@@ -38,7 +38,7 @@ export const WORKBENCH_CSS = String.raw`
 .rr-root { width: min(1100px, calc(100vw - 52px)); margin: 0 auto; padding: 18px 0 48px; }
 .rr-root--hero { width: 100%; max-height: min(560px, calc(100vh - 320px)); min-height: 360px; padding: 18px 14px 34px; overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable; border: 1px solid var(--rr-line); border-radius: 18px; background: var(--rr-panel); }
 .rr-root--session { width: 100%; max-width: 1220px; padding: 28px 30px 90px; }
-.rr-hero-head { text-align: center; max-width: 680px; margin: 0 auto 25px; }
+.rr-hero-head { height: 136px; text-align: center; max-width: 680px; margin: 0 auto 25px; }
 .rr-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid var(--rr-line); border-radius: 999px; background: var(--rr-panel); color: var(--rr-muted); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
 .rr-kicker-dot { width: 6px; height: 6px; border-radius: 50%; background: #6f9b8c; box-shadow: 0 0 0 3px rgba(111, 155, 140, .13); }
 .rr-title { margin: 13px 0 8px; font-family: Georgia, "Times New Roman", serif; font-weight: 500; font-size: clamp(27px, 3vw, 42px); letter-spacing: -.035em; line-height: 1.03; }
@@ -139,6 +139,7 @@ export const WORKBENCH_CSS = String.raw`
 @media (max-width: 840px) {
   .rr-root { width: min(680px, calc(100vw - 28px)); }
   .rr-root--hero { width: 100%; min-height: 320px; max-height: min(520px, calc(100vh - 300px)); padding-inline: 10px; }
+  .rr-hero-head { height: 120px; }
   .rr-grid { grid-template-columns: 1fr; }
   .rr-toolbar { grid-template-columns: 1fr 1fr; }
   .rr-search { grid-column: 1 / -1; }

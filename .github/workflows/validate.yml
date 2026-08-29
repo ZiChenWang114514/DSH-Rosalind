@@ -65,12 +65,22 @@ jobs:
           dsh web --port 3180 --no-open > dsh-web.log 2>&1 &
           dsh_pid=$!
           trap 'kill "$dsh_pid" 2>/dev/null || true' EXIT
-          for attempt in $(seq 1 30); do
+          ready=0
+          for attempt in $(seq 1 120); do
             if curl --fail --silent --show-error http://127.0.0.1:3180/ > dsh-web.html; then
+              ready=1
               break
+            fi
+            if ! kill -0 "$dsh_pid" 2>/dev/null; then
+              cat dsh-web.log
+              wait "$dsh_pid"
             fi
             sleep 1
           done
+          if [ "$ready" -ne 1 ]; then
+            cat dsh-web.log
+            exit 1
+          fi
           test -s dsh-web.html
           grep -q '<div id="root"' dsh-web.html
           ! grep -q 'Failed to initialize extension' dsh-web.log
