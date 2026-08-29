@@ -1,0 +1,27 @@
+{
+  "run_date": "2026-08-29",
+  "viewer_session": "64ed7c20-e7c9-4aca-a83f-d4a8d5b4cb70",
+  "reference_row": "P01116",
+  "row_order": ["P01116", "P01111", "P01112"],
+  "distance": {
+    "method": "uncorrected-p-distance",
+    "gap_policy": "all-gap comparisons ignored by pairwise p-distance",
+    "matrix": [
+      [0, 0.13157894736842105, 0.1368421052631579],
+      [0.13157894736842105, 0, 0.15789473684210525],
+      [0.1368421052631579, 0.15789473684210525, 0]
+    ]
+  },
+  "tree": {
+    "algorithm": "neighbor-joining",
+    "distance": "uncorrected-p-distance",
+    "newick": "('P01116':0.027632,('P01111':0.076316,'P01112':0.081579):0.027632);",
+    "warning": "Exploratory guide tree only. Use a dedicated phylogenetics workflow with an explicit substitution model and support assessment for publication-grade inference."
+  },
+  "motifs": [
+    {"kras_positions": "10-17", "alignment_columns": "10-17", "sequence": "GAGGVGKS", "identity": 1.0},
+    {"kras_positions": "30-38", "alignment_columns": "30-38", "sequence": "DEYDPTIED", "identity": 1.0},
+    {"kras_positions": "60-76", "alignment_columns": "60-76", "sequence": "GQEEYSAMRDQYMRTGE", "identity": 1.0},
+    {"kras_positions": "116-119", "alignment_columns": "116-119", "sequence": "NKCD", "identity": 1.0}
+  ]
+}

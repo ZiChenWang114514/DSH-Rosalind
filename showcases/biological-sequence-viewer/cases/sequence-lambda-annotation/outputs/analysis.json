@@ -1,0 +1,18 @@
+{
+  "accession_version": "NC_001416.1",
+  "genome_length": 48502,
+  "cI_location": "complement(37227..37940)",
+  "cI_coding_bases": 714,
+  "translation_table": 11,
+  "protein_id": "NP_040628.1",
+  "translated_residues": 237,
+  "terminal_stop_present": true,
+  "matches_genbank_translation": true,
+  "cI_coding_sequence_sha256": "a51dec784e51f85a35d643a84820c89430b526cd9bf54a398b91c70045cc62e8",
+  "cI_protein_sha256": "ec5d954fd10be8c19c920e78badc5d9e9cc281f6801e2c5fde3803c9f133f580",
+  "operator_annotations": {
+    "OR3": "37951..37967",
+    "OR2": "37974..37990",
+    "OR1": "37998..38014"
+  }
+}

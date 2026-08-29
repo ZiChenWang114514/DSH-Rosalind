@@ -1,0 +1,20 @@
+{
+  "id": "literature-pmc-availability",
+  "plugin_id": "life-sciences-literature",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],
+  "previews": [{"path":"previews/pmc-availability.svg"}],
+  "sources": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC3257301/","https://pubmed.ncbi.nlm.nih.gov/22253597/","https://doi.org/10.1371/journal.ppat.1002485"],
+  "observations": [
+    "The lookup resolved PMCID PMC3257301 to PMID 22253597 and DOI 10.1371/journal.ppat.1002485.",
+    "The compact dataset record reported open-access status, a CC BY license, and PDF, XML, and text files.",
+    "The record reported neither retraction nor manuscript status."
+  ],
+  "interpretation": ["The record is a stable example of resolving one article across PMC, PubMed, and DOI identifiers while reporting machine-readable availability."],
+  "limitations": ["Availability is time-sensitive and should be rechecked before automated reuse.","The showcase checks metadata and file availability; it does not evaluate article content."],
+  "environment": {"lookup":"PMC3257301","retrieval_date":"2026-08-29"}
+}

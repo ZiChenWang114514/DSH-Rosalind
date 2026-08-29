@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">PMC open-access availability for PMC3257301</title>
+  <desc id="desc">A source-backed availability summary showing identifiers, license, status flags, and file types.</desc>
+  <rect width="1200" height="720" rx="30" fill="#f3f7f6"/>
+  <rect x="0" y="0" width="1200" height="155" rx="30" fill="#143d3a"/>
+  <text x="70" y="70" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="38" font-weight="700">PMC availability check</text>
+  <text x="70" y="112" fill="#bfe1db" font-family="Inter,Segoe UI,sans-serif" font-size="21">PMC3257301 · checked 29 Aug 2026</text>
+  <circle cx="1040" cy="78" r="45" fill="#31b77a"/><path d="M1018 78l15 16 30-35" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="70" y="222" fill="#173b38" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="700">Article identifiers</text>
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <rect x="70" y="250" width="320" height="86" rx="16" fill="#ffffff" stroke="#cadbd7"/><text x="95" y="284" fill="#6a7d79" font-size="15">PMCID</text><text x="95" y="316" fill="#163c38" font-size="25" font-weight="700">PMC3257301</text>
+    <rect x="410" y="250" width="320" height="86" rx="16" fill="#ffffff" stroke="#cadbd7"/><text x="435" y="284" fill="#6a7d79" font-size="15">PMID</text><text x="435" y="316" fill="#163c38" font-size="25" font-weight="700">22253597</text>
+    <rect x="750" y="250" width="380" height="86" rx="16" fill="#ffffff" stroke="#cadbd7"/><text x="775" y="284" fill="#6a7d79" font-size="15">DOI</text><text x="775" y="316" fill="#163c38" font-size="22" font-weight="700">10.1371/journal.ppat.1002485</text>
+  </g>
+  <text x="70" y="398" fill="#173b38" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="700">Availability and status</text>
+  <g font-family="Inter,Segoe UI,sans-serif" font-size="18">
+    <rect x="70" y="426" width="250" height="74" rx="18" fill="#d8f4e6"/><text x="94" y="472" fill="#176541">Open access · Yes</text>
+    <rect x="340" y="426" width="220" height="74" rx="18" fill="#e3eefc"/><text x="364" y="472" fill="#275c93">License · CC BY</text>
+    <rect x="580" y="426" width="250" height="74" rx="18" fill="#eef1f0"/><text x="604" y="472" fill="#435451">Retracted · No</text>
+    <rect x="850" y="426" width="280" height="74" rx="18" fill="#eef1f0"/><text x="874" y="472" fill="#435451">Manuscript · No</text>
+  </g>
+  <text x="70" y="565" fill="#173b38" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="700">Article files reported by the dataset</text>
+  <g font-family="Inter,Segoe UI,sans-serif" font-size="19" font-weight="700">
+    <rect x="70" y="592" width="180" height="62" rx="31" fill="#143d3a"/><text x="131" y="631" fill="#fff">PDF</text>
+    <rect x="270" y="592" width="180" height="62" rx="31" fill="#143d3a"/><text x="326" y="631" fill="#fff">XML</text>
+    <rect x="470" y="592" width="230" height="62" rx="31" fill="#143d3a"/><text x="522" y="631" fill="#fff">Plain text</text>
+  </g>
+  <text x="750" y="620" fill="#607773" font-family="Inter,Segoe UI,sans-serif" font-size="16">22 media URLs were listed in the compact response.</text>
+</svg>

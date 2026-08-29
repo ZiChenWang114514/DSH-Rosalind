@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">EGFR structure and pharmacology landscape</title><desc id="desc">A connected view of EGFR protein, pathway, structure, target, and three inhibitors.</desc>
+  <rect width="1200" height="720" rx="28" fill="#0c1321"/>
+  <text x="70" y="78" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="38" font-weight="700">EGFR knowledge landscape</text>
+  <text x="70" y="116" fill="#9aaac1" font-family="Inter,Segoe UI,sans-serif" font-size="20">Protein · pathway · structure · pharmacology</text>
+  <circle cx="600" cy="330" r="105" fill="#244f86" stroke="#78b7ff" stroke-width="4"/>
+  <text x="600" y="316" text-anchor="middle" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="36" font-weight="700">EGFR</text>
+  <text x="600" y="353" text-anchor="middle" fill="#c7e0ff" font-family="Inter,Segoe UI,sans-serif" font-size="16">P00533 · CHEMBL203</text>
+  <g stroke="#49627e" stroke-width="4"><line x1="510" y1="276" x2="300" y2="220"/><line x1="690" y1="276" x2="900" y2="220"/><line x1="505" y1="386" x2="300" y2="510"/><line x1="695" y1="386" x2="900" y2="510"/></g>
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <rect x="70" y="155" width="360" height="150" rx="20" fill="#182437" stroke="#79d0b5"/>
+    <text x="100" y="196" fill="#91e5ca" font-size="16">UNIPROT</text><text x="100" y="238" fill="#fff" font-size="25" font-weight="700">Reviewed human EGFR</text><text x="100" y="270" fill="#b7c6d8" font-size="16">Entry version 300</text>
+    <rect x="770" y="155" width="360" height="150" rx="20" fill="#182437" stroke="#d896ff"/>
+    <text x="800" y="196" fill="#e1b4ff" font-size="16">REACTOME</text><text x="800" y="238" fill="#fff" font-size="25" font-weight="700">Signaling by EGFR</text><text x="800" y="270" fill="#b7c6d8" font-size="16">R-HSA-177929</text>
+    <rect x="70" y="455" width="360" height="150" rx="20" fill="#182437" stroke="#ffb66e"/>
+    <text x="100" y="496" fill="#ffd09f" font-size="16">RCSB PDB</text><text x="100" y="538" fill="#fff" font-size="25" font-weight="700">1M17 · erlotinib</text><text x="100" y="570" fill="#b7c6d8" font-size="16">X-ray · 2.60 Å</text>
+    <rect x="770" y="455" width="360" height="150" rx="20" fill="#182437" stroke="#ff7d92"/>
+    <text x="800" y="496" fill="#ff9eae" font-size="16">ChEMBL EXAMPLES · PHASE 4</text>
+    <text x="800" y="535" fill="#fff" font-size="20" font-weight="700">Gefitinib · Erlotinib</text><text x="800" y="567" fill="#fff" font-size="20" font-weight="700">Osimertinib</text>
+  </g>
+  <text x="70" y="670" fill="#8799b1" font-family="Inter,Segoe UI,sans-serif" font-size="15">Identifiers connect the records; the three compounds are illustrative rather than exhaustive.</text>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "id":"databases-egfr-landscape","plugin_id":"life-sciences-databases","plugin_version":"0.1.5","status":"ready","run_date":"2026-08-29","prompt":"prompt.md","inputs":[],
+  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],"previews":[{"path":"previews/egfr-landscape.svg"}],
+  "sources":["https://www.uniprot.org/uniprotkb/P00533/entry","https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203","https://www.rcsb.org/structure/1M17","https://reactome.org/content/detail/R-HSA-177929"],
+  "observations":["UniProt identifies P00533 as a reviewed human EGFR record.","ChEMBL identifies CHEMBL203 as human EGFR and returned ten inhibitor mechanism records in the selected slice.","Gefitinib, erlotinib, and osimertinib are each phase-4 ChEMBL compounds.","RCSB 1M17 is a 2.60 Å X-ray structure of the EGFR kinase domain with erlotinib.","Reactome R-HSA-177929 is Signaling by EGFR."],
+  "interpretation":["Stable protein, target, compound, structure, and pathway identifiers support a navigable EGFR research map."],
+  "limitations":["The compound set is illustrative, not comprehensive.","A Reactome API call failed; pathway identity was verified from the official record page.","Database linkage does not compare efficacy or clinical use."],
+  "environment":{"retrieval_date":"2026-08-29","protein":"P00533","target":"CHEMBL203","structure":"1M17"}
+}

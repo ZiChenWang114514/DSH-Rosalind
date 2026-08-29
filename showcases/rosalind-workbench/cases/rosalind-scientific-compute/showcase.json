@@ -1,0 +1,34 @@
+{
+  "id": "rosalind-scientific-compute",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/launcher-observation.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/rosalind-scientific-compute.svg"
+    }
+  ],
+  "sources": [],
+  "observations": [
+    "The Rosalind launcher was ready and exposed the named scientific area."
+  ],
+  "interpretation": [
+    "The area is available for interactive task discovery in the current Workbench."
+  ],
+  "limitations": [
+    "The tool response did not expose individual task choices.",
+    "No workspace was opened and no scientific analysis was executed."
+  ],
+  "environment": {
+    "launcher_ready": true,
+    "scientific_job_executed": false
+  }
+}

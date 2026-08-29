@@ -1,0 +1,1 @@
+Use the pinned public CMU-1 Aperio slide to verify source integrity and inspect its whole-slide pyramid metadata. Record the viewer execution state exactly, and make no tissue-morphology claim unless a rendered region is available.

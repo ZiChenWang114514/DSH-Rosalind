@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<rect width="1200" height="675" fill="#08131f"/><circle cx="1090" cy="80" r="230" fill="#8b9cff" opacity=".12"/>
+<rect x="54" y="50" width="1092" height="575" rx="28" fill="#102235" stroke="#29435a"/>
+<text x="92" y="112" fill="#8b9cff" font-family="Segoe UI,Arial" font-size="24" font-weight="700">NGS ANALYSIS WORKBENCH</text>
+<text x="92" y="174" fill="#f2f7fa" font-family="Segoe UI,Arial" font-size="42" font-weight="700">Bulk RNA-seq workflow design</text>
+<style>.body{fill:#c9d9e5;font-family:Segoe UI,Arial;font-size:27px}</style><text x="92" y="232" class="body">Counts + QC workflow identified</text><text x="92" y="282" class="body">Study design remains required</text><text x="92" y="332" class="body">0 registered runs</text><text x="92" y="382" class="body">Expression results unavailable</text>
+<text x="92" y="585" fill="#7f9aae" font-family="Segoe UI,Arial" font-size="19">Verified showcase package · 2026-08-29</text>
+</svg>

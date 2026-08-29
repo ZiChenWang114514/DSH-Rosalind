@@ -1,0 +1,10 @@
+{
+  "retrieval_date": "2026-08-29",
+  "sources": [
+    {"name":"medRxiv preprint","url":"https://doi.org/10.1101/2020.09.09.20191205","supports":"Preprint identity and version history."},
+    {"name":"bioRxiv/medRxiv publication-link API","url":"https://api.biorxiv.org/pubs/medrxiv/10.1101/2020.09.09.20191205/na/json","supports":"The linked publication DOI, journal, and publication date."},
+    {"name":"Nature Communications publication","url":"https://doi.org/10.1038/s41467-021-21444-5","supports":"Published article identity."},
+    {"name":"PubMed record","url":"https://pubmed.ncbi.nlm.nih.gov/33608522/","supports":"Published title, journal date, and PMID."}
+  ],
+  "method_note": "Version dates and identifiers are source observations. The 162-day elapsed interval and title-change flag are computed results."
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">DSH-Rosalind mark</title>
+  <desc id="desc">An original double-helix mark in green and amber.</desc>
+  <defs>
+    <linearGradient id="a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#92b5a8"/><stop offset="1" stop-color="#557e72"/></linearGradient>
+    <linearGradient id="b" x1="47" y1="11" x2="15" y2="53" gradientUnits="userSpaceOnUse"><stop stop-color="#d7b78f"/><stop offset="1" stop-color="#a87558"/></linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#f5f3ee"/>
+  <path d="M16 10c17 5 16 39 33 44" fill="none" stroke="url(#a)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M48 10C31 15 32 49 15 54" fill="none" stroke="url(#b)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M19 18h26M16 29h32M16 40h32M19 51h26" fill="none" stroke="#26322f" stroke-opacity=".32" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="16" cy="10" r="3" fill="#d5e5de"/><circle cx="48" cy="10" r="3" fill="#f0dbc0"/><circle cx="15" cy="54" r="3" fill="#d5e5de"/><circle cx="49" cy="54" r="3" fill="#f0dbc0"/>
+</svg>

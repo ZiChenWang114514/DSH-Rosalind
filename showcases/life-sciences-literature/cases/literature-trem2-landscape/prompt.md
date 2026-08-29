@@ -1,0 +1,1 @@
+Use Life Sciences Literature to retrieve the ten most recent PubMed records matching TREM2 and microglia. Add one relevant bioRxiv preprint, keep publication and preprint evidence distinct, and summarize the visible research themes without claiming a systematic review.

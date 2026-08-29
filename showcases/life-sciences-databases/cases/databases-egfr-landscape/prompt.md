@@ -1,0 +1,1 @@
+Use Life Sciences Databases to connect the reviewed human EGFR protein record, the ChEMBL target and three named inhibitors, one ligand-bound EGFR kinase structure, and a Reactome signaling pathway. Preserve identifier relationships and distinguish database observations from mechanistic interpretation.

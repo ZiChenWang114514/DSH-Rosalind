@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<rect width="1200" height="675" fill="#08131f"/><circle cx="1090" cy="80" r="230" fill="#f48fb1" opacity=".12"/>
+<rect x="54" y="50" width="1092" height="575" rx="28" fill="#102235" stroke="#29435a"/>
+<text x="92" y="112" fill="#f48fb1" font-family="Segoe UI,Arial" font-size="24" font-weight="700">SLIDE VIEWER</text>
+<text x="92" y="174" fill="#f2f7fa" font-family="Segoe UI,Arial" font-size="42" font-weight="700">Mouse-brain spatial expression</text>
+<style>.body{fill:#c9d9e5;font-family:Segoe UI,Arial;font-size:27px}</style><text x="92" y="232" class="body">684 spots · 18,078 genes</text><text x="92" y="282" class="body">Slc17a7: 671 nonzero · mean 2.711</text><text x="92" y="332" class="body">Gad1: 490 nonzero · mean 1.072</text><text x="92" y="382" class="body">Matrix scale unknown · no morphology claim</text>
+<text x="92" y="585" fill="#7f9aae" font-family="Segoe UI,Arial" font-size="19">Verified showcase package · 2026-08-29</text>
+</svg>

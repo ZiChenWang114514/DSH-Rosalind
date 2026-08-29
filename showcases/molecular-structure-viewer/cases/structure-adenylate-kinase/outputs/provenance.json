@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "accession": "4AKE",
+      "url": "https://files.rcsb.org/download/4AKE.pdb",
+      "revision": {"major": 1, "minor": 3, "date": "2024-02-28"},
+      "role": "open conformation and alignment reference"
+    },
+    {
+      "accession": "1AKE",
+      "url": "https://files.rcsb.org/download/1AKE.pdb",
+      "revision": {"major": 1, "minor": 4, "date": "2024-12-25"},
+      "role": "AP5-bound closed conformation and alignment mobile"
+    }
+  ],
+  "local_checks": [
+    "file size and SHA-256 match the starter contract",
+    "ATOM/HETATM records were counted from the pinned files",
+    "chain-A C-alpha atoms and AP5 atoms were counted from the pinned files"
+  ],
+  "interactive_viewer_run": {
+    "status": "not-executed-after-pending-host-session",
+    "next_step": "Run the prompt in a clean Molecular Structure Viewer session and replace contract metrics with exported analysis results."
+  }
+}

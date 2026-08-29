@@ -1,0 +1,14 @@
+{
+  "retrieved_at":"2026-08-29T12:15:36Z",
+  "protein":{"uniprot":"P00533","entry":"EGFR_HUMAN","reviewed":true,"entry_version":300,"last_annotation_update":"2026-06-10"},
+  "target":{"chembl_id":"CHEMBL203","name":"Epidermal growth factor receptor","organism":"Homo sapiens"},
+  "mechanism_slice":{"records_returned":10,"action_type":"INHIBITOR in all returned records","max_phase_4_records":8},
+  "selected_compounds":[
+    {"name":"GEFITINIB","chembl_id":"CHEMBL939","max_phase":4},
+    {"name":"ERLOTINIB","chembl_id":"CHEMBL553","max_phase":4},
+    {"name":"OSIMERTINIB","chembl_id":"CHEMBL3353410","max_phase":4}
+  ],
+  "structure":{"pdb_id":"1M17","title":"Epidermal Growth Factor Receptor tyrosine kinase domain with 4-anilinoquinazoline inhibitor erlotinib","method":"X-RAY DIFFRACTION","resolution_angstrom":2.6,"pdb_doi":"10.2210/pdb1M17/pdb"},
+  "pathway":{"reactome_id":"R-HSA-177929","name":"Signaling by EGFR"},
+  "service_notes":[{"source":"Reactome ContentService","status":"service_error","used_as_evidence":false,"replacement_check":"Official Reactome record page R-HSA-177929"}]
+}

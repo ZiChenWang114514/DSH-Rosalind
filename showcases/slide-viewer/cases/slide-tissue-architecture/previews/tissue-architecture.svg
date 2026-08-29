@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">CMU-1 whole-slide pyramid summary</title>
+  <desc id="desc">Verified source and three tiled image levels; the viewer remained awaiting mount.</desc>
+  <rect width="1200" height="630" fill="#f5f1e8"/>
+  <text x="70" y="90" font-family="Segoe UI, sans-serif" font-size="42" font-weight="700" fill="#263238">CMU-1 whole-slide pyramid</text>
+  <text x="70" y="135" font-family="Segoe UI, sans-serif" font-size="23" fill="#53646b">Aperio SVS · CC0 · source hash verified</text>
+  <g transform="translate(80 205)" fill="none" stroke="#8b3d48" stroke-width="5">
+    <rect width="620" height="300" rx="12"/>
+    <rect x="690" y="95" width="310" height="150" rx="10"/>
+    <rect x="1040" y="135" width="78" height="56" rx="6"/>
+  </g>
+  <g font-family="Segoe UI, sans-serif" fill="#263238">
+    <text x="100" y="245" font-size="26" font-weight="700">46,000 × 32,893</text>
+    <text x="790" y="335" font-size="24">11,500 × 8,223</text>
+    <text x="990" y="405" font-size="22">2,875 × 2,055</text>
+    <text x="70" y="565" font-size="22" fill="#6b4f4f">Metadata verified · no rendered region · no morphology interpretation</text>
+  </g>
+</svg>

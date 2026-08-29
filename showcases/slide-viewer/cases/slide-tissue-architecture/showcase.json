@@ -1,0 +1,25 @@
+{
+  "id": "slide-tissue-architecture",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {"path": "outputs/source-provenance.json"},
+    {"path": "outputs/pyramid-metadata.json"}
+  ],
+  "previews": [{"path": "previews/tissue-architecture.svg"}],
+  "sources": ["https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs"],
+  "observations": [
+    "The pinned CC0 source matched its expected byte length and SHA-256.",
+    "The TIFF contains a 46,000 by 32,893 tiled main image and two reduced whole-slide levels."
+  ],
+  "interpretation": ["The source and pyramid metadata support reproducible whole-slide navigation testing."],
+  "limitations": [
+    "The Slide Viewer session remained awaiting-viewer.",
+    "No rendered region was available, so no morphology interpretation is made."
+  ],
+  "environment": {"viewer_session": "d21efa4f-fce2-4057-9d25-eba188a994cd", "viewer_rendered": false}
+}

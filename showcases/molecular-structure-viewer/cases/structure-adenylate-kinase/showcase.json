@@ -1,0 +1,14 @@
+{
+  "id":"structure-adenylate-kinase","plugin_id":"molecular-structure-viewer","plugin_version":"0.1.80","status":"ready","run_date":"2026-08-29","prompt":"prompt.md",
+  "inputs":[
+    {"path":"inputs/4AKE.pdb","bytes":309339,"sha256":"ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"},
+    {"path":"inputs/1AKE.pdb","bytes":357777,"sha256":"651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"}
+  ],
+  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/provenance.json"}],
+  "previews":[{"path":"previews/adenylate-kinase.svg"}],
+  "sources":["https://www.rcsb.org/structure/4AKE","https://www.rcsb.org/structure/1AKE","https://files.rcsb.org/download/4AKE.pdb","https://files.rcsb.org/download/1AKE.pdb"],
+  "observations":["Both pinned RCSB files match the starter contract by size and digest.","Each chain A contains 214 C-alpha atoms in the pinned coordinate files.","AP5 is present in 1AKE and has 64 atoms in chain A."],
+  "interpretation":["The starter-contract alignment describes a substantial domain rearrangement between the open and AP5-bound forms."],
+  "limitations":["The current host's preceding structure-viewer session remained render-pending.","The RMSD and TM-scores are starter-contract expectations, not a fresh current-host measurement.","Structural similarity metrics do not measure catalytic activity."],
+  "environment":{"source_snapshot":"2026-08-29","current_host_viewer_status":"not-run-after-pending-session","alignment_contract":"Mol* TM-align 5.11.0"}
+}

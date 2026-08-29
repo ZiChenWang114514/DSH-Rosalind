@@ -1,0 +1,25 @@
+{
+  "retrieved_at": "2026-08-29T12:11:08Z",
+  "target": {"symbol":"IL6R","ensembl_id":"ENSG00000160712"},
+  "disease": {"name":"asthma","id":"MONDO_0004979"},
+  "open_targets": {
+    "associated_disease_rows_fetched": 200,
+    "total_associated_disease_rows": 1042,
+    "asthma_rows_returned": 1,
+    "datasource_scores": {"gwas_credible_sets":0.8824150241840469,"europepmc":0.6641557469258165}
+  },
+  "gwas_catalog": {
+    "query":"mapped_gene=IL6R",
+    "records_returned":10,
+    "p_value_range_in_returned_slice":{"minimum":4e-323,"maximum":6e-6},
+    "note":"The compact response did not expose trait labels, so these records are not described as asthma-specific."
+  },
+  "gtex": {
+    "variant":"rs2228145",
+    "grch38":"1:154454494-A-C",
+    "eqtl_rows_total":15,
+    "il6r_eqtl_rows":7,
+    "il6r_tissues":["Esophagus_Muscularis","Whole_Blood","Artery_Tibial","Colon_Sigmoid","Artery_Aorta","Colon_Transverse","Artery_Coronary"],
+    "il6r_nes_range":{"minimum":-0.3008628785610199,"maximum":-0.09051726758480072}
+  }
+}

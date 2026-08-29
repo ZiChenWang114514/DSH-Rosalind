@@ -1,0 +1,8 @@
+{
+  "target": "human PD-L1 extracellular domain",
+  "uniprot": "Q9NZQ7",
+  "target_residues": "18-239",
+  "parent": "KN035",
+  "parent_structure": "PDB 5JDS",
+  "candidate_count": 20
+}

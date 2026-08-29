@@ -1,0 +1,31 @@
+{
+  "id": "structure-gfp-figure",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {"path": "previews/gfp.png"},
+    {"path": "previews/gfp.png.render.json"}
+  ],
+  "previews": [{"path": "previews/gfp.png"}],
+  "sources": ["RCSB PDB 1EMA, supplied by the plugin's pinned bundled example"],
+  "observations": [
+    "The mounted viewer identified 1EMA as an X-ray structure at 1.9 angstrom resolution.",
+    "The displayed model contained 225 protein residues, 1866 atoms, and CRO at chain A author residue 66.",
+    "The viewer returned 18 polymer residues within 4.0 angstrom of CRO using closest heavy-atom Euclidean distance.",
+    "A 1600 by 1200 PNG and render provenance file were generated and visually inspected."
+  ],
+  "interpretation": ["The chromophore occupies the protected interior of the GFP beta barrel."],
+  "limitations": [
+    "The 4 angstrom contact display is a coordinate-distance analysis, not an energetic interaction model.",
+    "CRO is polymer-linked; the shortest contact records include covalent geometry.",
+    "The current render keeps all source-visible small components, including solvent markers."
+  ],
+  "environment": {
+    "viewer_session": "f2f2c36e-028a-4c13-a1d7-2c1a249edb28",
+    "render_job": "ed237485-1fa9-48db-ad91-18a40bd4d52a"
+  }
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Adenylate kinase open and closed conformations</title>
+  <desc id="desc">A reproducible showcase preview comparing 4AKE and AP5-bound 1AKE, with starter-contract alignment metrics clearly identified.</desc>
+  <rect width="1200" height="675" fill="#08151c"/>
+  <text x="70" y="78" fill="#ecf9f5" font-family="Segoe UI,Arial" font-size="34" font-weight="700">Adenylate kinase · open ↔ closed</text>
+  <text x="70" y="116" fill="#91b8b5" font-family="Segoe UI,Arial" font-size="18">4AKE chain A aligned with AP5-bound 1AKE chain A</text>
+  <g transform="translate(115 170)" fill="none" stroke-linecap="round">
+    <path d="M70 238 C110 100,270 58,365 154 C420 210,397 330,295 358 C190 388,97 330,70 238Z" stroke="#2dd4bf" stroke-width="34" opacity=".82"/>
+    <path d="M385 236 C420 132,540 106,626 176 C694 230,670 336,574 364 C484 391,402 330,385 236Z" stroke="#e879f9" stroke-width="34" opacity=".82"/>
+    <path d="M280 231 C324 178,382 179,427 231" stroke="#f59e0b" stroke-width="16"/>
+    <circle cx="354" cy="220" r="12" fill="#fbbf24" stroke="none"/>
+  </g>
+  <g font-family="Segoe UI,Arial">
+    <rect x="742" y="170" width="388" height="352" rx="22" fill="#102832" stroke="#244854"/>
+    <text x="780" y="220" fill="#f1fbf8" font-size="22" font-weight="650">Starter-contract alignment</text>
+    <text x="780" y="267" fill="#9cc8c3" font-size="17">Aligned residues</text><text x="1080" y="267" text-anchor="end" fill="#ffffff" font-size="22">214</text>
+    <text x="780" y="315" fill="#9cc8c3" font-size="17">RMSD</text><text x="1080" y="315" text-anchor="end" fill="#ffffff" font-size="22">8.044 Å</text>
+    <text x="780" y="363" fill="#9cc8c3" font-size="17">TM-score · reference</text><text x="1080" y="363" text-anchor="end" fill="#ffffff" font-size="22">0.684</text>
+    <text x="780" y="411" fill="#9cc8c3" font-size="17">TM-score · mobile</text><text x="1080" y="411" text-anchor="end" fill="#ffffff" font-size="22">0.684</text>
+    <rect x="780" y="451" width="172" height="38" rx="19" fill="#4c2d08" stroke="#f59e0b"/>
+    <text x="866" y="477" text-anchor="middle" fill="#fcd34d" font-size="16" font-weight="700">CONTRACT VALUES</text>
+    <circle cx="138" cy="582" r="7" fill="#2dd4bf"/><text x="156" y="589" fill="#b9d8d4" font-size="17">4AKE open</text>
+    <circle cx="306" cy="582" r="7" fill="#e879f9"/><text x="324" y="589" fill="#b9d8d4" font-size="17">1AKE closed</text>
+    <circle cx="493" cy="582" r="7" fill="#f59e0b"/><text x="511" y="589" fill="#b9d8d4" font-size="17">AP5</text>
+    <text x="1130" y="620" text-anchor="end" fill="#648c8c" font-size="14">Source files verified locally · viewer rerun pending</text>
+  </g>
+</svg>

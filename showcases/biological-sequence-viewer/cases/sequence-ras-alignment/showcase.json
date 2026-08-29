@@ -1,0 +1,41 @@
+{
+  "id": "sequence-ras-alignment",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/human-RAS-UniProt-SV1.aln-fasta", "bytes": 786, "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"},
+    {"path": "inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json", "bytes": 2089, "sha256": "770de4ae974506be7a4a24cc31bae27c0e3a787686ecd1f79f4015665b827526"}
+  ],
+  "outputs": [
+    {"path": "outputs/RAS-P01116-P01111-P01112-NJ.nwk"},
+    {"path": "outputs/analysis.json"}
+  ],
+  "previews": [{"path": "previews/ras-alignment.svg"}],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "observations": [
+    "The mounted viewer reported three protein rows, 191 alignment columns, mean identity 0.9284467713787081, and normalized conservation 0.6453400570165564.",
+    "KRAS positions 10-17, 30-38, 60-76, and 116-119 were identical across all three rows.",
+    "Alignment columns 170-191 contained substantially more substitutions and short gaps."
+  ],
+  "interpretation": [
+    "The shared GTPase core is highly conserved across the three human RAS paralogues.",
+    "The C-terminal targeting region contains more paralogue-specific variation."
+  ],
+  "limitations": [
+    "The distance matrix uses uncorrected p-distance.",
+    "The three-leaf neighbor-joining tree is exploratory and has no substitution model or support assessment.",
+    "The SVG preview is a project-owned summary drawn from exact model-visible viewer results because source-relative viewer publication was unavailable."
+  ],
+  "environment": {
+    "viewer_session": "64ed7c20-e7c9-4aca-a83f-d4a8d5b4cb70",
+    "distance_job": "b1f71492-132f-4c3b-9a59-e79b998ef1fe",
+    "tree_job": "6d8be725-e828-4353-97ca-d1a6ce523a00"
+  }
+}

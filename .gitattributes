@@ -1,0 +1,4 @@
+*.pdb -text -diff
+*.cif -text -diff
+*.gb -text -diff
+*.png binary

@@ -1,0 +1,1 @@
+Create a source-preserving research export for all spatial observations in the licensed mouse-brain H&amp;E H5AD. Include exact identifiers, coordinates, QC fields, and indexed Slc17a7 and Gad1 values, with complete provenance and an explicit statement that matrix scale is unknown.

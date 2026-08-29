@@ -1,0 +1,20 @@
+{
+  "retrieved_at": "2026-08-29T12:04:25Z",
+  "pmcid": "PMC3257301",
+  "pmid": "22253597",
+  "doi": "10.1371/journal.ppat.1002485",
+  "title": "The bZIP Transcription Factor Rca1p Is a Central Regulator of a Novel CO2 Sensing Pathway in Yeast",
+  "citation": "PLoS Pathogens. 2012 Jan 12;8(1):e1002485",
+  "is_pmc_openaccess": true,
+  "license": "CC BY",
+  "is_manuscript": false,
+  "is_historical_ocr": false,
+  "is_retracted": false,
+  "article_files": ["PDF", "XML", "plain text"],
+  "media_url_count": 22,
+  "canonical_urls": {
+    "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3257301/",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/22253597/",
+    "doi": "https://doi.org/10.1371/journal.ppat.1002485"
+  }
+}

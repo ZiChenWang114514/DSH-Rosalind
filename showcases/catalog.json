@@ -1,0 +1,277 @@
+{
+  "$schema": "../schema/catalog.schema.json",
+  "catalog_version": "1.0.0",
+  "updated": "2026-08-29",
+  "plugins": [
+    {
+      "id": "life-sciences-literature",
+      "name": "Life Sciences Literature",
+      "version": "0.1.5",
+      "kind": "research-skill-bundle",
+      "readme": "showcases/life-sciences-literature/README.md",
+      "showcases": [
+        {
+          "id": "literature-trem2-landscape",
+          "title": "TREM2 microglia publication landscape",
+          "status": "ready",
+          "summary": "Search PubMed and bioRxiv/medRxiv for TREM2 research in microglia.",
+          "next_step": "Open the case README to present the dated literature snapshot and theme summary.",
+          "case_path": "showcases/life-sciences-literature/cases/literature-trem2-landscape",
+          "preview": "showcases/life-sciences-literature/cases/literature-trem2-landscape/previews/trem2-landscape.svg"
+        },
+        {
+          "id": "literature-pmc-availability",
+          "title": "PMC open-access availability",
+          "status": "ready",
+          "summary": "Check PMC availability for a validated PMID or DOI.",
+          "next_step": "Open the case README to present the identifier, license, and file-availability report.",
+          "case_path": "showcases/life-sciences-literature/cases/literature-pmc-availability",
+          "preview": "showcases/life-sciences-literature/cases/literature-pmc-availability/previews/pmc-availability.svg"
+        },
+        {
+          "id": "literature-preprint-publication-link",
+          "title": "Preprint to publication linkage",
+          "status": "ready",
+          "summary": "Compare a preprint with its linked peer-reviewed publication.",
+          "next_step": "Open the case README to present the versioned preprint-to-publication timeline.",
+          "case_path": "showcases/life-sciences-literature/cases/literature-preprint-publication-link",
+          "preview": "showcases/life-sciences-literature/cases/literature-preprint-publication-link/previews/preprint-publication.svg"
+        }
+      ]
+    },
+    {
+      "id": "life-sciences-databases",
+      "name": "Life Sciences Databases",
+      "version": "0.1.5",
+      "kind": "research-skill-bundle",
+      "readme": "showcases/life-sciences-databases/README.md",
+      "showcases": [
+        {
+          "id": "databases-il6r-asthma",
+          "title": "IL6R and asthma evidence map",
+          "status": "ready",
+          "summary": "Combine public genetics, expression, and target evidence for IL6R and asthma.",
+          "next_step": "Open the case README to present the three-source IL6R evidence map.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-il6r-asthma",
+          "preview": "showcases/life-sciences-databases/cases/databases-il6r-asthma/previews/il6r-asthma.svg"
+        },
+        {
+          "id": "databases-variant-interpretation",
+          "title": "Multi-source variant interpretation",
+          "status": "ready",
+          "summary": "Combine ClinVar, gnomAD, Ensembl, and cohort evidence for one variant.",
+          "next_step": "Open the case README to present the allele-resolved rs7903146 report.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-variant-interpretation",
+          "preview": "showcases/life-sciences-databases/cases/databases-variant-interpretation/previews/variant-rs7903146.svg"
+        },
+        {
+          "id": "databases-egfr-landscape",
+          "title": "EGFR structure and pharmacology landscape",
+          "status": "ready",
+          "summary": "Connect EGFR structure, pathway, ligand, and pharmacology records.",
+          "next_step": "Open the case README to present the EGFR protein-to-drug knowledge map.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-egfr-landscape",
+          "preview": "showcases/life-sciences-databases/cases/databases-egfr-landscape/previews/egfr-landscape.svg"
+        }
+      ]
+    },
+    {
+      "id": "biological-sequence-viewer",
+      "name": "Biological Sequence & Alignment Viewer",
+      "version": "0.1.43",
+      "kind": "interactive-viewer",
+      "readme": "showcases/biological-sequence-viewer/README.md",
+      "showcases": [
+        {
+          "id": "sequence-lambda-annotation",
+          "title": "Lambda genome annotation and cI translation",
+          "status": "ready",
+          "summary": "Versioned NCBI genome annotation with an independently verified reverse-strand cI translation.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-lambda-annotation",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-lambda-annotation/previews/lambda-annotation.svg"
+        },
+        {
+          "id": "sequence-ras-alignment",
+          "title": "Human RAS protein alignment",
+          "status": "ready",
+          "summary": "Compare KRAS, NRAS, and HRAS conservation, distances, and an exploratory NJ tree.",
+          "next_step": "Open the case README to present the verified alignment, matrix, tree, and preview.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/previews/ras-alignment.svg"
+        },
+        {
+          "id": "sequence-fastq-qc",
+          "title": "Public-read FASTQ quality exploration",
+          "status": "ready",
+          "summary": "Deterministic 500-read ENA subset with sequence and Phred-quality metrics.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/previews/fastq-qc.svg"
+        }
+      ]
+    },
+    {
+      "id": "ngs-analysis-workbench",
+      "name": "NGS Analysis Workbench",
+      "version": "0.2.16",
+      "kind": "workflow-workbench",
+      "readme": "showcases/ngs-analysis-workbench/README.md",
+      "showcases": [
+        {
+          "id": "ngs-fastq-qc",
+          "title": "FASTQ QC workflow readiness",
+          "status": "ready",
+          "summary": "Live workflow discovery, assay-aware QC design, and verified compute-readiness report.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-fastq-qc",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-fastq-qc/previews/ngs-fastq-qc.svg"
+        },
+        {
+          "id": "ngs-bulk-rnaseq",
+          "title": "Bulk RNA-seq workflow design",
+          "status": "ready",
+          "summary": "Live bundled-workflow evidence and a study-design-aware bulk RNA-seq plan.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-bulk-rnaseq",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-bulk-rnaseq/previews/ngs-bulk-rnaseq.svg"
+        },
+        {
+          "id": "ngs-single-cell",
+          "title": "Single-cell RNA-seq workflow design",
+          "status": "ready",
+          "summary": "Live bundled-workflow evidence and a chemistry-aware FASTQ-to-count plan.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-single-cell",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-single-cell/previews/ngs-single-cell.svg"
+        }
+      ]
+    },
+    {
+      "id": "molecular-structure-viewer",
+      "name": "Molecular Structure Viewer",
+      "version": "0.1.80",
+      "kind": "interactive-viewer",
+      "readme": "showcases/molecular-structure-viewer/README.md",
+      "showcases": [
+        {
+          "id": "structure-mdm2-p53",
+          "title": "MDM2-p53 interface analysis",
+          "status": "ready",
+          "summary": "Analyze 4 Å contacts and p53 hotspot residues in RCSB 1YCR.",
+          "next_step": "Open the case README to inspect the pinned structure, locally recomputed contacts, starter-contract buried area, and viewer execution status.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/previews/mdm2-p53.svg"
+        },
+        {
+          "id": "structure-adenylate-kinase",
+          "title": "Adenylate kinase conformational comparison",
+          "status": "ready",
+          "summary": "Align RCSB 4AKE and 1AKE and report structural comparison metrics.",
+          "next_step": "Open the case README to inspect the pinned structures, AP5 observations, starter-contract alignment metrics, and viewer execution status.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-adenylate-kinase",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-adenylate-kinase/previews/adenylate-kinase.svg"
+        },
+        {
+          "id": "structure-gfp-figure",
+          "title": "Provenance-bearing GFP figure",
+          "status": "ready",
+          "summary": "Style the 1EMA chromophore and render a publication-ready image.",
+          "next_step": "Open the case README to present the inspected PNG, contact analysis, and render provenance.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-gfp-figure",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/previews/gfp.png"
+        }
+      ]
+    },
+    {
+      "id": "slide-viewer",
+      "name": "Slide Viewer",
+      "version": "0.1.56",
+      "kind": "interactive-viewer",
+      "readme": "showcases/slide-viewer/README.md",
+      "showcases": [
+        {
+          "id": "slide-tissue-architecture",
+          "title": "CMU-1 whole-slide source and pyramid",
+          "status": "ready",
+          "summary": "Verify a pinned CC0 Aperio slide and its multiresolution TIFF structure.",
+          "next_step": "Open the case README to inspect the verified source, pyramid metadata, and viewer execution status.",
+          "case_path": "showcases/slide-viewer/cases/slide-tissue-architecture",
+          "preview": "showcases/slide-viewer/cases/slide-tissue-architecture/previews/tissue-architecture.svg"
+        },
+        {
+          "id": "slide-spatial-expression",
+          "title": "Mouse-brain spatial expression",
+          "status": "ready",
+          "summary": "Indexed Slc17a7 and Gad1 expression summaries for a licensed public H5AD.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/slide-viewer/cases/slide-spatial-expression",
+          "preview": "showcases/slide-viewer/cases/slide-spatial-expression/previews/spatial-expression.svg"
+        },
+        {
+          "id": "slide-segmentation-overlay",
+          "title": "Source-aligned spatial annotation overlay",
+          "status": "ready",
+          "summary": "Create provenance-bearing GeoJSON demonstration geometry from exact spatial coordinates.",
+          "next_step": "Open the case README to inspect the GeoJSON, coordinate association, and recorded rendering limitation.",
+          "case_path": "showcases/slide-viewer/cases/slide-segmentation-overlay",
+          "preview": "showcases/slide-viewer/cases/slide-segmentation-overlay/previews/segmentation-overlay.svg"
+        },
+        {
+          "id": "slide-research-export",
+          "title": "Source-preserving spatial research export",
+          "status": "ready",
+          "summary": "Export all 684 observations with coordinates, QC fields, and two indexed genes.",
+          "next_step": "Open the case README to inspect the complete CSV, provenance, and matrix-scale limitation.",
+          "case_path": "showcases/slide-viewer/cases/slide-research-export",
+          "preview": "showcases/slide-viewer/cases/slide-research-export/previews/research-export.svg"
+        }
+      ]
+    },
+    {
+      "id": "rosalind-workbench",
+      "name": "Rosalind Workbench",
+      "version": "0.2.2-research-preview",
+      "kind": "research-launcher",
+      "readme": "showcases/rosalind-workbench/README.md",
+      "showcases": [
+        {
+          "id": "rosalind-molecular-design",
+          "title": "PD-L1 nanobody design showcase",
+          "status": "ready",
+          "summary": "Twenty KN035-derived designs, Boltz-2 ensemble ranking, and retained best structure.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-molecular-design",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-molecular-design/previews/pdl1-nanobody.svg"
+        },
+        {
+          "id": "rosalind-structure-analysis",
+          "title": "Rosalind structure-analysis launcher",
+          "status": "ready",
+          "summary": "Verified ready launcher state for the structure-analysis area.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-structure-analysis",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-structure-analysis/previews/rosalind-structure-analysis.svg"
+        },
+        {
+          "id": "rosalind-genomics",
+          "title": "Rosalind genomics launcher",
+          "status": "ready",
+          "summary": "Verified ready launcher state for the genomics area.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-genomics",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-genomics/previews/rosalind-genomics.svg"
+        },
+        {
+          "id": "rosalind-scientific-compute",
+          "title": "Rosalind scientific-compute launcher",
+          "status": "ready",
+          "summary": "Verified ready launcher state for the scientific-compute area.",
+          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-scientific-compute",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-scientific-compute/previews/rosalind-scientific-compute.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Use Life Sciences Databases to interpret rs7903146 C>T across ClinVar, Ensembl, gnomAD, and UKB-TOPMed PheWAS. Verify allele and coordinate identity before combining sources, preserve empty or failed checks separately, and avoid assigning clinical significance that the returned records do not support.

@@ -1,0 +1,20 @@
+{
+  "source_verification": {
+    "accession":"1YCR","bytes":94041,"sha256":"d8f23749da9ec22da2e17bb31c33803e3db6123233cd0404bdc005111196e7a3","atom_count":818,
+    "chain_atom_counts":{"A":705,"B":113},"matches_starter_contract":true
+  },
+  "computed_from_pinned_pdb": {
+    "method":"all cross-chain atom pairs at Euclidean distance <= 4.0 angstrom",
+    "atom_contact_count":105,"residue_pair_count":34,
+    "p53_hotspots_verified":["PHE B:19","TRP B:23","LEU B:26"]
+  },
+  "starter_contract_expected": {
+    "method":"coordinate-derived Shrake-Rupley SASA","probe_radius_angstrom":1.4,"samples":240,
+    "first_sasa_square_angstrom":5287.675647,"second_sasa_square_angstrom":1613.478497,"complex_sasa_square_angstrom":5429.424218,
+    "total_sasa_loss_square_angstrom":1471.729925,"interface_area_square_angstrom":735.864963
+  },
+  "current_viewer_attempt": {
+    "session_created":true,"mount_state":"mounted","presentation":"headless","render_state":"pending","get_state_acknowledged":false,
+    "note":"The current-host viewer did not acknowledge analysis commands, so the buried-area contract values are not labeled as a fresh run."
+  }
+}

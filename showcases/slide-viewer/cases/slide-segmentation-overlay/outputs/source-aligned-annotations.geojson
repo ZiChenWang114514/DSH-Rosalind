@@ -1,0 +1,274 @@
+{
+  "type": "FeatureCollection",
+  "name": "source-aligned-spatial-spot-neighborhoods",
+  "coordinate_system": {
+    "name": "obsm/spatial image-pixel frame",
+    "origin": "top-left",
+    "units": "source image pixels"
+  },
+  "source_association": {
+    "dataset": "Brain Coronal HnE Adata Crop",
+    "file_sha256": "9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd",
+    "matrix_revision": "b93bd2bb146dbf8ec519e04145d9cd2efaca3aeca8aadd191601720123d57159"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "demonstration_spot_neighborhood",
+        "observation_index": 0,
+        "observation_id": "AAAGACCCAAGTCGCG-1",
+        "radius_pixels": 55,
+        "derived_from": "exact obsm/spatial observation coordinate",
+        "biological_interpretation": "none"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1630,
+              98
+            ],
+            [
+              1625.813,
+              119.048
+            ],
+            [
+              1613.891,
+              136.891
+            ],
+            [
+              1596.048,
+              148.813
+            ],
+            [
+              1575,
+              153
+            ],
+            [
+              1553.952,
+              148.813
+            ],
+            [
+              1536.109,
+              136.891
+            ],
+            [
+              1524.187,
+              119.048
+            ],
+            [
+              1520,
+              98
+            ],
+            [
+              1524.187,
+              76.952
+            ],
+            [
+              1536.109,
+              59.109
+            ],
+            [
+              1553.952,
+              47.187
+            ],
+            [
+              1575,
+              43
+            ],
+            [
+              1596.048,
+              47.187
+            ],
+            [
+              1613.891,
+              59.109
+            ],
+            [
+              1625.813,
+              76.952
+            ],
+            [
+              1630,
+              98
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "demonstration_spot_neighborhood",
+        "observation_index": 1,
+        "observation_id": "AAAGGGATGTAGCAAG-1",
+        "radius_pixels": 55,
+        "derived_from": "exact obsm/spatial observation coordinate",
+        "biological_interpretation": "none"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2593,
+              1774
+            ],
+            [
+              2588.813,
+              1795.048
+            ],
+            [
+              2576.891,
+              1812.891
+            ],
+            [
+              2559.048,
+              1824.813
+            ],
+            [
+              2538,
+              1829
+            ],
+            [
+              2516.952,
+              1824.813
+            ],
+            [
+              2499.109,
+              1812.891
+            ],
+            [
+              2487.187,
+              1795.048
+            ],
+            [
+              2483,
+              1774
+            ],
+            [
+              2487.187,
+              1752.952
+            ],
+            [
+              2499.109,
+              1735.109
+            ],
+            [
+              2516.952,
+              1723.187
+            ],
+            [
+              2538,
+              1719
+            ],
+            [
+              2559.048,
+              1723.187
+            ],
+            [
+              2576.891,
+              1735.109
+            ],
+            [
+              2588.813,
+              1752.952
+            ],
+            [
+              2593,
+              1774
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "demonstration_spot_neighborhood",
+        "observation_index": 2,
+        "observation_id": "AAAGTCACTGATGTAA-1",
+        "radius_pixels": 55,
+        "derived_from": "exact obsm/spatial observation coordinate",
+        "biological_interpretation": "none"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1905,
+              98
+            ],
+            [
+              1900.813,
+              119.048
+            ],
+            [
+              1888.891,
+              136.891
+            ],
+            [
+              1871.048,
+              148.813
+            ],
+            [
+              1850,
+              153
+            ],
+            [
+              1828.952,
+              148.813
+            ],
+            [
+              1811.109,
+              136.891
+            ],
+            [
+              1799.187,
+              119.048
+            ],
+            [
+              1795,
+              98
+            ],
+            [
+              1799.187,
+              76.952
+            ],
+            [
+              1811.109,
+              59.109
+            ],
+            [
+              1828.952,
+              47.187
+            ],
+            [
+              1850,
+              43
+            ],
+            [
+              1871.048,
+              47.187
+            ],
+            [
+              1888.891,
+              59.109
+            ],
+            [
+              1900.813,
+              76.952
+            ],
+            [
+              1905,
+              98
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "retrieval_date":"2026-08-29",
+  "sources":[
+    {"name":"UniProt EGFR","url":"https://www.uniprot.org/uniprotkb/P00533/entry","supports":"Reviewed human protein identity and entry version."},
+    {"name":"ChEMBL EGFR target","url":"https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203","supports":"Human EGFR target identity and inhibitor mechanism records."},
+    {"name":"ChEMBL gefitinib","url":"https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL939","supports":"Compound name, identifier, and maximum phase."},
+    {"name":"ChEMBL erlotinib","url":"https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL553","supports":"Compound name, identifier, and maximum phase."},
+    {"name":"ChEMBL osimertinib","url":"https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3353410","supports":"Compound name, identifier, and maximum phase."},
+    {"name":"RCSB PDB 1M17","url":"https://www.rcsb.org/structure/1M17","supports":"EGFR–erlotinib structure identity, method, and 2.60 Å resolution."},
+    {"name":"Reactome Signaling by EGFR","url":"https://reactome.org/content/detail/R-HSA-177929","supports":"Pathway identity and ligand-induced EGFR dimerization context."}
+  ],
+  "checked_sources":[{"name":"Reactome ContentService","request":"data/pathways/low/entity/P00533","status":"service_error","supports_claim":false}],
+  "method_note":"The selected compounds are examples, not a comprehensive EGFR inhibitor inventory."
+}

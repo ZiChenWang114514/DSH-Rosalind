@@ -1,0 +1,13 @@
+{
+  "retrieval_date":"2026-08-29",
+  "sources":[
+    {"name":"ClinVar C>T record","url":"https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/","supports":"TCF7L2 transcript HGVS and ClinVar Variation ID for the C>T allele."},
+    {"name":"ClinVar C>G record","url":"https://www.ncbi.nlm.nih.gov/clinvar/variation/1692994/","supports":"The distinct alternate allele returned by the same rsID search."},
+    {"name":"Ensembl variation","url":"https://rest.ensembl.org/variation/homo_sapiens/rs7903146","supports":"rsID identity, dbSNP source, and returned cross-reference synonyms."},
+    {"name":"UKB-TOPMed PheWAS","url":"https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T","supports":"GRCh38 allele identity, nearest gene, allele frequency, and association-count metadata."}
+  ],
+  "checked_sources":[
+    {"name":"gnomAD GraphQL","request":"variant 10-112998590-C-T in gnomad_r4","status":"service_error","supports_claim":false}
+  ],
+  "method_note":"The case is allele-specific. The C>T and C>G ClinVar records are never merged. The failed gnomAD request is retained only as method provenance."
+}

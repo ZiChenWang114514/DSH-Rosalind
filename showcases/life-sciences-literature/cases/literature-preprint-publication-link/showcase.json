@@ -1,0 +1,20 @@
+{
+  "id": "literature-preprint-publication-link",
+  "plugin_id": "life-sciences-literature",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],
+  "previews": [{"path":"previews/preprint-publication.svg"}],
+  "sources": ["https://doi.org/10.1101/2020.09.09.20191205","https://doi.org/10.1038/s41467-021-21444-5","https://pubmed.ncbi.nlm.nih.gov/33608522/"],
+  "observations": [
+    "The medRxiv API returned two preprint versions dated 10 and 11 September 2020.",
+    "The publication-link endpoint associated the preprint with Nature Communications DOI 10.1038/s41467-021-21444-5.",
+    "PubMed identifies the linked publication as PMID 33608522, published 19 February 2021."
+  ],
+  "interpretation": ["The example demonstrates a traceable preprint-to-publication relationship with a changed title and a computed 162-day interval."],
+  "limitations": ["Publication-link services can omit or update relationships.","A linkage indicates record continuity, not equivalence of every claim, analysis, or dataset version."],
+  "environment": {"preprint_doi":"10.1101/2020.09.09.20191205","retrieval_date":"2026-08-29"}
+}

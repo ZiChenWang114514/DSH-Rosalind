@@ -1,0 +1,9 @@
+{
+  "id":"databases-il6r-asthma","plugin_id":"life-sciences-databases","plugin_version":"0.1.5","status":"ready","run_date":"2026-08-29","prompt":"prompt.md","inputs":[],
+  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],"previews":[{"path":"previews/il6r-asthma.svg"}],
+  "sources":["https://platform.opentargets.org/target/ENSG00000160712","https://www.ebi.ac.uk/gwas/","https://gtexportal.org/home/gene/ENSG00000160712"],
+  "observations":["Open Targets returned one asthma row with GWAS credible-set and Europe PMC datasource scores.","The GWAS Catalog query returned ten IL6R-mapped association records.","GTEx returned 15 eQTL rows for rs2228145, including seven IL6R rows across seven tissues."],
+  "interpretation":["The combined sources connect disease-level evidence, cataloged genetic associations, and tissue-specific expression context for IL6R."],
+  "limitations":["Open Targets datasource scores are evidence context, not causal effect sizes.","The compact GWAS response did not expose trait labels, so its slice is not described as asthma-specific.","The evidence map does not establish therapeutic direction."],
+  "environment":{"retrieval_date":"2026-08-29","target":"ENSG00000160712","variant":"rs2228145"}
+}

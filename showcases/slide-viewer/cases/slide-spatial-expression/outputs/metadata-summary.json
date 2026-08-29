@@ -1,0 +1,18 @@
+{
+  "observations": 684,
+  "genes": 18078,
+  "matrix": "X",
+  "matrix_format": "csr",
+  "matrix_shape": [
+    684,
+    18078
+  ],
+  "spatial_coordinates": "obsm/spatial",
+  "library_id": "V1_Adult_Mouse_Brain",
+  "value_scale": "unknown",
+  "matrix_revision": "b93bd2bb146dbf8ec519e04145d9cd2efaca3aeca8aadd191601720123d57159",
+  "observed_fields": [
+    "total_counts",
+    "n_genes_by_counts"
+  ]
+}

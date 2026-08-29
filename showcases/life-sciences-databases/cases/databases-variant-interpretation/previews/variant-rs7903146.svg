@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Multi-source interpretation of rs7903146 C to T</title><desc id="desc">An allele-resolved evidence display from ClinVar, Ensembl, UKB-TOPMed, and a recorded gnomAD service error.</desc>
+  <rect width="1200" height="720" rx="28" fill="#f4f1eb"/>
+  <text x="70" y="76" fill="#202b3d" font-family="Inter,Segoe UI,sans-serif" font-size="38" font-weight="700">rs7903146 · C → T</text>
+  <text x="70" y="115" fill="#607086" font-family="Inter,Segoe UI,sans-serif" font-size="20">GRCh38 10:112,998,590 · nearest gene TCF7L2</text>
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <rect x="70" y="170" width="500" height="180" rx="22" fill="#ffffff" stroke="#4666a8" stroke-width="2"/>
+    <text x="100" y="212" fill="#4666a8" font-size="17">CLINVAR</text>
+    <text x="100" y="257" fill="#202b3d" font-size="27" font-weight="700">Variation 7413</text>
+    <text x="100" y="295" fill="#4b596d" font-size="17">TCF7L2 c.450+33966C&gt;T</text>
+    <text x="100" y="324" fill="#7b8798" font-size="15">C&gt;G is a separate record: 1692994</text>
+    <rect x="630" y="170" width="500" height="180" rx="22" fill="#ffffff" stroke="#2d9478" stroke-width="2"/>
+    <text x="660" y="212" fill="#2d9478" font-size="17">ENSEMBL</text>
+    <text x="660" y="257" fill="#202b3d" font-size="27" font-weight="700">rsID cross-references</text>
+    <text x="660" y="295" fill="#4b596d" font-size="17">Includes VCV000007413</text>
+    <text x="660" y="324" fill="#7b8798" font-size="15">Source reported as dbSNP import</text>
+    <rect x="70" y="390" width="740" height="200" rx="22" fill="#152d46"/>
+    <text x="105" y="433" fill="#8ec7ff" font-size="17">UKB–TOPMed PheWAS</text>
+    <text x="105" y="492" fill="#fff" font-size="48" font-weight="700">AF 0.29</text>
+    <text x="345" y="492" fill="#fff" font-size="48" font-weight="700">1,419</text>
+    <text x="345" y="527" fill="#b7cce2" font-size="17">association rows available</text>
+    <text x="105" y="556" fill="#b7cce2" font-size="16">First 10 returned; slice is not treated as significance-ranked.</text>
+    <rect x="850" y="390" width="280" height="200" rx="22" fill="#f4dddd" stroke="#c96c6c"/>
+    <text x="880" y="433" fill="#9c3e3e" font-size="17">gnomAD r4</text>
+    <text x="880" y="487" fill="#5f3030" font-size="27" font-weight="700">Service error</text>
+    <text x="880" y="528" fill="#775151" font-size="16">Recorded in methods</text>
+    <text x="880" y="555" fill="#775151" font-size="16">Not used as evidence</text>
+  </g>
+  <text x="70" y="656" fill="#596a7b" font-family="Inter,Segoe UI,sans-serif" font-size="16">Allele identity is verified before synthesis; no clinical classification is inferred from these compact responses.</text>
+</svg>

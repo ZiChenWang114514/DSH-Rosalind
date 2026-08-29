@@ -1,0 +1,1 @@
+Use Life Sciences Databases to build a compact IL6R–asthma evidence map from Open Targets, the GWAS Catalog, and GTEx. Keep disease-target evidence, catalog associations, and tissue eQTL observations separate, and explain what the combined evidence does and does not establish.

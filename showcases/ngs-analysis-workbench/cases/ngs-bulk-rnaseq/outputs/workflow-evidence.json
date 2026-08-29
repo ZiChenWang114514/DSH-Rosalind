@@ -1,0 +1,48 @@
+{
+  "observed_at": "2026-08-29T13:05:24Z",
+  "workbench_version": "0.2.16",
+  "compute_targets": [
+    {
+      "id": "local",
+      "os": "Windows",
+      "inspection": "completed"
+    },
+    {
+      "id": "wsl-ubuntu-24.04-ngs",
+      "title": "Ubuntu 24.04 NGS (D drive)",
+      "inspection": "unreachable"
+    }
+  ],
+  "local_runtime_snapshot": "runtime-166d443587f54d58bcd4121cbf1584a7",
+  "local_runtime": {
+    "snakemake": "missing",
+    "nextflow": "missing",
+    "java": "openjdk 21.0.12.1",
+    "docker_cli": "29.7.2",
+    "docker_daemon": "unreachable",
+    "conda": "timed_out",
+    "mamba": "timed_out"
+  },
+  "registered_runs": 0,
+  "execution_performed": false,
+  "workflow": {
+    "id": "oai_bulk_rnaseq_counts_qc",
+    "engine": "Snakemake",
+    "version": "version-a99d0908ddacd176e3b77e9ec2e482f3",
+    "source_sha256": "sha256:eddf2cd523b62c20b3fa4496c4d441b9dfb48a303de9c5b922bad30d7e30f9cc"
+  },
+  "evidence_labels": {
+    "observed": [
+      "workflow catalogue entry",
+      "active workflow version",
+      "compute-target inspection",
+      "runtime snapshot",
+      "empty run registry"
+    ],
+    "unknown": [
+      "example input integrity because data were not fetched",
+      "workflow output quality",
+      "biological result"
+    ]
+  }
+}

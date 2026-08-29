@@ -1,0 +1,23 @@
+{
+  "id": "slide-research-export",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {"path": "outputs/spatial-observations-expression.csv", "bytes": 81802, "sha256": "e529e286575eab027726d8e78a53e71b0fdf858723578a0da34b5a0acd4e1ed7"},
+    {"path": "outputs/export-provenance.json"}
+  ],
+  "previews": [{"path": "previews/research-export.svg"}],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1",
+    "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+  ],
+  "observations": ["All 684 spatial observations and two indexed gene columns were exported with complete row coverage."],
+  "interpretation": ["The CSV is suitable for source-preserving inspection of the selected variables."],
+  "limitations": ["Matrix value scale is unknown.", "No user-drawn region or viewer-native export was available."],
+  "environment": {"viewer_session": "fe033c3b-cd83-452f-83ac-1060e3a9425c", "viewer_rendered": false}
+}

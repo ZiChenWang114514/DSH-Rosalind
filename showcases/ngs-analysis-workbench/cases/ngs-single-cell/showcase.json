@@ -1,0 +1,43 @@
+{
+  "id": "ngs-single-cell",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/workflow-evidence.json"
+    },
+    {
+      "path": "outputs/analysis-plan.md"
+    },
+    {
+      "path": "outputs/readiness-review.md"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/ngs-single-cell.svg"
+    }
+  ],
+  "sources": [],
+  "observations": [
+    "Workflow oai_scrnaseq_fastq_to_count has one active bundled version.",
+    "No workflow run is registered.",
+    "Neither inspected compute target was runnable at observation time."
+  ],
+  "interpretation": [
+    "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable."
+  ],
+  "limitations": [
+    "No input data were fetched.",
+    "No workflow was executed.",
+    "No QC or biological conclusion can be drawn."
+  ],
+  "environment": {
+    "runtime_snapshot": "runtime-166d443587f54d58bcd4121cbf1584a7",
+    "execution_performed": false
+  }
+}

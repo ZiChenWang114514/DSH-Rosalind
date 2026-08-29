@@ -1,0 +1,19 @@
+{
+  "method": "all 684 indexed observations queried in 11 guarded pages; descriptive statistics over matrix X",
+  "Slc17a7": {
+    "gene_index": 7717,
+    "n": 684,
+    "nonzero": 671,
+    "min": 0,
+    "max": 4.05490255355835,
+    "mean": 2.7109799739735867
+  },
+  "Gad1": {
+    "gene_index": 1607,
+    "n": 684,
+    "nonzero": 490,
+    "min": 0,
+    "max": 3.9498746395111084,
+    "mean": 1.071753799871743
+  }
+}

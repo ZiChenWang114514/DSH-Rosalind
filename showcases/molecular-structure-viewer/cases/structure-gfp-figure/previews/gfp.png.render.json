@@ -1,0 +1,111 @@
+{
+  "artifact": {
+    "byteLength": 738922,
+    "mediaType": "image/png",
+    "outputPath": "gfp-v2.png",
+    "repositoryCopy": "previews/gfp.png",
+    "sha256": "6d8d83a5daf18f97ee6efaf02dfefb06bdf0f433c5b8a3b045f089556696796b"
+  },
+  "createdAt": "2026-08-29T11:49:09.515Z",
+  "provenance": {
+    "canonicalSpec": "{\"autoCrop\":false,\"cropPadding\":16,\"format\":\"png\",\"height\":1200,\"kind\":\"image\",\"outputPath\":\"gfp-v2.png\",\"overwrite\":false,\"scene\":{\"antialiasing\":\"quality\",\"background\":\"#0F172A\",\"camera\":{\"orientation\":\"front\",\"zoom\":1.15},\"clearExisting\":false,\"density\":[],\"lighting\":\"studio\",\"representationOptions\":{\"hydrogens\":\"none\",\"quality\":\"high\"},\"scientificAnnotations\":{\"guides\":[],\"quality\":[],\"symmetry\":[]}},\"transparent\":false,\"width\":1600}",
+    "density": {
+      "initial": [],
+      "sceneTransitions": []
+    },
+    "generatedAt": "2026-08-29T11:49:09.379Z",
+    "output": {
+      "autoCrop": false,
+      "crop": {
+        "applied": false,
+        "empty": false,
+        "height": 1200,
+        "padding": 16,
+        "width": 1600,
+        "x": 0,
+        "y": 0
+      },
+      "format": "png",
+      "height": 1200,
+      "sourceHeight": 1200,
+      "sourceWidth": 1600,
+      "transparent": false,
+      "width": 1600
+    },
+    "renderer": "Mol* 5.11.0",
+    "replay": {
+      "autoCrop": false,
+      "cropPadding": 16,
+      "format": "png",
+      "height": 1200,
+      "kind": "image",
+      "outputPath": "gfp-v2.png",
+      "overwrite": false,
+      "scene": {
+        "antialiasing": "quality",
+        "background": "#0F172A",
+        "camera": {
+          "orientation": "front",
+          "zoom": 1.15
+        },
+        "clearExisting": false,
+        "density": [],
+        "lighting": "studio",
+        "representationOptions": {
+          "hydrogens": "none",
+          "quality": "high"
+        },
+        "scientificAnnotations": {
+          "guides": [],
+          "quality": [],
+          "symmetry": []
+        }
+      },
+      "transparent": false,
+      "width": 1600
+    },
+    "schemaVersion": 1,
+    "source": {
+      "fileName": "1EMA.pdb",
+      "name": "1EMA.pdb",
+      "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088"
+    },
+    "structureObjects": [
+      {
+        "construction": {
+          "assemblyId": "1",
+          "dynamicBonds": false,
+          "kind": "assembly",
+          "modelIndex": 0
+        },
+        "fileName": "1EMA.pdb",
+        "frameCount": 1,
+        "id": "primary",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "primary": true,
+        "visible": true
+      }
+    ],
+    "encodingDurationMs": 1805.7000000178814,
+    "jobId": "ed237485-1fa9-48db-ad91-18a40bd4d52a"
+  },
+  "renderer": "Mol* 5.11.0",
+  "schemaVersion": 1
+}

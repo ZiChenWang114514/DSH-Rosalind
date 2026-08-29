@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">TREM2 and microglia publication landscape</title>
+  <desc id="desc">A dated PubMed snapshot of ten records plus one separately identified bioRxiv preprint.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081827"/><stop offset="1" stop-color="#102f3c"/></linearGradient></defs>
+  <rect width="1200" height="720" rx="28" fill="url(#bg)"/>
+  <text x="70" y="82" fill="#f4fbff" font-family="Inter,Segoe UI,sans-serif" font-size="38" font-weight="700">TREM2 × microglia</text>
+  <text x="70" y="121" fill="#9ecbd7" font-family="Inter,Segoe UI,sans-serif" font-size="20">Dated literature snapshot · 29 Aug 2026</text>
+  <rect x="70" y="165" width="300" height="180" rx="22" fill="#123f4d" stroke="#49c5b6"/>
+  <text x="102" y="210" fill="#9ff3df" font-family="Inter,Segoe UI,sans-serif" font-size="18">PUBMED RESULTS</text>
+  <text x="102" y="285" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="72" font-weight="700">10</text>
+  <text x="102" y="320" fill="#b8dfe7" font-family="Inter,Segoe UI,sans-serif" font-size="17">Title/abstract query, date sorted</text>
+  <rect x="410" y="165" width="300" height="180" rx="22" fill="#19364f" stroke="#7aa7ff"/>
+  <text x="442" y="210" fill="#b7d0ff" font-family="Inter,Segoe UI,sans-serif" font-size="18">ARTICLE TYPES</text>
+  <text x="442" y="266" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="34" font-weight="700">6 reviews</text>
+  <text x="442" y="308" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="34" font-weight="700">4 research</text>
+  <rect x="750" y="165" width="380" height="180" rx="22" fill="#402f4d" stroke="#dc94ff"/>
+  <text x="782" y="210" fill="#edc5ff" font-family="Inter,Segoe UI,sans-serif" font-size="18">PREPRINT, KEPT SEPARATE</text>
+  <text x="782" y="257" fill="#ffffff" font-family="Inter,Segoe UI,sans-serif" font-size="24" font-weight="700">GPR34 × TREM2 metabolism</text>
+  <text x="782" y="292" fill="#e4cce9" font-family="Inter,Segoe UI,sans-serif" font-size="17">bioRxiv · 2025-04-03</text>
+  <text x="782" y="320" fill="#e4cce9" font-family="Inter,Segoe UI,sans-serif" font-size="17">No linked publication returned</text>
+  <text x="70" y="408" fill="#dff5fa" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="700">Visible themes in the retrieved records</text>
+  <g font-family="Inter,Segoe UI,sans-serif" font-size="18">
+    <rect x="70" y="445" width="320" height="70" rx="16" fill="#164b56"/><text x="94" y="487" fill="#eaffff">R47H and disease models</text>
+    <rect x="410" y="445" width="320" height="70" rx="16" fill="#164b56"/><text x="434" y="487" fill="#eaffff">Injury and inflammation</text>
+    <rect x="750" y="445" width="380" height="70" rx="16" fill="#164b56"/><text x="774" y="487" fill="#eaffff">Metabolism and therapeutic targeting</text>
+    <rect x="70" y="535" width="320" height="70" rx="16" fill="#243e5d"/><text x="94" y="577" fill="#eaf2ff">Glioma immune environment</text>
+    <rect x="410" y="535" width="320" height="70" rx="16" fill="#243e5d"/><text x="434" y="577" fill="#eaf2ff">Molecular simulation</text>
+    <rect x="750" y="535" width="380" height="70" rx="16" fill="#243e5d"/><text x="774" y="577" fill="#eaf2ff">Innate immune memory</text>
+  </g>
+  <text x="70" y="665" fill="#8eb7c3" font-family="Inter,Segoe UI,sans-serif" font-size="15">Source observations and project-authored theme labels are recorded separately in outputs/.</text>
+</svg>

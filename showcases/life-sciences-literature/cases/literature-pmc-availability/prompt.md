@@ -1,0 +1,1 @@
+Use Life Sciences Literature to check whether PMCID PMC3257301 is currently available in the PMC Article Dataset. Report identifiers, open-access and license status, retraction flags, and the available article-file types with canonical evidence links.

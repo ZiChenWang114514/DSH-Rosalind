@@ -1,0 +1,47 @@
+{
+  "id": "slide-spatial-expression",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/source-provenance.json"
+    },
+    {
+      "path": "outputs/metadata-summary.json"
+    },
+    {
+      "path": "outputs/expression-summary.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/spatial-expression.svg"
+    }
+  ],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1",
+    "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+  ],
+  "observations": [
+    "The indexed H5AD exposes 684 observations, 18,078 genes, matrix X, and spatial coordinates.",
+    "Slc17a7 and Gad1 values were read for all indexed observations."
+  ],
+  "interpretation": [
+    "The dataset supports reproducible indexed expression queries for the two selected genes."
+  ],
+  "limitations": [
+    "The viewer session did not render a tissue image.",
+    "Matrix value scale is unknown.",
+    "No anatomical or diagnostic interpretation is made."
+  ],
+  "environment": {
+    "viewer_session": "fe033c3b-cd83-452f-83ac-1060e3a9425c",
+    "source_id": "eed811c3-c105-4fba-9dd3-84a5b3f16939",
+    "viewer_rendered": false
+  }
+}

@@ -1,0 +1,1 @@
+Use Life Sciences Literature to inspect medRxiv DOI 10.1101/2020.09.09.20191205, identify all returned preprint versions, verify its linked journal publication, and compare the preprint and publication titles, dates, and identifiers without treating them as the same record.

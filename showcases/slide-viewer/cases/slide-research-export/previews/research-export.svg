@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Source-preserving spatial research export</title>
+  <desc id="desc">A complete CSV export of 684 observations with coordinates, QC fields, and two genes.</desc>
+  <rect width="1200" height="630" fill="#f7f4ec"/>
+  <text x="70" y="95" font-family="Segoe UI, sans-serif" font-size="42" font-weight="700" fill="#20354a">Spatial research export</text>
+  <text x="70" y="142" font-family="Segoe UI, sans-serif" font-size="23" fill="#5b6f82">Complete source-indexed CSV · provenance retained</text>
+  <g font-family="Segoe UI, sans-serif">
+    <rect x="70" y="210" width="315" height="220" rx="18" fill="#dce9f5"/><rect x="443" y="210" width="315" height="220" rx="18" fill="#e6eed8"/><rect x="815" y="210" width="315" height="220" rx="18" fill="#f2dfcf"/>
+    <text x="135" y="300" font-size="60" font-weight="700" fill="#20354a">684</text><text x="120" y="350" font-size="23" fill="#40566b">observations</text>
+    <text x="545" y="300" font-size="60" font-weight="700" fill="#2d482d">2</text><text x="505" y="350" font-size="23" fill="#456245">gene columns</text>
+    <text x="895" y="300" font-size="60" font-weight="700" fill="#6b3f22">100%</text><text x="900" y="350" font-size="23" fill="#744f36">coverage</text>
+    <text x="70" y="525" font-size="22" fill="#5b4a3a">Exact IDs and coordinates · matrix revision pinned · value scale unknown</text>
+  </g>
+</svg>

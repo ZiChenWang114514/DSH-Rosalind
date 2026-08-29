@@ -1,0 +1,32 @@
+{
+  "format": "Aperio SVS / tiled TIFF",
+  "inspection_tool": "tiffinfo",
+  "main_image": {
+    "width": 46000,
+    "height": 32893,
+    "tile_width": 240,
+    "tile_height": 240,
+    "samples_per_pixel": 3,
+    "bits_per_sample": 8,
+    "photometric": "RGB",
+    "compression_code": 33005,
+    "objective_magnification": 20,
+    "microns_per_pixel": 0.499
+  },
+  "pyramid_levels": [
+    {"width": 46000, "height": 32893, "downsample": 1},
+    {"width": 11500, "height": 8223, "downsample": 4},
+    {"width": 2875, "height": 2055, "downsample": 16}
+  ],
+  "associated_images": [
+    {"kind": "thumbnail", "width": 1024, "height": 732},
+    {"kind": "label", "width": 387, "height": 463},
+    {"kind": "macro", "width": 1280, "height": 431}
+  ],
+  "viewer_execution": {
+    "session_id": "d21efa4f-fce2-4057-9d25-eba188a994cd",
+    "source_authorized": true,
+    "state": "awaiting-viewer",
+    "rendered_region_available": false
+  }
+}

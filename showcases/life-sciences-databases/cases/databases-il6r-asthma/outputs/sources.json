@@ -1,0 +1,10 @@
+{
+  "retrieval_date":"2026-08-29",
+  "sources":[
+    {"name":"Open Targets IL6R","url":"https://platform.opentargets.org/target/ENSG00000160712","supports":"Target identity and the associated-disease evidence matrix."},
+    {"name":"Open Targets asthma","url":"https://platform.opentargets.org/disease/MONDO_0004979","supports":"Asthma identity and datasource scores in the IL6R association row."},
+    {"name":"GWAS Catalog IL6R query","url":"https://www.ebi.ac.uk/gwas/rest/api/v2/associations?mapped_gene=IL6R&size=10","supports":"Ten returned associations mapped to IL6R in the requested slice."},
+    {"name":"GTEx Portal","url":"https://gtexportal.org/home/gene/ENSG00000160712","supports":"The rs2228145 single-tissue eQTL rows for IL6R and neighboring genes."}
+  ],
+  "method_note":"Datasource scores describe evidence context. They are not causal effect sizes. GTEx NES values are tissue-specific association estimates."
+}

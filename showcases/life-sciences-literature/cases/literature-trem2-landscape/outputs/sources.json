@@ -1,0 +1,10 @@
+{
+  "retrieval_date": "2026-08-29",
+  "sources": [
+    {"name":"NCBI Entrez search","url":"https://pubmed.ncbi.nlm.nih.gov/?term=TREM2%5BTitle%2FAbstract%5D+AND+microglia%5BTitle%2FAbstract%5D&sort=date","supports":"The ten PubMed identifiers returned by the dated query."},
+    {"name":"PubMed records","url_pattern":"https://pubmed.ncbi.nlm.nih.gov/{PMID}/","pmids":["42437587","42341895","41467385","42570638","42396649","42342036","42288287","42160848","42102578","42632547"],"supports":"Titles, journals, and publication dates."},
+    {"name":"bioRxiv preprint","url":"https://www.biorxiv.org/content/10.1101/2025.03.28.646038v1","doi":"10.1101/2025.03.28.646038","supports":"Preprint title and posting date."},
+    {"name":"bioRxiv publication-link API","url":"https://api.biorxiv.org/pubs/biorxiv/10.1101/2025.03.28.646038/na/json","retrieved_at":"2026-08-29T12:06:06Z","supports":"The checked response contained no linked publication record on the retrieval date."}
+  ],
+  "method_note": "Titles and metadata are source observations. Theme labels and counts are project-authored classifications."
+}

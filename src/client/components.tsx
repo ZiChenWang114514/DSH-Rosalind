@@ -1,0 +1,235 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { EmptyWorkspaceOwnerProps, HeroBrandMarkOwnerProps } from "@deepseek-ai/dsh-client-ui-conversation/client";
+
+import { PREVIEW_DATA_URLS, SHOWCASE_BY_ID, SHOWCASES, SHOWCASE_FILE_COUNT, SHOWCASE_SOURCE_COMMIT } from "../generated/catalog.js";
+import { SHOWCASE_CATEGORIES, categoryById } from "../shared/categories.js";
+import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
+import { ArrowIcon, CategoryIcon, CheckIcon, CloseIcon, FileIcon, PlayIcon, RosalindMark, SearchIcon } from "./icons.js";
+import { buildConversationPrompt } from "./prompt.js";
+import {
+  closeShowcase,
+  consumeConversationPrompt,
+  getWorkbenchState,
+  openShowcase,
+  setDetailTab,
+  setShowcaseMode,
+  setWorkbenchBridge,
+  showNotice,
+  stageConversationPrompt,
+  useWorkbenchState,
+} from "./state.js";
+
+type InputActions = { setDraft: (text: string) => void; submit?: () => void };
+
+function styleFor(showcase: ShowcaseDefinition): React.CSSProperties {
+  const color = categoryById.get(showcase.categoryId)?.color ?? "#537d70";
+  return { "--category-color": color } as React.CSSProperties;
+}
+
+function categoryFor(showcase: ShowcaseDefinition) {
+  return categoryById.get(showcase.categoryId) ?? SHOWCASE_CATEGORIES[0]!;
+}
+
+function previewFor(showcase: ShowcaseDefinition): string | undefined {
+  if (!showcase.preview?.path) return undefined;
+  return PREVIEW_DATA_URLS[showcase.preview.path] ?? (showcase.preview.mediaType === "image/png" ? undefined : showcase.preview.resourceUri);
+}
+
+export interface WorkbenchProps {
+  session?: boolean;
+  hero?: boolean;
+  inputActions?: InputActions;
+}
+
+export function Workbench({ session = false, hero = false, inputActions }: WorkbenchProps): JSX.Element {
+  const [query, setQuery] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [runnableOnly, setRunnableOnly] = useState(false);
+
+  useEffect(() => {
+    if (!inputActions) return undefined;
+    const staged = consumeConversationPrompt();
+    if (staged) inputActions.setDraft(staged);
+    return setWorkbenchBridge({
+      importCase(showcase, mode) {
+        inputActions.setDraft(buildConversationPrompt(showcase, mode));
+        showNotice("The teaching prompt is ready in the DSH composer.");
+      },
+    });
+  }, [inputActions]);
+
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return SHOWCASES.filter((showcase) => showcase.status === "ready")
+      .filter((showcase) => !categoryId || showcase.categoryId === categoryId)
+      .filter((showcase) => !runnableOnly || showcase.modes.includes("reproduce"))
+      .filter((showcase) => !normalized || showcase.searchText.includes(normalized));
+  }, [categoryId, query, runnableOnly]);
+
+  return (
+    <section className={`rr-root${session ? " rr-root--session" : ""}${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind scientific workbench">
+      <header className="rr-hero-head">
+        <span className="rr-kicker"><span className="rr-kicker-dot" /> Research preview · 23 projects</span>
+        <h1 className="rr-title">Rosalind scientific workbench</h1>
+        <p className="rr-subtitle">Learn from versioned evidence, replay checked results, or prepare a fresh run across literature, databases, sequences, NGS, structures, pathology, spatial biology, and molecular design.</p>
+      </header>
+      <div className="rr-toolbar">
+        <label className="rr-search">
+          <SearchIcon size={17} />
+          <span className="sr-only">Search projects</span>
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search a scientific question or method" />
+        </label>
+        <select className="rr-select" aria-label="Filter by scientific area" value={categoryId} onChange={(event) => setCategoryId(event.target.value)}>
+          <option value="">All scientific areas</option>
+          {SHOWCASE_CATEGORIES.map((category) => <option key={category.id} value={category.id}>{category.label}</option>)}
+        </select>
+        <label className="rr-count">
+          <input type="checkbox" checked={runnableOnly} onChange={(event) => setRunnableOnly(event.target.checked)} />
+          <span>Reproduce path</span><strong>{filtered.length}</strong>
+        </label>
+      </div>
+      <div className="rr-grid">
+        {filtered.map((showcase) => {
+          const category = categoryFor(showcase);
+          return (
+            <button key={showcase.id} type="button" className="rr-card" style={styleFor(showcase)} onClick={() => openShowcase(showcase.id)} aria-label={`Open ${showcase.title}`}>
+              <span className="rr-card-icon"><CategoryIcon icon={category.icon} size={24} /></span>
+              <span className="rr-card-body">
+                <span className="rr-card-meta"><span className="rr-ready-dot" />{category.label}</span>
+                <span className="rr-card-title">{showcase.title}</span>
+                <span className="rr-card-summary">{showcase.summary}</span>
+              </span>
+              <span className="rr-card-arrow"><ArrowIcon size={17} /></span>
+            </button>
+          );
+        })}
+        {filtered.length === 0 && <div className="rr-empty">No project matches this search. Clear a filter to see the complete catalogue.</div>}
+      </div>
+      <footer className="rr-source-note">
+        <span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span>
+        <span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span>
+      </footer>
+    </section>
+  );
+}
+
+function InfoBlock({ title, items, wide = false }: { title: string; items: readonly string[]; wide?: boolean }): JSX.Element {
+  return (
+    <section className={`rr-info-block${wide ? " rr-info-block--wide" : ""}`}>
+      <h3 className="rr-info-title">{title}</h3>
+      <ul className="rr-list">{items.map((item, index) => <li key={`${title}-${index}`}>{item}</li>)}</ul>
+    </section>
+  );
+}
+
+function Overview({ showcase }: { showcase: ShowcaseDefinition }): JSX.Element {
+  return (
+    <div className="rr-section-grid">
+      <section className="rr-info-block rr-info-block--wide"><h3 className="rr-info-title">Scientific question</h3><p className="rr-question">{showcase.question}</p></section>
+      <InfoBlock title="Source observations" items={showcase.observations} />
+      <InfoBlock title="Computed results" items={showcase.computedResults} />
+      <InfoBlock title="Interpretation" items={showcase.interpretation} />
+      <InfoBlock title="Limitations" items={showcase.limitations} />
+    </div>
+  );
+}
+
+function Evidence({ showcase }: { showcase: ShowcaseDefinition }): JSX.Element {
+  const artifacts = showcase.artifacts.filter((artifact) => artifact.path || artifact.resourceUri);
+  return (
+    <div className="rr-section-grid">
+      <section className="rr-info-block rr-info-block--wide">
+        <h3 className="rr-info-title">Indexed artifacts</h3>
+        <div className="rr-artifacts">{artifacts.map((artifact) => <div className="rr-artifact" key={artifact.id}><FileIcon size={15} /><span className="rr-artifact-name">{artifact.path ?? artifact.resourceUri}</span><span className="rr-artifact-role">{artifact.role}</span></div>)}</div>
+      </section>
+      <InfoBlock title="Recorded sources" items={showcase.sources} wide />
+      <InfoBlock title="Scientific claims" items={showcase.claims.map((claim) => `${claim.kind}: ${claim.statement}`)} wide />
+    </div>
+  );
+}
+
+function Reproduce({ showcase }: { showcase: ShowcaseDefinition }): JSX.Element {
+  return (
+    <div className="rr-recipe">
+      <div className="rr-recipe-head"><span className="rr-chip">{showcase.recipe.strategy}</span><span className="rr-chip">{showcase.recipe.adapter}</span>{showcase.recipe.providerIds.map((id) => <span className="rr-chip" key={id}>{id}</span>)}</div>
+      <InfoBlock title="Required inputs" items={showcase.recipe.requiredInputs} wide />
+      <InfoBlock title="Expected outputs" items={showcase.recipe.expectedOutputs} wide />
+      <InfoBlock title="Validation checks" items={showcase.recipe.checks} wide />
+      <p className="rr-detail-summary">A fresh run begins with provider status and an execution plan. Network, paid, GPU, SSH/HPC, and external-write steps wait for explicit confirmation.</p>
+    </div>
+  );
+}
+
+const MODE_COPY: Record<ShowcaseMode, { label: string; description: string }> = {
+  lesson: { label: "Lesson", description: "Teach from checked evidence" },
+  replay: { label: "Replay", description: "Open retained results" },
+  reproduce: { label: "Reproduce", description: "Prepare a fresh run" },
+};
+
+export function ShowcaseDetailOverlay(): JSX.Element | null {
+  const { selectedCaseId, detailTab, mode, bridge, notice } = useWorkbenchState();
+  const showcase = selectedCaseId ? SHOWCASE_BY_ID.get(selectedCaseId) : undefined;
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showcase) return undefined;
+    const previous = document.activeElement as HTMLElement | null;
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") closeShowcase(); };
+    document.addEventListener("keydown", onKey);
+    window.setTimeout(() => panelRef.current?.focus(), 0);
+    return () => { document.removeEventListener("keydown", onKey); previous?.focus(); };
+  }, [showcase]);
+
+  if (!showcase) return null;
+  const category = categoryFor(showcase);
+  const preview = previewFor(showcase);
+  const importCase = () => {
+    if (bridge.importCase) bridge.importCase(showcase, mode);
+    else if (bridge.startSession) bridge.startSession(showcase, mode);
+    else showNotice("Open a DSH workspace, then add this project to the conversation.");
+  };
+  return (
+    <div className="rr-overlay rr-overlay-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closeShowcase(); }}>
+      <div ref={panelRef} className="rr-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="rr-detail-title" tabIndex={-1} style={styleFor(showcase)}>
+        <header className="rr-detail-head">
+          {preview ? <img className="rr-preview" src={preview} alt="" /> : <div className="rr-preview-fallback"><CategoryIcon icon={category.icon} size={36} /></div>}
+          <div><span className="rr-detail-category"><CategoryIcon icon={category.icon} size={15} />{category.label}</span><h2 id="rr-detail-title" className="rr-detail-title">{showcase.title}</h2><p className="rr-detail-summary">{showcase.summary}</p></div>
+          <button type="button" className="rr-close" aria-label="Close project details" onClick={closeShowcase}><CloseIcon size={18} /></button>
+        </header>
+        <div className="rr-tabs" role="tablist" aria-label="Project details">
+          {(["overview", "evidence", "reproduce"] as const).map((tab) => <button key={tab} type="button" className="rr-tab" role="tab" aria-selected={detailTab === tab} onClick={() => setDetailTab(tab)}>{tab[0]!.toUpperCase() + tab.slice(1)}</button>)}
+        </div>
+        <main className="rr-detail-body">{detailTab === "overview" ? <Overview showcase={showcase} /> : detailTab === "evidence" ? <Evidence showcase={showcase} /> : <Reproduce showcase={showcase} />}</main>
+        <footer className="rr-detail-foot">
+          <div className="rr-mode-picker" aria-label="How to use this project">{showcase.modes.map((candidate) => <button key={candidate} type="button" className="rr-mode" aria-pressed={mode === candidate} onClick={() => setShowcaseMode(candidate)}><strong>{MODE_COPY[candidate].label}</strong><span>{MODE_COPY[candidate].description}</span></button>)}</div>
+          {notice && <span className="rr-notice" role="status">{notice}</span>}
+          <div className="rr-actions"><button type="button" className="rr-button" onClick={() => setDetailTab("evidence")}><FileIcon size={15} />Files</button><button type="button" className="rr-button rr-button--primary" onClick={importCase}><PlayIcon size={15} />Add to conversation</button></div>
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+export function RosalindBrandMark({ size = 48, className }: HeroBrandMarkOwnerProps): JSX.Element {
+  return <span className={`rr-brand-mark${className ? ` ${className}` : ""}`}><RosalindMark size={size} /></span>;
+}
+
+export function HeroWorkspacePicker(props: EmptyWorkspaceOwnerProps): JSX.Element {
+  useEffect(() => setWorkbenchBridge({
+    startSession(showcase, mode) {
+      const prompt = buildConversationPrompt(showcase, mode);
+      stageConversationPrompt(prompt);
+      if (props.selectedId) props.onPick(props.selectedId);
+      else showNotice("Choose a DSH workspace first; the selected project will remain open.");
+    },
+  }), [props.onPick, props.selectedId]);
+  return <Workbench hero />;
+}
+
+export function ConversationWorkbenchView(props: { inputActions: InputActions }): JSX.Element {
+  return <Workbench session inputActions={props.inputActions} />;
+}
+
+export function checkReadyIcon(): JSX.Element {
+  return <CheckIcon size={14} />;
+}

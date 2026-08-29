@@ -1,0 +1,41 @@
+{
+  "id": "sequence-fastq-qc",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/quality-summary.json"
+    },
+    {
+      "path": "outputs/source-provenance.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/fastq-qc.svg"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "The subset contains 500 reads and 235490 bases.",
+    "The computed Q30 fraction is 95.397681 percent."
+  ],
+  "interpretation": [
+    "The subset has high base-call quality under the Phred+33 interpretation."
+  ],
+  "limitations": [
+    "The first 500 records may not represent the entire run.",
+    "No adapter, contamination, or run-wide distribution analysis was performed.",
+    "The viewer card did not mount."
+  ],
+  "environment": {
+    "viewer_session": "a23f374a-311c-4d9b-b718-6c79756a99ac",
+    "viewer_rendered": false
+  }
+}

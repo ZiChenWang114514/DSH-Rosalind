@@ -1,0 +1,61 @@
+{
+  "id": "rosalind-molecular-design",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/candidates.csv",
+      "bytes": 3898,
+      "sha256": "bab5e24ca736a2d7f46ba1234a450df100c4094bd672f8711dd70d6d32d35daf"
+    },
+    {
+      "path": "outputs/top5_ensemble_ranking.csv",
+      "bytes": 1758,
+      "sha256": "93103f2c3cc891dbf907b6c13f25e2c79320e377a1f2d00c52f5d09be2469955"
+    },
+    {
+      "path": "outputs/design_metadata.json",
+      "bytes": 185,
+      "sha256": "4bbd8a7146f764053127220de074c9f27eda272b919be3d1e2650e7c0712bbf8"
+    },
+    {
+      "path": "outputs/result-summary.json",
+      "bytes": 3842,
+      "sha256": "763d8f1e8d4b28295c49ceacb5c02caea2b5d0b9c38485251903ebcde2f1d78c"
+    },
+    {
+      "path": "outputs/NB13_E104Q_best_model.cif",
+      "bytes": 242752,
+      "sha256": "ad6aeec20ca2df8f049db68ea5cfee70fa3d38b9488b013c8997efc882821fc5"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/pdl1-nanobody.svg"
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry",
+    "https://www.rcsb.org/structure/5JDS"
+  ],
+  "observations": [
+    "Twenty initial and twenty-five top-five ensemble predictions completed successfully.",
+    "NB13_E104Q ranked first and had no severe-clash ensemble model."
+  ],
+  "interpretation": [
+    "NB13_E104Q is the leading computational candidate under the retained scoring method."
+  ],
+  "limitations": [
+    "No wet-lab affinity, specificity, expression, stability, or functional validation was performed.",
+    "Model confidence and ranking scores are not experimental binding measurements."
+  ],
+  "environment": {
+    "rosalind_launcher_ready": true,
+    "prediction_engine": "Boltz-2",
+    "gpu_count": 4
+  }
+}

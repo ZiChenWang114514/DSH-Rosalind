@@ -1,0 +1,28 @@
+{
+  "retrieved_at": "2026-08-29T12:04:25Z",
+  "preprint": {
+    "server": "medRxiv",
+    "doi": "10.1101/2020.09.09.20191205",
+    "title": "Evolution of immunity to SARS-CoV-2",
+    "category": "infectious diseases",
+    "versions": [
+      {"version":"1","date":"2020-09-10"},
+      {"version":"2","date":"2020-09-11"}
+    ],
+    "license": "cc_no"
+  },
+  "publication": {
+    "doi": "10.1038/s41467-021-21444-5",
+    "pmid": "33608522",
+    "journal": "Nature Communications",
+    "date": "2021-02-19",
+    "title": "Evolution of immune responses to SARS-CoV-2 in mild-moderate COVID-19."
+  },
+  "linkage": {
+    "reported_by": "bioRxiv/medRxiv API publication-link endpoint",
+    "preprint_first_date": "2020-09-10",
+    "publication_date": "2021-02-19",
+    "elapsed_days": 162,
+    "title_changed": true
+  }
+}

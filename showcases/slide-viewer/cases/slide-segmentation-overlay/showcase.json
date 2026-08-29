@@ -1,0 +1,22 @@
+{
+  "id": "slide-segmentation-overlay",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {"path": "outputs/source-aligned-annotations.geojson", "bytes": 5592, "sha256": "a1e18c90aaa5736ae63da5f2cc2b2c817a025f2699879fc05770dd962885c3a0"},
+    {"path": "outputs/overlay-provenance.json"}
+  ],
+  "previews": [{"path": "previews/segmentation-overlay.svg"}],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1"
+  ],
+  "observations": ["Three demonstration polygons were derived from exact obsm/spatial coordinates."],
+  "interpretation": ["The GeoJSON is a reproducible annotation artifact, not a biological segmentation result."],
+  "limitations": ["The overlay was not imported or rendered in the pending viewer session."],
+  "environment": {"viewer_session": "fe033c3b-cd83-452f-83ac-1060e3a9425c", "viewer_rendered": false}
+}

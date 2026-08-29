@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Source-aligned spatial annotation summary</title>
+  <desc id="desc">Three demonstration polygons tied to exact spatial observation coordinates.</desc>
+  <rect width="1200" height="630" fill="#f3f7f4"/>
+  <text x="70" y="90" font-family="Segoe UI, sans-serif" font-size="42" font-weight="700" fill="#173b34">Source-aligned GeoJSON</text>
+  <text x="70" y="135" font-family="Segoe UI, sans-serif" font-size="23" fill="#496b63">Mouse brain H&amp;E spatial coordinates · CC BY 4.0</text>
+  <rect x="80" y="190" width="1040" height="300" rx="20" fill="#dbe9e4" stroke="#7ba89a" stroke-width="3"/>
+  <g fill="#f6a623" fill-opacity="0.28" stroke="#c46d12" stroke-width="5">
+    <circle cx="355" cy="295" r="55"/><circle cx="760" cy="390" r="55"/><circle cx="590" cy="265" r="55"/>
+  </g>
+  <g font-family="Segoe UI, sans-serif" font-size="21" fill="#173b34">
+    <text x="285" y="375">observation 0</text><text x="700" y="470">observation 1</text><text x="530" y="345">observation 2</text>
+    <text x="70" y="560" fill="#6a4b2e">3 demonstrative regions · exact coordinates · no biological segmentation claim</text>
+  </g>
+</svg>

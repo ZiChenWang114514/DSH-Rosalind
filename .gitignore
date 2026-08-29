@@ -1,0 +1,13 @@
+node_modules/
+.npm-cache/
+lib/
+dist/
+artifacts/
+coverage/
+playwright-report/
+test-results/
+.dsh-profile/
+.rosalind-runs/
+*.tgz
+*.log
+.DS_Store

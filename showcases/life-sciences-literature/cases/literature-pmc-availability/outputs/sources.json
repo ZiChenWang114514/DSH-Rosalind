@@ -1,0 +1,10 @@
+{
+  "retrieval_date": "2026-08-29",
+  "sources": [
+    {"name":"PMC article","url":"https://pmc.ncbi.nlm.nih.gov/articles/PMC3257301/","supports":"Article identity, bibliographic record, and accessible full text."},
+    {"name":"PMC Article Dataset lookup","url":"https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC3257301/unicode","supports":"Current dataset metadata, open-access flag, license, file links, and status flags."},
+    {"name":"PubMed record","url":"https://pubmed.ncbi.nlm.nih.gov/22253597/","supports":"PMID-linked bibliographic identity."},
+    {"name":"Publisher DOI","url":"https://doi.org/10.1371/journal.ppat.1002485","supports":"DOI-linked article identity."}
+  ],
+  "method_note": "All status fields are source observations from the compact PMC lookup; no article-content analysis was performed."
+}

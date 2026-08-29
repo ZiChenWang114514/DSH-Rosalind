@@ -1,0 +1,45 @@
+{
+  "id": "sequence-lambda-annotation",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/NC_001416.1.gb",
+      "bytes": 176721,
+      "sha256": "3c624302adeeb3c00649f549903ab781b9e75bab16069ae655833d536407367f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/analysis.json"
+    },
+    {
+      "path": "outputs/source-provenance.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/lambda-annotation.svg"
+    }
+  ],
+  "sources": [
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=gbwithparts&retmode=text"
+  ],
+  "observations": [
+    "The cI feature is reverse-strand and spans 714 bases.",
+    "The computed 237-residue translation equals the annotated translation."
+  ],
+  "interpretation": [
+    "The cI translation is internally consistent with the versioned GenBank record."
+  ],
+  "limitations": [
+    "The viewer card did not mount, so no viewer screenshot or interactive query result is claimed."
+  ],
+  "environment": {
+    "viewer_session": "b304e8c6-15b0-41b6-93f0-6ce3879ee948",
+    "viewer_rendered": false
+  }
+}

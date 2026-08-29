@@ -1,0 +1,16 @@
+{
+  "schema": "life-sciences.launcher/v1",
+  "ready": true,
+  "view": "launcher",
+  "observed": "2026-08-29",
+  "message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "visible_scientific_areas": [
+    "molecular design",
+    "structure analysis",
+    "genomics",
+    "scientific compute"
+  ],
+  "task_list_exposed_to_tool": false,
+  "scientific_job_executed": false,
+  "selected_area": "genomics"
+}

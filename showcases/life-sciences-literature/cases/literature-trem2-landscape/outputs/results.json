@@ -1,0 +1,32 @@
+{
+  "query": "TREM2[Title/Abstract] AND microglia[Title/Abstract]",
+  "database": "PubMed",
+  "sort": "publication date",
+  "retrieved_at": "2026-08-29T12:04:10Z",
+  "record_count": 10,
+  "records": [
+    {"pmid":"42437587","date":"2026-07-12","journal":"Experimental Neurology","title":"Loss of TREM2 is associated with altered microglial responses and inhibitory synaptic changes after closed head injury.","theme":"injury response"},
+    {"pmid":"42341895","date":"2026-06-24","journal":"Experimental Neurology","title":"Trem2 R47H mutation shows mild, but functionally divergent alterations in microglial phenotypes compared to Trem2 deficiency in aged App(NL-F) knock-in mice.","theme":"variant and disease model"},
+    {"pmid":"41467385","date":"2025-12-30","journal":"Neural Regeneration Research","title":"CD11c + microglia: From basic research to clinical application.","theme":"review"},
+    {"pmid":"42570638","date":"2026-08-08","journal":"Biomedicine & Pharmacotherapy","title":"Microglial immunometabolism in Alzheimer's disease: A stage-resolved trajectory from adaptive remodeling to the metabolic paradox.","theme":"immunometabolism review"},
+    {"pmid":"42396649","date":"2026-07-03","journal":"Molecular Medicine Reports","title":"TREM2 in glioma: Reprogramming the immune microenvironment from mechanistic understanding to clinical translation (Review).","theme":"glioma review"},
+    {"pmid":"42342036","date":"2026-06-24","journal":"Neurochemistry International","title":"Mesenchymal stem cell secretome attenuates disease-associated microglial activation and cognitive decline in TBI-associated neuroinflammation.","theme":"intervention and injury"},
+    {"pmid":"42288287","date":"2026-06-13","journal":"Progress in Biophysics and Molecular Biology","title":"Uncovering the biological mechanisms of TREM2 with molecular simulations: A comprehensive review and perspective.","theme":"simulation review"},
+    {"pmid":"42160848","date":"2026-05-14","journal":"Journal of Neuroimmunology","title":"Targeting microglia: A new strategy for the treatment of Alzheimer's disease.","theme":"therapeutic review"},
+    {"pmid":"42102578","date":"2026-04-29","journal":"Neurobiology of Aging","title":"The TREM2 R47H variant is associated with liver-plasma-brain axis dyshomeostasis in the 5xFAD mouse model of Alzheimer's disease.","theme":"variant and systemic metabolism"},
+    {"pmid":"42632547","date":"2026-08-22","journal":"Biochemical Pharmacology","title":"Immunopharmacological reprogramming of innate immune memory in Alzheimer's disease: From microglial priming to therapeutic resilience.","theme":"innate immune memory review"}
+  ],
+  "preprint": {
+    "doi": "10.1101/2025.03.28.646038",
+    "posted": "2025-04-03",
+    "title": "GPR34 regulates microglia state and loss-of-function rescues TREM2 metabolic dysfunction",
+    "server": "bioRxiv",
+    "publication_link_checked": true,
+    "linked_publication_found": false
+  },
+  "theme_counts": {
+    "primary or model research": 4,
+    "reviews or perspectives": 6,
+    "preprints shown separately": 1
+  }
+}

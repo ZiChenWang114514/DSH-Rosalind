@@ -1,0 +1,24 @@
+{
+  "id": "literature-trem2-landscape",
+  "plugin_id": "life-sciences-literature",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],
+  "previews": [{"path":"previews/trem2-landscape.svg"}],
+  "sources": ["https://pubmed.ncbi.nlm.nih.gov/","https://www.biorxiv.org/content/10.1101/2025.03.28.646038v1"],
+  "observations": [
+    "The dated PubMed query returned ten identifiers.",
+    "Six titles were reviews or perspectives and four were primary or model-focused research reports.",
+    "The bioRxiv publication-link endpoint returned no linked publication for the selected preprint on the retrieval date."
+  ],
+  "interpretation": ["The snapshot shows current TREM2 work spanning variants, immunometabolism, injury, glioma, simulation, and therapeutic targeting."],
+  "limitations": [
+    "This is a ten-record date-sorted snapshot, not a systematic review.",
+    "Theme labels were assigned from titles and limited metadata.",
+    "An empty publication-link response means no link was returned by that endpoint on the retrieval date."
+  ],
+  "environment": {"pubmed_query":"TREM2[Title/Abstract] AND microglia[Title/Abstract]","retrieval_date":"2026-08-29"}
+}

@@ -1,0 +1,31 @@
+{
+  "retrieved_at":"2026-08-29T12:13:00Z",
+  "variant":{"rsid":"rs7903146","grch38":"10:112998590-C-T","nearest_gene":"TCF7L2"},
+  "clinvar":{
+    "records_returned":2,
+    "selected_alt":"T",
+    "selected_variation_id":"7413",
+    "selected_hgvs":"NM_001367943.1(TCF7L2):c.450+33966C>T",
+    "other_alt_record":{"alt":"G","variation_id":"1692994"}
+  },
+  "ensembl":{
+    "name":"rs7903146",
+    "source":"dbSNP-imported variant",
+    "returned_synonyms_include":["VCV000007413","RCV002259421","602228.0001"]
+  },
+  "ukb_topmed":{
+    "variant":"10:112998590-C-T",
+    "allele_frequency":0.29,
+    "association_count_total":1419,
+    "records_returned":10,
+    "truncated":true,
+    "first_slice_category":"infectious diseases",
+    "note":"The first API slice is not a significance-ranked summary and is not used to assign phenotype causality."
+  },
+  "gnomad":{
+    "requested_variant":"10-112998590-C-T",
+    "dataset":"gnomad_r4",
+    "status":"service_error",
+    "used_as_evidence":false
+  }
+}

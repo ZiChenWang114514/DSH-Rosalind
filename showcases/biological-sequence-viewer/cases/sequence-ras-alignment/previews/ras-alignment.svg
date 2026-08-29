@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Human RAS alignment analysis</title>
+  <desc id="desc">Viewer-derived summary of conserved RAS motifs, pairwise distances, exploratory neighbor-joining tree, and divergent C-terminal residues.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#152238"/></linearGradient>
+    <style>.sans{font-family:Inter,Segoe UI,Arial,sans-serif}.mono{font-family:Consolas,Menlo,monospace}.muted{fill:#9fb0c8}.white{fill:#f5f8fc}.green{fill:#55d6a9}.amber{fill:#f3c969}.line{stroke:#6f86a6;stroke-width:3;fill:none}.panel{fill:#101d31;stroke:#29415f;stroke-width:1.5}.pill{fill:#173b38;stroke:#2f8c76;stroke-width:1}</style>
+  </defs>
+  <rect width="1200" height="760" rx="28" fill="url(#bg)"/>
+  <text x="58" y="72" class="sans white" font-size="34" font-weight="700">Human RAS protein alignment</text>
+  <text x="58" y="105" class="sans muted" font-size="18">KRAS · NRAS · HRAS — 3 sequences × 191 alignment columns</text>
+  <rect x="52" y="140" width="1096" height="180" rx="18" class="panel"/>
+  <text x="78" y="178" class="sans white" font-size="20" font-weight="650">Conserved GTPase motifs</text>
+  <g class="mono" font-size="22">
+    <rect x="78" y="202" width="220" height="76" rx="12" class="pill"/><text x="96" y="230" class="muted" font-size="14">KRAS 10–17</text><text x="96" y="260" class="green">GAGGVGKS</text>
+    <rect x="320" y="202" width="220" height="76" rx="12" class="pill"/><text x="338" y="230" class="muted" font-size="14">KRAS 30–38</text><text x="338" y="260" class="green">DEYDPTIED</text>
+    <rect x="562" y="202" width="330" height="76" rx="12" class="pill"/><text x="580" y="230" class="muted" font-size="14">KRAS 60–76</text><text x="580" y="260" class="green">GQEEYSAMRDQYMRTGE</text>
+    <rect x="914" y="202" width="178" height="76" rx="12" class="pill"/><text x="932" y="230" class="muted" font-size="14">KRAS 116–119</text><text x="932" y="260" class="green">NKCD</text>
+  </g>
+  <text x="78" y="302" class="sans muted" font-size="15">All four displayed segments have identity = 1.00 across the three rows.</text>
+  <rect x="52" y="344" width="520" height="340" rx="18" class="panel"/>
+  <text x="78" y="385" class="sans white" font-size="20" font-weight="650">Uncorrected p-distance</text>
+  <g class="sans" font-size="17"><text x="212" y="428" class="muted">KRAS</text><text x="324" y="428" class="muted">NRAS</text><text x="436" y="428" class="muted">HRAS</text>
+    <text x="86" y="468" class="white">KRAS</text><text x="222" y="468" class="green">0</text><text x="326" y="468" class="white">0.1316</text><text x="438" y="468" class="white">0.1368</text>
+    <text x="86" y="510" class="white">NRAS</text><text x="214" y="510" class="white">0.1316</text><text x="338" y="510" class="green">0</text><text x="438" y="510" class="white">0.1579</text>
+    <text x="86" y="552" class="white">HRAS</text><text x="214" y="552" class="white">0.1368</text><text x="326" y="552" class="white">0.1579</text><text x="450" y="552" class="green">0</text>
+  </g>
+  <text x="78" y="602" class="sans muted" font-size="15">Closest pair: KRAS–NRAS</text>
+  <text x="78" y="642" class="sans white" font-size="18" font-weight="650">Exploratory NJ tree</text>
+  <path d="M92 660H170M170 660V620M170 620H250M170 660V690M170 690H210M210 690V672M210 672H284M210 690V708M210 708H284" class="line"/>
+  <text x="260" y="626" class="sans white" font-size="15">KRAS</text><text x="294" y="678" class="sans white" font-size="15">NRAS</text><text x="294" y="714" class="sans white" font-size="15">HRAS</text>
+  <rect x="596" y="344" width="552" height="340" rx="18" class="panel"/>
+  <text x="622" y="385" class="sans white" font-size="20" font-weight="650">C-terminal divergence · columns 170–191</text>
+  <g class="mono" font-size="20"><text x="622" y="438" class="muted">KRAS</text><text x="700" y="438" class="amber">KK-ISKEEKTPGCVKIKKCIIM</text><text x="622" y="480" class="muted">NRAS</text><text x="700" y="480" class="white">KKLNSSDDGTQGC-MGLPCVVM</text><text x="622" y="522" class="muted">HRAS</text><text x="700" y="522" class="white">KL-NPPDESGPGC-MSCKCVLS</text></g>
+  <text x="622" y="568" class="sans muted" font-size="16">The catalytic core is strongly conserved, while the targeting tail</text><text x="622" y="592" class="sans muted" font-size="16">contains substitutions and short gaps specific to each paralogue.</text>
+  <line x1="622" y1="626" x2="1120" y2="626" stroke="#29415f"/>
+  <text x="622" y="655" class="sans muted" font-size="14">Methods: viewer alignment columns; uncorrected p-distance;</text><text x="622" y="675" class="sans muted" font-size="14">neighbor joining. The three-leaf tree is intended for exploration.</text>
+</svg>

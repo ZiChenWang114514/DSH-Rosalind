@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">MDM2 and p53 interface showcase</title><desc id="desc">A source-verified contact summary and separately labeled starter-contract buried-area target.</desc>
+  <rect width="1200" height="720" rx="28" fill="#101727"/>
+  <text x="70" y="78" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="38" font-weight="700">MDM2 × p53 interface</text>
+  <text x="70" y="116" fill="#9daac2" font-family="Inter,Segoe UI,sans-serif" font-size="20">RCSB 1YCR · pinned source verified</text>
+  <path d="M180 470 C110 270 250 160 430 230 C540 274 510 432 382 486 C286 526 220 520 180 470Z" fill="#275877" opacity=".95"/>
+  <path d="M350 455 C455 390 570 352 690 330 C808 307 895 273 1010 225" fill="none" stroke="#e96ad6" stroke-width="32" stroke-linecap="round"/>
+  <g fill="#ffca63" stroke="#fff" stroke-width="3"><circle cx="495" cy="385" r="19"/><circle cx="660" cy="336" r="19"/><circle cx="820" cy="296" r="19"/></g>
+  <g fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="17" font-weight="700"><text x="454" y="425">Phe19</text><text x="624" y="378">Trp23</text><text x="787" y="338">Leu26</text></g>
+  <rect x="70" y="545" width="300" height="105" rx="18" fill="#18263a" stroke="#5db9ef"/>
+  <text x="95" y="580" fill="#a7dfff" font-family="Inter,Segoe UI,sans-serif" font-size="15">LOCAL PDB CHECK</text><text x="95" y="625" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="31" font-weight="700">105 atom contacts</text>
+  <rect x="395" y="545" width="300" height="105" rx="18" fill="#18263a" stroke="#74d4ad"/>
+  <text x="420" y="580" fill="#a8efd1" font-family="Inter,Segoe UI,sans-serif" font-size="15">RESIDUE PAIRS · ≤ 4 Å</text><text x="420" y="625" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="31" font-weight="700">34</text>
+  <rect x="720" y="545" width="410" height="105" rx="18" fill="#302642" stroke="#d99cff"/>
+  <text x="745" y="580" fill="#e7c4ff" font-family="Inter,Segoe UI,sans-serif" font-size="15">STARTER-CONTRACT INTERFACE AREA</text><text x="745" y="625" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="31" font-weight="700">735.865 Å²</text>
+  <text x="70" y="688" fill="#8796ae" font-family="Inter,Segoe UI,sans-serif" font-size="14">Contact count was recomputed from the pinned PDB; buried area is visibly marked as a plugin-contract target pending a fresh acknowledged viewer run.</text>
+</svg>

@@ -1,0 +1,1 @@
+Create a source-associated GeoJSON demonstration overlay from exact spatial observation coordinates in the licensed mouse-brain H&amp;E H5AD. Preserve coordinate provenance and do not describe the polygons as biological segmentation.

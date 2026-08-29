@@ -1,0 +1,10 @@
+{
+  "artifact": "CMU-1-JP2K-33005.svs",
+  "source_url": "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs",
+  "source_collection": "OpenSlide test data / Aperio",
+  "license": "CC0-1.0",
+  "bytes": 132565343,
+  "sha256": "9a1923cd9bcb260ba4d99d64f8d6e32550648c332ba48817f920662f3a513420",
+  "retrieved": "2026-08-29",
+  "repository_storage": "The source binary is retained outside Git under pathology-slide-viewer-examples/."
+}

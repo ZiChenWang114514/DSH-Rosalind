@@ -1,0 +1,14 @@
+{
+  "dataset": "Brain Coronal HnE Adata Crop",
+  "source_url": "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+  "license": "CC BY 4.0",
+  "source_file": {"bytes": 94259482, "sha256": "9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd"},
+  "coordinate_source": "obsm/spatial",
+  "coordinate_frame": "registered source image pixels, top-left origin",
+  "matrix_revision": "b93bd2bb146dbf8ec519e04145d9cd2efaca3aeca8aadd191601720123d57159",
+  "feature_count": 3,
+  "construction": "Sixteen-segment circles of radius 55 pixels around observation indices 0, 1, and 2.",
+  "scientific_scope": "Demonstration annotation geometry only; no cell, tissue, or disease segmentation claim.",
+  "viewer_imported": false,
+  "reason_not_imported": "The viewer remained in a pending render state and no annotation-control action was exposed."
+}

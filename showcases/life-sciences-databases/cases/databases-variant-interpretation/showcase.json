@@ -1,0 +1,9 @@
+{
+  "id":"databases-variant-interpretation","plugin_id":"life-sciences-databases","plugin_version":"0.1.5","status":"ready","run_date":"2026-08-29","prompt":"prompt.md","inputs":[],
+  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],"previews":[{"path":"previews/variant-rs7903146.svg"}],
+  "sources":["https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/","https://rest.ensembl.org/variation/homo_sapiens/rs7903146","https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T"],
+  "observations":["ClinVar returned distinct C>T and C>G records for rs7903146; the selected C>T allele is Variation ID 7413.","Ensembl returned rs7903146 cross-references including VCV000007413.","UKB-TOPMed reported allele frequency 0.29 and 1,419 available association rows for 10:112998590-C-T.","The gnomAD GraphQL request failed and was not used as evidence."],
+  "interpretation":["The case demonstrates allele-resolved identity checking before combining clinical, annotation, and cohort records."],
+  "limitations":["The compact ClinVar search does not provide a complete clinical-significance review.","The first UKB-TOPMed slice is not significance-ranked.","No gnomAD frequency was reported because the live request failed."],
+  "environment":{"retrieval_date":"2026-08-29","variant":"10:112998590-C-T"}
+}
