@@ -49,14 +49,14 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
+      - run: npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm@10.15.1
       - run: npm run pack:bundle
       - name: Install bundle into DSH Web profile
         shell: bash
         run: |
           tgz="$(find . -maxdepth 1 -name 'zichenwang114514-dsh-rosalind-*.tgz' -print -quit)"
           test -n "$tgz"
-          dsh plugin --profile web add "file:$PWD/${tgz#./}"
+          dsh plugin --profile web add "$tgz"
           dsh --profile web --dump-config > dsh-config.txt
           grep -q "dsh-rosalind" dsh-config.txt
       - name: Start DSH Web and request the packaged page

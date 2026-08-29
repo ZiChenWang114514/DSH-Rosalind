@@ -53,7 +53,7 @@ export const WORKBENCH_CSS = String.raw`
 .rr-count { display: flex; align-items: center; gap: 8px; color: var(--rr-muted); white-space: nowrap; font-size: 12px; }
 .rr-count strong { color: var(--rr-ink); font-size: 13px; }
 .rr-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.rr-card { position: relative; display: grid; grid-template-columns: 48px minmax(0,1fr) auto; gap: 13px; align-items: center; min-height: 104px; padding: 15px 15px 15px 16px; border: 1px solid var(--rr-line); border-radius: 16px; background: var(--rr-panel); text-align: left; cursor: pointer; overflow: hidden; transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease; }
+.rr-card { position: relative; display: grid; grid-template-columns: 48px minmax(0,1fr) auto; gap: 13px; align-items: center; height: 105px; min-height: 105px; padding: 15px 15px 15px 16px; border: 1px solid var(--rr-line); border-radius: 16px; background: var(--rr-panel); text-align: left; cursor: pointer; overflow: hidden; transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease; }
 .rr-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--category-color); opacity: .7; }
 .rr-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--category-color) 48%, var(--rr-line)); box-shadow: 0 12px 32px rgba(38,50,45,.09); background: var(--rr-panel-solid); }
 .rr-card:focus-visible { outline: 3px solid rgba(83,125,112,.28); outline-offset: 2px; }
