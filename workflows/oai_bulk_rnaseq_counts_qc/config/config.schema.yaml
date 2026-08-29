@@ -1,0 +1,46 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: oai_bulk_rnaseq_counts_qc configuration
+type: object
+additionalProperties: false
+required: [smoke_mode, results_dir, fastqc_threads, salmon_threads]
+properties:
+  smoke_mode:
+    type: boolean
+  results_dir:
+    type: string
+    minLength: 1
+  fastqc_threads:
+    type: integer
+    minimum: 1
+  salmon_threads:
+    type: integer
+    minimum: 1
+  salmon_index:
+    type: string
+    minLength: 1
+  samples:
+    type: object
+    minProperties: 1
+    propertyNames:
+      pattern: "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    additionalProperties:
+      type: object
+      additionalProperties: false
+      required: [r1, r2, library_type]
+      properties:
+        r1:
+          type: string
+          minLength: 1
+        r2:
+          type: string
+          minLength: 1
+        library_type:
+          type: string
+          minLength: 1
+allOf:
+  - if:
+      properties:
+        smoke_mode:
+          const: false
+    then:
+      required: [salmon_index, samples]

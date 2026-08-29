@@ -76,10 +76,12 @@ describe("provider diagnostics", () => {
   it("reports public network authorization, credentials, commands, and confirmation requirements precisely", () => {
     expect(providers.get("local-sequence")).toMatchObject({ runnable: true, kind: "local" });
     expect(providers.get("ncbi-entrez")).toMatchObject({ runnable: false, installed: false, kind: "public-api" });
+    expect(providers.get("gnomad-graphql")).toMatchObject({ runnable: false, installed: false, kind: "public-api" });
+    expect(providers.get("ukb-topmed-phewas")).toMatchObject({ runnable: false, installed: false, kind: "public-api" });
     expect(providers.get("biohub-esm")).toMatchObject({ runnable: false, credentialConfigured: false, kind: "paid-api" });
     expect(providers.get("boltz").diagnostics.join(" ")).toContain("Required command is unavailable");
     expect(providerRequiresConfirmation(providers.get("boltz"))).toBe(true);
-    expect(providerRequiresConfirmation(providers.get("ncbi-entrez"))).toBe(false);
+    expect(providerRequiresConfirmation(providers.get("ncbi-entrez"))).toBe(true);
   });
 });
 
@@ -131,10 +133,12 @@ describe("run lifecycle", () => {
     const runtime = new RosalindRuntime({ providers: new ProviderRegistry({ env: {}, platform: "linux", path: "" }) });
     const session = {};
     const planned = runtime.plan(session, "literature-trem2-landscape", "reproduce", "ncbi-entrez");
-    const finished = await runtime.run(session, planned.id, new AbortController().signal);
+    expect(planned.state).toBe("awaiting_confirmation");
+    const approved = runtime.approve(session, planned.id, [...planned.plan.confirmationReasons]);
+    const finished = await runtime.run(session, approved.id, new AbortController().signal);
     expect(finished.state).toBe("failed");
     expect(finished.error?.code).toBe("PROVIDER_UNAVAILABLE");
-    expect(finished.plan.providerIds).toEqual(["ncbi-entrez"]);
+    expect(finished.plan.providerIds).toEqual(["ncbi-entrez", "biorxiv"]);
     runtime.dispose();
   });
 });

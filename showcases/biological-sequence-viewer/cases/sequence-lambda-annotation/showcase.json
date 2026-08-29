@@ -39,7 +39,7 @@
     "The viewer card did not mount, so no viewer screenshot or interactive query result is claimed."
   ],
   "environment": {
-    "viewer_session": "b304e8c6-15b0-41b6-93f0-6ce3879ee948",
+    "viewer_status": "session_created_but_card_not_mounted",
     "viewer_rendered": false
   }
 }

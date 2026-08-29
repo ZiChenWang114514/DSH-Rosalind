@@ -1,0 +1,102 @@
+"""Bulk RNA-seq quantification, transcript-count export, and QC workflow."""
+
+import csv
+import os
+
+from snakemake.utils import validate
+
+
+configfile: "../config/config.yaml"
+validate(config, os.path.join(workflow.basedir, "../config/config.schema.yaml"))
+
+RESULTS = config["results_dir"].rstrip("/")
+SAMPLES = sorted(config.get("samples", {}))
+SMOKE_MODE = config["smoke_mode"]
+
+
+if SMOKE_MODE:
+    rule all:
+        input:
+            f"{RESULTS}/smoke/ENGINEERING_TEST_ONLY.txt"
+
+
+    rule engineering_smoke_marker:
+        output:
+            marker=f"{RESULTS}/smoke/ENGINEERING_TEST_ONLY.txt"
+        run:
+            os.makedirs(os.path.dirname(output.marker), exist_ok=True)
+            with open(output.marker, "w", encoding="utf-8") as handle:
+                handle.write(
+                    "ENGINEERING SMOKE TEST ONLY\n"
+                    "No FASTQ files were read, quantified, or converted to counts.\n"
+                )
+else:
+    rule all:
+        input:
+            counts=f"{RESULTS}/counts/transcript_read_counts.tsv",
+            report=f"{RESULTS}/multiqc/multiqc_report.html"
+
+
+    rule fastqc:
+        input:
+            reads=lambda wildcards: [
+                config["samples"][wildcards.sample]["r1"],
+                config["samples"][wildcards.sample]["r2"],
+            ]
+        output:
+            qc_dir=directory(f"{RESULTS}/fastqc/{{sample}}")
+        threads: config["fastqc_threads"]
+        shell:
+            "fastqc --threads {threads} --outdir {output.qc_dir:q} {input.reads:q}"
+
+
+    rule salmon_quant:
+        input:
+            index=config["salmon_index"],
+            r1=lambda wildcards: config["samples"][wildcards.sample]["r1"],
+            r2=lambda wildcards: config["samples"][wildcards.sample]["r2"]
+        output:
+            quant=f"{RESULTS}/salmon/{{sample}}/quant.sf"
+        params:
+            output_dir=f"{RESULTS}/salmon/{{sample}}",
+            library_type=lambda wildcards: config["samples"][wildcards.sample]["library_type"]
+        threads: config["salmon_threads"]
+        shell:
+            "mkdir -p {params.output_dir:q} && "
+            "salmon quant --index {input.index:q} --libType {params.library_type:q} "
+            "--mates1 {input.r1:q} --mates2 {input.r2:q} --threads {threads} "
+            "--validateMappings --output {params.output_dir:q}"
+
+
+    rule transcript_read_counts:
+        input:
+            quant_files=expand(f"{RESULTS}/salmon/{{sample}}/quant.sf", sample=SAMPLES)
+        output:
+            table=f"{RESULTS}/counts/transcript_read_counts.tsv"
+        run:
+            counts = {}
+            transcript_ids = set()
+            for sample, quant_path in zip(SAMPLES, input.quant_files):
+                with open(quant_path, newline="", encoding="utf-8") as handle:
+                    reader = csv.DictReader(handle, delimiter="\t")
+                    counts[sample] = {row["Name"]: row["NumReads"] for row in reader}
+                    transcript_ids.update(counts[sample])
+            os.makedirs(os.path.dirname(output.table), exist_ok=True)
+            with open(output.table, "w", newline="", encoding="utf-8") as handle:
+                writer = csv.writer(handle, delimiter="\t")
+                writer.writerow(["transcript_id", *SAMPLES])
+                for transcript_id in sorted(transcript_ids):
+                    writer.writerow([transcript_id, *[counts[sample].get(transcript_id, "0") for sample in SAMPLES]])
+
+
+    rule multiqc:
+        input:
+            qc_dirs=expand(f"{RESULTS}/fastqc/{{sample}}", sample=SAMPLES),
+            quant_files=expand(f"{RESULTS}/salmon/{{sample}}/quant.sf", sample=SAMPLES)
+        output:
+            report=f"{RESULTS}/multiqc/multiqc_report.html"
+        params:
+            output_dir=f"{RESULTS}/multiqc"
+        shell:
+            "multiqc --force --module fastqc --module salmon "
+            "--outdir {params.output_dir:q} {input:q}"

@@ -1,0 +1,3 @@
+smoke_mode: true
+results_dir: results-smoke
+threads: 1

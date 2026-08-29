@@ -24,7 +24,7 @@
     {"kind": "macro", "width": 1280, "height": 431}
   ],
   "viewer_execution": {
-    "session_id": "d21efa4f-fce2-4057-9d25-eba188a994cd",
+    "session_status": "awaiting_viewer",
     "source_authorized": true,
     "state": "awaiting-viewer",
     "rendered_region_available": false

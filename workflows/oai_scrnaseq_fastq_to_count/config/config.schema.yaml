@@ -1,0 +1,70 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: oai_scrnaseq_fastq_to_count configuration
+type: object
+additionalProperties: false
+required:
+  - smoke_mode
+  - results_dir
+  - fastqc_threads
+  - star_threads
+  - read_files_command
+  - cell_barcode_start
+  - cell_barcode_length
+  - umi_start
+  - umi_length
+properties:
+  smoke_mode:
+    type: boolean
+  results_dir:
+    type: string
+    minLength: 1
+  fastqc_threads:
+    type: integer
+    minimum: 1
+  star_threads:
+    type: integer
+    minimum: 1
+  read_files_command:
+    type: string
+    minLength: 1
+  cell_barcode_start:
+    type: integer
+    minimum: 1
+  cell_barcode_length:
+    type: integer
+    minimum: 1
+  umi_start:
+    type: integer
+    minimum: 1
+  umi_length:
+    type: integer
+    minimum: 1
+  star_index:
+    type: string
+    minLength: 1
+  barcode_whitelist:
+    type: string
+    minLength: 1
+  samples:
+    type: object
+    minProperties: 1
+    propertyNames:
+      pattern: "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    additionalProperties:
+      type: object
+      additionalProperties: false
+      required: [barcode_read, cdna_read]
+      properties:
+        barcode_read:
+          type: string
+          minLength: 1
+        cdna_read:
+          type: string
+          minLength: 1
+allOf:
+  - if:
+      properties:
+        smoke_mode:
+          const: false
+    then:
+      required: [star_index, barcode_whitelist, samples]

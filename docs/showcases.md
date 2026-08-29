@@ -1,6 +1,6 @@
 # Showcase catalogue
 
-This release contains 23 ready projects copied from `rosalind-science-showcases` commit `f81e668c69edbfe7863cc936f2d535b61d8df76b`. Every row supports lesson, replay, and reproduce. Reproduce means that the workbench can prepare and diagnose a fresh run; when a service or compute resource is unavailable, it reports the exact requirement without changing providers.
+This release contains 23 lesson-and-replay-ready projects copied from `rosalind-science-showcases` commit `f81e668c69edbfe7863cc936f2d535b61d8df76b`. Every row exposes lesson, replay, and reproduce. Reproduce runs the registered local operations, prepares an authorized public request, or reports the exact missing renderer, service, credential, input, or compute resource without changing providers. A completed replay does not imply that a fresh run completed.
 
 | Area | Showcase ID | Project | Fresh-run path |
 |---|---|---|---|

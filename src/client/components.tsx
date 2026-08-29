@@ -6,6 +6,7 @@ import { SHOWCASE_CATEGORIES, categoryById } from "../shared/categories.js";
 import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
 import { ArrowIcon, CategoryIcon, CheckIcon, CloseIcon, FileIcon, PlayIcon, RosalindMark, SearchIcon } from "./icons.js";
 import { buildConversationPrompt } from "./prompt.js";
+import { ScienceEcosystemPanel } from "./ecosystem.js";
 import {
   closeShowcase,
   consumeConversationPrompt,
@@ -45,6 +46,7 @@ export function Workbench({ session = false, hero = false, inputActions }: Workb
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [runnableOnly, setRunnableOnly] = useState(false);
+  const [workspaceView, setWorkspaceView] = useState<"projects" | "plugins">("projects");
 
   useEffect(() => {
     if (!inputActions) return undefined;
@@ -73,6 +75,15 @@ export function Workbench({ session = false, hero = false, inputActions }: Workb
         <h1 className="rr-title">Rosalind scientific workbench</h1>
         <p className="rr-subtitle">Learn from versioned evidence, replay checked results, or prepare a fresh run across literature, databases, sequences, NGS, structures, pathology, spatial biology, and molecular design.</p>
       </header>
+      <nav className="rr-workbench-nav" aria-label="Workbench view">
+        <button type="button" aria-pressed={workspaceView === "projects"} onClick={() => setWorkspaceView("projects")}>23 projects</button>
+        <button type="button" aria-pressed={workspaceView === "plugins"} onClick={() => setWorkspaceView("plugins")}>Seven plugins</button>
+      </nav>
+      {workspaceView === "plugins" ? <ScienceEcosystemPanel onExample={(example) => {
+        if (inputActions) inputActions.setDraft(example.prompt);
+        else stageConversationPrompt(example.prompt);
+        showNotice("The scientific task is ready for a DSH conversation.");
+      }} /> : <>
       <div className="rr-toolbar">
         <label className="rr-search">
           <SearchIcon size={17} />
@@ -109,6 +120,7 @@ export function Workbench({ session = false, hero = false, inputActions }: Workb
         <span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span>
         <span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span>
       </footer>
+      </>}
     </section>
   );
 }

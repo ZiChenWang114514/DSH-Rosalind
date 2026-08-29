@@ -11,3 +11,6 @@ test-results/
 *.tgz
 *.log
 .DS_Store
+reference-plugins/
+workflows/**/.snakemake/
+workflows/**/results-smoke/

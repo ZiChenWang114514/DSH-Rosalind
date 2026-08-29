@@ -60,6 +60,14 @@ export interface ShowcaseDefinition {
   interpretation: string[];
   limitations: string[];
   claims: ScientificClaim[];
+  requiredMcpServers: string[];
+  requiredOperations: string[];
+  requiredSkills: string[];
+  fixtures: string[];
+  expectedArtifacts: string[];
+  scientificAssertions: ScientificClaim[];
+  visualAssertions: Array<{ id: string; artifactId: string; requirement: string }>;
+  provenance: { sourceCommit: string; sources: string[]; runDate: string };
   recipe: ReproductionRecipe;
   modes: ShowcaseMode[];
   searchText: string;

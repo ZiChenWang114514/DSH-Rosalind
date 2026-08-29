@@ -40,8 +40,8 @@
     "No anatomical or diagnostic interpretation is made."
   ],
   "environment": {
-    "viewer_session": "fe033c3b-cd83-452f-83ac-1060e3a9425c",
-    "source_id": "eed811c3-c105-4fba-9dd3-84a5b3f16939",
+    "viewer_status": "awaiting_viewer",
+    "source_status": "metadata_loaded",
     "viewer_rendered": false
   }
 }

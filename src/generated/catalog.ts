@@ -8,7 +8,7 @@ export const SHOWCASE_SOURCE = {
 } as const;
 
 export const SHOWCASE_SOURCE_COMMIT = "f81e668c69edbfe7863cc936f2d535b61d8df76b";
-export const SHOWCASE_FILE_COUNT = 148;
+export const SHOWCASE_FILE_COUNT = 150;
 export const PREVIEW_DATA_URLS: Record<string, string> = {
   "literature-trem2-landscape": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyMDAgNzIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+VFJFTTIgYW5kIG1pY3JvZ2xpYSBwdWJsaWNhdGlvbiBsYW5kc2NhcGU8L3RpdGxlPgogIDxkZXNjIGlkPSJkZXNjIj5BIGRhdGVkIFB1Yk1lZCBzbmFwc2hvdCBvZiB0ZW4gcmVjb3JkcyBwbHVzIG9uZSBzZXBhcmF0ZWx5IGlkZW50aWZpZWQgYmlvUnhpdiBwcmVwcmludC48L2Rlc2M+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMwODE4MjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxMDJmM2MiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MjAiIHJ4PSIyOCIgZmlsbD0idXJsKCNiZykiLz4KICA8dGV4dCB4PSI3MCIgeT0iODIiIGZpbGw9IiNmNGZiZmYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM4IiBmb250LXdlaWdodD0iNzAwIj5UUkVNMiDDlyBtaWNyb2dsaWE8L3RleHQ+CiAgPHRleHQgeD0iNzAiIHk9IjEyMSIgZmlsbD0iIzllY2JkNyIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiPkRhdGVkIGxpdGVyYXR1cmUgc25hcHNob3QgwrcgMjkgQXVnIDIwMjY8L3RleHQ+CiAgPHJlY3QgeD0iNzAiIHk9IjE2NSIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxODAiIHJ4PSIyMiIgZmlsbD0iIzEyM2Y0ZCIgc3Ryb2tlPSIjNDljNWI2Ii8+CiAgPHRleHQgeD0iMTAyIiB5PSIyMTAiIGZpbGw9IiM5ZmYzZGYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4Ij5QVUJNRUQgUkVTVUxUUzwvdGV4dD4KICA8dGV4dCB4PSIxMDIiIHk9IjI4NSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNzIiIGZvbnQtd2VpZ2h0PSI3MDAiPjEwPC90ZXh0PgogIDx0ZXh0IHg9IjEwMiIgeT0iMzIwIiBmaWxsPSIjYjhkZmU3IiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyI+VGl0bGUvYWJzdHJhY3QgcXVlcnksIGRhdGUgc29ydGVkPC90ZXh0PgogIDxyZWN0IHg9IjQxMCIgeT0iMTY1IiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE4MCIgcng9IjIyIiBmaWxsPSIjMTkzNjRmIiBzdHJva2U9IiM3YWE3ZmYiLz4KICA8dGV4dCB4PSI0NDIiIHk9IjIxMCIgZmlsbD0iI2I3ZDBmZiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPkFSVElDTEUgVFlQRVM8L3RleHQ+CiAgPHRleHQgeD0iNDQyIiB5PSIyNjYiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iNzAwIj42IHJldmlld3M8L3RleHQ+CiAgPHRleHQgeD0iNDQyIiB5PSIzMDgiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iNzAwIj40IHJlc2VhcmNoPC90ZXh0PgogIDxyZWN0IHg9Ijc1MCIgeT0iMTY1IiB3aWR0aD0iMzgwIiBoZWlnaHQ9IjE4MCIgcng9IjIyIiBmaWxsPSIjNDAyZjRkIiBzdHJva2U9IiNkYzk0ZmYiLz4KICA8dGV4dCB4PSI3ODIiIHk9IjIxMCIgZmlsbD0iI2VkYzVmZiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPlBSRVBSSU5ULCBLRVBUIFNFUEFSQVRFPC90ZXh0PgogIDx0ZXh0IHg9Ijc4MiIgeT0iMjU3IiBmaWxsPSIjZmZmZmZmIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCI+R1BSMzQgw5cgVFJFTTIgbWV0YWJvbGlzbTwvdGV4dD4KICA8dGV4dCB4PSI3ODIiIHk9IjI5MiIgZmlsbD0iI2U0Y2NlOSIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciPmJpb1J4aXYgwrcgMjAyNS0wNC0wMzwvdGV4dD4KICA8dGV4dCB4PSI3ODIiIHk9IjMyMCIgZmlsbD0iI2U0Y2NlOSIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciPk5vIGxpbmtlZCBwdWJsaWNhdGlvbiByZXR1cm5lZDwvdGV4dD4KICA8dGV4dCB4PSI3MCIgeT0iNDA4IiBmaWxsPSIjZGZmNWZhIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjcwMCI+VmlzaWJsZSB0aGVtZXMgaW4gdGhlIHJldHJpZXZlZCByZWNvcmRzPC90ZXh0PgogIDxnIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4Ij4KICAgIDxyZWN0IHg9IjcwIiB5PSI0NDUiIHdpZHRoPSIzMjAiIGhlaWdodD0iNzAiIHJ4PSIxNiIgZmlsbD0iIzE2NGI1NiIvPjx0ZXh0IHg9Ijk0IiB5PSI0ODciIGZpbGw9IiNlYWZmZmYiPlI0N0ggYW5kIGRpc2Vhc2UgbW9kZWxzPC90ZXh0PgogICAgPHJlY3QgeD0iNDEwIiB5PSI0NDUiIHdpZHRoPSIzMjAiIGhlaWdodD0iNzAiIHJ4PSIxNiIgZmlsbD0iIzE2NGI1NiIvPjx0ZXh0IHg9IjQzNCIgeT0iNDg3IiBmaWxsPSIjZWFmZmZmIj5Jbmp1cnkgYW5kIGluZmxhbW1hdGlvbjwvdGV4dD4KICAgIDxyZWN0IHg9Ijc1MCIgeT0iNDQ1IiB3aWR0aD0iMzgwIiBoZWlnaHQ9IjcwIiByeD0iMTYiIGZpbGw9IiMxNjRiNTYiLz48dGV4dCB4PSI3NzQiIHk9IjQ4NyIgZmlsbD0iI2VhZmZmZiI+TWV0YWJvbGlzbSBhbmQgdGhlcmFwZXV0aWMgdGFyZ2V0aW5nPC90ZXh0PgogICAgPHJlY3QgeD0iNzAiIHk9IjUzNSIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI3MCIgcng9IjE2IiBmaWxsPSIjMjQzZTVkIi8+PHRleHQgeD0iOTQiIHk9IjU3NyIgZmlsbD0iI2VhZjJmZiI+R2xpb21hIGltbXVuZSBlbnZpcm9ubWVudDwvdGV4dD4KICAgIDxyZWN0IHg9IjQxMCIgeT0iNTM1IiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjcwIiByeD0iMTYiIGZpbGw9IiMyNDNlNWQiLz48dGV4dCB4PSI0MzQiIHk9IjU3NyIgZmlsbD0iI2VhZjJmZiI+TW9sZWN1bGFyIHNpbXVsYXRpb248L3RleHQ+CiAgICA8cmVjdCB4PSI3NTAiIHk9IjUzNSIgd2lkdGg9IjM4MCIgaGVpZ2h0PSI3MCIgcng9IjE2IiBmaWxsPSIjMjQzZTVkIi8+PHRleHQgeD0iNzc0IiB5PSI1NzciIGZpbGw9IiNlYWYyZmYiPklubmF0ZSBpbW11bmUgbWVtb3J5PC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI3MCIgeT0iNjY1IiBmaWxsPSIjOGViN2MzIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSI+U291cmNlIG9ic2VydmF0aW9ucyBhbmQgcHJvamVjdC1hdXRob3JlZCB0aGVtZSBsYWJlbHMgYXJlIHJlY29yZGVkIHNlcGFyYXRlbHkgaW4gb3V0cHV0cy8uPC90ZXh0Pgo8L3N2Zz4K",
   "literature-pmc-availability": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyMDAgNzIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+UE1DIG9wZW4tYWNjZXNzIGF2YWlsYWJpbGl0eSBmb3IgUE1DMzI1NzMwMTwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPkEgc291cmNlLWJhY2tlZCBhdmFpbGFiaWxpdHkgc3VtbWFyeSBzaG93aW5nIGlkZW50aWZpZXJzLCBsaWNlbnNlLCBzdGF0dXMgZmxhZ3MsIGFuZCBmaWxlIHR5cGVzLjwvZGVzYz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MjAiIHJ4PSIzMCIgZmlsbD0iI2YzZjdmNiIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1NSIgcng9IjMwIiBmaWxsPSIjMTQzZDNhIi8+CiAgPHRleHQgeD0iNzAiIHk9IjcwIiBmaWxsPSIjZmZmZmZmIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzOCIgZm9udC13ZWlnaHQ9IjcwMCI+UE1DIGF2YWlsYWJpbGl0eSBjaGVjazwvdGV4dD4KICA8dGV4dCB4PSI3MCIgeT0iMTEyIiBmaWxsPSIjYmZlMWRiIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSI+UE1DMzI1NzMwMSDCtyBjaGVja2VkIDI5IEF1ZyAyMDI2PC90ZXh0PgogIDxjaXJjbGUgY3g9IjEwNDAiIGN5PSI3OCIgcj0iNDUiIGZpbGw9IiMzMWI3N2EiLz48cGF0aCBkPSJNMTAxOCA3OGwxNSAxNiAzMC0zNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjcwIiB5PSIyMjIiIGZpbGw9IiMxNzNiMzgiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIj5BcnRpY2xlIGlkZW50aWZpZXJzPC90ZXh0PgogIDxnIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIj4KICAgIDxyZWN0IHg9IjcwIiB5PSIyNTAiIHdpZHRoPSIzMjAiIGhlaWdodD0iODYiIHJ4PSIxNiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjY2FkYmQ3Ii8+PHRleHQgeD0iOTUiIHk9IjI4NCIgZmlsbD0iIzZhN2Q3OSIgZm9udC1zaXplPSIxNSI+UE1DSUQ8L3RleHQ+PHRleHQgeD0iOTUiIHk9IjMxNiIgZmlsbD0iIzE2M2MzOCIgZm9udC1zaXplPSIyNSIgZm9udC13ZWlnaHQ9IjcwMCI+UE1DMzI1NzMwMTwvdGV4dD4KICAgIDxyZWN0IHg9IjQxMCIgeT0iMjUwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9Ijg2IiByeD0iMTYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2NhZGJkNyIvPjx0ZXh0IHg9IjQzNSIgeT0iMjg0IiBmaWxsPSIjNmE3ZDc5IiBmb250LXNpemU9IjE1Ij5QTUlEPC90ZXh0Pjx0ZXh0IHg9IjQzNSIgeT0iMzE2IiBmaWxsPSIjMTYzYzM4IiBmb250LXNpemU9IjI1IiBmb250LXdlaWdodD0iNzAwIj4yMjI1MzU5NzwvdGV4dD4KICAgIDxyZWN0IHg9Ijc1MCIgeT0iMjUwIiB3aWR0aD0iMzgwIiBoZWlnaHQ9Ijg2IiByeD0iMTYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2NhZGJkNyIvPjx0ZXh0IHg9Ijc3NSIgeT0iMjg0IiBmaWxsPSIjNmE3ZDc5IiBmb250LXNpemU9IjE1Ij5ET0k8L3RleHQ+PHRleHQgeD0iNzc1IiB5PSIzMTYiIGZpbGw9IiMxNjNjMzgiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiPjEwLjEzNzEvam91cm5hbC5wcGF0LjEwMDI0ODU8L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjcwIiB5PSIzOTgiIGZpbGw9IiMxNzNiMzgiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIj5BdmFpbGFiaWxpdHkgYW5kIHN0YXR1czwvdGV4dD4KICA8ZyBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+CiAgICA8cmVjdCB4PSI3MCIgeT0iNDI2IiB3aWR0aD0iMjUwIiBoZWlnaHQ9Ijc0IiByeD0iMTgiIGZpbGw9IiNkOGY0ZTYiLz48dGV4dCB4PSI5NCIgeT0iNDcyIiBmaWxsPSIjMTc2NTQxIj5PcGVuIGFjY2VzcyDCtyBZZXM8L3RleHQ+CiAgICA8cmVjdCB4PSIzNDAiIHk9IjQyNiIgd2lkdGg9IjIyMCIgaGVpZ2h0PSI3NCIgcng9IjE4IiBmaWxsPSIjZTNlZWZjIi8+PHRleHQgeD0iMzY0IiB5PSI0NzIiIGZpbGw9IiMyNzVjOTMiPkxpY2Vuc2UgwrcgQ0MgQlk8L3RleHQ+CiAgICA8cmVjdCB4PSI1ODAiIHk9IjQyNiIgd2lkdGg9IjI1MCIgaGVpZ2h0PSI3NCIgcng9IjE4IiBmaWxsPSIjZWVmMWYwIi8+PHRleHQgeD0iNjA0IiB5PSI0NzIiIGZpbGw9IiM0MzU0NTEiPlJldHJhY3RlZCDCtyBObzwvdGV4dD4KICAgIDxyZWN0IHg9Ijg1MCIgeT0iNDI2IiB3aWR0aD0iMjgwIiBoZWlnaHQ9Ijc0IiByeD0iMTgiIGZpbGw9IiNlZWYxZjAiLz48dGV4dCB4PSI4NzQiIHk9IjQ3MiIgZmlsbD0iIzQzNTQ1MSI+TWFudXNjcmlwdCDCtyBObzwvdGV4dD4KICA8L2c+CiAgPHRleHQgeD0iNzAiIHk9IjU2NSIgZmlsbD0iIzE3M2IzOCIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiPkFydGljbGUgZmlsZXMgcmVwb3J0ZWQgYnkgdGhlIGRhdGFzZXQ8L3RleHQ+CiAgPGcgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTkiIGZvbnQtd2VpZ2h0PSI3MDAiPgogICAgPHJlY3QgeD0iNzAiIHk9IjU5MiIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI2MiIgcng9IjMxIiBmaWxsPSIjMTQzZDNhIi8+PHRleHQgeD0iMTMxIiB5PSI2MzEiIGZpbGw9IiNmZmYiPlBERjwvdGV4dD4KICAgIDxyZWN0IHg9IjI3MCIgeT0iNTkyIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjYyIiByeD0iMzEiIGZpbGw9IiMxNDNkM2EiLz48dGV4dCB4PSIzMjYiIHk9IjYzMSIgZmlsbD0iI2ZmZiI+WE1MPC90ZXh0PgogICAgPHJlY3QgeD0iNDcwIiB5PSI1OTIiIHdpZHRoPSIyMzAiIGhlaWdodD0iNjIiIHJ4PSIzMSIgZmlsbD0iIzE0M2QzYSIvPjx0ZXh0IHg9IjUyMiIgeT0iNjMxIiBmaWxsPSIjZmZmIj5QbGFpbiB0ZXh0PC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI3NTAiIHk9IjYyMCIgZmlsbD0iIzYwNzc3MyIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiPjIyIG1lZGlhIFVSTHMgd2VyZSBsaXN0ZWQgaW4gdGhlIGNvbXBhY3QgcmVzcG9uc2UuPC90ZXh0Pgo8L3N2Zz4K",
@@ -110,10 +110,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [
       "Project-authored theme labels identify work on R47H and disease models, brain injury, immunometabolism, glioma, molecular simulation, innate immune memory, and therapeutic targeting.",
-      "Exact records and labels are retained in outputs/results.json; source roles and retrieval evidence are in outputs/sources.json.",
-      "The dated PubMed query returned ten identifiers.",
-      "Six titles were reviews or perspectives and four were primary or model-focused research reports.",
-      "The bioRxiv publication-link endpoint returned no linked publication for the selected preprint on the retrieval date."
+      "Exact records and labels are retained in outputs/results.json; source roles and retrieval evidence are in outputs/sources.json."
     ],
     "interpretation": [
       "The snapshot shows current TREM2 work spanning variants, immunometabolism, injury, glioma, simulation, and therapeutic targeting."
@@ -181,36 +178,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "literature-trem2-landscape:computed:3",
-        "statement": "The dated PubMed query returned ten identifiers.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-trem2-landscape:previews/trem2-landscape.svg",
-          "literature-trem2-landscape:outputs/results.json",
-          "literature-trem2-landscape:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "literature-trem2-landscape:computed:4",
-        "statement": "Six titles were reviews or perspectives and four were primary or model-focused research reports.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-trem2-landscape:previews/trem2-landscape.svg",
-          "literature-trem2-landscape:outputs/results.json",
-          "literature-trem2-landscape:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "literature-trem2-landscape:computed:5",
-        "statement": "The bioRxiv publication-link endpoint returned no linked publication for the selected preprint on the retrieval date.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-trem2-landscape:previews/trem2-landscape.svg",
-          "literature-trem2-landscape:outputs/results.json",
-          "literature-trem2-landscape:outputs/sources.json"
-        ]
-      },
-      {
         "id": "literature-trem2-landscape:interpretation:1",
         "statement": "The snapshot shows current TREM2 work spanning variants, immunometabolism, injury, glioma, simulation, and therapeutic targeting.",
         "kind": "interpretation",
@@ -221,11 +188,102 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "literature"
+    ],
+    "requiredOperations": [
+      "literature.entrez.request"
+    ],
+    "requiredSkills": [
+      "rosalind-literature-ncbi-entrez",
+      "rosalind-literature-biorxiv"
+    ],
+    "fixtures": [
+      "literature-trem2-landscape:README.md",
+      "literature-trem2-landscape:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "literature-trem2-landscape:previews/trem2-landscape.svg",
+      "literature-trem2-landscape:outputs/results.json",
+      "literature-trem2-landscape:outputs/sources.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "literature-trem2-landscape:observation:1",
+        "statement": "The PubMed query TREM2[Title/Abstract] AND microglia[Title/Abstract], sorted by publication date, returned ten identifiers on 29 August 2026.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-trem2-landscape:README.md",
+          "literature-trem2-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-trem2-landscape:observation:2",
+        "statement": "Six retrieved titles were reviews or perspectives; four described primary or model-focused research.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-trem2-landscape:README.md",
+          "literature-trem2-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-trem2-landscape:observation:3",
+        "statement": "A relevant bioRxiv record, 10.1101/2025.03.28.646038, concerns GPR34 loss of function and TREM2 metabolic dysfunction in microglia.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-trem2-landscape:README.md",
+          "literature-trem2-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-trem2-landscape:observation:4",
+        "statement": "The bioRxiv publication-link endpoint returned no linked publication record for that DOI on the retrieval date.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-trem2-landscape:README.md",
+          "literature-trem2-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-trem2-landscape:computed:1",
+        "statement": "Project-authored theme labels identify work on R47H and disease models, brain injury, immunometabolism, glioma, molecular simulation, innate immune memory, and therapeutic targeting.",
+        "kind": "computed",
+        "artifactIds": [
+          "literature-trem2-landscape:previews/trem2-landscape.svg",
+          "literature-trem2-landscape:outputs/results.json",
+          "literature-trem2-landscape:outputs/sources.json"
+        ]
+      },
+      {
+        "id": "literature-trem2-landscape:computed:2",
+        "statement": "Exact records and labels are retained in outputs/results.json; source roles and retrieval evidence are in outputs/sources.json.",
+        "kind": "computed",
+        "artifactIds": [
+          "literature-trem2-landscape:previews/trem2-landscape.svg",
+          "literature-trem2-landscape:outputs/results.json",
+          "literature-trem2-landscape:outputs/sources.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "literature-trem2-landscape:preview",
+        "artifactId": "literature-trem2-landscape:previews/trem2-landscape.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/",
+        "https://www.biorxiv.org/content/10.1101/2025.03.28.646038v1"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "literature-evidence",
       "providerIds": [
         "ncbi-entrez",
-        "ncbi-pmc",
         "biorxiv"
       ],
       "strategy": "network",
@@ -326,10 +384,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [
       "Exact identifiers, status fields, and canonical links are in outputs/results.json. outputs/sources.json explains which source supports each claim.",
-      "The preview translates these machine-readable fields into a compact display without analyzing the paper's scientific conclusions.",
-      "The lookup resolved PMCID PMC3257301 to PMID 22253597 and DOI 10.1371/journal.ppat.1002485.",
-      "The compact dataset record reported open-access status, a CC BY license, and PDF, XML, and text files.",
-      "The record reported neither retraction nor manuscript status."
+      "The preview translates these machine-readable fields into a compact display without analyzing the paper's scientific conclusions."
     ],
     "interpretation": [
       "The record is a stable example of resolving one article across PMC, PubMed, and DOI identifiers while reporting machine-readable availability."
@@ -396,36 +451,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "literature-pmc-availability:computed:3",
-        "statement": "The lookup resolved PMCID PMC3257301 to PMID 22253597 and DOI 10.1371/journal.ppat.1002485.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-pmc-availability:previews/pmc-availability.svg",
-          "literature-pmc-availability:outputs/results.json",
-          "literature-pmc-availability:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "literature-pmc-availability:computed:4",
-        "statement": "The compact dataset record reported open-access status, a CC BY license, and PDF, XML, and text files.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-pmc-availability:previews/pmc-availability.svg",
-          "literature-pmc-availability:outputs/results.json",
-          "literature-pmc-availability:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "literature-pmc-availability:computed:5",
-        "statement": "The record reported neither retraction nor manuscript status.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-pmc-availability:previews/pmc-availability.svg",
-          "literature-pmc-availability:outputs/results.json",
-          "literature-pmc-availability:outputs/sources.json"
-        ]
-      },
-      {
         "id": "literature-pmc-availability:interpretation:1",
         "statement": "The record is a stable example of resolving one article across PMC, PubMed, and DOI identifiers while reporting machine-readable availability.",
         "kind": "interpretation",
@@ -436,12 +461,102 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "literature"
+    ],
+    "requiredOperations": [
+      "literature.pmc.request"
+    ],
+    "requiredSkills": [
+      "rosalind-literature-ncbi-pmc"
+    ],
+    "fixtures": [
+      "literature-pmc-availability:README.md",
+      "literature-pmc-availability:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "literature-pmc-availability:previews/pmc-availability.svg",
+      "literature-pmc-availability:outputs/results.json",
+      "literature-pmc-availability:outputs/sources.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "literature-pmc-availability:observation:1",
+        "statement": "PMC3257301 resolves to PMID 22253597 and DOI 10.1371/journal.ppat.1002485.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-pmc-availability:README.md",
+          "literature-pmc-availability:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-pmc-availability:observation:2",
+        "statement": "The PMC Article Dataset lookup reported open-access status and a CC BY license.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-pmc-availability:README.md",
+          "literature-pmc-availability:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-pmc-availability:observation:3",
+        "statement": "PDF, XML, and plain-text article files were present; 22 media URLs were reported.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-pmc-availability:README.md",
+          "literature-pmc-availability:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-pmc-availability:observation:4",
+        "statement": "The compact record marked the article as neither retracted nor a manuscript submission.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-pmc-availability:README.md",
+          "literature-pmc-availability:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-pmc-availability:computed:1",
+        "statement": "Exact identifiers, status fields, and canonical links are in outputs/results.json. outputs/sources.json explains which source supports each claim.",
+        "kind": "computed",
+        "artifactIds": [
+          "literature-pmc-availability:previews/pmc-availability.svg",
+          "literature-pmc-availability:outputs/results.json",
+          "literature-pmc-availability:outputs/sources.json"
+        ]
+      },
+      {
+        "id": "literature-pmc-availability:computed:2",
+        "statement": "The preview translates these machine-readable fields into a compact display without analyzing the paper's scientific conclusions.",
+        "kind": "computed",
+        "artifactIds": [
+          "literature-pmc-availability:previews/pmc-availability.svg",
+          "literature-pmc-availability:outputs/results.json",
+          "literature-pmc-availability:outputs/sources.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "literature-pmc-availability:preview",
+        "artifactId": "literature-pmc-availability:previews/pmc-availability.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3257301/",
+        "https://pubmed.ncbi.nlm.nih.gov/22253597/",
+        "https://doi.org/10.1371/journal.ppat.1002485"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "literature-evidence",
       "providerIds": [
-        "ncbi-entrez",
-        "ncbi-pmc",
-        "biorxiv"
+        "ncbi-pmc"
       ],
       "strategy": "network",
       "requiredInputs": [
@@ -541,10 +656,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [
       "The interval from the first preprint date to the publication date is 162 days.",
-      "The published title differs from the preprint title. outputs/results.json retains the two records and the computed comparison; outputs/sources.json assigns a source to every factual field.",
-      "The medRxiv API returned two preprint versions dated 10 and 11 September 2020.",
-      "The publication-link endpoint associated the preprint with Nature Communications DOI 10.1038/s41467-021-21444-5.",
-      "PubMed identifies the linked publication as PMID 33608522, published 19 February 2021."
+      "The published title differs from the preprint title. outputs/results.json retains the two records and the computed comparison; outputs/sources.json assigns a source to every factual field."
     ],
     "interpretation": [
       "The example demonstrates a traceable preprint-to-publication relationship with a changed title and a computed 162-day interval."
@@ -611,36 +723,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "literature-preprint-publication-link:computed:3",
-        "statement": "The medRxiv API returned two preprint versions dated 10 and 11 September 2020.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-preprint-publication-link:previews/preprint-publication.svg",
-          "literature-preprint-publication-link:outputs/results.json",
-          "literature-preprint-publication-link:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "literature-preprint-publication-link:computed:4",
-        "statement": "The publication-link endpoint associated the preprint with Nature Communications DOI 10.1038/s41467-021-21444-5.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-preprint-publication-link:previews/preprint-publication.svg",
-          "literature-preprint-publication-link:outputs/results.json",
-          "literature-preprint-publication-link:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "literature-preprint-publication-link:computed:5",
-        "statement": "PubMed identifies the linked publication as PMID 33608522, published 19 February 2021.",
-        "kind": "computed",
-        "artifactIds": [
-          "literature-preprint-publication-link:previews/preprint-publication.svg",
-          "literature-preprint-publication-link:outputs/results.json",
-          "literature-preprint-publication-link:outputs/sources.json"
-        ]
-      },
-      {
         "id": "literature-preprint-publication-link:interpretation:1",
         "statement": "The example demonstrates a traceable preprint-to-publication relationship with a changed title and a computed 162-day interval.",
         "kind": "interpretation",
@@ -651,12 +733,104 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "literature"
+    ],
+    "requiredOperations": [
+      "literature.biorxiv.request"
+    ],
+    "requiredSkills": [
+      "rosalind-literature-biorxiv",
+      "rosalind-literature-ncbi-entrez"
+    ],
+    "fixtures": [
+      "literature-preprint-publication-link:README.md",
+      "literature-preprint-publication-link:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "literature-preprint-publication-link:previews/preprint-publication.svg",
+      "literature-preprint-publication-link:outputs/results.json",
+      "literature-preprint-publication-link:outputs/sources.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "literature-preprint-publication-link:observation:1",
+        "statement": "medRxiv DOI 10.1101/2020.09.09.20191205 has two returned versions dated 10 and 11 September 2020.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-preprint-publication-link:README.md",
+          "literature-preprint-publication-link:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-preprint-publication-link:observation:2",
+        "statement": "The preprint title is *Evolution of immunity to SARS-CoV-2*.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-preprint-publication-link:README.md",
+          "literature-preprint-publication-link:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-preprint-publication-link:observation:3",
+        "statement": "The publication-link endpoint reports Nature Communications DOI 10.1038/s41467-021-21444-5.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-preprint-publication-link:README.md",
+          "literature-preprint-publication-link:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-preprint-publication-link:observation:4",
+        "statement": "PubMed PMID 33608522 records the published title as *Evolution of immune responses to SARS-CoV-2 in mild-moderate COVID-19.* and the publication date as 19 February 2021.",
+        "kind": "observation",
+        "artifactIds": [
+          "literature-preprint-publication-link:README.md",
+          "literature-preprint-publication-link:prompt.md"
+        ]
+      },
+      {
+        "id": "literature-preprint-publication-link:computed:1",
+        "statement": "The interval from the first preprint date to the publication date is 162 days.",
+        "kind": "computed",
+        "artifactIds": [
+          "literature-preprint-publication-link:previews/preprint-publication.svg",
+          "literature-preprint-publication-link:outputs/results.json",
+          "literature-preprint-publication-link:outputs/sources.json"
+        ]
+      },
+      {
+        "id": "literature-preprint-publication-link:computed:2",
+        "statement": "The published title differs from the preprint title. outputs/results.json retains the two records and the computed comparison; outputs/sources.json assigns a source to every factual field.",
+        "kind": "computed",
+        "artifactIds": [
+          "literature-preprint-publication-link:previews/preprint-publication.svg",
+          "literature-preprint-publication-link:outputs/results.json",
+          "literature-preprint-publication-link:outputs/sources.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "literature-preprint-publication-link:preview",
+        "artifactId": "literature-preprint-publication-link:previews/preprint-publication.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://doi.org/10.1101/2020.09.09.20191205",
+        "https://doi.org/10.1038/s41467-021-21444-5",
+        "https://pubmed.ncbi.nlm.nih.gov/33608522/"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "literature-evidence",
       "providerIds": [
-        "ncbi-entrez",
-        "ncbi-pmc",
-        "biorxiv"
+        "biorxiv",
+        "ncbi-entrez"
       ],
       "strategy": "network",
       "requiredInputs": [
@@ -754,11 +928,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "GTEx v10 returned 15 single-tissue eQTL rows for rs2228145; seven mapped to IL6R across esophagus muscularis, blood, three arteries, and two colon tissues.",
       "All seven returned IL6R normalized effect sizes were negative, ranging from −0.3009 to −0.0905."
     ],
-    "computedResults": [
-      "Open Targets returned one asthma row with GWAS credible-set and Europe PMC datasource scores.",
-      "The GWAS Catalog query returned ten IL6R-mapped association records.",
-      "GTEx returned 15 eQTL rows for rs2228145, including seven IL6R rows across seven tissues."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The combined sources connect disease-level evidence, cataloged genetic associations, and tissue-specific expression context for IL6R."
     ],
@@ -805,36 +975,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "databases-il6r-asthma:computed:1",
-        "statement": "Open Targets returned one asthma row with GWAS credible-set and Europe PMC datasource scores.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-il6r-asthma:previews/il6r-asthma.svg",
-          "databases-il6r-asthma:outputs/results.json",
-          "databases-il6r-asthma:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-il6r-asthma:computed:2",
-        "statement": "The GWAS Catalog query returned ten IL6R-mapped association records.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-il6r-asthma:previews/il6r-asthma.svg",
-          "databases-il6r-asthma:outputs/results.json",
-          "databases-il6r-asthma:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-il6r-asthma:computed:3",
-        "statement": "GTEx returned 15 eQTL rows for rs2228145, including seven IL6R rows across seven tissues.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-il6r-asthma:previews/il6r-asthma.svg",
-          "databases-il6r-asthma:outputs/results.json",
-          "databases-il6r-asthma:outputs/sources.json"
-        ]
-      },
-      {
         "id": "databases-il6r-asthma:interpretation:1",
         "statement": "The combined sources connect disease-level evidence, cataloged genetic associations, and tissue-specific expression context for IL6R.",
         "kind": "interpretation",
@@ -845,18 +985,86 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "databases"
+    ],
+    "requiredOperations": [
+      "databases.database.request"
+    ],
+    "requiredSkills": [
+      "rosalind-databases-opentargets",
+      "rosalind-databases-gwas-catalog",
+      "rosalind-databases-gtex-eqtl"
+    ],
+    "fixtures": [
+      "databases-il6r-asthma:README.md",
+      "databases-il6r-asthma:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "databases-il6r-asthma:previews/il6r-asthma.svg",
+      "databases-il6r-asthma:outputs/results.json",
+      "databases-il6r-asthma:outputs/sources.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "databases-il6r-asthma:observation:1",
+        "statement": "Open Targets returned an asthma row for IL6R with datasource scores of 0.8824 for GWAS credible sets and 0.6642 for Europe PMC.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-il6r-asthma:README.md",
+          "databases-il6r-asthma:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-il6r-asthma:observation:2",
+        "statement": "A GWAS Catalog query with mapped_gene=IL6R returned ten association records in the requested slice.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-il6r-asthma:README.md",
+          "databases-il6r-asthma:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-il6r-asthma:observation:3",
+        "statement": "GTEx v10 returned 15 single-tissue eQTL rows for rs2228145; seven mapped to IL6R across esophagus muscularis, blood, three arteries, and two colon tissues.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-il6r-asthma:README.md",
+          "databases-il6r-asthma:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-il6r-asthma:observation:4",
+        "statement": "All seven returned IL6R normalized effect sizes were negative, ranging from −0.3009 to −0.0905.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-il6r-asthma:README.md",
+          "databases-il6r-asthma:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "databases-il6r-asthma:preview",
+        "artifactId": "databases-il6r-asthma:previews/il6r-asthma.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://platform.opentargets.org/target/ENSG00000160712",
+        "https://www.ebi.ac.uk/gwas/",
+        "https://gtexportal.org/home/gene/ENSG00000160712"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "database-evidence",
       "providerIds": [
         "opentargets",
-        "ensembl",
-        "clinvar",
         "gwas-catalog",
-        "gtex",
-        "uniprot",
-        "chembl",
-        "rcsb-pdb",
-        "reactome"
+        "gtex-eqtl"
       ],
       "strategy": "network",
       "requiredInputs": [
@@ -955,12 +1163,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "UKB-TOPMed resolved the selected allele to GRCh38 10:112998590-C-T, reported a cohort allele frequency of 0.29, and exposed 1,419 association rows.",
       "The gnomAD r4 GraphQL request returned a service error, so no gnomAD frequency is reported."
     ],
-    "computedResults": [
-      "ClinVar returned distinct C>T and C>G records for rs7903146; the selected C>T allele is Variation ID 7413.",
-      "Ensembl returned rs7903146 cross-references including VCV000007413.",
-      "UKB-TOPMed reported allele frequency 0.29 and 1,419 available association rows for 10:112998590-C-T.",
-      "The gnomAD GraphQL request failed and was not used as evidence."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The case demonstrates allele-resolved identity checking before combining clinical, annotation, and cohort records."
     ],
@@ -1016,46 +1219,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "databases-variant-interpretation:computed:1",
-        "statement": "ClinVar returned distinct C>T and C>G records for rs7903146; the selected C>T allele is Variation ID 7413.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-variant-interpretation:previews/variant-rs7903146.svg",
-          "databases-variant-interpretation:outputs/results.json",
-          "databases-variant-interpretation:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-variant-interpretation:computed:2",
-        "statement": "Ensembl returned rs7903146 cross-references including VCV000007413.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-variant-interpretation:previews/variant-rs7903146.svg",
-          "databases-variant-interpretation:outputs/results.json",
-          "databases-variant-interpretation:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-variant-interpretation:computed:3",
-        "statement": "UKB-TOPMed reported allele frequency 0.29 and 1,419 available association rows for 10:112998590-C-T.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-variant-interpretation:previews/variant-rs7903146.svg",
-          "databases-variant-interpretation:outputs/results.json",
-          "databases-variant-interpretation:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-variant-interpretation:computed:4",
-        "statement": "The gnomAD GraphQL request failed and was not used as evidence.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-variant-interpretation:previews/variant-rs7903146.svg",
-          "databases-variant-interpretation:outputs/results.json",
-          "databases-variant-interpretation:outputs/sources.json"
-        ]
-      },
-      {
         "id": "databases-variant-interpretation:interpretation:1",
         "statement": "The case demonstrates allele-resolved identity checking before combining clinical, annotation, and cohort records.",
         "kind": "interpretation",
@@ -1066,18 +1229,97 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "databases"
+    ],
+    "requiredOperations": [
+      "databases.database.request"
+    ],
+    "requiredSkills": [
+      "rosalind-databases-clinvar-variation",
+      "rosalind-databases-ensembl",
+      "rosalind-databases-ukb-topmed-phewas",
+      "rosalind-databases-gnomad-graphql"
+    ],
+    "fixtures": [
+      "databases-variant-interpretation:README.md",
+      "databases-variant-interpretation:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "databases-variant-interpretation:previews/variant-rs7903146.svg",
+      "databases-variant-interpretation:outputs/results.json",
+      "databases-variant-interpretation:outputs/sources.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "databases-variant-interpretation:observation:1",
+        "statement": "ClinVar returned two records for rs7903146.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-variant-interpretation:README.md",
+          "databases-variant-interpretation:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-variant-interpretation:observation:2",
+        "statement": "Variation 7413 is the selected TCF7L2 C>T allele; Variation 1692994 is a distinct C>G allele.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-variant-interpretation:README.md",
+          "databases-variant-interpretation:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-variant-interpretation:observation:3",
+        "statement": "Ensembl identifies the variant as rs7903146 and returned cross-references that include VCV000007413.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-variant-interpretation:README.md",
+          "databases-variant-interpretation:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-variant-interpretation:observation:4",
+        "statement": "UKB-TOPMed resolved the selected allele to GRCh38 10:112998590-C-T, reported a cohort allele frequency of 0.29, and exposed 1,419 association rows.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-variant-interpretation:README.md",
+          "databases-variant-interpretation:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-variant-interpretation:observation:5",
+        "statement": "The gnomAD r4 GraphQL request returned a service error, so no gnomAD frequency is reported.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-variant-interpretation:README.md",
+          "databases-variant-interpretation:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "databases-variant-interpretation:preview",
+        "artifactId": "databases-variant-interpretation:previews/variant-rs7903146.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/",
+        "https://rest.ensembl.org/variation/homo_sapiens/rs7903146",
+        "https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "database-evidence",
       "providerIds": [
-        "opentargets",
+        "clinvar-variation",
         "ensembl",
-        "clinvar",
-        "gwas-catalog",
-        "gtex",
-        "uniprot",
-        "chembl",
-        "rcsb-pdb",
-        "reactome"
+        "ukb-topmed-phewas",
+        "gnomad-graphql"
       ],
       "strategy": "network",
       "requiredInputs": [
@@ -1178,13 +1420,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "RCSB PDB 1M17 is a 2.60 Å X-ray structure of the EGFR tyrosine kinase domain with erlotinib.",
       "Reactome R-HSA-177929 is *Signaling by EGFR*."
     ],
-    "computedResults": [
-      "UniProt identifies P00533 as a reviewed human EGFR record.",
-      "ChEMBL identifies CHEMBL203 as human EGFR and returned ten inhibitor mechanism records in the selected slice.",
-      "Gefitinib, erlotinib, and osimertinib are each phase-4 ChEMBL compounds.",
-      "RCSB 1M17 is a 2.60 Å X-ray structure of the EGFR kinase domain with erlotinib.",
-      "Reactome R-HSA-177929 is Signaling by EGFR."
-    ],
+    "computedResults": [],
     "interpretation": [
       "Stable protein, target, compound, structure, and pathway identifiers support a navigable EGFR research map."
     ],
@@ -1249,56 +1485,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "databases-egfr-landscape:computed:1",
-        "statement": "UniProt identifies P00533 as a reviewed human EGFR record.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-egfr-landscape:previews/egfr-landscape.svg",
-          "databases-egfr-landscape:outputs/results.json",
-          "databases-egfr-landscape:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-egfr-landscape:computed:2",
-        "statement": "ChEMBL identifies CHEMBL203 as human EGFR and returned ten inhibitor mechanism records in the selected slice.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-egfr-landscape:previews/egfr-landscape.svg",
-          "databases-egfr-landscape:outputs/results.json",
-          "databases-egfr-landscape:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-egfr-landscape:computed:3",
-        "statement": "Gefitinib, erlotinib, and osimertinib are each phase-4 ChEMBL compounds.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-egfr-landscape:previews/egfr-landscape.svg",
-          "databases-egfr-landscape:outputs/results.json",
-          "databases-egfr-landscape:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-egfr-landscape:computed:4",
-        "statement": "RCSB 1M17 is a 2.60 Å X-ray structure of the EGFR kinase domain with erlotinib.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-egfr-landscape:previews/egfr-landscape.svg",
-          "databases-egfr-landscape:outputs/results.json",
-          "databases-egfr-landscape:outputs/sources.json"
-        ]
-      },
-      {
-        "id": "databases-egfr-landscape:computed:5",
-        "statement": "Reactome R-HSA-177929 is Signaling by EGFR.",
-        "kind": "computed",
-        "artifactIds": [
-          "databases-egfr-landscape:previews/egfr-landscape.svg",
-          "databases-egfr-landscape:outputs/results.json",
-          "databases-egfr-landscape:outputs/sources.json"
-        ]
-      },
-      {
         "id": "databases-egfr-landscape:interpretation:1",
         "statement": "Stable protein, target, compound, structure, and pathway identifiers support a navigable EGFR research map.",
         "kind": "interpretation",
@@ -1309,14 +1495,103 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "databases"
+    ],
+    "requiredOperations": [
+      "databases.database.request"
+    ],
+    "requiredSkills": [
+      "rosalind-databases-uniprot",
+      "rosalind-databases-chembl",
+      "rosalind-databases-rcsb-pdb",
+      "rosalind-databases-reactome"
+    ],
+    "fixtures": [
+      "databases-egfr-landscape:README.md",
+      "databases-egfr-landscape:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "databases-egfr-landscape:previews/egfr-landscape.svg",
+      "databases-egfr-landscape:outputs/results.json",
+      "databases-egfr-landscape:outputs/sources.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "databases-egfr-landscape:observation:1",
+        "statement": "UniProt P00533 is the reviewed human EGFR entry; the retrieved record was entry version 300.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-egfr-landscape:README.md",
+          "databases-egfr-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-egfr-landscape:observation:2",
+        "statement": "ChEMBL target CHEMBL203 is the human epidermal growth factor receptor.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-egfr-landscape:README.md",
+          "databases-egfr-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-egfr-landscape:observation:3",
+        "statement": "All ten returned records in the requested mechanism slice had inhibitor action; eight reported maximum phase 4.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-egfr-landscape:README.md",
+          "databases-egfr-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-egfr-landscape:observation:4",
+        "statement": "ChEMBL identifies gefitinib (CHEMBL939), erlotinib (CHEMBL553), and osimertinib (CHEMBL3353410) as phase-4 compounds.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-egfr-landscape:README.md",
+          "databases-egfr-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-egfr-landscape:observation:5",
+        "statement": "RCSB PDB 1M17 is a 2.60 Å X-ray structure of the EGFR tyrosine kinase domain with erlotinib.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-egfr-landscape:README.md",
+          "databases-egfr-landscape:prompt.md"
+        ]
+      },
+      {
+        "id": "databases-egfr-landscape:observation:6",
+        "statement": "Reactome R-HSA-177929 is *Signaling by EGFR*.",
+        "kind": "observation",
+        "artifactIds": [
+          "databases-egfr-landscape:README.md",
+          "databases-egfr-landscape:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "databases-egfr-landscape:preview",
+        "artifactId": "databases-egfr-landscape:previews/egfr-landscape.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/P00533/entry",
+        "https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203",
+        "https://www.rcsb.org/structure/1M17",
+        "https://reactome.org/content/detail/R-HSA-177929"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "database-evidence",
       "providerIds": [
-        "opentargets",
-        "ensembl",
-        "clinvar",
-        "gwas-catalog",
-        "gtex",
         "uniprot",
         "chembl",
         "rcsb-pdb",
@@ -1412,7 +1687,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "application/json",
         "generatedAt": "2026-08-29",
         "path": "showcases/biological-sequence-viewer/cases/sequence-lambda-annotation/outputs/source-provenance.json",
-        "bytes": 455
+        "bytes": 454
       }
     ],
     "sources": [
@@ -1426,9 +1701,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     "computedResults": [
       "scripts/prepare_sequence_examples.py extracted the 714-base interval, reverse-complemented it, translated it, removed the terminal stop, and recovered 237 residues.",
       "The sequence matches the GenBank translation exactly.",
-      "Exact sequence digests are retained in outputs/analysis.json.",
-      "The cI feature is reverse-strand and spans 714 bases.",
-      "The computed 237-residue translation equals the annotated translation."
+      "Exact sequence digests are retained in outputs/analysis.json."
     ],
     "interpretation": [
       "The cI translation is internally consistent with the versioned GenBank record."
@@ -1501,26 +1774,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "sequence-lambda-annotation:computed:4",
-        "statement": "The cI feature is reverse-strand and spans 714 bases.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-lambda-annotation:previews/lambda-annotation.svg",
-          "sequence-lambda-annotation:outputs/analysis.json",
-          "sequence-lambda-annotation:outputs/source-provenance.json"
-        ]
-      },
-      {
-        "id": "sequence-lambda-annotation:computed:5",
-        "statement": "The computed 237-residue translation equals the annotated translation.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-lambda-annotation:previews/lambda-annotation.svg",
-          "sequence-lambda-annotation:outputs/analysis.json",
-          "sequence-lambda-annotation:outputs/source-provenance.json"
-        ]
-      },
-      {
         "id": "sequence-lambda-annotation:interpretation:1",
         "statement": "The cI translation is internally consistent with the versioned GenBank record.",
         "kind": "interpretation",
@@ -1531,6 +1784,106 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "sequence"
+    ],
+    "requiredOperations": [
+      "sequence.open_from_chat",
+      "sequence.run_analysis",
+      "sequence.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-sequence-biological-sequence-viewer"
+    ],
+    "fixtures": [
+      "sequence-lambda-annotation:README.md",
+      "sequence-lambda-annotation:prompt.md",
+      "sequence-lambda-annotation:inputs/NC_001416.1.gb"
+    ],
+    "expectedArtifacts": [
+      "sequence-lambda-annotation:previews/lambda-annotation.svg",
+      "sequence-lambda-annotation:outputs/analysis.json",
+      "sequence-lambda-annotation:outputs/source-provenance.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "sequence-lambda-annotation:observation:1",
+        "statement": "NCBI record NC_001416.1 contains a 48,502-base genome.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-lambda-annotation:README.md",
+          "sequence-lambda-annotation:prompt.md",
+          "sequence-lambda-annotation:inputs/NC_001416.1.gb",
+          "sequence-lambda-annotation:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-lambda-annotation:observation:2",
+        "statement": "The cI CDS is complement(37227..37940), uses translation table 11, and names protein NP_040628.1.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-lambda-annotation:README.md",
+          "sequence-lambda-annotation:prompt.md",
+          "sequence-lambda-annotation:inputs/NC_001416.1.gb",
+          "sequence-lambda-annotation:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-lambda-annotation:observation:3",
+        "statement": "The record annotates OR3, OR2, and OR1 at 37951–37967, 37974–37990, and 37998–38014.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-lambda-annotation:README.md",
+          "sequence-lambda-annotation:prompt.md",
+          "sequence-lambda-annotation:inputs/NC_001416.1.gb",
+          "sequence-lambda-annotation:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-lambda-annotation:computed:1",
+        "statement": "scripts/prepare_sequence_examples.py extracted the 714-base interval, reverse-complemented it, translated it, removed the terminal stop, and recovered 237 residues.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-lambda-annotation:previews/lambda-annotation.svg",
+          "sequence-lambda-annotation:outputs/analysis.json",
+          "sequence-lambda-annotation:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-lambda-annotation:computed:2",
+        "statement": "The sequence matches the GenBank translation exactly.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-lambda-annotation:previews/lambda-annotation.svg",
+          "sequence-lambda-annotation:outputs/analysis.json",
+          "sequence-lambda-annotation:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-lambda-annotation:computed:3",
+        "statement": "Exact sequence digests are retained in outputs/analysis.json.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-lambda-annotation:previews/lambda-annotation.svg",
+          "sequence-lambda-annotation:outputs/analysis.json",
+          "sequence-lambda-annotation:outputs/source-provenance.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "sequence-lambda-annotation:preview",
+        "artifactId": "sequence-lambda-annotation:previews/lambda-annotation.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=gbwithparts&retmode=text"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "sequence-analysis",
       "providerIds": [
@@ -1636,7 +1989,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "application/json",
         "generatedAt": "2026-08-29",
         "path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/analysis.json",
-        "bytes": 1280
+        "bytes": 1252
       }
     ],
     "sources": [
@@ -1654,10 +2007,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "KRAS positions 10–17, 30–38, 60–76, and 116–119 were identical across all three sequences in the displayed alignment.",
       "Pairwise uncorrected p-distances were 0.131579 for KRAS–NRAS, 0.136842 for KRAS–HRAS, and 0.157895 for NRAS–HRAS.",
       "The neighbor-joining result is stored in outputs/RAS-P01116-P01111-P01112-NJ.nwk; the matrix and analysis settings are in outputs/analysis.json.",
-      "Columns 170–191 contain the clearest substitutions and short gaps, consistent with greater divergence in the C-terminal targeting region.",
-      "The mounted viewer reported three protein rows, 191 alignment columns, mean identity 0.9284467713787081, and normalized conservation 0.6453400570165564.",
-      "KRAS positions 10-17, 30-38, 60-76, and 116-119 were identical across all three rows.",
-      "Alignment columns 170-191 contained substantially more substitutions and short gaps."
+      "Columns 170–191 contain the clearest substitutions and short gaps, consistent with greater divergence in the C-terminal targeting region."
     ],
     "interpretation": [
       "The shared GTPase core is highly conserved across the three human RAS paralogues.",
@@ -1758,39 +2108,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "sequence-ras-alignment:computed:6",
-        "statement": "The mounted viewer reported three protein rows, 191 alignment columns, mean identity 0.9284467713787081, and normalized conservation 0.6453400570165564.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
-          "sequence-ras-alignment:previews/ras-alignment.svg",
-          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
-          "sequence-ras-alignment:outputs/analysis.json"
-        ]
-      },
-      {
-        "id": "sequence-ras-alignment:computed:7",
-        "statement": "KRAS positions 10-17, 30-38, 60-76, and 116-119 were identical across all three rows.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
-          "sequence-ras-alignment:previews/ras-alignment.svg",
-          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
-          "sequence-ras-alignment:outputs/analysis.json"
-        ]
-      },
-      {
-        "id": "sequence-ras-alignment:computed:8",
-        "statement": "Alignment columns 170-191 contained substantially more substitutions and short gaps.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
-          "sequence-ras-alignment:previews/ras-alignment.svg",
-          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
-          "sequence-ras-alignment:outputs/analysis.json"
-        ]
-      },
-      {
         "id": "sequence-ras-alignment:interpretation:1",
         "statement": "The shared GTPase core is highly conserved across the three human RAS paralogues.",
         "kind": "interpretation",
@@ -1813,6 +2130,134 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "sequence"
+    ],
+    "requiredOperations": [
+      "sequence.open_from_chat",
+      "sequence.run_analysis",
+      "sequence.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-sequence-biological-sequence-viewer"
+    ],
+    "fixtures": [
+      "sequence-ras-alignment:README.md",
+      "sequence-ras-alignment:prompt.md",
+      "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta"
+    ],
+    "expectedArtifacts": [
+      "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+      "sequence-ras-alignment:previews/ras-alignment.svg",
+      "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+      "sequence-ras-alignment:outputs/analysis.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "sequence-ras-alignment:observation:1",
+        "statement": "The aligned FASTA contains three 189-residue proteins and 191 alignment columns.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-ras-alignment:README.md",
+          "sequence-ras-alignment:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:observation:2",
+        "statement": "The rows are P01116 (KRAS), P01111 (NRAS), and P01112 (HRAS), all UniProt sequence version 1.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-ras-alignment:README.md",
+          "sequence-ras-alignment:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:observation:3",
+        "statement": "The mounted viewer reported mean identity 0.9284467713787081 and normalized conservation 0.6453400570165564 across the full alignment.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-ras-alignment:README.md",
+          "sequence-ras-alignment:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:computed:1",
+        "statement": "P01116 was used as the reference row.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+          "sequence-ras-alignment:previews/ras-alignment.svg",
+          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+          "sequence-ras-alignment:outputs/analysis.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:computed:2",
+        "statement": "KRAS positions 10–17, 30–38, 60–76, and 116–119 were identical across all three sequences in the displayed alignment.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+          "sequence-ras-alignment:previews/ras-alignment.svg",
+          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+          "sequence-ras-alignment:outputs/analysis.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:computed:3",
+        "statement": "Pairwise uncorrected p-distances were 0.131579 for KRAS–NRAS, 0.136842 for KRAS–HRAS, and 0.157895 for NRAS–HRAS.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+          "sequence-ras-alignment:previews/ras-alignment.svg",
+          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+          "sequence-ras-alignment:outputs/analysis.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:computed:4",
+        "statement": "The neighbor-joining result is stored in outputs/RAS-P01116-P01111-P01112-NJ.nwk; the matrix and analysis settings are in outputs/analysis.json.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+          "sequence-ras-alignment:previews/ras-alignment.svg",
+          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+          "sequence-ras-alignment:outputs/analysis.json"
+        ]
+      },
+      {
+        "id": "sequence-ras-alignment:computed:5",
+        "statement": "Columns 170–191 contain the clearest substitutions and short gaps, consistent with greater divergence in the C-terminal targeting region.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+          "sequence-ras-alignment:previews/ras-alignment.svg",
+          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+          "sequence-ras-alignment:outputs/analysis.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "sequence-ras-alignment:preview",
+        "artifactId": "sequence-ras-alignment:previews/ras-alignment.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "sequence-analysis",
       "providerIds": [
@@ -1870,7 +2315,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/README.md",
-        "bytes": 1052
+        "bytes": 1246
       },
       {
         "id": "sequence-fastq-qc:prompt.md",
@@ -1878,6 +2323,13 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "text/markdown",
         "path": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/prompt.md",
         "bytes": 139
+      },
+      {
+        "id": "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
+        "role": "input",
+        "mediaType": "application/octet-stream",
+        "path": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/inputs/DRR037765.first500.fastq",
+        "bytes": 480372
       },
       {
         "id": "sequence-fastq-qc:previews/fastq-qc.svg",
@@ -1902,7 +2354,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "application/json",
         "generatedAt": "2026-08-29",
         "path": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/outputs/source-provenance.json",
-        "bytes": 612
+        "bytes": 552
       }
     ],
     "sources": [
@@ -1910,14 +2362,12 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "observations": [
       "The source is ENA run DRR037765.",
-      "The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes a canonical local subset.",
-      "Large read files remain outside Git; outputs/source-provenance.json records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256."
+      "The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes the small canonical subset bundled with this lesson.",
+      "The complete source file remains outside Git; outputs/source-provenance.json records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256."
     ],
     "computedResults": [
       "500 reads and 235,490 bases length 469–471 bases GC 28.85% Q30 95.40% These values describe this bounded subset only.",
-      "They do not establish run-wide quality or suitability for a downstream assay.",
-      "The subset contains 500 reads and 235490 bases.",
-      "The computed Q30 fraction is 95.397681 percent."
+      "They do not establish run-wide quality or suitability for a downstream assay."
     ],
     "interpretation": [
       "The subset has high base-call quality under the Phred+33 interpretation."
@@ -1935,26 +2385,29 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "artifactIds": [
           "sequence-fastq-qc:README.md",
           "sequence-fastq-qc:prompt.md",
+          "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
           "sequence-fastq-qc:outputs/source-provenance.json"
         ]
       },
       {
         "id": "sequence-fastq-qc:observation:2",
-        "statement": "The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes a canonical local subset.",
+        "statement": "The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes the small canonical subset bundled with this lesson.",
         "kind": "observation",
         "artifactIds": [
           "sequence-fastq-qc:README.md",
           "sequence-fastq-qc:prompt.md",
+          "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
           "sequence-fastq-qc:outputs/source-provenance.json"
         ]
       },
       {
         "id": "sequence-fastq-qc:observation:3",
-        "statement": "Large read files remain outside Git; outputs/source-provenance.json records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256.",
+        "statement": "The complete source file remains outside Git; outputs/source-provenance.json records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256.",
         "kind": "observation",
         "artifactIds": [
           "sequence-fastq-qc:README.md",
           "sequence-fastq-qc:prompt.md",
+          "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
           "sequence-fastq-qc:outputs/source-provenance.json"
         ]
       },
@@ -1979,26 +2432,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "sequence-fastq-qc:computed:3",
-        "statement": "The subset contains 500 reads and 235490 bases.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-fastq-qc:previews/fastq-qc.svg",
-          "sequence-fastq-qc:outputs/quality-summary.json",
-          "sequence-fastq-qc:outputs/source-provenance.json"
-        ]
-      },
-      {
-        "id": "sequence-fastq-qc:computed:4",
-        "statement": "The computed Q30 fraction is 95.397681 percent.",
-        "kind": "computed",
-        "artifactIds": [
-          "sequence-fastq-qc:previews/fastq-qc.svg",
-          "sequence-fastq-qc:outputs/quality-summary.json",
-          "sequence-fastq-qc:outputs/source-provenance.json"
-        ]
-      },
-      {
         "id": "sequence-fastq-qc:interpretation:1",
         "statement": "The subset has high base-call quality under the Phred+33 interpretation.",
         "kind": "interpretation",
@@ -2009,6 +2442,96 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "sequence"
+    ],
+    "requiredOperations": [
+      "sequence.open_from_chat",
+      "sequence.run_analysis",
+      "sequence.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-sequence-biological-sequence-viewer"
+    ],
+    "fixtures": [
+      "sequence-fastq-qc:README.md",
+      "sequence-fastq-qc:prompt.md",
+      "sequence-fastq-qc:inputs/DRR037765.first500.fastq"
+    ],
+    "expectedArtifacts": [
+      "sequence-fastq-qc:previews/fastq-qc.svg",
+      "sequence-fastq-qc:outputs/quality-summary.json",
+      "sequence-fastq-qc:outputs/source-provenance.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "sequence-fastq-qc:observation:1",
+        "statement": "The source is ENA run DRR037765.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-fastq-qc:README.md",
+          "sequence-fastq-qc:prompt.md",
+          "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
+          "sequence-fastq-qc:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-fastq-qc:observation:2",
+        "statement": "The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes the small canonical subset bundled with this lesson.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-fastq-qc:README.md",
+          "sequence-fastq-qc:prompt.md",
+          "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
+          "sequence-fastq-qc:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-fastq-qc:observation:3",
+        "statement": "The complete source file remains outside Git; outputs/source-provenance.json records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256.",
+        "kind": "observation",
+        "artifactIds": [
+          "sequence-fastq-qc:README.md",
+          "sequence-fastq-qc:prompt.md",
+          "sequence-fastq-qc:inputs/DRR037765.first500.fastq",
+          "sequence-fastq-qc:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-fastq-qc:computed:1",
+        "statement": "500 reads and 235,490 bases length 469–471 bases GC 28.85% Q30 95.40% These values describe this bounded subset only.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-fastq-qc:previews/fastq-qc.svg",
+          "sequence-fastq-qc:outputs/quality-summary.json",
+          "sequence-fastq-qc:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "sequence-fastq-qc:computed:2",
+        "statement": "They do not establish run-wide quality or suitability for a downstream assay.",
+        "kind": "computed",
+        "artifactIds": [
+          "sequence-fastq-qc:previews/fastq-qc.svg",
+          "sequence-fastq-qc:outputs/quality-summary.json",
+          "sequence-fastq-qc:outputs/source-provenance.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "sequence-fastq-qc:preview",
+        "artifactId": "sequence-fastq-qc:previews/fastq-qc.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "sequence-analysis",
       "providerIds": [
@@ -2017,7 +2540,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "strategy": "local",
       "requiredInputs": [
         "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/README.md",
-        "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/prompt.md"
+        "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/prompt.md",
+        "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/inputs/DRR037765.first500.fastq"
       ],
       "expectedOutputs": [
         "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/previews/fastq-qc.svg",
@@ -2112,11 +2636,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Bundled workflow: oai_fastq_qc Active version: version-8e0c15a605d394be27a4e68246a061ef Workflow source digest: sha256:705bf609376de4193dafbb50a8967b75bc30ffeb5c17e1849a56cafe949db201 The local target is currently unable to launch this Snakemake workflow, and the configured Ubuntu target was unreachable.",
       "The registered run list was empty; no dataset was fetched and no analysis result exists."
     ],
-    "computedResults": [
-      "Workflow oai_fastq_qc has one active bundled version.",
-      "No workflow run is registered.",
-      "Neither inspected compute target was runnable at observation time."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable."
     ],
@@ -2145,39 +2665,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "ngs-fastq-qc:computed:1",
-        "statement": "Workflow oai_fastq_qc has one active bundled version.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-fastq-qc:previews/ngs-fastq-qc.svg",
-          "ngs-fastq-qc:outputs/workflow-evidence.json",
-          "ngs-fastq-qc:outputs/analysis-plan.md",
-          "ngs-fastq-qc:outputs/readiness-review.md"
-        ]
-      },
-      {
-        "id": "ngs-fastq-qc:computed:2",
-        "statement": "No workflow run is registered.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-fastq-qc:previews/ngs-fastq-qc.svg",
-          "ngs-fastq-qc:outputs/workflow-evidence.json",
-          "ngs-fastq-qc:outputs/analysis-plan.md",
-          "ngs-fastq-qc:outputs/readiness-review.md"
-        ]
-      },
-      {
-        "id": "ngs-fastq-qc:computed:3",
-        "statement": "Neither inspected compute target was runnable at observation time.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-fastq-qc:previews/ngs-fastq-qc.svg",
-          "ngs-fastq-qc:outputs/workflow-evidence.json",
-          "ngs-fastq-qc:outputs/analysis-plan.md",
-          "ngs-fastq-qc:outputs/readiness-review.md"
-        ]
-      },
-      {
         "id": "ngs-fastq-qc:interpretation:1",
         "statement": "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable.",
         "kind": "interpretation",
@@ -2189,9 +2676,65 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "ngs"
+    ],
+    "requiredOperations": [
+      "list_workflows",
+      "get_runtime_environment",
+      "check_nextflow_readiness",
+      "plan_nextflow"
+    ],
+    "requiredSkills": [
+      "rosalind-ngs-ngs-analysis-workbench",
+      "rosalind-ngs-run-ngs-analysis"
+    ],
+    "fixtures": [
+      "ngs-fastq-qc:README.md",
+      "ngs-fastq-qc:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "ngs-fastq-qc:previews/ngs-fastq-qc.svg",
+      "ngs-fastq-qc:outputs/workflow-evidence.json",
+      "ngs-fastq-qc:outputs/analysis-plan.md",
+      "ngs-fastq-qc:outputs/readiness-review.md"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "ngs-fastq-qc:observation:1",
+        "statement": "Bundled workflow: oai_fastq_qc Active version: version-8e0c15a605d394be27a4e68246a061ef Workflow source digest: sha256:705bf609376de4193dafbb50a8967b75bc30ffeb5c17e1849a56cafe949db201 The local target is currently unable to launch this Snakemake workflow, and the configured Ubuntu target was unreachable.",
+        "kind": "observation",
+        "artifactIds": [
+          "ngs-fastq-qc:README.md",
+          "ngs-fastq-qc:prompt.md"
+        ]
+      },
+      {
+        "id": "ngs-fastq-qc:observation:2",
+        "statement": "The registered run list was empty; no dataset was fetched and no analysis result exists.",
+        "kind": "observation",
+        "artifactIds": [
+          "ngs-fastq-qc:README.md",
+          "ngs-fastq-qc:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "ngs-fastq-qc:preview",
+        "artifactId": "ngs-fastq-qc:previews/ngs-fastq-qc.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "ngs-workflow",
       "providerIds": [
+        "local-ngs",
         "local-container",
         "ssh-hpc"
       ],
@@ -2294,11 +2837,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Bundled workflow: oai_bulk_rnaseq_counts_qc Active version: version-a99d0908ddacd176e3b77e9ec2e482f3 Workflow source digest: sha256:eddf2cd523b62c20b3fa4496c4d441b9dfb48a303de9c5b922bad30d7e30f9cc The local target is currently unable to launch this Snakemake workflow, and the configured Ubuntu target was unreachable.",
       "The registered run list was empty; no dataset was fetched and no analysis result exists."
     ],
-    "computedResults": [
-      "Workflow oai_bulk_rnaseq_counts_qc has one active bundled version.",
-      "No workflow run is registered.",
-      "Neither inspected compute target was runnable at observation time."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable."
     ],
@@ -2327,39 +2866,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "ngs-bulk-rnaseq:computed:1",
-        "statement": "Workflow oai_bulk_rnaseq_counts_qc has one active bundled version.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-bulk-rnaseq:previews/ngs-bulk-rnaseq.svg",
-          "ngs-bulk-rnaseq:outputs/workflow-evidence.json",
-          "ngs-bulk-rnaseq:outputs/analysis-plan.md",
-          "ngs-bulk-rnaseq:outputs/readiness-review.md"
-        ]
-      },
-      {
-        "id": "ngs-bulk-rnaseq:computed:2",
-        "statement": "No workflow run is registered.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-bulk-rnaseq:previews/ngs-bulk-rnaseq.svg",
-          "ngs-bulk-rnaseq:outputs/workflow-evidence.json",
-          "ngs-bulk-rnaseq:outputs/analysis-plan.md",
-          "ngs-bulk-rnaseq:outputs/readiness-review.md"
-        ]
-      },
-      {
-        "id": "ngs-bulk-rnaseq:computed:3",
-        "statement": "Neither inspected compute target was runnable at observation time.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-bulk-rnaseq:previews/ngs-bulk-rnaseq.svg",
-          "ngs-bulk-rnaseq:outputs/workflow-evidence.json",
-          "ngs-bulk-rnaseq:outputs/analysis-plan.md",
-          "ngs-bulk-rnaseq:outputs/readiness-review.md"
-        ]
-      },
-      {
         "id": "ngs-bulk-rnaseq:interpretation:1",
         "statement": "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable.",
         "kind": "interpretation",
@@ -2371,9 +2877,65 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "ngs"
+    ],
+    "requiredOperations": [
+      "list_workflows",
+      "get_runtime_environment",
+      "check_nextflow_readiness",
+      "plan_nextflow"
+    ],
+    "requiredSkills": [
+      "rosalind-ngs-ngs-analysis-workbench",
+      "rosalind-ngs-run-ngs-analysis"
+    ],
+    "fixtures": [
+      "ngs-bulk-rnaseq:README.md",
+      "ngs-bulk-rnaseq:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "ngs-bulk-rnaseq:previews/ngs-bulk-rnaseq.svg",
+      "ngs-bulk-rnaseq:outputs/workflow-evidence.json",
+      "ngs-bulk-rnaseq:outputs/analysis-plan.md",
+      "ngs-bulk-rnaseq:outputs/readiness-review.md"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "ngs-bulk-rnaseq:observation:1",
+        "statement": "Bundled workflow: oai_bulk_rnaseq_counts_qc Active version: version-a99d0908ddacd176e3b77e9ec2e482f3 Workflow source digest: sha256:eddf2cd523b62c20b3fa4496c4d441b9dfb48a303de9c5b922bad30d7e30f9cc The local target is currently unable to launch this Snakemake workflow, and the configured Ubuntu target was unreachable.",
+        "kind": "observation",
+        "artifactIds": [
+          "ngs-bulk-rnaseq:README.md",
+          "ngs-bulk-rnaseq:prompt.md"
+        ]
+      },
+      {
+        "id": "ngs-bulk-rnaseq:observation:2",
+        "statement": "The registered run list was empty; no dataset was fetched and no analysis result exists.",
+        "kind": "observation",
+        "artifactIds": [
+          "ngs-bulk-rnaseq:README.md",
+          "ngs-bulk-rnaseq:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "ngs-bulk-rnaseq:preview",
+        "artifactId": "ngs-bulk-rnaseq:previews/ngs-bulk-rnaseq.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "ngs-workflow",
       "providerIds": [
+        "local-ngs",
         "local-container",
         "ssh-hpc"
       ],
@@ -2476,11 +3038,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Bundled workflow: oai_scrnaseq_fastq_to_count Active version: version-f3c773924a7ebc534c3adc131d4356ec Workflow source digest: sha256:6f7aa0dcf4ed6fdb6e187ff0f8d1128b6ffa93504bc688aee341fe250a893510 The local target is currently unable to launch this Snakemake workflow, and the configured Ubuntu target was unreachable.",
       "The registered run list was empty; no dataset was fetched and no analysis result exists."
     ],
-    "computedResults": [
-      "Workflow oai_scrnaseq_fastq_to_count has one active bundled version.",
-      "No workflow run is registered.",
-      "Neither inspected compute target was runnable at observation time."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable."
     ],
@@ -2509,39 +3067,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "ngs-single-cell:computed:1",
-        "statement": "Workflow oai_scrnaseq_fastq_to_count has one active bundled version.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-single-cell:previews/ngs-single-cell.svg",
-          "ngs-single-cell:outputs/workflow-evidence.json",
-          "ngs-single-cell:outputs/analysis-plan.md",
-          "ngs-single-cell:outputs/readiness-review.md"
-        ]
-      },
-      {
-        "id": "ngs-single-cell:computed:2",
-        "statement": "No workflow run is registered.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-single-cell:previews/ngs-single-cell.svg",
-          "ngs-single-cell:outputs/workflow-evidence.json",
-          "ngs-single-cell:outputs/analysis-plan.md",
-          "ngs-single-cell:outputs/readiness-review.md"
-        ]
-      },
-      {
-        "id": "ngs-single-cell:computed:3",
-        "statement": "Neither inspected compute target was runnable at observation time.",
-        "kind": "computed",
-        "artifactIds": [
-          "ngs-single-cell:previews/ngs-single-cell.svg",
-          "ngs-single-cell:outputs/workflow-evidence.json",
-          "ngs-single-cell:outputs/analysis-plan.md",
-          "ngs-single-cell:outputs/readiness-review.md"
-        ]
-      },
-      {
         "id": "ngs-single-cell:interpretation:1",
         "statement": "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable.",
         "kind": "interpretation",
@@ -2553,9 +3078,65 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "ngs"
+    ],
+    "requiredOperations": [
+      "list_workflows",
+      "get_runtime_environment",
+      "check_nextflow_readiness",
+      "plan_nextflow"
+    ],
+    "requiredSkills": [
+      "rosalind-ngs-ngs-analysis-workbench",
+      "rosalind-ngs-run-ngs-analysis"
+    ],
+    "fixtures": [
+      "ngs-single-cell:README.md",
+      "ngs-single-cell:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "ngs-single-cell:previews/ngs-single-cell.svg",
+      "ngs-single-cell:outputs/workflow-evidence.json",
+      "ngs-single-cell:outputs/analysis-plan.md",
+      "ngs-single-cell:outputs/readiness-review.md"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "ngs-single-cell:observation:1",
+        "statement": "Bundled workflow: oai_scrnaseq_fastq_to_count Active version: version-f3c773924a7ebc534c3adc131d4356ec Workflow source digest: sha256:6f7aa0dcf4ed6fdb6e187ff0f8d1128b6ffa93504bc688aee341fe250a893510 The local target is currently unable to launch this Snakemake workflow, and the configured Ubuntu target was unreachable.",
+        "kind": "observation",
+        "artifactIds": [
+          "ngs-single-cell:README.md",
+          "ngs-single-cell:prompt.md"
+        ]
+      },
+      {
+        "id": "ngs-single-cell:observation:2",
+        "statement": "The registered run list was empty; no dataset was fetched and no analysis result exists.",
+        "kind": "observation",
+        "artifactIds": [
+          "ngs-single-cell:README.md",
+          "ngs-single-cell:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "ngs-single-cell:preview",
+        "artifactId": "ngs-single-cell:previews/ngs-single-cell.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "ngs-workflow",
       "providerIds": [
+        "local-ngs",
         "local-container",
         "ssh-hpc"
       ],
@@ -2610,7 +3191,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/README.md",
-        "bytes": 1965
+        "bytes": 1967
       },
       {
         "id": "structure-mdm2-p53:prompt.md",
@@ -2657,13 +3238,12 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "https://www.rcsb.org/structure/1YCR",
       "https://files.rcsb.org/download/1YCR.pdb"
     ],
-    "observations": [],
+    "observations": [
+      "The downloaded RCSB 1YCR file matched the plugin contract: 94,041 bytes, 818 atoms, and the declared SHA-256 digest.",
+      "Chain A contains 705 atoms and chain B contains 113 atoms."
+    ],
     "computedResults": [
-      "The plugin's shipped contract specifies a Shrake–Rupley calculation with a 1.4 Å probe and 240 samples.",
-      "Its expected one-sided interface area is 735.864963 Å², while total SASA loss across both partners is 1471.729925 Å².",
-      "These are distinct geometric quantities and are not affinity or energy estimates.",
-      "The current viewer session mounted in headless mode but remained render-pending and did not acknowledge analysis commands.",
-      "Therefore, the buried-area values are explicitly retained as starter-contract targets rather than presented as a new current-host run."
+      "A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å."
     ],
     "interpretation": [
       "The three p53 residues Phe19, Trp23, and Leu26 sit within the contact-bearing peptide segment shown in the interface workflow."
@@ -2675,48 +3255,30 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "claims": [
       {
+        "id": "structure-mdm2-p53:observation:1",
+        "statement": "The downloaded RCSB 1YCR file matched the plugin contract: 94,041 bytes, 818 atoms, and the declared SHA-256 digest.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-mdm2-p53:README.md",
+          "structure-mdm2-p53:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-mdm2-p53:observation:2",
+        "statement": "Chain A contains 705 atoms and chain B contains 113 atoms.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-mdm2-p53:README.md",
+          "structure-mdm2-p53:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
+        ]
+      },
+      {
         "id": "structure-mdm2-p53:computed:1",
-        "statement": "The plugin's shipped contract specifies a Shrake–Rupley calculation with a 1.4 Å probe and 240 samples.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-mdm2-p53:previews/mdm2-p53.svg",
-          "structure-mdm2-p53:outputs/results.json",
-          "structure-mdm2-p53:outputs/provenance.json"
-        ]
-      },
-      {
-        "id": "structure-mdm2-p53:computed:2",
-        "statement": "Its expected one-sided interface area is 735.864963 Å², while total SASA loss across both partners is 1471.729925 Å².",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-mdm2-p53:previews/mdm2-p53.svg",
-          "structure-mdm2-p53:outputs/results.json",
-          "structure-mdm2-p53:outputs/provenance.json"
-        ]
-      },
-      {
-        "id": "structure-mdm2-p53:computed:3",
-        "statement": "These are distinct geometric quantities and are not affinity or energy estimates.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-mdm2-p53:previews/mdm2-p53.svg",
-          "structure-mdm2-p53:outputs/results.json",
-          "structure-mdm2-p53:outputs/provenance.json"
-        ]
-      },
-      {
-        "id": "structure-mdm2-p53:computed:4",
-        "statement": "The current viewer session mounted in headless mode but remained render-pending and did not acknowledge analysis commands.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-mdm2-p53:previews/mdm2-p53.svg",
-          "structure-mdm2-p53:outputs/results.json",
-          "structure-mdm2-p53:outputs/provenance.json"
-        ]
-      },
-      {
-        "id": "structure-mdm2-p53:computed:5",
-        "statement": "Therefore, the buried-area values are explicitly retained as starter-contract targets rather than presented as a new current-host run.",
+        "statement": "A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å.",
         "kind": "computed",
         "artifactIds": [
           "structure-mdm2-p53:previews/mdm2-p53.svg",
@@ -2735,6 +3297,77 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "structure"
+    ],
+    "requiredOperations": [
+      "structure.open_from_chat",
+      "structure.set_selection",
+      "structure.analyze",
+      "structure.get_state"
+    ],
+    "requiredSkills": [
+      "rosalind-structure-structure-viewer"
+    ],
+    "fixtures": [
+      "structure-mdm2-p53:README.md",
+      "structure-mdm2-p53:prompt.md",
+      "structure-mdm2-p53:inputs/1YCR.pdb"
+    ],
+    "expectedArtifacts": [
+      "structure-mdm2-p53:previews/mdm2-p53.svg",
+      "structure-mdm2-p53:outputs/results.json",
+      "structure-mdm2-p53:outputs/provenance.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "structure-mdm2-p53:observation:1",
+        "statement": "The downloaded RCSB 1YCR file matched the plugin contract: 94,041 bytes, 818 atoms, and the declared SHA-256 digest.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-mdm2-p53:README.md",
+          "structure-mdm2-p53:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-mdm2-p53:observation:2",
+        "statement": "Chain A contains 705 atoms and chain B contains 113 atoms.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-mdm2-p53:README.md",
+          "structure-mdm2-p53:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-mdm2-p53:computed:1",
+        "statement": "A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-mdm2-p53:previews/mdm2-p53.svg",
+          "structure-mdm2-p53:outputs/results.json",
+          "structure-mdm2-p53:outputs/provenance.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "structure-mdm2-p53:preview",
+        "artifactId": "structure-mdm2-p53:previews/mdm2-p53.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://www.rcsb.org/structure/1YCR",
+        "https://files.rcsb.org/download/1YCR.pdb"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "molecular-structure",
       "providerIds": [
@@ -2858,10 +3491,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     "computedResults": [
       "The starter contract specifies Mol* TM-align 5.11.0 using chain-A protein C-alpha atoms: 214 aligned residues, RMSD 8.0437 Å, and TM-scores 0.68385 for both reference and mobile structures.",
       "These values are retained as expected results because the current host's preceding structure-viewer session remained in a pending render state.",
-      "They are not described as a fresh interactive computation.",
-      "Both pinned RCSB files match the starter contract by size and digest.",
-      "Each chain A contains 214 C-alpha atoms in the pinned coordinate files.",
-      "AP5 is present in 1AKE and has 64 atoms in chain A."
+      "They are not described as a fresh interactive computation."
     ],
     "interpretation": [
       "The starter-contract alignment describes a substantial domain rearrangement between the open and AP5-bound forms."
@@ -2951,36 +3581,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "structure-adenylate-kinase:computed:4",
-        "statement": "Both pinned RCSB files match the starter contract by size and digest.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-adenylate-kinase:previews/adenylate-kinase.svg",
-          "structure-adenylate-kinase:outputs/results.json",
-          "structure-adenylate-kinase:outputs/provenance.json"
-        ]
-      },
-      {
-        "id": "structure-adenylate-kinase:computed:5",
-        "statement": "Each chain A contains 214 C-alpha atoms in the pinned coordinate files.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-adenylate-kinase:previews/adenylate-kinase.svg",
-          "structure-adenylate-kinase:outputs/results.json",
-          "structure-adenylate-kinase:outputs/provenance.json"
-        ]
-      },
-      {
-        "id": "structure-adenylate-kinase:computed:6",
-        "statement": "AP5 is present in 1AKE and has 64 atoms in chain A.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-adenylate-kinase:previews/adenylate-kinase.svg",
-          "structure-adenylate-kinase:outputs/results.json",
-          "structure-adenylate-kinase:outputs/provenance.json"
-        ]
-      },
-      {
         "id": "structure-adenylate-kinase:interpretation:1",
         "statement": "The starter-contract alignment describes a substantial domain rearrangement between the open and AP5-bound forms.",
         "kind": "interpretation",
@@ -2991,6 +3591,126 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "structure"
+    ],
+    "requiredOperations": [
+      "structure.open_from_chat",
+      "structure.add_structure",
+      "structure.align_structures",
+      "structure.get_state"
+    ],
+    "requiredSkills": [
+      "rosalind-structure-structure-viewer"
+    ],
+    "fixtures": [
+      "structure-adenylate-kinase:README.md",
+      "structure-adenylate-kinase:prompt.md",
+      "structure-adenylate-kinase:inputs/4AKE.pdb",
+      "structure-adenylate-kinase:inputs/1AKE.pdb"
+    ],
+    "expectedArtifacts": [
+      "structure-adenylate-kinase:previews/adenylate-kinase.svg",
+      "structure-adenylate-kinase:outputs/results.json",
+      "structure-adenylate-kinase:outputs/provenance.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "structure-adenylate-kinase:observation:1",
+        "statement": "The pinned 4AKE file contains 3,459 ATOM/HETATM records and 214 chain-A C-alpha atoms.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-adenylate-kinase:README.md",
+          "structure-adenylate-kinase:prompt.md",
+          "structure-adenylate-kinase:inputs/4AKE.pdb",
+          "structure-adenylate-kinase:inputs/1AKE.pdb",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-adenylate-kinase:observation:2",
+        "statement": "The pinned 1AKE file contains 3,816 ATOM/HETATM records and 214 chain-A C-alpha atoms.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-adenylate-kinase:README.md",
+          "structure-adenylate-kinase:prompt.md",
+          "structure-adenylate-kinase:inputs/4AKE.pdb",
+          "structure-adenylate-kinase:inputs/1AKE.pdb",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-adenylate-kinase:observation:3",
+        "statement": "AP5 is present in 1AKE; the chain-A ligand contains 64 atoms.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-adenylate-kinase:README.md",
+          "structure-adenylate-kinase:prompt.md",
+          "structure-adenylate-kinase:inputs/4AKE.pdb",
+          "structure-adenylate-kinase:inputs/1AKE.pdb",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-adenylate-kinase:observation:4",
+        "statement": "File sizes and digests match the repository's starter contract.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-adenylate-kinase:README.md",
+          "structure-adenylate-kinase:prompt.md",
+          "structure-adenylate-kinase:inputs/4AKE.pdb",
+          "structure-adenylate-kinase:inputs/1AKE.pdb",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-adenylate-kinase:computed:1",
+        "statement": "The starter contract specifies Mol* TM-align 5.11.0 using chain-A protein C-alpha atoms: 214 aligned residues, RMSD 8.0437 Å, and TM-scores 0.68385 for both reference and mobile structures.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-adenylate-kinase:previews/adenylate-kinase.svg",
+          "structure-adenylate-kinase:outputs/results.json",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-adenylate-kinase:computed:2",
+        "statement": "These values are retained as expected results because the current host's preceding structure-viewer session remained in a pending render state.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-adenylate-kinase:previews/adenylate-kinase.svg",
+          "structure-adenylate-kinase:outputs/results.json",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      },
+      {
+        "id": "structure-adenylate-kinase:computed:3",
+        "statement": "They are not described as a fresh interactive computation.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-adenylate-kinase:previews/adenylate-kinase.svg",
+          "structure-adenylate-kinase:outputs/results.json",
+          "structure-adenylate-kinase:outputs/provenance.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "structure-adenylate-kinase:preview",
+        "artifactId": "structure-adenylate-kinase:previews/adenylate-kinase.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://www.rcsb.org/structure/4AKE",
+        "https://www.rcsb.org/structure/1AKE",
+        "https://files.rcsb.org/download/4AKE.pdb",
+        "https://files.rcsb.org/download/1AKE.pdb"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "molecular-structure",
       "providerIds": [
@@ -3049,7 +3769,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/README.md",
-        "bytes": 1669
+        "bytes": 1852
       },
       {
         "id": "structure-gfp-figure:prompt.md",
@@ -3057,6 +3777,14 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "text/markdown",
         "path": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/prompt.md",
         "bytes": 274
+      },
+      {
+        "id": "structure-gfp-figure:inputs/1EMA.pdb",
+        "role": "input",
+        "mediaType": "chemical/x-pdb",
+        "path": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/inputs/1EMA.pdb",
+        "bytes": 190188,
+        "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088"
       },
       {
         "id": "structure-gfp-figure:previews/gfp.png",
@@ -3073,11 +3801,11 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "application/json",
         "generatedAt": "2026-08-29",
         "path": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/previews/gfp.png.render.json",
-        "bytes": 3007
+        "bytes": 2984
       }
     ],
     "sources": [
-      "RCSB PDB 1EMA, supplied by the plugin's pinned bundled example"
+      "https://files.rcsb.org/download/1EMA.pdb"
     ],
     "observations": [
       "1EMA is an X-ray structure reported at 1.9 Å resolution.",
@@ -3088,11 +3816,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "CRO was focused in operator ASM_1, instance ASM-1.",
       "The viewer found 18 polymer residues within 4.0 Å using the closest heavy-atom Euclidean distance in the displayed coordinates.",
       "Examples below 3.1 Å include Thr203 (2.666 Å), Arg96 (2.730 Å), Val61 (2.778 Å), Thr62 (2.795 Å), Glu222 (2.813 Å), His148 (2.850 Å), and Gln94 (3.028 Å).",
-      "The 1600×1200 PNG uses a dark background, studio lighting, a protein cartoon, element-colored ligand sticks, and no displayed hydrogens.",
-      "The mounted viewer identified 1EMA as an X-ray structure at 1.9 angstrom resolution.",
-      "The displayed model contained 225 protein residues, 1866 atoms, and CRO at chain A author residue 66.",
-      "The viewer returned 18 polymer residues within 4.0 angstrom of CRO using closest heavy-atom Euclidean distance.",
-      "A 1600 by 1200 PNG and render provenance file were generated and visually inspected."
+      "The 1600×1200 PNG uses a dark background, studio lighting, a protein cartoon, element-colored ligand sticks, and no displayed hydrogens."
     ],
     "interpretation": [
       "The chromophore occupies the protected interior of the GFP beta barrel."
@@ -3109,7 +3833,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "structure-gfp-figure:README.md",
-          "structure-gfp-figure:prompt.md"
+          "structure-gfp-figure:prompt.md",
+          "structure-gfp-figure:inputs/1EMA.pdb"
         ]
       },
       {
@@ -3118,7 +3843,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "structure-gfp-figure:README.md",
-          "structure-gfp-figure:prompt.md"
+          "structure-gfp-figure:prompt.md",
+          "structure-gfp-figure:inputs/1EMA.pdb"
         ]
       },
       {
@@ -3127,7 +3853,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "structure-gfp-figure:README.md",
-          "structure-gfp-figure:prompt.md"
+          "structure-gfp-figure:prompt.md",
+          "structure-gfp-figure:inputs/1EMA.pdb"
         ]
       },
       {
@@ -3167,42 +3894,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "structure-gfp-figure:computed:5",
-        "statement": "The mounted viewer identified 1EMA as an X-ray structure at 1.9 angstrom resolution.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-gfp-figure:previews/gfp.png",
-          "structure-gfp-figure:previews/gfp.png.render.json"
-        ]
-      },
-      {
-        "id": "structure-gfp-figure:computed:6",
-        "statement": "The displayed model contained 225 protein residues, 1866 atoms, and CRO at chain A author residue 66.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-gfp-figure:previews/gfp.png",
-          "structure-gfp-figure:previews/gfp.png.render.json"
-        ]
-      },
-      {
-        "id": "structure-gfp-figure:computed:7",
-        "statement": "The viewer returned 18 polymer residues within 4.0 angstrom of CRO using closest heavy-atom Euclidean distance.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-gfp-figure:previews/gfp.png",
-          "structure-gfp-figure:previews/gfp.png.render.json"
-        ]
-      },
-      {
-        "id": "structure-gfp-figure:computed:8",
-        "statement": "A 1600 by 1200 PNG and render provenance file were generated and visually inspected.",
-        "kind": "computed",
-        "artifactIds": [
-          "structure-gfp-figure:previews/gfp.png",
-          "structure-gfp-figure:previews/gfp.png.render.json"
-        ]
-      },
-      {
         "id": "structure-gfp-figure:interpretation:1",
         "statement": "The chromophore occupies the protected interior of the GFP beta barrel.",
         "kind": "interpretation",
@@ -3212,6 +3903,110 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "structure"
+    ],
+    "requiredOperations": [
+      "structure.open_from_chat",
+      "structure.control_viewer",
+      "structure.analyze",
+      "structure.validate_render",
+      "structure.render_image"
+    ],
+    "requiredSkills": [
+      "rosalind-structure-structure-viewer"
+    ],
+    "fixtures": [
+      "structure-gfp-figure:README.md",
+      "structure-gfp-figure:prompt.md",
+      "structure-gfp-figure:inputs/1EMA.pdb"
+    ],
+    "expectedArtifacts": [
+      "structure-gfp-figure:previews/gfp.png",
+      "structure-gfp-figure:previews/gfp.png.render.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "structure-gfp-figure:observation:1",
+        "statement": "1EMA is an X-ray structure reported at 1.9 Å resolution.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-gfp-figure:README.md",
+          "structure-gfp-figure:prompt.md",
+          "structure-gfp-figure:inputs/1EMA.pdb"
+        ]
+      },
+      {
+        "id": "structure-gfp-figure:observation:2",
+        "statement": "The displayed model contains one protein chain, 225 polymer residues, 1,866 atoms, and one CRO component.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-gfp-figure:README.md",
+          "structure-gfp-figure:prompt.md",
+          "structure-gfp-figure:inputs/1EMA.pdb"
+        ]
+      },
+      {
+        "id": "structure-gfp-figure:observation:3",
+        "statement": "CRO is identified by author chain A and residue 66.",
+        "kind": "observation",
+        "artifactIds": [
+          "structure-gfp-figure:README.md",
+          "structure-gfp-figure:prompt.md",
+          "structure-gfp-figure:inputs/1EMA.pdb"
+        ]
+      },
+      {
+        "id": "structure-gfp-figure:computed:1",
+        "statement": "CRO was focused in operator ASM_1, instance ASM-1.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-gfp-figure:previews/gfp.png",
+          "structure-gfp-figure:previews/gfp.png.render.json"
+        ]
+      },
+      {
+        "id": "structure-gfp-figure:computed:2",
+        "statement": "The viewer found 18 polymer residues within 4.0 Å using the closest heavy-atom Euclidean distance in the displayed coordinates.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-gfp-figure:previews/gfp.png",
+          "structure-gfp-figure:previews/gfp.png.render.json"
+        ]
+      },
+      {
+        "id": "structure-gfp-figure:computed:3",
+        "statement": "Examples below 3.1 Å include Thr203 (2.666 Å), Arg96 (2.730 Å), Val61 (2.778 Å), Thr62 (2.795 Å), Glu222 (2.813 Å), His148 (2.850 Å), and Gln94 (3.028 Å).",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-gfp-figure:previews/gfp.png",
+          "structure-gfp-figure:previews/gfp.png.render.json"
+        ]
+      },
+      {
+        "id": "structure-gfp-figure:computed:4",
+        "statement": "The 1600×1200 PNG uses a dark background, studio lighting, a protein cartoon, element-colored ligand sticks, and no displayed hydrogens.",
+        "kind": "computed",
+        "artifactIds": [
+          "structure-gfp-figure:previews/gfp.png",
+          "structure-gfp-figure:previews/gfp.png.render.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "structure-gfp-figure:preview",
+        "artifactId": "structure-gfp-figure:previews/gfp.png",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://files.rcsb.org/download/1EMA.pdb"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "molecular-structure",
       "providerIds": [
@@ -3221,7 +4016,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "strategy": "local",
       "requiredInputs": [
         "showcases/molecular-structure-viewer/cases/structure-gfp-figure/README.md",
-        "showcases/molecular-structure-viewer/cases/structure-gfp-figure/prompt.md"
+        "showcases/molecular-structure-viewer/cases/structure-gfp-figure/prompt.md",
+        "showcases/molecular-structure-viewer/cases/structure-gfp-figure/inputs/1EMA.pdb"
       ],
       "expectedOutputs": [
         "showcases/molecular-structure-viewer/cases/structure-gfp-figure/previews/gfp.png",
@@ -3238,7 +4034,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "replay",
       "reproduce"
     ],
-    "searchText": "provenance-bearing gfp figure style the 1ema chromophore and render a publication-ready image. where is the mature gfp chromophore located within the protein fold, and which nearby residues lie within a 4 å heavy-atom distance in the displayed crystal coordinates? structure molecular structure viewer rcsb pdb 1ema, supplied by the plugin's pinned bundled example"
+    "searchText": "provenance-bearing gfp figure style the 1ema chromophore and render a publication-ready image. where is the mature gfp chromophore located within the protein fold, and which nearby residues lie within a 4 å heavy-atom distance in the displayed crystal coordinates? structure molecular structure viewer https://files.rcsb.org/download/1ema.pdb"
   },
   {
     "id": "slide-tissue-architecture",
@@ -3299,7 +4095,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "mediaType": "application/json",
         "generatedAt": "2026-08-29",
         "path": "showcases/slide-viewer/cases/slide-tissue-architecture/outputs/pyramid-metadata.json",
-        "bytes": 935
+        "bytes": 918
       }
     ],
     "sources": [
@@ -3312,9 +4108,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [
       "The verified pyramid has nominal downsample factors of 1, 4, and 16.",
-      "These dimensions and the associated-image inventory are retained in outputs/pyramid-metadata.json.",
-      "The pinned CC0 source matched its expected byte length and SHA-256.",
-      "The TIFF contains a 46,000 by 32,893 tiled main image and two reduced whole-slide levels."
+      "These dimensions and the associated-image inventory are retained in outputs/pyramid-metadata.json."
     ],
     "interpretation": [
       "The source and pyramid metadata support reproducible whole-slide navigation testing."
@@ -3375,26 +4169,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "slide-tissue-architecture:computed:3",
-        "statement": "The pinned CC0 source matched its expected byte length and SHA-256.",
-        "kind": "computed",
-        "artifactIds": [
-          "slide-tissue-architecture:previews/tissue-architecture.svg",
-          "slide-tissue-architecture:outputs/source-provenance.json",
-          "slide-tissue-architecture:outputs/pyramid-metadata.json"
-        ]
-      },
-      {
-        "id": "slide-tissue-architecture:computed:4",
-        "statement": "The TIFF contains a 46,000 by 32,893 tiled main image and two reduced whole-slide levels.",
-        "kind": "computed",
-        "artifactIds": [
-          "slide-tissue-architecture:previews/tissue-architecture.svg",
-          "slide-tissue-architecture:outputs/source-provenance.json",
-          "slide-tissue-architecture:outputs/pyramid-metadata.json"
-        ]
-      },
-      {
         "id": "slide-tissue-architecture:interpretation:1",
         "statement": "The source and pyramid metadata support reproducible whole-slide navigation testing.",
         "kind": "interpretation",
@@ -3405,6 +4179,92 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "slide"
+    ],
+    "requiredOperations": [
+      "slide.open_from_chat",
+      "slide.get_viewer_state",
+      "slide.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-slide-slide-viewer"
+    ],
+    "fixtures": [
+      "slide-tissue-architecture:README.md",
+      "slide-tissue-architecture:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "slide-tissue-architecture:previews/tissue-architecture.svg",
+      "slide-tissue-architecture:outputs/source-provenance.json",
+      "slide-tissue-architecture:outputs/pyramid-metadata.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "slide-tissue-architecture:observation:1",
+        "statement": "The CC0 CMU-1 SVS file is 132,565,343 bytes and matches the pinned SHA-256 recorded in outputs/source-provenance.json.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-tissue-architecture:README.md",
+          "slide-tissue-architecture:prompt.md",
+          "slide-tissue-architecture:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-tissue-architecture:observation:2",
+        "statement": "TIFF metadata reports a 46,000 × 32,893 tiled RGB main image, 240 × 240 tiles, 20× objective metadata, and 0.499 µm/pixel.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-tissue-architecture:README.md",
+          "slide-tissue-architecture:prompt.md",
+          "slide-tissue-architecture:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-tissue-architecture:observation:3",
+        "statement": "Two reduced whole-slide levels measure 11,500 × 8,223 and 2,875 × 2,055; thumbnail, label, and macro associated images are also present.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-tissue-architecture:README.md",
+          "slide-tissue-architecture:prompt.md",
+          "slide-tissue-architecture:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-tissue-architecture:computed:1",
+        "statement": "The verified pyramid has nominal downsample factors of 1, 4, and 16.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-tissue-architecture:previews/tissue-architecture.svg",
+          "slide-tissue-architecture:outputs/source-provenance.json",
+          "slide-tissue-architecture:outputs/pyramid-metadata.json"
+        ]
+      },
+      {
+        "id": "slide-tissue-architecture:computed:2",
+        "statement": "These dimensions and the associated-image inventory are retained in outputs/pyramid-metadata.json.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-tissue-architecture:previews/tissue-architecture.svg",
+          "slide-tissue-architecture:outputs/source-provenance.json",
+          "slide-tissue-architecture:outputs/pyramid-metadata.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "slide-tissue-architecture:preview",
+        "artifactId": "slide-tissue-architecture:previews/tissue-architecture.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "pathology-spatial",
       "providerIds": [
@@ -3517,9 +4377,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     "computedResults": [
       "Across all 684 indexed observations, Slc17a7 was nonzero in 671 with mean 2.711 and maximum 4.055.",
       "Gad1 was nonzero in 490 with mean 1.072 and maximum 3.950.",
-      "The matrix value scale is unspecified, so these are descriptive matrix values rather than raw-count or normalized-expression claims.",
-      "The indexed H5AD exposes 684 observations, 18,078 genes, matrix X, and spatial coordinates.",
-      "Slc17a7 and Gad1 values were read for all indexed observations."
+      "The matrix value scale is unspecified, so these are descriptive matrix values rather than raw-count or normalized-expression claims."
     ],
     "interpretation": [
       "The dataset supports reproducible indexed expression queries for the two selected genes."
@@ -3594,28 +4452,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "slide-spatial-expression:computed:4",
-        "statement": "The indexed H5AD exposes 684 observations, 18,078 genes, matrix X, and spatial coordinates.",
-        "kind": "computed",
-        "artifactIds": [
-          "slide-spatial-expression:previews/spatial-expression.svg",
-          "slide-spatial-expression:outputs/source-provenance.json",
-          "slide-spatial-expression:outputs/metadata-summary.json",
-          "slide-spatial-expression:outputs/expression-summary.json"
-        ]
-      },
-      {
-        "id": "slide-spatial-expression:computed:5",
-        "statement": "Slc17a7 and Gad1 values were read for all indexed observations.",
-        "kind": "computed",
-        "artifactIds": [
-          "slide-spatial-expression:previews/spatial-expression.svg",
-          "slide-spatial-expression:outputs/source-provenance.json",
-          "slide-spatial-expression:outputs/metadata-summary.json",
-          "slide-spatial-expression:outputs/expression-summary.json"
-        ]
-      },
-      {
         "id": "slide-spatial-expression:interpretation:1",
         "statement": "The dataset supports reproducible indexed expression queries for the two selected genes.",
         "kind": "interpretation",
@@ -3627,6 +4463,108 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "slide"
+    ],
+    "requiredOperations": [
+      "slide.import_scientific_layer",
+      "slide.spatial_indexed",
+      "slide.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-slide-slide-viewer"
+    ],
+    "fixtures": [
+      "slide-spatial-expression:README.md",
+      "slide-spatial-expression:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "slide-spatial-expression:previews/spatial-expression.svg",
+      "slide-spatial-expression:outputs/source-provenance.json",
+      "slide-spatial-expression:outputs/metadata-summary.json",
+      "slide-spatial-expression:outputs/expression-summary.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "slide-spatial-expression:observation:1",
+        "statement": "The licensed public H5AD contains 684 observations and 18,078 genes.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-spatial-expression:README.md",
+          "slide-spatial-expression:prompt.md",
+          "slide-spatial-expression:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-spatial-expression:observation:2",
+        "statement": "Matrix X is CSR with shape 684 × 18,078; spatial coordinates are present in obsm/spatial.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-spatial-expression:README.md",
+          "slide-spatial-expression:prompt.md",
+          "slide-spatial-expression:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-spatial-expression:observation:3",
+        "statement": "The indexed genes are Slc17a7 (index 7717) and Gad1 (index 1607).",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-spatial-expression:README.md",
+          "slide-spatial-expression:prompt.md",
+          "slide-spatial-expression:outputs/source-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-spatial-expression:computed:1",
+        "statement": "Across all 684 indexed observations, Slc17a7 was nonzero in 671 with mean 2.711 and maximum 4.055.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-spatial-expression:previews/spatial-expression.svg",
+          "slide-spatial-expression:outputs/source-provenance.json",
+          "slide-spatial-expression:outputs/metadata-summary.json",
+          "slide-spatial-expression:outputs/expression-summary.json"
+        ]
+      },
+      {
+        "id": "slide-spatial-expression:computed:2",
+        "statement": "Gad1 was nonzero in 490 with mean 1.072 and maximum 3.950.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-spatial-expression:previews/spatial-expression.svg",
+          "slide-spatial-expression:outputs/source-provenance.json",
+          "slide-spatial-expression:outputs/metadata-summary.json",
+          "slide-spatial-expression:outputs/expression-summary.json"
+        ]
+      },
+      {
+        "id": "slide-spatial-expression:computed:3",
+        "statement": "The matrix value scale is unspecified, so these are descriptive matrix values rather than raw-count or normalized-expression claims.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-spatial-expression:previews/spatial-expression.svg",
+          "slide-spatial-expression:outputs/source-provenance.json",
+          "slide-spatial-expression:outputs/metadata-summary.json",
+          "slide-spatial-expression:outputs/expression-summary.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "slide-spatial-expression:preview",
+        "artifactId": "slide-spatial-expression:previews/spatial-expression.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1",
+        "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "pathology-spatial",
       "providerIds": [
@@ -3730,8 +4668,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [
       "outputs/source-aligned-annotations.geojson contains three 16-segment circular polygons with a 55-pixel radius around those coordinates.",
-      "Dataset hash, matrix revision, coordinate frame, observation identifiers, and construction method are retained with the artifact.",
-      "Three demonstration polygons were derived from exact obsm/spatial coordinates."
+      "Dataset hash, matrix revision, coordinate frame, observation identifiers, and construction method are retained with the artifact."
     ],
     "interpretation": [
       "The GeoJSON is a reproducible annotation artifact, not a biological segmentation result."
@@ -3781,16 +4718,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "slide-segmentation-overlay:computed:3",
-        "statement": "Three demonstration polygons were derived from exact obsm/spatial coordinates.",
-        "kind": "computed",
-        "artifactIds": [
-          "slide-segmentation-overlay:previews/segmentation-overlay.svg",
-          "slide-segmentation-overlay:outputs/source-aligned-annotations.geojson",
-          "slide-segmentation-overlay:outputs/overlay-provenance.json"
-        ]
-      },
-      {
         "id": "slide-segmentation-overlay:interpretation:1",
         "statement": "The GeoJSON is a reproducible annotation artifact, not a biological segmentation result.",
         "kind": "interpretation",
@@ -3801,6 +4728,83 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "slide"
+    ],
+    "requiredOperations": [
+      "slide.import_scientific_layer",
+      "slide.list_scientific_layers",
+      "slide.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-slide-slide-viewer"
+    ],
+    "fixtures": [
+      "slide-segmentation-overlay:README.md",
+      "slide-segmentation-overlay:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "slide-segmentation-overlay:previews/segmentation-overlay.svg",
+      "slide-segmentation-overlay:outputs/source-aligned-annotations.geojson",
+      "slide-segmentation-overlay:outputs/overlay-provenance.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "slide-segmentation-overlay:observation:1",
+        "statement": "The public H5AD contains 684 Visium observations registered through obsm/spatial to its H&amp;E image.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-segmentation-overlay:README.md",
+          "slide-segmentation-overlay:prompt.md",
+          "slide-segmentation-overlay:outputs/overlay-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-segmentation-overlay:observation:2",
+        "statement": "Observation indices 0, 1, and 2 have exact coordinates (1575, 98), (2538, 1774), and (1850, 98).",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-segmentation-overlay:README.md",
+          "slide-segmentation-overlay:prompt.md",
+          "slide-segmentation-overlay:outputs/overlay-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-segmentation-overlay:computed:1",
+        "statement": "outputs/source-aligned-annotations.geojson contains three 16-segment circular polygons with a 55-pixel radius around those coordinates.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-segmentation-overlay:previews/segmentation-overlay.svg",
+          "slide-segmentation-overlay:outputs/source-aligned-annotations.geojson",
+          "slide-segmentation-overlay:outputs/overlay-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-segmentation-overlay:computed:2",
+        "statement": "Dataset hash, matrix revision, coordinate frame, observation identifiers, and construction method are retained with the artifact.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-segmentation-overlay:previews/segmentation-overlay.svg",
+          "slide-segmentation-overlay:outputs/source-aligned-annotations.geojson",
+          "slide-segmentation-overlay:outputs/overlay-provenance.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "slide-segmentation-overlay:preview",
+        "artifactId": "slide-segmentation-overlay:previews/segmentation-overlay.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "pathology-spatial",
       "providerIds": [
@@ -3907,8 +4911,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Coverage is 684/684.",
       "The CSV is 81,802 bytes and matches the SHA-256 in outputs/export-provenance.json.",
       "Independent CSV checks reproduce mean values of 2.711 for Slc17a7 and 1.072 for Gad1.",
-      "Their maxima are 4.055 and 3.950, respectively.",
-      "All 684 spatial observations and two indexed gene columns were exported with complete row coverage."
+      "Their maxima are 4.055 and 3.950, respectively."
     ],
     "interpretation": [
       "The CSV is suitable for source-preserving inspection of the selected variables."
@@ -3989,16 +4992,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "slide-research-export:computed:6",
-        "statement": "All 684 spatial observations and two indexed gene columns were exported with complete row coverage.",
-        "kind": "computed",
-        "artifactIds": [
-          "slide-research-export:previews/research-export.svg",
-          "slide-research-export:outputs/spatial-observations-expression.csv",
-          "slide-research-export:outputs/export-provenance.json"
-        ]
-      },
-      {
         "id": "slide-research-export:interpretation:1",
         "statement": "The CSV is suitable for source-preserving inspection of the selected variables.",
         "kind": "interpretation",
@@ -4009,6 +5002,114 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "slide"
+    ],
+    "requiredOperations": [
+      "slide.import_scientific_layer",
+      "slide.spatial_indexed",
+      "slide.query_viewer"
+    ],
+    "requiredSkills": [
+      "rosalind-slide-slide-viewer"
+    ],
+    "fixtures": [
+      "slide-research-export:README.md",
+      "slide-research-export:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "slide-research-export:previews/research-export.svg",
+      "slide-research-export:outputs/spatial-observations-expression.csv",
+      "slide-research-export:outputs/export-provenance.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "slide-research-export:observation:1",
+        "statement": "The licensed H5AD exposes 684 observations, 18,078 genes, obsm/spatial coordinates, and CSR matrix X.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-research-export:README.md",
+          "slide-research-export:prompt.md",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-research-export:observation:2",
+        "statement": "Every observation is marked in tissue; coordinate ranges are x = 130–3433 and y = 98–3330.",
+        "kind": "observation",
+        "artifactIds": [
+          "slide-research-export:README.md",
+          "slide-research-export:prompt.md",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-research-export:computed:1",
+        "statement": "outputs/spatial-observations-expression.csv contains 684 data rows with exact observation index and identifier, a JSON-protected identifier companion, coordinates, tissue flag, total_counts, n_genes_by_counts, and indexed Slc17a7 and Gad1 values.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-research-export:previews/research-export.svg",
+          "slide-research-export:outputs/spatial-observations-expression.csv",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-research-export:computed:2",
+        "statement": "Coverage is 684/684.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-research-export:previews/research-export.svg",
+          "slide-research-export:outputs/spatial-observations-expression.csv",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-research-export:computed:3",
+        "statement": "The CSV is 81,802 bytes and matches the SHA-256 in outputs/export-provenance.json.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-research-export:previews/research-export.svg",
+          "slide-research-export:outputs/spatial-observations-expression.csv",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-research-export:computed:4",
+        "statement": "Independent CSV checks reproduce mean values of 2.711 for Slc17a7 and 1.072 for Gad1.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-research-export:previews/research-export.svg",
+          "slide-research-export:outputs/spatial-observations-expression.csv",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      },
+      {
+        "id": "slide-research-export:computed:5",
+        "statement": "Their maxima are 4.055 and 3.950, respectively.",
+        "kind": "computed",
+        "artifactIds": [
+          "slide-research-export:previews/research-export.svg",
+          "slide-research-export:outputs/spatial-observations-expression.csv",
+          "slide-research-export:outputs/export-provenance.json"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "slide-research-export:preview",
+        "artifactId": "slide-research-export:previews/research-export.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1",
+        "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "pathology-spatial",
       "providerIds": [
@@ -4141,9 +5242,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [
       "NB13_E104Q ranked first with ensemble score 0.91750 ± 0.00803, protein ipTM 0.92386 ± 0.01084, interface pLDDT 0.92900, and no severe-clash models.",
-      "The complete candidate table, top-five ranking, result summary, and best NB13 model are included.",
-      "Twenty initial and twenty-five top-five ensemble predictions completed successfully.",
-      "NB13_E104Q ranked first and had no severe-clash ensemble model."
+      "The complete candidate table, top-five ranking, result summary, and best NB13 model are included."
     ],
     "interpretation": [
       "NB13_E104Q is the leading computational candidate under the retained scoring method."
@@ -4216,32 +5315,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "rosalind-molecular-design:computed:3",
-        "statement": "Twenty initial and twenty-five top-five ensemble predictions completed successfully.",
-        "kind": "computed",
-        "artifactIds": [
-          "rosalind-molecular-design:previews/pdl1-nanobody.svg",
-          "rosalind-molecular-design:outputs/candidates.csv",
-          "rosalind-molecular-design:outputs/top5_ensemble_ranking.csv",
-          "rosalind-molecular-design:outputs/design_metadata.json",
-          "rosalind-molecular-design:outputs/result-summary.json",
-          "rosalind-molecular-design:outputs/NB13_E104Q_best_model.cif"
-        ]
-      },
-      {
-        "id": "rosalind-molecular-design:computed:4",
-        "statement": "NB13_E104Q ranked first and had no severe-clash ensemble model.",
-        "kind": "computed",
-        "artifactIds": [
-          "rosalind-molecular-design:previews/pdl1-nanobody.svg",
-          "rosalind-molecular-design:outputs/candidates.csv",
-          "rosalind-molecular-design:outputs/top5_ensemble_ranking.csv",
-          "rosalind-molecular-design:outputs/design_metadata.json",
-          "rosalind-molecular-design:outputs/result-summary.json",
-          "rosalind-molecular-design:outputs/NB13_E104Q_best_model.cif"
-        ]
-      },
-      {
         "id": "rosalind-molecular-design:interpretation:1",
         "statement": "NB13_E104Q is the leading computational candidate under the retained scoring method.",
         "kind": "interpretation",
@@ -4255,6 +5328,104 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "rosalind"
+    ],
+    "requiredOperations": [
+      "rosalind.open"
+    ],
+    "requiredSkills": [],
+    "fixtures": [
+      "rosalind-molecular-design:README.md",
+      "rosalind-molecular-design:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "rosalind-molecular-design:previews/pdl1-nanobody.svg",
+      "rosalind-molecular-design:outputs/candidates.csv",
+      "rosalind-molecular-design:outputs/top5_ensemble_ranking.csv",
+      "rosalind-molecular-design:outputs/design_metadata.json",
+      "rosalind-molecular-design:outputs/result-summary.json",
+      "rosalind-molecular-design:outputs/NB13_E104Q_best_model.cif"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "rosalind-molecular-design:observation:1",
+        "statement": "Target: UniProt Q9NZQ7 extracellular domain, residues 18–239.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-molecular-design:README.md",
+          "rosalind-molecular-design:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-molecular-design:observation:2",
+        "statement": "Structural parent: KN035 in PDB 5JDS.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-molecular-design:README.md",
+          "rosalind-molecular-design:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-molecular-design:observation:3",
+        "statement": "Twenty 130-residue VHH candidates were evaluated; all initial predictions completed.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-molecular-design:README.md",
+          "rosalind-molecular-design:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-molecular-design:observation:4",
+        "statement": "The five leading designs were each resampled five times, yielding 25 successful ensemble predictions and 40 retained structures in the completed Codex task.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-molecular-design:README.md",
+          "rosalind-molecular-design:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-molecular-design:computed:1",
+        "statement": "NB13_E104Q ranked first with ensemble score 0.91750 ± 0.00803, protein ipTM 0.92386 ± 0.01084, interface pLDDT 0.92900, and no severe-clash models.",
+        "kind": "computed",
+        "artifactIds": [
+          "rosalind-molecular-design:previews/pdl1-nanobody.svg",
+          "rosalind-molecular-design:outputs/candidates.csv",
+          "rosalind-molecular-design:outputs/top5_ensemble_ranking.csv",
+          "rosalind-molecular-design:outputs/design_metadata.json",
+          "rosalind-molecular-design:outputs/result-summary.json",
+          "rosalind-molecular-design:outputs/NB13_E104Q_best_model.cif"
+        ]
+      },
+      {
+        "id": "rosalind-molecular-design:computed:2",
+        "statement": "The complete candidate table, top-five ranking, result summary, and best NB13 model are included.",
+        "kind": "computed",
+        "artifactIds": [
+          "rosalind-molecular-design:previews/pdl1-nanobody.svg",
+          "rosalind-molecular-design:outputs/candidates.csv",
+          "rosalind-molecular-design:outputs/top5_ensemble_ranking.csv",
+          "rosalind-molecular-design:outputs/design_metadata.json",
+          "rosalind-molecular-design:outputs/result-summary.json",
+          "rosalind-molecular-design:outputs/NB13_E104Q_best_model.cif"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "rosalind-molecular-design:preview",
+        "artifactId": "rosalind-molecular-design:previews/pdl1-nanobody.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry",
+        "https://www.rcsb.org/structure/5JDS"
+      ],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "nanobody-design",
       "providerIds": [
@@ -4349,9 +5520,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
       "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute."
     ],
-    "computedResults": [
-      "The Rosalind launcher was ready and exposed the named scientific area."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The area is available for interactive task discovery in the current Workbench."
     ],
@@ -4379,15 +5548,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "rosalind-structure-analysis:computed:1",
-        "statement": "The Rosalind launcher was ready and exposed the named scientific area.",
-        "kind": "computed",
-        "artifactIds": [
-          "rosalind-structure-analysis:previews/rosalind-structure-analysis.svg",
-          "rosalind-structure-analysis:outputs/launcher-observation.json"
-        ]
-      },
-      {
         "id": "rosalind-structure-analysis:interpretation:1",
         "statement": "The area is available for interactive task discovery in the current Workbench.",
         "kind": "interpretation",
@@ -4397,6 +5557,54 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "rosalind"
+    ],
+    "requiredOperations": [
+      "rosalind.open",
+      "structure.open_from_chat"
+    ],
+    "requiredSkills": [],
+    "fixtures": [
+      "rosalind-structure-analysis:README.md",
+      "rosalind-structure-analysis:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "rosalind-structure-analysis:previews/rosalind-structure-analysis.svg",
+      "rosalind-structure-analysis:outputs/launcher-observation.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "rosalind-structure-analysis:observation:1",
+        "statement": "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-structure-analysis:README.md",
+          "rosalind-structure-analysis:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-structure-analysis:observation:2",
+        "statement": "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-structure-analysis:README.md",
+          "rosalind-structure-analysis:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "rosalind-structure-analysis:preview",
+        "artifactId": "rosalind-structure-analysis:previews/rosalind-structure-analysis.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "workbench-launcher",
       "providerIds": [
@@ -4483,9 +5691,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
       "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute."
     ],
-    "computedResults": [
-      "The Rosalind launcher was ready and exposed the named scientific area."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The area is available for interactive task discovery in the current Workbench."
     ],
@@ -4513,15 +5719,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "rosalind-genomics:computed:1",
-        "statement": "The Rosalind launcher was ready and exposed the named scientific area.",
-        "kind": "computed",
-        "artifactIds": [
-          "rosalind-genomics:previews/rosalind-genomics.svg",
-          "rosalind-genomics:outputs/launcher-observation.json"
-        ]
-      },
-      {
         "id": "rosalind-genomics:interpretation:1",
         "statement": "The area is available for interactive task discovery in the current Workbench.",
         "kind": "interpretation",
@@ -4531,6 +5728,54 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "rosalind"
+    ],
+    "requiredOperations": [
+      "rosalind.open",
+      "list_workflows"
+    ],
+    "requiredSkills": [],
+    "fixtures": [
+      "rosalind-genomics:README.md",
+      "rosalind-genomics:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "rosalind-genomics:previews/rosalind-genomics.svg",
+      "rosalind-genomics:outputs/launcher-observation.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "rosalind-genomics:observation:1",
+        "statement": "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-genomics:README.md",
+          "rosalind-genomics:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-genomics:observation:2",
+        "statement": "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-genomics:README.md",
+          "rosalind-genomics:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "rosalind-genomics:preview",
+        "artifactId": "rosalind-genomics:previews/rosalind-genomics.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "workbench-launcher",
       "providerIds": [
@@ -4617,9 +5862,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
       "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute."
     ],
-    "computedResults": [
-      "The Rosalind launcher was ready and exposed the named scientific area."
-    ],
+    "computedResults": [],
     "interpretation": [
       "The area is available for interactive task discovery in the current Workbench."
     ],
@@ -4647,15 +5890,6 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       },
       {
-        "id": "rosalind-scientific-compute:computed:1",
-        "statement": "The Rosalind launcher was ready and exposed the named scientific area.",
-        "kind": "computed",
-        "artifactIds": [
-          "rosalind-scientific-compute:previews/rosalind-scientific-compute.svg",
-          "rosalind-scientific-compute:outputs/launcher-observation.json"
-        ]
-      },
-      {
         "id": "rosalind-scientific-compute:interpretation:1",
         "statement": "The area is available for interactive task discovery in the current Workbench.",
         "kind": "interpretation",
@@ -4665,6 +5899,54 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         ]
       }
     ],
+    "requiredMcpServers": [
+      "rosalind"
+    ],
+    "requiredOperations": [
+      "rosalind.open",
+      "list_compute_targets"
+    ],
+    "requiredSkills": [],
+    "fixtures": [
+      "rosalind-scientific-compute:README.md",
+      "rosalind-scientific-compute:prompt.md"
+    ],
+    "expectedArtifacts": [
+      "rosalind-scientific-compute:previews/rosalind-scientific-compute.svg",
+      "rosalind-scientific-compute:outputs/launcher-observation.json"
+    ],
+    "scientificAssertions": [
+      {
+        "id": "rosalind-scientific-compute:observation:1",
+        "statement": "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-scientific-compute:README.md",
+          "rosalind-scientific-compute:prompt.md"
+        ]
+      },
+      {
+        "id": "rosalind-scientific-compute:observation:2",
+        "statement": "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute.",
+        "kind": "observation",
+        "artifactIds": [
+          "rosalind-scientific-compute:README.md",
+          "rosalind-scientific-compute:prompt.md"
+        ]
+      }
+    ],
+    "visualAssertions": [
+      {
+        "id": "rosalind-scientific-compute:preview",
+        "artifactId": "rosalind-scientific-compute:previews/rosalind-scientific-compute.svg",
+        "requirement": "The preview opens at its native aspect ratio in light and dark Workbench themes."
+      }
+    ],
+    "provenance": {
+      "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
+      "sources": [],
+      "runDate": "2026-08-29"
+    },
     "recipe": {
       "adapter": "workbench-launcher",
       "providerIds": [

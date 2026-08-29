@@ -18,7 +18,7 @@ describe("Workbench catalogue", () => {
     expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(23);
     const category = screen.getByRole("combobox", { name: "Filter by scientific area" });
     expect(within(category).getAllByRole("option")).toHaveLength(8);
-    expect(screen.getByText("148 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
+    expect(screen.getByText("150 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
   });
 
   it("uses a height-limited catalogue inside the blank-session hero", () => {

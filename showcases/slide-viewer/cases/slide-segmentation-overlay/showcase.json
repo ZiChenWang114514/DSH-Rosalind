@@ -18,5 +18,5 @@
   "observations": ["Three demonstration polygons were derived from exact obsm/spatial coordinates."],
   "interpretation": ["The GeoJSON is a reproducible annotation artifact, not a biological segmentation result."],
   "limitations": ["The overlay was not imported or rendered in the pending viewer session."],
-  "environment": {"viewer_session": "fe033c3b-cd83-452f-83ac-1060e3a9425c", "viewer_rendered": false}
+  "environment": {"viewer_status": "awaiting_viewer", "viewer_rendered": false}
 }

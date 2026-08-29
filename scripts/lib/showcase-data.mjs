@@ -17,12 +17,21 @@ const PLUGIN_CATEGORIES = Object.freeze({
 
 const PROVIDERS = Object.freeze({
   literature: ["ncbi-entrez", "ncbi-pmc", "biorxiv"],
-  databases: ["opentargets", "ensembl", "clinvar", "gwas-catalog", "gtex", "uniprot", "chembl", "rcsb-pdb", "reactome"],
+  databases: ["opentargets", "ensembl", "clinvar-variation", "gwas-catalog", "gtex-eqtl", "uniprot", "chembl", "rcsb-pdb", "reactome"],
   sequence: ["local-sequence"],
-  ngs: ["local-container", "ssh-hpc"],
+  ngs: ["local-ngs", "local-container", "ssh-hpc"],
   structure: ["local-structure", "rcsb-pdb"],
   slide: ["local-slide", "public-dataset"],
   workbench: ["local-workbench"],
+});
+
+const SHOWCASE_PROVIDERS = Object.freeze({
+  "literature-trem2-landscape": ["ncbi-entrez", "biorxiv"],
+  "literature-pmc-availability": ["ncbi-pmc"],
+  "literature-preprint-publication-link": ["biorxiv", "ncbi-entrez"],
+  "databases-il6r-asthma": ["opentargets", "gwas-catalog", "gtex-eqtl"],
+  "databases-variant-interpretation": ["clinvar-variation", "ensembl", "ukb-topmed-phewas", "gnomad-graphql"],
+  "databases-egfr-landscape": ["uniprot", "chembl", "rcsb-pdb", "reactome"],
 });
 
 const ADAPTERS = Object.freeze({
@@ -34,6 +43,56 @@ const ADAPTERS = Object.freeze({
   slide: "pathology-spatial",
   workbench: "workbench-launcher",
 });
+
+const REQUIRED_OPERATIONS = Object.freeze({
+  "literature-trem2-landscape": ["literature.entrez.request"],
+  "literature-pmc-availability": ["literature.pmc.request"],
+  "literature-preprint-publication-link": ["literature.biorxiv.request"],
+  "databases-il6r-asthma": ["databases.database.request"],
+  "databases-variant-interpretation": ["databases.database.request"],
+  "databases-egfr-landscape": ["databases.database.request"],
+  "sequence-lambda-annotation": ["sequence.open_from_chat", "sequence.run_analysis", "sequence.query_viewer"],
+  "sequence-ras-alignment": ["sequence.open_from_chat", "sequence.run_analysis", "sequence.query_viewer"],
+  "sequence-fastq-qc": ["sequence.open_from_chat", "sequence.run_analysis", "sequence.query_viewer"],
+  "ngs-fastq-qc": ["list_workflows", "get_runtime_environment", "check_nextflow_readiness", "plan_nextflow"],
+  "ngs-bulk-rnaseq": ["list_workflows", "get_runtime_environment", "check_nextflow_readiness", "plan_nextflow"],
+  "ngs-single-cell": ["list_workflows", "get_runtime_environment", "check_nextflow_readiness", "plan_nextflow"],
+  "structure-mdm2-p53": ["structure.open_from_chat", "structure.set_selection", "structure.analyze", "structure.get_state"],
+  "structure-adenylate-kinase": ["structure.open_from_chat", "structure.add_structure", "structure.align_structures", "structure.get_state"],
+  "structure-gfp-figure": ["structure.open_from_chat", "structure.control_viewer", "structure.analyze", "structure.validate_render", "structure.render_image"],
+  "slide-tissue-architecture": ["slide.open_from_chat", "slide.get_viewer_state", "slide.query_viewer"],
+  "slide-spatial-expression": ["slide.import_scientific_layer", "slide.spatial_indexed", "slide.query_viewer"],
+  "slide-segmentation-overlay": ["slide.import_scientific_layer", "slide.list_scientific_layers", "slide.query_viewer"],
+  "slide-research-export": ["slide.import_scientific_layer", "slide.spatial_indexed", "slide.query_viewer"],
+  "rosalind-molecular-design": ["rosalind.open"],
+  "rosalind-structure-analysis": ["rosalind.open", "structure.open_from_chat"],
+  "rosalind-genomics": ["rosalind.open", "list_workflows"],
+  "rosalind-scientific-compute": ["rosalind.open", "list_compute_targets"],
+});
+
+const REQUIRED_SKILLS = Object.freeze({
+  "literature-trem2-landscape": ["rosalind-literature-ncbi-entrez", "rosalind-literature-biorxiv"],
+  "literature-pmc-availability": ["rosalind-literature-ncbi-pmc"],
+  "literature-preprint-publication-link": ["rosalind-literature-biorxiv", "rosalind-literature-ncbi-entrez"],
+  "databases-il6r-asthma": ["rosalind-databases-opentargets", "rosalind-databases-gwas-catalog", "rosalind-databases-gtex-eqtl"],
+  "databases-variant-interpretation": ["rosalind-databases-clinvar-variation", "rosalind-databases-ensembl", "rosalind-databases-ukb-topmed-phewas", "rosalind-databases-gnomad-graphql"],
+  "databases-egfr-landscape": ["rosalind-databases-uniprot", "rosalind-databases-chembl", "rosalind-databases-rcsb-pdb", "rosalind-databases-reactome"],
+});
+
+function requiredSkills(showcase, categoryId) {
+  if (REQUIRED_SKILLS[showcase.id]) return REQUIRED_SKILLS[showcase.id];
+  if (categoryId === "sequence") return ["rosalind-sequence-biological-sequence-viewer"];
+  if (categoryId === "ngs") return ["rosalind-ngs-ngs-analysis-workbench", "rosalind-ngs-run-ngs-analysis"];
+  if (categoryId === "structure") return ["rosalind-structure-structure-viewer"];
+  if (categoryId === "slide") return ["rosalind-slide-slide-viewer"];
+  if (categoryId === "workbench") return [];
+  return [];
+}
+
+function requiredService(categoryId) {
+  if (categoryId === "workbench") return "rosalind";
+  return categoryId;
+}
 
 const MIME_TYPES = Object.freeze({
   ".json": "application/json",
@@ -125,7 +184,7 @@ function recipeFor(showcase, categoryId, artifacts) {
   const inputs = artifacts.filter((artifact) => artifact.role === "input").map((artifact) => artifact.path);
   const outputs = artifacts.filter((artifact) => ["output", "preview", "provenance"].includes(artifact.role)).map((artifact) => artifact.path);
   let strategy = ["sequence", "structure"].includes(categoryId) ? "local" : "network";
-  let providerIds = [...PROVIDERS[categoryId]];
+  let providerIds = [...(SHOWCASE_PROVIDERS[showcase.id] ?? PROVIDERS[categoryId])];
   let adapter = ADAPTERS[categoryId];
 
   if (categoryId === "ngs") strategy = "conditional";
@@ -222,14 +281,16 @@ export async function buildCatalogue(repositoryRoot) {
 
       const sourceSection = firstSection(sections, ["source observations", "verified observations", "source and method", "observed interface state", "rosalind observation"]);
       const computedSection = firstSection(sections, ["computed results", "computed result", "viewer analysis", "result", "computed summary", "starter-contract metric", "alignment result carried by the starter contract"]);
-      const sourceObservations = unique([
-        ...splitStatements(sourceSection),
-        ...((sourceSection || computedSection) ? [] : manifest.observations ?? []),
-      ]);
-      const computedResults = unique([
-        ...splitStatements(computedSection),
-        ...(sourceSection ? (manifest.observations ?? []).filter((item) => !sourceSection.includes(cleanMarkdown(item))) : []),
-      ]);
+      const sourceObservations = unique(
+        sourceSection
+          ? splitStatements(sourceSection)
+          : manifest.observations ?? [],
+      );
+      const computedResults = unique(
+        Array.isArray(manifest.computed_results) && manifest.computed_results.length
+          ? manifest.computed_results
+          : splitStatements(computedSection),
+      );
       const interpretation = unique(manifest.interpretation ?? splitStatements(firstSection(sections, ["interpretation", "scientific interpretation"])));
       const limitations = unique(manifest.limitations ?? splitStatements(firstSection(sections, ["limitations", "limitation"])));
       const inputArtifactIds = artifacts.filter((item) => ["input", "provenance"].includes(item.role)).map((item) => item.id);
@@ -265,6 +326,14 @@ export async function buildCatalogue(repositoryRoot) {
         interpretation,
         limitations,
         claims,
+        requiredMcpServers: [requiredService(categoryId)],
+        requiredOperations: REQUIRED_OPERATIONS[manifest.id] ?? [],
+        requiredSkills: requiredSkills(manifest, categoryId),
+        fixtures: artifacts.filter((item) => item.role === "input").map((item) => item.id),
+        expectedArtifacts: artifacts.filter((item) => ["output", "preview", "provenance"].includes(item.role)).map((item) => item.id),
+        scientificAssertions: claims.filter((claim) => claim.kind !== "interpretation"),
+        visualAssertions: preview ? [{ id: `${manifest.id}:preview`, artifactId: preview.id, requirement: "The preview opens at its native aspect ratio in light and dark Workbench themes." }] : [],
+        provenance: { sourceCommit: SOURCE_COMMIT, sources: manifest.sources ?? [], runDate: manifest.run_date },
         recipe: recipeFor(manifest, categoryId, artifacts),
         modes: ["lesson", "replay", "reproduce"],
         searchText: unique([summary.title, summary.summary, question, categoryId, plugin.name, ...(manifest.sources ?? [])]).join(" ").toLowerCase(),
@@ -403,7 +472,7 @@ export async function validateShowcases(repositoryRoot) {
   if (definitions.length !== 23) errors.push(`Expected 23 showcases, found ${definitions.length}`);
   if (definitions.some((item) => item.status !== "ready")) errors.push("All 23 release showcases must be ready");
   if (new Set(definitions.map((item) => item.id)).size !== definitions.length) errors.push("Showcase IDs must be unique");
-  if (files.length !== 148) errors.push(`Expected 148 committed catalogue/case files, found ${files.length}`);
+  if (files.length !== 150) errors.push(`Expected 150 committed catalogue/case files, found ${files.length}`);
 
   for (const absolutePath of files) {
     const relativePath = toPosix(path.relative(repositoryRoot, absolutePath));

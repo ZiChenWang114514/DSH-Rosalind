@@ -1,0 +1,2611 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "ngs",
+  "tools": [
+    {
+      "name": "activate_workflow_version",
+      "title": "Activate a workflow version",
+      "description": "",
+      "inputSchema": {
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "version_id": {
+            "title": "Version Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "version_id"
+        ],
+        "title": "activate_workflow_versionArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "activate_workflow_versionArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "version_id": {
+            "type": "string",
+            "title": "Version Id"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "version_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "archive_workflow",
+      "title": "Archive a workflow",
+      "description": "Hide a user-owned workflow from normal discovery without deleting its versions.",
+      "inputSchema": {
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ],
+        "title": "archive_workflowArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "archive_workflowArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "cancel_ngs_run",
+      "title": "Cancel an NGS run",
+      "description": "Request cancellation of a running workflow by its durable registry ID.",
+      "inputSchema": {
+        "properties": {
+          "registry_run_id": {
+            "title": "Registry Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "title": "cancel_ngs_runArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "cancel_ngs_runArguments",
+        "properties": {
+          "registry_run_id": {
+            "type": "string",
+            "title": "Registry Run Id"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "check_nextflow_readiness",
+      "title": "Check Nextflow readiness",
+      "description": "Compare one exact workflow request with a target-scoped runtime snapshot. Return sourced missing and unknown requirements without installing, downloading, writing, or starting.",
+      "inputSchema": {
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "run_dir": {
+            "title": "Run Dir",
+            "type": "string"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Profile"
+          },
+          "runtime_snapshot_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Runtime Snapshot Id"
+          },
+          "controller_candidate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Controller Candidate Id"
+          },
+          "target_id": {
+            "default": "local",
+            "title": "Target Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "title": "check_nextflow_readinessArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "check_nextflow_readinessArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "run_dir": {
+            "type": "string",
+            "title": "Run Dir"
+          },
+          "profile": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile",
+            "default": null
+          },
+          "runtime_snapshot_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime Snapshot Id",
+            "default": null
+          },
+          "controller_candidate_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controller Candidate Id",
+            "default": null
+          },
+          "target_id": {
+            "type": "string",
+            "title": "Target Id",
+            "default": "local"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {}
+    },
+    {
+      "name": "check_snakemake_readiness",
+      "title": "Check Snakemake readiness",
+      "description": "Check one cataloged Snakemake version and its run configuration.",
+      "inputSchema": {
+        "$defs": {
+          "GeneratedFileRequest": {
+            "additionalProperties": false,
+            "description": "One bounded text file whose exact content is part of the workflow plan.",
+            "properties": {
+              "relative_path": {
+                "minLength": 1,
+                "title": "Relative Path",
+                "type": "string"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "media_type": {
+                "default": "text/plain",
+                "enum": [
+                  "application/json",
+                  "text/csv",
+                  "text/plain"
+                ],
+                "title": "Media Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "relative_path",
+              "content"
+            ],
+            "title": "GeneratedFileRequest",
+            "type": "object"
+          },
+          "PreparationRequest": {
+            "additionalProperties": false,
+            "description": "Typed, analysis-owned effects that run under the workflow plan approval.",
+            "properties": {
+              "destination_dir": {
+                "minLength": 1,
+                "title": "Destination Dir",
+                "type": "string"
+              },
+              "downloads": {
+                "items": {
+                  "$ref": "#/$defs/VerifiedDownloadRequest"
+                },
+                "title": "Downloads",
+                "type": "array"
+              },
+              "generated_files": {
+                "items": {
+                  "$ref": "#/$defs/GeneratedFileRequest"
+                },
+                "title": "Generated Files",
+                "type": "array"
+              }
+            },
+            "required": [
+              "destination_dir"
+            ],
+            "title": "PreparationRequest",
+            "type": "object"
+          },
+          "VerifiedDownloadRequest": {
+            "additionalProperties": false,
+            "description": "One exact remote file to download and verify before workflow launch.",
+            "properties": {
+              "relative_path": {
+                "minLength": 1,
+                "title": "Relative Path",
+                "type": "string"
+              },
+              "url": {
+                "minLength": 1,
+                "title": "Url",
+                "type": "string"
+              },
+              "bytes": {
+                "minimum": 0,
+                "title": "Bytes",
+                "type": "integer"
+              },
+              "sha256": {
+                "pattern": "^(?:sha256:)?[0-9a-f]{64}$",
+                "title": "Sha256",
+                "type": "string"
+              },
+              "role": {
+                "default": "workflow input",
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Role",
+                "type": "string"
+              }
+            },
+            "required": [
+              "relative_path",
+              "url",
+              "bytes",
+              "sha256"
+            ],
+            "title": "VerifiedDownloadRequest",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "run_dir": {
+            "title": "Run Dir",
+            "type": "string"
+          },
+          "config_file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Config File"
+          },
+          "runtime_snapshot_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Runtime Snapshot Id"
+          },
+          "controller_candidate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Controller Candidate Id"
+          },
+          "target_id": {
+            "default": "local",
+            "title": "Target Id",
+            "type": "string"
+          },
+          "preparation": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/PreparationRequest"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "title": "check_snakemake_readinessArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "check_snakemake_readinessArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "run_dir": {
+            "type": "string",
+            "title": "Run Dir"
+          },
+          "config_file": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config File",
+            "default": null
+          },
+          "runtime_snapshot_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime Snapshot Id",
+            "default": null
+          },
+          "controller_candidate_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controller Candidate Id",
+            "default": null
+          },
+          "target_id": {
+            "type": "string",
+            "title": "Target Id",
+            "default": "local"
+          },
+          "preparation": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "PreparationRequest",
+                "description": "Typed, analysis-owned effects that run under the workflow plan approval.",
+                "properties": {
+                  "destination_dir": {
+                    "type": "string",
+                    "title": "Destination Dir"
+                  },
+                  "downloads": {
+                    "type": "array",
+                    "title": "Downloads",
+                    "items": {
+                      "type": "object",
+                      "title": "VerifiedDownloadRequest",
+                      "description": "One exact remote file to download and verify before workflow launch.",
+                      "properties": {
+                        "relative_path": {
+                          "type": "string",
+                          "title": "Relative Path"
+                        },
+                        "url": {
+                          "type": "string",
+                          "title": "Url"
+                        },
+                        "bytes": {
+                          "type": "integer",
+                          "title": "Bytes"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "title": "Sha256"
+                        },
+                        "role": {
+                          "type": "string",
+                          "title": "Role",
+                          "default": "workflow input"
+                        }
+                      },
+                      "required": [
+                        "relative_path",
+                        "url",
+                        "bytes",
+                        "sha256"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "generated_files": {
+                    "type": "array",
+                    "title": "Generated Files",
+                    "items": {
+                      "type": "object",
+                      "title": "GeneratedFileRequest",
+                      "description": "One bounded text file whose exact content is part of the workflow plan.",
+                      "properties": {
+                        "relative_path": {
+                          "type": "string",
+                          "title": "Relative Path"
+                        },
+                        "content": {
+                          "type": "string",
+                          "title": "Content"
+                        },
+                        "media_type": {
+                          "type": "string",
+                          "enum": [
+                            "application/json",
+                            "text/csv",
+                            "text/plain"
+                          ],
+                          "title": "Media Type",
+                          "default": "text/plain"
+                        }
+                      },
+                      "required": [
+                        "relative_path",
+                        "content"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "destination_dir"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {}
+    },
+    {
+      "name": "execute_plan",
+      "title": "Request approval to execute a reviewed NGS plan",
+      "description": "Request host-native approval for one registered plan by name, ID, and checksum. Codex pauses this call for approval; only after approval does the server revalidate the plan, apply its preparation, and launch its exact workflow.",
+      "inputSchema": {
+        "properties": {
+          "plan_name": {
+            "title": "Plan Name",
+            "type": "string"
+          },
+          "plan_id": {
+            "title": "Plan Id",
+            "type": "string"
+          },
+          "plan_checksum": {
+            "title": "Plan Checksum",
+            "type": "string"
+          }
+        },
+        "required": [
+          "plan_name",
+          "plan_id",
+          "plan_checksum"
+        ],
+        "title": "execute_planArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "execute_planArguments",
+        "properties": {
+          "plan_name": {
+            "type": "string",
+            "title": "Plan Name"
+          },
+          "plan_id": {
+            "type": "string",
+            "title": "Plan Id"
+          },
+          "plan_checksum": {
+            "type": "string",
+            "title": "Plan Checksum"
+          }
+        },
+        "required": [
+          "plan_name",
+          "plan_id",
+          "plan_checksum"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {}
+    },
+    {
+      "name": "get_ngs_run",
+      "title": "Get NGS run",
+      "description": "Read one local durable run record by its global registry id.",
+      "inputSchema": {
+        "properties": {
+          "registry_run_id": {
+            "title": "Registry Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "title": "get_ngs_runArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "get_ngs_runArguments",
+        "properties": {
+          "registry_run_id": {
+            "type": "string",
+            "title": "Registry Run Id"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "get_runtime_environment",
+      "title": "Inspect a compute target runtime",
+      "description": "Issue a short-lived, server-authored snapshot of the selected local or SSH host architecture, Host PATH workflow controllers, task-environment commands, and Docker daemon. Local snapshots also inspect discovered managed environments; package subdirs provide OS/CPU evidence when available. This is read-only and does not install packages, download artifacts, inspect container images, activate environments, or start a run.",
+      "inputSchema": {
+        "properties": {
+          "target_id": {
+            "default": "local",
+            "title": "Target Id",
+            "type": "string"
+          }
+        },
+        "title": "get_runtime_environmentArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "get_runtime_environmentArguments",
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "title": "Target Id",
+            "default": "local"
+          }
+        },
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {}
+    },
+    {
+      "name": "list_ngs_run_lineages",
+      "title": "List recent NGS run lineages",
+      "description": "List recent workflow groups with a bounded workflow-attempt trace.",
+      "inputSchema": {
+        "properties": {
+          "limit": {
+            "default": 20,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "list_ngs_run_lineagesArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "list_ngs_run_lineagesArguments",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          }
+        },
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "list_ngs_runs",
+      "title": "List NGS runs",
+      "description": "List durable run history across registered targets with bounded filters.",
+      "inputSchema": {
+        "properties": {
+          "statuses": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Statuses"
+          },
+          "binding": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Binding"
+          },
+          "pipeline": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pipeline"
+          },
+          "first_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter executions by the first_run_id returned in run history.",
+            "title": "First Run Id"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "list_ngs_runsArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "list_ngs_runsArguments",
+        "properties": {
+          "statuses": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statuses",
+            "default": null
+          },
+          "binding": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Binding",
+            "default": null
+          },
+          "pipeline": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pipeline",
+            "default": null
+          },
+          "first_run_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Run Id",
+            "description": "Filter executions by the first_run_id returned in run history.",
+            "default": null
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 50
+          }
+        },
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "list_workflow_versions",
+      "title": "List workflow versions",
+      "description": "",
+      "inputSchema": {
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ],
+        "title": "list_workflow_versionsArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "list_workflow_versionsArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "list_workflows",
+      "title": "List available NGS workflows",
+      "description": "List bundled and globally saved workflows with engine, source, and selection metadata.",
+      "inputSchema": {
+        "properties": {
+          "engine": {
+            "anyOf": [
+              {
+                "enum": [
+                  "nextflow",
+                  "snakemake"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Engine"
+          },
+          "include_archived": {
+            "default": false,
+            "title": "Include Archived",
+            "type": "boolean"
+          }
+        },
+        "title": "list_workflowsArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "list_workflowsArguments",
+        "properties": {
+          "engine": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "nextflow",
+                  "snakemake"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Engine",
+            "default": null
+          },
+          "include_archived": {
+            "type": "boolean",
+            "title": "Include Archived",
+            "default": false
+          }
+        },
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "observe_ngs_run",
+      "title": "Observe NGS run",
+      "description": "Reconcile one run and read its controller log and execution evidence.",
+      "inputSchema": {
+        "properties": {
+          "registry_run_id": {
+            "title": "Registry Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "title": "observe_ngs_runArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "observe_ngs_runArguments",
+        "properties": {
+          "registry_run_id": {
+            "type": "string",
+            "title": "Registry Run Id"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "execution": {}
+    },
+    {
+      "name": "plan_nextflow",
+      "title": "Plan a Nextflow workflow",
+      "description": "Create an approval-bound plan for a cataloged Nextflow workflow. Inspect its documentation, help, or nextflow_schema.json to identify required inputs and put workflow-specific parameters in params_file. Samplesheet formats, when used, are defined by the selected workflow and may be described by its linked input schema. Planning does not execute the workflow; use execute_plan for the approved plan.",
+      "inputSchema": {
+        "$defs": {
+          "GeneratedFileRequest": {
+            "additionalProperties": false,
+            "description": "One bounded text file whose exact content is part of the workflow plan.",
+            "properties": {
+              "relative_path": {
+                "minLength": 1,
+                "title": "Relative Path",
+                "type": "string"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "media_type": {
+                "default": "text/plain",
+                "enum": [
+                  "application/json",
+                  "text/csv",
+                  "text/plain"
+                ],
+                "title": "Media Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "relative_path",
+              "content"
+            ],
+            "title": "GeneratedFileRequest",
+            "type": "object"
+          },
+          "PreparationRequest": {
+            "additionalProperties": false,
+            "description": "Typed, analysis-owned effects that run under the workflow plan approval.",
+            "properties": {
+              "destination_dir": {
+                "minLength": 1,
+                "title": "Destination Dir",
+                "type": "string"
+              },
+              "downloads": {
+                "items": {
+                  "$ref": "#/$defs/VerifiedDownloadRequest"
+                },
+                "title": "Downloads",
+                "type": "array"
+              },
+              "generated_files": {
+                "items": {
+                  "$ref": "#/$defs/GeneratedFileRequest"
+                },
+                "title": "Generated Files",
+                "type": "array"
+              }
+            },
+            "required": [
+              "destination_dir"
+            ],
+            "title": "PreparationRequest",
+            "type": "object"
+          },
+          "VerifiedDownloadRequest": {
+            "additionalProperties": false,
+            "description": "One exact remote file to download and verify before workflow launch.",
+            "properties": {
+              "relative_path": {
+                "minLength": 1,
+                "title": "Relative Path",
+                "type": "string"
+              },
+              "url": {
+                "minLength": 1,
+                "title": "Url",
+                "type": "string"
+              },
+              "bytes": {
+                "minimum": 0,
+                "title": "Bytes",
+                "type": "integer"
+              },
+              "sha256": {
+                "pattern": "^(?:sha256:)?[0-9a-f]{64}$",
+                "title": "Sha256",
+                "type": "string"
+              },
+              "role": {
+                "default": "workflow input",
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Role",
+                "type": "string"
+              }
+            },
+            "required": [
+              "relative_path",
+              "url",
+              "bytes",
+              "sha256"
+            ],
+            "title": "VerifiedDownloadRequest",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "workflow_id": {
+            "description": "Selected Nextflow workflow catalog identifier.",
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "run_dir": {
+            "description": "Absolute execution directory on the selected target; created after approval.",
+            "title": "Run Dir",
+            "type": "string"
+          },
+          "params_file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Nextflow parameter file containing workflow-specific inputs, references, databases, and options. Use an absolute path on the selected target. nf-core workflows require JSON; user-saved generic workflows may also accept YAML.",
+            "title": "Params File"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Nextflow execution profiles, for example docker or singularity.",
+            "title": "Profile"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Display Name"
+          },
+          "runtime_snapshot_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Runtime Snapshot Id"
+          },
+          "controller_candidate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Controller Candidate Id"
+          },
+          "target_id": {
+            "default": "local",
+            "title": "Target Id",
+            "type": "string"
+          },
+          "preparation": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/PreparationRequest"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "first_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Recovery root identifier returned in first_run_id by run history. Omit to start an independent workflow run.",
+            "title": "First Run Id"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "title": "plan_nextflowArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "plan_nextflowArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id",
+            "description": "Selected Nextflow workflow catalog identifier."
+          },
+          "run_dir": {
+            "type": "string",
+            "title": "Run Dir",
+            "description": "Absolute execution directory on the selected target; created after approval."
+          },
+          "params_file": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Params File",
+            "description": "Nextflow parameter file containing workflow-specific inputs, references, databases, and options. Use an absolute path on the selected target. nf-core workflows require JSON; user-saved generic workflows may also accept YAML.",
+            "default": null
+          },
+          "profile": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile",
+            "description": "Nextflow execution profiles, for example docker or singularity.",
+            "default": null
+          },
+          "display_name": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name",
+            "default": null
+          },
+          "runtime_snapshot_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime Snapshot Id",
+            "default": null
+          },
+          "controller_candidate_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controller Candidate Id",
+            "default": null
+          },
+          "target_id": {
+            "type": "string",
+            "title": "Target Id",
+            "default": "local"
+          },
+          "preparation": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "PreparationRequest",
+                "description": "Typed, analysis-owned effects that run under the workflow plan approval.",
+                "properties": {
+                  "destination_dir": {
+                    "type": "string",
+                    "title": "Destination Dir"
+                  },
+                  "downloads": {
+                    "type": "array",
+                    "title": "Downloads",
+                    "items": {
+                      "type": "object",
+                      "title": "VerifiedDownloadRequest",
+                      "description": "One exact remote file to download and verify before workflow launch.",
+                      "properties": {
+                        "relative_path": {
+                          "type": "string",
+                          "title": "Relative Path"
+                        },
+                        "url": {
+                          "type": "string",
+                          "title": "Url"
+                        },
+                        "bytes": {
+                          "type": "integer",
+                          "title": "Bytes"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "title": "Sha256"
+                        },
+                        "role": {
+                          "type": "string",
+                          "title": "Role",
+                          "default": "workflow input"
+                        }
+                      },
+                      "required": [
+                        "relative_path",
+                        "url",
+                        "bytes",
+                        "sha256"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "generated_files": {
+                    "type": "array",
+                    "title": "Generated Files",
+                    "items": {
+                      "type": "object",
+                      "title": "GeneratedFileRequest",
+                      "description": "One bounded text file whose exact content is part of the workflow plan.",
+                      "properties": {
+                        "relative_path": {
+                          "type": "string",
+                          "title": "Relative Path"
+                        },
+                        "content": {
+                          "type": "string",
+                          "title": "Content"
+                        },
+                        "media_type": {
+                          "type": "string",
+                          "enum": [
+                            "application/json",
+                            "text/csv",
+                            "text/plain"
+                          ],
+                          "title": "Media Type",
+                          "default": "text/plain"
+                        }
+                      },
+                      "required": [
+                        "relative_path",
+                        "content"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "destination_dir"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "first_run_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Run Id",
+            "description": "Recovery root identifier returned in first_run_id by run history. Omit to start an independent workflow run.",
+            "default": null
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "plan_snakemake",
+      "title": "Plan a Snakemake workflow",
+      "description": "Create an approval-bound plan for a cataloged Snakemake workflow. Inspect its README, Snakefile, configuration schema, or examples to identify required inputs and put workflow-specific settings in config_file. A configuration can contain sample paths or reference a workflow-specific samplesheet. Planning does not execute the workflow; use execute_plan for the approved plan.",
+      "inputSchema": {
+        "$defs": {
+          "GeneratedFileRequest": {
+            "additionalProperties": false,
+            "description": "One bounded text file whose exact content is part of the workflow plan.",
+            "properties": {
+              "relative_path": {
+                "minLength": 1,
+                "title": "Relative Path",
+                "type": "string"
+              },
+              "content": {
+                "title": "Content",
+                "type": "string"
+              },
+              "media_type": {
+                "default": "text/plain",
+                "enum": [
+                  "application/json",
+                  "text/csv",
+                  "text/plain"
+                ],
+                "title": "Media Type",
+                "type": "string"
+              }
+            },
+            "required": [
+              "relative_path",
+              "content"
+            ],
+            "title": "GeneratedFileRequest",
+            "type": "object"
+          },
+          "PreparationRequest": {
+            "additionalProperties": false,
+            "description": "Typed, analysis-owned effects that run under the workflow plan approval.",
+            "properties": {
+              "destination_dir": {
+                "minLength": 1,
+                "title": "Destination Dir",
+                "type": "string"
+              },
+              "downloads": {
+                "items": {
+                  "$ref": "#/$defs/VerifiedDownloadRequest"
+                },
+                "title": "Downloads",
+                "type": "array"
+              },
+              "generated_files": {
+                "items": {
+                  "$ref": "#/$defs/GeneratedFileRequest"
+                },
+                "title": "Generated Files",
+                "type": "array"
+              }
+            },
+            "required": [
+              "destination_dir"
+            ],
+            "title": "PreparationRequest",
+            "type": "object"
+          },
+          "VerifiedDownloadRequest": {
+            "additionalProperties": false,
+            "description": "One exact remote file to download and verify before workflow launch.",
+            "properties": {
+              "relative_path": {
+                "minLength": 1,
+                "title": "Relative Path",
+                "type": "string"
+              },
+              "url": {
+                "minLength": 1,
+                "title": "Url",
+                "type": "string"
+              },
+              "bytes": {
+                "minimum": 0,
+                "title": "Bytes",
+                "type": "integer"
+              },
+              "sha256": {
+                "pattern": "^(?:sha256:)?[0-9a-f]{64}$",
+                "title": "Sha256",
+                "type": "string"
+              },
+              "role": {
+                "default": "workflow input",
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Role",
+                "type": "string"
+              }
+            },
+            "required": [
+              "relative_path",
+              "url",
+              "bytes",
+              "sha256"
+            ],
+            "title": "VerifiedDownloadRequest",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "workflow_id": {
+            "description": "Selected Snakemake workflow catalog identifier.",
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "run_dir": {
+            "description": "Absolute execution directory on the selected target; created after approval.",
+            "title": "Run Dir",
+            "type": "string"
+          },
+          "config_file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Workflow-specific configuration passed as --configfile, as an absolute path on the selected target. Use JSON for bundled workflows; custom workflows may also accept YAML. Local bundled workflows may provide a default configuration.",
+            "title": "Config File"
+          },
+          "cores": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Number of cores available to Snakemake.",
+            "title": "Cores"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Display Name"
+          },
+          "runtime_snapshot_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Runtime Snapshot Id"
+          },
+          "controller_candidate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Controller Candidate Id"
+          },
+          "target_id": {
+            "default": "local",
+            "title": "Target Id",
+            "type": "string"
+          },
+          "preparation": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/PreparationRequest"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "first_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Recovery root identifier returned in first_run_id by run history. Omit to start an independent workflow run.",
+            "title": "First Run Id"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "title": "plan_snakemakeArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "plan_snakemakeArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id",
+            "description": "Selected Snakemake workflow catalog identifier."
+          },
+          "run_dir": {
+            "type": "string",
+            "title": "Run Dir",
+            "description": "Absolute execution directory on the selected target; created after approval."
+          },
+          "config_file": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config File",
+            "description": "Workflow-specific configuration passed as --configfile, as an absolute path on the selected target. Use JSON for bundled workflows; custom workflows may also accept YAML. Local bundled workflows may provide a default configuration.",
+            "default": null
+          },
+          "cores": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cores",
+            "description": "Number of cores available to Snakemake.",
+            "default": null
+          },
+          "display_name": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name",
+            "default": null
+          },
+          "runtime_snapshot_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime Snapshot Id",
+            "default": null
+          },
+          "controller_candidate_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controller Candidate Id",
+            "default": null
+          },
+          "target_id": {
+            "type": "string",
+            "title": "Target Id",
+            "default": "local"
+          },
+          "preparation": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "PreparationRequest",
+                "description": "Typed, analysis-owned effects that run under the workflow plan approval.",
+                "properties": {
+                  "destination_dir": {
+                    "type": "string",
+                    "title": "Destination Dir"
+                  },
+                  "downloads": {
+                    "type": "array",
+                    "title": "Downloads",
+                    "items": {
+                      "type": "object",
+                      "title": "VerifiedDownloadRequest",
+                      "description": "One exact remote file to download and verify before workflow launch.",
+                      "properties": {
+                        "relative_path": {
+                          "type": "string",
+                          "title": "Relative Path"
+                        },
+                        "url": {
+                          "type": "string",
+                          "title": "Url"
+                        },
+                        "bytes": {
+                          "type": "integer",
+                          "title": "Bytes"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "title": "Sha256"
+                        },
+                        "role": {
+                          "type": "string",
+                          "title": "Role",
+                          "default": "workflow input"
+                        }
+                      },
+                      "required": [
+                        "relative_path",
+                        "url",
+                        "bytes",
+                        "sha256"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "generated_files": {
+                    "type": "array",
+                    "title": "Generated Files",
+                    "items": {
+                      "type": "object",
+                      "title": "GeneratedFileRequest",
+                      "description": "One bounded text file whose exact content is part of the workflow plan.",
+                      "properties": {
+                        "relative_path": {
+                          "type": "string",
+                          "title": "Relative Path"
+                        },
+                        "content": {
+                          "type": "string",
+                          "title": "Content"
+                        },
+                        "media_type": {
+                          "type": "string",
+                          "enum": [
+                            "application/json",
+                            "text/csv",
+                            "text/plain"
+                          ],
+                          "title": "Media Type",
+                          "default": "text/plain"
+                        }
+                      },
+                      "required": [
+                        "relative_path",
+                        "content"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "destination_dir"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "first_run_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Run Id",
+            "description": "Recovery root identifier returned in first_run_id by run history. Omit to start an independent workflow run.",
+            "default": null
+          }
+        },
+        "required": [
+          "workflow_id",
+          "run_dir"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "restore_workflow",
+      "title": "Restore an archived workflow",
+      "description": "",
+      "inputSchema": {
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ],
+        "title": "restore_workflowArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "restore_workflowArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "save_workflow",
+      "title": "Save a selected NGS workflow",
+      "description": "Create a reusable catalog entry only after the user has selected this workflow. Discovery candidates that the user has not selected must not be saved.",
+      "inputSchema": {
+        "$defs": {
+          "LocalWorkflowSource": {
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "local",
+                "title": "Kind",
+                "type": "string"
+              },
+              "root": {
+                "minLength": 1,
+                "title": "Root",
+                "type": "string"
+              },
+              "entrypoint": {
+                "minLength": 1,
+                "title": "Entrypoint",
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "root",
+              "entrypoint"
+            ],
+            "title": "LocalWorkflowSource",
+            "type": "object"
+          },
+          "RemoteWorkflowSource": {
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "remote",
+                "title": "Kind",
+                "type": "string"
+              },
+              "workflow": {
+                "minLength": 1,
+                "title": "Workflow",
+                "type": "string"
+              },
+              "revision": {
+                "minLength": 1,
+                "title": "Revision",
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "workflow",
+              "revision"
+            ],
+            "title": "RemoteWorkflowSource",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "engine": {
+            "enum": [
+              "nextflow",
+              "snakemake"
+            ],
+            "title": "Engine",
+            "type": "string"
+          },
+          "source": {
+            "discriminator": {
+              "mapping": {
+                "local": "#/$defs/LocalWorkflowSource",
+                "remote": "#/$defs/RemoteWorkflowSource"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/LocalWorkflowSource"
+              },
+              {
+                "$ref": "#/$defs/RemoteWorkflowSource"
+              }
+            ],
+            "title": "Source"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Description"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "name",
+          "engine",
+          "source"
+        ],
+        "title": "save_workflowArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "save_workflowArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "engine": {
+            "type": "string",
+            "enum": [
+              "nextflow",
+              "snakemake"
+            ],
+            "title": "Engine"
+          },
+          "source": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "LocalWorkflowSource",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "local",
+                    "title": "Kind"
+                  },
+                  "root": {
+                    "type": "string",
+                    "title": "Root"
+                  },
+                  "entrypoint": {
+                    "type": "string",
+                    "title": "Entrypoint"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "root",
+                  "entrypoint"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "RemoteWorkflowSource",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "remote",
+                    "title": "Kind"
+                  },
+                  "workflow": {
+                    "type": "string",
+                    "title": "Workflow"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "title": "Revision"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "workflow",
+                  "revision"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "title": "Source"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "default": null
+          }
+        },
+        "required": [
+          "workflow_id",
+          "name",
+          "engine",
+          "source"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "update_ngs_run_analysis_summary",
+      "title": "Update NGS run analysis summary",
+      "description": "Save an agent-authored Markdown analysis for an existing run. Inspect relevant workflow outputs first, using SSH for a remote target, then write a local summary file. This tool saves that file; it does not inspect results or change run status.",
+      "inputSchema": {
+        "properties": {
+          "registry_run_id": {
+            "title": "Registry Run Id",
+            "type": "string"
+          },
+          "summary_path": {
+            "description": "Absolute path to the agent-authored local Markdown file.",
+            "title": "Summary Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "registry_run_id",
+          "summary_path"
+        ],
+        "title": "update_ngs_run_analysis_summaryArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "update_ngs_run_analysis_summaryArguments",
+        "properties": {
+          "registry_run_id": {
+            "type": "string",
+            "title": "Registry Run Id"
+          },
+          "summary_path": {
+            "type": "string",
+            "title": "Summary Path",
+            "description": "Absolute path to the agent-authored local Markdown file."
+          }
+        },
+        "required": [
+          "registry_run_id",
+          "summary_path"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "update_workflow",
+      "title": "Update a saved NGS workflow",
+      "description": "Create and activate a new immutable version of a user-owned workflow.",
+      "inputSchema": {
+        "$defs": {
+          "LocalWorkflowSource": {
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "local",
+                "title": "Kind",
+                "type": "string"
+              },
+              "root": {
+                "minLength": 1,
+                "title": "Root",
+                "type": "string"
+              },
+              "entrypoint": {
+                "minLength": 1,
+                "title": "Entrypoint",
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "root",
+              "entrypoint"
+            ],
+            "title": "LocalWorkflowSource",
+            "type": "object"
+          },
+          "RemoteWorkflowSource": {
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "const": "remote",
+                "title": "Kind",
+                "type": "string"
+              },
+              "workflow": {
+                "minLength": 1,
+                "title": "Workflow",
+                "type": "string"
+              },
+              "revision": {
+                "minLength": 1,
+                "title": "Revision",
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "workflow",
+              "revision"
+            ],
+            "title": "RemoteWorkflowSource",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "workflow_id": {
+            "title": "Workflow Id",
+            "type": "string"
+          },
+          "source": {
+            "discriminator": {
+              "mapping": {
+                "local": "#/$defs/LocalWorkflowSource",
+                "remote": "#/$defs/RemoteWorkflowSource"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/LocalWorkflowSource"
+              },
+              {
+                "$ref": "#/$defs/RemoteWorkflowSource"
+              }
+            ],
+            "title": "Source"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "source"
+        ],
+        "title": "update_workflowArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "update_workflowArguments",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "source": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "LocalWorkflowSource",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "local",
+                    "title": "Kind"
+                  },
+                  "root": {
+                    "type": "string",
+                    "title": "Root"
+                  },
+                  "entrypoint": {
+                    "type": "string",
+                    "title": "Entrypoint"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "root",
+                  "entrypoint"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "RemoteWorkflowSource",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "remote",
+                    "title": "Kind"
+                  },
+                  "workflow": {
+                    "type": "string",
+                    "title": "Workflow"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "title": "Revision"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "workflow",
+                  "revision"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "title": "Source"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "source"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "configure_ssh_target",
+      "title": "Configure an existing SSH compute target",
+      "description": "Register nonsecret SSH and Slurm references in the local daemon.",
+      "inputSchema": {
+        "properties": {
+          "target_id": {
+            "title": "Target Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "ssh_alias": {
+            "title": "Ssh Alias",
+            "type": "string"
+          },
+          "workspace_root": {
+            "title": "Workspace Root",
+            "type": "string"
+          },
+          "executor": {
+            "default": "local_process",
+            "enum": [
+              "local_process",
+              "slurm"
+            ],
+            "title": "Executor",
+            "type": "string"
+          },
+          "partition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Partition"
+          },
+          "account": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Account"
+          }
+        },
+        "required": [
+          "target_id",
+          "title",
+          "ssh_alias",
+          "workspace_root"
+        ],
+        "title": "configure_ssh_targetArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "configure_ssh_targetArguments",
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "title": "Target Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "ssh_alias": {
+            "type": "string",
+            "title": "Ssh Alias"
+          },
+          "workspace_root": {
+            "type": "string",
+            "title": "Workspace Root"
+          },
+          "executor": {
+            "type": "string",
+            "enum": [
+              "local_process",
+              "slurm"
+            ],
+            "title": "Executor",
+            "default": "local_process"
+          },
+          "partition": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Partition",
+            "default": null
+          },
+          "account": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account",
+            "default": null
+          }
+        },
+        "required": [
+          "target_id",
+          "title",
+          "ssh_alias",
+          "workspace_root"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "inspect_compute_target",
+      "title": "Inspect an existing SSH compute target",
+      "description": "Observe bounded host, workspace, executable, and Slurm facts without changing them.",
+      "inputSchema": {
+        "properties": {
+          "target_id": {
+            "title": "Target Id",
+            "type": "string"
+          },
+          "executable_paths": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Executable Paths"
+          }
+        },
+        "required": [
+          "target_id"
+        ],
+        "title": "inspect_compute_targetArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "inspect_compute_targetArguments",
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "title": "Target Id"
+          },
+          "executable_paths": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Executable Paths",
+            "default": null
+          }
+        },
+        "required": [
+          "target_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {}
+    },
+    {
+      "name": "list_compute_targets",
+      "title": "List configured compute targets",
+      "description": "List registered infrastructure without claiming scientific readiness.",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_compute_targetsArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "list_compute_targetsArguments",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    }
+  ]
+}

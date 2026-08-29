@@ -2,6 +2,8 @@
 
 This ready showcase uses Molecular Structure Viewer and RCSB entry 1EMA to present the GFP beta barrel and its CRO chromophore.
 
+The retained coordinate input comes from the public RCSB PDB coordinate endpoint. The local structure service parses its atoms directly and computes contacts from those coordinates.
+
 ![GFP beta barrel and CRO chromophore](previews/gfp.png)
 
 ## Scientific question

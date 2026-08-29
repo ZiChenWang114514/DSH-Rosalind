@@ -8,6 +8,5 @@
   "subset_rule": "first 500 complete records; first header token retained; plus line normalized to +; LF line endings",
   "subset_bytes": 480372,
   "subset_sha256": "46bd72991d9c9c2bf64751e88e52548d852d5fa021da4815ee6f6517a51b18b9",
-  "viewer_session": "a23f374a-311c-4d9b-b718-6c79756a99ac",
   "viewer_status": "session_created_but_card_not_mounted"
 }

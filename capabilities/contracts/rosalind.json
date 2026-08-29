@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "rosalind",
+  "tools": [
+    {
+      "name": "rosalind.open",
+      "title": "Rosalind Workbench",
+      "description": "Open Rosalind Workbench to choose research tasks across molecular design, structure analysis, genomics, and scientific compute.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}

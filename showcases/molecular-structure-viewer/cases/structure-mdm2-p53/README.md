@@ -8,10 +8,13 @@ This display-ready showcase packages the pinned 1YCR source, a locally recompute
 
 What does a 4 Å coordinate-contact analysis reveal about the MDM2–p53 peptide interface, and how should the viewer's buried-area metric be reported?
 
-## Source observations and computed result
+## Source observations
 
 - The downloaded RCSB 1YCR file matched the plugin contract: 94,041 bytes, 818 atoms, and the declared SHA-256 digest.
 - Chain A contains 705 atoms and chain B contains 113 atoms.
+
+## Computed results
+
 - A direct coordinate calculation over all cross-chain atom pairs found exactly 105 contacts at or below 4.0 Å, spanning 34 residue pairs.
 - Author-numbered p53 Phe19, Trp23, and Leu26 are present in chain B and are the workflow's labeled hotspots.
 

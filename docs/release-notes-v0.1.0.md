@@ -1,4 +1,6 @@
-# DSH-Rosalind v0.1.0
+# DSH-Rosalind v0.1.0 (historical record)
+
+This file describes the already published v0.1.0 package. It is retained for release history and does not describe the v0.2.0 candidate or its current file counts.
 
 DSH-Rosalind v0.1.0 brings a reproducible scientific workbench to DeepSeek Harness 0.1.1-rc.2. The release includes 23 ready teaching projects across literature, biomedical databases, sequences, NGS, molecular structures, pathology and spatial biology, and scientific workbench launchers.
 

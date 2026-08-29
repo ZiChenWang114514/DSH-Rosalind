@@ -3,7 +3,8 @@
   "inputs":[{"path":"inputs/1YCR.pdb","bytes":94041,"sha256":"d8f23749da9ec22da2e17bb31c33803e3db6123233cd0404bdc005111196e7a3"}],
   "outputs":[{"path":"outputs/results.json"},{"path":"outputs/provenance.json"}],"previews":[{"path":"previews/mdm2-p53.svg"}],
   "sources":["https://www.rcsb.org/structure/1YCR","https://files.rcsb.org/download/1YCR.pdb"],
-  "observations":["The pinned 1YCR file matched the plugin contract at 94,041 bytes, 818 atoms, and the declared SHA-256 digest.","Chains A and B contained 705 and 113 atoms.","A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å."],
+  "observations":["The pinned 1YCR file matched the plugin contract at 94,041 bytes, 818 atoms, and the declared SHA-256 digest.","Chains A and B contained 705 and 113 atoms."],
+  "computed_results":["A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å."],
   "interpretation":["The three p53 residues Phe19, Trp23, and Leu26 sit within the contact-bearing peptide segment shown in the interface workflow."],
   "limitations":["The current viewer remained render-pending and did not acknowledge analysis commands.","The 735.864963 Å² interface area is retained as the shipped starter-contract target, not a fresh current-host measurement.","Geometric contacts and buried surface area are not binding energies or affinity measurements."],
   "environment":{"source_snapshot":"2026-07-03","current_host_viewer_status":"render-pending","contact_check":"project-owned coordinate parser"}

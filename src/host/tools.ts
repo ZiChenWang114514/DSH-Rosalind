@@ -146,7 +146,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
     }),
     defineTool({
       name: "rosalind_approve",
-      description: "Approve exactly one awaiting DSH-Rosalind plan by acknowledging every recorded confirmation reason.",
+      description: "Request host approval for exactly one awaiting DSH-Rosalind plan, while acknowledging every recorded confirmation reason.",
       parameters: {
         run_id: { type: "string", required: true },
         acknowledgements: { type: "array", items: { type: "string" }, required: true },
@@ -222,12 +222,12 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
     }),
     defineTool({
       name: "rosalind_export",
-      description: "Export a showcase review or import bundle to an explicit relative path under the active workspace after confirmation.",
+      description: "Export a showcase review or import bundle to an explicit relative path under the active workspace. A true write request still requires independent DSH host approval.",
       parameters: {
         showcase_id: { type: "string", required: true },
         format: { type: "string", enum: ["review-json", "import-json"], required: true },
         output_path: { type: "string", required: true, description: "Relative path beneath the active workspace" },
-        approved: { type: "boolean", required: true, description: "True only after the user approved this write" },
+        approved: { type: "boolean", required: true, description: "Request the write; the DSH host independently asks the user before execution" },
       },
       output: jsonOutput,
       async execute(args) {

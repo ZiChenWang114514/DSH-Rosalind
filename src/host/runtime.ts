@@ -12,6 +12,9 @@ import type {
 } from "../shared/types.js";
 import { resolveInside, ShowcaseCatalog } from "./catalog.js";
 import { ProviderRegistry, providerRequiresConfirmation } from "./providers.js";
+import { reproduceShowcase, type ReproductionResult } from "./reproduction.js";
+import type { ScienceExecutor } from "./science-tools.js";
+import { ScienceRuntime } from "./science/runtime.js";
 import { validateShowcase, type ValidationResult } from "./validators.js";
 
 interface RunRecord {
@@ -48,9 +51,11 @@ function event(record: RunRecord, state: RunState, message: string, stepId?: str
 
 function confirmationReasons(providerKind: string): string[] {
   switch (providerKind) {
+    case "public-api": return ["This execution will contact the selected public network service."];
     case "paid-api": return ["This provider may create billable API usage."];
     case "gpu": return ["This provider may start a GPU workload."];
     case "ssh": return ["This provider may submit work to a configured SSH or HPC target."];
+    case "container": return ["This provider may start a local container workload."];
     default: return [];
   }
 }
@@ -66,16 +71,29 @@ function validationArtifact(runId: string, showcaseId: string, validation: Valid
   };
 }
 
+function reproductionArtifact(runId: string, showcaseId: string, result: ReproductionResult): ArtifactRef {
+  return {
+    id: `reproduction:${runId}`,
+    role: "log",
+    mediaType: "application/json",
+    generatedAt: now(),
+    source: result.summary,
+    resourceUri: `rosalind-run://${runId}/${showcaseId}/reproduction`,
+  };
+}
+
 export class RosalindRuntime {
   readonly catalog: ShowcaseCatalog;
   readonly providers: ProviderRegistry;
+  readonly science: ScienceExecutor;
   private readonly sessions = new WeakMap<object, Map<string, RunRecord>>();
   private readonly liveRecords = new Set<RunRecord>();
   private disposed = false;
 
-  constructor(options: { catalog?: ShowcaseCatalog; providers?: ProviderRegistry } = {}) {
+  constructor(options: { catalog?: ShowcaseCatalog; providers?: ProviderRegistry; science?: ScienceExecutor } = {}) {
     this.catalog = options.catalog ?? new ShowcaseCatalog();
     this.providers = options.providers ?? new ProviderRegistry();
+    this.science = options.science ?? new ScienceRuntime();
   }
 
   dispose(): void {
@@ -130,8 +148,12 @@ export class RosalindRuntime {
     if (mode === "reproduce" && !showcase.recipe.providerIds.includes(providerId)) {
       throw new Error(`Provider ${providerId} is not declared for ${showcaseId}`);
     }
-    const provider = this.providers.get(providerId);
-    const reasons = providerRequiresConfirmation(provider) ? confirmationReasons(provider.kind) : [];
+    const providerIds = mode === "reproduce" && (showcase.categoryId === "literature" || showcase.categoryId === "databases")
+      ? [...showcase.recipe.providerIds]
+      : [providerId];
+    const providers = providerIds.map((id) => this.providers.get(id));
+    const provider = providers[0]!;
+    const reasons = [...new Set(providers.flatMap((item) => providerRequiresConfirmation(item) ? confirmationReasons(item.kind) : []))];
     const createdAt = now();
     const plan: ExecutionPlan = {
       id: randomUUID(),
@@ -158,9 +180,12 @@ export class RosalindRuntime {
         },
       ],
       inputs: showcase.artifacts.filter((artifact) => artifact.role === "input"),
-      providerIds: [providerId],
-      resources: [provider.label],
-      estimatedCostUsd: provider.estimatedCostUsd ?? { min: 0, max: 0 },
+      providerIds,
+      resources: providers.map((item) => item.label),
+      estimatedCostUsd: providers.reduce((total, item) => ({
+        min: total.min + (item.estimatedCostUsd?.min ?? 0),
+        max: total.max + (item.estimatedCostUsd?.max ?? 0),
+      }), { min: 0, max: 0 }),
       confirmationReasons: reasons,
     };
     const snapshot: RunSnapshot = {
@@ -210,7 +235,8 @@ export class RosalindRuntime {
       this.throwIfAborted(record);
       const showcase = this.catalog.get(record.snapshot.showcaseId);
       const providerId = record.snapshot.plan.providerIds[0]!;
-      const provider = this.providers.get(providerId);
+      const providers = record.snapshot.plan.providerIds.map((id) => this.providers.get(id));
+      const provider = providers[0]!;
       record.snapshot.currentStepId = "execute";
       record.snapshot.progress = 0.4;
 
@@ -240,8 +266,9 @@ export class RosalindRuntime {
         return clone(record.snapshot);
       }
 
-      if (!provider.runnable) {
-        record.snapshot.error = { code: "PROVIDER_UNAVAILABLE", message: provider.diagnostics.join(" ") || `${provider.id} is unavailable.` };
+      const unavailable = providers.filter((item) => !item.runnable);
+      if (unavailable.length > 0) {
+        record.snapshot.error = { code: "PROVIDER_UNAVAILABLE", message: unavailable.map((item) => `${item.label}: ${item.diagnostics.join(" ") || "unavailable"}`).join(" ") };
         record.snapshot.progress = 1;
         delete record.snapshot.currentStepId;
         event(record, "failed", "The selected provider is unavailable; no alternate provider was selected.", "execute");
@@ -249,30 +276,34 @@ export class RosalindRuntime {
         return clone(record.snapshot);
       }
 
-      const localProvider = provider.kind === "local";
-      if (!localProvider) {
+      const unsupported = providers.find((item) => ["paid-api", "gpu", "ssh", "container"].includes(item.kind));
+      if (unsupported) {
         record.snapshot.error = {
-          code: "ADAPTER_NOT_CONNECTED",
-          message: `Provider prerequisites for ${provider.id} are available, but adapter ${showcase.recipe.adapter} has no configured execution transport.`,
+          code: "PROVIDER_EXECUTION_NOT_IMPLEMENTED",
+          message: `Provider ${unsupported.id} is configured, but DSH-Rosalind does not yet implement its declared execution protocol for ${showcase.recipe.adapter}.`,
         };
         record.snapshot.progress = 1;
         delete record.snapshot.currentStepId;
-        event(record, "failed", "No external work was started and the selected provider was not replaced.", "execute");
+        event(record, "failed", "No external work was started and the selected provider was unchanged.", "execute");
         this.liveRecords.delete(record);
         return clone(record.snapshot);
       }
 
-      await Promise.resolve();
       this.throwIfAborted(record);
-      const validation = validateShowcase(this.catalog.packageRoot, showcase);
+      const reproduction = await reproduceShowcase(showcase, providerId, this.science, {
+        session,
+        signal: record.controller.signal,
+        packageRoot: this.catalog.packageRoot,
+        allowNetwork: providers.some((item) => item.kind === "public-api") && unavailable.length === 0,
+      });
       this.throwIfAborted(record);
-      record.snapshot.artifacts = [validationArtifact(runId, showcase.id, validation)];
+      record.snapshot.artifacts = [reproductionArtifact(runId, showcase.id, reproduction)];
       record.snapshot.progress = 1;
       delete record.snapshot.currentStepId;
-      if (validation.ok) event(record, "completed", "Deterministic local reproduction checks passed.", "execute");
+      if (reproduction.status === "completed") event(record, "completed", reproduction.summary, "execute");
       else {
-        record.snapshot.error = { code: "REPRODUCTION_CHECK_FAILED", message: validation.checks.filter((item) => !item.ok).map((item) => item.name).join(", ") };
-        event(record, "failed", "Deterministic local reproduction checks failed.", "execute");
+        record.snapshot.error = reproduction.error ?? { code: "REPRODUCTION_FAILED", message: reproduction.summary };
+        event(record, "failed", reproduction.summary, "execute");
       }
       this.liveRecords.delete(record);
       return clone(record.snapshot);

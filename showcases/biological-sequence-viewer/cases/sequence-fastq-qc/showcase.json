@@ -5,7 +5,11 @@
   "status": "ready",
   "run_date": "2026-08-29",
   "prompt": "prompt.md",
-  "inputs": [],
+  "inputs": [
+    {
+      "path": "inputs/DRR037765.first500.fastq"
+    }
+  ],
   "outputs": [
     {
       "path": "outputs/quality-summary.json"
@@ -35,7 +39,7 @@
     "The viewer card did not mount."
   ],
   "environment": {
-    "viewer_session": "a23f374a-311c-4d9b-b718-6c79756a99ac",
+    "viewer_status": "session_created_but_card_not_mounted",
     "viewer_rendered": false
   }
 }

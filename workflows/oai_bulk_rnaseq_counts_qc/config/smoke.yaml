@@ -1,0 +1,4 @@
+smoke_mode: true
+results_dir: results-smoke
+fastqc_threads: 1
+salmon_threads: 1

@@ -1,0 +1,15 @@
+smoke_mode: false
+results_dir: results
+fastqc_threads: 2
+star_threads: 8
+read_files_command: zcat
+cell_barcode_start: 1
+cell_barcode_length: 16
+umi_start: 17
+umi_length: 12
+star_index: references/STAR_index
+barcode_whitelist: references/3M-february-2018.txt
+samples:
+  example_10x:
+    barcode_read: data/reads/example_10x_R1.fastq.gz
+    cdna_read: data/reads/example_10x_R2.fastq.gz

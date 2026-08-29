@@ -13,16 +13,18 @@ export default defineConfig({
     },
   },
   use: {
-    baseURL: "http://127.0.0.1:4175",
+    baseURL: process.env.DSH_PROFILE_URL ?? "http://127.0.0.1:4175",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
-  webServer: {
-    command: "node scripts/preview-server.mjs",
-    url: "http://127.0.0.1:4175/health",
-    reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
-  },
+  ...(process.env.DSH_PROFILE_URL ? {} : {
+    webServer: {
+      command: "node scripts/preview-server.mjs",
+      url: "http://127.0.0.1:4175/health",
+      reuseExistingServer: !process.env.CI,
+      timeout: 30_000,
+    },
+  }),
   projects: [
     {
       name: "chromium-1280",

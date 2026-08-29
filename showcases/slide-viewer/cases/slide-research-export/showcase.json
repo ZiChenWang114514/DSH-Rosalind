@@ -19,5 +19,5 @@
   "observations": ["All 684 spatial observations and two indexed gene columns were exported with complete row coverage."],
   "interpretation": ["The CSV is suitable for source-preserving inspection of the selected variables."],
   "limitations": ["Matrix value scale is unknown.", "No user-drawn region or viewer-native export was available."],
-  "environment": {"viewer_session": "fe033c3b-cd83-452f-83ac-1060e3a9425c", "viewer_rendered": false}
+  "environment": {"viewer_status": "awaiting_viewer", "viewer_rendered": false}
 }

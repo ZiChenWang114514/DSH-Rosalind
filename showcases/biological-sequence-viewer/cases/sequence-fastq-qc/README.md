@@ -8,7 +8,7 @@ What sequence composition and base-quality profile appears in a deterministic su
 
 ## Source and method
 
-The source is ENA run `DRR037765`. The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes a canonical local subset. Large read files remain outside Git; `outputs/source-provenance.json` records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256.
+The source is ENA run `DRR037765`. The preparation script reads the first 500 complete records, verifies sequence/quality length equality, and writes the small canonical subset bundled with this lesson. The complete source file remains outside Git; `outputs/source-provenance.json` records the public URL, ENA MD5, transformation rule, byte count, and subset SHA-256.
 
 ## Computed results
 
@@ -21,8 +21,8 @@ These values describe this bounded subset only. They do not establish run-wide q
 
 ## Reproduce
 
-Download the documented ENA object to the case input path and run `python scripts/prepare_sequence_examples.py`.
+Open `inputs/DRR037765.first500.fastq` with the Sequence Viewer and run `fastq_qc`. To rebuild the subset from ENA, download the documented source object and apply the transformation in `outputs/source-provenance.json`.
 
 ## Limitation
 
-The viewer session was created but did not render, so the visual is a project-owned numerical summary.
+The numerical results are reproducible from the bundled subset. They remain a 500-read sample and should not be interpreted as a complete run assessment.

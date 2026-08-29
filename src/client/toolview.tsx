@@ -1,6 +1,13 @@
 import type { ToolCallOwnerProps } from "@deepseek-ai/dsh-client-ui-tool/client";
+import { lazy, Suspense } from "react";
 
 import { RosalindMark } from "./icons.js";
+import { SCIENCE_VIEWER_TOOL_NAMES } from "./science-viewers.js";
+
+const ScienceToolView = lazy(async () => {
+  const module = await import("./science-viewers.js");
+  return { default: module.ScienceToolView };
+});
 
 const LABELS: Record<string, string> = {
   rosalind_catalog_list: "Browse showcase catalogue",
@@ -40,4 +47,9 @@ export function RosalindToolCard(props: ToolCallOwnerProps): JSX.Element {
   );
 }
 
+export function ScienceToolCard(props: ToolCallOwnerProps): JSX.Element {
+  return <Suspense fallback={<article className="rr-tool-card" data-tool-name={props.toolName}><header className="rr-tool-head"><span className="rr-tool-mark"><RosalindMark size={18} /></span><span className="rr-tool-name">Loading scientific viewer</span><span className="rr-tool-state">loading</span></header></article>}><ScienceToolView {...props} /></Suspense>;
+}
+
 export const ROSALIND_TOOL_NAMES = Object.freeze(Object.keys(LABELS));
+export { SCIENCE_VIEWER_TOOL_NAMES };

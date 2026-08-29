@@ -14,13 +14,13 @@
 
 ## What it is
 
-DSH-Rosalind is a native extension for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It turns a verified scientific showcase collection into a searchable workbench inside DSH Web. Every project supports three complementary paths:
+DSH-Rosalind is a native extension for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It turns a fixture-checked scientific showcase collection into a searchable workbench inside DSH Web. Every project supports three complementary paths:
 
 - **Lesson** explains the scientific question, retained evidence, computed results, interpretation, limitations, and citations.
 - **Replay** opens the versioned artifacts and previews that were already checked for this release.
 - **Reproduce** prepares a new execution plan, reports provider readiness, and runs only the steps that are available and approved.
 
-The release contains **23 ready projects in seven scientific areas** and the **148 files referenced by their manifests**. The snapshot is pinned to `rosalind-science-showcases` commit [`f81e668c69edbfe7863cc936f2d535b61d8df76b`](https://github.com/ZiChenWang114514/rosalind-science-showcases/tree/f81e668c69edbfe7863cc936f2d535b61d8df76b).
+The release contains **23 lesson-and-replay-ready projects in seven scientific areas** and the **150 files referenced by their manifests**. A fresh reproduction can complete locally, call a public service after authorization, or report the exact missing runtime or credential. The snapshot is pinned to `rosalind-science-showcases` commit [`f81e668c69edbfe7863cc936f2d535b61d8df76b`](https://github.com/ZiChenWang114514/rosalind-science-showcases/tree/f81e668c69edbfe7863cc936f2d535b61d8df76b).
 
 ## Inside DSH Web
 
@@ -49,10 +49,10 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-Download `zichenwang114514-dsh-rosalind-0.1.0.tgz` from the [v0.1.0 release](https://github.com/ZiChenWang114514/DSH-Rosalind/releases/tag/v0.1.0), then add the bundle to DSH Web:
+Download `zichenwang114514-dsh-rosalind-0.2.0.tgz` from the [v0.2.0 release](https://github.com/ZiChenWang114514/DSH-Rosalind/releases/tag/v0.2.0), then add the bundle to DSH Web:
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.1.0.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.2.0.tgz
 dsh web --no-open
 ```
 
@@ -65,7 +65,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.1.0.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.2.0.tgz
 ```
 
 ## The catalogue

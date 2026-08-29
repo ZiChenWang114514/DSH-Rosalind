@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "description": "Public fixed input for the DSH-Rosalind capability manifest. It retains only operation identifiers, plugin versions, and related cases from the source coverage record.",
+  "source": {
+    "repository": "https://github.com/ZiChenWang114514/rosalind-science-showcases",
+    "commit": "12d79ecd112ddfd55c1575adfc94c033a368bdc1",
+    "path": "showcases/coverage.json",
+    "transformed": "Retained groups, versions, operation identifiers, and cases present in this repository's 23-showcase catalogue."
+  },
+  "groups": [
+    {
+      "id": "rosalind",
+      "version": "0.2.2-research-preview",
+      "operations": [
+        {
+          "id": "rosalind.rosalind_open",
+          "cases": [
+            "databases-egfr-landscape",
+            "databases-il6r-asthma",
+            "databases-variant-interpretation",
+            "literature-pmc-availability",
+            "literature-preprint-publication-link",
+            "literature-trem2-landscape",
+            "ngs-bulk-rnaseq",
+            "ngs-fastq-qc",
+            "ngs-single-cell",
+            "rosalind-genomics",
+            "rosalind-molecular-design",
+            "rosalind-scientific-compute",
+            "rosalind-structure-analysis",
+            "sequence-fastq-qc",
+            "sequence-lambda-annotation",
+            "sequence-ras-alignment",
+            "slide-research-export",
+            "slide-segmentation-overlay",
+            "slide-spatial-expression",
+            "slide-tissue-architecture",
+            "structure-adenylate-kinase",
+            "structure-gfp-figure",
+            "structure-mdm2-p53"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ngs-analysis-workbench",
+      "version": "0.2.16",
+      "operations": [
+        {
+          "id": "ngs-analysis-workbench.activate_workflow_version",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.archive_workflow",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.cancel_ngs_run",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.check_nextflow_readiness",
+          "cases": [
+            "ngs-bulk-rnaseq",
+            "ngs-fastq-qc",
+            "ngs-single-cell"
+          ]
+        },
+        {
+          "id": "ngs-analysis-workbench.check_snakemake_readiness",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.execute_plan",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.get_ngs_run",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.get_runtime_environment",
+          "cases": [
+            "ngs-fastq-qc"
+          ]
+        },
+        {
+          "id": "ngs-analysis-workbench.list_ngs_run_lineages",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.list_ngs_runs",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.list_workflow_versions",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.list_workflows",
+          "cases": [
+            "ngs-bulk-rnaseq",
+            "ngs-fastq-qc",
+            "ngs-single-cell"
+          ]
+        },
+        {
+          "id": "ngs-analysis-workbench.observe_ngs_run",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.plan_nextflow",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.plan_snakemake",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.restore_workflow",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.save_workflow",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.update_ngs_run_analysis_summary",
+          "cases": []
+        },
+        {
+          "id": "ngs-analysis-workbench.update_workflow",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "id": "ngs-compute",
+      "version": "current installed contract",
+      "operations": [
+        {
+          "id": "ngs-compute.configure_ssh_target",
+          "cases": []
+        },
+        {
+          "id": "ngs-compute.inspect_compute_target",
+          "cases": []
+        },
+        {
+          "id": "ngs-compute.list_compute_targets",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "id": "sequence-viewer",
+      "version": "0.1.43",
+      "operations": [
+        {
+          "id": "sequence-viewer.sequence_acquire_public_example",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_align",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_cancel_job",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_control_viewer",
+          "cases": [
+            "sequence-ras-alignment"
+          ]
+        },
+        {
+          "id": "sequence-viewer.sequence_edit_copy",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_export_artifact",
+          "cases": [
+            "sequence-ras-alignment"
+          ]
+        },
+        {
+          "id": "sequence-viewer.sequence_load_track",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_manage_annotations",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_open_from_chat",
+          "cases": [
+            "sequence-ras-alignment"
+          ]
+        },
+        {
+          "id": "sequence-viewer.sequence_query_viewer",
+          "cases": [
+            "sequence-ras-alignment"
+          ]
+        },
+        {
+          "id": "sequence-viewer.sequence_restore_session",
+          "cases": []
+        },
+        {
+          "id": "sequence-viewer.sequence_run_analysis",
+          "cases": [
+            "sequence-ras-alignment"
+          ]
+        },
+        {
+          "id": "sequence-viewer.sequence_save_session",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "id": "structure-viewer",
+      "version": "0.1.80",
+      "operations": [
+        {
+          "id": "structure-viewer.structure_add_structure",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_align_structures",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_analyze",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_apply_scene",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_assembly_symmetry",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_browse_related_data",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_cancel_render",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_control_viewer",
+          "cases": [
+            "structure-mdm2-p53"
+          ]
+        },
+        {
+          "id": "structure-viewer.structure_delete_scene",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_derive_object",
+          "cases": [
+            "structure-mdm2-p53"
+          ]
+        },
+        {
+          "id": "structure-viewer.structure_discover_density",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_export",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_get_render_status",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_get_state",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_list_scenes",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_list_structures",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_load_background",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_load_data",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_load_public_density",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_load_scene",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_manage_guides",
+          "cases": [
+            "structure-mdm2-p53"
+          ]
+        },
+        {
+          "id": "structure-viewer.structure_measure",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_open_from_chat",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_pymol_action",
+          "cases": [
+            "structure-mdm2-p53"
+          ]
+        },
+        {
+          "id": "structure-viewer.structure_pymol_actions",
+          "cases": [
+            "structure-mdm2-p53"
+          ]
+        },
+        {
+          "id": "structure-viewer.structure_quality_assessment",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_query",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_redo",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_remove_structure",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_render_image",
+          "cases": [
+            "structure-gfp-figure"
+          ]
+        },
+        {
+          "id": "structure-viewer.structure_render_movie",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_save_scene",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_search_motif",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_set_assembly_symmetry",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_set_object_visibility",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_set_quality_assessment",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_set_selection",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_set_trajectory_state",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_transform_object",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_undo",
+          "cases": []
+        },
+        {
+          "id": "structure-viewer.structure_validate_render",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "id": "slide-viewer",
+      "version": "0.1.56",
+      "operations": [
+        {
+          "id": "slide-viewer.slide_cancel_analysis_from_chat",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_cancel_pathology",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_cancel_scientific_layer_import",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_cancel_workflow",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_export_dicom_object",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_analysis_from_chat",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_capabilities",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_live_workflow",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_pathology",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_scientific_entity",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_scientific_layer_import",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_viewer_state",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_get_workflow",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_import_analysis_source_from_chat",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_import_dicom_object",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_import_scientific_layer",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_import_workflow_source",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_inspect_dicomweb_instance",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_list_scientific_layers",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_list_workflow_sources",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_list_workflows",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_open_dicom_series",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_open_dicomweb_wsi",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_open_from_chat",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_open_ome_tiff_series",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_open_ome_zarr",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_prepare_dicom_upload",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_query_dicomweb",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_query_viewer",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_read_dicomweb_object",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_read_live_workflow_artifact",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_read_workflow_artifact",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_renew_scientific_layer_authorization",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_renew_source_authorization",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_resume_pathology",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_resume_workflow",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_run_workflow",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_spatial_indexed",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_submit_dicom_upload",
+          "cases": []
+        },
+        {
+          "id": "slide-viewer.slide_wait_for_render",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

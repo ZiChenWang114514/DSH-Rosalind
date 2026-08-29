@@ -21,5 +21,5 @@
     "The Slide Viewer session remained awaiting-viewer.",
     "No rendered region was available, so no morphology interpretation is made."
   ],
-  "environment": {"viewer_session": "d21efa4f-fce2-4057-9d25-eba188a994cd", "viewer_rendered": false}
+  "environment": {"viewer_status": "awaiting_viewer", "viewer_rendered": false}
 }

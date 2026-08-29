@@ -15,7 +15,7 @@ DSH-Rosalind 是面向 [DeepSeek Harness](https://github.com/deepseek-ai/deepsee
 - **Replay**：打开随版本发布且已经检查的文件和预览。
 - **Reproduce**：检查数据、软件、凭据与计算资源，生成步骤清楚的运行计划。
 
-首个版本包含七个科学类别、23 个 ready 案例，以及案例清单引用的 148 个文件。案例内容固定到 `rosalind-science-showcases` 提交 `f81e668c69edbfe7863cc936f2d535b61d8df76b`。
+本版本包含七个科学类别、23 个已完成教学与回放验证的案例，以及案例清单引用的 150 个文件。重新运行会根据实际条件完成本地计算、在授权后调用公共服务，或准确说明缺少的运行环境和凭据。案例内容固定到 `rosalind-science-showcases` 提交 `f81e668c69edbfe7863cc936f2d535b61d8df76b`。
 
 ## DSH Web 实际界面
 
@@ -38,10 +38,10 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-从 [v0.1.0 Release](https://github.com/ZiChenWang114514/DSH-Rosalind/releases/tag/v0.1.0) 下载 `zichenwang114514-dsh-rosalind-0.1.0.tgz`，然后安装到 DSH Web：
+从 [v0.2.0 Release](https://github.com/ZiChenWang114514/DSH-Rosalind/releases/tag/v0.2.0) 下载 `zichenwang114514-dsh-rosalind-0.2.0.tgz`，然后安装到 DSH Web：
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.1.0.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.2.0.tgz
 dsh web --no-open
 ```
 
@@ -54,7 +54,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.1.0.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.2.0.tgz
 ```
 
 ## 23 个案例

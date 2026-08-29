@@ -27,9 +27,11 @@ const PUBLIC_APIS = [
   ["biorxiv", "bioRxiv / medRxiv"],
   ["opentargets", "Open Targets"],
   ["gwas-catalog", "GWAS Catalog"],
-  ["gtex", "GTEx"],
-  ["clinvar", "ClinVar"],
+  ["gtex-eqtl", "GTEx eQTL"],
+  ["clinvar-variation", "ClinVar Variation"],
   ["ensembl", "Ensembl"],
+  ["ukb-topmed-phewas", "UKB-TOPMed PheWAS"],
+  ["gnomad-graphql", "gnomAD GraphQL"],
   ["uniprot", "UniProt"],
   ["chembl", "ChEMBL"],
   ["rcsb-pdb", "RCSB PDB"],
@@ -40,6 +42,7 @@ const PUBLIC_APIS = [
 const PROVIDERS: ProviderDefinition[] = [
   { id: "local-replay", label: "Repository replay", kind: "local" },
   { id: "local-sequence", label: "Local sequence validator", kind: "local" },
+  { id: "local-ngs", label: "Local Nextflow / Snakemake host", kind: "local" },
   { id: "local-structure", label: "Local structure validator", kind: "local" },
   { id: "local-slide", label: "Local slide and spatial validator", kind: "local" },
   { id: "local-workbench", label: "Local Rosalind Workbench replay", kind: "local" },
@@ -77,7 +80,11 @@ function commandExists(command: string, environment: ProviderEnvironment): boole
 }
 
 export function providerRequiresConfirmation(status: Pick<ProviderStatus, "kind">): boolean {
-  return status.kind === "paid-api" || status.kind === "gpu" || status.kind === "ssh";
+  return status.kind === "public-api"
+    || status.kind === "paid-api"
+    || status.kind === "gpu"
+    || status.kind === "ssh"
+    || status.kind === "container";
 }
 
 export class ProviderRegistry {

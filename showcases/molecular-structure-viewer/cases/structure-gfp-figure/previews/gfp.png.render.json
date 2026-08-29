@@ -104,7 +104,7 @@
       }
     ],
     "encodingDurationMs": 1805.7000000178814,
-    "jobId": "ed237485-1fa9-48db-ad91-18a40bd4d52a"
+    "jobStatus": "completed"
   },
   "renderer": "Mol* 5.11.0",
   "schemaVersion": 1

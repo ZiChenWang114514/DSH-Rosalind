@@ -1,0 +1,9 @@
+smoke_mode: true
+results_dir: results-smoke
+fastqc_threads: 1
+star_threads: 1
+read_files_command: zcat
+cell_barcode_start: 1
+cell_barcode_length: 16
+umi_start: 17
+umi_length: 12

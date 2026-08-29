@@ -1,0 +1,108 @@
+import { existsSync, readFileSync } from "node:fs";
+import { basename } from "node:path";
+import { gunzipSync } from "node:zlib";
+
+const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+const EXPECTED_PACKAGE_VERSION = "0.2.0";
+if (pkg.version !== EXPECTED_PACKAGE_VERSION) {
+  throw new Error(`Packed bundle check expects package version ${EXPECTED_PACKAGE_VERSION}, found ${String(pkg.version)}.`);
+}
+const archiveName = `${pkg.name.replace(/^@/, "").replace(/\//g, "-")}-${pkg.version}.tgz`;
+const archivePath = process.argv[2] ?? process.env.DSH_ROSALIND_BUNDLE_ARCHIVE ?? archiveName;
+if (!existsSync(archivePath)) {
+  throw new Error(`Expected npm pack archive ${archivePath} was not found.`);
+}
+
+const SKILL_ADAPTER_TOOL_NAMES = [
+  "literature_request", "database_request", "slide_control_viewer",
+  "slide_run_analysis_from_chat", "slide_run_pathology", "slide_query_scientific_layer",
+];
+const SLIDE_COMPATIBILITY_NAMES = SKILL_ADAPTER_TOOL_NAMES.slice(2);
+const ROSALIND_TOOL_NAMES = [
+  "rosalind_catalog_list", "rosalind_showcase_get", "rosalind_provider_status",
+  "rosalind_showcase_import", "rosalind_plan", "rosalind_approve", "rosalind_run",
+  "rosalind_status", "rosalind_cancel", "rosalind_artifact_list",
+  "rosalind_artifact_open", "rosalind_export", "rosalind_review",
+];
+const PUBLIC_PROVIDER_IDS = ["gtex-eqtl", "clinvar-variation", "ukb-topmed-phewas", "gnomad-graphql"];
+const PUBLIC_PROVIDER_CONTRACTS = ["article-dataset", ...PUBLIC_PROVIDER_IDS];
+const EXPECTED_TOOL_COUNT = 117 + SKILL_ADAPTER_TOOL_NAMES.length + ROSALIND_TOOL_NAMES.length;
+
+function readEntries(buffer) {
+  const entries = [];
+  let position = 0;
+  while (position + 512 <= buffer.length) {
+    const header = buffer.subarray(position, position + 512);
+    if (header.every((byte) => byte === 0)) break;
+    const name = header.subarray(0, 100).toString("utf8").replace(/\0.*$/, "");
+    const prefix = header.subarray(345, 500).toString("utf8").replace(/\0.*$/, "");
+    const sizeText = header.subarray(124, 136).toString("utf8").replace(/\0.*$/, "").trim();
+    const size = sizeText ? Number.parseInt(sizeText, 8) : 0;
+    if (!Number.isFinite(size) || size < 0) throw new Error(`Invalid tar entry size for ${name || "unnamed entry"}.`);
+    const entryName = prefix ? `${prefix}/${name}` : name;
+    entries.push({ name: entryName, data: buffer.subarray(position + 512, position + 512 + size) });
+    position += 512 + Math.ceil(size / 512) * 512;
+  }
+  return entries;
+}
+
+const entries = readEntries(gunzipSync(readFileSync(archivePath)));
+const entryMap = new Map(entries.map((entry) => [entry.name, entry.data]));
+const entryNames = entries.map((entry) => entry.name);
+const required = [
+  "package/package.json",
+  "package/lib/index.js",
+  "package/lib/client.js",
+  "package/lib/types/index.d.ts",
+  "package/lib/types/client/index.d.ts",
+  "package/cordis.patch.yml",
+  "package/capabilities/capability-manifest.json",
+  "package/workflows/oai_fastq_qc/workflow/Snakefile",
+  "package/workflows/oai_bulk_rnaseq_counts_qc/workflow/Snakefile",
+  "package/workflows/oai_scrnaseq_fastq_to_count/workflow/Snakefile",
+  "package/README.md",
+  "package/README.zh-CN.md",
+  "package/THIRD_PARTY_NOTICES.md",
+];
+const missing = required.filter((entry) => !entryMap.has(entry));
+if (EXPECTED_TOOL_COUNT !== 136) missing.push(`136-tool contract arithmetic (found ${EXPECTED_TOOL_COUNT})`);
+const skillCount = entryNames.filter((entry) => entry.startsWith("package/skills/") && entry.endsWith("/SKILL.md")).length;
+const showcaseCount = entryNames.filter((entry) => entry.startsWith("package/showcases/") && entry.endsWith("showcase.json")).length;
+if (skillCount !== 55) missing.push(`55 project Skill documents (found ${skillCount})`);
+if (showcaseCount !== 23) missing.push(`23 showcase manifests (found ${showcaseCount})`);
+const forbidden = entryNames.filter((entry) => /^package\/(?:src|tests|node_modules|reference-plugins)\//.test(entry));
+for (const workflowId of ["oai_fastq_qc", "oai_bulk_rnaseq_counts_qc", "oai_scrnaseq_fastq_to_count"]) {
+  const prefix = `package/workflows/${workflowId}/`;
+  const requiredWorkflowFiles = ["workflow/Snakefile", "config/config.yaml", "config/config.schema.yaml", "config/smoke.yaml", "README.md"];
+  for (const relative of requiredWorkflowFiles) if (!entryMap.has(`${prefix}${relative}`)) missing.push(`${workflowId}/${relative}`);
+}
+
+function fileText(path) {
+  const data = entryMap.get(path);
+  return data ? data.toString("utf8") : "";
+}
+
+function requireTokens(path, tokens, label) {
+  const content = fileText(path);
+  const absent = tokens.filter((token) => !content.includes(token));
+  if (absent.length) missing.push(`${label} in ${path}: ${absent.join(", ")}`);
+}
+
+const capabilityManifestText = fileText("package/capabilities/capability-manifest.json");
+if (capabilityManifestText) {
+  const capabilityManifest = JSON.parse(capabilityManifestText);
+  const operationCount = capabilityManifest.target?.requiredOperationCount;
+  if (operationCount !== 117) missing.push(`117 fixed operations in capability manifest (found ${String(operationCount)})`);
+}
+requireTokens("package/lib/index.js", SKILL_ADAPTER_TOOL_NAMES, "Skill adapter tools");
+requireTokens("package/lib/index.js", ROSALIND_TOOL_NAMES, "Rosalind tools");
+requireTokens("package/lib/index.js", PUBLIC_PROVIDER_CONTRACTS, "PMC/provider contracts");
+requireTokens("package/lib/client.js", PUBLIC_PROVIDER_IDS, "client provider contracts");
+if (missing.length || forbidden.length) {
+  const details = [
+    missing.length ? `Missing: ${missing.join(", ")}` : "",
+    forbidden.length ? `Unexpected development files: ${forbidden.join(", ")}` : "",
+  ].filter(Boolean).join("\n");
+  throw new Error(`Packed DSH bundle failed content inspection.\n${details}`);
+}
+console.log(`Packed bundle inspection passed: ${basename(archivePath)} contains ${entries.length} files, ${skillCount} project Skills, ${showcaseCount} showcase manifests, and the 136-tool contract (117 fixed operations + ${SKILL_ADAPTER_TOOL_NAMES.length} Skill adapters, including ${SLIDE_COMPATIBILITY_NAMES.length} Slide compatibility tools + ${ROSALIND_TOOL_NAMES.length} Rosalind tools).`);

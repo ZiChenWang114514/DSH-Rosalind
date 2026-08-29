@@ -1,0 +1,10 @@
+smoke_mode: false
+results_dir: results
+fastqc_threads: 2
+salmon_threads: 4
+salmon_index: references/salmon_transcriptome_index
+samples:
+  control_1:
+    r1: data/reads/control_1_R1.fastq.gz
+    r2: data/reads/control_1_R2.fastq.gz
+    library_type: A

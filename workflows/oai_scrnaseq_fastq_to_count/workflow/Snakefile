@@ -1,0 +1,96 @@
+"""10x-style single-cell RNA-seq FASTQ to STARsolo count-matrix workflow."""
+
+import os
+
+from snakemake.utils import validate
+
+
+configfile: "../config/config.yaml"
+validate(config, os.path.join(workflow.basedir, "../config/config.schema.yaml"))
+
+RESULTS = config["results_dir"].rstrip("/")
+SAMPLES = sorted(config.get("samples", {}))
+SMOKE_MODE = config["smoke_mode"]
+
+
+if SMOKE_MODE:
+    rule all:
+        input:
+            f"{RESULTS}/smoke/ENGINEERING_TEST_ONLY.txt"
+
+
+    rule engineering_smoke_marker:
+        output:
+            marker=f"{RESULTS}/smoke/ENGINEERING_TEST_ONLY.txt"
+        run:
+            os.makedirs(os.path.dirname(output.marker), exist_ok=True)
+            with open(output.marker, "w", encoding="utf-8") as handle:
+                handle.write(
+                    "ENGINEERING SMOKE TEST ONLY\n"
+                    "No FASTQ files were aligned and no single-cell count matrix was produced.\n"
+                )
+else:
+    rule all:
+        input:
+            matrices=expand(
+                f"{RESULTS}/starsolo/{{sample}}/Solo.out/Gene/filtered/matrix.mtx",
+                sample=SAMPLES,
+            ),
+            report=f"{RESULTS}/multiqc/multiqc_report.html"
+
+
+    rule fastqc:
+        input:
+            reads=lambda wildcards: [
+                config["samples"][wildcards.sample]["barcode_read"],
+                config["samples"][wildcards.sample]["cdna_read"],
+            ]
+        output:
+            qc_dir=directory(f"{RESULTS}/fastqc/{{sample}}")
+        threads: config["fastqc_threads"]
+        shell:
+            "fastqc --threads {threads} --outdir {output.qc_dir:q} {input.reads:q}"
+
+
+    rule starsolo_count:
+        input:
+            genome=config["star_index"],
+            whitelist=config["barcode_whitelist"],
+            barcode_read=lambda wildcards: config["samples"][wildcards.sample]["barcode_read"],
+            cdna_read=lambda wildcards: config["samples"][wildcards.sample]["cdna_read"]
+        output:
+            matrix=f"{RESULTS}/starsolo/{{sample}}/Solo.out/Gene/filtered/matrix.mtx",
+            barcodes=f"{RESULTS}/starsolo/{{sample}}/Solo.out/Gene/filtered/barcodes.tsv",
+            features=f"{RESULTS}/starsolo/{{sample}}/Solo.out/Gene/filtered/features.tsv",
+            log=f"{RESULTS}/starsolo/{{sample}}/Log.final.out"
+        params:
+            output_prefix=f"{RESULTS}/starsolo/{{sample}}/",
+            read_command=config["read_files_command"],
+            cb_start=config["cell_barcode_start"],
+            cb_length=config["cell_barcode_length"],
+            umi_start=config["umi_start"],
+            umi_length=config["umi_length"]
+        threads: config["star_threads"]
+        shell:
+            "mkdir -p {params.output_prefix:q} && "
+            "STAR --genomeDir {input.genome:q} "
+            "--readFilesIn {input.cdna_read:q} {input.barcode_read:q} "
+            "--readFilesCommand {params.read_command:q} --runThreadN {threads} "
+            "--outFileNamePrefix {params.output_prefix:q} "
+            "--soloType CB_UMI_Simple --soloCBwhitelist {input.whitelist:q} "
+            "--soloCBstart {params.cb_start} --soloCBlen {params.cb_length} "
+            "--soloUMIstart {params.umi_start} --soloUMIlen {params.umi_length} "
+            "--soloFeatures Gene"
+
+
+    rule multiqc:
+        input:
+            qc_dirs=expand(f"{RESULTS}/fastqc/{{sample}}", sample=SAMPLES),
+            star_logs=expand(f"{RESULTS}/starsolo/{{sample}}/Log.final.out", sample=SAMPLES)
+        output:
+            report=f"{RESULTS}/multiqc/multiqc_report.html"
+        params:
+            output_dir=f"{RESULTS}/multiqc"
+        shell:
+            "multiqc --force --module fastqc --module star "
+            "--outdir {params.output_dir:q} {input:q}"

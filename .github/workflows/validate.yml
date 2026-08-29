@@ -10,6 +10,34 @@ permissions:
   contents: read
 
 jobs:
+  ngs-workflows:
+    name: Bundled Snakemake workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install "snakemake==8.30.0" "jsonschema>=4,<5" "pyyaml>=6,<7"
+      - name: Run engineering smoke configurations and verify scientific inputs remain required
+        shell: bash
+        run: |
+          set -euo pipefail
+          for workflow in oai_fastq_qc oai_bulk_rnaseq_counts_qc oai_scrnaseq_fastq_to_count; do
+            root="workflows/$workflow"
+            (cd "$root" && snakemake --snakefile workflow/Snakefile --configfile config/smoke.yaml --cores 1)
+            marker="$root/results-smoke/smoke/ENGINEERING_TEST_ONLY.txt"
+            test -s "$marker"
+            grep -q "ENGINEERING SMOKE TEST ONLY" "$marker"
+            if (cd "$root" && snakemake --snakefile workflow/Snakefile --configfile config/config.yaml --dry-run --cores 1) > "$workflow-dry-run.log" 2>&1; then
+              echo "$workflow scientific dry-run unexpectedly succeeded without declared inputs" >&2
+              exit 1
+            fi
+            grep -q "MissingInputException" "$workflow-dry-run.log"
+            rm -rf "$root/results-smoke" "$root/.snakemake"
+          done
+
   validate:
     name: Node ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -42,6 +70,10 @@ jobs:
   dsh-bundle:
     name: DSH 0.1.1-rc.2 bundle
     runs-on: ubuntu-latest
+    env:
+      # A fresh, job-scoped profile prevents a runner's prior settings or
+      # extensions from contributing to this installation check.
+      DSH_HOME: ${{ runner.temp }}/dsh-rosalind-profile
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,7 +81,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: npx playwright install --with-deps chromium
       - run: npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm@10.15.1
+      - run: test "$(dsh --version)" = "0.1.1-rc.2"
+      - run: test "$(pnpm --version)" = "10.15.1"
       - run: npm run pack:bundle
       - name: Install bundle into DSH Web profile
         shell: bash
@@ -84,3 +119,54 @@ jobs:
           test -s dsh-web.html
           grep -q '<div id="root"' dsh-web.html
           ! grep -q 'Failed to initialize extension' dsh-web.log
+          DSH_PROFILE_URL=http://127.0.0.1:3180 npx playwright test tests/e2e/dsh-profile.spec.ts --project chromium-1440
+
+  dsh-bundle-windows:
+    name: DSH 0.1.1-rc.2 bundle on Windows
+    runs-on: windows-latest
+    env:
+      DSH_HOME: ${{ runner.temp }}/dsh-rosalind-profile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - run: npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm@10.15.1
+      - shell: pwsh
+        run: |
+          if ((dsh --version) -ne '0.1.1-rc.2') { throw 'Expected DSH 0.1.1-rc.2.' }
+          if ((pnpm --version) -ne '10.15.1') { throw 'Expected pnpm 10.15.1.' }
+      - run: npm run pack:bundle
+      - name: Install bundle and exercise the packaged page
+        shell: pwsh
+        run: |
+          $archive = Get-ChildItem -LiteralPath . -Filter 'zichenwang114514-dsh-rosalind-*.tgz' | Select-Object -First 1
+          if (-not $archive) { throw 'The bundle archive was not created.' }
+          dsh plugin --profile web add $archive.FullName
+          dsh --profile web --dump-config | Set-Content -LiteralPath dsh-config.txt
+          if (-not (Select-String -LiteralPath dsh-config.txt -Pattern 'dsh-rosalind' -Quiet)) { throw 'The installed DSH profile does not include dsh-rosalind.' }
+
+          $process = Start-Process -FilePath 'dsh.cmd' -ArgumentList @('web', '--port', '3180', '--no-open') -RedirectStandardOutput dsh-web.log -RedirectStandardError dsh-web-error.log -PassThru -WindowStyle Hidden
+          try {
+            $ready = $false
+            foreach ($attempt in 1..120) {
+              if ($process.HasExited) {
+                Get-Content -LiteralPath dsh-web.log -ErrorAction SilentlyContinue
+                Get-Content -LiteralPath dsh-web-error.log -ErrorAction SilentlyContinue
+                throw "DSH Web exited with code $($process.ExitCode)."
+              }
+              try {
+                $response = Invoke-WebRequest -UseBasicParsing -Uri 'http://127.0.0.1:3180/' -TimeoutSec 2
+                if ($response.StatusCode -eq 200) { $ready = $true; break }
+              } catch { Start-Sleep -Seconds 1 }
+            }
+            if (-not $ready) { throw 'DSH Web did not become ready.' }
+            $env:DSH_PROFILE_URL = 'http://127.0.0.1:3180'
+            npx playwright test tests/e2e/dsh-profile.spec.ts --project chromium-1440
+            if ($LASTEXITCODE -ne 0) { throw 'The packaged DSH profile interaction test failed.' }
+          } finally {
+            if (-not $process.HasExited) { Stop-Process -Id $process.Id -Force }
+          }

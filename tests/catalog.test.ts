@@ -31,6 +31,20 @@ describe("generated showcase catalogue", () => {
     expect(lambda?.claims.some((claim) => claim.kind === "computed")).toBe(true);
   });
 
+  it("connects every showcase to explicit services, operations, fixtures, assertions, and provenance", async () => {
+    const catalogue = await buildCatalogue(repositoryRoot);
+    for (const showcase of catalogue) {
+      expect(showcase.requiredMcpServers.length).toBeGreaterThan(0);
+      expect(showcase.requiredOperations.length).toBeGreaterThan(0);
+      expect(showcase.fixtures.length).toBeGreaterThan(0);
+      expect(showcase.expectedArtifacts.length).toBeGreaterThan(0);
+      expect(showcase.scientificAssertions.length).toBeGreaterThan(0);
+      expect(showcase.provenance.sourceCommit).toBe("f81e668c69edbfe7863cc936f2d535b61d8df76b");
+      expect(showcase.provenance.sources).toEqual(showcase.sources);
+      expect(showcase.visualAssertions.length).toBe(showcase.preview ? 1 : 0);
+    }
+  });
+
   it("retains exact artifact sizes, recorded hashes, and browser-safe previews", async () => {
     const catalogue = await buildCatalogue(repositoryRoot);
     const ras = catalogue.find((item) => item.id === "sequence-ras-alignment");
@@ -56,10 +70,10 @@ describe("scientific acceptance records", () => {
     expect(values.pdl1).toEqual({ candidates: 20, topFiveRows: 5, ensemblePredictions: 25, firstCandidate: "NB13_E104Q" });
   });
 
-  it("parses the complete 148-file release snapshot", async () => {
+  it("parses the complete 150-file release snapshot", async () => {
     const report = await validateShowcases(repositoryRoot);
     expect(report.errors).toEqual([]);
-    expect(report).toMatchObject({ ok: true, pluginCount: 7, showcaseCount: 23, fileCount: 148 });
-    expect(Object.values(report.parsedByType).reduce((sum, count) => sum + count, 0)).toBe(148);
+    expect(report).toMatchObject({ ok: true, pluginCount: 7, showcaseCount: 23, fileCount: 150 });
+    expect(Object.values(report.parsedByType).reduce((sum, count) => sum + count, 0)).toBe(150);
   });
 });

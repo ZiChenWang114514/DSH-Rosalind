@@ -1,0 +1,7 @@
+smoke_mode: false
+results_dir: results
+threads: 2
+samples:
+  example:
+    r1: data/reads/example_R1.fastq.gz
+    r2: data/reads/example_R2.fastq.gz

@@ -5,13 +5,19 @@
   "status": "ready",
   "run_date": "2026-08-29",
   "prompt": "prompt.md",
-  "inputs": [],
+  "inputs": [
+    {
+      "path": "inputs/1EMA.pdb",
+      "bytes": 190188,
+      "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088"
+    }
+  ],
   "outputs": [
     {"path": "previews/gfp.png"},
     {"path": "previews/gfp.png.render.json"}
   ],
   "previews": [{"path": "previews/gfp.png"}],
-  "sources": ["RCSB PDB 1EMA, supplied by the plugin's pinned bundled example"],
+  "sources": ["https://files.rcsb.org/download/1EMA.pdb"],
   "observations": [
     "The mounted viewer identified 1EMA as an X-ray structure at 1.9 angstrom resolution.",
     "The displayed model contained 225 protein residues, 1866 atoms, and CRO at chain A author residue 66.",
@@ -25,7 +31,7 @@
     "The current render keeps all source-visible small components, including solvent markers."
   ],
   "environment": {
-    "viewer_session": "f2f2c36e-028a-4c13-a1d7-2c1a249edb28",
-    "render_job": "ed237485-1fa9-48db-ad91-18a40bd4d52a"
+    "viewer_status": "completed",
+    "render_status": "completed"
   }
 }

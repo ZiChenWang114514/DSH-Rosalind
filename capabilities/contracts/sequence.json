@@ -1,0 +1,2482 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "sequence",
+  "tools": [
+    {
+      "name": "sequence.acquire_public_example",
+      "title": "Acquire authoritative public sequence example",
+      "description": "Optional legacy acquisition route, available only when the plugin host independently exposes authenticated local workspace roots through MCP roots/list. For marketplace starters, follow the Biological Sequence & Alignment Viewer skill: Codex fetches and validates the pinned official source with its own authorized network and workspace tools, then calls sequence.open_from_chat exactly once with its exact absolute local path. This acquisition tool is never a starter prerequisite or a fallback when roots are unavailable; supplying workspaceRoot cannot grant access. When authorized, it acquires one exact versioned NCBI, UniProtKB, Rfam, or ENA example into codex-viewer-examples, enforces fixed endpoints and accession/release/checksum/format/byte bounds, records deterministic derivation and SHA-256 provenance, and opens the collision-safely published result in one session. Never substitute a bundled fixture or an arbitrary URL.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "exampleId": {
+            "type": "string",
+            "enum": [
+              "ena-drr037765-first-500",
+              "ncbi-nc-001416-1",
+              "rfam-rf00360-15-1",
+              "uniprot-human-ras-sv1"
+            ],
+            "description": "Exact versioned public example identifier from the Sequence Viewer starter catalog."
+          },
+          "workspaceRoot": {
+            "description": "Exact independently authenticated MCP workspace root to select. Omit when the host exposes exactly one active root. This path does not grant workspace access.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32768
+          }
+        },
+        "required": [
+          "exampleId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "exampleId": {
+            "type": "string",
+            "enum": [
+              "ena-drr037765-first-500",
+              "ncbi-nc-001416-1",
+              "rfam-rf00360-15-1",
+              "uniprot-human-ras-sv1"
+            ],
+            "description": "Exact versioned public example identifier from the Sequence Viewer starter catalog."
+          },
+          "workspaceRoot": {
+            "type": "string",
+            "description": "Exact independently authenticated MCP workspace root to select. Omit when the host exposes exactly one active root. This path does not grant workspace access."
+          }
+        },
+        "required": [
+          "exampleId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.align",
+      "title": "Align Sequences in the Viewer",
+      "description": "Create a new exploratory pairwise or center-star alignment from exact sequence record IDs or alignment row IDs in the mounted viewer. The operation is cancellable, source-safe, and produces a derived alignment artifact with engine provenance.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "builtin-center-star",
+              "builtin-pairwise"
+            ]
+          },
+          "recordIds": {
+            "minItems": 2,
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "rowIds": {
+            "minItems": 2,
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "builtin-center-star",
+              "builtin-pairwise"
+            ]
+          },
+          "recordIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.cancel_job",
+      "title": "Cancel Biological Sequence Viewer Job",
+      "description": "Cancel an active viewer analysis or alignment job by exact job ID. Completed or unknown jobs are left unchanged and reported explicitly.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "jobId",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "jobId",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.control_viewer",
+      "title": "Control Biological Sequence & Alignment Viewer",
+      "description": "Control the active Biological Sequence & Alignment Viewer. Always pass sessionId and action, never viewerSessionId or command. Sequence actions: clear_sequence_selection, focus_sequence_coordinate, navigate_sequence_search_hit, navigate_sequence_feature, search_sequence, select_sequence_feature, select_sequence_range, set_sequence_record, set_sequence_record_browser, set_sequence_annotation_index, and set_sequence_view_options. select_sequence_range supports wraparound=true for a circular start-through-origin-to-end range. set_sequence_view_options controls palette, wrap, features/quality/translation, genetic code, linear/circular/split layout, orientation, origin-range controls, and view synchronization. select_sequence_feature accepts an exact feature ID or a unique case-insensitive biological type, label, or qualifier value; ambiguous matches return exact candidate IDs. Quality controls: set_quality_view_options controls report distributions, methods, and the exact expandedTables IDs. Read controls: set_read_pileup_options shares UI filters and display options (MAPQ255 is unknown, so a strict threshold also sets includeUnknownMappingQuality:false); select_read uses exact trackId plus zero-based sourceReadIndex, and clear_read_selection clears it. Trace controls: set_chromatogram_view_options sets firstBase and basesPerWindow (1–100 source bases). Alignment actions: clear_alignment_selection, compute_alignment_guide_tree, filter_alignment_rows, focus_alignment_cell, focus_alignment_reference_coordinate, navigate_alignment_search_hit, reset_alignment_view, search_alignment, select_alignment_columns, select_alignment_rows, set_alignment_reference, set_alignment_row_visibility, set_alignment_view_options, and show_all_alignment_rows. set_alignment_view_options also controls enabledMetricTracks, sequence-logo help, and row-manager sorting; row-manager sorting does not reorder the matrix. focus_alignment_cell uses singular row; set_alignment_row_visibility always requires the rows array, even for one row. select_alignment_rows accepts an empty rows list to clear the selection. Feedback control: dismiss_workbench_feedback takes a registered feedbackId from query target workbench-feedback and dismisses only copy feedback or session errors, never approvals or source-write confirmation. Shared actions: set_display_mode, set_mode, set_toolbar_visibility, and set_workbench_panel. set_workbench_disclosure uses an exact disclosureId from query target workbench-disclosures and expanded:true or false, revealing parent sections when expanded. set_workbench_panel takes group (sequence-tools, sequence-display, or alignment-tools) and panel (an available ID, or null to close); query workbench-panels to discover current choices. Panel/mode changes cannot hide pending user approvals or copy feedback and return applied:false if blocked. set_toolbar_visibility requires visible:true or visible:false and changes toolbar chrome without moving the viewer between chat and the side pane. Call this tool directly from the conversation that contains the mounted viewer; do not delegate live-viewer control to a subagent and do not use browser or DevTools automation. Biological coordinates are 1-based; browser pages and sourceReadIndex are zero-based.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "clear_alignment_selection",
+              "clear_read_selection",
+              "clear_sequence_selection",
+              "compute_alignment_guide_tree",
+              "dismiss_workbench_feedback",
+              "filter_alignment_rows",
+              "focus_alignment_cell",
+              "focus_alignment_reference_coordinate",
+              "focus_sequence_coordinate",
+              "navigate_alignment_search_hit",
+              "navigate_sequence_search_hit",
+              "navigate_sequence_feature",
+              "reset_alignment_view",
+              "search_alignment",
+              "search_sequence",
+              "select_alignment_columns",
+              "select_alignment_rows",
+              "select_read",
+              "select_sequence_feature",
+              "select_sequence_range",
+              "set_alignment_reference",
+              "set_alignment_row_visibility",
+              "set_alignment_view_options",
+              "set_chromatogram_view_options",
+              "set_display_mode",
+              "set_mode",
+              "set_quality_view_options",
+              "set_read_pileup_options",
+              "set_sequence_annotation_index",
+              "set_sequence_record",
+              "set_sequence_record_browser",
+              "set_sequence_view_options",
+              "set_toolbar_visibility",
+              "set_workbench_panel",
+              "set_workbench_disclosure",
+              "show_all_alignment_rows"
+            ]
+          },
+          "analysisScope": {
+            "type": "string",
+            "enum": [
+              "all-unhidden-rows",
+              "currently-displayed-rows"
+            ]
+          },
+          "cellWidth": {
+            "type": "integer",
+            "minimum": 16,
+            "maximum": 42
+          },
+          "basesPerWindow": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "colorMode": {
+            "type": "string",
+            "enum": [
+              "coding-impact",
+              "difference",
+              "identity",
+              "nucleotide-substitution",
+              "protein-conservation",
+              "protein-similarity",
+              "residue"
+            ]
+          },
+          "column": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "coordinate": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "next",
+              "previous"
+            ]
+          },
+          "displayMode": {
+            "type": "string",
+            "enum": [
+              "fullscreen",
+              "inline"
+            ]
+          },
+          "disclosureId": {
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^(?:alignment|sequence)\\.[a-z0-9][a-z0-9.-]*$",
+            "description": "Exact registered ID returned by query_viewer target workbench-disclosures; expanding reveals its parent tool and sections."
+          },
+          "distributionsExpanded": {
+            "type": "boolean"
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "enabledMetricTracks": {
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "gap",
+                "identity",
+                "mismatch",
+                "modality-conservation",
+                "rna-structure",
+                "sequence-logo"
+              ]
+            }
+          },
+          "expanded": {
+            "type": "boolean"
+          },
+          "expandedTables": {
+            "maxItems": 7,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cycle-quality",
+                "cycle-composition",
+                "read-length",
+                "read-gc",
+                "read-mean-quality",
+                "repeated-sequences",
+                "frequent-kmers"
+              ]
+            }
+          },
+          "firstBase": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "feedbackId": {
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^(?:alignment|sequence)\\.[a-z0-9][a-z0-9.-]*$",
+            "description": "Exact registered copy or session-error feedback ID from query target workbench-feedback. This cannot approve, cancel, or confirm source writes."
+          },
+          "featureId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Exact generated feature ID or a unique case-insensitive biological type, label, or qualifier value such as CDS or kinase domain."
+          },
+          "geneticCodeId": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "alignment-tools",
+              "sequence-display",
+              "sequence-tools"
+            ]
+          },
+          "includeDuplicates": {
+            "type": "boolean"
+          },
+          "includeQcFailed": {
+            "type": "boolean"
+          },
+          "includeSecondary": {
+            "type": "boolean"
+          },
+          "includeSupplementary": {
+            "type": "boolean"
+          },
+          "includeUnknownMappingQuality": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "circular",
+              "linear",
+              "split"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "alignment",
+              "sequence"
+            ]
+          },
+          "methodsExpanded": {
+            "type": "boolean"
+          },
+          "minimumMappingQuality": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "moleculeType": {
+            "type": "string",
+            "enum": [
+              "dna",
+              "mixed",
+              "nucleic-acid-ambiguous",
+              "protein",
+              "rna",
+              "unknown"
+            ]
+          },
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "forward",
+              "reverse-complement"
+            ]
+          },
+          "originRangeExpanded": {
+            "type": "boolean"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "panel": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "palette": {
+            "type": "string",
+            "enum": [
+              "clustal-x",
+              "hydrophobicity",
+              "jalview-nucleotide",
+              "muted-amino-acid",
+              "muted-nucleic-acid",
+              "ncbi-nucleic-acid",
+              "neutral",
+              "nucleotide-ambiguity",
+              "purine-pyrimidine",
+              "rasmol",
+              "zappo"
+            ],
+            "description": "Single-sequence palette ID. Defaults are muted-nucleic-acid (Soft nucleotide) for DNA/RNA and muted-amino-acid (Soft amino acid) for proteins; neutral selects Monochrome. Query sequence-ui-state for the active record's palette options. Use residuePalette for alignments."
+          },
+          "query": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "record": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "residuePalette": {
+            "type": "string",
+            "enum": [
+              "clustal-x",
+              "hydrophobicity",
+              "jalview-nucleotide",
+              "muted-amino-acid",
+              "muted-nucleic-acid",
+              "ncbi-nucleic-acid",
+              "neutral",
+              "nucleotide-ambiguity",
+              "purine-pyrimidine",
+              "rasmol",
+              "zappo"
+            ],
+            "description": "Alignment residue palette ID: muted-nucleic-acid for DNA/RNA, muted-amino-acid for proteins, or neutral for Monochrome. Existing scientific palettes remain available; the mounted viewer validates molecule compatibility."
+          },
+          "row": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Single alignment row ID or label; use only with focus_alignment_cell."
+          },
+          "rows": {
+            "maxItems": 500,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "description": "Alignment row IDs or unique labels; required with set_alignment_row_visibility (1–200 rows), even for one row. select_alignment_rows accepts 0–500, where an empty list clears the selection."
+          },
+          "rowSortDirection": {
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          },
+          "rowSortKey": {
+            "type": "string",
+            "enum": [
+              "coverage",
+              "identity",
+              "label",
+              "length",
+              "mismatches",
+              "source"
+            ]
+          },
+          "searchScope": {
+            "type": "string",
+            "enum": [
+              "all-unhidden-rows",
+              "currently-displayed-rows"
+            ]
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID returned by sequence.open_from_chat."
+          },
+          "showAnnotationTracks": {
+            "type": "boolean"
+          },
+          "showAllBases": {
+            "type": "boolean"
+          },
+          "showFeatures": {
+            "type": "boolean"
+          },
+          "showIdenticalAsDots": {
+            "type": "boolean"
+          },
+          "showQuality": {
+            "type": "boolean"
+          },
+          "showRnaStructureOverlays": {
+            "type": "boolean"
+          },
+          "showSequenceLogoHelp": {
+            "type": "boolean"
+          },
+          "showSoftClips": {
+            "type": "boolean"
+          },
+          "showTranslation": {
+            "type": "boolean"
+          },
+          "start": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "sortBy": {
+            "type": "string",
+            "enum": [
+              "source",
+              "label",
+              "length",
+              "molecule",
+              "position",
+              "mapping-quality",
+              "strand"
+            ]
+          },
+          "sourceReadIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Zero-based index into the currently materialized loaded track.reads array; not a file ordinal, line number, or byte offset."
+          },
+          "strand": {
+            "type": "string",
+            "enum": [
+              "all",
+              "+",
+              "-"
+            ]
+          },
+          "synchronizedViews": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "trackId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "wrapWidth": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 40
+              },
+              {
+                "type": "number",
+                "const": 50
+              },
+              {
+                "type": "number",
+                "const": 60
+              },
+              {
+                "type": "number",
+                "const": 80
+              }
+            ]
+          },
+          "wraparound": {
+            "type": "boolean",
+            "description": "For select_sequence_range on a circular record, follow start through the origin to end. Start must be greater than end."
+          }
+        },
+        "required": [
+          "action",
+          "sessionId"
+        ],
+        "additionalProperties": false
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "clear_alignment_selection",
+              "clear_read_selection",
+              "clear_sequence_selection",
+              "compute_alignment_guide_tree",
+              "dismiss_workbench_feedback",
+              "filter_alignment_rows",
+              "focus_alignment_cell",
+              "focus_alignment_reference_coordinate",
+              "focus_sequence_coordinate",
+              "navigate_alignment_search_hit",
+              "navigate_sequence_search_hit",
+              "navigate_sequence_feature",
+              "reset_alignment_view",
+              "search_alignment",
+              "search_sequence",
+              "select_alignment_columns",
+              "select_alignment_rows",
+              "select_read",
+              "select_sequence_feature",
+              "select_sequence_range",
+              "set_alignment_reference",
+              "set_alignment_row_visibility",
+              "set_alignment_view_options",
+              "set_chromatogram_view_options",
+              "set_display_mode",
+              "set_mode",
+              "set_quality_view_options",
+              "set_read_pileup_options",
+              "set_sequence_annotation_index",
+              "set_sequence_record",
+              "set_sequence_record_browser",
+              "set_sequence_view_options",
+              "set_toolbar_visibility",
+              "set_workbench_panel",
+              "set_workbench_disclosure",
+              "show_all_alignment_rows"
+            ]
+          },
+          "analysisScope": {
+            "type": "string",
+            "enum": [
+              "all-unhidden-rows",
+              "currently-displayed-rows"
+            ]
+          },
+          "cellWidth": {
+            "type": "integer"
+          },
+          "basesPerWindow": {
+            "type": "integer"
+          },
+          "colorMode": {
+            "type": "string",
+            "enum": [
+              "coding-impact",
+              "difference",
+              "identity",
+              "nucleotide-substitution",
+              "protein-conservation",
+              "protein-similarity",
+              "residue"
+            ]
+          },
+          "column": {
+            "type": "integer"
+          },
+          "coordinate": {
+            "type": "integer"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "next",
+              "previous"
+            ]
+          },
+          "displayMode": {
+            "type": "string",
+            "enum": [
+              "fullscreen",
+              "inline"
+            ]
+          },
+          "disclosureId": {
+            "type": "string",
+            "description": "Exact registered ID returned by query_viewer target workbench-disclosures; expanding reveals its parent tool and sections."
+          },
+          "distributionsExpanded": {
+            "type": "boolean"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "enabledMetricTracks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "gap",
+                "identity",
+                "mismatch",
+                "modality-conservation",
+                "rna-structure",
+                "sequence-logo"
+              ]
+            }
+          },
+          "expanded": {
+            "type": "boolean"
+          },
+          "expandedTables": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cycle-quality",
+                "cycle-composition",
+                "read-length",
+                "read-gc",
+                "read-mean-quality",
+                "repeated-sequences",
+                "frequent-kmers"
+              ]
+            }
+          },
+          "firstBase": {
+            "type": "integer"
+          },
+          "feedbackId": {
+            "type": "string",
+            "description": "Exact registered copy or session-error feedback ID from query target workbench-feedback. This cannot approve, cancel, or confirm source writes."
+          },
+          "featureId": {
+            "type": "string",
+            "description": "Exact generated feature ID or a unique case-insensitive biological type, label, or qualifier value such as CDS or kinase domain."
+          },
+          "geneticCodeId": {
+            "type": "integer"
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "alignment-tools",
+              "sequence-display",
+              "sequence-tools"
+            ]
+          },
+          "includeDuplicates": {
+            "type": "boolean"
+          },
+          "includeQcFailed": {
+            "type": "boolean"
+          },
+          "includeSecondary": {
+            "type": "boolean"
+          },
+          "includeSupplementary": {
+            "type": "boolean"
+          },
+          "includeUnknownMappingQuality": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "circular",
+              "linear",
+              "split"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "alignment",
+              "sequence"
+            ]
+          },
+          "methodsExpanded": {
+            "type": "boolean"
+          },
+          "minimumMappingQuality": {
+            "type": "integer"
+          },
+          "moleculeType": {
+            "type": "string",
+            "enum": [
+              "dna",
+              "mixed",
+              "nucleic-acid-ambiguous",
+              "protein",
+              "rna",
+              "unknown"
+            ]
+          },
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "forward",
+              "reverse-complement"
+            ]
+          },
+          "originRangeExpanded": {
+            "type": "boolean"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "panel": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "palette": {
+            "type": "string",
+            "enum": [
+              "clustal-x",
+              "hydrophobicity",
+              "jalview-nucleotide",
+              "muted-amino-acid",
+              "muted-nucleic-acid",
+              "ncbi-nucleic-acid",
+              "neutral",
+              "nucleotide-ambiguity",
+              "purine-pyrimidine",
+              "rasmol",
+              "zappo"
+            ],
+            "description": "Single-sequence palette ID. Defaults are muted-nucleic-acid (Soft nucleotide) for DNA/RNA and muted-amino-acid (Soft amino acid) for proteins; neutral selects Monochrome. Query sequence-ui-state for the active record's palette options. Use residuePalette for alignments."
+          },
+          "query": {
+            "type": "string"
+          },
+          "record": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "residuePalette": {
+            "type": "string",
+            "enum": [
+              "clustal-x",
+              "hydrophobicity",
+              "jalview-nucleotide",
+              "muted-amino-acid",
+              "muted-nucleic-acid",
+              "ncbi-nucleic-acid",
+              "neutral",
+              "nucleotide-ambiguity",
+              "purine-pyrimidine",
+              "rasmol",
+              "zappo"
+            ],
+            "description": "Alignment residue palette ID: muted-nucleic-acid for DNA/RNA, muted-amino-acid for proteins, or neutral for Monochrome. Existing scientific palettes remain available; the mounted viewer validates molecule compatibility."
+          },
+          "row": {
+            "type": "string",
+            "description": "Single alignment row ID or label; use only with focus_alignment_cell."
+          },
+          "rows": {
+            "type": "array",
+            "description": "Alignment row IDs or unique labels; required with set_alignment_row_visibility (1–200 rows), even for one row. select_alignment_rows accepts 0–500, where an empty list clears the selection.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowSortDirection": {
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          },
+          "rowSortKey": {
+            "type": "string",
+            "enum": [
+              "coverage",
+              "identity",
+              "label",
+              "length",
+              "mismatches",
+              "source"
+            ]
+          },
+          "searchScope": {
+            "type": "string",
+            "enum": [
+              "all-unhidden-rows",
+              "currently-displayed-rows"
+            ]
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID returned by sequence.open_from_chat."
+          },
+          "showAnnotationTracks": {
+            "type": "boolean"
+          },
+          "showAllBases": {
+            "type": "boolean"
+          },
+          "showFeatures": {
+            "type": "boolean"
+          },
+          "showIdenticalAsDots": {
+            "type": "boolean"
+          },
+          "showQuality": {
+            "type": "boolean"
+          },
+          "showRnaStructureOverlays": {
+            "type": "boolean"
+          },
+          "showSequenceLogoHelp": {
+            "type": "boolean"
+          },
+          "showSoftClips": {
+            "type": "boolean"
+          },
+          "showTranslation": {
+            "type": "boolean"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "sortBy": {
+            "type": "string",
+            "enum": [
+              "source",
+              "label",
+              "length",
+              "molecule",
+              "position",
+              "mapping-quality",
+              "strand"
+            ]
+          },
+          "sourceReadIndex": {
+            "type": "integer",
+            "description": "Zero-based index into the currently materialized loaded track.reads array; not a file ordinal, line number, or byte offset."
+          },
+          "strand": {
+            "type": "string",
+            "enum": [
+              "all",
+              "+",
+              "-"
+            ]
+          },
+          "synchronizedViews": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "trackId": {
+            "type": "string"
+          },
+          "wrapWidth": {
+            "oneOf": [
+              {
+                "type": "number",
+                "const": 40
+              },
+              {
+                "type": "number",
+                "const": 50
+              },
+              {
+                "type": "number",
+                "const": 60
+              },
+              {
+                "type": "number",
+                "const": 80
+              }
+            ]
+          },
+          "wraparound": {
+            "type": "boolean",
+            "description": "For select_sequence_range on a circular record, follow start through the origin to end. Start must be greater than end."
+          }
+        },
+        "required": [
+          "action",
+          "sessionId"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.edit_copy",
+      "title": "Edit a Biological Sequence or Alignment Copy",
+      "description": "Apply typed insert, delete, replace, reverse-complement, circular rotation, gap, trim, row grouping, sort, undo, or redo operations to an in-memory copy in the mounted viewer. Source files are never overwritten; export the derived copy explicitly when ready.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "coordinate": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "minimumGapFraction": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "group",
+              "identity-to-reference",
+              "label",
+              "tree"
+            ]
+          },
+          "newOrigin": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "add-alignment-gap",
+              "assign-alignment-row-group",
+              "delete-alignment-gap",
+              "delete-sequence-range",
+              "insert-sequence",
+              "redo",
+              "remove-alignment-columns",
+              "remove-alignment-rows",
+              "remove-gappy-columns",
+              "reorder-alignment-rows",
+              "replace-sequence-range",
+              "reverse-complement-range",
+              "rotate-sequence",
+              "sort-alignment-rows",
+              "undo"
+            ]
+          },
+          "record": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "referenceRowId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "row": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "rowIds": {
+            "minItems": 1,
+            "maxItems": 500,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "sequence": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000000
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "start": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "operation",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "integer"
+          },
+          "coordinate": {
+            "type": "integer"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "group": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "minimumGapFraction": {
+            "type": "number"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "group",
+              "identity-to-reference",
+              "label",
+              "tree"
+            ]
+          },
+          "newOrigin": {
+            "type": "integer"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "add-alignment-gap",
+              "assign-alignment-row-group",
+              "delete-alignment-gap",
+              "delete-sequence-range",
+              "insert-sequence",
+              "redo",
+              "remove-alignment-columns",
+              "remove-alignment-rows",
+              "remove-gappy-columns",
+              "reorder-alignment-rows",
+              "replace-sequence-range",
+              "reverse-complement-range",
+              "rotate-sequence",
+              "sort-alignment-rows",
+              "undo"
+            ]
+          },
+          "record": {
+            "type": "string"
+          },
+          "referenceRowId": {
+            "type": "string"
+          },
+          "row": {
+            "type": "string"
+          },
+          "rowIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "start": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "operation",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.export_artifact",
+      "title": "Export Viewer Artifact",
+      "description": "Persist the active full, visible, or selected biological data, annotations, table, figure, tree, or JSON copy as a bounded derived artifact. Private persistence is the default. A source-relative workspace destination is create-new only, requires trusted host source context inside an active root, and returns compact relative metadata; it never overwrites the source.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "destination": {
+            "default": {
+              "kind": "private"
+            },
+            "description": "Keep the default private artifact, or request create-new publication relative to a trusted opened workspace source.",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "private"
+                  }
+                },
+                "required": [
+                  "kind"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "const": "opened-source"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "const": "workspace"
+                  },
+                  "relativePath": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096,
+                    "description": "Destination relative to the opened source directory. Parent segments are allowed only when the server confirms containment in the same workspace root."
+                  }
+                },
+                "required": [
+                  "base",
+                  "kind",
+                  "relativePath"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "a3m",
+              "aligned-fasta",
+              "bed",
+              "clustal",
+              "csv",
+              "embl",
+              "fasta",
+              "fastq",
+              "genbank",
+              "gff3",
+              "gtf",
+              "json",
+              "newick",
+              "pdf",
+              "stockholm",
+              "svg",
+              "tsv",
+              "vcf"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "scope": {
+            "default": "all",
+            "type": "string",
+            "enum": [
+              "all",
+              "selection",
+              "visible"
+            ]
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "format",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "private"
+                  }
+                },
+                "required": [
+                  "kind"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "const": "opened-source"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "const": "workspace"
+                  },
+                  "relativePath": {
+                    "type": "string",
+                    "description": "Destination relative to the opened source directory. Parent segments are allowed only when the server confirms containment in the same workspace root."
+                  }
+                },
+                "required": [
+                  "base",
+                  "kind",
+                  "relativePath"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "description": "Keep the default private artifact, or request create-new publication relative to a trusted opened workspace source.",
+            "default": {
+              "kind": "private"
+            }
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "a3m",
+              "aligned-fasta",
+              "bed",
+              "clustal",
+              "csv",
+              "embl",
+              "fasta",
+              "fastq",
+              "genbank",
+              "gff3",
+              "gtf",
+              "json",
+              "newick",
+              "pdf",
+              "stockholm",
+              "svg",
+              "tsv",
+              "vcf"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "all",
+              "selection",
+              "visible"
+            ],
+            "default": "all"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "format",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.load_track",
+      "title": "Load an Annotation or Evidence Track",
+      "description": "Attach a local GFF3, GTF, BED, VCF, SAM, BAM, or CRAM annotation/evidence track to the mounted viewer with explicit reference mapping diagnostics. BAM uses a BAI/CSI index (default path+.bai). CRAM uses a CRAI index (default path+.crai) and usually a matching reference FASTA. Pass an exact contig when ambiguous and a bounded 1-based inclusive regional window. Read views disclose downsampling.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Indexed BAM/CRAM regional end coordinate, 1-based inclusive."
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "bam",
+              "bed",
+              "cram",
+              "gff3",
+              "gtf",
+              "sam",
+              "vcf"
+            ]
+          },
+          "indexPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "BAM BAI/CSI or CRAM CRAI path; defaults to path + .bai for BAM and path + .crai for CRAM."
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "Workspace evidence-track path."
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Exact or uniquely normalized reference/contig name."
+          },
+          "referencePath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "Matching FASTA reference path required by most CRAM files."
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "start": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Indexed BAM/CRAM regional start coordinate, 1-based inclusive."
+          }
+        },
+        "required": [
+          "format",
+          "path",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "end": {
+            "type": "integer",
+            "description": "Indexed BAM/CRAM regional end coordinate, 1-based inclusive."
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "bam",
+              "bed",
+              "cram",
+              "gff3",
+              "gtf",
+              "sam",
+              "vcf"
+            ]
+          },
+          "indexPath": {
+            "type": "string",
+            "description": "BAM BAI/CSI or CRAM CRAI path; defaults to path + .bai for BAM and path + .crai for CRAM."
+          },
+          "path": {
+            "type": "string",
+            "description": "Workspace evidence-track path."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Exact or uniquely normalized reference/contig name."
+          },
+          "referencePath": {
+            "type": "string",
+            "description": "Matching FASTA reference path required by most CRAM files."
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "start": {
+            "type": "integer",
+            "description": "Indexed BAM/CRAM regional start coordinate, 1-based inclusive."
+          }
+        },
+        "required": [
+          "format",
+          "path",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.manage_annotations",
+      "title": "Manage Viewer Annotations",
+      "description": "Add, update, delete, or import annotations on the active in-memory sequence copy. Coordinates are 1-based inclusive and imports retain track provenance; the original file is not modified.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "add",
+              "delete",
+              "import",
+              "update"
+            ]
+          },
+          "feature": {
+            "type": "object",
+            "properties": {
+              "end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "qualifiers": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                }
+              },
+              "start": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "strand": {
+                "default": ".",
+                "type": "string",
+                "enum": [
+                  "+",
+                  "-",
+                  ".",
+                  "?"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            },
+            "required": [
+              "end",
+              "id",
+              "start",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "featureId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "record": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "trackId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "action",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "add",
+              "delete",
+              "import",
+              "update"
+            ]
+          },
+          "feature": {
+            "type": "object",
+            "properties": {
+              "end": {
+                "type": "integer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "qualifiers": {
+                "type": "object",
+                "default": {},
+                "properties": {},
+                "additionalProperties": true
+              },
+              "start": {
+                "type": "integer"
+              },
+              "strand": {
+                "type": "string",
+                "enum": [
+                  "+",
+                  "-",
+                  ".",
+                  "?"
+                ],
+                "default": "."
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "end",
+              "id",
+              "start",
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "featureId": {
+            "type": "string"
+          },
+          "record": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "trackId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.open_from_chat",
+      "title": "Open Biological Sequence & Alignment Viewer from chat",
+      "description": "Open a supported local biological sequence or alignment file in an inline viewer. Use the exact absolute file path whenever available. For marketplace starters, first follow the Biological Sequence & Alignment Viewer skill to fetch and validate the pinned official source using Codex's authorized network and workspace tools, then call this tool exactly once with the validated absolute local path. This route does not require the plugin host to expose MCP workspace roots. Optional presentation:'full' shows viewer controls by default; presentation:'inline' initially hides the toolbar until the top edge is hovered or focused. The result structuredContent includes viewerSessionId; for same-turn follow-up actions, pass that ID directly to sequence.control_viewer without waiting for later model context. Success confirms session creation, not rendering: report that the viewer is opening until live viewer context or an acknowledged action confirms readiness. Tell the user to click or expand the embedded Sequence open from chat tool card and that they can use Open in side pane or ask you to move or control the same live viewer. Do not repeat or format the file name or path in the user-facing response; it is not the opening action.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact absolute path to the sequence or alignment file. A workspace-relative path works only when the MCP host exposes active roots."
+          },
+          "presentation": {
+            "description": "Initial viewer chrome: full shows its toolbar; inline hides it until the top edge is hovered or focused. Defaults to full.",
+            "type": "string",
+            "enum": [
+              "full",
+              "inline"
+            ]
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Exact absolute path to the sequence or alignment file. A workspace-relative path works only when the MCP host exposes active roots."
+          },
+          "presentation": {
+            "type": "string",
+            "enum": [
+              "full",
+              "inline"
+            ],
+            "description": "Initial viewer chrome: full shows its toolbar; inline hides it until the top edge is hovered or focused. Defaults to full."
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.query_viewer",
+      "title": "Query Biological Sequence Viewer",
+      "description": "Query the active viewer's records, features, coordinate ranges, quality, FASTQ summary metrics, alignment rows or columns, conservation metrics, search hits, tracks, tree nodes, jobs, artifacts, variants, coverage, or reads. Also query workbench-panels (mounted choices/open/blocked state), workbench-disclosures (up to 100 registered nested sections per page), workbench-feedback (registered copy or session-error dismissal choices, not user approvals), sequence-ui-state, read-pileup-state, quality-report (latest applied bounded QC report), read-detail (exact trackId plus zero-based sourceReadIndex), and chromatogram (start/end of at most 100 source bases, exact A/C/G/T samples paged at up to 500 per response with peak/base-call/quality semantics). Trace queries never return an entire binary blob or imply unverified Phred quality. Read and coverage queries use the same active read filters as the UI and disclose loaded-window completeness. Feature pages may be filtered by an exact biological identifier or annotation fragment with query. Use this whenever live model context is truncated; page limits are at most 500, cursors are target/window-specific, and coordinates are validated.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "alignment-tools",
+              "sequence-display",
+              "sequence-tools"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "alignment",
+              "sequence"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "record": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "row": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "sourceReadIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Zero-based index in the loaded track.reads array, as returned by target reads; not a file position."
+          },
+          "start": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "annotations",
+              "artifacts",
+              "columns",
+              "chromatogram",
+              "coverage",
+              "features",
+              "jobs",
+              "metrics",
+              "quality",
+              "quality-report",
+              "read-detail",
+              "read-pileup-state",
+              "reads",
+              "records",
+              "rows",
+              "search-hits",
+              "sequence-range",
+              "sequence-ui-state",
+              "tracks",
+              "tree-nodes",
+              "variants",
+              "workbench-panels",
+              "workbench-disclosures",
+              "workbench-feedback"
+            ]
+          },
+          "trackId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "sessionId",
+          "target"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "alignment-tools",
+              "sequence-display",
+              "sequence-tools"
+            ]
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "alignment",
+              "sequence"
+            ]
+          },
+          "query": {
+            "type": "string"
+          },
+          "record": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "row": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "sourceReadIndex": {
+            "type": "integer",
+            "description": "Zero-based index in the loaded track.reads array, as returned by target reads; not a file position."
+          },
+          "start": {
+            "type": "integer"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "annotations",
+              "artifacts",
+              "columns",
+              "chromatogram",
+              "coverage",
+              "features",
+              "jobs",
+              "metrics",
+              "quality",
+              "quality-report",
+              "read-detail",
+              "read-pileup-state",
+              "reads",
+              "records",
+              "rows",
+              "search-hits",
+              "sequence-range",
+              "sequence-ui-state",
+              "tracks",
+              "tree-nodes",
+              "variants",
+              "workbench-panels",
+              "workbench-disclosures",
+              "workbench-feedback"
+            ]
+          },
+          "trackId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sessionId",
+          "target"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.restore_session",
+      "title": "Restore Biological Sequence Viewer Session",
+      "description": "Restore a compatible saved workbench session into the currently mounted viewer. Source identity remains authoritative; missing resources or incompatible versions are reported rather than guessed.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "savedSessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "savedSessionId",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "savedSessionId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "savedSessionId",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.run_analysis",
+      "title": "Analyze Biological Sequence or Alignment",
+      "description": "Run a deterministic viewer analysis using the current live artifact: statistics, genetic-code-aware translation, ORFs, restriction sites and digest, primer candidates, distance matrix, exploratory NJ/UPGMA tree, or quality-report. quality-report analyzes the document's bounded retained FASTQ subset and optionally screens an explicit adapterSequence of 8–64 A/C/G/T bases; do not pass record for document-level QC. Its coverage, sampling bounds, source assumptions, and adapter evidence are reported separately from whole-file totals. Analyses are bounded, provenance-bearing jobs and never overwrite the source.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "adapterSequence": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "pattern": "^[ACGT]+$"
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "neighbor-joining",
+              "upgma"
+            ]
+          },
+          "analysis": {
+            "type": "string",
+            "enum": [
+              "build-tree",
+              "design-primers",
+              "distance-matrix",
+              "find-orfs",
+              "quality-report",
+              "restriction-analysis",
+              "statistics",
+              "translate"
+            ]
+          },
+          "circular": {
+            "type": "boolean"
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "enzymes": {
+            "maxItems": 200,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          },
+          "frame": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 1
+              },
+              {
+                "type": "number",
+                "const": 2
+              },
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": -1
+              },
+              {
+                "type": "number",
+                "const": -2
+              },
+              {
+                "type": "number",
+                "const": -3
+              }
+            ]
+          },
+          "geneticCodeId": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "includePartial": {
+            "type": "boolean"
+          },
+          "maxPairs": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "maxProductLength": {
+            "type": "integer",
+            "minimum": 20,
+            "maximum": 100000
+          },
+          "minAminoAcids": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100000
+          },
+          "minProductLength": {
+            "type": "integer",
+            "minimum": 20,
+            "maximum": 100000
+          },
+          "record": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "rowIds": {
+            "minItems": 1,
+            "maxItems": 500,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "start": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "strands": {
+            "type": "string",
+            "enum": [
+              "+",
+              "-",
+              "both"
+            ]
+          },
+          "targetEnd": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "targetStart": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "analysis",
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "adapterSequence": {
+            "type": "string"
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "neighbor-joining",
+              "upgma"
+            ]
+          },
+          "analysis": {
+            "type": "string",
+            "enum": [
+              "build-tree",
+              "design-primers",
+              "distance-matrix",
+              "find-orfs",
+              "quality-report",
+              "restriction-analysis",
+              "statistics",
+              "translate"
+            ]
+          },
+          "circular": {
+            "type": "boolean"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "enzymes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "frame": {
+            "oneOf": [
+              {
+                "type": "number",
+                "const": 1
+              },
+              {
+                "type": "number",
+                "const": 2
+              },
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": -1
+              },
+              {
+                "type": "number",
+                "const": -2
+              },
+              {
+                "type": "number",
+                "const": -3
+              }
+            ]
+          },
+          "geneticCodeId": {
+            "type": "integer"
+          },
+          "includePartial": {
+            "type": "boolean"
+          },
+          "maxPairs": {
+            "type": "integer"
+          },
+          "maxProductLength": {
+            "type": "integer"
+          },
+          "minAminoAcids": {
+            "type": "integer"
+          },
+          "minProductLength": {
+            "type": "integer"
+          },
+          "record": {
+            "type": "string"
+          },
+          "rowIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          },
+          "start": {
+            "type": "integer"
+          },
+          "strands": {
+            "type": "string",
+            "enum": [
+              "+",
+              "-",
+              "both"
+            ]
+          },
+          "targetEnd": {
+            "type": "integer"
+          },
+          "targetStart": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "analysis",
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "sequence.save_session",
+      "title": "Save Biological Sequence Viewer Session",
+      "description": "Save the mounted viewer's mode, view state, selection, tracks, analyses, edit-copy state, and derived-artifact lineage as a bounded versioned session.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "sessionId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "sessionId"
+        ]
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Active viewer session ID from the live viewer context."
+          }
+        },
+        "required": [
+          "sessionId"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}

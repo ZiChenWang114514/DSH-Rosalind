@@ -51,3 +51,20 @@ test("keyboard navigation, Escape, dark theme, and 200 percent zoom remain usabl
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });
+
+test("seven plugin ecosystems expose service, Skill, and task controls", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Seven plugins" }).click();
+  await expect(page.getByRole("tab")).toHaveCount(7);
+  await expect(page.getByText("55")).toBeVisible();
+  await expect(page.getByText("117", { exact: true })).toBeVisible();
+  const first = page.getByRole("tab").first();
+  await first.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.getByRole("tabpanel")).toContainText("Life Sciences Databases");
+  const skillSwitch = page.getByRole("switch", { name: "Toggle Life Sciences Databases skills" });
+  await expect(skillSwitch).toHaveAttribute("aria-checked", "true");
+  if (test.info().project.name === "chromium-1440") {
+    await expect(page).toHaveScreenshot("plugin-ecosystems-light.png", { fullPage: true, animations: "disabled" });
+  }
+});

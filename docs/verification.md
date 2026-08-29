@@ -4,7 +4,7 @@ Release acceptance covers the scientific snapshot, host behavior, browser compon
 
 ## Scientific acceptance
 
-`npm run validate:showcases` parses the 23 manifests and all 148 referenced files. It does not treat catalogue totals as scientific proof; the headline values are derived from the retained inputs and outputs.
+`npm run validate:showcases` parses the 23 manifests and all 150 referenced files. It does not treat catalogue totals as scientific proof; the headline values are derived from the retained inputs and outputs.
 
 | Case | Expected release value |
 |---|---|
@@ -36,12 +36,19 @@ For an installation check, build a tarball and add it to a DSH Web profile:
 
 ```powershell
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.1.0.tgz
+$env:DSH_HOME = Join-Path $env:TEMP "dsh-rosalind-profile-$([guid]::NewGuid())"
+$pnpmRoot = Join-Path $env:TEMP "dsh-rosalind-pnpm-$([guid]::NewGuid())"
+$npmCache = Join-Path $env:TEMP "dsh-rosalind-npm-cache-$([guid]::NewGuid())"
+$pnpmBin = Join-Path $pnpmRoot "node_modules\\.bin"
+npm install --prefix $pnpmRoot --cache $npmCache pnpm@10.15.1
+$env:Path = "$pnpmBin;$env:Path"
+$archive = Get-ChildItem -Filter "zichenwang114514-dsh-rosalind-*.tgz" | Select-Object -First 1
+dsh plugin --profile web add $archive.FullName
 dsh --profile web --dump-config
 dsh web --no-open
 ```
 
-The composed config must contain `dsh-rosalind`, and the server must load the host and client module without a startup error.
+The composed config must contain `dsh-rosalind`, and the server must load the host and client module without a startup error. The temporary `DSH_HOME` and `pnpm` directory are test-only and may be removed after the server stops.
 
 ## Browser and visual acceptance
 
@@ -61,7 +68,7 @@ Reference screenshots from another product are used locally for proportion and r
 
 ### Clean-profile visual record
 
-The `v0.1.0` candidate was installed from its tarball into a new DSH home and opened with `dsh web --port 3180 --no-open`. The packaged client registered successfully in the real blank-session hero and produced the following measured states:
+The `v0.2.0` candidate was installed from its tarball into a new DSH home and opened with `dsh web --port 3180 --no-open`. The packaged client registered successfully in the real blank-session hero and produced the following measured states:
 
 | Scenario | Observed result |
 |---|---|

@@ -34,8 +34,8 @@
     "The SVG preview is a project-owned summary drawn from exact model-visible viewer results because source-relative viewer publication was unavailable."
   ],
   "environment": {
-    "viewer_session": "64ed7c20-e7c9-4aca-a83f-d4a8d5b4cb70",
-    "distance_job": "b1f71492-132f-4c3b-9a59-e79b998ef1fe",
-    "tree_job": "6d8be725-e828-4353-97ca-d1a6ce523a00"
+    "viewer_status": "completed",
+    "distance_analysis": "completed",
+    "guide_tree": "completed"
   }
 }
