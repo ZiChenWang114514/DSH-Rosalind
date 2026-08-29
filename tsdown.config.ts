@@ -7,8 +7,5 @@ export default defineConfig({
   dts: false,
   sourcemap: true,
   clean: true,
-  outExtensions: () => ({ js: ".js" }),
-  deps: {
-    neverBundle: [/^@deepseek-ai\//, /^react(?:\/.*)?$/, /^node:/],
-  },
+  external: [/^@deepseek-ai\//, /^react(?:\/.*)?$/, /^node:/],
 });

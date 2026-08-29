@@ -1,8 +1,8 @@
 node_modules/
 .npm-cache/
-lib/
-dist/
-artifacts/
+/lib/
+/dist/
+/artifacts/
 coverage/
 playwright-report/
 test-results/
