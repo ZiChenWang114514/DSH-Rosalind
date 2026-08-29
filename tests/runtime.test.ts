@@ -4,6 +4,7 @@ import { resolveInside, ShowcaseCatalog } from "../src/host/catalog.js";
 import { ProviderRegistry, providerRequiresConfirmation } from "../src/host/providers.js";
 import { RosalindRuntime } from "../src/host/runtime.js";
 import { createRosalindTools } from "../src/host/tools.js";
+import { artifactByteCounts } from "../src/host/validators.js";
 
 const EXPECTED_TOOLS = [
   "rosalind_catalog_list",
@@ -48,6 +49,17 @@ describe("DSH host contract", () => {
   it("rejects workspace path traversal", () => {
     expect(() => resolveInside(process.cwd(), "../outside.json")).toThrow(/leaves the selected directory/);
     expect(() => resolveInside(process.cwd(), "   ")).toThrow(/must not be empty/);
+  });
+
+  it("treats LF and CRLF text as byte-equivalent across operating systems", () => {
+    expect(artifactByteCounts(new TextEncoder().encode("alpha\nbeta\n"))).toEqual({
+      actual: 11,
+      windowsEquivalent: 13,
+    });
+    expect(artifactByteCounts(new TextEncoder().encode("alpha\r\nbeta\r\n"))).toEqual({
+      actual: 13,
+      windowsEquivalent: 13,
+    });
   });
 });
 

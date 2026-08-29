@@ -21,6 +21,14 @@ function caseFile(entry: ShowcaseDefinition, suffix: string): string {
   return `${prefix}${suffix}`;
 }
 
+export function artifactByteCounts(bytes: Uint8Array): { actual: number; windowsEquivalent: number } {
+  let lfWithoutCr = 0;
+  for (let index = 0; index < bytes.length; index++) {
+    if (bytes[index] === 0x0a && (index === 0 || bytes[index - 1] !== 0x0d)) lfWithoutCr++;
+  }
+  return { actual: bytes.length, windowsEquivalent: bytes.length + lfWithoutCr };
+}
+
 function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationResult["checks"] {
   return entry.artifacts.map((artifact) => {
     if (!artifact.path) return { name: artifact.id, ok: true, actual: "resource", expected: "resource" };
@@ -28,7 +36,21 @@ function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationR
     if (!existsSync(absolute)) return { name: artifact.id, ok: false, actual: "missing", expected: "present" };
     const actualBytes = statSync(absolute).size;
     const expected = artifact.bytes ?? actualBytes;
-    return check(artifact.id, actualBytes, expected);
+    if (actualBytes === expected) return check(artifact.id, actualBytes, expected);
+
+    // Catalogue byte counts were captured on Windows. Git may materialize the
+    // same textual artifact with LF on Linux, one byte shorter per line break.
+    // Accept that byte-equivalent form while retaining exact checks for files
+    // whose lengths already match (including binary scientific artifacts).
+    const { windowsEquivalent: windowsEquivalentBytes } = artifactByteCounts(readFileSync(absolute));
+    return {
+      name: artifact.id,
+      ok: windowsEquivalentBytes === expected,
+      actual: windowsEquivalentBytes === expected
+        ? `${actualBytes} bytes (LF; ${windowsEquivalentBytes} CRLF-equivalent)`
+        : String(actualBytes),
+      expected: String(expected),
+    };
   });
 }
 
