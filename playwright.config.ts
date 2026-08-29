@@ -7,6 +7,11 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? "github" : "list",
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: process.env.CI ? 0.06 : 0.005,
+    },
+  },
   use: {
     baseURL: "http://127.0.0.1:4175",
     trace: "retain-on-failure",

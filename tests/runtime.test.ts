@@ -54,10 +54,12 @@ describe("DSH host contract", () => {
   it("treats LF and CRLF text as byte-equivalent across operating systems", () => {
     expect(artifactByteCounts(new TextEncoder().encode("alpha\nbeta\n"))).toEqual({
       actual: 11,
+      lfEquivalent: 11,
       windowsEquivalent: 13,
     });
     expect(artifactByteCounts(new TextEncoder().encode("alpha\r\nbeta\r\n"))).toEqual({
       actual: 13,
+      lfEquivalent: 11,
       windowsEquivalent: 13,
     });
   });

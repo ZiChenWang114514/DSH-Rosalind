@@ -56,7 +56,7 @@ jobs:
         run: |
           tgz="$(find . -maxdepth 1 -name 'zichenwang114514-dsh-rosalind-*.tgz' -print -quit)"
           test -n "$tgz"
-          dsh plugin --profile web add "$tgz"
+          dsh plugin --profile web add "file:$PWD/${tgz#./}"
           dsh --profile web --dump-config > dsh-config.txt
           grep -q "dsh-rosalind" dsh-config.txt
       - name: Start DSH Web and request the packaged page

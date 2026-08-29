@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
 export const SOURCE_COMMIT = "f81e668c69edbfe7863cc936f2d535b61d8df76b";
@@ -62,6 +62,23 @@ export function mediaTypeFor(filePath) {
 
 function sha256(buffer) {
   return createHash("sha256").update(buffer).digest("hex");
+}
+
+function usesCanonicalTextBytes(mediaType) {
+  return mediaType.startsWith("text/")
+    || mediaType === "application/json"
+    || mediaType === "application/geo+json"
+    || mediaType === "image/svg+xml"
+    || mediaType.startsWith("chemical/");
+}
+
+export function canonicalArtifactBuffer(mediaType, buffer) {
+  if (!usesCanonicalTextBytes(mediaType)) return buffer;
+  return Buffer.from(buffer.toString("utf8").replace(/\r\n/g, "\n"), "utf8");
+}
+
+async function canonicalArtifactSize(filePath, mediaType) {
+  return canonicalArtifactBuffer(mediaType, await readFile(filePath)).length;
 }
 
 function cleanMarkdown(value) {
@@ -139,12 +156,11 @@ function recipeFor(showcase, categoryId, artifacts) {
 async function artifactRef(repositoryRoot, caseRelativePath, entry, role, runDate) {
   const relativePath = toPosix(path.join(caseRelativePath, entry.path));
   const absolutePath = path.join(repositoryRoot, relativePath);
-  const buffer = await readFile(absolutePath);
-  const actualStat = await stat(absolutePath);
-  const actualSha256 = sha256(buffer);
-  const recordedMetadataDiffers = (entry.bytes !== undefined && entry.bytes !== actualStat.size)
-    || (entry.sha256 !== undefined && entry.sha256 !== actualSha256);
   const mediaType = mediaTypeFor(relativePath);
+  const buffer = canonicalArtifactBuffer(mediaType, await readFile(absolutePath));
+  const actualSha256 = sha256(buffer);
+  const recordedMetadataDiffers = (entry.bytes !== undefined && entry.bytes !== buffer.length)
+    || (entry.sha256 !== undefined && entry.sha256 !== actualSha256);
   const finalRole = /provenance/i.test(entry.path) ? "provenance" : role;
   const resourceUri = mediaType === "image/svg+xml"
     ? `data:image/svg+xml;base64,${buffer.toString("base64")}`
@@ -161,7 +177,7 @@ async function artifactRef(repositoryRoot, caseRelativePath, entry, role, runDat
     generatedAt: ["output", "preview", "provenance"].includes(finalRole) ? runDate : undefined,
     path: relativePath,
     resourceUri,
-    bytes: actualStat.size,
+    bytes: buffer.length,
     sha256: entry.sha256 === undefined ? undefined : actualSha256,
   };
 }
@@ -200,8 +216,8 @@ export async function buildCatalogue(repositoryRoot) {
       const readmePath = `${caseRelativePath}/README.md`;
       const promptPath = `${caseRelativePath}/${manifest.prompt}`;
       artifacts.unshift(
-        { id: `${manifest.id}:README.md`, role: "input", mediaType: "text/markdown", path: readmePath, bytes: (await stat(path.join(repositoryRoot, readmePath))).size },
-        { id: `${manifest.id}:${manifest.prompt}`, role: "input", mediaType: "text/markdown", path: promptPath, bytes: (await stat(path.join(repositoryRoot, promptPath))).size },
+        { id: `${manifest.id}:README.md`, role: "input", mediaType: "text/markdown", path: readmePath, bytes: await canonicalArtifactSize(path.join(repositoryRoot, readmePath), "text/markdown") },
+        { id: `${manifest.id}:${manifest.prompt}`, role: "input", mediaType: "text/markdown", path: promptPath, bytes: await canonicalArtifactSize(path.join(repositoryRoot, promptPath), "text/markdown") },
       );
 
       const sourceSection = firstSection(sections, ["source observations", "verified observations", "source and method", "observed interface state", "rosalind observation"]);

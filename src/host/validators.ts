@@ -21,12 +21,19 @@ function caseFile(entry: ShowcaseDefinition, suffix: string): string {
   return `${prefix}${suffix}`;
 }
 
-export function artifactByteCounts(bytes: Uint8Array): { actual: number; windowsEquivalent: number } {
+export function artifactByteCounts(bytes: Uint8Array): { actual: number; lfEquivalent: number; windowsEquivalent: number } {
   let lfWithoutCr = 0;
+  let crlfCount = 0;
   for (let index = 0; index < bytes.length; index++) {
-    if (bytes[index] === 0x0a && (index === 0 || bytes[index - 1] !== 0x0d)) lfWithoutCr++;
+    if (bytes[index] !== 0x0a) continue;
+    if (index > 0 && bytes[index - 1] === 0x0d) crlfCount++;
+    else lfWithoutCr++;
   }
-  return { actual: bytes.length, windowsEquivalent: bytes.length + lfWithoutCr };
+  return {
+    actual: bytes.length,
+    lfEquivalent: bytes.length - crlfCount,
+    windowsEquivalent: bytes.length + lfWithoutCr,
+  };
 }
 
 function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationResult["checks"] {
@@ -38,16 +45,15 @@ function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationR
     const expected = artifact.bytes ?? actualBytes;
     if (actualBytes === expected) return check(artifact.id, actualBytes, expected);
 
-    // Catalogue byte counts were captured on Windows. Git may materialize the
-    // same textual artifact with LF on Linux, one byte shorter per line break.
-    // Accept that byte-equivalent form while retaining exact checks for files
-    // whose lengths already match (including binary scientific artifacts).
-    const { windowsEquivalent: windowsEquivalentBytes } = artifactByteCounts(readFileSync(absolute));
+    // Git may materialize textual artifacts with LF or CRLF. Compare both
+    // canonical byte forms while retaining exact checks for binary artifacts.
+    const byteCounts = artifactByteCounts(readFileSync(absolute));
+    const isEquivalent = expected === byteCounts.lfEquivalent || expected === byteCounts.windowsEquivalent;
     return {
       name: artifact.id,
-      ok: windowsEquivalentBytes === expected,
-      actual: windowsEquivalentBytes === expected
-        ? `${actualBytes} bytes (LF; ${windowsEquivalentBytes} CRLF-equivalent)`
+      ok: isEquivalent,
+      actual: isEquivalent
+        ? `${actualBytes} bytes (LF-equivalent ${byteCounts.lfEquivalent}; CRLF-equivalent ${byteCounts.windowsEquivalent})`
         : String(actualBytes),
       expected: String(expected),
     };
