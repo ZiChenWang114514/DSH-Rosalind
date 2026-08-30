@@ -263,4 +263,21 @@ describe("Rosalind project session evidence", () => {
     expect(getSnapshotVersion()).toBe(published);
     expect(currentEvidence().ngs.workflows?.payload.workflows).toEqual([{ id: "workflow-999" }]);
   });
+
+  it("ignores ordinary conversation updates when scientific evidence is unchanged", () => {
+    const result = toolResult("stable-call", "ngs_list_workflows", {}, {
+      status: "completed", operation: "list_workflows", workflows: [{ id: "stable" }],
+    }, false, 10);
+    publishConversationNodes([result]);
+    const published = getSnapshotVersion();
+
+    publishConversationNodes([
+      { kind: "message", role: "assistant", time: 11, content: [{ type: "text", text: "Drafting the explanation." }] },
+      result,
+      { kind: "message", role: "assistant", time: 12, content: [{ type: "text", text: "Finished explanation." }] },
+    ]);
+
+    expect(getSnapshotVersion()).toBe(published);
+    expect(currentEvidence().ngs.workflows?.payload.workflows).toEqual([{ id: "stable" }]);
+  });
 });

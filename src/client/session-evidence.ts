@@ -508,7 +508,7 @@ function resultLabel(toolName: string): string {
  * Publication is skipped when the relevant tool-result set is unchanged.
  */
 export function publishConversationNodes(nodes: readonly unknown[]): void {
-  const orderedNodes = orderedConversationNodes(nodes);
+  const orderedNodes = orderedConversationNodes(nodes.filter((node) => fingerprint(node) !== null));
   const marks = orderedNodes.map(conversationMark);
   if (sameConversationMarks(lastConversationMarks, marks)) return;
   const ngs = { workflows: null, targets: null, runs: null, lineages: null, runDetails: new Map<string, SessionToolEvidence>(), observations: new Map<string, SessionToolEvidence>() } as EvidenceState["ngs"];

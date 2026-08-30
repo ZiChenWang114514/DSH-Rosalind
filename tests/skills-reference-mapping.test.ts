@@ -28,8 +28,9 @@ interface SourceInventory {
   }>;
 }
 
-function sha256(path: string): string {
-  return createHash("sha256").update(readFileSync(path)).digest("hex");
+function sha256(path: string, canonicalText = false): string {
+  const content = canonicalText ? readFileSync(path, "utf8").replace(/\r\n/g, "\n") : readFileSync(path);
+  return createHash("sha256").update(content).digest("hex");
 }
 
 function sourcePackage(serviceId: (typeof SCIENCE_SKILL_SPECS)[number]["serviceId"]): string {
@@ -70,7 +71,7 @@ describe("fixed-version Skill compatibility references", () => {
       expect(recorded?.sourceContentSha256, expectedSource).toMatch(/^[a-f0-9]{64}$/);
       expect(recorded?.bundledSkillDocument, expectedSource).toBe(`skills/${spec.serviceId}/${spec.sourceName}/SKILL.md`);
       expect(recorded?.bundledContentSha256, expectedSource).toBe(
-        sha256(resolve(repositoryRoot, `skills/${spec.serviceId}/${spec.sourceName}/SKILL.md`)),
+        sha256(resolve(repositoryRoot, `skills/${spec.serviceId}/${spec.sourceName}/SKILL.md`), true),
       );
     }
   });
@@ -102,7 +103,7 @@ describe("fixed-version Skill compatibility references", () => {
       const recorded = inventory.skills.find((item) => item.sourceDocument === relative)!;
       expect(sha256(referencePath), relative).toBe(recorded.sourceContentSha256);
       const bundledContent = readFileSync(resolve(repositoryRoot, recorded.bundledSkillDocument), "utf8");
-      expect(sha256(resolve(repositoryRoot, recorded.bundledSkillDocument)), relative).toBe(recorded.bundledContentSha256);
+      expect(sha256(resolve(repositoryRoot, recorded.bundledSkillDocument), true), relative).toBe(recorded.bundledContentSha256);
       expect(recorded.bundledContentSha256, relative).not.toBe(recorded.sourceContentSha256);
       expect(bundledContent, relative).not.toContain("<!-- dsh-rosalind-adaptation:v1 -->");
       expect(bundledContent, relative).toContain(`\`${relative}\``);

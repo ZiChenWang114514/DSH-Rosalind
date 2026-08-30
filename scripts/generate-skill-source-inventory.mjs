@@ -27,6 +27,10 @@ function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
+function canonicalText(path) {
+  return readFileSync(path, "utf8").replace(/\r\n/g, "\n");
+}
+
 const skills = [];
 for (const [packageName, serviceId, pluginVersion] of packages) {
   const skillsRoot = resolve(referenceRoot, packageName, pluginVersion, "skills");
@@ -50,7 +54,7 @@ for (const [packageName, serviceId, pluginVersion] of packages) {
       sourceContentSha256: sha256(sourceContent),
       declaredName: frontmatterName(sourcePath),
       bundledSkillDocument,
-      bundledContentSha256: sha256(readFileSync(bundledSkillPath)),
+      bundledContentSha256: sha256(canonicalText(bundledSkillPath)),
     });
   }
 }
