@@ -2,3 +2,4 @@
 *.cif -text -diff
 *.gb -text -diff
 *.png binary
+skills/**/*.md text eol=lf

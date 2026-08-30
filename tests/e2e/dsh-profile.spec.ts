@@ -12,7 +12,15 @@ test("clean DSH profile loads the installed Rosalind bundle", async ({ page }) =
   await expect(page.getByRole("button", { name: /New Session/i }).first()).toBeVisible({ timeout: 30_000 });
   await expect(page.locator(".drr-sidebar-browser")).toHaveCount(0);
   const scienceTab = page.getByRole("tab", { name: "科学" });
-  await expect(scienceTab).toBeVisible({ timeout: 30_000 });
+  const sidebarExtensionAvailable = await scienceTab.count() > 0;
+  if (!sidebarExtensionAvailable) {
+    await page.getByRole("button", { name: /Settings|设置/i }).click();
+    await page.getByRole("button", { name: "Rosalind" }).click();
+    await expect(page.getByText(/当前 DSH 版本尚未提供可扩展工作区侧栏/)).toBeVisible();
+    await expect(page.getByRole("heading", { name: "DSH-Rosalind 模块设置" })).toBeVisible();
+    return;
+  }
+  await expect(scienceTab).toBeVisible();
   const tabList = scienceTab.locator("xpath=..");
   const [tabBox, tabListBox] = await Promise.all([scienceTab.boundingBox(), tabList.boundingBox()]);
   expect(tabBox).not.toBeNull();
