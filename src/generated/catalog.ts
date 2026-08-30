@@ -12707,8 +12707,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "id": "ngs-snakemake-readiness:workflow/Snakefile",
         "role": "input",
         "mediaType": "application/octet-stream",
+        "source": "Pinned file identity supersedes stale source-manifest metadata (recorded bytes=365, sha256=unspecified).",
         "path": "showcases/ngs-analysis-workbench/cases/ngs-snakemake-readiness/workflow/Snakefile",
-        "bytes": 365
+        "bytes": 381
       },
       {
         "id": "ngs-snakemake-readiness:scripts/reference_fastq_stats.py",
@@ -13355,9 +13356,10 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "id": "ngs-workflow-save:workflow/v1/Snakefile",
         "role": "input",
         "mediaType": "application/octet-stream",
+        "source": "Pinned file identity supersedes stale source-manifest metadata (recorded bytes=484, sha256=3261e8d1ed5c5540aca8af1ac233c3f6b789b51cf55b64241d5f7626d1bd1ff1).",
         "path": "showcases/ngs-analysis-workbench/cases/ngs-workflow-save/workflow/v1/Snakefile",
-        "bytes": 484,
-        "sha256": "3261e8d1ed5c5540aca8af1ac233c3f6b789b51cf55b64241d5f7626d1bd1ff1"
+        "bytes": 504,
+        "sha256": "71baeca6fcddeb4998cbb1233f24b036a36a8c9f4d0356fd98a7b568c4c6ca99"
       },
       {
         "id": "ngs-workflow-save:workflow/v1/config/config.json",
@@ -13723,9 +13725,10 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "id": "ngs-workflow-versions:workflow/v2/Snakefile",
         "role": "input",
         "mediaType": "application/octet-stream",
+        "source": "Pinned file identity supersedes stale source-manifest metadata (recorded bytes=631, sha256=97381e38082a97500d3364534f56cbfca199f45d8355b00d87b4003b9ca5eaf0).",
         "path": "showcases/ngs-analysis-workbench/cases/ngs-workflow-versions/workflow/v2/Snakefile",
-        "bytes": 631,
-        "sha256": "97381e38082a97500d3364534f56cbfca199f45d8355b00d87b4003b9ca5eaf0"
+        "bytes": 654,
+        "sha256": "415db7a5907e5e2f30997ec7f7db57085486038bbfbe331f1f69108d8db7e265"
       },
       {
         "id": "ngs-workflow-versions:workflow/v2/config/config.json",
@@ -14500,9 +14503,10 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "id": "ngs-run-execution:workflow/Snakefile",
         "role": "input",
         "mediaType": "application/octet-stream",
+        "source": "Pinned file identity supersedes stale source-manifest metadata (recorded bytes=631, sha256=97381e38082a97500d3364534f56cbfca199f45d8355b00d87b4003b9ca5eaf0).",
         "path": "showcases/ngs-analysis-workbench/cases/ngs-run-execution/workflow/Snakefile",
-        "bytes": 631,
-        "sha256": "97381e38082a97500d3364534f56cbfca199f45d8355b00d87b4003b9ca5eaf0"
+        "bytes": 654,
+        "sha256": "415db7a5907e5e2f30997ec7f7db57085486038bbfbe331f1f69108d8db7e265"
       },
       {
         "id": "ngs-run-execution:workflow/config/config.json",
@@ -15027,10 +15031,11 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "id": "ngs-run-observation:outputs/local-run-timeline.jsonl",
         "role": "output",
         "mediaType": "application/x-ndjson",
+        "source": "Pinned file identity supersedes stale source-manifest metadata (recorded bytes=424, sha256=c2d6bad9117bc886cc2dcc5725064312f2e5dd26aa5749969554ff6e8e175454).",
         "generatedAt": "2026-08-30",
         "path": "showcases/ngs-analysis-workbench/cases/ngs-run-observation/outputs/local-run-timeline.jsonl",
-        "bytes": 424,
-        "sha256": "c2d6bad9117bc886cc2dcc5725064312f2e5dd26aa5749969554ff6e8e175454"
+        "bytes": 427,
+        "sha256": "eac8fef0e0e92be02a81381dd8bf7927e4b2ad558d2134958d7fa225cfc197a9"
       },
       {
         "id": "ngs-run-observation:outputs/observed-metrics.json",
@@ -39867,8 +39872,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "id": "rosalind-nextflow-snakemake:workflows/snakemake/Snakefile",
         "role": "input",
         "mediaType": "application/octet-stream",
+        "source": "Pinned file identity supersedes stale source-manifest metadata (recorded bytes=232, sha256=unspecified).",
         "path": "showcases/rosalind-workbench/cases/rosalind-nextflow-snakemake/workflows/snakemake/Snakefile",
-        "bytes": 232
+        "bytes": 244
       },
       {
         "id": "rosalind-nextflow-snakemake:previews/preview.svg",

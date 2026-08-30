@@ -9,7 +9,7 @@
   </p>
 
   <p><strong>One hundred reproducible life-science projects, designed for DSH Web.</strong></p>
-  <p><a href="README.zh-CN.md">简体中文</a> · <a href="docs/showcases.md">Showcase catalogue</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/verification.md">Verification</a> · <a href="docs/release-notes-v0.3.0.md">v0.3.0 notes</a></p>
+  <p><a href="README.zh-CN.md">简体中文</a> · <a href="docs/showcases.md">Showcase catalogue</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/verification.md">Verification</a> · <a href="docs/release-notes-v0.3.2.md">v0.3.2 notes</a></p>
 </div>
 
 ## What it is
@@ -49,14 +49,14 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-For the v0.3.0 candidate, build the exact installation archive from this branch with `npm run pack:bundle`. After v0.3.0 is published, the same archive name will also be available from GitHub Releases. Add `zichenwang114514-dsh-rosalind-0.3.0.tgz` to DSH Web:
+Download `zichenwang114514-dsh-rosalind-0.3.2.tgz` from GitHub Releases, or build the same version from this tag with `npm run pack:bundle`. Add the archive to DSH Web:
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.0.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.2.tgz
 dsh web --no-open
 ```
 
-Open the address printed by DSH. The blank-session screen opens directly on the scientific task launcher and checked project catalogue. Search or filter the projects, open one, then choose **Start lesson**, **Inspect evidence**, or **Prepare run**. The selected action enters the active DSH conversation as a concise scientific request; internal tool names and adapter parameters remain inside the extension.
+Open the address printed by DSH. The native Harness session view remains available, while the **Science** sidebar view manages the seven Rosalind modules. Enable Science mode to apply the scientific theme and capability preset, then create or continue a research session. Showcases appear inside module details and research flows rather than replacing the Harness home screen.
 
 To install a local source build:
 
@@ -65,7 +65,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.0.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.2.tgz
 ```
 
 ## The catalogue

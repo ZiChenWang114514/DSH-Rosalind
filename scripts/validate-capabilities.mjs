@@ -14,7 +14,7 @@ const expectTotal = (label, actual, expected) => {
 expectTotal("services", manifest.services.length, 7);
 expectTotal("skills", manifest.skills.length, 55);
 expectTotal("operations", manifest.operations.length, 121);
-expectTotal("showcases", manifest.target.showcaseCount, 23);
+expectTotal("showcases", manifest.target.showcaseCount, 100);
 
 const seen = new Set();
 for (const operation of manifest.operations) {

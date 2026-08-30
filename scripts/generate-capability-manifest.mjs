@@ -979,7 +979,7 @@ const manifest = {
 
 // The operation total tracks the fixed contracts plus the coverage record, so it
 // moves whenever a fixed operation is added. Keep the other totals pinned.
-if (services.length !== 7 || skills.length !== 55 || operations.length !== 121 || targetShowcaseIds.size !== 23) {
+if (services.length !== 7 || skills.length !== 55 || operations.length !== 121 || targetShowcaseIds.size !== 100) {
   throw new Error(`Unexpected totals: ${services.length} services, ${skills.length} skills, ${operations.length} operations, ${targetShowcaseIds.size} showcases`);
 }
 await writeFile(path.join(outputDirectory, "capability-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");

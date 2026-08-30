@@ -135,7 +135,10 @@ function retainedMetadata(path: string): { format: string; width: number | null;
   try {
     const raw = JSON.parse(readFileSync(path, "utf8")) as Record<string, unknown>;
     const main = raw.main_image && typeof raw.main_image === "object" ? raw.main_image as Record<string, unknown> : undefined;
-    if (main) return { format: "svs", width: typeof main.width === "number" ? main.width : null, height: typeof main.height === "number" ? main.height : null, observations: null, genes: null, metadata: raw };
+    if (main) {
+      const micronsPerPixel = typeof main.microns_per_pixel_metadata === "number" ? main.microns_per_pixel_metadata : undefined;
+      return { format: "svs", width: typeof main.width === "number" ? main.width : null, height: typeof main.height === "number" ? main.height : null, observations: null, genes: null, metadata: { ...raw, ...(micronsPerPixel === undefined ? {} : { micronsPerPixel }) } };
+    }
     if (typeof raw.observations === "number" && typeof raw.genes === "number") {
       let sourceDataset: string | undefined;
       let sourceFileSha256: string | undefined;

@@ -1,6 +1,6 @@
 # DSH-Rosalind contributor guide
 
-The reference showcase snapshot is commit `f81e668c69edbfe7863cc936f2d535b61d8df76b` from `rosalind-science-showcases`. Keep the 23-case catalogue reproducible and do not silently replace recorded results with live data.
+The reference showcase snapshot is commit `f8c2ea83ac3b3b9258b160b80039dc3db37d76c4` from `rosalind-science-showcases`. Keep the 100-case catalogue reproducible and do not silently replace recorded results with live data.
 
 Before changing a showcase, read its `README.md`, `showcase.json`, prompt, every referenced artifact, and provenance record. Keep source observations, computed results, scientific interpretation, limitations, and citations distinct in both code and UI.
 

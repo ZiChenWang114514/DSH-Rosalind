@@ -2,7 +2,7 @@
   <img src="assets/readme-hero.svg" alt="DSH-Rosalind 可复现科学工作台" width="100%" />
 
   <p><strong>在 DSH Web 中浏览、讲解、回放并复现 100 个生命科学研究案例。</strong></p>
-  <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a> · <a href="docs/release-notes-v0.3.0.md">v0.3.0 更新</a></p>
+  <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a> · <a href="docs/release-notes-v0.3.2.md">v0.3.2 更新</a></p>
 </div>
 
 ## 项目简介
@@ -38,14 +38,14 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-当前 v0.3.0 候选版可在本分支执行 `npm run pack:bundle` 生成同名安装包；正式发布后，该文件也会出现在 GitHub Releases。将 `zichenwang114514-dsh-rosalind-0.3.0.tgz` 安装到 DSH Web：
+从 GitHub Releases 下载 `zichenwang114514-dsh-rosalind-0.3.2.tgz`，也可以在同名标签执行 `npm run pack:bundle` 构建。将安装包加入 DSH Web：
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.0.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.2.tgz
 dsh web --no-open
 ```
 
-打开 DSH 输出的地址。空白会话会直接显示科学任务启动区和项目目录；选择案例后，可执行 **Start lesson**、**Inspect evidence** 或 **Prepare run**。该动作会向当前 DSH 会话提交简洁的科学请求，内部工具名、参数与适配器信息不会出现在用户输入框中。
+打开 DSH 输出的地址。Harness 原生会话视图继续保留，左侧的**科学**视图用于管理 Rosalind 的七个模块。开启科学工作台模式后，会应用科研主题和能力组合，再创建或继续研究会话。Showcase 会出现在模块详情和研究流程中，不会替换 Harness 首页。
 
 从源码构建也很直接：
 
@@ -54,7 +54,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.0.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.2.tgz
 ```
 
 ## 100 个案例

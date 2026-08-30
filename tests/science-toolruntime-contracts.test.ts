@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { ScienceRuntime } from "../src/host/science/runtime.js";
 import { createScienceTools } from "../src/host/science-tools.js";
 
-const fastqPath = "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/inputs/DRR037765.first500.fastq";
+const fastqPath = "showcases/rosalind-workbench/cases/rosalind-nextflow-snakemake/inputs/DRR037765-first-500.fastq";
 const rasAlignmentPath = "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta";
 
 function callId(value: string): ToolExecutionInput["callId"] { return value as ToolExecutionInput["callId"]; }

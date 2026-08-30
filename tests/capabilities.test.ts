@@ -9,14 +9,14 @@ import { createScienceTools, type ScienceExecutor } from "../src/host/science-to
 import { createScienceSkills } from "../src/host/skills.js";
 
 describe("fixed-version capability registry", () => {
-  it("loads seven services, 55 Skills, 121 unique DSH operations, and 23 showcases", () => {
+  it("loads seven services, 55 Skills, 121 unique DSH operations, and 100 showcases", () => {
     const registry = new CapabilityRegistry();
     expect(registry.manifest.target).toMatchObject({
       dshVersion: "0.1.1-rc.2",
       serviceCount: 7,
       skillCount: 55,
       requiredOperationCount: 121,
-      showcaseCount: 23,
+      showcaseCount: 100,
     });
     expect(registry.operations).toHaveLength(121);
     expect(new Set(registry.operations.map((item) => item.registeredName))).toHaveLength(121);

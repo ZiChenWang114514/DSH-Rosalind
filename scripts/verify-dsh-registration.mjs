@@ -212,7 +212,7 @@ async function run() {
     if (skills.length !== 55 || readBack.some((skill) => !skill.loaded || skill.contentBytes === 0)) {
       throw new Error("Expected 55 readable profile-mounted Skills, received " + skills.length);
     }
-    if (representatives.rosalind.result.total !== 23) throw new Error("Rosalind profile call did not return 23 showcases");
+    if (representatives.rosalind.result.total !== 100) throw new Error("Rosalind profile call did not return 100 showcases");
     if (!representatives.sequence.result.viewerSessionId || representatives.sequence.result.viewer !== "alignment") throw new Error("Sequence profile call did not open the retained RAS alignment: " + JSON.stringify(representatives.sequence));
     if (!representatives.structure.result.viewerSessionId || representatives.structure.result.atomCount !== 818) throw new Error("Structure profile call did not parse the retained 1YCR fixture: " + JSON.stringify(representatives.structure));
     if (!representatives.slide.result.viewerSessionId || representatives.slide.result.sourceWidth !== 46000 || representatives.slide.result.sourceHeight !== 32893) throw new Error("Slide profile call did not open the retained pyramid metadata: " + JSON.stringify(representatives.slide));
@@ -464,7 +464,7 @@ async function main() {
     ]) {
       representativeResults[key] = valueSummary(await call(name, args));
     }
-    assert(representativeResults.rosalind_catalog_list.total === 23, "Catalogue call did not return 23 showcases");
+    assert(representativeResults.rosalind_catalog_list.total === 100, "Catalogue call did not return 100 showcases");
     for (const key of [
       "literature_biorxiv", "literature_pmc_article_dataset", "database_uniprot",
       "database_gtex_eqtl", "database_clinvar_variation", "database_ukb_topmed_phewas", "database_gnomad_graphql",
