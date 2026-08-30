@@ -108,7 +108,9 @@ function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationR
 
 function validateScientificRecord(root: string, entry: ShowcaseDefinition): ValidationResult["checks"] {
   const artifactIds = new Set(entry.artifacts.map((artifact) => artifact.id));
+  const claimIds = new Set(entry.claims.map((claim) => claim.id));
   const referencedIds = entry.claims.flatMap((claim) => claim.artifactIds);
+  const expectedScientificAssertions = entry.claims.filter((claim) => claim.kind !== "interpretation");
   const recipePaths = [...entry.recipe.requiredInputs, ...entry.recipe.expectedOutputs];
   return [
     check("showcase is ready", entry.status, "ready"),
@@ -119,7 +121,10 @@ function validateScientificRecord(root: string, entry: ShowcaseDefinition): Vali
     check("scientific assertions recorded", entry.scientificAssertions.length > 0, true),
     check("scientific interpretation recorded", entry.interpretation.length > 0, true),
     check("limitations recorded", entry.limitations.length > 0, true),
+    check("artifact IDs are unique", artifactIds.size, entry.artifacts.length),
+    check("claim IDs are unique", claimIds.size, entry.claims.length),
     check("claim artifact references resolve", referencedIds.every((id) => artifactIds.has(id)), true),
+    check("scientific assertions match observation and computed claims", JSON.stringify(entry.scientificAssertions) === JSON.stringify(expectedScientificAssertions), true),
     check("recipe files are present", recipePaths.every((path) => existsSync(resolveInside(root, path))), true),
   ];
 }

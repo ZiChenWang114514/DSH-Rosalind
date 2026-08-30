@@ -16,7 +16,7 @@ The registered provider is `ncbi-entrez` (NCBI Entrez) at `https://eutils.ncbi.n
 ## Tool call sequence
 
 1. Confirm that the requested scientific source matches `ncbi-entrez` and identify the smallest relevant question.
-2. Call `database_request` with `provider: "ncbi-entrez"`, `allowNetwork: true`, and search, summary, fetch, or links with explicit `db`, identifier or term, and `retmode`. Use the explicit action requested by the source contract.
+2. Call `database_request` with `provider: "ncbi-entrez"`, `allowNetwork: true`, and search, summary, fetch, or links with explicit `db`, identifier or term, and `retmode`. For links, use `dbfrom` for the source database and `db` for the target database. Use the explicit action requested by the source contract.
 3. Keep one bounded page at a time. Use the returned pagination cursor or page only when the user asks for more.
 4. Read the returned `status`, `records`, `sources`, `request`, and `pagination` before presenting a scientific conclusion.
 

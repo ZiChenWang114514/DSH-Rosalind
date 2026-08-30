@@ -59,6 +59,11 @@ function now(): string {
   return new Date().toISOString();
 }
 
+function sessionId(session: object): string | undefined {
+  const value = (session as { id?: unknown }).id;
+  return typeof value === "string" && value.trim() ? value : undefined;
+}
+
 function event(record: RunRecord, state: RunState, message: string, stepId?: string): void {
   const previous = record.snapshot.state;
   if (!TRANSITIONS[previous].includes(state)) throw new Error(`Invalid run transition: ${previous} -> ${state}`);
@@ -426,8 +431,10 @@ export class RosalindRuntime {
           ...(record.snapshot.ngs.registryRunId ? { registryRunId: record.snapshot.ngs.registryRunId } : {}),
         }
         : undefined;
+      const stableSessionId = sessionId(session);
       const reproduction = await reproduceShowcase(showcase, providerId, this.science, {
         session,
+        ...(stableSessionId ? { sessionId: stableSessionId } : {}),
         signal: record.controller.signal,
         packageRoot: this.catalog.packageRoot,
         allowNetwork: providers.some((item) => item.kind === "public-api") && unavailable.length === 0,
@@ -510,8 +517,10 @@ export class RosalindRuntime {
     } else if (record.snapshot.state === "running") {
       const registryRunId = record.snapshot.ngs?.registryRunId;
       if (registryRunId) {
+        const stableSessionId = sessionId(session);
         const cancellation = await this.science.execute("ngs", "cancel_ngs_run", { registry_run_id: registryRunId }, {
           session,
+          ...(stableSessionId ? { sessionId: stableSessionId } : {}),
           signal: new AbortController().signal,
           packageRoot: this.catalog.packageRoot,
         });
