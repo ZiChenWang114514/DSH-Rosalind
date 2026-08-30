@@ -5,6 +5,7 @@ DSH-Rosalind 0.3.4 preserves the scientific workbench delivered in 0.3.3 and rep
 ## Improvements
 
 - Initializes the clean DSH profile from each runner's runtime environment, allowing GitHub Actions to create the Linux and Windows bundle jobs successfully.
+- Runs validation with Node 24 and an explicit pnpm 10.15.1 installation, matching current dependency requirements and the verified DSH runtime.
 - Retains the DeepSeek Harness Science sidebar, reversible Science mode, seven Cordis science modules, session evidence, project workflow, source adapters, viewers and runtime improvements from 0.3.3.
 
 ## Verification

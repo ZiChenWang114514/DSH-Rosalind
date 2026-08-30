@@ -117,7 +117,14 @@ function createPnpmShim(root) {
   const bin = join(root, "bin");
   mkdirSync(bin, { recursive: true });
   const corepack = join(dirname(process.execPath), process.platform === "win32" ? "corepack.cmd" : "corepack");
-  assert(readFileSync(corepack).byteLength > 0, `Cannot create an isolated profile because Corepack is unavailable at ${corepack}`);
+  if (!existsSync(corepack)) {
+    const lookup = commandResult(process.platform === "win32" ? "where.exe" : "which", [process.platform === "win32" ? "pnpm.cmd" : "pnpm"], {
+      cwd: SOURCE_ROOT,
+      timeout: 30_000,
+    });
+    assert(lookup.status === 0 && lookup.stdout.trim(), "Cannot create an isolated profile because neither Corepack nor pnpm is available");
+    return dirname(lookup.stdout.trim().split(/\r?\n/, 1)[0]);
+  }
   if (process.platform === "win32") {
     const shim = join(bin, "pnpm.cmd");
     writeFileSync(shim, `@echo off\r\n"${corepack}" pnpm %*\r\n`);
