@@ -25,7 +25,7 @@ describe("LocalSlideCanvas", () => {
     vi.stubGlobal("ResizeObserver", WorkspaceResizeObserver);
 
     const { getByRole } = render(<LocalSlideCanvas width={1000} height={500} sourceRevision="local:test" tile={null} regions={[]} />);
-    const canvas = getByRole("application") as HTMLCanvasElement;
+    const canvas = getByRole("img") as HTMLCanvasElement;
     expect(canvas.width).toBe(240);
     expect(canvas.height).toBe(160);
 
@@ -40,10 +40,22 @@ describe("LocalSlideCanvas", () => {
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({ setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), save: vi.fn(), restore: vi.fn(), setLineDash: vi.fn(), strokeRect: vi.fn() } as unknown as CanvasRenderingContext2D);
     const created: Array<{ x: number; y: number; width: number; height: number }> = [];
     const { getByRole } = render(<LocalSlideCanvas width={1000} height={500} sourceRevision="local:test" tile={null} regions={[]} onCreateRegion={(region) => created.push(region)} />);
-    const canvas = getByRole("application");
+    const canvas = getByRole("img");
     Object.defineProperty(canvas, "getBoundingClientRect", { value: () => ({ left: 0, top: 0, width: 500, height: 250 }) });
     fireEvent(canvas, new MouseEvent("pointerdown", { bubbles: true, clientX: 50, clientY: 25 })); fireEvent(canvas, new MouseEvent("pointermove", { bubbles: true, clientX: 250, clientY: 125 })); fireEvent(canvas, new MouseEvent("pointerup", { bubbles: true, clientX: 250, clientY: 125 }));
     expect(created).toEqual([{ x: 100, y: 50, width: 400, height: 200 }]);
+  });
+
+  it("keeps the tile path keyboard-operable and reports its viewport", () => {
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({ setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), save: vi.fn(), restore: vi.fn(), setLineDash: vi.fn(), strokeRect: vi.fn() } as unknown as CanvasRenderingContext2D);
+    const viewports: Array<{ zoom: number; panX: number; panY: number }> = [];
+    const { getByRole } = render(<LocalSlideCanvas width={1000} height={500} sourceRevision="local:test" tile={null} regions={[]} onViewportChange={(viewport) => viewports.push(viewport)} />);
+    const canvas = getByRole("img");
+    fireEvent.keyDown(canvas, { key: "+" });
+    fireEvent.keyDown(canvas, { key: "ArrowRight" });
+    expect(viewports.at(-1)).toMatchObject({ zoom: 1.2, panX: 20, panY: 0 });
+    fireEvent.keyDown(canvas, { key: "Home" });
+    expect(viewports.at(-1)).toEqual({ zoom: 1, panX: 0, panY: 0 });
   });
 
   it("ignores an old Image load after a newer source tile replaces it", () => {

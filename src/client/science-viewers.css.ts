@@ -120,7 +120,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-scene svg { position: relative; z-index: 1; width: 100%; height: 180px; cursor: grab; touch-action: none; }
 .sv-scene svg:active { cursor: grabbing; }
 .sv-scene--canvas::before { display: none; }
-.sv-structure-canvas { position: relative; z-index: 1; display: block; width: 100%; height: 180px; background: color-mix(in srgb, var(--rr-panel-muted) 72%, transparent); color: var(--rr-muted); cursor: grab; touch-action: none; }
+.sv-structure-canvas { position: relative; z-index: 1; display: block; width: 100%; height: 180px; background: #101827; color: #d7e3f4; cursor: grab; touch-action: none; }
 .sv-structure-canvas:active { cursor: grabbing; }
 .sv-atom { cursor: pointer; opacity: .92; stroke: rgba(11,18,22,.35); stroke-width: .65px; vector-effect: non-scaling-stroke; }
 .sv-atom:hover, .sv-atom--selected { stroke: white; stroke-width: 1.5px; opacity: 1; }
@@ -177,7 +177,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
   .sv-spatial-layout > section:last-child { grid-column: 1 / -1; }
   .sv-scene, .sv-scene svg, .sv-structure-canvas { min-height: 160px; height: 160px; }
 }
-@media (prefers-reduced-motion: reduce) { .sv-loading > i { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .sv-loading > i { animation: none; } .sv-root *, .sv-root *::before, .sv-root *::after { scroll-behavior: auto !important; transition-duration: 0s !important; } }
 :root[data-theme="dark"] .sv-root--slide, :root[style*="color-scheme: dark"] .sv-root--slide, [data-theme="dark"] .sv-root--slide { --sv-slide-tissue: #5c3f4c; --sv-slide-nucleus: #b7799f; }
 :root[data-theme="dark"] .sv-slide-map, :root[style*="color-scheme: dark"] .sv-slide-map, [data-theme="dark"] .sv-slide-map { background: #2d2529; }
 `;

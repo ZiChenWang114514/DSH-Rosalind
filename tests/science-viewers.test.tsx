@@ -164,7 +164,7 @@ describe("science ToolViews", () => {
     });
     render(<ScienceToolView {...props} />);
     expect(screen.getByRole("application", { name: /local molecular coordinate view/i })).toBeInTheDocument();
-    expect(screen.getByText("Local coordinate render confirmed · 3 returned coordinates")).toBeInTheDocument();
+    expect(screen.getByText(/Local coordinate render confirmed · 3 returned coordinates/)).toBeInTheDocument();
     expect(screen.getByLabelText("Molecular scene state")).toHaveAttribute("data-client-render-ready", "true");
   });
 
@@ -176,7 +176,7 @@ describe("science ToolViews", () => {
       atoms: [{ atomId: "primary:1", x: 0, y: 0, z: 0, element: "C" }, { atomId: "primary:2", x: 2, y: 1, z: 1, element: "O" }],
     })} />);
     expect(screen.getByRole("application", { name: /local molecular coordinate view/i })).toBeInTheDocument();
-    expect(screen.getByText("Local coordinate render confirmed · 2 returned coordinates")).toBeInTheDocument();
+    expect(screen.getByText(/Local coordinate render confirmed · 2 returned coordinates/)).toBeInTheDocument();
   });
 
   it("renders a host-decoded local slide tile in the Canvas ToolView", () => {
@@ -193,6 +193,12 @@ describe("science ToolViews", () => {
       sourceRevision: "local:test",
     })} />);
     expect(screen.getByLabelText("Local slide source pixel workspace")).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Zoom slide in"));
+    expect(document.querySelector(".sv-slide-position")).toHaveTextContent("120% · x 0 · y 0");
+    fireEvent.keyDown(screen.getByLabelText("Local slide source pixel workspace"), { key: "ArrowRight" });
+    expect(document.querySelector(".sv-slide-position")).toHaveTextContent("x 20");
+    fireEvent.click(screen.getByLabelText("Reset slide view"));
+    expect(document.querySelector(".sv-slide-position")).toHaveTextContent("100% · x 0 · y 0");
     expect(screen.getByText("1,000 × 500 px")).toBeInTheDocument();
     expect(screen.getByText(/receives pixel data decoded from the authorized local source tile/i)).toBeInTheDocument();
   });

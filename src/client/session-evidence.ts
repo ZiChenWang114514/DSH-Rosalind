@@ -365,6 +365,46 @@ function nodeOrder(node: unknown, index: number): { time: number; seq: number; i
   };
 }
 
+interface ConversationMark {
+  callId: string | null;
+  toolName: string | null;
+  argsRaw: string | null;
+  content: readonly string[];
+  isError: boolean;
+  order: ReturnType<typeof nodeOrder>;
+}
+
+function conversationMark(node: unknown, index: number): ConversationMark {
+  const record = node && typeof node === "object" ? node as Record<string, unknown> : {};
+  const call = record.call && typeof record.call === "object" ? record.call as Record<string, unknown> : {};
+  const content = Array.isArray(record.content)
+    ? record.content.flatMap((block) => block && typeof block === "object" && typeof (block as Record<string, unknown>).text === "string" ? [(block as Record<string, unknown>).text as string] : [])
+    : [];
+  return {
+    callId: fingerprint(node),
+    toolName: typeof call.name === "string" ? call.name : null,
+    argsRaw: typeof call.argsRaw === "string" ? call.argsRaw : null,
+    content,
+    isError: record.isError === true,
+    order: nodeOrder(node, index),
+  };
+}
+
+function sameConversationMarks(previous: readonly ConversationMark[] | null, next: readonly ConversationMark[]): boolean {
+  return previous !== null && previous.length === next.length && previous.every((mark, index) => {
+    const candidate = next[index]!;
+    return mark.callId === candidate.callId
+      && mark.toolName === candidate.toolName
+      && mark.argsRaw === candidate.argsRaw
+      && mark.isError === candidate.isError
+      && mark.order.time === candidate.order.time
+      && mark.order.seq === candidate.order.seq
+      && mark.order.index === candidate.order.index
+      && mark.content.length === candidate.content.length
+      && mark.content.every((text, contentIndex) => text === candidate.content[contentIndex]);
+  });
+}
+
 /**
  * DSH snapshots can repeat a settled call while a conversation refresh is in
  * flight, and callers are not required to pass the nodes in chronological
@@ -468,7 +508,9 @@ function resultLabel(toolName: string): string {
  * Publication is skipped when the relevant tool-result set is unchanged.
  */
 export function publishConversationNodes(nodes: readonly unknown[]): void {
-  const marks: string[] = [];
+  const orderedNodes = orderedConversationNodes(nodes);
+  const marks = orderedNodes.map(conversationMark);
+  if (sameConversationMarks(lastConversationMarks, marks)) return;
   const ngs = { workflows: null, targets: null, runs: null, lineages: null, runDetails: new Map<string, SessionToolEvidence>(), observations: new Map<string, SessionToolEvidence>() } as EvidenceState["ngs"];
   const slideCommands: SlideViewerCommand[] = [];
   const structure: EvidenceState["structure"] = { source: null, commands: [] };
@@ -478,9 +520,7 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
   const seenActivity = new Set<string>();
   const seenResults = new Set<string>();
   const seenSources = new Set<string>();
-  for (const node of orderedConversationNodes(nodes)) {
-    const mark = fingerprint(node);
-    if (mark != null) marks.push(JSON.stringify(node) ?? mark);
+  for (const node of orderedNodes) {
     const parsed = textPayload(node);
     if (!parsed) continue;
     const { toolName, args, payload } = parsed;
@@ -568,26 +608,11 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
   if (liveModuleAvailability.ngs !== "unknown") workbench.modules.ngs = liveModuleAvailability.ngs;
   if (liveModuleAvailability.rosalind !== "unknown") workbench.modules.rosalind = liveModuleAvailability.rosalind;
   const next: EvidenceState = { ngs, structure, slideCommands, rosalind, workbench };
-  const signature = JSON.stringify([
-    marks,
-    next.ngs.workflows?.callId ?? null,
-    next.ngs.targets?.callId ?? null,
-    next.ngs.runs?.callId ?? null,
-    next.ngs.lineages?.callId ?? null,
-    [...next.ngs.runDetails.keys()],
-    [...next.ngs.observations.keys()],
-    next.structure.source?.callId ?? null,
-    next.structure.commands.map((command) => [command.commandId, command.action, command.args]),
-    next.slideCommands.map((command) => [command.action, command.args]),
-    next.rosalind,
-    next.workbench,
-  ]);
-  if (signature === lastSignature) return;
-  lastSignature = signature;
+  lastConversationMarks = marks;
   publish(next);
 }
 
-let lastSignature: string | null = null;
+let lastConversationMarks: readonly ConversationMark[] | null = null;
 
 /** Seeds evidence from a host-provided global (used by the release preview). */
 export function seedEvidenceFromGlobal(): void {
@@ -595,7 +620,7 @@ export function seedEvidenceFromGlobal(): void {
     ngs?: { workflows?: unknown; targets?: unknown; runs?: unknown; lineages?: unknown; runDetails?: Array<Record<string, unknown>>; observations?: Array<Record<string, unknown>> };
   } | undefined;
   if (!seed?.ngs) return;
-  lastSignature = null;
+  lastConversationMarks = null;
   const asRecord = (value: unknown): Record<string, unknown> | null => (value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : null);
   const item = (value: unknown): SessionToolEvidence | null => {
     const record = asRecord(value);

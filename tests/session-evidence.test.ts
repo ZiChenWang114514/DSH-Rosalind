@@ -252,4 +252,15 @@ describe("Rosalind project session evidence", () => {
     expect(first.result.current).toBe(second.result.current);
     expect(first.result.current.ngs.workflows?.payload.workflows).toEqual([{ id: "after-refresh" }]);
   });
+
+  it("does not republish an unchanged large conversation snapshot", () => {
+    const nodes = Array.from({ length: 1_000 }, (_, index) => toolResult(`call-${index}`, "ngs_list_workflows", {}, {
+      status: "completed", operation: "list_workflows", workflows: [{ id: `workflow-${index}` }],
+    }, false, index + 1));
+    publishConversationNodes(nodes);
+    const published = getSnapshotVersion();
+    publishConversationNodes(nodes);
+    expect(getSnapshotVersion()).toBe(published);
+    expect(currentEvidence().ngs.workflows?.payload.workflows).toEqual([{ id: "workflow-999" }]);
+  });
 });

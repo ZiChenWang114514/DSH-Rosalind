@@ -88,6 +88,19 @@ test("slide source controls preserve state and explain read-only layer visibilit
   await expect(page.getByText("46,000 × 32,893 px")).toBeVisible();
 });
 
+test("decoded slide tiles provide the same zoom, pan, and position feedback", async ({ page }) => {
+  await page.goto("/?science=slide&live=1");
+  const canvas = page.getByRole("img", { name: "Local slide source pixel workspace" });
+  await expect(canvas).toBeVisible();
+  await canvas.focus();
+  await page.keyboard.press("+");
+  await expect(page.locator(".sv-slide-position")).toHaveText("120% · x 0 · y 0");
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".sv-slide-position")).toHaveText("120% · x 20 · y 0");
+  await page.getByLabel("Reset slide view").click();
+  await expect(page.locator(".sv-slide-position")).toHaveText("100% · x 0 · y 0");
+});
+
 test("dark structure result and narrow slide result retain their scientific state", async ({ page }, testInfo) => {
   if (testInfo.project.name === "chromium-1440") {
     await page.goto("/?science=structure&theme=dark");
