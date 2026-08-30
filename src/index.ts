@@ -91,6 +91,7 @@ export async function apply(ctx: Context): Promise<() => Promise<void>> {
     persist: (enabled) => persistModuleSettings(ctx, enabled),
     disposeShared: () => composition.dispose(),
   });
+  composition.bindModules(modules);
   ctx.provide("rosalindModules", modules);
   const approvalListener = ctx.on("tools/pre-execute", async (exec, next) => {
       const decision = await next();

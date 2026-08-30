@@ -71,6 +71,16 @@ async function execute(ctx: Context, name: string, args: unknown) {
   return ctx.tools.execute({ callId: callId(`module-core-${name}`), name, arguments: args, signal: new AbortController().signal });
 }
 
+const MODULE_LIFECYCLE_CASES = [
+  { id: "literature", showcaseId: "literature-trem2-landscape", tool: "literature_request", toolCount: 1, skillCount: 3, operationCount: 0 },
+  { id: "databases", showcaseId: "databases-il6r-asthma", tool: "database_request", toolCount: 1, skillCount: 44, operationCount: 0 },
+  { id: "sequence", showcaseId: "sequence-ras-alignment", tool: "sequence_open_from_chat", toolCount: 13, skillCount: 1, operationCount: 13 },
+  { id: "ngs", showcaseId: "ngs-fastq-qc", tool: "ngs_list_workflows", toolCount: 25, skillCount: 5, operationCount: 25 },
+  { id: "structure", showcaseId: "structure-mdm2-p53", tool: "structure_get_state", toolCount: 41, skillCount: 1, operationCount: 41 },
+  { id: "slide", showcaseId: "slide-tissue-architecture", tool: "slide_get_viewer_state", toolCount: 44, skillCount: 1, operationCount: 40 },
+  { id: "rosalind", showcaseId: "rosalind-molecular-design", tool: "rosalind_plan", toolCount: 15, skillCount: 0, operationCount: 2 },
+] as const;
+
 afterEach(async () => {
   for (const fixture of fixtures.splice(0).reverse()) {
     for (const fiber of fixture.fibers) await fiber.dispose();
@@ -124,6 +134,107 @@ describe("Cordis module core", () => {
     await ctx.rosalindModules.enable("rosalind");
     const status = await execute(ctx, "rosalind_status", { run_id: runId });
     expect(status).toMatchObject({ isError: false, value: { id: runId, showcaseId: "sequence-ras-alignment" } });
+  });
+
+  it("removes each module surface, blocks dependent Rosalind work, and restores the retained plan", async () => {
+    const { ctx } = await mount();
+
+    for (const item of MODULE_LIFECYCLE_CASES) {
+      const planned = await execute(ctx, "rosalind_plan", { showcase_id: item.showcaseId, mode: "lesson" });
+      expect(planned.isError, `plan before disabling ${item.id}`).toBe(false);
+      if (planned.isError) continue;
+      const runId = String((planned.value as Record<string, unknown>).id);
+
+      await ctx.rosalindModules.disable(item.id);
+      expect(ctx.rosalindModules.status(item.id)).toMatchObject({ status: "disabled", enabled: false });
+      expect(ctx.tools.get(item.tool), `${item.id} public tool`).toBeUndefined();
+      expect(ctx.tools.schemas(), `${item.id} tool count`).toHaveLength(140 - item.toolCount);
+      expect(await ctx.skills.list({ cwd: process.cwd() }), `${item.id} Skill count`).toHaveLength(55 - item.skillCount);
+
+      if (item.id === "rosalind") {
+        const unavailable = await execute(ctx, "rosalind_plan", { showcase_id: item.showcaseId, mode: "lesson" });
+        expect(unavailable.isError).toBe(true);
+        if (unavailable.isError) expect(unavailable.error.message).toMatch(/rosalind_plan|not found|unknown|registered/i);
+      } else {
+        const opened = await execute(ctx, "rosalind_open", {});
+        expect(opened.isError).toBe(false);
+        if (!opened.isError) {
+          const value = opened.value as { availableServices: string[]; operationCount: number; skillCount: number };
+          expect(value.availableServices).not.toContain(item.id);
+          expect(value.operationCount).toBe(121 - item.operationCount);
+          expect(value.skillCount).toBe(55 - item.skillCount);
+        }
+
+        for (const [name, args] of [
+          ["rosalind_plan", { showcase_id: item.showcaseId, mode: "lesson" }],
+          ["rosalind_run", { run_id: runId }],
+        ] as const) {
+          const rejected = await execute(ctx, name, args);
+          expect(rejected.isError, `${name} while ${item.id} is disabled`).toBe(true);
+          if (rejected.isError) expect(rejected.error.message).toMatch(new RegExp(`${item.id}.*disabled`, "i"));
+        }
+        const retained = await execute(ctx, "rosalind_status", { run_id: runId });
+        expect(retained).toMatchObject({ isError: false, value: { id: runId, state: "queued" } });
+      }
+
+      await ctx.rosalindModules.enable(item.id);
+      const restoredStatus = ctx.rosalindModules.status(item.id);
+      expect(restoredStatus.enabled).toBe(true);
+      expect(["active", "needs_setup"]).toContain(restoredStatus.status);
+      expect(ctx.tools.get(item.tool), `${item.id} restored tool`).toBeDefined();
+      expect(ctx.tools.schemas()).toHaveLength(140);
+      expect(await ctx.skills.list({ cwd: process.cwd() })).toHaveLength(55);
+
+      const opened = await execute(ctx, "rosalind_open", {});
+      expect(opened.isError).toBe(false);
+      if (!opened.isError) {
+        const value = opened.value as { availableServices: string[]; operationCount: number; skillCount: number };
+        expect(value.availableServices).toContain(item.id);
+        expect(value.operationCount).toBe(121);
+        expect(value.skillCount).toBe(55);
+      }
+      const completed = await execute(ctx, "rosalind_run", { run_id: runId });
+      expect(completed).toMatchObject({ isError: false, value: { id: runId, state: "completed" } });
+    }
+  });
+
+  it("blocks Rosalind cross-module Showcases when their required service is disabled", async () => {
+    const { ctx } = await mount();
+    for (const [id, showcaseId] of [
+      ["sequence", "rosalind-genomics"],
+      ["ngs", "rosalind-scientific-compute"],
+      ["structure", "rosalind-structure-analysis"],
+    ] as const) {
+      await ctx.rosalindModules.disable(id);
+      const rejected = await execute(ctx, "rosalind_plan", { showcase_id: showcaseId, mode: "lesson" });
+      expect(rejected.isError).toBe(true);
+      if (rejected.isError) expect(rejected.error.message).toMatch(new RegExp(`${id}.*disabled`, "i"));
+      await ctx.rosalindModules.enable(id);
+      const restored = await execute(ctx, "rosalind_plan", { showcase_id: showcaseId, mode: "lesson" });
+      expect(restored.isError).toBe(false);
+    }
+  });
+
+  it("keeps one NGS session registry across module suspension and reactivation", async () => {
+    const { ctx } = await mount();
+    const workflowId = "module_core_retained_workflow";
+    const saved = await execute(ctx, "ngs_save_workflow", {
+      workflow_id: workflowId,
+      name: "Module core retained workflow",
+      engine: "snakemake",
+      source: { kind: "local", root: process.cwd(), entrypoint: "workflows/oai_fastq_qc/workflow/Snakefile" },
+    });
+    expect(saved.isError).toBe(false);
+
+    await ctx.rosalindModules.disable("ngs");
+    expect(ctx.tools.get("ngs_list_workflows")).toBeUndefined();
+    await ctx.rosalindModules.enable("ngs");
+    const listed = await execute(ctx, "ngs_list_workflows", {});
+    expect(listed.isError).toBe(false);
+    if (!listed.isError) {
+      const workflows = (listed.value as { workflows: Array<{ workflow_id: string }> }).workflows;
+      expect(workflows.some((workflow) => workflow.workflow_id === workflowId)).toBe(true);
+    }
   });
 
   it("restores and persists the seven-module selection through DSH settings", async () => {

@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 
 import type { JsonValue } from "@deepseek-ai/dsh-tools";
 
+import { MODULE_IDS, type ModuleId } from "../../modules/types.js";
 import type { ScienceExecutionContext, ScienceExecutor } from "../science-tools.js";
 import { DatabaseService } from "./databases.js";
 import { LiteratureService } from "./literature.js";
@@ -13,6 +14,26 @@ import { SlideService } from "./slide.js";
 import { StructureService } from "./structure.js";
 
 type JsonRecord = Record<string, JsonValue>;
+
+const MODULE_OPERATION_COUNTS: Record<ModuleId, number> = {
+  literature: 0,
+  databases: 0,
+  sequence: 13,
+  ngs: 25,
+  structure: 41,
+  slide: 40,
+  rosalind: 2,
+};
+
+const MODULE_SKILL_COUNTS: Record<ModuleId, number> = {
+  literature: 3,
+  databases: 44,
+  sequence: 1,
+  ngs: 5,
+  structure: 1,
+  slide: 1,
+  rosalind: 0,
+};
 
 function jsonRecord(value: unknown): JsonRecord {
   const normalized = JSON.parse(JSON.stringify(value ?? {})) as unknown;
@@ -51,16 +72,16 @@ function csvRows(path: string): Record<string, string>[] {
   return lines.filter(Boolean).map((line) => Object.fromEntries(headers.map((header, index) => [header, line.split(",")[index] ?? ""])));
 }
 
-function openRosalind(args: Record<string, unknown>, context: ScienceExecutionContext): Record<string, unknown> {
+function openRosalind(args: Record<string, unknown>, context: ScienceExecutionContext, availableServices: readonly ModuleId[]): Record<string, unknown> {
   const area = typeof args.area === "string" ? args.area : "catalogue";
   const providerId = typeof args.providerId === "string" ? args.providerId : null;
   const base = {
     viewer: "rosalind-workbench",
     area,
     providerId,
-    availableServices: ["literature", "databases", "sequence", "ngs", "structure", "slide", "rosalind"],
-    skillCount: 55,
-    operationCount: 121,
+    availableServices: [...availableServices],
+    skillCount: availableServices.reduce((total, id) => total + MODULE_SKILL_COUNTS[id], 0),
+    operationCount: availableServices.reduce((total, id) => total + MODULE_OPERATION_COUNTS[id], 0),
   };
   if (area !== "molecular-design" || (providerId && providerId !== "local-replay")) return base;
   const caseRoot = resolve(context.packageRoot, "showcases/rosalind-workbench/cases/rosalind-molecular-design");
@@ -91,6 +112,7 @@ export class ScienceRuntime implements ScienceExecutor {
   private ngsService: NgsService | null;
   readonly structure: StructureService;
   readonly slide: SlideService;
+  private moduleEnabled: ((id: ModuleId) => boolean) | undefined;
 
   constructor(options: { literature?: LiteratureService; databases?: DatabaseService; ngs?: NgsService | null } = {}) {
     this.literature = options.literature ?? new LiteratureService();
@@ -103,6 +125,10 @@ export class ScienceRuntime implements ScienceExecutor {
 
   get ngs(): NgsService | null {
     return this.ngsService;
+  }
+
+  setModuleEnabled(resolve: (id: ModuleId) => boolean): void {
+    this.moduleEnabled = resolve;
   }
 
   attachNgs(service: NgsService): void {
@@ -162,13 +188,7 @@ export class ScienceRuntime implements ScienceExecutor {
             break;
           }
           if (operation === "rosalind.open") {
-            const opened = openRosalind(args, context);
-            const services = Array.isArray(opened.availableServices)
-              ? opened.availableServices.filter((service): service is string => typeof service === "string" && service !== "ngs")
-              : [];
-            result = this.ngsService
-              ? opened
-              : { ...opened, availableServices: services };
+            result = openRosalind(args, context, MODULE_IDS.filter((id) => this.isModuleActive(id)));
             break;
           }
           throw new Error(`Unknown Rosalind operation: ${operation}`);
@@ -178,5 +198,10 @@ export class ScienceRuntime implements ScienceExecutor {
     } catch (cause) {
       return errorRecord(serviceId, operation, cause);
     }
+  }
+
+  private isModuleActive(id: ModuleId): boolean {
+    if (this.moduleEnabled && !this.moduleEnabled(id)) return false;
+    return id !== "ngs" || this.ngsService !== null;
   }
 }

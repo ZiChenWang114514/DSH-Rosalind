@@ -11,8 +11,10 @@ import type {
   ShowcaseReproductionInputs,
   RunSnapshot,
   RunState,
+  ShowcaseDefinition,
   ShowcaseMode,
 } from "../shared/types.js";
+import { MODULE_IDS, moduleIdForPlugin, type ModuleId } from "../modules/types.js";
 import { resolveInside, ShowcaseCatalog } from "./catalog.js";
 import { ProviderRegistry, providerRequiresConfirmation } from "./providers.js";
 import { reproduceShowcase, type NgsReproductionRequest, type ReproductionResult } from "./reproduction.js";
@@ -38,6 +40,15 @@ const TRANSITIONS: Record<RunState, readonly RunState[]> = {
 export interface RosalindPlanOptions {
   ngs?: NgsReproductionInputs;
   reproduction?: ShowcaseReproductionInputs;
+}
+
+export class RosalindModuleDisabledError extends Error {
+  readonly code = "ROSALIND_MODULE_DISABLED";
+
+  constructor(readonly moduleIds: readonly ModuleId[], action: string, showcaseId: string) {
+    super(`Cannot ${action} Showcase ${showcaseId} while required module${moduleIds.length === 1 ? "" : "s"} ${moduleIds.join(", ")} ${moduleIds.length === 1 ? "is" : "are"} disabled.`);
+    this.name = "RosalindModuleDisabledError";
+  }
 }
 
 const SOURCE_INPUT_SHOWCASES = new Set([
@@ -180,12 +191,18 @@ export class RosalindRuntime {
   readonly science: ScienceExecutor;
   private readonly sessions = new WeakMap<object, Map<string, RunRecord>>();
   private readonly liveRecords = new Set<RunRecord>();
+  private moduleEnabled: ((id: ModuleId) => boolean) | undefined;
   private disposed = false;
 
-  constructor(options: { catalog?: ShowcaseCatalog; providers?: ProviderRegistry; science?: ScienceExecutor } = {}) {
+  constructor(options: { catalog?: ShowcaseCatalog; providers?: ProviderRegistry; science?: ScienceExecutor; moduleEnabled?: (id: ModuleId) => boolean } = {}) {
     this.catalog = options.catalog ?? new ShowcaseCatalog();
     this.providers = options.providers ?? new ProviderRegistry();
     this.science = options.science ?? new ScienceRuntime();
+    this.moduleEnabled = options.moduleEnabled;
+  }
+
+  setModuleEnabled(resolve: (id: ModuleId) => boolean): void {
+    this.moduleEnabled = resolve;
   }
 
   dispose(): void {
@@ -204,6 +221,7 @@ export class RosalindRuntime {
   createImport(showcaseId: string, suggestedMode: ShowcaseMode): ImportBundle {
     this.assertActive();
     const showcase = this.catalog.get(showcaseId);
+    this.assertShowcaseAvailable(showcase, "import");
     if (!showcase.modes.includes(suggestedMode)) throw new Error(`${showcaseId} does not support ${suggestedMode}`);
     const prompt = readFileSync(resolveInside(this.catalog.packageRoot, showcase.promptPath), "utf8");
     return {
@@ -233,6 +251,7 @@ export class RosalindRuntime {
   ): RunSnapshot {
     this.assertActive();
     const showcase = this.catalog.get(showcaseId);
+    this.assertShowcaseAvailable(showcase, "plan");
     if (!showcase.modes.includes(mode)) throw new Error(`${showcaseId} does not support ${mode}`);
     if (options.ngs && !isNgsReproduction(showcaseId, mode)) {
       throw new Error("NGS scientific inputs can only be attached to an NGS reproduce plan.");
@@ -329,6 +348,7 @@ export class RosalindRuntime {
   approve(session: object, runId: string, acknowledgements: readonly string[], approvedNgsPlan?: NgsPlanIdentity): RunSnapshot {
     this.assertActive();
     const record = this.ownedRun(session, runId);
+    this.assertShowcaseAvailable(this.catalog.get(record.snapshot.showcaseId), "approve");
     if (record.snapshot.state !== "awaiting_confirmation") {
       throw new Error(`Run ${runId} is ${record.snapshot.state}; only awaiting_confirmation can be approved.`);
     }
@@ -350,6 +370,7 @@ export class RosalindRuntime {
   async run(session: object, runId: string, signal: AbortSignal): Promise<RunSnapshot> {
     this.assertActive();
     const record = this.ownedRun(session, runId);
+    this.assertShowcaseAvailable(this.catalog.get(record.snapshot.showcaseId), "run");
     const isNgs = isNgsReproduction(record.snapshot.showcaseId, record.snapshot.mode);
     const continuingNgs = isNgs && record.snapshot.state === "running";
     if (record.snapshot.state !== "queued" && !continuingNgs) throw new Error(`Run ${runId} is ${record.snapshot.state}; only queued runs can start, except an active NGS run may be observed again.`);
@@ -574,6 +595,23 @@ export class RosalindRuntime {
         return { artifactId: artifact.id, present: result?.ok ?? true, note: result?.actual ?? "resource reference" };
       }),
     };
+  }
+
+  private requiredModules(showcase: ShowcaseDefinition): ModuleId[] {
+    const required = new Set<ModuleId>(["rosalind"]);
+    const owner = moduleIdForPlugin(showcase.pluginId);
+    if (owner) required.add(owner);
+    for (const server of showcase.requiredMcpServers) {
+      const suffix = server.split(":").at(-1);
+      if (suffix && MODULE_IDS.includes(suffix as ModuleId)) required.add(suffix as ModuleId);
+    }
+    return MODULE_IDS.filter((id) => required.has(id));
+  }
+
+  private assertShowcaseAvailable(showcase: ShowcaseDefinition, action: string): void {
+    if (!this.moduleEnabled) return;
+    const disabled = this.requiredModules(showcase).filter((id) => !this.moduleEnabled!(id));
+    if (disabled.length > 0) throw new RosalindModuleDisabledError(disabled, action, showcase.id);
   }
 
   private sessionRuns(session: object): Map<string, RunRecord> {

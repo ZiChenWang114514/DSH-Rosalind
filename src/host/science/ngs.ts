@@ -265,6 +265,7 @@ export class NgsService {
   private readonly contextSessionIds = new WeakMap<object, string>();
   private readonly activeRuns = new Set<Run>();
   private readonly runOwners = new WeakMap<Run, NgsState>();
+  private active = true;
   private disposed = false;
   private readonly registryRoot: string | undefined;
 
@@ -280,6 +281,7 @@ export class NgsService {
 
   async executeOnServer(serverId: NgsMcpServerId, operation: string, args: Record<string, unknown>, context: ScienceExecutionContext): Promise<Json> {
     if (this.disposed) throw new Error("NGS service has been disposed.");
+    if (!this.active) throw new Error("NGS service is inactive because its Cordis module is disabled.");
     assertNotAborted(context.signal);
     if (!NGS_MCP_SERVER_OPERATIONS[serverId].includes(operation)) {
       throw new Error(`NGS operation ${operation} is not exposed by ${serverId}.`);
@@ -346,15 +348,31 @@ export class NgsService {
       }
   }
 
+  activate(): void {
+    if (this.disposed) throw new Error("A disposed NGS service cannot be activated.");
+    this.active = true;
+  }
+
+  async suspend(): Promise<Json[]> {
+    if (this.disposed || !this.active) return [];
+    this.active = false;
+    return this.stopActiveRuns("NGS module suspension requested termination of the running local workflow command.");
+  }
+
   async dispose(): Promise<Json[]> {
     if (this.disposed) return [];
     this.disposed = true;
+    this.active = false;
+    return this.stopActiveRuns("Plugin disposal requested termination of the running local workflow command.");
+  }
+
+  private async stopActiveRuns(message: string): Promise<Json[]> {
     const active = [...this.activeRuns];
     for (const run of active) {
       run.cancelRequested = true;
       run.state = "stopping";
       run.updatedAt = now();
-      run.events.push({ at: run.updatedAt, state: run.state, message: "Plugin disposal requested termination of the running local workflow command." });
+      run.events.push({ at: run.updatedAt, state: run.state, message });
       const owner = this.runOwners.get(run);
       if (owner) saveState(owner);
     }

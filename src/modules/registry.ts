@@ -86,6 +86,10 @@ export class ModuleRegistry {
     return enabledRecord(this.enabled);
   }
 
+  isActive(id: ModuleId): boolean {
+    return this.enabled.get(id) === true && this.active.has(id) && !this.errors.has(id);
+  }
+
   start(initial: Partial<ModuleEnabledState> = {}): Promise<void> {
     return this.serial(async () => {
       this.assertAlive();

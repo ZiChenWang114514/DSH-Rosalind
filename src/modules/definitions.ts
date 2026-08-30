@@ -7,11 +7,12 @@ import { ProviderRegistry } from "../host/providers.js";
 import { RosalindRuntime } from "../host/runtime.js";
 import { createScienceGatewayTools } from "../host/science-gateway-tools.js";
 import { createScienceTools } from "../host/science-tools.js";
+import { NgsService } from "../host/science/ngs.js";
 import { ScienceRuntime } from "../host/science/runtime.js";
 import { createScienceSkills } from "../host/skills.js";
 import { createRosalindTools } from "../host/tools.js";
-import { WorkflowModuleCoordinator } from "../host/workflow-modules.js";
 import { MODULE_IDS, type ModuleDefinition, type ModuleId } from "./types.js";
+import type { ModuleRegistry } from "./registry.js";
 
 const MODULE_META: Record<ModuleId, {
   name: string;
@@ -55,17 +56,58 @@ const MODULE_META: Record<ModuleId, {
   },
 };
 
-function modulePlugin(id: ModuleId, tools: readonly ToolDefinition[], skills: readonly SkillRegistration[]): Plugin<void> {
+interface ModuleLifecycle {
+  activate?(): void;
+  deactivate?(): void | Promise<void>;
+}
+
+function approvalListener(ctx: Context, id: ModuleId): (() => void) | undefined {
+  if (id === "ngs") {
+    return ctx.on("tools/pre-execute", async (exec, next) => {
+      const decision = await next();
+      if (decision.kind !== "allow" || exec.name !== "ngs_execute_plan") return decision;
+      return { kind: "ask" as const, reason: "Approval is required to run the exact reviewed NGS plan on the selected compute target." };
+    });
+  }
+  if (id === "rosalind") {
+    return ctx.on("tools/pre-execute", async (exec, next) => {
+      const decision = await next();
+      if (decision.kind !== "allow") return decision;
+      const args = exec.arguments && typeof exec.arguments === "object" && !Array.isArray(exec.arguments)
+        ? exec.arguments as Record<string, unknown>
+        : {};
+      if (exec.name === "rosalind_approve") {
+        return { kind: "ask" as const, reason: "Approval is required to authorize the exact DSH-Rosalind plan and its recorded external actions." };
+      }
+      if (exec.name === "rosalind_export" && args.approved === true) {
+        return { kind: "ask" as const, reason: "Approval is required to write the requested DSH-Rosalind export to the active workspace." };
+      }
+      return decision;
+    });
+  }
+  return undefined;
+}
+
+function modulePlugin(
+  id: ModuleId,
+  tools: readonly ToolDefinition[],
+  skills: readonly SkillRegistration[],
+  lifecycle: ModuleLifecycle = {},
+): Plugin<void> {
   return {
     name: `dsh-rosalind:${id}`,
     inject: ["tools", "skills"],
     apply(ctx: Context) {
+      lifecycle.activate?.();
+      const approval = approvalListener(ctx, id);
       const disposers = [
+        ...(approval ? [approval] : []),
         ...tools.map((tool) => ctx.tools.register(tool)),
         ...skills.map((skill) => ctx.skills.register(skill)),
       ];
-      return () => {
+      return async () => {
         for (const dispose of disposers.reverse()) dispose();
+        await lifecycle.deactivate?.();
       };
     },
   };
@@ -75,14 +117,16 @@ export interface RosalindModuleComposition {
   definitions: ModuleDefinition[];
   runtime: RosalindRuntime;
   science: ScienceRuntime;
+  bindModules(registry: ModuleRegistry): void;
   dispose(): Promise<void>;
 }
 
 export function createRosalindModuleComposition(): RosalindModuleComposition {
   const capabilities = new CapabilityRegistry();
   const providers = new ProviderRegistry();
-  const workflow = new WorkflowModuleCoordinator(capabilities);
-  const { science, rosalind: runtime } = workflow;
+  const science = new ScienceRuntime({ ngs: null });
+  const runtime = new RosalindRuntime({ science, providers });
+  const ngs = new NgsService();
   const definitions = MODULE_IDS.map((id): ModuleDefinition => {
     const meta = MODULE_META[id];
     const scienceTools = createScienceTools(science, capabilities, id);
@@ -96,11 +140,16 @@ export function createRosalindModuleComposition(): RosalindModuleComposition {
     const showcases = runtime.catalog.entries.filter((entry) => entry.pluginId === meta.pluginId);
     const version = showcases[0]?.pluginVersion;
     if (!version) throw new Error(`No showcase metadata supplies a version for ${meta.pluginId}`);
-    const plugin = id === "ngs"
-      ? workflow.ngsModule()
-      : id === "rosalind"
-        ? workflow.rosalindModule()
-        : modulePlugin(id, tools, skills);
+    const plugin = modulePlugin(id, tools, skills, id === "ngs" ? {
+      activate() {
+        ngs.activate();
+        science.attachNgs(ngs);
+      },
+      async deactivate() {
+        science.detachNgs(ngs);
+        await ngs.suspend();
+      },
+    } : {});
     return {
       id,
       name: meta.name,
@@ -118,10 +167,16 @@ export function createRosalindModuleComposition(): RosalindModuleComposition {
     definitions,
     runtime,
     science,
+    bindModules(registry) {
+      const enabled = (id: ModuleId) => registry.isActive(id);
+      runtime.setModuleEnabled(enabled);
+      science.setModuleEnabled(enabled);
+    },
     async dispose() {
       if (disposed) return;
       disposed = true;
       runtime.dispose();
+      await ngs.dispose();
       await science.dispose();
     },
   };

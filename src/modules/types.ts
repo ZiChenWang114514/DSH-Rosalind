@@ -15,6 +15,20 @@ export const MODULE_IDS = [
 export type ModuleId = (typeof MODULE_IDS)[number];
 export type ModuleState = "active" | "disabled" | "needs_setup" | "error";
 
+export const MODULE_PLUGIN_IDS: Record<ModuleId, string> = {
+  literature: "life-sciences-literature",
+  databases: "life-sciences-databases",
+  sequence: "biological-sequence-viewer",
+  ngs: "ngs-analysis-workbench",
+  structure: "molecular-structure-viewer",
+  slide: "slide-viewer",
+  rosalind: "rosalind-workbench",
+};
+
+export function moduleIdForPlugin(pluginId: string): ModuleId | undefined {
+  return MODULE_IDS.find((id) => MODULE_PLUGIN_IDS[id] === pluginId);
+}
+
 export interface ModuleDefinition {
   id: ModuleId;
   name: string;
