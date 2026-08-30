@@ -1,19 +1,12 @@
 import type { Plugin } from "@deepseek-ai/cordis";
 
 import type { ProviderStatus } from "../shared/types.js";
+import { MODULE_SETTING_IDS, type ModuleSettingId, type ModuleSettingSelection, type ModuleSettingState } from "../shared/module-settings-contract.js";
 
-export const MODULE_IDS = [
-  "literature",
-  "databases",
-  "sequence",
-  "ngs",
-  "structure",
-  "slide",
-  "rosalind",
-] as const;
+export const MODULE_IDS = MODULE_SETTING_IDS;
 
-export type ModuleId = (typeof MODULE_IDS)[number];
-export type ModuleState = "active" | "disabled" | "needs_setup" | "error";
+export type ModuleId = ModuleSettingId;
+export type ModuleState = ModuleSettingState;
 
 export const MODULE_PLUGIN_IDS: Record<ModuleId, string> = {
   literature: "life-sciences-literature",
@@ -54,4 +47,4 @@ export interface ModuleStatus {
   issues: string[];
 }
 
-export type ModuleEnabledState = Record<ModuleId, boolean>;
+export type ModuleEnabledState = ModuleSettingSelection;

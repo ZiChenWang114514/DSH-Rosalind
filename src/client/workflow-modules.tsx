@@ -1,9 +1,11 @@
 import type { Plugin } from "@deepseek-ai/cordis";
 import type { ClientContext } from "@deepseek-ai/dsh-client-runtime/client";
+import type {} from "@deepseek-ai/dsh-client-ui-settings/client";
 
 import { ConversationWorkbenchView, HeroWorkspacePicker, RosalindBrandMark } from "./components.js";
 import { setWorkbenchModuleAvailability } from "./session-evidence.js";
 import { ProviderSettings } from "./settings.js";
+import { bindModuleSettingsScope } from "./module-settings-control.js";
 import { ROSALIND_TOOL_NAMES, SCIENCE_VIEWER_TOOL_NAMES, RosalindToolCard, ScienceToolCard } from "./toolview.js";
 
 export const NGS_WORKBENCH_TOOL_NAMES = Object.freeze(SCIENCE_VIEWER_TOOL_NAMES.filter((name) => name.startsWith("ngs_")));
@@ -28,15 +30,17 @@ export function createNgsWorkbenchClientModule(): Plugin.Object {
 export function createRosalindWorkbenchClientModule(): Plugin.Object {
   return {
     name: "dsh-rosalind-workbench-client",
-    inject: ["slots"],
+    inject: ["slots", "settingsScope"],
     apply(ctx: ClientContext): void {
+      const moduleSettings = bindModuleSettingsScope(ctx);
+      const ModuleSettingsSection = () => <ProviderSettings scope={moduleSettings} />;
       ctx.effect(() => {
         setWorkbenchModuleAvailability("rosalind", "available");
         const disposers = [
           ctx.slots.register({ name: "conversation.hero.brand.mark", priority: -20 }, RosalindBrandMark),
           ctx.slots.register({ name: "conversation.hero.workspace", priority: -20 }, HeroWorkspacePicker),
           ctx.slots.register({ name: "conversation.view", id: "dsh-rosalind", order: 30, label: "Science" }, ConversationWorkbenchView),
-          ctx.slots.register({ name: "settings.section", id: "dsh-rosalind", order: 45, label: "Rosalind" }, ProviderSettings),
+          ctx.slots.register({ name: "settings.section", id: "dsh-rosalind", order: 45, label: "Rosalind" }, ModuleSettingsSection),
           ...ROSALIND_TOOL_NAMES.map((toolName) => ctx.slots.register({ name: "tool.call.toolview", key: toolName }, RosalindToolCard)),
         ];
         return () => {

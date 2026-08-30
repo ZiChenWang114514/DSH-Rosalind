@@ -7,11 +7,23 @@ import { createRosalindWorkbenchClientModule } from "../src/client/workflow-modu
 describe("DSH client composition", () => {
   it("leaves the native WorkspaceBrowser registered and exposes Science as a conversation view", () => {
     const registrations: Array<Record<string, unknown>> = [];
+    const boundNamespaces: string[] = [];
     const ctx = {
       slots: {
         register(spec: Record<string, unknown>) {
           registrations.push(spec);
           return () => undefined;
+        },
+      },
+      settingsScope: {
+        bind(spec: { namespace: string }) {
+          boundNamespaces.push(spec.namespace);
+          return {
+            getSnapshot: () => ({ status: "loading", value: undefined, base: undefined, user: undefined, revision: undefined, writable: false, mode: "host" }),
+            subscribe: () => () => undefined,
+            set: async () => undefined,
+            unset: async () => undefined,
+          };
         },
       },
       effect(setup: () => void | (() => void)) { setup(); },
@@ -24,5 +36,7 @@ describe("DSH client composition", () => {
     expect(registrations.some((spec) => spec.name === "sidebar.workspaces")).toBe(false);
     expect(registrations.some((spec) => spec.name === "shell.overlay")).toBe(false);
     expect(registrations).toContainEqual(expect.objectContaining({ name: "conversation.view", label: "Science" }));
+    expect(registrations).toContainEqual(expect.objectContaining({ name: "settings.section", id: "dsh-rosalind" }));
+    expect(boundNamespaces).toEqual(["dsh-rosalind-modules"]);
   });
 });

@@ -275,6 +275,18 @@ describe("Cordis module core", () => {
     const { ctx, settings } = await mount(initial);
     await vi.waitFor(() => expect(ctx.rosalindModules.status("sequence").status).toBe("disabled"));
     expect(ctx.rosalindModules.status("ngs").status).toBe("active");
+    await vi.waitFor(() => expect(settings?.snapshot()).toMatchObject({
+      "dsh-rosalind-modules": {
+        runtime: {
+          sequence: { status: "disabled", enabled: false, version: "0.1.43", toolCount: 13 },
+          literature: {
+            status: "needs_setup",
+            enabled: true,
+            providers: expect.arrayContaining([expect.objectContaining({ id: "ncbi-entrez", runnable: false })]),
+          },
+        },
+      },
+    }));
 
     await ctx.rosalindModules.enable("sequence");
     await ctx.rosalindModules.enable("sequence");
@@ -296,6 +308,9 @@ describe("Cordis module core", () => {
 
     await ctx.rosalindModules.enable("sequence");
     expect(ctx.rosalindModules.status("sequence")).toMatchObject({ status: "active", enabled: true });
+    await vi.waitFor(() => expect(settings?.snapshot()).toMatchObject({
+      "dsh-rosalind-modules": { runtime: { sequence: { status: "active", enabled: true } } },
+    }));
   });
 
   it("retains module state after a settings write error and clears the diagnostic on retry", async () => {
