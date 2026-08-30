@@ -12,6 +12,32 @@ export { ProviderRegistry } from "./host/providers.js";
 export { RosalindRuntime } from "./host/runtime.js";
 export { createRosalindTools } from "./host/tools.js";
 export { createScienceSkills, SCIENCE_SKILL_SPECS } from "./host/skills.js";
+export type {
+  ModuleDefinition as SourceModuleDefinition,
+  ShowcaseOwnership,
+  SourceProviderAdapter,
+} from "./modules/module-definition.js";
+export {
+  createLiteratureModule,
+  createLiteratureRequestTool,
+  createLiteratureSkills,
+  LiteratureProviderAdapter,
+  LITERATURE_PROVIDER_IDS,
+  LITERATURE_REQUEST_PARAMETERS,
+  LITERATURE_SHOWCASES,
+  LITERATURE_SKILL_SPECS,
+} from "./modules/life-sciences-literature.js";
+export {
+  createDatabaseModule,
+  createDatabaseRequestTool,
+  createDatabaseSkills,
+  DatabaseProviderAdapter,
+  DATABASE_PROVIDER_IDS,
+  DATABASE_PROVIDERS,
+  DATABASE_REQUEST_PARAMETERS,
+  DATABASE_SHOWCASES,
+  DATABASE_SKILL_SPECS,
+} from "./modules/life-sciences-databases.js";
 export { CapabilityRegistry } from "./host/capabilities.js";
 export { createScienceTools } from "./host/science-tools.js";
 export { ScienceRuntime } from "./host/science/runtime.js";
