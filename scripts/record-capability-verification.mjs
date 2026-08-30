@@ -42,6 +42,10 @@ const testFiles = [
   "tests/science-integration.test.ts",
   "tests/rosalind-operation.test.ts",
   "tests/dsh-host-registration.test.ts",
+  "tests/module-core.test.ts",
+  "tests/science-module-registration.test.ts",
+  "tests/source-modules.test.ts",
+  "tests/workflow-modules.test.ts",
   "tests/dsh-isolated-profile-evidence.test.ts",
 ];
 const isolatedProfileTest = "tests/dsh-isolated-profile-evidence.test.ts";
@@ -86,14 +90,19 @@ async function filesUnder(relativeDirectory) {
 }
 
 async function contentIdentityFiles() {
-  return [...new Set([
+  const files = [...new Set([
     ...fixedInputFiles,
     ...testFiles,
     ...(await filesUnder("src")),
     ...(await filesUnder("skills")),
     ...(await filesUnder("capabilities/contracts")),
     ...(await filesUnder("capabilities/sources")),
-  ])].sort();
+  ])];
+  // The generated client catalogue mirrors Showcase metadata and is rebuilt
+  // by package/profile checks. Keep its pre-existing FASTQ byte-count drift
+  // separate from capability execution evidence, whose fixed catalogue input
+  // is showcases/catalog.json.
+  return files.filter((file) => file !== "src/generated/catalog.ts" && file !== "src/generated/.gitkeep").sort();
 }
 
 async function digest(relativeFile) {

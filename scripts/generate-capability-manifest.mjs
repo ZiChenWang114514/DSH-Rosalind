@@ -34,7 +34,7 @@ async function readRuntimeOutputContracts() {
     if (!match) throw new Error(`${name} could not be read from src/host/science-tools.ts`);
     return new Set([...match[1].matchAll(/"([^"]+)"/g)].map((item) => item[1]));
   };
-  const mapMatch = sourceText.match(/const OPERATION_OUTPUT_FIELDS:[^=]*=\s*\{([\s\S]*?)\n\};\n\nfunction fieldSchema/);
+  const mapMatch = sourceText.match(/const OPERATION_OUTPUT_FIELDS:[^=]*=\s*\{([\s\S]*?)\n\};/);
   if (!mapMatch) throw new Error("OPERATION_OUTPUT_FIELDS could not be read from src/host/science-tools.ts");
   // This is a repository-controlled literal of quoted keys and string arrays.
   // Evaluating it preserves a single runtime/manifest source without importing
@@ -314,6 +314,10 @@ const verificationTestFiles = [
   "tests/science-integration.test.ts",
   "tests/rosalind-operation.test.ts",
   "tests/dsh-host-registration.test.ts",
+  "tests/module-core.test.ts",
+  "tests/science-module-registration.test.ts",
+  "tests/source-modules.test.ts",
+  "tests/workflow-modules.test.ts",
   "tests/dsh-isolated-profile-evidence.test.ts",
 ];
 
@@ -355,7 +359,7 @@ const verificationIdentityFiles = [...new Set([
   ...(await filesUnder("skills")),
   ...(await filesUnder("capabilities/contracts")),
   ...(await filesUnder("capabilities/sources")),
-])].sort();
+])].filter((file) => file !== "src/generated/catalog.ts" && file !== "src/generated/.gitkeep").sort();
 
 async function contentIdentity(relativePath) {
   return createHash("sha256").update(await readFile(path.join(repositoryRoot, relativePath))).digest("hex");
