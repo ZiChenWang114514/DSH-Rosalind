@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { ConversationSnapshot } from "@deepseek-ai/dsh-client-runtime/client";
+import type { ConversationSnapshot, SessionId, SessionListState, WorkspaceId, WorkspaceListState } from "@deepseek-ai/dsh-client-runtime/client";
 import type { EmptyWorkspaceOwnerProps, HeroBrandMarkOwnerProps } from "@deepseek-ai/dsh-client-ui-conversation/client";
 
 import { PREVIEW_DATA_URLS, SHOWCASE_BY_ID, SHOWCASES, SHOWCASE_FILE_COUNT, SHOWCASE_SOURCE_COMMIT } from "../generated/catalog.js";
@@ -9,19 +9,49 @@ import { CategoryIcon, CheckIcon, CloseIcon, FileIcon, PlayIcon, RosalindMark } 
 import { ScienceEcosystemPanel } from "./ecosystem.js";
 import { buildConversationPrompt } from "./prompt.js";
 import {
+  buildResearchTaskPrompt,
+  deriveResearchSessionRecord,
+  getResearchProjectHostAdapter,
+  SCIENCE_MODULE_OPTIONS,
+  validateResearchTaskDraft,
+} from "./project-flow.js";
+import type { ResearchProjectHostAdapter, ResearchSessionRecord, ResearchTaskDraft } from "./project-flow.js";
+import {
   closeShowcase,
   consumeConversationPrompt,
   openShowcase,
   setDetailTab,
   setWorkbenchBridge,
+  setResearchSubmissionState,
+  showProjectOverview,
   showNotice,
   stageConversationPrompt,
+  startNewResearchTask,
+  updateResearchDraft,
   useWorkbenchState,
 } from "./state.js";
 import { publishConversationNodes, useRosalindProjectSummary, useWorkbenchDataFlow } from "./session-evidence.js";
 import type { RosalindProjectSummary, WorkbenchDataFlowSummary, WorkbenchRecordSummary } from "./session-evidence.js";
 
 type InputActions = { setDraft: (text: string) => void; submit?: () => void };
+
+interface ResearchWorkspaceOption {
+  id: string;
+  title: string;
+  path: string;
+  sessionIds: readonly string[];
+}
+
+interface ProjectFlowEnvironment {
+  workspaces: readonly ResearchWorkspaceOption[];
+  workspaceReady: boolean;
+  currentSessionId?: string | undefined;
+  currentSessionBlank?: boolean | undefined;
+  currentWorkspaceId?: string | undefined;
+  blankSessionIds: ReadonlySet<string>;
+  onPickWorkspace?: ((workspaceId: string) => void) | undefined;
+  hostAdapter?: ResearchProjectHostAdapter | null | undefined;
+}
 
 function styleFor(showcase: ShowcaseDefinition): React.CSSProperties {
   const color = categoryById.get(showcase.categoryId)?.color ?? "#537d70";
@@ -43,6 +73,8 @@ export interface WorkbenchProps {
   inputActions?: InputActions;
   projectSummary?: RosalindProjectSummary | null;
   dataFlow?: WorkbenchDataFlowSummary;
+  researchRecord?: ResearchSessionRecord | null;
+  projectFlow?: ProjectFlowEnvironment;
 }
 
 function DataFlowSection({ title, items, empty }: { title: string; items: readonly WorkbenchRecordSummary[]; empty: string }): JSX.Element {
@@ -51,7 +83,29 @@ function DataFlowSection({ title, items, empty }: { title: string; items: readon
     : <p>{empty}</p>}</section>;
 }
 
-function SessionProjectPanel({ summary, dataFlow }: { summary: RosalindProjectSummary | null | undefined; dataFlow: WorkbenchDataFlowSummary | undefined }): JSX.Element {
+function ResearchRecordOverview({ record }: { record: ResearchSessionRecord }): JSX.Element {
+  const modules = record.moduleIds.map((id) => SCIENCE_MODULE_OPTIONS.find((item) => item.id === id)?.label ?? id);
+  return <div className="rr-session-flow" aria-label="Research record">
+    <div className="rr-session-flow__grid">
+      <DataFlowSection title="Research question" items={[{ id: "question", label: record.question, detail: null, status: record.stage }]} empty="No research question has been recorded." />
+      <DataFlowSection title="Scientific modules" items={modules.map((label) => ({ id: label, label, detail: null, status: null }))} empty="No scientific module has been recorded." />
+      <DataFlowSection title="Data sources and local files" items={record.sources.split("\n").filter(Boolean).map((source) => ({ id: source, label: source, detail: null, status: null }))} empty="No data source has been recorded." />
+      <DataFlowSection title="Recent tool results" items={record.toolResults.slice(-5).reverse().map((result) => ({ id: result.callId, label: result.toolName, detail: result.summary, status: result.status }))} empty="No tool result has been recorded for this task." />
+      <DataFlowSection title="Unfinished items" items={record.unfinishedItems.map((item) => ({ id: item, label: item, detail: null, status: null }))} empty="No unfinished item has been recorded." />
+    </div>
+  </div>;
+}
+
+function SessionProjectPanel({ summary, dataFlow, researchRecord }: { summary: RosalindProjectSummary | null | undefined; dataFlow: WorkbenchDataFlowSummary | undefined; researchRecord?: ResearchSessionRecord | null | undefined }): JSX.Element {
+  if (researchRecord) {
+    return <section className="rr-session-project" aria-labelledby="rr-session-project-title">
+      <span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span>
+      <h2 id="rr-session-project-title">{researchRecord.question}</h2>
+      <p className="rr-session-project__facts">Stage: {researchRecord.stage} · Created {new Date(researchRecord.createdAt).toLocaleString()}</p>
+      <ResearchRecordOverview record={researchRecord} />
+      {dataFlow && <SessionDataFlow dataFlow={dataFlow} />}
+    </section>;
+  }
   if (!summary) {
     return <section className="rr-session-project" aria-labelledby="rr-session-project-title"><span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span><h2 id="rr-session-project-title">Choose a project to begin</h2><p>Start from the new-session project search, then this view will keep the relevant research status and next action close to the conversation.</p>{dataFlow && <SessionDataFlow dataFlow={dataFlow} />}</section>;
   }
@@ -95,9 +149,104 @@ function SessionDataFlow({ dataFlow }: { dataFlow: WorkbenchDataFlowSummary }): 
   </div>;
 }
 
-export function Workbench({ session = false, hero = false, inputActions, projectSummary, dataFlow }: WorkbenchProps): JSX.Element {
-  const [showModules, setShowModules] = useState(false);
-  const { selectedCaseId } = useWorkbenchState();
+function ResearchTaskForm({ inputActions, projectFlow }: { inputActions: InputActions | undefined; projectFlow: ProjectFlowEnvironment | undefined }): JSX.Element {
+  const { researchDraft, submissionState, notice } = useWorkbenchState();
+  const [reviewing, setReviewing] = useState(false);
+  const workspaces = projectFlow?.workspaces ?? [];
+  const selectedWorkspace = workspaces.find((workspace) => workspace.id === researchDraft.workspaceId);
+  const draft: ResearchTaskDraft = researchDraft;
+  const errors = validateResearchTaskDraft(draft);
+
+  function toggleModule(moduleId: string): void {
+    const moduleIds = researchDraft.moduleIds.includes(moduleId)
+      ? researchDraft.moduleIds.filter((id) => id !== moduleId)
+      : [...researchDraft.moduleIds, moduleId];
+    updateResearchDraft({ moduleIds });
+  }
+
+  async function createTask(): Promise<void> {
+    const validationErrors = validateResearchTaskDraft(draft);
+    if (validationErrors.length > 0) {
+      setResearchSubmissionState("failed", validationErrors.join(" "));
+      setReviewing(false);
+      return;
+    }
+    setResearchSubmissionState("submitting", "Creating the research session…");
+    try {
+      const adapter = projectFlow?.hostAdapter ?? getResearchProjectHostAdapter();
+      let sessionId: string | undefined;
+      if (adapter) {
+        const connected = await adapter.createOrReuseBlankSession(draft.workspaceId);
+        sessionId = connected.sessionId;
+        await adapter.applyScienceCapabilities(sessionId, draft.moduleIds);
+        const prompt = buildResearchTaskPrompt(draft, sessionId, new Date().toISOString());
+        await adapter.submitResearchPrompt(sessionId, prompt);
+        adapter.showScienceView(sessionId);
+      } else {
+        const currentIsTargetBlank = projectFlow?.currentSessionBlank === true && projectFlow.currentWorkspaceId === draft.workspaceId;
+        const knownBlank = selectedWorkspace?.sessionIds.find((id) => projectFlow?.blankSessionIds.has(id));
+        sessionId = currentIsTargetBlank ? projectFlow?.currentSessionId : knownBlank;
+        projectFlow?.onPickWorkspace?.(draft.workspaceId);
+        if (!sessionId || !inputActions) {
+          throw new Error("DSH is opening a blank session for this workspace. Continue from its Science view when the session is ready.");
+        }
+        const prompt = buildResearchTaskPrompt(draft, sessionId, new Date().toISOString());
+        inputActions.setDraft(prompt);
+        inputActions.submit?.();
+      }
+      setResearchSubmissionState("submitted", "Research task submitted. Opening the Science view.");
+    } catch (error) {
+      setResearchSubmissionState("failed", error instanceof Error ? error.message : "The research task could not be created.");
+    }
+  }
+
+  if (reviewing) {
+    const moduleLabels = draft.moduleIds.map((id) => SCIENCE_MODULE_OPTIONS.find((module) => module.id === id)?.label ?? id);
+    return <section className="rr-project__primary" aria-labelledby="rr-project-review-title">
+      <span className="rr-project__label">Confirm research task</span>
+      <h2 id="rr-project-review-title">Review before creating the session</h2>
+      <dl>
+        <dt>Workspace</dt><dd>{selectedWorkspace?.title ?? draft.workspaceId}</dd>
+        <dt>Question</dt><dd>{draft.question}</dd>
+        <dt>Scientific modules</dt><dd>{moduleLabels.join(", ")}</dd>
+        <dt>Data sources and local files</dt><dd>{draft.sources}</dd>
+      </dl>
+      {notice && <p className="rr-notice" role={submissionState === "failed" ? "alert" : "status"}>{notice}</p>}
+      <div className="rr-actions">
+        <button type="button" className="rr-button" disabled={submissionState === "submitting"} onClick={() => setReviewing(false)}>Back to edit</button>
+        <button type="button" className="rr-button rr-button--primary" disabled={submissionState === "submitting"} onClick={() => void createTask()}>{submissionState === "submitting" ? "Creating…" : "Create research task"}</button>
+      </div>
+    </section>;
+  }
+
+  return <form className="rr-project__primary" aria-labelledby="rr-project-new-title" onSubmit={(event) => {
+    event.preventDefault();
+    if (errors.length > 0) setResearchSubmissionState("failed", errors.join(" "));
+    else setReviewing(true);
+  }}>
+    <span className="rr-project__label">New research task</span>
+    <h2 id="rr-project-new-title">Describe the investigation</h2>
+    <label htmlFor="rr-project-workspace"><strong>DSH workspace</strong></label>
+    <select id="rr-project-workspace" value={researchDraft.workspaceId} onChange={(event) => updateResearchDraft({ workspaceId: event.currentTarget.value })}>
+      <option value="">Choose a workspace</option>
+      {workspaces.map((workspace) => <option value={workspace.id} key={workspace.id}>{workspace.title}</option>)}
+    </select>
+    {projectFlow?.workspaceReady && workspaces.length === 0 && <p role="alert">Add a native DSH workspace from the sidebar before creating a research task.</p>}
+    <label htmlFor="rr-project-question"><strong>Research question</strong></label>
+    <textarea id="rr-project-question" rows={4} value={researchDraft.question} onChange={(event) => updateResearchDraft({ question: event.currentTarget.value })} placeholder="What scientific question should this session answer?" />
+    <fieldset>
+      <legend><strong>Scientific modules</strong></legend>
+      {SCIENCE_MODULE_OPTIONS.map((module) => <label key={module.id}><input type="checkbox" checked={researchDraft.moduleIds.includes(module.id)} onChange={() => toggleModule(module.id)} /> <span><strong>{module.label}</strong> — {module.description}</span></label>)}
+    </fieldset>
+    <label htmlFor="rr-project-sources"><strong>Data sources and local files</strong></label>
+    <textarea id="rr-project-sources" rows={4} value={researchDraft.sources} onChange={(event) => updateResearchDraft({ sources: event.currentTarget.value })} placeholder="List public records, URLs, accession identifiers, or paths already available in the selected workspace." />
+    {notice && <p className="rr-notice" role={submissionState === "failed" ? "alert" : "status"}>{notice}</p>}
+    <div className="rr-actions"><button type="submit" className="rr-button rr-button--primary">Review research task</button></div>
+  </form>;
+}
+
+export function Workbench({ session = false, hero = false, inputActions, projectSummary, dataFlow, researchRecord, projectFlow }: WorkbenchProps): JSX.Element {
+  const { selectedCaseId, projectView } = useWorkbenchState();
   useEffect(() => {
     if (!inputActions) return undefined;
     const staged = consumeConversationPrompt();
@@ -127,9 +276,11 @@ export function Workbench({ session = false, hero = false, inputActions, project
 
   if (session) {
     return <section className="rr-root rr-root--session rr-science-view" aria-label="DSH-Rosalind Science workspace">
-      <header className="rr-science-view__head"><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Science</span><h1>Rosalind Science</h1><p>Review the current project or choose one of seven scientific modules.</p></div></header>
+      <header className="rr-science-view__head"><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Science</span><h1>Rosalind Science</h1><p>Review the current project or begin a research task in a blank session.</p></div><div className="rr-actions"><button type="button" className="rr-button" aria-pressed={projectView === "overview"} onClick={showProjectOverview}>Project overview</button><button type="button" className="rr-button rr-button--primary" aria-pressed={projectView === "new-task"} onClick={() => startNewResearchTask(projectFlow?.currentWorkspaceId ?? "")}>New research task</button></div></header>
       {selectedCaseId ? <ShowcaseDetailPanel /> : <>
-        <SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} />
+        {projectView === "new-task"
+          ? <ResearchTaskForm inputActions={inputActions} projectFlow={projectFlow} />
+          : <SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} researchRecord={researchRecord} />}
         <section className="rr-project__modules" aria-labelledby="rr-session-modules-title">
           <div className="rr-project__section-head"><div><span className="rr-project__label">Scientific modules</span><h2 id="rr-session-modules-title">Methods and reviewed records</h2></div><p>Choose a module to prepare a task or inspect its retained scientific records.</p></div>
           <ScienceEcosystemPanel onExample={(example) => prepareExample(example.prompt)} onShowcase={openModuleShowcase} />
@@ -145,9 +296,9 @@ export function Workbench({ session = false, hero = false, inputActions, project
   return <section className={`rr-root rr-project${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind research project workspace">
     <header className="rr-project__mast">
       <div className="rr-project__identity"><span className="rr-launch-mark"><RosalindMark size={30} /></span><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Scientific project workspace</span><h1>Rosalind research workspace</h1><p>Frame a question, inspect sources, follow analysis, and keep results with their scientific record.</p></div></div>
-      <button type="button" className="rr-button rr-button--primary" aria-expanded={showModules} onClick={() => setShowModules((value) => !value)}>{showModules ? "Project overview" : "New research task"}</button>
+      <div className="rr-actions"><button type="button" className="rr-button" aria-pressed={projectView === "overview"} onClick={showProjectOverview}>Project overview</button><button type="button" className="rr-button rr-button--primary" aria-pressed={projectView === "new-task"} onClick={() => startNewResearchTask(projectFlow?.currentWorkspaceId ?? "")}>New research task</button></div>
     </header>
-    <div className="rr-project__grid">
+    {projectView === "new-task" ? <ResearchTaskForm inputActions={inputActions} projectFlow={projectFlow} /> : <div className="rr-project__grid">
       <section className="rr-project__primary" aria-labelledby="rr-project-current">
         <span className="rr-project__label">Current project</span><h2 id="rr-project-current">A new scientific investigation</h2><p>Begin with a testable question and choose the specialist module that matches the evidence and data you already have.</p>
         <ol className="rr-project__steps"><li><span>01</span><div><strong>Question</strong><small>Define the claim and required evidence.</small></div></li><li><span>02</span><div><strong>Sources</strong><small>Select local files or public records.</small></div></li><li><span>03</span><div><strong>Analysis</strong><small>Review methods before execution.</small></div></li><li><span>04</span><div><strong>Research record</strong><small>Keep outputs, limitations, and provenance together.</small></div></li></ol>
@@ -157,13 +308,13 @@ export function Workbench({ session = false, hero = false, inputActions, project
         <div><span>Reviewed records</span><strong>{SHOWCASES.length}</strong><small>available inside module details</small></div>
         <div><span>Runtime status</span><strong>Checked per task</strong><small>registration does not imply readiness</small></div>
       </aside>
-    </div>
+    </div>}
     <section className="rr-project__modules" aria-labelledby="rr-project-modules-title">
-      <div className="rr-project__section-head"><div><span className="rr-project__label">Research environment</span><h2 id="rr-project-modules-title">Choose a scientific module</h2></div><p>Showcases appear only after a module is selected, alongside new-task and reproduction actions.</p></div>
-      {showModules ? <ScienceEcosystemPanel
+      <div className="rr-project__section-head"><div><span className="rr-project__label">Research environment</span><h2 id="rr-project-modules-title">Scientific methods and reviewed records</h2></div><p>Reviewed examples remain available inside the task workflow and can prepare a reproduction request.</p></div>
+      {projectView === "new-task" ? <ScienceEcosystemPanel
         onExample={(example) => prepareExample(example.prompt)}
         onShowcase={openModuleShowcase}
-      /> : <div className="rr-project__module-strip">{SHOWCASE_CATEGORIES.map((category) => <button key={category.id} type="button" onClick={() => setShowModules(true)}><CategoryIcon icon={category.icon} size={19} /><span><strong>{category.label}</strong><small>{category.description}</small></span></button>)}</div>}
+      /> : <div className="rr-project__module-strip">{SHOWCASE_CATEGORIES.map((category) => <button key={category.id} type="button" onClick={() => { startNewResearchTask(projectFlow?.currentWorkspaceId ?? ""); updateResearchDraft({ moduleIds: [category.id] }); }}><CategoryIcon icon={category.icon} size={19} /><span><strong>{category.label}</strong><small>{category.description}</small></span></button>)}</div>}
     </section>
     <footer className="rr-source-note"><span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span><span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span></footer>
   </section>;
@@ -304,30 +455,92 @@ export function RosalindBrandMark({ size = 48, className }: HeroBrandMarkOwnerPr
   return <span className={`rr-brand-mark${className ? ` ${className}` : ""}`}><RosalindMark size={size} /></span>;
 }
 
-export function HeroWorkspacePicker(props: EmptyWorkspaceOwnerProps): JSX.Element {
+type SelectorHook<State> = <Value>(selector: (snapshot: State) => Value) => Value;
+const EMPTY_WORKSPACE_STATE: WorkspaceListState = { items: [], archivedSessionIds: [], state: "idle", phase: "pending", baselinesReady: false, recentWorkspaceId: undefined, error: null };
+const EMPTY_SESSION_STATE: SessionListState = { ids: [], byId: {}, current: undefined, phase: "pending", subagentsByParent: {}, jobsBySession: {}, currentAddress: undefined };
+const fallbackWorkspaces: SelectorHook<WorkspaceListState> = (selector) => selector(EMPTY_WORKSPACE_STATE);
+const fallbackSessions: SelectorHook<SessionListState> = (selector) => selector(EMPTY_SESSION_STATE);
+
+type HeroWorkspacePickerProps = EmptyWorkspaceOwnerProps & {
+  useWorkspaces?: SelectorHook<WorkspaceListState>;
+  useSessions?: SelectorHook<SessionListState>;
+};
+
+export function HeroWorkspacePicker(props: HeroWorkspacePickerProps): JSX.Element {
+  const useWorkspaces = props.useWorkspaces ?? fallbackWorkspaces;
+  const useSessions = props.useSessions ?? fallbackSessions;
+  const workspaces = useWorkspaces((snapshot) => snapshot);
+  const sessions = useSessions((snapshot) => snapshot);
+  const currentSessionId = sessions.current;
+  const currentWorkspace = currentSessionId ? workspaces.items.find((workspace) => workspace.sessionIds.includes(currentSessionId)) : undefined;
+  const projectFlow: ProjectFlowEnvironment = {
+    workspaces: workspaces.items.map((workspace) => ({ id: workspace.workspaceId, title: workspace.title, path: workspace.path, sessionIds: workspace.sessionIds })),
+    workspaceReady: workspaces.phase === "ready",
+    currentSessionId,
+    currentSessionBlank: currentSessionId ? sessions.byId[currentSessionId]?.blank : undefined,
+    currentWorkspaceId: currentWorkspace?.workspaceId ?? props.selectedId,
+    blankSessionIds: new Set(sessions.ids.filter((id) => sessions.byId[id]?.blank === true)),
+    onPickWorkspace: (workspaceId) => props.onPick(workspaceId as WorkspaceId),
+    hostAdapter: getResearchProjectHostAdapter(),
+  };
   useEffect(() => setWorkbenchBridge({
-    startSession(showcase, mode) {
+    async startSession(showcase, mode) {
       const prompt = buildConversationPrompt(showcase, mode);
-      stageConversationPrompt(prompt, { autoSubmit: true });
-      if (props.selectedId) props.onPick(props.selectedId);
-      else showNotice("Choose a DSH workspace first; the selected project will remain open.");
+      const adapter = getResearchProjectHostAdapter();
+      if (props.selectedId && adapter) {
+        try {
+          const connected = await adapter.createOrReuseBlankSession(props.selectedId);
+          await adapter.applyScienceCapabilities(connected.sessionId, [showcase.categoryId]);
+          await adapter.submitResearchPrompt(connected.sessionId, prompt);
+          adapter.showScienceView(connected.sessionId);
+          showNotice("The reviewed project was added to a blank research session.");
+        } catch (error) {
+          showNotice(error instanceof Error ? error.message : "The reviewed project could not be added.");
+        }
+      } else {
+        stageConversationPrompt(prompt, { autoSubmit: true });
+        if (props.selectedId) props.onPick(props.selectedId);
+        else showNotice("Choose a DSH workspace first; the selected project will remain open.");
+      }
     },
   }), [props.onPick, props.selectedId]);
-  return <Workbench hero />;
+  return <Workbench hero projectFlow={projectFlow} />;
 }
 
 type ConversationNodes = ConversationSnapshot["nodes"];
 
 const EMPTY_NODES: ConversationNodes = [];
 
-export function ConversationWorkbenchView(props: { inputActions: InputActions; useSession?: (selector: (snapshot: ConversationSnapshot) => ConversationNodes) => ConversationNodes }): JSX.Element {
+export function ConversationWorkbenchView(props: {
+  inputActions: InputActions;
+  sessionId?: SessionId;
+  useSession?: (selector: (snapshot: ConversationSnapshot) => ConversationNodes) => ConversationNodes;
+  useSessions?: SelectorHook<SessionListState>;
+  useWorkspaces?: SelectorHook<WorkspaceListState>;
+}): JSX.Element {
   const nodes = props.useSession ? props.useSession((snapshot) => snapshot.nodes) : EMPTY_NODES;
+  const useSessions = props.useSessions ?? fallbackSessions;
+  const useWorkspaces = props.useWorkspaces ?? fallbackWorkspaces;
+  const sessions = useSessions((snapshot) => snapshot);
+  const workspaces = useWorkspaces((snapshot) => snapshot);
+  const sessionId = props.sessionId ?? sessions.current;
+  const currentWorkspace = sessionId ? workspaces.items.find((workspace) => workspace.sessionIds.includes(sessionId)) : undefined;
+  const researchRecord = deriveResearchSessionRecord(nodes);
   const projectSummary = useRosalindProjectSummary();
   const dataFlow = useWorkbenchDataFlow();
   useEffect(() => {
     publishConversationNodes(nodes);
   }, [nodes]);
-  return <Workbench session inputActions={props.inputActions} projectSummary={projectSummary} dataFlow={dataFlow} />;
+  const projectFlow: ProjectFlowEnvironment = {
+    workspaces: workspaces.items.map((workspace) => ({ id: workspace.workspaceId, title: workspace.title, path: workspace.path, sessionIds: workspace.sessionIds })),
+    workspaceReady: workspaces.phase === "ready",
+    currentSessionId: sessionId,
+    currentSessionBlank: sessionId ? sessions.byId[sessionId]?.blank : undefined,
+    currentWorkspaceId: currentWorkspace?.workspaceId,
+    blankSessionIds: new Set(sessions.ids.filter((id) => sessions.byId[id]?.blank === true)),
+    hostAdapter: getResearchProjectHostAdapter(),
+  };
+  return <Workbench session inputActions={props.inputActions} projectSummary={projectSummary} dataFlow={dataFlow} researchRecord={researchRecord} projectFlow={projectFlow} />;
 }
 
 export function checkReadyIcon(): JSX.Element {

@@ -6,10 +6,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ConversationWorkbenchView, Workbench } from "../src/client/components.js";
 import { publishConversationNodes } from "../src/client/session-evidence.js";
-import { closeShowcase, consumeConversationPrompt, stageConversationPrompt } from "../src/client/state.js";
+import { closeShowcase, consumeConversationPrompt, resetResearchProjectFlow, stageConversationPrompt } from "../src/client/state.js";
 
 afterEach(() => {
   closeShowcase();
+  resetResearchProjectFlow();
   publishConversationNodes([]);
   cleanup();
 });
@@ -28,7 +29,7 @@ describe("Research project workspace", () => {
     render(<Workbench />);
     expect(screen.getByRole("heading", { name: "Rosalind research workspace" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A new scientific investigation" })).toBeInTheDocument();
-    expect(screen.getAllByRole("button")).toHaveLength(8);
+    expect(screen.getAllByRole("button")).toHaveLength(9);
     expect(screen.queryByText("Human RAS protein alignment")).not.toBeInTheDocument();
     expect(screen.getByText("1224 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
   });

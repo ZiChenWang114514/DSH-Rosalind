@@ -12,6 +12,16 @@ interface WorkbenchState {
   mode: ShowcaseMode;
   bridge: WorkbenchBridge;
   notice: string | null;
+  projectView: "overview" | "new-task";
+  researchDraft: ResearchTaskDraftState;
+  submissionState: "idle" | "submitting" | "submitted" | "failed";
+}
+
+export interface ResearchTaskDraftState {
+  workspaceId: string;
+  question: string;
+  moduleIds: string[];
+  sources: string;
 }
 
 export type DetailTab = "overview" | "evidence" | "reproduce";
@@ -35,6 +45,9 @@ let state: WorkbenchState = {
   mode: "lesson",
   bridge: {},
   notice: null,
+  projectView: "overview",
+  researchDraft: { workspaceId: "", question: "", moduleIds: [], sources: "" },
+  submissionState: "idle",
 };
 
 const selectedModes = new Map<string, ShowcaseMode>();
@@ -90,6 +103,36 @@ export function setWorkbenchBridge(bridge: WorkbenchBridge): () => void {
 
 export function showNotice(notice: string | null): void {
   update({ notice });
+}
+
+export function startNewResearchTask(workspaceId = ""): void {
+  update({
+    projectView: "new-task",
+    researchDraft: { workspaceId, question: "", moduleIds: [], sources: "" },
+    submissionState: "idle",
+    notice: null,
+  });
+}
+
+export function showProjectOverview(): void {
+  update({ projectView: "overview", submissionState: "idle", notice: null });
+}
+
+export function updateResearchDraft(patch: Partial<ResearchTaskDraftState>): void {
+  update({ researchDraft: { ...state.researchDraft, ...patch }, submissionState: "idle", notice: null });
+}
+
+export function setResearchSubmissionState(submissionState: WorkbenchState["submissionState"], notice: string | null): void {
+  update({ submissionState, notice });
+}
+
+export function resetResearchProjectFlow(): void {
+  update({
+    projectView: "overview",
+    researchDraft: { workspaceId: "", question: "", moduleIds: [], sources: "" },
+    submissionState: "idle",
+    notice: null,
+  });
 }
 
 export function stageConversationPrompt(prompt: string, options: { autoSubmit?: boolean } = {}): void {
