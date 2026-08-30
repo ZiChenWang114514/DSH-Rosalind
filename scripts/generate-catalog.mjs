@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { buildCatalogue, caseFiles, SOURCE_COMMIT, SOURCE_REPOSITORY } from "./lib/showcase-data.mjs";
 
@@ -6,11 +6,15 @@ const repositoryRoot = path.resolve(import.meta.dirname, "..");
 const outputDirectory = path.join(repositoryRoot, "src", "generated");
 const definitions = await buildCatalogue(repositoryRoot);
 const fileCount = (await caseFiles(repositoryRoot)).length;
-const previewDataUrls = Object.fromEntries(
+const previewDataUrls = Object.fromEntries(await Promise.all(
   definitions
-    .filter((definition) => definition.preview?.resourceUri)
-    .map((definition) => [definition.id, definition.preview.resourceUri]),
-);
+    .filter((definition) => definition.preview?.path && definition.preview.resourceUri && !definition.preview.resourceUri.startsWith("data:"))
+    .map(async (definition) => {
+      const preview = definition.preview;
+      const bytes = await readFile(path.join(repositoryRoot, preview.path));
+      return [definition.id, `data:${preview.mediaType};base64,${bytes.toString("base64")}`];
+    }),
+));
 const generatedAt = "2026-08-30";
 const serialized = JSON.stringify(definitions, null, 2)
   .replaceAll(" ", "\\u2028")

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import path from "node:path";
 import { buildCatalogue, reproductionRouteIds, scientificAcceptance, validateShowcases } from "../scripts/lib/showcase-data.mjs";
+import { PREVIEW_DATA_URLS, SHOWCASES } from "../src/generated/catalog.js";
 import { REPRODUCIBLE_SHOWCASE_IDS } from "../src/host/reproduction.js";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
@@ -97,6 +98,12 @@ describe("generated showcase catalogue", () => {
     expect(ras?.preview?.resourceUri?.startsWith("data:image/svg+xml;base64,")).toBe(true);
     const gfp = catalogue.find((item) => item.id === "structure-gfp-figure");
     expect(gfp?.preview).toMatchObject({ bytes: 738922, mediaType: "image/png" });
+  });
+
+  it("provides browser-safe data URLs for PNG previews through the showcase id used by the client", () => {
+    for (const showcase of SHOWCASES.filter((item) => item.preview?.mediaType === "image/png")) {
+      expect(PREVIEW_DATA_URLS[showcase.id]).toMatch(/^data:image\/(svg\+xml|png);base64,/);
+    }
   });
 });
 

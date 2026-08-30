@@ -27,6 +27,7 @@ describe("ScienceEcosystemPanel", () => {
     expect(screen.getByRole("tabpanel")).toHaveTextContent("declared in bundle");
     expect(screen.getByText(/Installation or registration does not confirm that a provider is ready/)).toBeInTheDocument();
     expect(screen.getByRole("tabpanel")).toHaveTextContent("DSH Settings → Rosalind");
+    expect(screen.getByRole("tabpanel")).toHaveAttribute("tabindex", "0");
   });
 
   it("makes each example task an actionable button", () => {
@@ -43,5 +44,15 @@ describe("ScienceEcosystemPanel", () => {
     render(<ScienceEcosystemPanel />);
     expect(screen.getByRole("tablist")).toHaveAttribute("aria-orientation", "horizontal");
     Object.defineProperty(window, "innerWidth", { configurable: true, value: width });
+  });
+
+  it("keeps tab ids and keyboard focus within each panel instance", () => {
+    render(<><ScienceEcosystemPanel /><ScienceEcosystemPanel /></>);
+    const tabs = screen.getAllByRole("tab");
+    const ids = tabs.map((tab) => tab.id);
+    expect(new Set(ids)).toHaveLength(ids.length);
+    fireEvent.keyDown(tabs[0]!, { key: "ArrowRight" });
+    expect(tabs[1]).toHaveFocus();
+    expect(tabs[8]).not.toHaveFocus();
   });
 });

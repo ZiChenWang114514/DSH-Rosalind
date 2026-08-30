@@ -63,8 +63,8 @@ function categoryFor(showcase: ShowcaseDefinition) {
 }
 
 function previewFor(showcase: ShowcaseDefinition): string | undefined {
-  if (!showcase.preview?.path) return undefined;
-  return PREVIEW_DATA_URLS[showcase.preview.path] ?? (showcase.preview.mediaType === "image/png" ? undefined : showcase.preview.resourceUri);
+  if (!showcase.preview) return undefined;
+  return PREVIEW_DATA_URLS[showcase.id] ?? showcase.preview.resourceUri;
 }
 
 export interface WorkbenchProps {
@@ -238,6 +238,7 @@ function ResearchTaskForm({ inputActions, projectFlow }: { inputActions: InputAc
 
 export function Workbench({ session = false, hero = false, inputActions, projectSummary, dataFlow, researchRecord, projectFlow }: WorkbenchProps): JSX.Element {
   const { selectedCaseId, projectView } = useWorkbenchState();
+  const instanceId = useId();
   useEffect(() => {
     if (!inputActions) return undefined;
     const staged = consumeConversationPrompt();
@@ -266,14 +267,15 @@ export function Workbench({ session = false, hero = false, inputActions, project
   }
 
   if (session) {
+    const modulesTitleId = `${instanceId}-session-modules-title`;
     return <section className="rr-root rr-root--session rr-science-view" aria-label="DSH-Rosalind Science workspace">
       <header className="rr-science-view__head"><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Science</span><h1>Rosalind Science</h1><p>Review the current project or begin a research task in a blank session.</p></div><div className="rr-actions"><button type="button" className="rr-button" aria-pressed={projectView === "overview"} onClick={showProjectOverview}>Project overview</button><button type="button" className="rr-button rr-button--primary" aria-pressed={projectView === "new-task"} onClick={() => startNewResearchTask(projectFlow?.currentWorkspaceId ?? "")}>New research task</button></div></header>
       {selectedCaseId ? <ShowcaseDetailPanel /> : <>
         {projectView === "new-task"
           ? <ResearchTaskForm inputActions={inputActions} projectFlow={projectFlow} />
           : <SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} researchRecord={researchRecord} />}
-        <section className="rr-project__modules" aria-labelledby="rr-session-modules-title">
-          <div className="rr-project__section-head"><div><span className="rr-project__label">Scientific modules</span><h2 id="rr-session-modules-title">Methods and reviewed records</h2></div><p>Choose a module to prepare a task or inspect its retained scientific records.</p></div>
+        <section className="rr-project__modules" aria-labelledby={modulesTitleId}>
+          <div className="rr-project__section-head"><div><span className="rr-project__label">Scientific modules</span><h2 id={modulesTitleId}>Methods and reviewed records</h2></div><p>Choose a module to prepare a task or inspect its retained scientific records.</p></div>
           <ScienceEcosystemPanel onExample={(example) => prepareExample(example.prompt)} onShowcase={openModuleShowcase} />
         </section>
       </>}
@@ -284,14 +286,17 @@ export function Workbench({ session = false, hero = false, inputActions, project
     return <section className={`rr-root rr-project${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind research project workspace"><ShowcaseDetailPanel /></section>;
   }
 
+  const currentProjectTitleId = `${instanceId}-project-current`;
+  const modulesTitleId = `${instanceId}-project-modules-title`;
+
   return <section className={`rr-root rr-project${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind research project workspace">
     <header className="rr-project__mast">
       <div className="rr-project__identity"><span className="rr-launch-mark"><RosalindMark size={30} /></span><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Scientific project workspace</span><h1>Rosalind research workspace</h1><p>Frame a question, inspect sources, follow analysis, and keep results with their scientific record.</p></div></div>
       <div className="rr-actions"><button type="button" className="rr-button" aria-pressed={projectView === "overview"} onClick={showProjectOverview}>Project overview</button><button type="button" className="rr-button rr-button--primary" aria-pressed={projectView === "new-task"} onClick={() => startNewResearchTask(projectFlow?.currentWorkspaceId ?? "")}>New research task</button></div>
     </header>
     {projectView === "new-task" ? <ResearchTaskForm inputActions={inputActions} projectFlow={projectFlow} /> : <div className="rr-project__grid">
-      <section className="rr-project__primary" aria-labelledby="rr-project-current">
-        <span className="rr-project__label">Current project</span><h2 id="rr-project-current">A new scientific investigation</h2><p>Begin with a testable question and choose the specialist module that matches the evidence and data you already have.</p>
+      <section className="rr-project__primary" aria-labelledby={currentProjectTitleId}>
+        <span className="rr-project__label">Current project</span><h2 id={currentProjectTitleId}>A new scientific investigation</h2><p>Begin with a testable question and choose the specialist module that matches the evidence and data you already have.</p>
         <ol className="rr-project__steps"><li><span>01</span><div><strong>Question</strong><small>Define the claim and required evidence.</small></div></li><li><span>02</span><div><strong>Sources</strong><small>Select local files or public records.</small></div></li><li><span>03</span><div><strong>Analysis</strong><small>Review methods before execution.</small></div></li><li><span>04</span><div><strong>Research record</strong><small>Keep outputs, limitations, and provenance together.</small></div></li></ol>
       </section>
       <aside className="rr-project__summary" aria-label="Workspace summary">
@@ -300,8 +305,8 @@ export function Workbench({ session = false, hero = false, inputActions, project
         <div><span>Runtime status</span><strong>Checked per task</strong><small>registration does not imply readiness</small></div>
       </aside>
     </div>}
-    <section className="rr-project__modules" aria-labelledby="rr-project-modules-title">
-      <div className="rr-project__section-head"><div><span className="rr-project__label">Research environment</span><h2 id="rr-project-modules-title">Scientific methods and reviewed records</h2></div><p>Reviewed examples remain available inside the task workflow and can prepare a reproduction request.</p></div>
+    <section className="rr-project__modules" aria-labelledby={modulesTitleId}>
+      <div className="rr-project__section-head"><div><span className="rr-project__label">Research environment</span><h2 id={modulesTitleId}>Scientific methods and reviewed records</h2></div><p>Reviewed examples remain available inside the task workflow and can prepare a reproduction request.</p></div>
       {projectView === "new-task" ? <ScienceEcosystemPanel
         onExample={(example) => prepareExample(example.prompt)}
         onShowcase={openModuleShowcase}
@@ -431,9 +436,9 @@ export function ShowcaseDetailPanel(): JSX.Element | null {
           >{tab[0]!.toUpperCase() + tab.slice(1)}</button>)}
         </div>
         <div className="rr-detail-body">
-          <div aria-labelledby={`${detailId}-tab-overview`} hidden={detailTab !== "overview"} id={`${detailId}-panel-overview`} role="tabpanel" tabIndex={detailTab === "overview" ? 0 : -1}>{detailTab === "overview" ? <Overview showcase={showcase} /> : null}</div>
-          <div aria-labelledby={`${detailId}-tab-evidence`} hidden={detailTab !== "evidence"} id={`${detailId}-panel-evidence`} role="tabpanel" tabIndex={detailTab === "evidence" ? 0 : -1}>{detailTab === "evidence" ? <Evidence showcase={showcase} /> : null}</div>
-          <div aria-labelledby={`${detailId}-tab-reproduce`} hidden={detailTab !== "reproduce"} id={`${detailId}-panel-reproduce`} role="tabpanel" tabIndex={detailTab === "reproduce" ? 0 : -1}>{detailTab === "reproduce" ? <Reproduce showcase={showcase} /> : null}</div>
+          <div aria-labelledby={`${detailId}-tab-overview`} hidden={detailTab !== "overview"} id={`${detailId}-panel-overview`} role="tabpanel" tabIndex={detailTab === "overview" ? 0 : -1}><Overview showcase={showcase} /></div>
+          <div aria-labelledby={`${detailId}-tab-evidence`} hidden={detailTab !== "evidence"} id={`${detailId}-panel-evidence`} role="tabpanel" tabIndex={detailTab === "evidence" ? 0 : -1}><Evidence showcase={showcase} /></div>
+          <div aria-labelledby={`${detailId}-tab-reproduce`} hidden={detailTab !== "reproduce"} id={`${detailId}-panel-reproduce`} role="tabpanel" tabIndex={detailTab === "reproduce" ? 0 : -1}><Reproduce showcase={showcase} /></div>
         </div>
         <footer className="rr-detail-foot">
           {notice && <span className="rr-notice" role="status">{notice}</span>}

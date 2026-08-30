@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { SHOWCASES } from "../generated/catalog.js";
 import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
 
@@ -61,6 +61,8 @@ function useHorizontalTabs(): { containerRef: React.RefObject<HTMLElement>; hori
 export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }: ScienceEcosystemPanelProps): JSX.Element {
   const [activeId, setActiveId] = useState(SCIENCE_ECOSYSTEMS[0]!.id);
   const { containerRef, horizontal } = useHorizontalTabs();
+  const panelId = useId();
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeIndex = Math.max(0, SCIENCE_ECOSYSTEMS.findIndex((item) => item.id === activeId));
   const active = SCIENCE_ECOSYSTEMS[activeIndex]!;
   const declaredOperationCount = SCIENCE_ECOSYSTEMS.reduce((sum, item) => sum + item.operationCount, 0);
@@ -69,7 +71,7 @@ export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }:
   function selectAt(index: number): void {
     const next = SCIENCE_ECOSYSTEMS[(index + SCIENCE_ECOSYSTEMS.length) % SCIENCE_ECOSYSTEMS.length]!;
     setActiveId(next.id);
-    document.getElementById(`science-ecosystem-tab-${next.id}`)?.focus();
+    tabRefs.current[(index + SCIENCE_ECOSYSTEMS.length) % SCIENCE_ECOSYSTEMS.length]?.focus();
   }
 
   return (
@@ -82,7 +84,8 @@ export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }:
         <div className="drr-ecosystem__tabs" role="tablist" aria-label="Scientific plugin workspaces" aria-orientation={horizontal ? "horizontal" : "vertical"}>
           {SCIENCE_ECOSYSTEMS.map((plugin, index) => {
             const selected = plugin.id === active.id;
-            return <button id={`science-ecosystem-tab-${plugin.id}`} key={plugin.id} type="button" className={`drr-ecosystem__tab${selected ? " is-active" : ""}`} role="tab" aria-selected={selected} aria-controls={`science-ecosystem-panel-${plugin.id}`} tabIndex={selected ? 0 : -1} onClick={() => setActiveId(plugin.id)} onKeyDown={(event) => {
+            const tabId = `${panelId}-tab-${plugin.id}`;
+            return <button id={tabId} key={plugin.id} type="button" className={`drr-ecosystem__tab${selected ? " is-active" : ""}`} role="tab" aria-selected={selected} aria-controls={`${panelId}-panel-${plugin.id}`} tabIndex={selected ? 0 : -1} ref={(element) => { tabRefs.current[index] = element; }} onClick={() => setActiveId(plugin.id)} onKeyDown={(event) => {
               if (event.key === "ArrowDown" || event.key === "ArrowRight") { event.preventDefault(); selectAt(index + 1); }
               if (event.key === "ArrowUp" || event.key === "ArrowLeft") { event.preventDefault(); selectAt(index - 1); }
               if (event.key === "Home") { event.preventDefault(); selectAt(0); }
@@ -92,7 +95,7 @@ export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }:
             </button>;
           })}
         </div>
-        <article id={`science-ecosystem-panel-${active.id}`} className="drr-ecosystem__detail" role="tabpanel" aria-labelledby={`science-ecosystem-tab-${active.id}`}>
+        <article id={`${panelId}-panel-${active.id}`} className="drr-ecosystem__detail" role="tabpanel" aria-labelledby={`${panelId}-tab-${active.id}`} tabIndex={0}>
           <div className="drr-ecosystem__detail-head"><span className="drr-ecosystem__large-mark" style={marker(active.color)} aria-hidden="true">✦</span><div><p className="drr-ecosystem__eyebrow">Declared contract · {active.version}</p><h3>{active.name}</h3><p>{active.description}</p></div></div>
           <div className="drr-ecosystem__status-grid"><section><h4>Services</h4><ul>{active.mcpServices.map((service) => <li key={service}><span className="drr-ecosystem__ready" style={{ background: "var(--rr-muted)" }} aria-hidden="true" />{service}<small>declared in bundle</small></li>)}</ul><p>Check provider status before a fresh run. Registration only records bundle membership; it does not confirm provider readiness.</p></section><section><h4>Skills & showcases</h4><p><strong>{active.skillCount}</strong> declared {active.skillCount === 1 ? "skill" : "skills"}</p><p><strong>{activeShowcases.length}</strong> reviewed showcases</p><p className="drr-ecosystem__read-only">Change provider configuration in DSH Settings → Rosalind.</p></section><section><h4>Tools</h4>{active.operationCount > 0 ? <p><strong>{active.operationCount}</strong> declared tools in this workspace</p> : <p>This reference does not claim runtime availability. Source requests use the Literature and Databases gateway tools.</p>}</section></div>
           <section className="drr-ecosystem__examples" aria-label={`${active.name} example conversation tasks`}><h4>Example conversation tasks</h4><p className="drr-ecosystem__read-only">When connected to a conversation composer, selecting an example prepares a conversation task; it does not run a provider.</p><div>{active.examples.map((example) => <button key={example.label} type="button" aria-label={`Prepare conversation task: ${example.label}`} onClick={() => onExample?.(example, active)}>{example.label}<span aria-hidden="true">→</span></button>)}</div></section>

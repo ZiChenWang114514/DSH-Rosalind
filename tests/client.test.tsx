@@ -129,6 +129,13 @@ describe("Research project workspace", () => {
     expect(within(detail).getByRole("button", { name: "Back to scientific modules" })).toBeInTheDocument();
   });
 
+  it("shows a browser-safe PNG preview for the GFP showcase", () => {
+    render(<Workbench />);
+    openModuleRecord("Provenance-bearing GFP figure", /Molecular Structure Viewer/);
+    const detail = screen.getByRole("region", { name: "Provenance-bearing GFP figure" });
+    expect(detail.querySelector("img.rr-preview")).toHaveAttribute("src", expect.stringMatching(/^data:image\/png;base64,/));
+  });
+
   it("uses roving focus and linked panels for project detail tabs", () => {
     render(<Workbench />);
     openModuleRecord("Human RAS protein alignment", /Biological Sequence/);
@@ -145,5 +152,6 @@ describe("Research project workspace", () => {
     expect(next).toHaveFocus();
     expect(next).toHaveAttribute("aria-selected", "true");
     expect(within(detail).getByRole("tabpanel")).toHaveAttribute("aria-labelledby", next.id);
+    expect(within(detail).getAllByRole("tabpanel", { hidden: true })).toHaveLength(3);
   });
 });

@@ -10,10 +10,13 @@ export const STRUCTURE_CLIENT_MODULE = {
 } as const;
 
 export function registerStructureClientModule(ctx: ClientContext): void {
-  for (const toolName of STRUCTURE_CLIENT_MODULE.toolNames) {
-    ctx.slots.inject("tool.call.toolview", () => ctx.slots.register(
+  ctx.effect(() => {
+    const disposers = STRUCTURE_CLIENT_MODULE.toolNames.map((toolName) => ctx.slots.register(
       { name: "tool.call.toolview", key: toolName },
       ScienceToolCard,
     ));
-  }
+    return () => {
+      for (const dispose of disposers.reverse()) dispose();
+    };
+  }, "dsh-rosalind: structure client module");
 }

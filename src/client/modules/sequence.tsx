@@ -10,10 +10,13 @@ export const SEQUENCE_CLIENT_MODULE = {
 } as const;
 
 export function registerSequenceClientModule(ctx: ClientContext): void {
-  for (const toolName of SEQUENCE_CLIENT_MODULE.toolNames) {
-    ctx.slots.inject("tool.call.toolview", () => ctx.slots.register(
+  ctx.effect(() => {
+    const disposers = SEQUENCE_CLIENT_MODULE.toolNames.map((toolName) => ctx.slots.register(
       { name: "tool.call.toolview", key: toolName },
       ScienceToolCard,
     ));
-  }
+    return () => {
+      for (const dispose of disposers.reverse()) dispose();
+    };
+  }, "dsh-rosalind: sequence client module");
 }
