@@ -11,7 +11,7 @@ function callId(value: string): ToolExecutionInput["callId"] {
 }
 
 describe("database_request gateway", () => {
-  it("exposes and dispatches every accepted BioBank Japan identifier through ToolRuntime", async () => {
+  it("exposes and dispatches source-specific database parameters through ToolRuntime", async () => {
     const calls: Array<{ args: Record<string, unknown>; operation: string; serviceId: string }> = [];
     const executor: ScienceExecutor = {
       async execute(serviceId, operation, args) {
@@ -30,6 +30,7 @@ describe("database_request gateway", () => {
       expect(databaseSchema?.parameters).toMatchObject({
         properties: {
           rsid: { type: "string" }, grch37: { type: "string" }, grch38: { type: "string" }, variant: { type: "string" },
+          ids: { type: "string" }, dbfrom: { type: "string" }, retmode: { type: "string" }, rettype: { type: "string" },
         },
       });
 
@@ -51,6 +52,13 @@ describe("database_request gateway", () => {
       expect(calls).toEqual(inputs.map((input) => ({
         serviceId: "databases", operation: "database.request", args: { provider: "biobankjapan-phewas", ...input },
       })));
+
+      const entrezArgs = { provider: "ncbi-entrez", operation: "fetch", ids: "7157", db: "gene", retmode: "xml", rettype: "full" };
+      const entrezResult = await ctx.tools.execute({
+        callId: callId("entrez-gateway"), name: "database_request", arguments: entrezArgs, signal: new AbortController().signal,
+      });
+      expect(entrezResult.isError).toBe(false);
+      expect(calls.at(-1)).toEqual({ serviceId: "databases", operation: "database.request", args: entrezArgs });
     } finally {
       for (const dispose of unregister.reverse()) dispose();
       await toolsFiber.dispose();
