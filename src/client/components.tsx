@@ -18,8 +18,8 @@ import {
   stageConversationPrompt,
   useWorkbenchState,
 } from "./state.js";
-import { publishConversationNodes, useRosalindProjectSummary } from "./session-evidence.js";
-import type { RosalindProjectSummary } from "./session-evidence.js";
+import { publishConversationNodes, useRosalindProjectSummary, useWorkbenchDataFlow } from "./session-evidence.js";
+import type { RosalindProjectSummary, WorkbenchDataFlowSummary, WorkbenchRecordSummary } from "./session-evidence.js";
 
 type InputActions = { setDraft: (text: string) => void; submit?: () => void };
 
@@ -42,11 +42,18 @@ export interface WorkbenchProps {
   hero?: boolean;
   inputActions?: InputActions;
   projectSummary?: RosalindProjectSummary | null;
+  dataFlow?: WorkbenchDataFlowSummary;
 }
 
-function SessionProjectPanel({ summary }: { summary: RosalindProjectSummary | null | undefined }): JSX.Element {
+function DataFlowSection({ title, items, empty }: { title: string; items: readonly WorkbenchRecordSummary[]; empty: string }): JSX.Element {
+  return <section className="rr-session-flow__section"><h3>{title}</h3>{items.length > 0
+    ? <ul>{items.map((item) => <li key={item.id}><strong>{item.label}</strong>{(item.detail || item.status) && <span>{[item.detail, item.status].filter(Boolean).join(" · ")}</span>}</li>)}</ul>
+    : <p>{empty}</p>}</section>;
+}
+
+function SessionProjectPanel({ summary, dataFlow }: { summary: RosalindProjectSummary | null | undefined; dataFlow: WorkbenchDataFlowSummary | undefined }): JSX.Element {
   if (!summary) {
-    return <section className="rr-session-project" aria-labelledby="rr-session-project-title"><span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span><h2 id="rr-session-project-title">Choose a project to begin</h2><p>Start from the new-session project search, then this view will keep the relevant research status and next action close to the conversation.</p></section>;
+    return <section className="rr-session-project" aria-labelledby="rr-session-project-title"><span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span><h2 id="rr-session-project-title">Choose a project to begin</h2><p>Start from the new-session project search, then this view will keep the relevant research status and next action close to the conversation.</p>{dataFlow && <SessionDataFlow dataFlow={dataFlow} />}</section>;
   }
   const facts = [
     summary.mode ? `Mode: ${summary.mode}` : null,
@@ -61,10 +68,34 @@ function SessionProjectPanel({ summary }: { summary: RosalindProjectSummary | nu
   return <section className="rr-session-project" aria-labelledby="rr-session-project-title">
     <span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span>
     <div className="rr-session-project__body"><div><h2 id="rr-session-project-title">{displayTitle}</h2>{facts.length > 0 && <p className="rr-session-project__facts">{facts.join(" · ")}</p>}</div><p className="rr-session-project__next"><strong>Next step</strong>{summary.nextAction ?? "Continue the current research task in the conversation."}</p></div>
+    {dataFlow && <SessionDataFlow dataFlow={dataFlow} />}
   </section>;
 }
 
-export function Workbench({ session = false, hero = false, inputActions, projectSummary }: WorkbenchProps): JSX.Element {
+function SessionDataFlow({ dataFlow }: { dataFlow: WorkbenchDataFlowSummary }): JSX.Element {
+  const activity = dataFlow.activity.map((item) => ({
+    ...item,
+    detail: item.detail ? SHOWCASE_BY_ID.get(item.detail)?.title ?? item.detail : null,
+  }));
+  const viewerItems: WorkbenchRecordSummary[] = (Object.entries(dataFlow.viewers) as Array<[string, WorkbenchDataFlowSummary["viewers"]["sequence"]]>).map(([name, viewer]) => ({
+    id: name,
+    label: `${name[0]!.toUpperCase()}${name.slice(1)} Viewer`,
+    detail: viewer.detail ?? viewer.sessionId,
+    status: viewer.status,
+  }));
+  return <div className="rr-session-flow" aria-label="Current Workbench data flow">
+    <div className="rr-session-flow__modules"><span>Rosalind module: {dataFlow.modules.rosalind}</span><span>NGS module: {dataFlow.modules.ngs}</span></div>
+    <div className="rr-session-flow__grid">
+      <DataFlowSection title="Data and files" items={dataFlow.files} empty="No file evidence has been recorded in this conversation." />
+      <DataFlowSection title="Tasks and runs" items={activity} empty="No plan or run evidence has been recorded." />
+      <DataFlowSection title="Recent results" items={dataFlow.recentResults} empty="No completed result has been recorded." />
+      <DataFlowSection title="Sources and citations" items={dataFlow.sources} empty="No source or citation has been recorded." />
+      <DataFlowSection title="Scientific viewers" items={viewerItems} empty="No viewer evidence has been recorded." />
+    </div>
+  </div>;
+}
+
+export function Workbench({ session = false, hero = false, inputActions, projectSummary, dataFlow }: WorkbenchProps): JSX.Element {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [runnableOnly, setRunnableOnly] = useState(false);
@@ -93,7 +124,7 @@ export function Workbench({ session = false, hero = false, inputActions, project
   }, [categoryId, query, runnableOnly]);
 
   if (session) {
-    return <section className="rr-root rr-root--session" aria-label="DSH-Rosalind current project"><SessionProjectPanel summary={projectSummary} /></section>;
+    return <section className="rr-root rr-root--session" aria-label="DSH-Rosalind current project"><SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} /></section>;
   }
 
   return (
@@ -321,10 +352,11 @@ const EMPTY_NODES: ConversationNodes = [];
 export function ConversationWorkbenchView(props: { inputActions: InputActions; useSession?: (selector: (snapshot: ConversationSnapshot) => ConversationNodes) => ConversationNodes }): JSX.Element {
   const nodes = props.useSession ? props.useSession((snapshot) => snapshot.nodes) : EMPTY_NODES;
   const projectSummary = useRosalindProjectSummary();
+  const dataFlow = useWorkbenchDataFlow();
   useEffect(() => {
     publishConversationNodes(nodes);
   }, [nodes]);
-  return <Workbench session inputActions={props.inputActions} projectSummary={projectSummary} />;
+  return <Workbench session inputActions={props.inputActions} projectSummary={projectSummary} dataFlow={dataFlow} />;
 }
 
 export function checkReadyIcon(): JSX.Element {

@@ -88,21 +88,44 @@ export class ScienceRuntime implements ScienceExecutor {
   readonly literature: LiteratureService;
   readonly databases: DatabaseService;
   readonly sequence: SequenceService;
-  readonly ngs: NgsService;
+  private ngsService: NgsService | null;
   readonly structure: StructureService;
   readonly slide: SlideService;
 
-  constructor(options: { literature?: LiteratureService; databases?: DatabaseService } = {}) {
+  constructor(options: { literature?: LiteratureService; databases?: DatabaseService; ngs?: NgsService | null } = {}) {
     this.literature = options.literature ?? new LiteratureService();
     this.databases = options.databases ?? new DatabaseService();
     this.sequence = new SequenceService();
-    this.ngs = new NgsService();
+    this.ngsService = options.ngs === undefined ? new NgsService() : options.ngs;
     this.structure = new StructureService();
     this.slide = new SlideService();
   }
 
+  get ngs(): NgsService | null {
+    return this.ngsService;
+  }
+
+  attachNgs(service: NgsService): void {
+    if (this.ngsService && this.ngsService !== service) throw new Error("An NGS Analysis Workbench module is already attached.");
+    this.ngsService = service;
+  }
+
+  detachNgs(service: NgsService): void {
+    if (this.ngsService === service) this.ngsService = null;
+  }
+
+  moduleStatus(): { ngs: { enabled: boolean; status: "available" | "disabled"; diagnostic: string | null }; rosalind: { enabled: true; status: "available"; diagnostic: null } } {
+    return {
+      ngs: this.ngsService
+        ? { enabled: true, status: "available", diagnostic: null }
+        : { enabled: false, status: "disabled", diagnostic: "The NGS Analysis Workbench Cordis module is not active. Historical conversation and registry records remain readable, but a new NGS call requires the module to be enabled." },
+      rosalind: { enabled: true, status: "available", diagnostic: null },
+    };
+  }
+
   async dispose(): Promise<void> {
-    await this.ngs.dispose();
+    if (this.ngsService) await this.ngsService.dispose();
+    this.ngsService = null;
   }
 
   async execute(serviceId: string, operation: string, args: Record<string, unknown>, context: ScienceExecutionContext): Promise<JsonRecord> {
@@ -113,7 +136,22 @@ export class ScienceRuntime implements ScienceExecutor {
         case "literature": result = await this.literature.execute(operation, args, context); break;
         case "databases": result = await this.databases.execute(operation, args, context); break;
         case "sequence": result = await this.sequence.execute(operation, args, context); break;
-        case "ngs": result = await this.ngs.execute(operation, args, context); break;
+        case "ngs":
+          if (!this.ngsService) {
+            return {
+              serviceId,
+              operation,
+              status: "unavailable",
+              module: "ngs-analysis-workbench",
+              moduleStatus: this.moduleStatus().ngs,
+              error: {
+                code: "NGS_MODULE_DISABLED",
+                message: "The NGS Analysis Workbench Cordis module is disabled. Enable it before making a new NGS call; retained project and run evidence is unchanged.",
+              },
+            };
+          }
+          result = await this.ngsService.execute(operation, args, context);
+          break;
         case "structure": result = await this.structure.execute(operation, args, context); break;
         case "slide": result = await this.slide.execute(operation, args, context); break;
         case "rosalind":
@@ -123,7 +161,16 @@ export class ScienceRuntime implements ScienceExecutor {
             result = { schemaVersion: "life-sciences.settings/v1", ready: true, view: "settings" };
             break;
           }
-          if (operation === "rosalind.open") { result = openRosalind(args, context); break; }
+          if (operation === "rosalind.open") {
+            const opened = openRosalind(args, context);
+            const services = Array.isArray(opened.availableServices)
+              ? opened.availableServices.filter((service): service is string => typeof service === "string" && service !== "ngs")
+              : [];
+            result = this.ngsService
+              ? opened
+              : { ...opened, availableServices: services };
+            break;
+          }
           throw new Error(`Unknown Rosalind operation: ${operation}`);
         default: throw new Error(`Unknown science service: ${serviceId}`);
       }

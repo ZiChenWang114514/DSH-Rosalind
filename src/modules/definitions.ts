@@ -10,6 +10,7 @@ import { createScienceTools } from "../host/science-tools.js";
 import { ScienceRuntime } from "../host/science/runtime.js";
 import { createScienceSkills } from "../host/skills.js";
 import { createRosalindTools } from "../host/tools.js";
+import { WorkflowModuleCoordinator } from "../host/workflow-modules.js";
 import { MODULE_IDS, type ModuleDefinition, type ModuleId } from "./types.js";
 
 const MODULE_META: Record<ModuleId, {
@@ -80,8 +81,8 @@ export interface RosalindModuleComposition {
 export function createRosalindModuleComposition(): RosalindModuleComposition {
   const capabilities = new CapabilityRegistry();
   const providers = new ProviderRegistry();
-  const science = new ScienceRuntime();
-  const runtime = new RosalindRuntime({ science, providers });
+  const workflow = new WorkflowModuleCoordinator(capabilities);
+  const { science, rosalind: runtime } = workflow;
   const definitions = MODULE_IDS.map((id): ModuleDefinition => {
     const meta = MODULE_META[id];
     const scienceTools = createScienceTools(science, capabilities, id);
@@ -95,12 +96,17 @@ export function createRosalindModuleComposition(): RosalindModuleComposition {
     const showcases = runtime.catalog.entries.filter((entry) => entry.pluginId === meta.pluginId);
     const version = showcases[0]?.pluginVersion;
     if (!version) throw new Error(`No showcase metadata supplies a version for ${meta.pluginId}`);
+    const plugin = id === "ngs"
+      ? workflow.ngsModule()
+      : id === "rosalind"
+        ? workflow.rosalindModule()
+        : modulePlugin(id, tools, skills);
     return {
       id,
       name: meta.name,
       version,
       pluginId: meta.pluginId,
-      plugin: modulePlugin(id, tools, skills),
+      plugin,
       toolCount: tools.length,
       skillCount: skills.length,
       showcaseCount: showcases.length,

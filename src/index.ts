@@ -41,6 +41,19 @@ export {
 export { CapabilityRegistry } from "./host/capabilities.js";
 export { createScienceTools } from "./host/science-tools.js";
 export { ScienceRuntime } from "./host/science/runtime.js";
+export {
+  WorkflowModuleCoordinator,
+  createNgsWorkbenchModule,
+  createRosalindWorkbenchModule,
+  ngsWorkbenchModule,
+  rosalindWorkbenchModule,
+} from "./host/workflow-modules.js";
+export type {
+  NgsWorkbenchModuleOptions,
+  RosalindWorkbenchModuleOptions,
+  WorkflowModuleHandle,
+  WorkflowModuleStatus,
+} from "./host/workflow-modules.js";
 export { validateShowcase } from "./host/validators.js";
 export { createRosalindModuleComposition } from "./modules/definitions.js";
 export { ModuleRegistry } from "./modules/registry.js";
@@ -58,8 +71,6 @@ export const name = "dsh-rosalind";
 export const inject = ["tools", "skills"];
 
 const WRITE_APPROVAL_REASONS: Readonly<Record<string, string>> = {
-  rosalind_approve: "Approval is required to authorize the exact DSH-Rosalind plan and its recorded external actions.",
-  rosalind_export: "Approval is required to write the requested DSH-Rosalind export to the active workspace.",
   sequence_export_artifact: "Approval is required to write the requested Sequence Viewer artifact.",
   structure_render_image: "Approval is required before writing a Molecular Structure Viewer image and its rendering record.",
   structure_render_movie: "Approval is required before writing a Molecular Structure Viewer movie and its rendering record.",
@@ -84,14 +95,11 @@ export async function apply(ctx: Context): Promise<() => Promise<void>> {
       const args = exec.arguments && typeof exec.arguments === "object" && !Array.isArray(exec.arguments)
         ? exec.arguments as Record<string, unknown>
         : {};
-      if (exec.name === "ngs_execute_plan") {
-        return { kind: "ask" as const, reason: "Approval is required to run the exact reviewed NGS plan on the selected compute target." };
-      }
       if ((exec.name === "literature_request" || exec.name === "database_request") && args.allowNetwork === true) {
         return { kind: "ask" as const, reason: `Approval is required to send this ${exec.name === "literature_request" ? "literature" : "database"} request to the selected public service.` };
       }
       const writeReason = WRITE_APPROVAL_REASONS[exec.name];
-      if (writeReason && (exec.name !== "rosalind_export" || args.approved === true)) {
+      if (writeReason) {
         return { kind: "ask" as const, reason: writeReason };
       }
       if (exec.name === "slide_control_viewer" && typeof args.action === "string" && SLIDE_WRITE_ACTIONS.has(args.action)) {

@@ -20,21 +20,28 @@ export const SCIENCE_SKILL_SPECS = [...LITERATURE_SKILL_SPECS, ...DATABASE_SKILL
 
 export function createCoreScienceSkills(
   packageRoot = findPackageRoot(),
-  serviceId?: SkillSpec["serviceId"],
+  serviceSelection?: SkillSpec["serviceId"] | ReadonlySet<string>,
 ): SkillRegistration[] {
   return createSkillRegistrations(
-    viewersAndNgs.filter((spec) => serviceId === undefined || spec.serviceId === serviceId),
+    viewersAndNgs.filter((spec) => serviceSelection === undefined
+      || (typeof serviceSelection === "string"
+        ? spec.serviceId === serviceSelection
+        : serviceSelection.has(spec.serviceId))),
     packageRoot,
   );
 }
 
-export function createScienceSkills(packageRoot = findPackageRoot(), serviceId?: SkillSpec["serviceId"]): SkillRegistration[] {
-  if (serviceId === "literature") return createLiteratureSkills(packageRoot);
-  if (serviceId === "databases") return createDatabaseSkills(packageRoot);
-  if (serviceId !== undefined) return createCoreScienceSkills(packageRoot, serviceId);
+export function createScienceSkills(
+  packageRoot = findPackageRoot(),
+  serviceSelection?: SkillSpec["serviceId"] | ReadonlySet<string>,
+): SkillRegistration[] {
+  const selected = (serviceId: SkillSpec["serviceId"]): boolean => serviceSelection === undefined
+    || (typeof serviceSelection === "string"
+      ? serviceSelection === serviceId
+      : serviceSelection.has(serviceId));
   return [
-    ...createLiteratureSkills(packageRoot),
-    ...createDatabaseSkills(packageRoot),
-    ...createCoreScienceSkills(packageRoot),
+    ...(selected("literature") ? createLiteratureSkills(packageRoot) : []),
+    ...(selected("databases") ? createDatabaseSkills(packageRoot) : []),
+    ...createCoreScienceSkills(packageRoot, serviceSelection),
   ];
 }

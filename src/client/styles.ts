@@ -87,6 +87,17 @@ export const WORKBENCH_CSS = String.raw`
 .rr-session-project__facts { margin: 6px 0 0; color: var(--rr-muted); font-size: 10px; line-height: 1.45; }
 .rr-session-project__next { display: grid; gap: 3px; max-width: 280px; margin: 0; color: var(--rr-muted); font-size: 10.5px; line-height: 1.45; }
 .rr-session-project__next strong { color: var(--rr-accent-ink); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase; }
+.rr-session-flow { display: grid; gap: 12px; margin-top: 5px; padding-top: 14px; border-top: 1px solid var(--rr-line); }
+.rr-session-flow__modules { display: flex; flex-wrap: wrap; gap: 7px; color: var(--rr-muted); font-size: 9px; }
+.rr-session-flow__modules span { padding: 4px 7px; border: 1px solid var(--rr-line); border-radius: 999px; background: var(--rr-panel-solid); }
+.rr-session-flow__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.rr-session-flow__section { min-width: 0; padding: 10px; border: 1px solid var(--rr-line); border-radius: 11px; background: color-mix(in srgb, var(--rr-panel-solid) 88%, transparent); }
+.rr-session-flow__section:last-child { grid-column: 1 / -1; }
+.rr-session-flow__section h3 { margin: 0 0 7px; color: var(--rr-accent-ink); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
+.rr-session-flow__section ul { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.rr-session-flow__section li { display: grid; gap: 2px; min-width: 0; font-size: 9.5px; }
+.rr-session-flow__section li strong { overflow: hidden; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; }
+.rr-session-flow__section li span, .rr-session-flow__section p { margin: 0; color: var(--rr-muted); font-size: 9px; line-height: 1.4; }
 .rr-launch { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 13px; align-items: center; margin: 0 0 16px; padding: 13px 15px; border: 1px solid var(--rr-line); border-radius: 15px; background: linear-gradient(130deg, color-mix(in srgb, var(--rr-accent-soft) 72%, var(--rr-panel-solid)), var(--rr-panel-solid)); }
 .rr-launch-mark { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 13px; color: var(--rr-accent-ink); background: color-mix(in srgb, var(--rr-accent-soft) 72%, transparent); }
 .rr-launch .rr-kicker { padding: 0; border: 0; background: transparent; font-size: 8.5px; }
@@ -310,6 +321,8 @@ export const WORKBENCH_CSS = String.raw`
   .rr-workspace-title p { display: none; }
   .rr-root--session { padding: 20px 13px 75px; }
   .rr-session-project__body { align-items: start; flex-direction: column; gap: 12px; }
+  .rr-session-flow__grid { grid-template-columns: 1fr; }
+  .rr-session-flow__section:last-child { grid-column: auto; }
   .rr-launch { padding: 11px; }
   .rr-toolbar { grid-template-columns: 1fr; }
   .rr-search { grid-column: auto; }

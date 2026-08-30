@@ -5,7 +5,9 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   currentEvidence,
   publishConversationNodes,
+  setWorkbenchModuleAvailability,
   useRosalindProjectSummary,
+  useWorkbenchDataFlow,
 } from "../src/client/session-evidence.js";
 
 function toolResult(
@@ -26,9 +28,63 @@ function toolResult(
   };
 }
 
-afterEach(() => publishConversationNodes([]));
+afterEach(() => {
+  setWorkbenchModuleAvailability("ngs", "unknown");
+  setWorkbenchModuleAvailability("rosalind", "unknown");
+  publishConversationNodes([]);
+});
 
 describe("Rosalind project session evidence", () => {
+  it("projects files, runs, results, citations, viewer summaries, and module availability from recorded results", () => {
+    publishConversationNodes([
+      toolResult("call-1", "rosalind_showcase_import", { showcase_id: "case-a" }, {
+        showcaseId: "case-a", title: "Evidence project", suggestedMode: "replay",
+        caseIndex: [{ role: "input", path: "inputs/example.fasta" }, { role: "output", path: "outputs/result.json" }],
+        sources: ["PMID:12345"],
+      }),
+      toolResult("call-2", "ngs_list_ngs_runs", {}, {
+        status: "completed", runs: [{ registry_run_id: "run-1", workflow_id: "wf-1", state: "completed" }],
+      }),
+      toolResult("call-3", "sequence_open_from_chat", {}, {
+        status: "completed", viewer: "alignment", viewerSessionId: "sequence-1", result: { rows: 3 },
+      }),
+      toolResult("call-4", "structure_get_state", {}, {
+        status: "completed", viewerSessionId: "structure-1", sceneRevision: 4,
+      }),
+      toolResult("call-5", "slide_get_viewer_state", {}, {
+        status: "completed", viewerSessionId: "slide-1", stateRevision: 7,
+      }),
+    ]);
+
+    const flow = currentEvidence().workbench;
+    expect(flow.files.map((item) => item.label)).toEqual(["inputs/example.fasta", "outputs/result.json"]);
+    expect(flow.activity).toContainEqual(expect.objectContaining({ label: "run-1", detail: "wf-1", status: "completed" }));
+    expect(flow.sources).toContainEqual(expect.objectContaining({ label: "PMID:12345" }));
+    expect(flow.viewers).toMatchObject({
+      sequence: { status: "observed", sessionId: "sequence-1", detail: "alignment" },
+      structure: { status: "observed", sessionId: "structure-1", detail: "revision 4" },
+      slide: { status: "observed", sessionId: "slide-1", detail: "revision 7" },
+    });
+    expect(flow.modules).toEqual({ ngs: "available", rosalind: "available" });
+
+    const { result } = renderHook(() => useWorkbenchDataFlow());
+    expect(result.current.files).toHaveLength(2);
+  });
+
+  it("keeps historical evidence when the NGS client module is disabled and re-enabled", () => {
+    publishConversationNodes([toolResult("call-1", "ngs_get_ngs_run", { registry_run_id: "run-1" }, {
+      status: "completed", registry_run_id: "run-1", state: "completed", summary_path: "results/summary.md",
+    })]);
+    setWorkbenchModuleAvailability("ngs", "disabled");
+    expect(currentEvidence().workbench.modules.ngs).toBe("disabled");
+    expect(currentEvidence().workbench.files).toContainEqual(expect.objectContaining({ label: "results/summary.md" }));
+    expect(currentEvidence().workbench.activity).toContainEqual(expect.objectContaining({ label: "run-1" }));
+
+    setWorkbenchModuleAvailability("ngs", "available");
+    expect(currentEvidence().workbench.modules.ngs).toBe("available");
+    expect(currentEvidence().workbench.files).toHaveLength(1);
+  });
+
   it("reconstructs a compact current-project summary from settled lifecycle results", () => {
     publishConversationNodes([
       toolResult("call-1", "rosalind_showcase_import", { showcase_id: "case-a", mode: "reproduce" }, {

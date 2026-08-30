@@ -55,6 +55,35 @@ export interface RosalindProjectSummary {
   nextAction: string | null;
 }
 
+export interface WorkbenchRecordSummary {
+  id: string;
+  label: string;
+  detail: string | null;
+  status: string | null;
+}
+
+export interface WorkbenchViewerSummary {
+  status: "observed" | "unavailable";
+  sessionId: string | null;
+  detail: string | null;
+}
+
+export interface WorkbenchDataFlowSummary {
+  files: WorkbenchRecordSummary[];
+  activity: WorkbenchRecordSummary[];
+  recentResults: WorkbenchRecordSummary[];
+  sources: WorkbenchRecordSummary[];
+  viewers: {
+    sequence: WorkbenchViewerSummary;
+    structure: WorkbenchViewerSummary;
+    slide: WorkbenchViewerSummary;
+  };
+  modules: {
+    ngs: "available" | "disabled" | "unknown";
+    rosalind: "available" | "disabled" | "unknown";
+  };
+}
+
 interface EvidenceState {
   ngs: {
     workflows: SessionToolEvidence | null;
@@ -70,9 +99,11 @@ interface EvidenceState {
   };
   slideCommands: SlideViewerCommand[];
   rosalind: RosalindProjectSummary | null;
+  workbench: WorkbenchDataFlowSummary;
 }
 
 let state: EvidenceState = emptyState();
+const liveModuleAvailability: WorkbenchDataFlowSummary["modules"] = { ngs: "unknown", rosalind: "unknown" };
 
 function emptyState(): EvidenceState {
   return {
@@ -80,6 +111,22 @@ function emptyState(): EvidenceState {
     structure: { source: null, commands: [] },
     slideCommands: [],
     rosalind: null,
+    workbench: emptyWorkbenchDataFlow(),
+  };
+}
+
+function emptyViewer(): WorkbenchViewerSummary {
+  return { status: "unavailable", sessionId: null, detail: null };
+}
+
+function emptyWorkbenchDataFlow(): WorkbenchDataFlowSummary {
+  return {
+    files: [],
+    activity: [],
+    recentResults: [],
+    sources: [],
+    viewers: { sequence: emptyViewer(), structure: emptyViewer(), slide: emptyViewer() },
+    modules: { ngs: "unknown", rosalind: "unknown" },
   };
 }
 
@@ -118,6 +165,23 @@ export function currentEvidence(): EvidenceState {
 export function useRosalindProjectSummary(): RosalindProjectSummary | null {
   useSessionEvidenceVersion();
   return state.rosalind;
+}
+
+export function setWorkbenchModuleAvailability(
+  module: keyof WorkbenchDataFlowSummary["modules"],
+  availability: WorkbenchDataFlowSummary["modules"][keyof WorkbenchDataFlowSummary["modules"]],
+): void {
+  liveModuleAvailability[module] = availability;
+  publish({
+    ...state,
+    workbench: { ...state.workbench, modules: { ...state.workbench.modules, [module]: availability } },
+  });
+}
+
+/** Returns the evidence-backed Workbench sections for the current conversation. */
+export function useWorkbenchDataFlow(): WorkbenchDataFlowSummary {
+  useSessionEvidenceVersion();
+  return state.workbench;
 }
 
 function textPayload(node: unknown): { toolName: string; args: Record<string, unknown>; payload: Record<string, unknown> } | null {
@@ -292,6 +356,75 @@ function fingerprint(node: unknown): string | null {
   return typeof call?.name === "string" ? String(record.callId ?? "") : null;
 }
 
+function recordArray(value: unknown): Record<string, unknown>[] {
+  return Array.isArray(value)
+    ? value.filter((item): item is Record<string, unknown> => Boolean(item && typeof item === "object" && !Array.isArray(item)))
+    : [];
+}
+
+function addUnique(items: WorkbenchRecordSummary[], seen: Set<string>, item: WorkbenchRecordSummary): void {
+  if (seen.has(item.id)) return;
+  seen.add(item.id);
+  items.push(item);
+}
+
+function pathRecords(payload: Record<string, unknown>): Array<{ path: string; role: string | null }> {
+  const records: Array<{ path: string; role: string | null }> = [];
+  for (const key of ["artifacts", "caseIndex", "case_index", "files", "outputs"]) {
+    for (const item of recordArray(payload[key])) {
+      const path = stringValue(item, "path", "resourceUri", "resource_uri", "summary_path", "output_path");
+      if (path) records.push({ path, role: stringValue(item, "role", "kind", "mediaType", "media_type") });
+    }
+  }
+  for (const key of ["path", "summary_path", "output_path", "result_path", "source_path"]) {
+    const path = stringValue(payload, key);
+    if (path) records.push({ path, role: key === "source_path" ? "source" : null });
+  }
+  return records;
+}
+
+function sourceRecords(payload: Record<string, unknown>): string[] {
+  const values: string[] = [];
+  for (const key of ["sources", "citations"]) {
+    if (!Array.isArray(payload[key])) continue;
+    for (const value of payload[key]) {
+      if (typeof value === "string" && value.trim()) values.push(value.trim());
+      else if (value && typeof value === "object" && !Array.isArray(value)) {
+        const item = value as Record<string, unknown>;
+        const label = stringValue(item, "citation", "source", "title", "doi", "pmid", "pmcid", "url");
+        if (label) values.push(label);
+      }
+    }
+  }
+  for (const key of ["citation", "doi", "pmid", "pmcid", "url", "sourceUrl", "source_url"]) {
+    const value = stringValue(payload, key);
+    if (value) values.push(value);
+  }
+  return values;
+}
+
+function viewerSummary(payload: Record<string, unknown>): WorkbenchViewerSummary {
+  const sessionId = stringValue(payload, "viewerSessionId", "viewer_session_id", "sessionId", "session_id");
+  const viewer = stringValue(payload, "viewer", "format", "fileName", "file_name");
+  const revision = numberValue(payload, "sceneRevision", "stateRevision", "revision");
+  return {
+    status: "observed",
+    sessionId,
+    detail: [viewer, revision === null ? null : `revision ${revision}`].filter((item): item is string => item !== null).join(" · ") || null,
+  };
+}
+
+function resultLabel(toolName: string): string {
+  if (toolName.startsWith("ngs_")) return "NGS workflow result";
+  if (toolName.startsWith("sequence_")) return "Sequence analysis result";
+  if (toolName.startsWith("structure_")) return "Structure analysis result";
+  if (toolName.startsWith("slide_")) return "Slide analysis result";
+  if (toolName.startsWith("rosalind_")) return "Research project result";
+  if (toolName === "literature_request") return "Literature result";
+  if (toolName === "database_request") return "Database result";
+  return "Scientific result";
+}
+
 /**
  * Rebuild the evidence store from a conversation snapshot's node list.
  * Publication is skipped when the relevant tool-result set is unchanged.
@@ -302,6 +435,11 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
   const slideCommands: SlideViewerCommand[] = [];
   const structure: EvidenceState["structure"] = { source: null, commands: [] };
   let rosalind: RosalindProjectSummary | null = null;
+  const workbench = emptyWorkbenchDataFlow();
+  const seenFiles = new Set<string>();
+  const seenActivity = new Set<string>();
+  const seenResults = new Set<string>();
+  const seenSources = new Set<string>();
   const seenNgs = new Set<string>();
   for (const node of nodes) {
     const mark = fingerprint(node);
@@ -311,6 +449,41 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
     const { toolName, args, payload } = parsed;
     const time = typeof (node as Record<string, unknown>).time === "number" ? (node as Record<string, unknown>).time as number : 0;
     const evidence: SessionToolEvidence = { callId: String((node as Record<string, unknown>).callId ?? ""), toolName, args, payload, time };
+    for (const item of pathRecords(payload)) {
+      addUnique(workbench.files, seenFiles, { id: item.path, label: item.path, detail: item.role, status: null });
+    }
+    for (const source of sourceRecords(payload)) {
+      addUnique(workbench.sources, seenSources, { id: source, label: source, detail: null, status: null });
+    }
+    const payloadStatus = statusValue(toolName, payload);
+    const runIdentity = stringValue(payload, "registry_run_id", "runId", "run_id", "id");
+    if (runIdentity && (toolName.startsWith("ngs_") || ROSALIND_TOOLS.has(toolName))) {
+      addUnique(workbench.activity, seenActivity, {
+        id: `${toolName}:${runIdentity}:${payloadStatus ?? "unknown"}`,
+        label: runIdentity,
+        detail: toolName.startsWith("ngs_") ? stringValue(payload, "workflow_id", "plan_id") : stringValue(payload, "showcaseId", "showcase_id"),
+        status: payloadStatus,
+      });
+    }
+    for (const run of recordArray(payload.runs)) {
+      const id = stringValue(run, "registry_run_id", "runId", "run_id", "id");
+      if (id) addUnique(workbench.activity, seenActivity, { id: `run:${id}`, label: id, detail: stringValue(run, "workflow_id", "showcaseId"), status: stringValue(run, "state", "status") });
+    }
+    if (payloadStatus === "completed" && (payload.artifacts !== undefined || payload.result !== undefined || payload.report !== undefined || payload.summary !== undefined || payload.output !== undefined)) {
+      addUnique(workbench.recentResults, seenResults, {
+        id: evidence.callId || `${toolName}:${time}`,
+        label: resultLabel(toolName),
+        detail: stringValue(payload, "summary", "title", "result_path", "output_path"),
+        status: payloadStatus,
+      });
+    }
+    const error = nestedRecord(payload, "error");
+    const errorCode = stringValue(error ?? {}, "code");
+    if (toolName.startsWith("ngs_")) workbench.modules.ngs = errorCode === "NGS_MODULE_DISABLED" ? "disabled" : "available";
+    if (toolName.startsWith("rosalind_")) workbench.modules.rosalind = errorCode === "ROSALIND_MODULE_DISABLED" ? "disabled" : "available";
+    if (toolName.startsWith("sequence_") && payloadStatus === "completed") workbench.viewers.sequence = viewerSummary(payload);
+    if (toolName.startsWith("structure_") && payloadStatus === "completed") workbench.viewers.structure = viewerSummary(payload);
+    if (toolName.startsWith("slide_") && payloadStatus === "completed") workbench.viewers.slide = viewerSummary(payload);
     if (ROSALIND_TOOLS.has(toolName)) {
       rosalind = rosalindSummaryFromEvidence(toolName, args, payload, rosalind);
     } else if (toolName.startsWith("ngs_")) {
@@ -352,7 +525,13 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
       }
     }
   }
-  const next: EvidenceState = { ngs, structure, slideCommands, rosalind };
+  workbench.activity = workbench.activity.slice(-12).reverse();
+  workbench.recentResults = workbench.recentResults.slice(-8).reverse();
+  workbench.files = workbench.files.slice(-16);
+  workbench.sources = workbench.sources.slice(-12);
+  if (liveModuleAvailability.ngs !== "unknown") workbench.modules.ngs = liveModuleAvailability.ngs;
+  if (liveModuleAvailability.rosalind !== "unknown") workbench.modules.rosalind = liveModuleAvailability.rosalind;
+  const next: EvidenceState = { ngs, structure, slideCommands, rosalind, workbench };
   const signature = JSON.stringify([
     marks,
     next.ngs.workflows?.callId ?? null,
@@ -365,6 +544,7 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
     next.structure.commands.map((command) => [command.commandId, command.action, command.args]),
     next.slideCommands.map((command) => [command.action, command.args]),
     next.rosalind,
+    next.workbench,
   ]);
   if (signature === lastSignature) return;
   lastSignature = signature;
@@ -401,5 +581,5 @@ export function seedEvidenceFromGlobal(): void {
     const evidence = item(observation);
     if (id && evidence) ngs.observations.set(id, evidence);
   }
-  publish({ ngs, structure: { source: null, commands: [] }, slideCommands: [], rosalind: null });
+  publish({ ngs, structure: { source: null, commands: [] }, slideCommands: [], rosalind: null, workbench: emptyWorkbenchDataFlow() });
 }

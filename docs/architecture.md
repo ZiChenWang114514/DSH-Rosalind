@@ -7,8 +7,8 @@ DSH Web
   hero catalogue · conversation Workbench · settings · tool views · detail overlay
         │
         ▼
-DSH-Rosalind client module
-  search · filters · evidence views · prompt import · run presentation
+DSH-Rosalind client bundle
+  Rosalind Workbench module · NGS Analysis Workbench module · other science viewers
         │
         ▼
 DSH tool runtime
@@ -21,9 +21,14 @@ Scientific adapters
 
 ## Package and lifecycle
 
-`cordis.patch.yml` inserts the host plugin. The host exports `name`, `inject`, and `apply`, constructs one `RosalindRuntime`, registers thirteen tools through `ctx.tools.register(defineTool(...))`, and disposes running work when Cordis unloads the plugin. Network and long tasks receive the DSH cancellation signal.
+`cordis.patch.yml` inserts the host bundle. Its core creates a shared science coordinator and mounts two independently disposable Cordis plugins:
 
-The client is built as a single classic DSH browser module:
+- `dsh-rosalind-ngs-workbench` registers the 25 NGS operations and five NGS Skills. It owns workflow discovery and versioning, reviewed plans, durable run attempts, observations and logs, cancellation, workflow restoration, and local process cleanup.
+- `dsh-rosalind-workbench` registers the thirteen project tools and the two fixed Rosalind service operations. It owns cross-service projects, confirmation, run coordination, status, cancellation, retained session evidence, and research-project summaries.
+
+Removing the NGS plugin unregisters its tools and Skills and stops any process it owns. The shared coordinator then reports `NGS_MODULE_DISABLED` for a new direct NGS request, while `rosalind_status` can still read project history already held by the Rosalind runtime. Mounting a fresh NGS plugin restores new calls and reads the same durable per-session registry. Network and long tasks continue to receive the DSH cancellation signal.
+
+The browser output remains one classic DSH module file for package compatibility, while its runtime registration is divided into matching NGS and Rosalind Cordis client plugins:
 
 ```text
 window.__ModuleLoader__.load({
@@ -47,7 +52,7 @@ The client occupies named slots and does not inspect product DOM elements:
 | `tool.call.toolview` | Dedicated display for each `rosalind_*` tool |
 | `shell.overlay` | Project details, evidence, use mode, and import action |
 
-The project detail state is a small external store. A blank-session selection keeps the requested teaching prompt until a DSH workspace is chosen. In an active conversation, the prompt is placed in the composer and remains editable before submission.
+The project detail state is a small external store. A blank-session selection keeps the requested teaching prompt until a DSH workspace is chosen. In an active conversation, the prompt is placed in the composer and remains editable before submission. The session Workbench derives its project, data and files, tasks and runs, recent results, sources and citations, and Sequence, Structure, and Slide Viewer summaries only from settled conversation tool results. Missing evidence stays visibly empty. Client-module lifecycle status is shown separately, so disabling NGS does not erase earlier result records.
 
 ## Host model
 
