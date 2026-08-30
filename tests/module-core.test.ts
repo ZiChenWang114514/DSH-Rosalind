@@ -43,6 +43,8 @@ function callId(value: string): ToolExecutionInput["callId"] {
   return value as ToolExecutionInput["callId"];
 }
 
+const MODULE_AGENT = { id: "module-core-agent" } as NonNullable<ToolExecutionInput["agent"]>;
+
 async function mount(initialSettings?: Record<string, unknown>): Promise<HarnessFixture> {
   const ctx = new Context();
   const fibers: Fiber[] = [];
@@ -68,7 +70,7 @@ async function mount(initialSettings?: Record<string, unknown>): Promise<Harness
 }
 
 async function execute(ctx: Context, name: string, args: unknown) {
-  return ctx.tools.execute({ callId: callId(`module-core-${name}`), name, arguments: args, signal: new AbortController().signal });
+  return ctx.tools.execute({ callId: callId(`module-core-${name}`), name, arguments: args, signal: new AbortController().signal, agent: MODULE_AGENT });
 }
 
 const MODULE_LIFECYCLE_CASES = [

@@ -63,12 +63,18 @@ describe("NGS fixed-version MCP facades", () => {
     expect(await service.executeOnServer("ngs-app", "get_ngs_run_report", { registry_run_id: "missing" }, ctx)).toMatchObject({
       ok: false,
       registry_run_id: "missing",
-      errors: ["registry run does not exist: missing"],
+      error: {
+        code: "NGS_RUN_NOT_FOUND",
+        message: "Registry run does not exist: missing",
+      },
     });
     expect(await service.execute("get_ngs_run", { registry_run_id: "missing" }, ctx)).toMatchObject({
       ok: false,
       registry_run_id: "missing",
-      errors: ["registry run does not exist: missing"],
+      error: {
+        code: "NGS_RUN_NOT_FOUND",
+        message: "Registry run does not exist: missing",
+      },
     });
     await service.dispose();
   });

@@ -495,7 +495,12 @@ function resultView(contract: RuntimeOperationContract, result: ToolResult) {
   };
 }
 
-function toolDefinition(contract: RuntimeOperationContract, executor: ScienceExecutor, packageRoot: string): ToolDefinition {
+function toolDefinition(
+  contract: RuntimeOperationContract,
+  executor: ScienceExecutor,
+  packageRoot: string,
+  fallbackSession: object,
+): ToolDefinition {
   return {
     name: contract.registeredName,
     description: contract.tool.description,
@@ -516,8 +521,9 @@ function toolDefinition(contract: RuntimeOperationContract, executor: ScienceExe
     isConcurrencySafe: () => contract.tool.annotations.readOnlyHint === true,
     async execute(args, exec) {
       const record = args && typeof args === "object" && !Array.isArray(args) ? args as Record<string, unknown> : {};
+      const toolRuntimeSession = typeof exec.deferContext === "function" ? fallbackSession : {};
       return executor.execute(contract.record.serviceId, contract.record.operation, record, {
-        session: exec.agent ?? {},
+        session: exec.agent ?? toolRuntimeSession,
         ...(exec.agent?.id ? { sessionId: String(exec.agent.id) } : {}),
         signal: exec.signal,
         packageRoot,
@@ -536,6 +542,7 @@ export function createScienceTools(
   registry = new CapabilityRegistry(),
   serviceSelection?: ScienceServiceId | ReadonlySet<string> | readonly ScienceServiceId[],
 ): ToolDefinition[] {
+  const fallbackSession = {};
   const operations = serviceSelection === undefined
     ? registry.operations
     : typeof serviceSelection === "string"
@@ -543,5 +550,5 @@ export function createScienceTools(
       : Array.isArray(serviceSelection)
         ? registry.operations.filter((contract) => (serviceSelection as readonly string[]).includes(contract.record.serviceId))
         : registry.operations.filter((contract) => (serviceSelection as ReadonlySet<string>).has(contract.record.serviceId));
-  return operations.map((contract) => toolDefinition(contract, executor, registry.packageRoot));
+  return operations.map((contract) => toolDefinition(contract, executor, registry.packageRoot, fallbackSession));
 }

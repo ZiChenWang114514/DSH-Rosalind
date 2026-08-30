@@ -5,6 +5,7 @@ import type {} from "@deepseek-ai/dsh-client-ui-settings/client";
 import type {} from "@deepseek-ai/dsh-client-ui-tool/client";
 
 import { ShowcaseDetailOverlay, ShowcaseDetailPanel, Workbench } from "./components.js";
+import { installResearchProjectHostAdapter } from "./project-flow.js";
 import { ProviderSettings } from "./settings.js";
 import { SCIENCE_VIEWER_CSS } from "./science-viewers.css.js";
 import { installWorkbenchStyles, WORKBENCH_CSS } from "./styles.js";
@@ -48,6 +49,7 @@ function installStyles(): () => void {
 
 export function apply(ctx: ClientContext): void {
   ctx.effect(installStyles, "dsh-rosalind: styles");
+  ctx.effect(() => installResearchProjectHostAdapter(ctx), "dsh-rosalind: research project host adapter");
   ctx.plugin(createNgsWorkbenchClientModule());
   ctx.plugin(createRosalindWorkbenchClientModule());
   registerSequenceClientModule(ctx);

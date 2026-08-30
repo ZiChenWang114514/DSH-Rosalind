@@ -1,23 +1,26 @@
-import type { SVGProps } from "react";
+import { useId, type SVGProps } from "react";
 import type { ShowcaseCategory } from "../shared/types.js";
 
 type IconProps = SVGProps<SVGSVGElement> & { size?: number };
 
 export function RosalindMark({ size = 48, ...props }: IconProps): JSX.Element {
+  const gradientId = useId();
+  const firstGradient = `rr-mark-a-${gradientId}`;
+  const secondGradient = `rr-mark-b-${gradientId}`;
   return (
     <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true" {...props}>
       <defs>
-        <linearGradient id="rr-mark-a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+        <linearGradient id={firstGradient} x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
           <stop stopColor="#92b5a8" />
           <stop offset="1" stopColor="#557e72" />
         </linearGradient>
-        <linearGradient id="rr-mark-b" x1="47" y1="11" x2="15" y2="53" gradientUnits="userSpaceOnUse">
+        <linearGradient id={secondGradient} x1="47" y1="11" x2="15" y2="53" gradientUnits="userSpaceOnUse">
           <stop stopColor="#d7b78f" />
           <stop offset="1" stopColor="#a87558" />
         </linearGradient>
       </defs>
-      <path d="M16 10c17 5 16 39 33 44" fill="none" stroke="url(#rr-mark-a)" strokeWidth="6" strokeLinecap="round" />
-      <path d="M48 10C31 15 32 49 15 54" fill="none" stroke="url(#rr-mark-b)" strokeWidth="6" strokeLinecap="round" />
+      <path d="M16 10c17 5 16 39 33 44" fill="none" stroke={`url(#${firstGradient})`} strokeWidth="6" strokeLinecap="round" />
+      <path d="M48 10C31 15 32 49 15 54" fill="none" stroke={`url(#${secondGradient})`} strokeWidth="6" strokeLinecap="round" />
       <path d="M19 18h26M16 29h32M16 40h32M19 51h26" fill="none" stroke="currentColor" strokeOpacity=".42" strokeWidth="2.4" strokeLinecap="round" />
       <circle cx="16" cy="10" r="3" fill="#d5e5de" />
       <circle cx="48" cy="10" r="3" fill="#f0dbc0" />

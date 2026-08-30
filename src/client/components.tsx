@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { ConversationSnapshot, SessionId, SessionListState, WorkspaceId, WorkspaceListState } from "@deepseek-ai/dsh-client-runtime/client";
 import type { EmptyWorkspaceOwnerProps, HeroBrandMarkOwnerProps } from "@deepseek-ai/dsh-client-ui-conversation/client";
 
@@ -97,17 +97,18 @@ function ResearchRecordOverview({ record }: { record: ResearchSessionRecord }): 
 }
 
 function SessionProjectPanel({ summary, dataFlow, researchRecord }: { summary: RosalindProjectSummary | null | undefined; dataFlow: WorkbenchDataFlowSummary | undefined; researchRecord?: ResearchSessionRecord | null | undefined }): JSX.Element {
+  const titleId = useId();
   if (researchRecord) {
-    return <section className="rr-session-project" aria-labelledby="rr-session-project-title">
+    return <section className="rr-session-project" aria-labelledby={titleId}>
       <span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span>
-      <h2 id="rr-session-project-title">{researchRecord.question}</h2>
+      <h2 id={titleId}>{researchRecord.question}</h2>
       <p className="rr-session-project__facts">Stage: {researchRecord.stage} · Created {new Date(researchRecord.createdAt).toLocaleString()}</p>
       <ResearchRecordOverview record={researchRecord} />
       {dataFlow && <SessionDataFlow dataFlow={dataFlow} />}
     </section>;
   }
   if (!summary) {
-    return <section className="rr-session-project" aria-labelledby="rr-session-project-title"><span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span><h2 id="rr-session-project-title">Choose a project to begin</h2><p>Start from the new-session project search, then this view will keep the relevant research status and next action close to the conversation.</p>{dataFlow && <SessionDataFlow dataFlow={dataFlow} />}</section>;
+    return <section className="rr-session-project" aria-labelledby={titleId}><span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span><h2 id={titleId}>Choose a project to begin</h2><p>Start from the new-session project search, then this view will keep the relevant research status and next action close to the conversation.</p>{dataFlow && <SessionDataFlow dataFlow={dataFlow} />}</section>;
   }
   const facts = [
     summary.mode ? `Mode: ${summary.mode}` : null,
@@ -119,9 +120,9 @@ function SessionProjectPanel({ summary, dataFlow, researchRecord }: { summary: R
   const displayTitle = summary.title
     ?? (summary.showcaseId ? SHOWCASE_BY_ID.get(summary.showcaseId)?.title : undefined)
     ?? "Research project";
-  return <section className="rr-session-project" aria-labelledby="rr-session-project-title">
+  return <section className="rr-session-project" aria-labelledby={titleId}>
     <span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span>
-    <div className="rr-session-project__body"><div><h2 id="rr-session-project-title">{displayTitle}</h2>{facts.length > 0 && <p className="rr-session-project__facts">{facts.join(" · ")}</p>}</div><p className="rr-session-project__next"><strong>Next step</strong>{summary.nextAction ?? "Continue the current research task in the conversation."}</p></div>
+    <div className="rr-session-project__body"><div><h2 id={titleId}>{displayTitle}</h2>{facts.length > 0 && <p className="rr-session-project__facts">{facts.join(" · ")}</p>}</div><p className="rr-session-project__next"><strong>Next step</strong>{summary.nextAction ?? "Continue the current research task in the conversation."}</p></div>
     {dataFlow && <SessionDataFlow dataFlow={dataFlow} />}
   </section>;
 }
@@ -156,6 +157,7 @@ function ResearchTaskForm({ inputActions, projectFlow }: { inputActions: InputAc
   const selectedWorkspace = workspaces.find((workspace) => workspace.id === researchDraft.workspaceId);
   const draft: ResearchTaskDraft = researchDraft;
   const errors = validateResearchTaskDraft(draft);
+  const formId = useId();
 
   function toggleModule(moduleId: string): void {
     const moduleIds = researchDraft.moduleIds.includes(moduleId)
@@ -182,18 +184,7 @@ function ResearchTaskForm({ inputActions, projectFlow }: { inputActions: InputAc
         const prompt = buildResearchTaskPrompt(draft, sessionId, new Date().toISOString());
         await adapter.submitResearchPrompt(sessionId, prompt);
         adapter.showScienceView(sessionId);
-      } else {
-        const currentIsTargetBlank = projectFlow?.currentSessionBlank === true && projectFlow.currentWorkspaceId === draft.workspaceId;
-        const knownBlank = selectedWorkspace?.sessionIds.find((id) => projectFlow?.blankSessionIds.has(id));
-        sessionId = currentIsTargetBlank ? projectFlow?.currentSessionId : knownBlank;
-        projectFlow?.onPickWorkspace?.(draft.workspaceId);
-        if (!sessionId || !inputActions) {
-          throw new Error("DSH is opening a blank session for this workspace. Continue from its Science view when the session is ready.");
-        }
-        const prompt = buildResearchTaskPrompt(draft, sessionId, new Date().toISOString());
-        inputActions.setDraft(prompt);
-        inputActions.submit?.();
-      }
+      } else throw new Error("The DSH research services are not ready yet. Please try again after the workspace finishes loading.");
       setResearchSubmissionState("submitted", "Research task submitted. Opening the Science view.");
     } catch (error) {
       setResearchSubmissionState("failed", error instanceof Error ? error.message : "The research task could not be created.");
@@ -202,9 +193,9 @@ function ResearchTaskForm({ inputActions, projectFlow }: { inputActions: InputAc
 
   if (reviewing) {
     const moduleLabels = draft.moduleIds.map((id) => SCIENCE_MODULE_OPTIONS.find((module) => module.id === id)?.label ?? id);
-    return <section className="rr-project__primary" aria-labelledby="rr-project-review-title">
+    return <section className="rr-project__primary" aria-labelledby={`${formId}-review-title`}>
       <span className="rr-project__label">Confirm research task</span>
-      <h2 id="rr-project-review-title">Review before creating the session</h2>
+      <h2 id={`${formId}-review-title`}>Review before creating the session</h2>
       <dl>
         <dt>Workspace</dt><dd>{selectedWorkspace?.title ?? draft.workspaceId}</dd>
         <dt>Question</dt><dd>{draft.question}</dd>
@@ -219,27 +210,27 @@ function ResearchTaskForm({ inputActions, projectFlow }: { inputActions: InputAc
     </section>;
   }
 
-  return <form className="rr-project__primary" aria-labelledby="rr-project-new-title" onSubmit={(event) => {
+  return <form className="rr-project__primary" aria-labelledby={`${formId}-new-title`} onSubmit={(event) => {
     event.preventDefault();
     if (errors.length > 0) setResearchSubmissionState("failed", errors.join(" "));
     else setReviewing(true);
   }}>
     <span className="rr-project__label">New research task</span>
-    <h2 id="rr-project-new-title">Describe the investigation</h2>
-    <label htmlFor="rr-project-workspace"><strong>DSH workspace</strong></label>
-    <select id="rr-project-workspace" value={researchDraft.workspaceId} onChange={(event) => updateResearchDraft({ workspaceId: event.currentTarget.value })}>
+    <h2 id={`${formId}-new-title`}>Describe the investigation</h2>
+    <label htmlFor={`${formId}-workspace`}><strong>DSH workspace</strong></label>
+    <select id={`${formId}-workspace`} value={researchDraft.workspaceId} onChange={(event) => updateResearchDraft({ workspaceId: event.currentTarget.value })}>
       <option value="">Choose a workspace</option>
       {workspaces.map((workspace) => <option value={workspace.id} key={workspace.id}>{workspace.title}</option>)}
     </select>
     {projectFlow?.workspaceReady && workspaces.length === 0 && <p role="alert">Add a native DSH workspace from the sidebar before creating a research task.</p>}
-    <label htmlFor="rr-project-question"><strong>Research question</strong></label>
-    <textarea id="rr-project-question" rows={4} value={researchDraft.question} onChange={(event) => updateResearchDraft({ question: event.currentTarget.value })} placeholder="What scientific question should this session answer?" />
+    <label htmlFor={`${formId}-question`}><strong>Research question</strong></label>
+    <textarea id={`${formId}-question`} rows={4} value={researchDraft.question} onChange={(event) => updateResearchDraft({ question: event.currentTarget.value })} placeholder="What scientific question should this session answer?" />
     <fieldset>
       <legend><strong>Scientific modules</strong></legend>
       {SCIENCE_MODULE_OPTIONS.map((module) => <label key={module.id}><input type="checkbox" checked={researchDraft.moduleIds.includes(module.id)} onChange={() => toggleModule(module.id)} /> <span><strong>{module.label}</strong> — {module.description}</span></label>)}
     </fieldset>
-    <label htmlFor="rr-project-sources"><strong>Data sources and local files</strong></label>
-    <textarea id="rr-project-sources" rows={4} value={researchDraft.sources} onChange={(event) => updateResearchDraft({ sources: event.currentTarget.value })} placeholder="List public records, URLs, accession identifiers, or paths already available in the selected workspace." />
+    <label htmlFor={`${formId}-sources`}><strong>Data sources and local files</strong></label>
+    <textarea id={`${formId}-sources`} rows={4} value={researchDraft.sources} onChange={(event) => updateResearchDraft({ sources: event.currentTarget.value })} placeholder="List public records, URLs, accession identifiers, or paths already available in the selected workspace." />
     {notice && <p className="rr-notice" role={submissionState === "failed" ? "alert" : "status"}>{notice}</p>}
     <div className="rr-actions"><button type="submit" className="rr-button rr-button--primary">Review research task</button></div>
   </form>;
@@ -378,12 +369,16 @@ export function ShowcaseDetailPanel(): JSX.Element | null {
   const showcase = selectedCaseId ? SHOWCASE_BY_ID.get(selectedCaseId) : undefined;
   const panelRef = useRef<HTMLElement>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const detailId = useId();
 
   useEffect(() => {
     if (!showcase) return undefined;
     const previous = document.activeElement as HTMLElement | null;
-    window.setTimeout(() => panelRef.current?.focus(), 0);
-    return () => previous?.focus();
+    const focusTimer = window.setTimeout(() => panelRef.current?.focus(), 0);
+    return () => {
+      window.clearTimeout(focusTimer);
+      if (previous?.isConnected) previous.focus();
+    };
   }, [showcase]);
 
   if (!showcase) return null;
@@ -405,22 +400,22 @@ export function ShowcaseDetailPanel(): JSX.Element | null {
       ref={panelRef}
       className="rr-detail-panel"
       role="region"
-      aria-labelledby="rr-detail-title"
+      aria-labelledby={`${detailId}-title`}
       tabIndex={-1}
       style={styleFor(showcase)}
       onKeyDown={(event) => { if (event.key === "Escape") { event.preventDefault(); closeShowcase(); } }}
     >
         <header className="rr-detail-head">
           {preview ? <img alt="" className="rr-preview" decoding="async" loading="lazy" src={preview} /> : <div className="rr-preview-fallback"><CategoryIcon icon={category.icon} size={36} /></div>}
-          <div><span className="rr-detail-category"><CategoryIcon icon={category.icon} size={15} />{category.label}</span><h2 id="rr-detail-title" className="rr-detail-title">{showcase.title}</h2><p className="rr-detail-summary">{showcase.summary}</p></div>
+          <div><span className="rr-detail-category"><CategoryIcon icon={category.icon} size={15} />{category.label}</span><h2 id={`${detailId}-title`} className="rr-detail-title">{showcase.title}</h2><p className="rr-detail-summary">{showcase.summary}</p></div>
           <button type="button" className="rr-close" aria-label="Back to scientific modules" onClick={closeShowcase}><CloseIcon size={18} /></button>
         </header>
         <div className="rr-tabs" role="tablist" aria-label="Project details">
           {detailTabs.map((tab, index) => <button
-            aria-controls={`rr-detail-panel-${tab}`}
+            aria-controls={`${detailId}-panel-${tab}`}
             aria-selected={detailTab === tab}
             className="rr-tab"
-            id={`rr-detail-tab-${tab}`}
+            id={`${detailId}-tab-${tab}`}
             key={tab}
             onClick={() => setDetailTab(tab)}
             onKeyDown={(event) => {
@@ -435,11 +430,11 @@ export function ShowcaseDetailPanel(): JSX.Element | null {
             type="button"
           >{tab[0]!.toUpperCase() + tab.slice(1)}</button>)}
         </div>
-        <main className="rr-detail-body">
-          <div aria-labelledby="rr-detail-tab-overview" hidden={detailTab !== "overview"} id="rr-detail-panel-overview" role="tabpanel" tabIndex={detailTab === "overview" ? 0 : -1}>{detailTab === "overview" ? <Overview showcase={showcase} /> : null}</div>
-          <div aria-labelledby="rr-detail-tab-evidence" hidden={detailTab !== "evidence"} id="rr-detail-panel-evidence" role="tabpanel" tabIndex={detailTab === "evidence" ? 0 : -1}>{detailTab === "evidence" ? <Evidence showcase={showcase} /> : null}</div>
-          <div aria-labelledby="rr-detail-tab-reproduce" hidden={detailTab !== "reproduce"} id="rr-detail-panel-reproduce" role="tabpanel" tabIndex={detailTab === "reproduce" ? 0 : -1}>{detailTab === "reproduce" ? <Reproduce showcase={showcase} /> : null}</div>
-        </main>
+        <div className="rr-detail-body">
+          <div aria-labelledby={`${detailId}-tab-overview`} hidden={detailTab !== "overview"} id={`${detailId}-panel-overview`} role="tabpanel" tabIndex={detailTab === "overview" ? 0 : -1}>{detailTab === "overview" ? <Overview showcase={showcase} /> : null}</div>
+          <div aria-labelledby={`${detailId}-tab-evidence`} hidden={detailTab !== "evidence"} id={`${detailId}-panel-evidence`} role="tabpanel" tabIndex={detailTab === "evidence" ? 0 : -1}>{detailTab === "evidence" ? <Evidence showcase={showcase} /> : null}</div>
+          <div aria-labelledby={`${detailId}-tab-reproduce`} hidden={detailTab !== "reproduce"} id={`${detailId}-panel-reproduce`} role="tabpanel" tabIndex={detailTab === "reproduce" ? 0 : -1}>{detailTab === "reproduce" ? <Reproduce showcase={showcase} /> : null}</div>
+        </div>
         <footer className="rr-detail-foot">
           {notice && <span className="rr-notice" role="status">{notice}</span>}
           <div className="rr-actions"><button type="button" className="rr-button rr-button--primary" onClick={importCase}><PlayIcon size={15} />{MODE_COPY[mode].action}</button></div>

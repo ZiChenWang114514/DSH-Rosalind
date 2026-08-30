@@ -23,10 +23,14 @@ const TEXT_MEDIA = new Set([
   "text/x-newick",
 ]);
 
-const FALLBACK_SESSION = {};
-
-function sessionFor(exec: { agent?: object }): object {
-  return exec.agent ?? FALLBACK_SESSION;
+function sessionRequired(action: string): Record<string, JsonValue> {
+  return {
+    status: "failed",
+    error: {
+      code: "DSH_SESSION_REQUIRED",
+      message: `A DSH agent session is required to ${action}; anonymous calls cannot access stateful Rosalind runs.`,
+    },
+  };
 }
 
 function jsonValue(value: unknown): Record<string, JsonValue> {
@@ -69,14 +73,139 @@ function presentedFailure(result: ToolResult): string | undefined {
   return undefined;
 }
 
+const errorOutput = {
+  type: "object",
+  properties: {
+    code: { type: "string", required: true },
+    message: { type: "string", required: true },
+  },
+  additionalProperties: true,
+} as const;
+
+const openObject = { type: "object", additionalProperties: true } as const;
+const errorFields = { error: errorOutput } as const;
+
+const catalogListSchema = {
+  type: "object",
+  properties: {
+    items: { type: "array", items: openObject },
+    total: { type: "integer" },
+    sourceCommit: { type: "string" },
+    referencedFiles: { type: "integer" },
+    ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const showcaseSchema = {
+  type: "object",
+  properties: {
+    id: { type: "string" }, pluginId: { type: "string" }, pluginVersion: { type: "string" },
+    categoryId: { type: "string" }, domain: { type: "string" }, caseType: { type: "string" },
+    difficulty: { type: "string" }, evidenceLevel: { type: "string" }, title: { type: "string" },
+    summary: { type: "string" }, question: { type: "string" }, status: { type: "string" }, runDate: { type: "string" },
+    capabilities: { type: "array", items: { type: "string" } }, rosalindTasks: { type: "array", items: { type: "string" } },
+    execution: openObject, preview: { oneOf: [openObject, { type: "null" }] }, artifacts: { type: "array", items: openObject },
+    sources: { type: "array", items: { type: "string" } }, observations: { type: "array", items: { type: "string" } },
+    computedResults: { type: "array", items: { type: "string" } }, interpretation: { type: "array", items: { type: "string" } },
+    limitations: { type: "array", items: { type: "string" } }, claims: { type: "array", items: openObject },
+    requiredMcpServers: { type: "array", items: { type: "string" } }, requiredOperations: { type: "array", items: { type: "string" } },
+    requiredSkills: { type: "array", items: { type: "string" } }, fixtures: { type: "array", items: { type: "string" } },
+    expectedArtifacts: { type: "array", items: { type: "string" } }, scientificAssertions: { type: "array", items: openObject },
+    visualAssertions: { type: "array", items: openObject }, provenance: openObject, reproductionSteps: { type: "array", items: { type: "string" } },
+    recipe: openObject, modes: { type: "array", items: { type: "string" } }, searchText: { type: "string" },
+    ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const providerStatusSchema = {
+  type: "object",
+  properties: {
+    providers: { type: "array", items: openObject }, total: { type: "integer" }, checkedAt: { type: "string" }, ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const importSchema = {
+  type: "object",
+  properties: {
+    showcaseId: { type: "string" }, title: { type: "string" }, prompt: { type: "string" },
+    caseIndex: { type: "array", items: openObject }, adapter: { type: "string" }, suggestedMode: { type: "string" }, ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const runSchema = {
+  type: "object",
+  properties: {
+    id: { type: "string" }, showcaseId: { type: "string" }, mode: { type: "string" }, state: { type: "string" },
+    progress: { type: "number" }, plan: openObject, createdAt: { type: "string" }, updatedAt: { type: "string" },
+    currentStepId: { type: "string" }, events: { type: "array", items: openObject }, artifacts: { type: "array", items: openObject },
+    ngs: openObject, reproduction: openObject, ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const artifactListSchema = {
+  type: "object",
+  properties: { showcaseId: { type: "string" }, artifacts: { type: "array", items: openObject }, total: { type: "integer" }, ...errorFields },
+  additionalProperties: true,
+} as const;
+
+const artifactOpenSchema = {
+  type: "object",
+  properties: {
+    artifact: openObject, bytes: { type: "integer" }, content: { oneOf: [{ type: "string" }, { type: "null" }] },
+    truncated: { type: "boolean" }, note: { type: "string" }, ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const exportSchema = {
+  type: "object",
+  properties: {
+    status: { type: "string" }, showcaseId: { type: "string" }, outputPath: { type: "string" }, bytes: { type: "integer" }, summary: { type: "string" }, ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
+const reviewSchema = {
+  type: "object",
+  properties: {
+    showcaseId: { type: "string" }, generatedAt: { type: "string" }, sourceObservations: { type: "array", items: { type: "string" } },
+    computedResults: { type: "array", items: { type: "string" } }, scientificInterpretation: { type: "array", items: { type: "string" } },
+    limitations: { type: "array", items: { type: "string" } }, citationChecks: { type: "array", items: openObject }, artifactChecks: { type: "array", items: openObject },
+    validation: openObject, ...errorFields,
+  },
+  additionalProperties: true,
+} as const;
+
 const jsonOutput = {
-  schema: { type: "object", additionalProperties: true } as const,
+  schema: {
+    type: "object",
+    properties: {
+      status: { type: "string" },
+      error: errorOutput,
+    },
+    additionalProperties: true,
+  } as const,
   render: (_args: unknown, value: Record<string, JsonValue>) => [{ type: "text" as const, text: JSON.stringify(value, null, 2) }],
   presentationMeta: (_args: unknown, value: Record<string, JsonValue>) => {
     const error = scientificError(value);
     return { summary: summaryOf(value), ...(error ? { errorCode: error.code, errorMessage: error.message } : {}) };
   },
 };
+
+const catalogListOutput = { ...jsonOutput, schema: catalogListSchema };
+const showcaseOutput = { ...jsonOutput, schema: showcaseSchema };
+const providerStatusOutput = { ...jsonOutput, schema: providerStatusSchema };
+const importOutput = { ...jsonOutput, schema: importSchema };
+const runOutput = { ...jsonOutput, schema: runSchema };
+const artifactListOutput = { ...jsonOutput, schema: artifactListSchema };
+const artifactOpenOutput = { ...jsonOutput, schema: artifactOpenSchema };
+const exportOutput = { ...jsonOutput, schema: exportSchema };
+const reviewOutput = { ...jsonOutput, schema: reviewSchema };
 
 function callCard(title: string, args: unknown) {
   return { card: "generic" as const, title, rawInput: JSON.stringify(args, null, 2) };
@@ -104,7 +233,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         category_id: { type: "string", description: "One of the seven scientific category IDs" },
         runnable_only: { type: "boolean", description: "Return only cases with a reproduce path" },
       },
-      output: jsonOutput,
+      output: catalogListOutput,
       isConcurrencySafe: () => true,
       async execute(args) {
         const items = runtime.catalog.list({
@@ -121,7 +250,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_showcase_get",
       description: "Get one complete showcase definition with its scientific question, evidence, results, limitations, artifacts, and reproduction recipe.",
       parameters: { showcase_id: { type: "string", required: true } },
-      output: jsonOutput,
+      output: showcaseOutput,
       isConcurrencySafe: () => true,
       async execute(args) { return jsonValue(runtime.catalog.get(args.showcase_id)); },
       presentCall: (args) => callCard("Open showcase record", args),
@@ -134,7 +263,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         showcase_id: { type: "string", description: "Limit the provider report to a showcase's declared providers" },
         provider_ids: { type: "array", items: { type: "string" }, description: "Specific provider IDs" },
       },
-      output: jsonOutput,
+      output: providerStatusOutput,
       isConcurrencySafe: () => true,
       async execute(args) {
         const declared = args.showcase_id ? runtime.catalog.get(args.showcase_id).recipe.providerIds : undefined;
@@ -152,7 +281,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         showcase_id: { type: "string", required: true },
         mode: { type: "string", enum: ["lesson", "replay", "reproduce"], required: true },
       },
-      output: jsonOutput,
+      output: importOutput,
       isConcurrencySafe: () => true,
       async execute(args) { return jsonValue(runtime.createImport(args.showcase_id, args.mode as ShowcaseMode)); },
       presentCall: (args) => callCard("Prepare showcase import", args),
@@ -172,7 +301,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         reproduction_source_paths: { type: "array", items: { type: "string" }, description: "Exact authorized source files retained with a non-NGS scientific reproduce plan." },
         reproduction_config: { type: "object", additionalProperties: true, description: "Provider- or showcase-specific JSON settings retained with the scientific inputs." },
       },
-      output: jsonOutput,
+      output: runOutput,
       async execute(args, exec) {
         const suppliedNgsFields = [args.ngs_run_directory, args.ngs_config_file, args.ngs_input_paths].some((value) => value !== undefined);
         if (suppliedNgsFields && (typeof args.ngs_run_directory !== "string" || typeof args.ngs_config_file !== "string" || !Array.isArray(args.ngs_input_paths))) {
@@ -192,7 +321,8 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
               ...(args.reproduction_config && typeof args.reproduction_config === "object" && !Array.isArray(args.reproduction_config) ? { config: args.reproduction_config as Record<string, never> } : {}),
             } }
             : undefined;
-        return jsonValue(runtime.plan(sessionFor(exec), args.showcase_id, args.mode as ShowcaseMode, args.provider_id, options));
+        if (!exec.agent) return sessionRequired("create a Rosalind execution plan");
+        return jsonValue(runtime.plan(exec.agent, args.showcase_id, args.mode as ShowcaseMode, args.provider_id, options));
       },
       presentCall: (args) => callCard("Prepare execution plan", args),
       presentResult: (_args, result) => resultCard("Execution plan", result),
@@ -207,13 +337,14 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         ngs_plan_name: { type: "string", description: "Exact reviewed NGS plan name when this run contains an NGS plan." },
         ngs_plan_checksum: { type: "string", description: "Exact reviewed NGS plan checksum when this run contains an NGS plan." },
       },
-      output: jsonOutput,
+      output: runOutput,
       async execute(args, exec) {
         const suppliedIdentity = [args.ngs_plan_id, args.ngs_plan_name, args.ngs_plan_checksum].some((value) => value !== undefined);
         if (suppliedIdentity && (typeof args.ngs_plan_id !== "string" || typeof args.ngs_plan_name !== "string" || typeof args.ngs_plan_checksum !== "string")) {
           throw new Error("NGS approval requires ngs_plan_id, ngs_plan_name, and ngs_plan_checksum together.");
         }
-        return jsonValue(runtime.approve(sessionFor(exec), args.run_id, args.acknowledgements, suppliedIdentity
+        if (!exec.agent) return sessionRequired("approve a Rosalind execution plan");
+        return jsonValue(runtime.approve(exec.agent, args.run_id, args.acknowledgements, suppliedIdentity
           ? { planId: args.ngs_plan_id as string, planName: args.ngs_plan_name as string, planChecksum: args.ngs_plan_checksum as string }
           : undefined));
       },
@@ -224,9 +355,12 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_run",
       description: "Run a queued lesson, replay, or reproduction plan using only its selected provider. The operation follows DSH cancellation.",
       parameters: { run_id: { type: "string", required: true } },
-      output: jsonOutput,
+      output: runOutput,
       timeoutMs: 30 * 60 * 1000,
-      async execute(args, exec) { return jsonValue(await runtime.run(sessionFor(exec), args.run_id, exec.signal)); },
+      async execute(args, exec) {
+        if (!exec.agent) return sessionRequired("run a Rosalind execution plan");
+        return jsonValue(await runtime.run(exec.agent, args.run_id, exec.signal));
+      },
       presentCall: (args) => callCard("Run scientific workflow", args),
       presentResult: (_args, result) => resultCard("Scientific workflow", result),
     }),
@@ -234,9 +368,12 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_status",
       description: "Read the current state, progress, events, artifacts, and error for a run owned by this DSH session.",
       parameters: { run_id: { type: "string", required: true } },
-      output: jsonOutput,
+      output: runOutput,
       isConcurrencySafe: () => true,
-      async execute(args, exec) { return jsonValue(runtime.status(sessionFor(exec), args.run_id)); },
+      async execute(args, exec) {
+        if (!exec.agent) return sessionRequired("read a Rosalind run");
+        return jsonValue(runtime.status(exec.agent, args.run_id));
+      },
       presentCall: (args) => callCard("Read run status", args),
       presentResult: (_args, result) => resultCard("Run status", result),
     }),
@@ -244,8 +381,11 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_cancel",
       description: "Request cancellation for a queued, awaiting-confirmation, or running DSH-Rosalind run in this session.",
       parameters: { run_id: { type: "string", required: true }, reason: { type: "string", required: true } },
-      output: jsonOutput,
-      async execute(args, exec) { return jsonValue(await runtime.cancel(sessionFor(exec), args.run_id, args.reason)); },
+      output: runOutput,
+      async execute(args, exec) {
+        if (!exec.agent) return sessionRequired("cancel a Rosalind run");
+        return jsonValue(await runtime.cancel(exec.agent, args.run_id, args.reason));
+      },
       presentCall: (args) => callCard("Cancel scientific run", args),
       presentResult: (_args, result) => resultCard("Cancellation status", result),
     }),
@@ -253,7 +393,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_artifact_list",
       description: "List versioned inputs, outputs, previews, provenance, and export artifacts for one showcase.",
       parameters: { showcase_id: { type: "string", required: true }, role: { type: "string", description: "Optional artifact role" } },
-      output: jsonOutput,
+      output: artifactListOutput,
       isConcurrencySafe: () => true,
       async execute(args) {
         const showcase = runtime.catalog.get(args.showcase_id);
@@ -267,7 +407,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_artifact_open",
       description: "Open one manifest-indexed showcase artifact. Text files return bounded content; binary files return metadata and their packaged resource reference.",
       parameters: { showcase_id: { type: "string", required: true }, artifact_id: { type: "string", required: true }, max_bytes: { type: "integer", description: "Maximum text bytes, up to 524288" } },
-      output: jsonOutput,
+      output: artifactOpenOutput,
       isConcurrencySafe: () => true,
       async execute(args) {
         const showcase = runtime.catalog.get(args.showcase_id);
@@ -294,7 +434,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         approved: { type: "boolean", required: true, description: "Request the write; the DSH host independently asks the user before execution" },
         overwrite: { type: "boolean", description: "Allow replacement only after the DSH host confirms this exact write request" },
       },
-      output: jsonOutput,
+      output: exportOutput,
       async execute(args) {
         const showcaseId = String(args.showcase_id);
         const outputPath = String(args.output_path);
@@ -313,7 +453,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       name: "rosalind_review",
       description: "Create a scientific review that keeps source observations, computed results, interpretation, limitations, citations, and artifact checks distinct.",
       parameters: { showcase_id: { type: "string", required: true } },
-      output: jsonOutput,
+      output: reviewOutput,
       isConcurrencySafe: () => true,
       async execute(args) {
         const showcase = runtime.catalog.get(args.showcase_id);

@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T17:14:26.402Z",
+  "recordedAt": "2026-08-30T20:11:26.172Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
-    "version": "0.3.2"
+    "version": "0.3.3"
   },
   "command": "npx vitest run tests/runtime.test.ts tests/capability-evidence-trust.test.ts tests/science-literature-databases.test.ts tests/database-provider-matrix.test.ts tests/sequence-ngs-operation-matrix.test.ts tests/rosalind-ngs-production.test.ts tests/ngs-local-execution.test.ts tests/ngs-mcp-facades.test.ts tests/ngs-persistence.test.ts tests/science-output-schema.test.ts tests/structure-operation-matrix.test.ts tests/structure-toolruntime.test.ts tests/structure-runtime.test.ts tests/structure-canvas.test.tsx tests/science-slide-parity.test.ts tests/science-slide-runtime.test.ts tests/science-slide-canvas.test.tsx tests/skills-source.test.ts tests/skills-workflow-matrix.test.ts tests/skills-registry-trace.test.ts tests/science-integration.test.ts tests/rosalind-operation.test.ts tests/dsh-host-registration.test.ts tests/module-core.test.ts tests/science-module-registration.test.ts tests/source-modules.test.ts tests/workflow-modules.test.ts --reporter=json --outputFile=<repo>/capabilities/evidence/capability-fixtures-2026-08-30.vitest.json && npx vitest run --config vitest.dsh-profile-evidence.config.ts tests/dsh-isolated-profile-evidence.test.ts --reporter=json --outputFile=<repo>/capabilities/evidence/capability-fixtures-2026-08-30.profile-vitest.json",
   "testFiles": [
@@ -629,6 +629,12 @@
     },
     {
       "file": "tests/ngs-persistence.test.ts",
+      "fullName": "NgsService durable registry coalesces burst output persistence into one scheduled registry write",
+      "title": "coalesces burst output persistence into one scheduled registry write",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ngs-persistence.test.ts",
       "fullName": "NgsService durable registry consumes an execution plan once and restores the same receipt in a new service instance",
       "title": "consumes an execution plan once and restores the same receipt in a new service instance",
       "status": "passed"
@@ -731,8 +737,32 @@
     },
     {
       "file": "tests/runtime.test.ts",
+      "fullName": "DSH host contract exports relative to the runtime workspace even when the host process cwd differs",
+      "title": "exports relative to the runtime workspace even when the host process cwd differs",
+      "status": "passed"
+    },
+    {
+      "file": "tests/runtime.test.ts",
+      "fullName": "DSH host contract shows scientific error codes and messages in Rosalind result cards",
+      "title": "shows scientific error codes and messages in Rosalind result cards",
+      "status": "passed"
+    },
+    {
+      "file": "tests/runtime.test.ts",
+      "fullName": "DSH host contract matches concrete output schemas for Rosalind success and failure results",
+      "title": "matches concrete output schemas for Rosalind success and failure results",
+      "status": "passed"
+    },
+    {
+      "file": "tests/runtime.test.ts",
       "fullName": "provider diagnostics reports public network authorization, credentials, commands, and confirmation requirements precisely",
       "title": "reports public network authorization, credentials, commands, and confirmation requirements precisely",
+      "status": "passed"
+    },
+    {
+      "file": "tests/runtime.test.ts",
+      "fullName": "run lifecycle rejects unsupported reproduce plans before creating a run",
+      "title": "rejects unsupported reproduce plans before creating a run",
       "status": "passed"
     },
     {
@@ -757,6 +787,18 @@
       "file": "tests/runtime.test.ts",
       "fullName": "run lifecycle isolates runs by DSH session and supports cancellation before execution",
       "title": "isolates runs by DSH session and supports cancellation before execution",
+      "status": "passed"
+    },
+    {
+      "file": "tests/runtime.test.ts",
+      "fullName": "run lifecycle requires an agent identity for every stateful Rosalind tool",
+      "title": "requires an agent identity for every stateful Rosalind tool",
+      "status": "passed"
+    },
+    {
+      "file": "tests/runtime.test.ts",
+      "fullName": "run lifecycle keeps plan, status, and cancel continuous for a real DSH agent",
+      "title": "keeps plan, status, and cancel continuous for a real DSH agent",
       "status": "passed"
     },
     {
@@ -833,6 +875,18 @@
     },
     {
       "file": "tests/science-literature-databases.test.ts",
+      "fullName": "LiteratureService caches only successful anonymous public GET responses for a short bounded interval",
+      "title": "caches only successful anonymous public GET responses for a short bounded interval",
+      "status": "passed"
+    },
+    {
+      "file": "tests/science-literature-databases.test.ts",
+      "fullName": "LiteratureService does not cache failed, credentialed, or response-protected literature requests",
+      "title": "does not cache failed, credentialed, or response-protected literature requests",
+      "status": "passed"
+    },
+    {
+      "file": "tests/science-literature-databases.test.ts",
       "fullName": "DatabaseService registers all 44 public database skills",
       "title": "registers all 44 public database skills",
       "status": "passed"
@@ -880,6 +934,12 @@
       "status": "passed"
     },
     {
+      "file": "tests/science-literature-databases.test.ts",
+      "fullName": "DatabaseService caches identical anonymous database GETs but not protected responses",
+      "title": "caches identical anonymous database GETs but not protected responses",
+      "status": "passed"
+    },
+    {
       "file": "tests/science-module-registration.test.ts",
       "fullName": "independent science viewer module registration keeps Sequence, Structure, and Slide host registrations disjoint",
       "title": "keeps Sequence, Structure, and Slide host registrations disjoint",
@@ -889,6 +949,24 @@
       "file": "tests/science-module-registration.test.ts",
       "fullName": "independent science viewer module registration maps every host viewer tool to its matching client module",
       "title": "maps every host viewer tool to its matching client module",
+      "status": "passed"
+    },
+    {
+      "file": "tests/science-output-schema.test.ts",
+      "fullName": "science tool output schemas keeps normalized identity and lifecycle fields authoritative",
+      "title": "keeps normalized identity and lifecycle fields authoritative",
+      "status": "passed"
+    },
+    {
+      "file": "tests/science-output-schema.test.ts",
+      "fullName": "science tool output schemas validates module-disabled, missing-run, and consumed-plan NGS results",
+      "title": "validates module-disabled, missing-run, and consumed-plan NGS results",
+      "status": "passed"
+    },
+    {
+      "file": "tests/science-output-schema.test.ts",
+      "fullName": "science tool output schemas describes sequence search hits and slide diagnostic notes exactly",
+      "title": "describes sequence search hits and slide diagnostic notes exactly",
       "status": "passed"
     },
     {
@@ -1081,6 +1159,12 @@
       "file": "tests/science-slide-runtime.test.ts",
       "fullName": "SlideService local Canvas renderer runs the Slide Viewer Skill ToolRuntime flow: open, state, pixel query, wait, frame acknowledgement, ready",
       "title": "runs the Slide Viewer Skill ToolRuntime flow: open, state, pixel query, wait, frame acknowledgement, ready",
+      "status": "passed"
+    },
+    {
+      "file": "tests/sequence-ngs-operation-matrix.test.ts",
+      "fullName": "Sequence operation matrix requires explicit destination authorization before creating an export",
+      "title": "requires explicit destination authorization before creating an export",
       "status": "passed"
     },
     {
@@ -1637,6 +1721,18 @@
     },
     {
       "file": "tests/structure-canvas.test.tsx",
+      "fullName": "LocalStructureCanvas uses a native non-passive wheel listener and prevents page scrolling",
+      "title": "uses a native non-passive wheel listener and prevents page scrolling",
+      "status": "passed"
+    },
+    {
+      "file": "tests/structure-canvas.test.tsx",
+      "fullName": "LocalStructureCanvas caps very large coordinate arrays without argument-spread failures",
+      "title": "caps very large coordinate arrays without argument-spread failures",
+      "status": "passed"
+    },
+    {
+      "file": "tests/structure-canvas.test.tsx",
       "fullName": "LocalStructureCanvas does not turn a long drag ending with a tiny move into an atom selection",
       "title": "does not turn a long drag ending with a tiny move into an atom selection",
       "status": "passed"
@@ -1966,6 +2062,12 @@
       "status": "passed"
     },
     {
+      "file": "tests/structure-operation-matrix.test.ts",
+      "fullName": "StructureService contract semantics cancels ffmpeg after asynchronous movie encoding has started",
+      "title": "cancels ffmpeg after asynchronous movie encoding has started",
+      "status": "passed"
+    },
+    {
       "file": "tests/structure-runtime.test.ts",
       "fullName": "StructureService local raster and scientific analyses renders GFP coordinates to a real PNG and retains a reproducible rendering record",
       "title": "renders GFP coordinates to a real PNG and retains a reproducible rendering record",
@@ -2015,9 +2117,9 @@
     }
   ],
   "profileInstallation": {
-    "archive": "zichenwang114514-dsh-rosalind-0.3.2.tgz",
-    "archiveBytes": 17134746,
-    "archiveSha256": "58e8bc6919487bc79e3ec9243d5a07e37ef029e5955bb9c6f2357e4cd83e10fd",
+    "archive": "zichenwang114514-dsh-rosalind-0.3.3.tgz",
+    "archiveBytes": 17166356,
+    "archiveSha256": "604500ad7e8b0c5e9bfc27234e1963e18c502614c5e15a815b178dd26090887a",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2190,8 +2292,8 @@
     "capabilities/sources/README.md": "9acdf3c369cd8bff4b441d499b74e60e6012a9a6410e8dfd0f04780ce6b905eb",
     "capabilities/sources/required-operations.json": "066ed5b95a571de3974d47d0b093a6bb5aa6da546be6f01131c055c14b734334",
     "capabilities/sources/skill-source-inventory.json": "59ee263c2d6788f6a19720396e3e2e3b01f9dd90b0e5821d5cff5e9284f492bf",
-    "package.json": "2e410423312bbd1ac0973924d354f9e1739d52ff35ff9b800da51bd1567a6b08",
-    "scripts/generate-capability-manifest.mjs": "9bfb6954862b62a19adad76d599f9ae89753eee92ab4db5fbc2c74eb3d966b15",
+    "package.json": "c7c9016a713d09ff16f8f75b5b3aca23a00ee7baa03ac41db209311f2ed44cf8",
+    "scripts/generate-capability-manifest.mjs": "d745b63b86478a9fa459fb81d2a5596dac46c1505b9db3575ea7ff60ee3ab29f",
     "scripts/lib/capability-evidence.mjs": "0d4ca26443b0f7dba1c6e9a2b5554d31e6615831fc236a26cd4891f5fb2acff9",
     "scripts/record-capability-verification.mjs": "fad1258e837b0c156db777bfc7d06ad5ace91b4f5fa7ee94b6b1b976fc7c1352",
     "scripts/validate-capabilities.mjs": "8a9f4919625e2e7c291a6660688f33abf181d79a23a6d96df3e47739685f0366",
@@ -2254,48 +2356,48 @@
     "skills/sequence/biological-sequence-viewer/SKILL.md": "63fde25d93fca49c0bf81698d3ae9bc433ab1f3e3ae4674347eec2ef4971d321",
     "skills/slide/slide-viewer/SKILL.md": "4ef80676bcd67a51e395cd68c2cfcdce1865f243687f89fe918f6bf3eebd2c32",
     "skills/structure/structure-viewer/SKILL.md": "11e804539365ae22eb17df6baa2e647e97a8dd48afee024f4293d30a81f92063",
-    "src/client/components.tsx": "d4072f7ee46a892746a907577bce00841eac4c5ccab2aa12e1912947e8ecc43f",
-    "src/client/ecosystem.tsx": "30de96b30a47ce1498378537581b54f7c9d30945941dac1490735c7d88572fc2",
-    "src/client/icons.tsx": "cbf22ca61804671bac4a2fd909fa686c1a9fcc67dc102a8cec393f26117f70c3",
-    "src/client/index.tsx": "4feaac0890e9e609d1ad30cfba1e3507c96b13dad7b3faa476607faf6d10c9fa",
+    "src/client/components.tsx": "d285dd4d7aaaa34093f82e01d8de3f5a72697648bac5c8a96447758c347bd40d",
+    "src/client/ecosystem.tsx": "7723b34a085ef676d1647c709be5973ca459b2236025eaf5e6c27761e9bdb339",
+    "src/client/icons.tsx": "6d5499bf91819275bd89cc174740afbd626d7c20fc993831619379a43857ce89",
+    "src/client/index.tsx": "807b83831696b50ee1512915c96db86ee6dea1011a8c1a67798fb982814a8eee",
     "src/client/module-settings-control.ts": "3f7295ec119a5589255303f60b93361f780fc8965e05835312d8cd57d9102b17",
     "src/client/modules/sequence.tsx": "3f17758c6926ede390a818b1f2250e2bb3a82bcc092a7a4999b02e9466d46f30",
     "src/client/modules/slide.tsx": "ac137ea737209dac267f929c0e9b86d77443e14cec773d8ed04c7bfde6345078",
     "src/client/modules/structure.tsx": "467faddfbe07ecfcda06f7b11d96f371e0421c60f4a253103a37912db53b70b4",
-    "src/client/project-flow.ts": "fd561b3bbf4c6f09537204bd1092b684fefee4f9cfd1a422dbf5b6d01783593b",
+    "src/client/project-flow.ts": "8578b5d8eb8a7446f485f5231c2b90b55f1fd44ab6627bb7c8c21affebd0c08f",
     "src/client/prompt.ts": "86844a06a47944deb385bfc02dd976e353527bc670d384b3f83ac66086173c5c",
-    "src/client/science-mode.tsx": "6b9087315d7de201926bd911444c323b9989737f85c830a09715d1b5c6ba7525",
-    "src/client/science-viewers.css.ts": "f4044025a34ddb92c66ca80610dee4313811fcd14760678701d55c51321ff208",
-    "src/client/science-viewers.tsx": "c2467f7127f6e5879fb053c6d8fc604f6c391faa62d4a9fae5e11b4aff47e185",
-    "src/client/session-evidence.ts": "48c721e7e9899de4208a76d79f13f546c3acf6d0a00c82149c01a4fc4a7f30d3",
+    "src/client/science-mode.tsx": "1476f8b1544f6104991ccca78a14205b798ff5579c30b3ddcefd3d7d9fe5c185",
+    "src/client/science-viewers.css.ts": "1107c2006731d1ac26c26f42fb6a3f4d100bbf4c563f26f58918795bf27f294c",
+    "src/client/science-viewers.tsx": "7fca466d51d0595fdd4dc6aa3aecc53c4d6b14c69cf77d01bd8ed1456a7065b9",
+    "src/client/session-evidence.ts": "831fbc7b612e6ab9ff7d063fd10d803d46f1bef9db7ccb05b11975602c51f1c2",
     "src/client/settings.tsx": "a1701bcb520e8faaaf6eac0cd07c39517364efdc6cdf91569b5c70f174091260",
     "src/client/state.ts": "e57425412aa92c78b0f432b2fcef899818a24ea18701f9430409e6879a0e6635",
-    "src/client/styles.ts": "bd40e2c3523ab140743cbf58cf2c5b207f0b731fd39913f3407ca212f4dfca0f",
+    "src/client/styles.ts": "5dbc7473f6a2fe6bbb92933289d8322f8146c74bf90feabe8d10215d974352bc",
     "src/client/toolview.tsx": "fbb461d5ef4e4f9e9eb373d736f2d6a906aa5e867035c23f2272566421ffbb82",
-    "src/client/viewers/slide/canvas.tsx": "f31cd2b5c675b249c0cf40e10c2f73a252307a818de5e620b7b5ffbb0df12254",
-    "src/client/viewers/structure/canvas.tsx": "dbf171359d87780bd6a921a23f987224b1658178ecb59835cd0752c07fa101eb",
-    "src/client/workflow-modules.tsx": "48d47634d4422b9c49b444a259aa678129ffe02c73bc7b2e5b7dd21e5129c538",
+    "src/client/viewers/slide/canvas.tsx": "dbe74a6e71f1d85bb53df2d00c58274d587794fd7ecddd513fe6dcf5890d9c2a",
+    "src/client/viewers/structure/canvas.tsx": "5a10f6e007d43241a3fb0a4f375ad81541c106419a67ff33e5ab1b3f57c85032",
+    "src/client/workflow-modules.tsx": "69256542abc692ab14425a54bcd9750c0b454a57eaada7dc3a6251929d54a7bd",
     "src/host/capabilities.ts": "8aa990a728b7a26e700fdf68cfa5d3ce74fa1298cb9724874414d81d7c5085c6",
     "src/host/catalog.ts": "a53180e71eb44459c364356299be4e8927b8971e48553841408ea565806449a9",
     "src/host/modules/sequence.ts": "9f8ad2dc85982128cbf65a23de4aaca5dc5226c614eeb605f7c20d242a2979f8",
     "src/host/modules/slide.ts": "d157e2956af76fe279fedf0e86398b6ffc8b3cb774f5bbea3413c5cd6f302772",
     "src/host/modules/structure.ts": "cccdf9df17a25965a03fbfbc39d51283694575c727bb0bbbab25b55c2042313d",
     "src/host/providers.ts": "cf1138b9212076919c41f4779c2ed7664629467851dd0ebf52c06db388fe9c70",
-    "src/host/reproduction.ts": "6252452e28dc7a79dbc9b07b4eb12a95d267b3eb00550524c0a07c86334206ba",
+    "src/host/reproduction.ts": "cb892d26d989fb3757dd96182e894d8abddd239b6306751afbe9358d361914d7",
     "src/host/runtime.ts": "928cf33829f45c2202983347bcb4b0aac10d04e74cb8bf2bfb0fa34da80fa6b7",
-    "src/host/science-gateway-tools.ts": "6dc2f298d44222d8b9339c48ee78dde0a10f9d32c3cf30cf936826e4cdf5e8fd",
-    "src/host/science-tools.ts": "4afe5d5db77b887e22889c4fa1adec41fd1b361efe766dc7b53d60d5bfe99567",
-    "src/host/science/databases.ts": "3f612640bea92c36642c46814bd76306eb477e2e1b9218d8ffd6e6f767612685",
-    "src/host/science/literature.ts": "db9e68252c34bdfda1c7fe41e5ec0388bd8cb3a148bc035b904001c28509d063",
-    "src/host/science/ngs.ts": "fdde2a986ec7630d3527022d6fd21244099f5cc88cddee7141897031ffaf4557",
-    "src/host/science/runtime.ts": "c9aab8cb97333401e8c7e4b1e69760bfa0ba469d1d1d6408b890aa12ec18ecb3",
-    "src/host/science/sequence.ts": "a10c779d9b852583c769edb3201177a85c1be25fe08ea966ad6c388f8bf4ee56",
-    "src/host/science/slide.ts": "b58f1484d0c67dc45c832b18dca39e2b8f3fe093f7c3a1ead8a3e182b0718c1f",
-    "src/host/science/structure.ts": "a875176af7c209e7a7c8cc81932756a5e7480b939e4d438eb7625aab967262e9",
+    "src/host/science-gateway-tools.ts": "d6a26165a1ece9b1849f5655a7f7a23a6a42d769cc35dc24213a017b9e2841f9",
+    "src/host/science-tools.ts": "9f2b23a03ced99898e7dbcc64dfdc4a88262434520f95386bc54e835f8b7d821",
+    "src/host/science/databases.ts": "a4860aa38e6afd2422c16f9e03492da4eda40705bc551bee1d9189b4dcdb2f8b",
+    "src/host/science/literature.ts": "7fac2d9a11ddd09b65d0e27dad79527aec1fa3d9944d1e95cb36bacd45e634c4",
+    "src/host/science/ngs.ts": "df3e07a6c8bb18482301cf48b827e2e436352a793f7c7062b8e27fd8590f1a0d",
+    "src/host/science/runtime.ts": "e8e44f66e30a0a77fb16fd62277511a9a54e5b134a51e8a504b3c0e4caa7cbb3",
+    "src/host/science/sequence.ts": "9138418a36ef8701d8adf785634e021b46e7e557e1461485da88863121402652",
+    "src/host/science/slide.ts": "f6f54437db38981ed2a7bb348f31e739a0adf6d4747680e8af02293b58dc9f49",
+    "src/host/science/structure.ts": "0ecf82dfdeb10af410e6320ebcf56a66afd139ffc82affdb5ee4c55330c28280",
     "src/host/skill-registration.ts": "91f523f368dec8292879ac844c2616bdba0b6c3f3092683b252c9e1f338a347c",
     "src/host/skills.ts": "dd6bceb118e3c7a0d47efa32678833a99209b93424acb32f5ba80e8e910006c7",
-    "src/host/tools.ts": "79bcecf0dadada5b8661d22755100693b8745755938494fe2e833e03c71b9290",
-    "src/host/validators.ts": "1e960c6abeebfa1a6445eadaedbddb0084638b5a3f70d32a634cd206ad710365",
+    "src/host/tools.ts": "40c1f8ab2463e1b25d1a6c85a7555473c8784b0c5234385cf41db719f39c0fcb",
+    "src/host/validators.ts": "ce51254e29db51ba0487a44652c1ba5c8d434f37295b3e3e0ab150aae8c75dc6",
     "src/host/workflow-modules.ts": "437bc240e6eb1606c63f1f263b2eaeb9056ea005cde20618524b848295cef5f6",
     "src/index.ts": "c461fe97c75083cb0e97b82ca1b292f6ec3785e052b3079bdcc058a41b74d125",
     "src/modules/definitions.ts": "8822e25e22c4c54c993564c4c5c46423b1922bcf956cd77c5d9736e6aaf7bb35",
@@ -2313,30 +2415,30 @@
     "tests/database-provider-matrix.test.ts": "b3b0732915f98b38e5248a406bc65e12c6fbdc66cc5fdd73e172b4815d114a63",
     "tests/dsh-host-registration.test.ts": "98c08fb8033578de14598e69846c6d7d35d3bd916531f57150366273c3aec874",
     "tests/dsh-isolated-profile-evidence.test.ts": "ef9c989eea9af5fdc7fb42ef3fe5eebecbfe5a8354f5f2881d61c89f5cc8b05e",
-    "tests/module-core.test.ts": "dc8163708b50015cbfd06dc578f81bf66ecd75df8fb976263d1104cad4d0d928",
+    "tests/module-core.test.ts": "adf99f4aec32d1e0460e94e10e2e385416839d48bc324da178c844feda97040a",
     "tests/ngs-local-execution.test.ts": "709148b6bca60ce22abf4e6c57e8df9e238317ecd0ee0b569527b1433915e27b",
-    "tests/ngs-mcp-facades.test.ts": "542dcd0eef6f4a0e70db3f7dec0541398f68488a7ad44dd02a52d9e84f8b85cc",
-    "tests/ngs-persistence.test.ts": "d98484b738d2225d08a3cb288a3801d62b5760a68b66f14085df701b6ea65802",
+    "tests/ngs-mcp-facades.test.ts": "16f2e79eb1a9c16ff786a039ffbcf3d33f921451190c6f41a1be848d07c5e639",
+    "tests/ngs-persistence.test.ts": "1b117920a86b634828e0feb2842a4ba3f7d4f0430b1da1784eea260ef1e2e342",
     "tests/rosalind-ngs-production.test.ts": "0278550e2ecdb5cb220c7947c6a716e218259afd2c3d15bbe1b100eaebd29507",
     "tests/rosalind-operation.test.ts": "9d565e537f19e5de8772c6b7c286ba6b79ea2d46d491501ac9f8a67f3f0f1bfc",
-    "tests/runtime.test.ts": "c53e9e78bcf10aa6b64a540a46d14c2c4e4e0c1ad2a7121154b7ab77f5b9ce9d",
+    "tests/runtime.test.ts": "c4c0816727a2b2c9fde790922a1c2efbca7ea6b0f54ea701267924c53b1564d2",
     "tests/science-integration.test.ts": "2beaf91967b85af937e1ae470cc1d07f4961c5f633ff2749e23d853037b65699",
-    "tests/science-literature-databases.test.ts": "70aea03d0a452f57cbbe9694640509cf6180c134039232787334feecc881e3d2",
+    "tests/science-literature-databases.test.ts": "d6f49334de8b372ad677795883cfb2ba90bf8d19c24526deb956268e6d6b11ad",
     "tests/science-module-registration.test.ts": "08c59157f6db32e792d08d7fc341ee16060e69bdec418e45ec8019200b7f6385",
-    "tests/science-output-schema.test.ts": "791f12fae0ec2e08c173d9865d1d8ed2cd0a5a31106e46e4ca9d19199ef1a599",
-    "tests/science-slide-canvas.test.tsx": "a5214ac57763f78989ccefd4d40a99accb6b62a1b737d7a713c99bd83c4fab27",
+    "tests/science-output-schema.test.ts": "cb1e0280eaeca5ebf8e5f1fc3155f59171d0a91650f01ebcb811d32333be2f71",
+    "tests/science-slide-canvas.test.tsx": "8df0ef9aa0c5e0778a4f8c00bb444ba445c93e3211d464159c29158797a2aa6b",
     "tests/science-slide-parity.test.ts": "1cc16684cb32ce5deb360ce200742f63d668a577f677b1d05d3b3493852580fd",
-    "tests/science-slide-runtime.test.ts": "ce1586c31c8c781431d352b738b67c763b158acb4dfc2c5d0f02cd81c35f9fc4",
-    "tests/sequence-ngs-operation-matrix.test.ts": "1d00675d59ec5e55e31e1cfc15c52d2186ff7ca0ec4e3dbaa345113bf4995c8d",
+    "tests/science-slide-runtime.test.ts": "261c6aee6e2bea462f8e56d8fe3ee1232a499aa5cf56ba79c12e7a0e09d9ff11",
+    "tests/sequence-ngs-operation-matrix.test.ts": "cfa1d8604474bfc1abca09d697988abf247a4cddc3c37a4070bbc743bd1a6593",
     "tests/skills-registry-trace.test.ts": "6c8da25ebfa8ba46f2c0b8e64bd1a0777a78dbb2b928f78854b09bff509de9e0",
     "tests/skills-source.test.ts": "6c6425b410fa89da5c46197947c503949643344f315b7de5ce9b3ac1bb98e3ac",
     "tests/skills-workflow-matrix.test.ts": "941f3dba4fc0649343e7ab7bb50dc753789329babebf7fa4d271d9ca382e3f85",
     "tests/source-modules.test.ts": "706399d2d6c9d7276803a7c18be4fc97a26ca26893900dd934ca02905b8f719f",
-    "tests/structure-canvas.test.tsx": "4a1b675d25fa23145c6a301a56079e3242105bd991f35a6483f27ee6404d4a2d",
-    "tests/structure-operation-matrix.test.ts": "3e2fc201e563f8194664a1150c036bc43552000699e9c8d04991e0a62d145f4c",
+    "tests/structure-canvas.test.tsx": "859178d64201a06a3a05844e270dc1fc17b93fa809a4b13356adf2c12b481880",
+    "tests/structure-operation-matrix.test.ts": "8248b315160350fbae51fb61a095a7a4320fe6d8a8a25be4f196959d6b6c2362",
     "tests/structure-runtime.test.ts": "87b7a53e5d220e2ccb6b562283c1061fc26fab6de6849525fc5199d22714268c",
     "tests/structure-toolruntime.test.ts": "ae8bb954035d4030245edcc187d0ac101408d9d362c6767453dea6d86525d9d7",
-    "tests/workflow-modules.test.ts": "0378da68c043cfc23423feb9624c3a924bfdc6b1b1bac4eac99be866199b052e",
+    "tests/workflow-modules.test.ts": "2124281d39f235aed102bde1a1bc02cf602cc868e3981278d7e9cad0bc7ef122",
     "vitest.dsh-profile-evidence.config.ts": "844bdf208f1f732725a1c0f6e10ede1387d4d496fe676f0dc920c1f212ed04ad"
   }
 }

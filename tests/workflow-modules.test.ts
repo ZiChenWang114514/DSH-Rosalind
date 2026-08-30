@@ -10,8 +10,10 @@ function callId(value: string): ToolExecutionInput["callId"] {
   return value as ToolExecutionInput["callId"];
 }
 
+const WORKFLOW_AGENT = { id: "workflow-modules-agent" } as NonNullable<ToolExecutionInput["agent"]>;
+
 async function execute(ctx: Context, name: string, args: unknown) {
-  return ctx.tools.execute({ callId: callId(`workflow-module-${name}`), name, arguments: args, signal: new AbortController().signal });
+  return ctx.tools.execute({ callId: callId(`workflow-module-${name}`), name, arguments: args, signal: new AbortController().signal, agent: WORKFLOW_AGENT });
 }
 
 describe("independent NGS and Rosalind Cordis modules", () => {

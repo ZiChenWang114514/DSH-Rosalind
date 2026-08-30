@@ -36,4 +36,12 @@ describe("ScienceEcosystemPanel", () => {
     fireEvent.click(within(panel).getByRole("button", { name: /Find TREM2 papers/ }));
     expect(onExample).toHaveBeenCalledWith(expect.objectContaining({ label: "Find TREM2 papers" }), expect.objectContaining({ id: "literature" }));
   });
+
+  it("reports horizontal tab semantics when the narrow layout uses a scrolling tab row", () => {
+    const width = window.innerWidth;
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 600 });
+    render(<ScienceEcosystemPanel />);
+    expect(screen.getByRole("tablist")).toHaveAttribute("aria-orientation", "horizontal");
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: width });
+  });
 });

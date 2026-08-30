@@ -2,6 +2,7 @@ import { existsSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
+import { validateJsonSchemaValue } from "@deepseek-ai/dsh-tools";
 import { describe, expect, it } from "vitest";
 
 import { resolveInside, ShowcaseCatalog } from "../src/host/catalog.js";
@@ -41,7 +42,16 @@ describe("DSH host contract", () => {
     const tools = createRosalindTools(runtime);
     expect(tools.map((tool) => tool.name)).toEqual(EXPECTED_TOOLS);
     for (const tool of tools) {
-      expect(tool.output?.schema).toEqual({ type: "object", additionalProperties: true });
+      expect(tool.output?.schema).toMatchObject({
+        type: "object",
+        additionalProperties: true,
+        properties: {
+          error: {
+            type: "object",
+            properties: { code: { type: "string" }, message: { type: "string" } },
+          },
+        },
+      });
       expect(tool.output?.render).toBeTypeOf("function");
       expect(tool.presentCall).toBeTypeOf("function");
       expect(tool.presentResult).toBeTypeOf("function");
@@ -110,6 +120,63 @@ describe("DSH host contract", () => {
         content: [{ type: "text", text: "DESTINATION_EXISTS: The selected export already exists." }],
       });
     } finally { runtime.dispose(); }
+  });
+
+  it("matches concrete output schemas for Rosalind success and failure results", async () => {
+    const runtime = new RosalindRuntime();
+    const tools = createRosalindTools(runtime);
+    const agent = { id: "output-schema-agent" };
+    const execution = { agent, signal: new AbortController().signal } as never;
+    const anonymous = { signal: new AbortController().signal } as never;
+    const tool = (name: string) => tools.find((candidate) => candidate.name === name)!;
+    const assertSchema = (name: string, value: Record<string, unknown>) => {
+      expect(validateJsonSchemaValue(tool(name).output.schema, value, name)).toEqual([]);
+    };
+    try {
+      const catalogue = await tool("rosalind_catalog_list").execute({}, execution) as Record<string, unknown>;
+      assertSchema("rosalind_catalog_list", catalogue);
+      const showcase = await tool("rosalind_showcase_get").execute({ showcase_id: "sequence-ras-alignment" }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_showcase_get", showcase);
+      const providers = await tool("rosalind_provider_status").execute({}, execution) as Record<string, unknown>;
+      assertSchema("rosalind_provider_status", providers);
+      const imported = await tool("rosalind_showcase_import").execute({ showcase_id: "sequence-ras-alignment", mode: "lesson" }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_showcase_import", imported);
+      const showcaseRecord = showcase as { artifacts?: Array<{ id: string; path?: string }> };
+      const artifactId = showcaseRecord.artifacts?.find((artifact) => artifact.path)?.id;
+      expect(artifactId).toBeTruthy();
+      const listed = await tool("rosalind_artifact_list").execute({ showcase_id: "sequence-ras-alignment" }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_artifact_list", listed);
+      const opened = await tool("rosalind_artifact_open").execute({ showcase_id: "sequence-ras-alignment", artifact_id: artifactId, max_bytes: 8192 }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_artifact_open", opened);
+      const exported = await tool("rosalind_export").execute({ showcase_id: "sequence-ras-alignment", format: "review-json", output_path: "results/schema-test.json", approved: false }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_export", exported);
+      const reviewed = await tool("rosalind_review").execute({ showcase_id: "sequence-ras-alignment" }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_review", reviewed);
+
+      const planned = await tool("rosalind_plan").execute({ showcase_id: "sequence-ras-alignment", mode: "replay" }, execution) as { id: string };
+      assertSchema("rosalind_plan", planned);
+      const status = await tool("rosalind_status").execute({ run_id: planned.id }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_status", status);
+      const cancelled = await tool("rosalind_cancel").execute({ run_id: planned.id, reason: "schema test" }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_cancel", cancelled);
+      const lesson = await tool("rosalind_plan").execute({ showcase_id: "literature-trem2-landscape", mode: "lesson" }, execution) as { id: string };
+      const ran = await tool("rosalind_run").execute({ run_id: lesson.id }, execution) as Record<string, unknown>;
+      assertSchema("rosalind_run", ran);
+
+      for (const [name, args] of [
+        ["rosalind_plan", { showcase_id: "sequence-ras-alignment", mode: "replay" }],
+        ["rosalind_approve", { run_id: "unknown", acknowledgements: [] }],
+        ["rosalind_run", { run_id: "unknown" }],
+        ["rosalind_status", { run_id: "unknown" }],
+        ["rosalind_cancel", { run_id: "unknown", reason: "schema test" }],
+      ] as const) {
+        const failed = await tool(name).execute(args, anonymous) as Record<string, unknown>;
+        expect(failed).toMatchObject({ status: "failed", error: { code: "DSH_SESSION_REQUIRED", message: expect.any(String) } });
+        assertSchema(name, failed);
+      }
+    } finally {
+      runtime.dispose();
+    }
   });
 });
 
@@ -202,6 +269,37 @@ describe("run lifecycle", () => {
     expect(cancelled.state).toBe("cancelled");
     await expect(runtime.cancel(owner, planned.id, "again")).rejects.toThrow(/already cancelled/);
     runtime.dispose();
+  });
+
+  it("requires an agent identity for every stateful Rosalind tool", async () => {
+    const runtime = new RosalindRuntime();
+    const tools = createRosalindTools(runtime);
+    const plan = tools.find((tool) => tool.name === "rosalind_plan")!;
+    const status = tools.find((tool) => tool.name === "rosalind_status")!;
+    const cancel = tools.find((tool) => tool.name === "rosalind_cancel")!;
+    const anonymous = { signal: new AbortController().signal } as never;
+    try {
+      expect(await plan.execute({ showcase_id: "structure-gfp-figure", mode: "replay" }, anonymous)).toMatchObject({ status: "failed", error: { code: "DSH_SESSION_REQUIRED" } });
+      expect(await status.execute({ run_id: "unknown" }, anonymous)).toMatchObject({ status: "failed", error: { code: "DSH_SESSION_REQUIRED" } });
+      expect(await cancel.execute({ run_id: "unknown", reason: "anonymous context test" }, anonymous)).toMatchObject({ status: "failed", error: { code: "DSH_SESSION_REQUIRED" } });
+    } finally {
+      runtime.dispose();
+    }
+  });
+
+  it("keeps plan, status, and cancel continuous for a real DSH agent", async () => {
+    const runtime = new RosalindRuntime();
+    const tools = createRosalindTools(runtime);
+    const agent = { id: "rosalind-runtime-agent" };
+    const execution = { agent, signal: new AbortController().signal } as never;
+    try {
+      const planned = await tools.find((tool) => tool.name === "rosalind_plan")!.execute({ showcase_id: "structure-gfp-figure", mode: "replay" }, execution) as { id: string; state: string };
+      expect(planned.state).toBe("queued");
+      expect(await tools.find((tool) => tool.name === "rosalind_status")!.execute({ run_id: planned.id }, execution)).toMatchObject({ id: planned.id, state: "queued" });
+      expect(await tools.find((tool) => tool.name === "rosalind_cancel")!.execute({ run_id: planned.id, reason: "agent context test" }, execution)).toMatchObject({ id: planned.id, state: "cancelled" });
+    } finally {
+      runtime.dispose();
+    }
   });
 
   it("reports unavailable live providers without selecting another service", async () => {

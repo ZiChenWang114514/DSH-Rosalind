@@ -62,6 +62,11 @@ function runtimeOutputSchema(serviceId, operation) {
   const fieldSchema = (field) => {
     if (field === "job") return { type: "object", properties: { id: { type: "string" }, durableId: { type: "string" }, state: { type: "string", enum: ["queued", "running", "completed", "failed", "cancelled"] } }, additionalProperties: true };
     if (field === "error") return { type: "object", properties: { code: { type: "string" }, message: { type: "string" }, status: { type: "integer" }, details: { type: "object", additionalProperties: true } }, required: ["code", "message"], additionalProperties: false };
+    if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "target") return { type: "string" };
+    if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "query") return { type: "string" };
+    if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "selectedHit") return { oneOf: [{ type: "number" }, { type: "null" }] };
+    if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "hits") return { type: "array", items: { type: "object", properties: { record: { type: "string" }, start: { type: "number" }, end: { type: "number" } }, required: ["record", "start", "end"], additionalProperties: false } };
+    if (serviceId === "slide" && field === "note" && ["slide.open_from_chat", "slide.open_ome_zarr", "slide.open_ome_tiff_series"].includes(operation)) return { oneOf: [{ type: "string" }, { type: "object", properties: { code: { type: "string" }, message: { type: "string" }, diagnostic: { type: "object", properties: { code: { type: "string" }, message: { type: "string" }, status: { type: "integer" }, details: { type: "object", additionalProperties: true } }, required: ["code", "message"], additionalProperties: false } }, required: ["code", "message"], additionalProperties: false }] };
     if (operation === "structure.apply_scene" && field === "wouldApply") return { type: "object", additionalProperties: true };
     if (field === "ok" || runtimeOutputContracts.boolean.has(field)) return { type: "boolean" };
     if (field === "state" && serviceId === "sequence" && operation !== "sequence.run_analysis") return { type: "object", additionalProperties: true };
@@ -86,13 +91,53 @@ function runtimeOutputSchema(serviceId, operation) {
     if (runtimeOutputContracts.string.has(field)) return { type: "string" };
     return { type: "object", additionalProperties: true };
   };
+  const ngsModuleFields = serviceId === "ngs" ? {
+    module: { type: "string", const: "ngs-analysis-workbench" },
+    moduleStatus: {
+      type: "object",
+      properties: {
+        enabled: { type: "boolean" },
+        status: { type: "string", enum: ["available", "disabled"] },
+        diagnostic: { oneOf: [{ type: "string" }, { type: "null" }] },
+      },
+      required: ["enabled", "status", "diagnostic"],
+      additionalProperties: false,
+    },
+    registry_restoration: {
+      type: "object",
+      properties: {
+        code: { type: "string" },
+        path: { type: "string" },
+        original_preserved: { type: "boolean" },
+        byte_length: { type: "number" },
+        message: { type: "string" },
+        observed_schema: { oneOf: [{ type: "string" }, { type: "null" }] },
+      },
+      required: ["code", "path", "original_preserved"],
+      additionalProperties: false,
+    },
+    registry_persistence: {
+      type: "object",
+      properties: {
+        code: { type: "string" },
+        path: { type: "string" },
+        original_preserved: { type: "boolean" },
+        byte_length: { type: "number" },
+        message: { type: "string" },
+        observed_schema: { oneOf: [{ type: "string" }, { type: "null" }] },
+      },
+      required: ["code", "path", "original_preserved"],
+      additionalProperties: false,
+    },
+  } : {};
   return {
     type: "object",
     properties: {
       ...Object.fromEntries(payloadFields.map((field) => [field, fieldSchema(field)])),
+      ...ngsModuleFields,
       serviceId: { type: "string", const: serviceId },
       operation: { type: "string", const: operation },
-      status: { type: "string", enum: ["completed", "failed", "cancelled", "blocked", "configured"] },
+      status: { type: "string", enum: ["completed", "failed", "cancelled", "blocked", "configured", "unavailable"] },
       ok: { type: "boolean" },
       error: {
         type: "object",

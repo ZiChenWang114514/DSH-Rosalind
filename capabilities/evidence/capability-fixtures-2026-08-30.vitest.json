@@ -3,8 +3,8 @@
   "numPassedTestSuites": 62,
   "numFailedTestSuites": 0,
   "numPendingTestSuites": 0,
-  "numTotalTests": 326,
-  "numPassedTests": 326,
+  "numTotalTests": 343,
+  "numPassedTests": 343,
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
@@ -24,7 +24,7 @@
     "updated": 0,
     "didUpdate": false
   },
-  "startTime": 1788109980365,
+  "startTime": 1788120553772,
   "success": true,
   "testResults": [
     {
@@ -36,7 +36,7 @@
           "fullName": "capability execution evidence uses a source digest that is stable across worktree line endings",
           "status": "passed",
           "title": "uses a source digest that is stable across worktree line endings",
-          "duration": 1.5592000000000041,
+          "duration": 2.4500999999999635,
           "failureMessages": [],
           "meta": {}
         },
@@ -47,7 +47,7 @@
           "fullName": "capability execution evidence accepts only the exact passed Vitest case for a capability",
           "status": "passed",
           "title": "accepts only the exact passed Vitest case for a capability",
-          "duration": 0.20820000000000505,
+          "duration": 0.31689999999997553,
           "failureMessages": [],
           "meta": {}
         },
@@ -58,7 +58,7 @@
           "fullName": "capability execution evidence rejects skipped, absent, and merely similarly named cases",
           "status": "passed",
           "title": "rejects skipped, absent, and merely similarly named cases",
-          "duration": 0.1688000000000045,
+          "duration": 0.3199999999999932,
           "failureMessages": [],
           "meta": {}
         },
@@ -69,7 +69,7 @@
           "fullName": "capability execution evidence requires a complete archive identity and separates source smoke from a selected tgz",
           "status": "passed",
           "title": "requires a complete archive identity and separates source smoke from a selected tgz",
-          "duration": 0.27490000000000236,
+          "duration": 0.4316000000000031,
           "failureMessages": [],
           "meta": {}
         },
@@ -80,7 +80,7 @@
           "fullName": "capability execution evidence removes repository and user-profile paths from public Vitest reports",
           "status": "passed",
           "title": "removes repository and user-profile paths from public Vitest reports",
-          "duration": 0.3348000000000013,
+          "duration": 0.7307999999999879,
           "failureMessages": [],
           "meta": {}
         },
@@ -91,13 +91,13 @@
           "fullName": "capability execution evidence writes public evidence commands with repository-relative report paths",
           "status": "passed",
           "title": "writes public evidence commands with repository-relative report paths",
-          "duration": 0.21420000000000528,
+          "duration": 0.41149999999998954,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109991564,
-      "endTime": 1788109991567.214,
+      "startTime": 1788120574514,
+      "endTime": 1788120574519.4116,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/capability-evidence-trust.test.ts"
@@ -111,7 +111,7 @@
           "fullName": "44 fixed-version database providers keeps a one-to-one provider and Skill inventory",
           "status": "passed",
           "title": "keeps a one-to-one provider and Skill inventory",
-          "duration": 1.8012999999999693,
+          "duration": 2.958900000000085,
           "failureMessages": [],
           "meta": {}
         },
@@ -122,7 +122,7 @@
           "fullName": "44 fixed-version database providers alphafold executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "alphafold executes its source-native path, request encoding, and response extraction",
-          "duration": 4.045099999999991,
+          "duration": 7.230399999999918,
           "failureMessages": [],
           "meta": {}
         },
@@ -133,7 +133,7 @@
           "fullName": "44 fixed-version database providers bgee executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "bgee executes its source-native path, request encoding, and response extraction",
-          "duration": 0.7375000000000114,
+          "duration": 0.9626000000000658,
           "failureMessages": [],
           "meta": {}
         },
@@ -144,7 +144,7 @@
           "fullName": "44 fixed-version database providers bindingdb executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "bindingdb executes its source-native path, request encoding, and response extraction",
-          "duration": 0.4481999999999857,
+          "duration": 1.1689000000000078,
           "failureMessages": [],
           "meta": {}
         },
@@ -155,7 +155,7 @@
           "fullName": "44 fixed-version database providers biobankjapan-phewas executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "biobankjapan-phewas executes its source-native path, request encoding, and response extraction",
-          "duration": 0.6108999999999583,
+          "duration": 1.2182999999999993,
           "failureMessages": [],
           "meta": {}
         },
@@ -166,7 +166,7 @@
           "fullName": "44 fixed-version database providers biostudies-arrayexpress executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "biostudies-arrayexpress executes its source-native path, request encoding, and response extraction",
-          "duration": 0.3913000000000011,
+          "duration": 0.8958000000000084,
           "failureMessages": [],
           "meta": {}
         },
@@ -177,7 +177,7 @@
           "fullName": "44 fixed-version database providers cbioportal executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "cbioportal executes its source-native path, request encoding, and response extraction",
-          "duration": 0.40739999999999554,
+          "duration": 0.8145000000000664,
           "failureMessages": [],
           "meta": {}
         },
@@ -188,7 +188,7 @@
           "fullName": "44 fixed-version database providers cellxgene executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "cellxgene executes its source-native path, request encoding, and response extraction",
-          "duration": 0.3335999999999899,
+          "duration": 0.7358000000000402,
           "failureMessages": [],
           "meta": {}
         },
@@ -199,7 +199,7 @@
           "fullName": "44 fixed-version database providers chebi executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "chebi executes its source-native path, request encoding, and response extraction",
-          "duration": 0.339999999999975,
+          "duration": 0.9997000000000753,
           "failureMessages": [],
           "meta": {}
         },
@@ -210,7 +210,7 @@
           "fullName": "44 fixed-version database providers chembl executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "chembl executes its source-native path, request encoding, and response extraction",
-          "duration": 0.42430000000001655,
+          "duration": 1.2506000000000768,
           "failureMessages": [],
           "meta": {}
         },
@@ -221,7 +221,7 @@
           "fullName": "44 fixed-version database providers civic executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "civic executes its source-native path, request encoding, and response extraction",
-          "duration": 0.5545999999999935,
+          "duration": 1.004699999999957,
           "failureMessages": [],
           "meta": {}
         },
@@ -232,7 +232,7 @@
           "fullName": "44 fixed-version database providers clinicaltrials executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "clinicaltrials executes its source-native path, request encoding, and response extraction",
-          "duration": 0.33440000000001646,
+          "duration": 0.6562999999999874,
           "failureMessages": [],
           "meta": {}
         },
@@ -243,7 +243,7 @@
           "fullName": "44 fixed-version database providers clinvar-variation executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "clinvar-variation executes its source-native path, request encoding, and response extraction",
-          "duration": 0.2743000000000393,
+          "duration": 0.5991999999999962,
           "failureMessages": [],
           "meta": {}
         },
@@ -254,7 +254,7 @@
           "fullName": "44 fixed-version database providers efo-ontology executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "efo-ontology executes its source-native path, request encoding, and response extraction",
-          "duration": 0.23239999999998417,
+          "duration": 0.485300000000052,
           "failureMessages": [],
           "meta": {}
         },
@@ -265,7 +265,7 @@
           "fullName": "44 fixed-version database providers encode executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "encode executes its source-native path, request encoding, and response extraction",
-          "duration": 0.190400000000011,
+          "duration": 0.5304999999999609,
           "failureMessages": [],
           "meta": {}
         },
@@ -276,7 +276,7 @@
           "fullName": "44 fixed-version database providers ensembl executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "ensembl executes its source-native path, request encoding, and response extraction",
-          "duration": 0.19889999999998054,
+          "duration": 0.45210000000008677,
           "failureMessages": [],
           "meta": {}
         },
@@ -287,7 +287,7 @@
           "fullName": "44 fixed-version database providers epigraphdb executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "epigraphdb executes its source-native path, request encoding, and response extraction",
-          "duration": 0.25270000000000437,
+          "duration": 0.68850000000009,
           "failureMessages": [],
           "meta": {}
         },
@@ -298,7 +298,7 @@
           "fullName": "44 fixed-version database providers eqtl-catalogue executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "eqtl-catalogue executes its source-native path, request encoding, and response extraction",
-          "duration": 0.20120000000002847,
+          "duration": 0.544399999999996,
           "failureMessages": [],
           "meta": {}
         },
@@ -309,7 +309,7 @@
           "fullName": "44 fixed-version database providers eva executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "eva executes its source-native path, request encoding, and response extraction",
-          "duration": 0.20659999999998035,
+          "duration": 0.3789999999999054,
           "failureMessages": [],
           "meta": {}
         },
@@ -320,7 +320,7 @@
           "fullName": "44 fixed-version database providers finngen-phewas executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "finngen-phewas executes its source-native path, request encoding, and response extraction",
-          "duration": 0.19249999999999545,
+          "duration": 0.4298000000000002,
           "failureMessages": [],
           "meta": {}
         },
@@ -331,7 +331,7 @@
           "fullName": "44 fixed-version database providers genebass-gene-burden executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "genebass-gene-burden executes its source-native path, request encoding, and response extraction",
-          "duration": 0.17629999999996926,
+          "duration": 0.3447999999999638,
           "failureMessages": [],
           "meta": {}
         },
@@ -342,7 +342,7 @@
           "fullName": "44 fixed-version database providers gnomad-graphql executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "gnomad-graphql executes its source-native path, request encoding, and response extraction",
-          "duration": 0.22320000000001983,
+          "duration": 0.4154000000000906,
           "failureMessages": [],
           "meta": {}
         },
@@ -353,7 +353,7 @@
           "fullName": "44 fixed-version database providers gtex-eqtl executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "gtex-eqtl executes its source-native path, request encoding, and response extraction",
-          "duration": 0.4545999999999708,
+          "duration": 0.8956000000000586,
           "failureMessages": [],
           "meta": {}
         },
@@ -364,7 +364,7 @@
           "fullName": "44 fixed-version database providers gwas-catalog executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "gwas-catalog executes its source-native path, request encoding, and response extraction",
-          "duration": 0.21519999999998163,
+          "duration": 0.49720000000002074,
           "failureMessages": [],
           "meta": {}
         },
@@ -375,7 +375,7 @@
           "fullName": "44 fixed-version database providers human-protein-atlas executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "human-protein-atlas executes its source-native path, request encoding, and response extraction",
-          "duration": 0.16440000000000055,
+          "duration": 0.35399999999992815,
           "failureMessages": [],
           "meta": {}
         },
@@ -386,7 +386,7 @@
           "fullName": "44 fixed-version database providers ipd executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "ipd executes its source-native path, request encoding, and response extraction",
-          "duration": 0.17090000000001737,
+          "duration": 0.3506999999999607,
           "failureMessages": [],
           "meta": {}
         },
@@ -397,7 +397,7 @@
           "fullName": "44 fixed-version database providers metabolights executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "metabolights executes its source-native path, request encoding, and response extraction",
-          "duration": 0.18889999999998963,
+          "duration": 0.38380000000006476,
           "failureMessages": [],
           "meta": {}
         },
@@ -408,7 +408,7 @@
           "fullName": "44 fixed-version database providers mgnify executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "mgnify executes its source-native path, request encoding, and response extraction",
-          "duration": 0.17109999999996717,
+          "duration": 0.38450000000000273,
           "failureMessages": [],
           "meta": {}
         },
@@ -419,7 +419,7 @@
           "fullName": "44 fixed-version database providers ncbi-clinicaltables executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "ncbi-clinicaltables executes its source-native path, request encoding, and response extraction",
-          "duration": 0.183400000000006,
+          "duration": 0.43229999999994106,
           "failureMessages": [],
           "meta": {}
         },
@@ -430,7 +430,7 @@
           "fullName": "44 fixed-version database providers ncbi-datasets executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "ncbi-datasets executes its source-native path, request encoding, and response extraction",
-          "duration": 0.2188000000000443,
+          "duration": 0.4112999999999829,
           "failureMessages": [],
           "meta": {}
         },
@@ -441,7 +441,7 @@
           "fullName": "44 fixed-version database providers ncbi-entrez executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "ncbi-entrez executes its source-native path, request encoding, and response extraction",
-          "duration": 0.36149999999997817,
+          "duration": 0.7968999999999369,
           "failureMessages": [],
           "meta": {}
         },
@@ -452,7 +452,7 @@
           "fullName": "44 fixed-version database providers opentargets executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "opentargets executes its source-native path, request encoding, and response extraction",
-          "duration": 0.2290999999999599,
+          "duration": 0.5625,
           "failureMessages": [],
           "meta": {}
         },
@@ -463,7 +463,7 @@
           "fullName": "44 fixed-version database providers pharmgkb executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "pharmgkb executes its source-native path, request encoding, and response extraction",
-          "duration": 0.17149999999998045,
+          "duration": 0.41409999999996217,
           "failureMessages": [],
           "meta": {}
         },
@@ -474,7 +474,7 @@
           "fullName": "44 fixed-version database providers pride executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "pride executes its source-native path, request encoding, and response extraction",
-          "duration": 0.21829999999999927,
+          "duration": 0.5058999999999969,
           "failureMessages": [],
           "meta": {}
         },
@@ -485,7 +485,7 @@
           "fullName": "44 fixed-version database providers proteomexchange executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "proteomexchange executes its source-native path, request encoding, and response extraction",
-          "duration": 0.16290000000003602,
+          "duration": 0.3895999999999731,
           "failureMessages": [],
           "meta": {}
         },
@@ -496,7 +496,7 @@
           "fullName": "44 fixed-version database providers pubchem-pug executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "pubchem-pug executes its source-native path, request encoding, and response extraction",
-          "duration": 0.18540000000001555,
+          "duration": 0.41259999999999764,
           "failureMessages": [],
           "meta": {}
         },
@@ -507,7 +507,7 @@
           "fullName": "44 fixed-version database providers quickgo executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "quickgo executes its source-native path, request encoding, and response extraction",
-          "duration": 0.16470000000003893,
+          "duration": 0.4399999999999409,
           "failureMessages": [],
           "meta": {}
         },
@@ -518,7 +518,7 @@
           "fullName": "44 fixed-version database providers rcsb-pdb executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "rcsb-pdb executes its source-native path, request encoding, and response extraction",
-          "duration": 0.15250000000003183,
+          "duration": 0.4096999999999298,
           "failureMessages": [],
           "meta": {}
         },
@@ -529,7 +529,7 @@
           "fullName": "44 fixed-version database providers reactome executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "reactome executes its source-native path, request encoding, and response extraction",
-          "duration": 0.158299999999997,
+          "duration": 0.34019999999998163,
           "failureMessages": [],
           "meta": {}
         },
@@ -540,7 +540,7 @@
           "fullName": "44 fixed-version database providers rhea executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "rhea executes its source-native path, request encoding, and response extraction",
-          "duration": 0.16390000000001237,
+          "duration": 0.37620000000003984,
           "failureMessages": [],
           "meta": {}
         },
@@ -551,7 +551,7 @@
           "fullName": "44 fixed-version database providers rnacentral executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "rnacentral executes its source-native path, request encoding, and response extraction",
-          "duration": 0.161200000000008,
+          "duration": 0.4955999999999676,
           "failureMessages": [],
           "meta": {}
         },
@@ -562,7 +562,7 @@
           "fullName": "44 fixed-version database providers string executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "string executes its source-native path, request encoding, and response extraction",
-          "duration": 0.3199999999999932,
+          "duration": 0.4897999999999456,
           "failureMessages": [],
           "meta": {}
         },
@@ -573,7 +573,7 @@
           "fullName": "44 fixed-version database providers tpmi-phewas executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "tpmi-phewas executes its source-native path, request encoding, and response extraction",
-          "duration": 0.2113000000000511,
+          "duration": 0.39179999999998927,
           "failureMessages": [],
           "meta": {}
         },
@@ -584,7 +584,7 @@
           "fullName": "44 fixed-version database providers ukb-topmed-phewas executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "ukb-topmed-phewas executes its source-native path, request encoding, and response extraction",
-          "duration": 0.15679999999997563,
+          "duration": 0.3305000000000291,
           "failureMessages": [],
           "meta": {}
         },
@@ -595,7 +595,7 @@
           "fullName": "44 fixed-version database providers uniprot executes its source-native path, request encoding, and response extraction",
           "status": "passed",
           "title": "uniprot executes its source-native path, request encoding, and response extraction",
-          "duration": 0.18199999999995953,
+          "duration": 0.39430000000004384,
           "failureMessages": [],
           "meta": {}
         },
@@ -606,7 +606,7 @@
           "fullName": "44 fixed-version database providers reports cancellation before any provider fetch",
           "status": "passed",
           "title": "reports cancellation before any provider fetch",
-          "duration": 0.9552999999999656,
+          "duration": 1.84699999999998,
           "failureMessages": [],
           "meta": {}
         },
@@ -617,7 +617,7 @@
           "fullName": "44 fixed-version database providers uses the fixed eQTL Catalogue v3 dataset-scoped associations route",
           "status": "passed",
           "title": "uses the fixed eQTL Catalogue v3 dataset-scoped associations route",
-          "duration": 0.372099999999989,
+          "duration": 1.1221000000000458,
           "failureMessages": [],
           "meta": {}
         },
@@ -628,7 +628,7 @@
           "fullName": "44 fixed-version database providers maps a top-level UniProt query to the native query parameter",
           "status": "passed",
           "title": "maps a top-level UniProt query to the native query parameter",
-          "duration": 0.31670000000002574,
+          "duration": 0.7273000000000138,
           "failureMessages": [],
           "meta": {}
         },
@@ -639,7 +639,7 @@
           "fullName": "44 fixed-version database providers maps a top-level ChEMBL query to the native q parameter",
           "status": "passed",
           "title": "maps a top-level ChEMBL query to the native q parameter",
-          "duration": 0.40809999999999036,
+          "duration": 0.5950000000000273,
           "failureMessages": [],
           "meta": {}
         },
@@ -650,7 +650,7 @@
           "fullName": "44 fixed-version database providers maps NCBI Entrez search pagination to retstart and retmax",
           "status": "passed",
           "title": "maps NCBI Entrez search pagination to retstart and retmax",
-          "duration": 0.5716999999999643,
+          "duration": 0.7576000000000249,
           "failureMessages": [],
           "meta": {}
         },
@@ -661,7 +661,7 @@
           "fullName": "44 fixed-version database providers maps NCBI Entrez summary identifiers and response format",
           "status": "passed",
           "title": "maps NCBI Entrez summary identifiers and response format",
-          "duration": 0.5185000000000173,
+          "duration": 1.0382999999999356,
           "failureMessages": [],
           "meta": {}
         },
@@ -672,7 +672,7 @@
           "fullName": "44 fixed-version database providers maps NCBI Entrez fetch identifiers and response format",
           "status": "passed",
           "title": "maps NCBI Entrez fetch identifiers and response format",
-          "duration": 0.6766000000000076,
+          "duration": 1.4122999999999593,
           "failureMessages": [],
           "meta": {}
         },
@@ -683,7 +683,7 @@
           "fullName": "44 fixed-version database providers maps the NCBI Entrez link source and target databases",
           "status": "passed",
           "title": "maps the NCBI Entrez link source and target databases",
-          "duration": 0.5518000000000143,
+          "duration": 1.0285000000000082,
           "failureMessages": [],
           "meta": {}
         },
@@ -694,7 +694,7 @@
           "fullName": "44 fixed-version database providers rejects incomplete NCBI Entrez requests before fetch",
           "status": "passed",
           "title": "rejects incomplete NCBI Entrez requests before fetch",
-          "duration": 0.3035000000000423,
+          "duration": 0.6879999999999882,
           "failureMessages": [],
           "meta": {}
         },
@@ -705,7 +705,7 @@
           "fullName": "44 fixed-version database providers maps BioBank Japan rsid input to its exact endpoint URL",
           "status": "passed",
           "title": "maps BioBank Japan rsid input to its exact endpoint URL",
-          "duration": 0.40960000000001173,
+          "duration": 0.934099999999944,
           "failureMessages": [],
           "meta": {}
         },
@@ -716,7 +716,7 @@
           "fullName": "44 fixed-version database providers maps BioBank Japan grch37 input to its exact endpoint URL",
           "status": "passed",
           "title": "maps BioBank Japan grch37 input to its exact endpoint URL",
-          "duration": 0.23249999999995907,
+          "duration": 0.527300000000082,
           "failureMessages": [],
           "meta": {}
         },
@@ -727,7 +727,7 @@
           "fullName": "44 fixed-version database providers maps BioBank Japan grch38 input to its exact endpoint URL",
           "status": "passed",
           "title": "maps BioBank Japan grch38 input to its exact endpoint URL",
-          "duration": 0.1705000000000041,
+          "duration": 0.41819999999995616,
           "failureMessages": [],
           "meta": {}
         },
@@ -738,7 +738,7 @@
           "fullName": "44 fixed-version database providers maps BioBank Japan variant input to its exact endpoint URL",
           "status": "passed",
           "title": "maps BioBank Japan variant input to its exact endpoint URL",
-          "duration": 0.1712999999999738,
+          "duration": 0.42819999999994707,
           "failureMessages": [],
           "meta": {}
         },
@@ -749,7 +749,7 @@
           "fullName": "44 fixed-version database providers rejects arbitrary HTTPS origins before a provider request is sent",
           "status": "passed",
           "title": "rejects arbitrary HTTPS origins before a provider request is sent",
-          "duration": 0.2866000000000213,
+          "duration": 0.5119999999999436,
           "failureMessages": [],
           "meta": {}
         },
@@ -760,7 +760,7 @@
           "fullName": "44 fixed-version database providers allows a declared official alternate origin such as RCSB Search",
           "status": "passed",
           "title": "allows a declared official alternate origin such as RCSB Search",
-          "duration": 0.3066000000000031,
+          "duration": 0.5897999999999683,
           "failureMessages": [],
           "meta": {}
         },
@@ -771,7 +771,7 @@
           "fullName": "three fixed-version literature providers biorxiv executes through a provenance-bearing request",
           "status": "passed",
           "title": "biorxiv executes through a provenance-bearing request",
-          "duration": 0.8349000000000046,
+          "duration": 1.9405000000000427,
           "failureMessages": [],
           "meta": {}
         },
@@ -782,7 +782,7 @@
           "fullName": "three fixed-version literature providers entrez executes through a provenance-bearing request",
           "status": "passed",
           "title": "entrez executes through a provenance-bearing request",
-          "duration": 0.47169999999999845,
+          "duration": 1.1578000000000657,
           "failureMessages": [],
           "meta": {}
         },
@@ -793,13 +793,13 @@
           "fullName": "three fixed-version literature providers pmc executes through a provenance-bearing request",
           "status": "passed",
           "title": "pmc executes through a provenance-bearing request",
-          "duration": 0.42880000000002383,
+          "duration": 0.9687999999999874,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109991463,
-      "endTime": 1788109991489.4717,
+      "startTime": 1788120574518,
+      "endTime": 1788120574571.9688,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/database-provider-matrix.test.ts"
@@ -813,7 +813,7 @@
           "fullName": "DSH bundle registration through Cordis services registers 121 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
           "status": "passed",
           "title": "registers 121 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
-          "duration": 330.8098,
+          "duration": 640.9236999999994,
           "failureMessages": [],
           "meta": {}
         },
@@ -824,7 +824,7 @@
           "fullName": "DSH bundle registration through Cordis services checks every registered schema and presentation contract, then dispatches all 140 names through ToolRuntime",
           "status": "passed",
           "title": "checks every registered schema and presentation contract, then dispatches all 140 names through ToolRuntime",
-          "duration": 323.45790000000034,
+          "duration": 739.9243999999999,
           "failureMessages": [],
           "meta": {}
         },
@@ -835,7 +835,7 @@
           "fullName": "DSH bundle registration through Cordis services executes representative valid calls without network access and reports cancellation before dispatch",
           "status": "passed",
           "title": "executes representative valid calls without network access and reports cancellation before dispatch",
-          "duration": 160.09480000000076,
+          "duration": 335.46680000000015,
           "failureMessages": [],
           "meta": {}
         },
@@ -846,13 +846,13 @@
           "fullName": "DSH bundle registration through Cordis services requires the DSH approval service for NGS execution and live public-network requests",
           "status": "passed",
           "title": "requires the DSH approval service for NGS execution and live public-network requests",
-          "duration": 158.0019999999995,
+          "duration": 300.09929999999986,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109985581,
-      "endTime": 1788109986553.002,
+      "startTime": 1788120562454,
+      "endTime": 1788120564471.0994,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/dsh-host-registration.test.ts"
@@ -866,7 +866,7 @@
           "fullName": "Cordis module core exposes seven independently managed modules with catalogue-derived metadata",
           "status": "passed",
           "title": "exposes seven independently managed modules with catalogue-derived metadata",
-          "duration": 184.1277,
+          "duration": 368.28930000000037,
           "failureMessages": [],
           "meta": {}
         },
@@ -877,7 +877,7 @@
           "fullName": "Cordis module core disables and re-enables one Fiber without affecting the other modules",
           "status": "passed",
           "title": "disables and re-enables one Fiber without affecting the other modules",
-          "duration": 256.6729000000005,
+          "duration": 555.5030000000006,
           "failureMessages": [],
           "meta": {}
         },
@@ -888,7 +888,7 @@
           "fullName": "Cordis module core retains a Rosalind run while its registrations are temporarily disabled",
           "status": "passed",
           "title": "retains a Rosalind run while its registrations are temporarily disabled",
-          "duration": 163.10279999999966,
+          "duration": 314.51300000000083,
           "failureMessages": [],
           "meta": {}
         },
@@ -899,7 +899,7 @@
           "fullName": "Cordis module core removes each module surface, blocks dependent Rosalind work, and restores the retained plan",
           "status": "passed",
           "title": "removes each module surface, blocks dependent Rosalind work, and restores the retained plan",
-          "duration": 708.0556999999999,
+          "duration": 1456.2573000000011,
           "failureMessages": [],
           "meta": {}
         },
@@ -910,7 +910,7 @@
           "fullName": "Cordis module core blocks Rosalind cross-module Showcases when their required service is disabled",
           "status": "passed",
           "title": "blocks Rosalind cross-module Showcases when their required service is disabled",
-          "duration": 148.60379999999986,
+          "duration": 291.41219999999885,
           "failureMessages": [],
           "meta": {}
         },
@@ -921,7 +921,7 @@
           "fullName": "Cordis module core reports every missing module when multiple Rosalind dependencies are disabled",
           "status": "passed",
           "title": "reports every missing module when multiple Rosalind dependencies are disabled",
-          "duration": 135.94859999999971,
+          "duration": 269.5493000000006,
           "failureMessages": [],
           "meta": {}
         },
@@ -932,7 +932,7 @@
           "fullName": "Cordis module core keeps one NGS session registry across module suspension and reactivation",
           "status": "passed",
           "title": "keeps one NGS session registry across module suspension and reactivation",
-          "duration": 147.51000000000022,
+          "duration": 303.1152999999995,
           "failureMessages": [],
           "meta": {}
         },
@@ -943,7 +943,7 @@
           "fullName": "Cordis module core restores and persists the seven-module selection through DSH settings",
           "status": "passed",
           "title": "restores and persists the seven-module selection through DSH settings",
-          "duration": 273.78740000000016,
+          "duration": 400.6144000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -954,7 +954,7 @@
           "fullName": "Cordis module core retains module state after a settings write error and clears the diagnostic on retry",
           "status": "passed",
           "title": "retains module state after a settings write error and clears the diagnostic on retry",
-          "duration": 3.984599999999773,
+          "duration": 8.491500000000087,
           "failureMessages": [],
           "meta": {}
         },
@@ -965,13 +965,13 @@
           "fullName": "Cordis module core reports provider setup and startup failures, then disposes every active Fiber",
           "status": "passed",
           "title": "reports provider setup and startup failures, then disposes every active Fiber",
-          "duration": 6.516099999999824,
+          "duration": 17.119299999998475,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109985583,
-      "endTime": 1788109987611.516,
+      "startTime": 1788120562453,
+      "endTime": 1788120566438.1194,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/module-core.test.ts"
@@ -985,7 +985,7 @@
           "fullName": "NgsService local engine execution starts the reviewed local Nextflow command and records its successful lifecycle and summaries",
           "status": "passed",
           "title": "starts the reviewed local Nextflow command and records its successful lifecycle and summaries",
-          "duration": 1488.6109999999999,
+          "duration": 2390.8846000000003,
           "failureMessages": [],
           "meta": {}
         },
@@ -996,7 +996,7 @@
           "fullName": "NgsService local engine execution records a non-zero local Nextflow exit and its stderr",
           "status": "passed",
           "title": "records a non-zero local Nextflow exit and its stderr",
-          "duration": 1669.0682000000002,
+          "duration": 2416.7395,
           "failureMessages": [],
           "meta": {}
         },
@@ -1007,7 +1007,7 @@
           "fullName": "NgsService local engine execution terminates a running local command on cancellation and retains its cancellation record",
           "status": "passed",
           "title": "terminates a running local command on cancellation and retains its cancellation record",
-          "duration": 2563.5837,
+          "duration": 3577.1843,
           "failureMessages": [],
           "meta": {}
         },
@@ -1018,7 +1018,7 @@
           "fullName": "NgsService local engine execution terminates active local commands when the NGS service is disposed",
           "status": "passed",
           "title": "terminates active local commands when the NGS service is disposed",
-          "duration": 2652.0464999999995,
+          "duration": 3892.918600000001,
           "failureMessages": [],
           "meta": {}
         },
@@ -1029,7 +1029,7 @@
           "fullName": "NgsService local engine execution reports termination_failed while a failed kill leaves the PID alive",
           "status": "passed",
           "title": "reports termination_failed while a failed kill leaves the PID alive",
-          "duration": 2803.750399999999,
+          "duration": 3635.4378000000015,
           "failureMessages": [],
           "meta": {}
         },
@@ -1040,7 +1040,7 @@
           "fullName": "NgsService local engine execution rejects changed workflow and parameter bytes before creating a process",
           "status": "passed",
           "title": "rejects changed workflow and parameter bytes before creating a process",
-          "duration": 449.4254000000001,
+          "duration": 772.2269000000015,
           "failureMessages": [],
           "meta": {}
         },
@@ -1051,7 +1051,7 @@
           "fullName": "NgsService local engine execution captures every configuration-referenced scientific input and rejects changed input bytes before execution",
           "status": "passed",
           "title": "captures every configuration-referenced scientific input and rejects changed input bytes before execution",
-          "duration": 425.4205000000002,
+          "duration": 802.2978000000003,
           "failureMessages": [],
           "meta": {}
         },
@@ -1062,7 +1062,7 @@
           "fullName": "NgsService local engine execution passes Windows metacharacters, quotes, spaces, and Unicode as literal native argv",
           "status": "passed",
           "title": "passes Windows metacharacters, quotes, spaces, and Unicode as literal native argv",
-          "duration": 1363.9027000000006,
+          "duration": 2587.9772999999986,
           "failureMessages": [],
           "meta": {}
         },
@@ -1073,13 +1073,13 @@
           "fullName": "NgsService local engine execution returns a structured refusal for command-script runtimes",
           "status": "passed",
           "title": "returns a structured refusal for command-script runtimes",
-          "duration": 7.408800000001065,
+          "duration": 17.100600000001577,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109980777,
-      "endTime": 1788109994200.4087,
+      "startTime": 1788120554504,
+      "endTime": 1788120574597.1006,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/ngs-local-execution.test.ts"
@@ -1093,7 +1093,7 @@
           "fullName": "NGS fixed-version MCP facades retains the three original service surfaces",
           "status": "passed",
           "title": "retains the three original service surfaces",
-          "duration": 1.8274000000000115,
+          "duration": 4.930700000000002,
           "failureMessages": [],
           "meta": {}
         },
@@ -1104,7 +1104,7 @@
           "fullName": "NGS fixed-version MCP facades shares one session registry across app, workbench, and compute facades",
           "status": "passed",
           "title": "shares one session registry across app, workbench, and compute facades",
-          "duration": 23.13730000000001,
+          "duration": 42.91839999999996,
           "failureMessages": [],
           "meta": {}
         },
@@ -1115,7 +1115,7 @@
           "fullName": "NGS fixed-version MCP facades rejects tools invoked through the wrong fixed-version server",
           "status": "passed",
           "title": "rejects tools invoked through the wrong fixed-version server",
-          "duration": 1.5504999999999995,
+          "duration": 3.616100000000017,
           "failureMessages": [],
           "meta": {}
         },
@@ -1126,13 +1126,13 @@
           "fullName": "NGS fixed-version MCP facades exposes unique app tools through generic routing and returns fixed missing-run responses",
           "status": "passed",
           "title": "exposes unique app tools through generic routing and returns fixed missing-run responses",
-          "duration": 20.68380000000002,
+          "duration": 28.656999999999982,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109991112,
-      "endTime": 1788109991159.6838,
+      "startTime": 1788120573927,
+      "endTime": 1788120574006.657,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/ngs-mcp-facades.test.ts"
@@ -1143,10 +1143,21 @@
           "ancestorTitles": [
             "NgsService durable registry"
           ],
+          "fullName": "NgsService durable registry coalesces burst output persistence into one scheduled registry write",
+          "status": "passed",
+          "title": "coalesces burst output persistence into one scheduled registry write",
+          "duration": 182.2817,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "NgsService durable registry"
+          ],
           "fullName": "NgsService durable registry consumes an execution plan once and restores the same receipt in a new service instance",
           "status": "passed",
           "title": "consumes an execution plan once and restores the same receipt in a new service instance",
-          "duration": 70.67770000000002,
+          "duration": 106.7693999999999,
           "failureMessages": [],
           "meta": {}
         },
@@ -1157,7 +1168,7 @@
           "fullName": "NgsService durable registry marks a saved active controller as orphaned instead of claiming it is still running",
           "status": "passed",
           "title": "marks a saved active controller as orphaned instead of claiming it is still running",
-          "duration": 11.583699999999965,
+          "duration": 21.620000000000005,
           "failureMessages": [],
           "meta": {}
         },
@@ -1168,7 +1179,7 @@
           "fullName": "NgsService durable registry keeps colliding normalized session IDs in separate digest-named registry files",
           "status": "passed",
           "title": "keeps colliding normalized session IDs in separate digest-named registry files",
-          "duration": 12.728499999999997,
+          "duration": 23.41489999999999,
           "failureMessages": [],
           "meta": {}
         },
@@ -1179,7 +1190,7 @@
           "fullName": "NgsService durable registry preserves original bytes and reports restoration diagnostics for corrupt JSON",
           "status": "passed",
           "title": "preserves original bytes and reports restoration diagnostics for corrupt JSON",
-          "duration": 10.37700000000001,
+          "duration": 21.47569999999996,
           "failureMessages": [],
           "meta": {}
         },
@@ -1190,7 +1201,7 @@
           "fullName": "NgsService durable registry preserves original bytes and reports restoration diagnostics for unknown schema",
           "status": "passed",
           "title": "preserves original bytes and reports restoration diagnostics for unknown schema",
-          "duration": 9.034800000000018,
+          "duration": 20.71460000000002,
           "failureMessages": [],
           "meta": {}
         },
@@ -1201,13 +1212,13 @@
           "fullName": "NgsService durable registry reports an unwritable registry location without modifying the blocking file",
           "status": "passed",
           "title": "reports an unwritable registry location without modifying the blocking file",
-          "duration": 6.793000000000006,
+          "duration": 9.007599999999911,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109990256,
-      "endTime": 1788109990377.793,
+      "startTime": 1788120572279,
+      "endTime": 1788120572665.0076,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/ngs-persistence.test.ts"
@@ -1221,7 +1232,7 @@
           "fullName": "Rosalind NGS production plan lifecycle records declared scientific inputs in the real planner and rejects configurations that do not reference them",
           "status": "passed",
           "title": "records declared scientific inputs in the real planner and rejects configurations that do not reference them",
-          "duration": 75.35820000000001,
+          "duration": 119.8696000000001,
           "failureMessages": [],
           "meta": {}
         },
@@ -1232,7 +1243,7 @@
           "fullName": "Rosalind NGS production plan lifecycle uses the real NgsService planner once, saves its exact identity, and rejects mismatched approval before execution",
           "status": "passed",
           "title": "uses the real NgsService planner once, saves its exact identity, and rejects mismatched approval before execution",
-          "duration": 163.9878,
+          "duration": 210.0127000000001,
           "failureMessages": [],
           "meta": {}
         },
@@ -1243,7 +1254,7 @@
           "fullName": "Rosalind NGS production plan lifecycle retains the NGS registry under the stable DSH agent identity used by the Rosalind lifecycle",
           "status": "passed",
           "title": "retains the NGS registry under the stable DSH agent identity used by the Rosalind lifecycle",
-          "duration": 190.18720000000008,
+          "duration": 223.64199999999983,
           "failureMessages": [],
           "meta": {}
         },
@@ -1254,7 +1265,7 @@
           "fullName": "Rosalind NGS production plan lifecycle keeps an active NGS registry run active, resumes observation without replanning, then records completion",
           "status": "passed",
           "title": "keeps an active NGS registry run active, resumes observation without replanning, then records completion",
-          "duration": 25.766199999999913,
+          "duration": 52.40919999999983,
           "failureMessages": [],
           "meta": {}
         },
@@ -1265,7 +1276,7 @@
           "fullName": "Rosalind NGS production plan lifecycle records cancellation from the NGS registry rather than converting it to a failed run",
           "status": "passed",
           "title": "records cancellation from the NGS registry rather than converting it to a failed run",
-          "duration": 23.336400000000026,
+          "duration": 44.18399999999997,
           "failureMessages": [],
           "meta": {}
         },
@@ -1276,13 +1287,13 @@
           "fullName": "Rosalind NGS production plan lifecycle keeps Rosalind observation active when the retained NGS process reports termination_failed",
           "status": "passed",
           "title": "keeps Rosalind observation active when the retained NGS process reports termination_failed",
-          "duration": 21.094400000000064,
+          "duration": 33.48129999999992,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109988195,
-      "endTime": 1788109988695.0945,
+      "startTime": 1788120569571,
+      "endTime": 1788120570254.4812,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/rosalind-ngs-production.test.ts"
@@ -1296,13 +1307,13 @@
           "fullName": "Rosalind operation contract opens the molecular-design workbench from the real catalogue context and retained artifacts",
           "status": "passed",
           "title": "opens the molecular-design workbench from the real catalogue context and retained artifacts",
-          "duration": 3.782099999999957,
+          "duration": 6.977000000000032,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109991486,
-      "endTime": 1788109991489.782,
+      "startTime": 1788120574517,
+      "endTime": 1788120574523.977,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/rosalind-operation.test.ts"
@@ -1316,7 +1327,7 @@
           "fullName": "DSH host contract registers the complete public tool surface with explicit output and presentation contracts",
           "status": "passed",
           "title": "registers the complete public tool surface with explicit output and presentation contracts",
-          "duration": 10.653399999999976,
+          "duration": 22.755499999999984,
           "failureMessages": [],
           "meta": {}
         },
@@ -1327,7 +1338,7 @@
           "fullName": "DSH host contract keeps catalogue copies immutable and filters all seven scientific areas",
           "status": "passed",
           "title": "keeps catalogue copies immutable and filters all seven scientific areas",
-          "duration": 18.137699999999995,
+          "duration": 30.52789999999993,
           "failureMessages": [],
           "meta": {}
         },
@@ -1338,7 +1349,7 @@
           "fullName": "DSH host contract rejects workspace path traversal",
           "status": "passed",
           "title": "rejects workspace path traversal",
-          "duration": 0.6702000000000226,
+          "duration": 1.2806000000000495,
           "failureMessages": [],
           "meta": {}
         },
@@ -1349,7 +1360,40 @@
           "fullName": "DSH host contract treats LF and CRLF text as byte-equivalent across operating systems",
           "status": "passed",
           "title": "treats LF and CRLF text as byte-equivalent across operating systems",
-          "duration": 0.18419999999997572,
+          "duration": 0.6756000000000313,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "DSH host contract"
+          ],
+          "fullName": "DSH host contract exports relative to the runtime workspace even when the host process cwd differs",
+          "status": "passed",
+          "title": "exports relative to the runtime workspace even when the host process cwd differs",
+          "duration": 26.237899999999968,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "DSH host contract"
+          ],
+          "fullName": "DSH host contract shows scientific error codes and messages in Rosalind result cards",
+          "status": "passed",
+          "title": "shows scientific error codes and messages in Rosalind result cards",
+          "duration": 15.593999999999937,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "DSH host contract"
+          ],
+          "fullName": "DSH host contract matches concrete output schemas for Rosalind success and failure results",
+          "status": "passed",
+          "title": "matches concrete output schemas for Rosalind success and failure results",
+          "duration": 469.7043,
           "failureMessages": [],
           "meta": {}
         },
@@ -1360,7 +1404,18 @@
           "fullName": "provider diagnostics reports public network authorization, credentials, commands, and confirmation requirements precisely",
           "status": "passed",
           "title": "reports public network authorization, credentials, commands, and confirmation requirements precisely",
-          "duration": 0.9995000000000118,
+          "duration": 0.4876999999999043,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "run lifecycle"
+          ],
+          "fullName": "run lifecycle rejects unsupported reproduce plans before creating a run",
+          "status": "passed",
+          "title": "rejects unsupported reproduce plans before creating a run",
+          "duration": 10.351699999999937,
           "failureMessages": [],
           "meta": {}
         },
@@ -1371,7 +1426,7 @@
           "fullName": "run lifecycle completes lesson, replay, and local reproduce runs",
           "status": "passed",
           "title": "completes lesson, replay, and local reproduce runs",
-          "duration": 32.41040000000004,
+          "duration": 41.05430000000001,
           "failureMessages": [],
           "meta": {}
         },
@@ -1382,7 +1437,7 @@
           "fullName": "run lifecycle requires a new immutable Slide plan and rejects a look-alike source that lacks the recorded identity",
           "status": "passed",
           "title": "requires a new immutable Slide plan and rejects a look-alike source that lacks the recorded identity",
-          "duration": 24.988699999999994,
+          "duration": 32.746900000000096,
           "failureMessages": [],
           "meta": {}
         },
@@ -1393,7 +1448,7 @@
           "fullName": "run lifecycle requires full acknowledgement for GPU work and never changes the selected provider",
           "status": "passed",
           "title": "requires full acknowledgement for GPU work and never changes the selected provider",
-          "duration": 6.423000000000002,
+          "duration": 12.610299999999825,
           "failureMessages": [],
           "meta": {}
         },
@@ -1404,7 +1459,29 @@
           "fullName": "run lifecycle isolates runs by DSH session and supports cancellation before execution",
           "status": "passed",
           "title": "isolates runs by DSH session and supports cancellation before execution",
-          "duration": 5.821900000000028,
+          "duration": 14.05139999999983,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "run lifecycle"
+          ],
+          "fullName": "run lifecycle requires an agent identity for every stateful Rosalind tool",
+          "status": "passed",
+          "title": "requires an agent identity for every stateful Rosalind tool",
+          "duration": 14.802000000000135,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "run lifecycle"
+          ],
+          "fullName": "run lifecycle keeps plan, status, and cancel continuous for a real DSH agent",
+          "status": "passed",
+          "title": "keeps plan, status, and cancel continuous for a real DSH agent",
+          "duration": 14.671800000000076,
           "failureMessages": [],
           "meta": {}
         },
@@ -1415,13 +1492,13 @@
           "fullName": "run lifecycle reports unavailable live providers without selecting another service",
           "status": "passed",
           "title": "reports unavailable live providers without selecting another service",
-          "duration": 5.394900000000007,
+          "duration": 11.121499999999969,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109989832,
-      "endTime": 1788109989938.395,
+      "startTime": 1788120567964,
+      "endTime": 1788120568685.1216,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/runtime.test.ts"
@@ -1435,7 +1512,7 @@
           "fullName": "unified science runtime builds 121 fixed-version tools and 55 executable Skills",
           "status": "passed",
           "title": "builds 121 fixed-version tools and 55 executable Skills",
-          "duration": 146.00879999999995,
+          "duration": 234.08270000000005,
           "failureMessages": [],
           "meta": {}
         },
@@ -1446,7 +1523,7 @@
           "fullName": "unified science runtime dispatches every required operation to its scientific service",
           "status": "passed",
           "title": "dispatches every required operation to its scientific service",
-          "duration": 189.6979,
+          "duration": 255.73350000000005,
           "failureMessages": [],
           "meta": {}
         },
@@ -1457,7 +1534,7 @@
           "fullName": "unified science runtime provides literature/database gateways and four Slide Skill compatibility tools",
           "status": "passed",
           "title": "provides literature/database gateways and four Slide Skill compatibility tools",
-          "duration": 105.66910000000007,
+          "duration": 141.80009999999993,
           "failureMessages": [],
           "meta": {}
         },
@@ -1468,13 +1545,13 @@
           "fullName": "showcase reproduction routes retains reproduction instructions for all 100 showcases and exercises the registered operation routes",
           "status": "passed",
           "title": "retains reproduction instructions for all 100 showcases and exercises the registered operation routes",
-          "duration": 3.6120999999999412,
+          "duration": 12.711500000000115,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109988103,
-      "endTime": 1788109988549.612,
+      "startTime": 1788120569381,
+      "endTime": 1788120570026.7114,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-integration.test.ts"
@@ -1488,7 +1565,7 @@
           "fullName": "LiteratureService constructs biorxiv requests and retains publication records",
           "status": "passed",
           "title": "constructs biorxiv requests and retains publication records",
-          "duration": 5.623100000000022,
+          "duration": 12.564999999999998,
           "failureMessages": [],
           "meta": {}
         },
@@ -1499,7 +1576,7 @@
           "fullName": "LiteratureService normalizes Entrez search IDs and refuses unapproved live calls",
           "status": "passed",
           "title": "normalizes Entrez search IDs and refuses unapproved live calls",
-          "duration": 1.1875,
+          "duration": 2.340000000000032,
           "failureMessages": [],
           "meta": {}
         },
@@ -1510,7 +1587,7 @@
           "fullName": "LiteratureService retrieves compact, versioned PMC Article Dataset metadata",
           "status": "passed",
           "title": "retrieves compact, versioned PMC Article Dataset metadata",
-          "duration": 1.9495999999999754,
+          "duration": 3.780400000000043,
           "failureMessages": [],
           "meta": {}
         },
@@ -1521,7 +1598,7 @@
           "fullName": "LiteratureService resolves DOI identifiers through PMC ESearch before reading cloud metadata",
           "status": "passed",
           "title": "resolves DOI identifiers through PMC ESearch before reading cloud metadata",
-          "duration": 1.1034999999999968,
+          "duration": 2.6003000000000043,
           "failureMessages": [],
           "meta": {}
         },
@@ -1532,7 +1609,7 @@
           "fullName": "LiteratureService strictly requires params.id for PMC and keeps caller cancellation distinct",
           "status": "passed",
           "title": "strictly requires params.id for PMC and keeps caller cancellation distinct",
-          "duration": 0.767599999999959,
+          "duration": 1.384399999999971,
           "failureMessages": [],
           "meta": {}
         },
@@ -1543,7 +1620,7 @@
           "fullName": "LiteratureService parses TSV with record_path, applies max_depth, and only writes a new raw package file",
           "status": "passed",
           "title": "parses TSV with record_path, applies max_depth, and only writes a new raw package file",
-          "duration": 14.300299999999993,
+          "duration": 56.94820000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -1554,7 +1631,29 @@
           "fullName": "LiteratureService returns a precise timeout error without treating it as user cancellation",
           "status": "passed",
           "title": "returns a precise timeout error without treating it as user cancellation",
-          "duration": 1011.5309,
+          "duration": 1014.5106000000001,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "LiteratureService"
+          ],
+          "fullName": "LiteratureService caches only successful anonymous public GET responses for a short bounded interval",
+          "status": "passed",
+          "title": "caches only successful anonymous public GET responses for a short bounded interval",
+          "duration": 5.163400000000138,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "LiteratureService"
+          ],
+          "fullName": "LiteratureService does not cache failed, credentialed, or response-protected literature requests",
+          "status": "passed",
+          "title": "does not cache failed, credentialed, or response-protected literature requests",
+          "duration": 2.6796999999999116,
           "failureMessages": [],
           "meta": {}
         },
@@ -1565,7 +1664,7 @@
           "fullName": "DatabaseService registers all 44 public database skills",
           "status": "passed",
           "title": "registers all 44 public database skills",
-          "duration": 0.4536000000000513,
+          "duration": 0.9855999999999767,
           "failureMessages": [],
           "meta": {}
         },
@@ -1576,7 +1675,7 @@
           "fullName": "DatabaseService routes a provider request with fixture data and pagination",
           "status": "passed",
           "title": "routes a provider request with fixture data and pagination",
-          "duration": 1.5217999999999847,
+          "duration": 2.530100000000175,
           "failureMessages": [],
           "meta": {}
         },
@@ -1587,7 +1686,7 @@
           "fullName": "DatabaseService reports provider and HTTP errors precisely",
           "status": "passed",
           "title": "reports provider and HTTP errors precisely",
-          "duration": 0.49840000000017426,
+          "duration": 1.0229999999999109,
           "failureMessages": [],
           "meta": {}
         },
@@ -1598,7 +1697,7 @@
           "fullName": "DatabaseService uses a GraphQL body only for providers that declare it",
           "status": "passed",
           "title": "uses a GraphQL body only for providers that declare it",
-          "duration": 0.4237000000000535,
+          "duration": 0.7925999999999931,
           "failureMessages": [],
           "meta": {}
         },
@@ -1609,7 +1708,7 @@
           "fullName": "DatabaseService honors form bodies, strips unsafe headers, and parses compact FASTA or TSV records",
           "status": "passed",
           "title": "honors form bodies, strips unsafe headers, and parses compact FASTA or TSV records",
-          "duration": 0.47939999999994143,
+          "duration": 0.9332999999999174,
           "failureMessages": [],
           "meta": {}
         },
@@ -1620,7 +1719,7 @@
           "fullName": "DatabaseService preserves declared text responses and compacts nested JSON by max_depth",
           "status": "passed",
           "title": "preserves declared text responses and compacts nested JSON by max_depth",
-          "duration": 0.4852000000000771,
+          "duration": 1.1059999999999945,
           "failureMessages": [],
           "meta": {}
         },
@@ -1631,7 +1730,7 @@
           "fullName": "DatabaseService strictly validates BioBank Japan and gnomAD request prerequisites",
           "status": "passed",
           "title": "strictly validates BioBank Japan and gnomAD request prerequisites",
-          "duration": 0.4175000000000182,
+          "duration": 1.0433000000000447,
           "failureMessages": [],
           "meta": {}
         },
@@ -1642,13 +1741,24 @@
           "fullName": "DatabaseService reads a gnomAD query only from the package and writes raw response without overwrite",
           "status": "passed",
           "title": "reads a gnomAD query only from the package and writes raw response without overwrite",
-          "duration": 16.15650000000005,
+          "duration": 39.06670000000008,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "DatabaseService"
+          ],
+          "fullName": "DatabaseService caches identical anonymous database GETs but not protected responses",
+          "status": "passed",
+          "title": "caches identical anonymous database GETs but not protected responses",
+          "duration": 2.7740000000001146,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109980809,
-      "endTime": 1788109981867.1565,
+      "startTime": 1788120567509,
+      "endTime": 1788120568661.774,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-literature-databases.test.ts"
@@ -1662,7 +1772,7 @@
           "fullName": "independent science viewer module registration keeps Sequence, Structure, and Slide host registrations disjoint",
           "status": "passed",
           "title": "keeps Sequence, Structure, and Slide host registrations disjoint",
-          "duration": 117.79640000000006,
+          "duration": 209.58859999999981,
           "failureMessages": [],
           "meta": {}
         },
@@ -1673,13 +1783,13 @@
           "fullName": "independent science viewer module registration maps every host viewer tool to its matching client module",
           "status": "passed",
           "title": "maps every host viewer tool to its matching client module",
-          "duration": 95.23670000000004,
+          "duration": 174.17899999999986,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109990240,
-      "endTime": 1788109990453.2368,
+      "startTime": 1788120572270,
+      "endTime": 1788120572655.179,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-module-registration.test.ts"
@@ -1690,10 +1800,43 @@
           "ancestorTitles": [
             "science tool output schemas"
           ],
+          "fullName": "science tool output schemas keeps normalized identity and lifecycle fields authoritative",
+          "status": "passed",
+          "title": "keeps normalized identity and lifecycle fields authoritative",
+          "duration": 3.334699999999998,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "science tool output schemas"
+          ],
+          "fullName": "science tool output schemas validates module-disabled, missing-run, and consumed-plan NGS results",
+          "status": "passed",
+          "title": "validates module-disabled, missing-run, and consumed-plan NGS results",
+          "duration": 263.92999999999995,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "science tool output schemas"
+          ],
+          "fullName": "science tool output schemas describes sequence search hits and slide diagnostic notes exactly",
+          "status": "passed",
+          "title": "describes sequence search hits and slide diagnostic notes exactly",
+          "duration": 281.75880000000006,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "science tool output schemas"
+          ],
           "fullName": "science tool output schemas declares a strict normalized result contract for all 121 fixed operations",
           "status": "passed",
           "title": "declares a strict normalized result contract for all 121 fixed operations",
-          "duration": 130.06709999999998,
+          "duration": 186.92899999999986,
           "failureMessages": [],
           "meta": {}
         },
@@ -1704,7 +1847,7 @@
           "fullName": "science tool output schemas declares the same strict contract for all six gateway tools",
           "status": "passed",
           "title": "declares the same strict contract for all six gateway tools",
-          "duration": 4.817000000000007,
+          "duration": 16.339300000000094,
           "failureMessages": [],
           "meta": {}
         },
@@ -1715,7 +1858,7 @@
           "fullName": "science tool output schemas rejects missing identity, unknown top-level fields, and malformed diagnostics",
           "status": "passed",
           "title": "rejects missing identity, unknown top-level fields, and malformed diagnostics",
-          "duration": 94.60239999999999,
+          "duration": 167.4148,
           "failureMessages": [],
           "meta": {}
         },
@@ -1726,7 +1869,7 @@
           "fullName": "science tool output schemas keeps structure contracts operation-specific and type-safe",
           "status": "passed",
           "title": "keeps structure contracts operation-specific and type-safe",
-          "duration": 86.00839999999994,
+          "duration": 136.2364,
           "failureMessages": [],
           "meta": {}
         },
@@ -1737,7 +1880,7 @@
           "fullName": "science tool output schemas accepts nullable viewer payloads only where the fixed contract permits them",
           "status": "passed",
           "title": "accepts nullable viewer payloads only where the fixed contract permits them",
-          "duration": 103.51470000000006,
+          "duration": 128.46170000000006,
           "failureMessages": [],
           "meta": {}
         },
@@ -1748,7 +1891,7 @@
           "fullName": "science tool output schemas accepts the actual diagnostic-shaped result from every fixed operation",
           "status": "passed",
           "title": "accepts the actual diagnostic-shaped result from every fixed operation",
-          "duration": 141.55730000000005,
+          "duration": 205.42439999999988,
           "failureMessages": [],
           "meta": {}
         },
@@ -1759,13 +1902,13 @@
           "fullName": "science tool output schemas accepts representative successful and diagnostic runtime values without affecting presentation",
           "status": "passed",
           "title": "accepts representative successful and diagnostic runtime values without affecting presentation",
-          "duration": 86.1934,
+          "duration": 142.3200999999999,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109987071,
-      "endTime": 1788109987719.1934,
+      "startTime": 1788120565403,
+      "endTime": 1788120566937.32,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-output-schema.test.ts"
@@ -1779,7 +1922,7 @@
           "fullName": "LocalSlideCanvas redraws its backing buffer when the workspace changes size",
           "status": "passed",
           "title": "redraws its backing buffer when the workspace changes size",
-          "duration": 45.9215999999999,
+          "duration": 71.29169999999999,
           "failureMessages": [],
           "meta": {}
         },
@@ -1790,7 +1933,7 @@
           "fullName": "LocalSlideCanvas keeps ROI interaction in base-slide coordinates",
           "status": "passed",
           "title": "keeps ROI interaction in base-slide coordinates",
-          "duration": 8.972300000000132,
+          "duration": 13.126899999999978,
           "failureMessages": [],
           "meta": {}
         },
@@ -1801,13 +1944,13 @@
           "fullName": "LocalSlideCanvas ignores an old Image load after a newer source tile replaces it",
           "status": "passed",
           "title": "ignores an old Image load after a newer source tile replaces it",
-          "duration": 4.441000000000031,
+          "duration": 9.228700000000117,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109992546,
-      "endTime": 1788109992605.441,
+      "startTime": 1788120576176,
+      "endTime": 1788120576269.2288,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-slide-canvas.test.tsx"
@@ -1821,7 +1964,7 @@
           "fullName": "SlideService fixed-contract parity rejects absent, stale, and other-caller session IDs without creating state",
           "status": "passed",
           "title": "rejects absent, stale, and other-caller session IDs without creating state",
-          "duration": 4.580700000000007,
+          "duration": 9.608499999999992,
           "failureMessages": [],
           "meta": {}
         },
@@ -1832,7 +1975,7 @@
           "fullName": "SlideService fixed-contract parity asserts operation-specific results for the 33 previously classification-only operations",
           "status": "passed",
           "title": "asserts operation-specific results for the 33 previously classification-only operations",
-          "duration": 32.25939999999997,
+          "duration": 29.682999999999993,
           "failureMessages": [],
           "meta": {}
         },
@@ -1843,7 +1986,7 @@
           "fullName": "SlideService fixed-contract parity retains ROI, measurements, GeoJSON entities, project state, and precise renderer diagnostics",
           "status": "passed",
           "title": "retains ROI, measurements, GeoJSON entities, project state, and precise renderer diagnostics",
-          "duration": 12.365700000000004,
+          "duration": 26.247900000000016,
           "failureMessages": [],
           "meta": {}
         },
@@ -1854,7 +1997,7 @@
           "fullName": "SlideService fixed-contract parity rejects a mouse-brain layer on CMU-1 and accepts it only with matching retained spatial identity",
           "status": "passed",
           "title": "rejects a mouse-brain layer on CMU-1 and accepts it only with matching retained spatial identity",
-          "duration": 3.0138000000000034,
+          "duration": 3.183200000000056,
           "failureMessages": [],
           "meta": {}
         },
@@ -1865,7 +2008,7 @@
           "fullName": "SlideService fixed-contract parity keeps TIFF metadata-only when its strip pixels are unavailable to the local renderer",
           "status": "passed",
           "title": "keeps TIFF metadata-only when its strip pixels are unavailable to the local renderer",
-          "duration": 5.34250000000003,
+          "duration": 10.472599999999943,
           "failureMessages": [],
           "meta": {}
         },
@@ -1876,13 +2019,13 @@
           "fullName": "SlideService fixed-contract parity preserves failed workflow identity and terminal cancellation semantics",
           "status": "passed",
           "title": "preserves failed workflow identity and terminal cancellation semantics",
-          "duration": 1.0492999999999597,
+          "duration": 1.5025000000000546,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109991219,
-      "endTime": 1788109991278.0493,
+      "startTime": 1788120573827,
+      "endTime": 1788120573907.5024,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-slide-parity.test.ts"
@@ -1896,7 +2039,7 @@
           "fullName": "SlideService local Canvas renderer reads actual local TIFF samples, exports a source PNG, and records ROI history",
           "status": "passed",
           "title": "reads actual local TIFF samples, exports a source PNG, and records ROI history",
-          "duration": 42.008400000000165,
+          "duration": 67.19069999999999,
           "failureMessages": [],
           "meta": {}
         },
@@ -1907,7 +2050,7 @@
           "fullName": "SlideService local Canvas renderer does not invent PNG samples for compressed TIFF sources",
           "status": "passed",
           "title": "does not invent PNG samples for compressed TIFF sources",
-          "duration": 9.369599999999991,
+          "duration": 11.543900000000008,
           "failureMessages": [],
           "meta": {}
         },
@@ -1918,7 +2061,7 @@
           "fullName": "SlideService local Canvas renderer reads a local tiled TIFF across tile seams",
           "status": "passed",
           "title": "reads a local tiled TIFF across tile seams",
-          "duration": 16.144999999999982,
+          "duration": 24.89549999999997,
           "failureMessages": [],
           "meta": {}
         },
@@ -1929,7 +2072,7 @@
           "fullName": "SlideService local Canvas renderer keeps wait_for_render revision-exact and pending without a host frame acknowledgement",
           "status": "passed",
           "title": "keeps wait_for_render revision-exact and pending without a host frame acknowledgement",
-          "duration": 19.645899999999983,
+          "duration": 28.496599999999944,
           "failureMessages": [],
           "meta": {}
         },
@@ -1940,7 +2083,7 @@
           "fullName": "SlideService local Canvas renderer supports BlackIsZero and WhiteIsZero grayscale while rejecting palette and planar RGB",
           "status": "passed",
           "title": "supports BlackIsZero and WhiteIsZero grayscale while rejecting palette and planar RGB",
-          "duration": 32.11360000000013,
+          "duration": 57.39140000000009,
           "failureMessages": [],
           "meta": {}
         },
@@ -1951,7 +2094,7 @@
           "fullName": "SlideService local Canvas renderer opens a real local DICOM Part-10 series and rejects mismatched identities",
           "status": "passed",
           "title": "opens a real local DICOM Part-10 series and rejects mismatched identities",
-          "duration": 9.38169999999991,
+          "duration": 15.170599999999922,
           "failureMessages": [],
           "meta": {}
         },
@@ -1962,7 +2105,7 @@
           "fullName": "SlideService local Canvas renderer decodes a real tiny local OME-Zarr fixture and keeps unsupported layouts explicit",
           "status": "passed",
           "title": "decodes a real tiny local OME-Zarr fixture and keeps unsupported layouts explicit",
-          "duration": 21.966199999999844,
+          "duration": 53.00829999999996,
           "failureMessages": [],
           "meta": {}
         },
@@ -1973,7 +2116,7 @@
           "fullName": "SlideService local Canvas renderer uses an explicit loopback DICOMweb mock without attempting remote transport",
           "status": "passed",
           "title": "uses an explicit loopback DICOMweb mock without attempting remote transport",
-          "duration": 39.13799999999992,
+          "duration": 116.77140000000009,
           "failureMessages": [],
           "meta": {}
         },
@@ -1984,7 +2127,7 @@
           "fullName": "SlideService local Canvas renderer imports and exports actual bounded local DICOM semantic-object identities",
           "status": "passed",
           "title": "imports and exports actual bounded local DICOM semantic-object identities",
-          "duration": 42.05879999999979,
+          "duration": 66.34930000000008,
           "failureMessages": [],
           "meta": {}
         },
@@ -1995,7 +2138,7 @@
           "fullName": "SlideService local Canvas renderer executes one-time DICOMweb loopback upload preparation and submission without remote transport",
           "status": "passed",
           "title": "executes one-time DICOMweb loopback upload preparation and submission without remote transport",
-          "duration": 27.627700000000004,
+          "duration": 35.21309999999994,
           "failureMessages": [],
           "meta": {}
         },
@@ -2006,7 +2149,7 @@
           "fullName": "SlideService local Canvas renderer reuses completed pathology summaries and exposes both retained artifact endpoints",
           "status": "passed",
           "title": "reuses completed pathology summaries and exposes both retained artifact endpoints",
-          "duration": 12.45719999999983,
+          "duration": 26.613900000000058,
           "failureMessages": [],
           "meta": {}
         },
@@ -2017,7 +2160,7 @@
           "fullName": "SlideService local Canvas renderer retains a source-bound local workflow result as a readable artifact and can acknowledge a matching Canvas frame",
           "status": "passed",
           "title": "retains a source-bound local workflow result as a readable artifact and can acknowledge a matching Canvas frame",
-          "duration": 24.28780000000006,
+          "duration": 30.692999999999984,
           "failureMessages": [],
           "meta": {}
         },
@@ -2028,7 +2171,7 @@
           "fullName": "SlideService local Canvas renderer keeps project history and render diagnostics inside the strict Slide ToolRuntime schema",
           "status": "passed",
           "title": "keeps project history and render diagnostics inside the strict Slide ToolRuntime schema",
-          "duration": 147.36979999999994,
+          "duration": 236.0516,
           "failureMessages": [],
           "meta": {}
         },
@@ -2039,7 +2182,7 @@
           "fullName": "SlideService local Canvas renderer keeps local DICOM semantic and loopback-upload receipts inside their operation output schemas",
           "status": "passed",
           "title": "keeps local DICOM semantic and loopback-upload receipts inside their operation output schemas",
-          "duration": 173.35280000000012,
+          "duration": 425.9658999999997,
           "failureMessages": [],
           "meta": {}
         },
@@ -2050,7 +2193,7 @@
           "fullName": "SlideService local Canvas renderer executes every formerly-unverified Slide operation by its registered ToolRuntime name",
           "status": "passed",
           "title": "executes every formerly-unverified Slide operation by its registered ToolRuntime name",
-          "duration": 157.73309999999947,
+          "duration": 287.8112000000001,
           "failureMessages": [],
           "meta": {}
         },
@@ -2061,13 +2204,13 @@
           "fullName": "SlideService local Canvas renderer runs the Slide Viewer Skill ToolRuntime flow: open, state, pixel query, wait, frame acknowledgement, ready",
           "status": "passed",
           "title": "runs the Slide Viewer Skill ToolRuntime flow: open, state, pixel query, wait, frame acknowledgement, ready",
-          "duration": 109.72490000000016,
+          "duration": 239.70829999999978,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109985457,
-      "endTime": 1788109986342.7249,
+      "startTime": 1788120565146,
+      "endTime": 1788120566870.7083,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/science-slide-runtime.test.ts"
@@ -2078,10 +2221,21 @@
           "ancestorTitles": [
             "Sequence operation matrix"
           ],
+          "fullName": "Sequence operation matrix requires explicit destination authorization before creating an export",
+          "status": "passed",
+          "title": "requires explicit destination authorization before creating an export",
+          "duration": 5.927199999999971,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "Sequence operation matrix"
+          ],
           "fullName": "Sequence operation matrix executes every one of the 13 registered operations through one scientific session",
           "status": "passed",
           "title": "executes every one of the 13 registered operations through one scientific session",
-          "duration": 18.545299999999997,
+          "duration": 27.4683,
           "failureMessages": [],
           "meta": {}
         },
@@ -2092,7 +2246,7 @@
           "fullName": "NGS operation matrix executes all 22 registered management, planning, run, and compute-target operations",
           "status": "passed",
           "title": "executes all 22 registered management, planning, run, and compute-target operations",
-          "duration": 212.77210000000002,
+          "duration": 236.43350000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -2103,7 +2257,7 @@
           "fullName": "NGS operation-specific local evidence covers exactly the 22 NGS operations registered by the fixed contract",
           "status": "passed",
           "title": "covers exactly the 22 NGS operations registered by the fixed contract",
-          "duration": 0.24729999999999563,
+          "duration": 0.5113000000000056,
           "failureMessages": [],
           "meta": {}
         },
@@ -2114,7 +2268,7 @@
           "fullName": "NGS operation-specific local evidence 'list_workflows' 'returns the local workflow inventory'",
           "status": "passed",
           "title": "'list_workflows' 'returns the local workflow inventory'",
-          "duration": 0.1775000000000091,
+          "duration": 0.3307999999999538,
           "failureMessages": [],
           "meta": {}
         },
@@ -2125,7 +2279,7 @@
           "fullName": "NGS operation-specific local evidence 'save_workflow' 'creates a local versioned workflow'",
           "status": "passed",
           "title": "'save_workflow' 'creates a local versioned workflow'",
-          "duration": 0.07600000000002183,
+          "duration": 0.16179999999997108,
           "failureMessages": [],
           "meta": {}
         },
@@ -2136,7 +2290,7 @@
           "fullName": "NGS operation-specific local evidence 'update_workflow' 'creates a new workflow version'",
           "status": "passed",
           "title": "'update_workflow' 'creates a new workflow version'",
-          "duration": 0.09920000000010987,
+          "duration": 0.15629999999998745,
           "failureMessages": [],
           "meta": {}
         },
@@ -2147,7 +2301,7 @@
           "fullName": "NGS operation-specific local evidence 'list_workflow_versions' 'lists both local workflow versions'",
           "status": "passed",
           "title": "'list_workflow_versions' 'lists both local workflow versions'",
-          "duration": 0.16499999999996362,
+          "duration": 0.38409999999998945,
           "failureMessages": [],
           "meta": {}
         },
@@ -2158,7 +2312,7 @@
           "fullName": "NGS operation-specific local evidence 'activate_workflow_version' 'activates the requested workflow vers…'",
           "status": "passed",
           "title": "'activate_workflow_version' 'activates the requested workflow vers…'",
-          "duration": 0.08749999999997726,
+          "duration": 0.27719999999999345,
           "failureMessages": [],
           "meta": {}
         },
@@ -2169,7 +2323,7 @@
           "fullName": "NGS operation-specific local evidence 'archive_workflow' 'archives the selected workflow'",
           "status": "passed",
           "title": "'archive_workflow' 'archives the selected workflow'",
-          "duration": 0.06809999999995853,
+          "duration": 0.18729999999993652,
           "failureMessages": [],
           "meta": {}
         },
@@ -2180,7 +2334,7 @@
           "fullName": "NGS operation-specific local evidence 'restore_workflow' 'restores the archived workflow'",
           "status": "passed",
           "title": "'restore_workflow' 'restores the archived workflow'",
-          "duration": 0.07920000000001437,
+          "duration": 0.11660000000006221,
           "failureMessages": [],
           "meta": {}
         },
@@ -2191,7 +2345,7 @@
           "fullName": "NGS operation-specific local evidence 'get_runtime_environment' 'reports the local runtime environment'",
           "status": "passed",
           "title": "'get_runtime_environment' 'reports the local runtime environment'",
-          "duration": 0.056199999999989814,
+          "duration": 0.08399999999994634,
           "failureMessages": [],
           "meta": {}
         },
@@ -2202,7 +2356,7 @@
           "fullName": "NGS operation-specific local evidence 'check_nextflow_readiness' 'reports ready or compute-unavailable …'",
           "status": "passed",
           "title": "'check_nextflow_readiness' 'reports ready or compute-unavailable …'",
-          "duration": 0.45260000000007494,
+          "duration": 0.15560000000004948,
           "failureMessages": [],
           "meta": {}
         },
@@ -2213,7 +2367,7 @@
           "fullName": "NGS operation-specific local evidence 'check_snakemake_readiness' 'reports ready or compute-unavailable …'",
           "status": "passed",
           "title": "'check_snakemake_readiness' 'reports ready or compute-unavailable …'",
-          "duration": 0.08820000000002892,
+          "duration": 0.1230999999999085,
           "failureMessages": [],
           "meta": {}
         },
@@ -2224,7 +2378,7 @@
           "fullName": "NGS operation-specific local evidence 'plan_nextflow' 'returns a checksum-bound Nextflow plan'",
           "status": "passed",
           "title": "'plan_nextflow' 'returns a checksum-bound Nextflow plan'",
-          "duration": 0.2497000000000753,
+          "duration": 0.34169999999994616,
           "failureMessages": [],
           "meta": {}
         },
@@ -2235,7 +2389,7 @@
           "fullName": "NGS operation-specific local evidence 'plan_snakemake' 'returns a checksum-bound Snakemake pl…'",
           "status": "passed",
           "title": "'plan_snakemake' 'returns a checksum-bound Snakemake pl…'",
-          "duration": 0.08900000000005548,
+          "duration": 0.15570000000002437,
           "failureMessages": [],
           "meta": {}
         },
@@ -2246,7 +2400,7 @@
           "fullName": "NGS operation-specific local evidence 'execute_plan' 'creates a durable local run record'",
           "status": "passed",
           "title": "'execute_plan' 'creates a durable local run record'",
-          "duration": 0.04939999999999145,
+          "duration": 0.12270000000000891,
           "failureMessages": [],
           "meta": {}
         },
@@ -2257,7 +2411,7 @@
           "fullName": "NGS operation-specific local evidence 'list_ngs_runs' 'lists the durable run record'",
           "status": "passed",
           "title": "'list_ngs_runs' 'lists the durable run record'",
-          "duration": 0.051799999999957436,
+          "duration": 0.11040000000002692,
           "failureMessages": [],
           "meta": {}
         },
@@ -2268,7 +2422,7 @@
           "fullName": "NGS operation-specific local evidence 'list_ngs_run_lineages' 'lists local workflow lineage'",
           "status": "passed",
           "title": "'list_ngs_run_lineages' 'lists local workflow lineage'",
-          "duration": 0.04349999999999454,
+          "duration": 0.0968000000000302,
           "failureMessages": [],
           "meta": {}
         },
@@ -2279,7 +2433,7 @@
           "fullName": "NGS operation-specific local evidence 'get_ngs_run' 'retrieves the exact durable run ident…'",
           "status": "passed",
           "title": "'get_ngs_run' 'retrieves the exact durable run ident…'",
-          "duration": 0.044399999999996,
+          "duration": 0.07570000000009713,
           "failureMessages": [],
           "meta": {}
         },
@@ -2290,7 +2444,7 @@
           "fullName": "NGS operation-specific local evidence 'observe_ngs_run' 'returns an observation for the durabl…'",
           "status": "passed",
           "title": "'observe_ngs_run' 'returns an observation for the durabl…'",
-          "duration": 0.03890000000001237,
+          "duration": 0.07569999999998345,
           "failureMessages": [],
           "meta": {}
         },
@@ -2301,7 +2455,7 @@
           "fullName": "NGS operation-specific local evidence 'update_ngs_run_analysis_summary' 'links the local analysis summary'",
           "status": "passed",
           "title": "'update_ngs_run_analysis_summary' 'links the local analysis summary'",
-          "duration": 0.0442000000000462,
+          "duration": 0.06639999999993051,
           "failureMessages": [],
           "meta": {}
         },
@@ -2312,7 +2466,7 @@
           "fullName": "NGS operation-specific local evidence 'cancel_ngs_run' 'records terminal cancellation'",
           "status": "passed",
           "title": "'cancel_ngs_run' 'records terminal cancellation'",
-          "duration": 0.34179999999992106,
+          "duration": 0.07310000000006767,
           "failureMessages": [],
           "meta": {}
         },
@@ -2323,7 +2477,7 @@
           "fullName": "NGS operation-specific local evidence 'list_compute_targets' 'lists configured compute targets'",
           "status": "passed",
           "title": "'list_compute_targets' 'lists configured compute targets'",
-          "duration": 0.08270000000004529,
+          "duration": 0.080600000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -2334,7 +2488,7 @@
           "fullName": "NGS operation-specific local evidence 'configure_ssh_target' 'stores an SSH target without connecti…'",
           "status": "passed",
           "title": "'configure_ssh_target' 'stores an SSH target without connecti…'",
-          "duration": 0.04759999999998854,
+          "duration": 0.24860000000001037,
           "failureMessages": [],
           "meta": {}
         },
@@ -2345,13 +2499,13 @@
           "fullName": "NGS operation-specific local evidence 'inspect_compute_target' 'returns the exact offline authorizati…'",
           "status": "passed",
           "title": "'inspect_compute_target' 'returns the exact offline authorizati…'",
-          "duration": 0.04210000000000491,
+          "duration": 0.18290000000001783,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109988937,
-      "endTime": 1788109989313.3418,
+      "startTime": 1788120570632,
+      "endTime": 1788120571104.2485,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/sequence-ngs-operation-matrix.test.ts"
@@ -2365,7 +2519,7 @@
           "fullName": "representative Skill registry and DSH tool-call traces reads one Skill per service from the active DSH registry",
           "status": "passed",
           "title": "reads one Skill per service from the active DSH registry",
-          "duration": 300.98299999999995,
+          "duration": 338.1871,
           "failureMessages": [],
           "meta": {}
         },
@@ -2376,13 +2530,13 @@
           "fullName": "representative Skill registry and DSH tool-call traces records deterministic no-network calls and live sequence viewer state",
           "status": "passed",
           "title": "records deterministic no-network calls and live sequence viewer state",
-          "duration": 203.69950000000006,
+          "duration": 286.23160000000007,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109989156,
-      "endTime": 1788109989660.6995,
+      "startTime": 1788120569696,
+      "endTime": 1788120570320.2317,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/skills-registry-trace.test.ts"
@@ -2396,7 +2550,7 @@
           "fullName": "project-authored Codex science Skills loads all 55 bundled Skill documents without a reference-plugin dependency",
           "status": "passed",
           "title": "loads all 55 bundled Skill documents without a reference-plugin dependency",
-          "duration": 38.49109999999996,
+          "duration": 68.11090000000002,
           "failureMessages": [],
           "meta": {}
         },
@@ -2407,13 +2561,13 @@
           "fullName": "project-authored Codex science Skills gives all 55 Skills project-authored instructions plus an executable DSH mapping",
           "status": "passed",
           "title": "gives all 55 Skills project-authored instructions plus an executable DSH mapping",
-          "duration": 21.552300000000002,
+          "duration": 45.905399999999986,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109990945,
-      "endTime": 1788109991005.5522,
+      "startTime": 1788120573543,
+      "endTime": 1788120573656.9055,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/skills-source.test.ts"
@@ -2427,7 +2581,7 @@
           "fullName": "55-Skill executable workflow evidence uses concrete runtime-accepted defaults for all literature Skills",
           "status": "passed",
           "title": "uses concrete runtime-accepted defaults for all literature Skills",
-          "duration": 1.5983000000001084,
+          "duration": 3.5575000000001182,
           "failureMessages": [],
           "meta": {}
         },
@@ -2438,7 +2592,7 @@
           "fullName": "55-Skill executable workflow evidence documents only route names that actually match each provider default path",
           "status": "passed",
           "title": "documents only route names that actually match each provider default path",
-          "duration": 0.2505999999999631,
+          "duration": 0.723700000000008,
           "failureMessages": [],
           "meta": {}
         },
@@ -2449,7 +2603,7 @@
           "fullName": "55-Skill executable workflow evidence declares exactly the same 55 IDs as the production Skill specifications",
           "status": "passed",
           "title": "declares exactly the same 55 IDs as the production Skill specifications",
-          "duration": 1.318399999999997,
+          "duration": 3.5623999999997977,
           "failureMessages": [],
           "meta": {}
         },
@@ -2460,7 +2614,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-literature-biorxiv' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-literature-biorxiv' is registered from its source document with a resolvable tool and fixture",
-          "duration": 2.332499999999982,
+          "duration": 4.817400000000134,
           "failureMessages": [],
           "meta": {}
         },
@@ -2471,7 +2625,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-literature-ncbi-entrez' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-literature-ncbi-entrez' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.115000000000009,
+          "duration": 1.8765000000000782,
           "failureMessages": [],
           "meta": {}
         },
@@ -2482,7 +2636,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-literature-ncbi-pmc' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-literature-ncbi-pmc' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.0384000000000242,
+          "duration": 1.7330999999999221,
           "failureMessages": [],
           "meta": {}
         },
@@ -2493,7 +2647,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-alphafold' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-alphafold' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.1352000000000544,
+          "duration": 1.7467000000001462,
           "failureMessages": [],
           "meta": {}
         },
@@ -2504,7 +2658,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-bgee' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-bgee' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.0746000000000322,
+          "duration": 1.5600000000001728,
           "failureMessages": [],
           "meta": {}
         },
@@ -2515,7 +2669,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-bindingdb' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-bindingdb' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8824999999999363,
+          "duration": 6.110699999999952,
           "failureMessages": [],
           "meta": {}
         },
@@ -2526,7 +2680,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-biobankjapan-phewas' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-biobankjapan-phewas' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.066699999999969,
+          "duration": 3.101799999999912,
           "failureMessages": [],
           "meta": {}
         },
@@ -2537,7 +2691,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-biostudies-arrayex…' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-biostudies-arrayex…' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.0481999999999516,
+          "duration": 3.2738999999999123,
           "failureMessages": [],
           "meta": {}
         },
@@ -2548,7 +2702,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-cbioportal' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-cbioportal' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9782999999999902,
+          "duration": 2.189300000000003,
           "failureMessages": [],
           "meta": {}
         },
@@ -2559,7 +2713,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-cellxgene' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-cellxgene' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.887299999999982,
+          "duration": 1.619799999999941,
           "failureMessages": [],
           "meta": {}
         },
@@ -2570,7 +2724,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-chebi' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-chebi' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8177000000000589,
+          "duration": 1.6709999999998217,
           "failureMessages": [],
           "meta": {}
         },
@@ -2581,7 +2735,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-chembl' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-chembl' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6756000000000313,
+          "duration": 1.473799999999983,
           "failureMessages": [],
           "meta": {}
         },
@@ -2592,7 +2746,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-civic' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-civic' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8390999999999167,
+          "duration": 1.5399999999999636,
           "failureMessages": [],
           "meta": {}
         },
@@ -2603,7 +2757,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-clinicaltrials' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-clinicaltrials' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7396999999999707,
+          "duration": 1.4765999999999622,
           "failureMessages": [],
           "meta": {}
         },
@@ -2614,7 +2768,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-clinvar-variation' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-clinvar-variation' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6899000000000797,
+          "duration": 1.4320999999999913,
           "failureMessages": [],
           "meta": {}
         },
@@ -2625,7 +2779,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-efo-ontology' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-efo-ontology' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6983000000000175,
+          "duration": 1.5636999999999261,
           "failureMessages": [],
           "meta": {}
         },
@@ -2636,7 +2790,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-encode' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-encode' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9262999999999693,
+          "duration": 2.0072999999999865,
           "failureMessages": [],
           "meta": {}
         },
@@ -2647,7 +2801,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-ensembl' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-ensembl' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.187599999999975,
+          "duration": 1.817299999999932,
           "failureMessages": [],
           "meta": {}
         },
@@ -2658,7 +2812,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-epigraphdb' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-epigraphdb' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9978000000000975,
+          "duration": 1.907799999999952,
           "failureMessages": [],
           "meta": {}
         },
@@ -2669,7 +2823,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-eqtl-catalogue' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-eqtl-catalogue' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7304000000000315,
+          "duration": 1.4928999999999633,
           "failureMessages": [],
           "meta": {}
         },
@@ -2680,7 +2834,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-eva' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-eva' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9104999999999563,
+          "duration": 1.6207999999999174,
           "failureMessages": [],
           "meta": {}
         },
@@ -2691,7 +2845,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-finngen-phewas' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-finngen-phewas' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.1651000000000522,
+          "duration": 1.7894999999998618,
           "failureMessages": [],
           "meta": {}
         },
@@ -2702,7 +2856,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-genebass-gene-burd…' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-genebass-gene-burd…' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.1558999999999742,
+          "duration": 1.8036999999999352,
           "failureMessages": [],
           "meta": {}
         },
@@ -2713,7 +2867,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-gnomad-graphql' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-gnomad-graphql' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.7370999999999412,
+          "duration": 2.0208999999999833,
           "failureMessages": [],
           "meta": {}
         },
@@ -2724,7 +2878,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-gtex-eqtl' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-gtex-eqtl' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9240999999999531,
+          "duration": 2.8495000000000346,
           "failureMessages": [],
           "meta": {}
         },
@@ -2735,7 +2889,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-gwas-catalog' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-gwas-catalog' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9785999999999149,
+          "duration": 2.025000000000091,
           "failureMessages": [],
           "meta": {}
         },
@@ -2746,7 +2900,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-human-protein-atlas' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-human-protein-atlas' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.683400000000006,
+          "duration": 2.14429999999993,
           "failureMessages": [],
           "meta": {}
         },
@@ -2757,7 +2911,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-ipd' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-ipd' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6308999999999969,
+          "duration": 1.7740999999998621,
           "failureMessages": [],
           "meta": {}
         },
@@ -2768,7 +2922,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-metabolights' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-metabolights' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8673999999999751,
+          "duration": 1.768400000000156,
           "failureMessages": [],
           "meta": {}
         },
@@ -2779,7 +2933,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-mgnify' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-mgnify' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7065000000000055,
+          "duration": 1.5914000000000215,
           "failureMessages": [],
           "meta": {}
         },
@@ -2790,7 +2944,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-ncbi-clinicaltables' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-ncbi-clinicaltables' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7432000000000016,
+          "duration": 1.808999999999969,
           "failureMessages": [],
           "meta": {}
         },
@@ -2801,7 +2955,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-ncbi-datasets' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-ncbi-datasets' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8306999999999789,
+          "duration": 1.7419999999999618,
           "failureMessages": [],
           "meta": {}
         },
@@ -2812,7 +2966,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-ncbi-entrez' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-ncbi-entrez' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8659999999999854,
+          "duration": 1.505200000000059,
           "failureMessages": [],
           "meta": {}
         },
@@ -2823,7 +2977,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-opentargets' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-opentargets' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9844000000000506,
+          "duration": 1.6993999999999687,
           "failureMessages": [],
           "meta": {}
         },
@@ -2834,7 +2988,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-pharmgkb' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-pharmgkb' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9653999999999314,
+          "duration": 2.6405999999999494,
           "failureMessages": [],
           "meta": {}
         },
@@ -2845,7 +2999,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-pride' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-pride' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7817999999999756,
+          "duration": 2.2224999999998545,
           "failureMessages": [],
           "meta": {}
         },
@@ -2856,7 +3010,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-proteomexchange' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-proteomexchange' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6533000000000584,
+          "duration": 1.9761000000000877,
           "failureMessages": [],
           "meta": {}
         },
@@ -2867,7 +3021,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-pubchem-pug' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-pubchem-pug' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7243000000000848,
+          "duration": 1.8563000000001466,
           "failureMessages": [],
           "meta": {}
         },
@@ -2878,7 +3032,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-quickgo' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-quickgo' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.1433999999999287,
+          "duration": 1.7159999999998945,
           "failureMessages": [],
           "meta": {}
         },
@@ -2889,7 +3043,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-rcsb-pdb' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-rcsb-pdb' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8305000000000291,
+          "duration": 1.9576999999999316,
           "failureMessages": [],
           "meta": {}
         },
@@ -2900,7 +3054,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-reactome' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-reactome' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9753000000000611,
+          "duration": 1.6897999999998774,
           "failureMessages": [],
           "meta": {}
         },
@@ -2911,7 +3065,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-rhea' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-rhea' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7293000000000802,
+          "duration": 1.4441999999999098,
           "failureMessages": [],
           "meta": {}
         },
@@ -2922,7 +3076,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-rnacentral' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-rnacentral' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7484999999999218,
+          "duration": 1.9582000000000335,
           "failureMessages": [],
           "meta": {}
         },
@@ -2933,7 +3087,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-string' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-string' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.0217999999999847,
+          "duration": 1.9360999999998967,
           "failureMessages": [],
           "meta": {}
         },
@@ -2944,7 +3098,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-tpmi-phewas' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-tpmi-phewas' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.0609000000000606,
+          "duration": 2.2621999999998934,
           "failureMessages": [],
           "meta": {}
         },
@@ -2955,7 +3109,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-ukb-topmed-phewas' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-ukb-topmed-phewas' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.939899999999966,
+          "duration": 2.171100000000024,
           "failureMessages": [],
           "meta": {}
         },
@@ -2966,7 +3120,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-databases-uniprot' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-databases-uniprot' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.7626999999999953,
+          "duration": 2.35349999999994,
           "failureMessages": [],
           "meta": {}
         },
@@ -2977,7 +3131,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-sequence-biological-sequence…' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-sequence-biological-sequence…' is registered from its source document with a resolvable tool and fixture",
-          "duration": 1.018100000000004,
+          "duration": 2.4103000000000065,
           "failureMessages": [],
           "meta": {}
         },
@@ -2988,7 +3142,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-ngs-design-ngs-analysis' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-ngs-design-ngs-analysis' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6022000000000389,
+          "duration": 1.2063000000000557,
           "failureMessages": [],
           "meta": {}
         },
@@ -2999,7 +3153,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-ngs-ngs-analysis-workbench' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-ngs-ngs-analysis-workbench' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.4903000000000475,
+          "duration": 1.1580999999998767,
           "failureMessages": [],
           "meta": {}
         },
@@ -3010,7 +3164,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-ngs-run-ngs-analysis' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-ngs-run-ngs-analysis' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8461999999999534,
+          "duration": 1.8681000000001404,
           "failureMessages": [],
           "meta": {}
         },
@@ -3021,7 +3175,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-ngs-understand-ngs-data' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-ngs-understand-ngs-data' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.6622999999999593,
+          "duration": 1.1403999999999996,
           "failureMessages": [],
           "meta": {}
         },
@@ -3032,7 +3186,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-ngs-understand-ngs-results' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-ngs-understand-ngs-results' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.8388999999999669,
+          "duration": 1.4284000000000106,
           "failureMessages": [],
           "meta": {}
         },
@@ -3043,7 +3197,7 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-structure-structure-viewer' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-structure-structure-viewer' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9492000000000189,
+          "duration": 1.2258999999999105,
           "failureMessages": [],
           "meta": {}
         },
@@ -3054,13 +3208,13 @@
           "fullName": "55-Skill executable workflow evidence 'rosalind-slide-slide-viewer' is registered from its source document with a resolvable tool and fixture",
           "status": "passed",
           "title": "'rosalind-slide-slide-viewer' is registered from its source document with a resolvable tool and fixture",
-          "duration": 0.9311999999999898,
+          "duration": 1.2331000000001495,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109989643,
-      "endTime": 1788109989697.9312,
+      "startTime": 1788120571989,
+      "endTime": 1788120572108.2332,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/skills-workflow-matrix.test.ts"
@@ -3074,7 +3228,7 @@
           "fullName": "independent Life Sciences source modules declares the exact provider, Skill, tool, and Showcase contracts",
           "status": "passed",
           "title": "declares the exact provider, Skill, tool, and Showcase contracts",
-          "duration": 3.019999999999982,
+          "duration": 4.984400000000051,
           "failureMessages": [],
           "meta": {}
         },
@@ -3085,7 +3239,7 @@
           "fullName": "independent Life Sciences source modules mounts and disposes Literature without changing Database registrations",
           "status": "passed",
           "title": "mounts and disposes Literature without changing Database registrations",
-          "duration": 33.346000000000004,
+          "duration": 50.29759999999999,
           "failureMessages": [],
           "meta": {}
         },
@@ -3096,13 +3250,13 @@
           "fullName": "independent Life Sciences source modules keeps validation and public-network failure behavior within each module",
           "status": "passed",
           "title": "keeps validation and public-network failure behavior within each module",
-          "duration": 31.105600000000038,
+          "duration": 66.457,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109990856,
-      "endTime": 1788109990923.1057,
+      "startTime": 1788120573108,
+      "endTime": 1788120573229.457,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/source-modules.test.ts"
@@ -3116,7 +3270,7 @@
           "fullName": "LocalStructureCanvas redraws its backing buffer when the workspace changes size",
           "status": "passed",
           "title": "redraws its backing buffer when the workspace changes size",
-          "duration": 51.02859999999998,
+          "duration": 75.58719999999994,
           "failureMessages": [],
           "meta": {}
         },
@@ -3127,7 +3281,29 @@
           "fullName": "LocalStructureCanvas selects a clicked atom and supports Escape and Home",
           "status": "passed",
           "title": "selects a clicked atom and supports Escape and Home",
-          "duration": 12.105499999999893,
+          "duration": 18.094299999999976,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "LocalStructureCanvas"
+          ],
+          "fullName": "LocalStructureCanvas uses a native non-passive wheel listener and prevents page scrolling",
+          "status": "passed",
+          "title": "uses a native non-passive wheel listener and prevents page scrolling",
+          "duration": 6.060100000000148,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "LocalStructureCanvas"
+          ],
+          "fullName": "LocalStructureCanvas caps very large coordinate arrays without argument-spread failures",
+          "status": "passed",
+          "title": "caps very large coordinate arrays without argument-spread failures",
+          "duration": 39.02850000000012,
           "failureMessages": [],
           "meta": {}
         },
@@ -3138,7 +3314,7 @@
           "fullName": "LocalStructureCanvas does not turn a long drag ending with a tiny move into an atom selection",
           "status": "passed",
           "title": "does not turn a long drag ending with a tiny move into an atom selection",
-          "duration": 4.609399999999823,
+          "duration": 6.607099999999946,
           "failureMessages": [],
           "meta": {}
         },
@@ -3149,13 +3325,13 @@
           "fullName": "LocalStructureCanvas clears pointer interaction on pointercancel without selecting",
           "status": "passed",
           "title": "clears pointer interaction on pointercancel without selecting",
-          "duration": 3.501700000000028,
+          "duration": 4.23680000000013,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109992536,
-      "endTime": 1788109992607.5017,
+      "startTime": 1788120576229,
+      "endTime": 1788120576379.2368,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/structure-canvas.test.tsx"
@@ -3169,7 +3345,7 @@
           "fullName": "StructureService 41-operation implementation matrix covers exactly the registered structure operations without trusting implemented flags",
           "status": "passed",
           "title": "covers exactly the registered structure operations without trusting implemented flags",
-          "duration": 2.10329999999999,
+          "duration": 3.0480999999999767,
           "failureMessages": [],
           "meta": {}
         },
@@ -3180,7 +3356,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.add_structure has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.add_structure has a real local result or its exact diagnostic",
-          "duration": 19.058899999999994,
+          "duration": 32.016099999999824,
           "failureMessages": [],
           "meta": {}
         },
@@ -3191,7 +3367,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.align_structures has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.align_structures has a real local result or its exact diagnostic",
-          "duration": 21.98380000000003,
+          "duration": 37.33399999999983,
           "failureMessages": [],
           "meta": {}
         },
@@ -3202,7 +3378,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.analyze has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.analyze has a real local result or its exact diagnostic",
-          "duration": 9.671600000000012,
+          "duration": 20.789099999999962,
           "failureMessages": [],
           "meta": {}
         },
@@ -3213,7 +3389,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.apply_scene has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.apply_scene has a real local result or its exact diagnostic",
-          "duration": 8.015600000000006,
+          "duration": 17.945999999999913,
           "failureMessages": [],
           "meta": {}
         },
@@ -3224,7 +3400,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.assembly_symmetry has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.assembly_symmetry has a real local result or its exact diagnostic",
-          "duration": 11.713200000000029,
+          "duration": 20.418100000000777,
           "failureMessages": [],
           "meta": {}
         },
@@ -3235,7 +3411,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.browse_related_data has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.browse_related_data has a real local result or its exact diagnostic",
-          "duration": 9.760199999999998,
+          "duration": 15.817600000000311,
           "failureMessages": [],
           "meta": {}
         },
@@ -3246,7 +3422,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.cancel_render has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.cancel_render has a real local result or its exact diagnostic",
-          "duration": 19.100000000000023,
+          "duration": 30.565200000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -3257,7 +3433,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.control_viewer has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.control_viewer has a real local result or its exact diagnostic",
-          "duration": 8.80880000000002,
+          "duration": 23.682600000000093,
           "failureMessages": [],
           "meta": {}
         },
@@ -3268,7 +3444,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.delete_scene has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.delete_scene has a real local result or its exact diagnostic",
-          "duration": 18.978099999999984,
+          "duration": 30.71680000000015,
           "failureMessages": [],
           "meta": {}
         },
@@ -3279,7 +3455,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.derive_object has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.derive_object has a real local result or its exact diagnostic",
-          "duration": 7.835899999999924,
+          "duration": 21.038800000000265,
           "failureMessages": [],
           "meta": {}
         },
@@ -3290,7 +3466,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.discover_density has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.discover_density has a real local result or its exact diagnostic",
-          "duration": 9.490100000000098,
+          "duration": 17.056900000000496,
           "failureMessages": [],
           "meta": {}
         },
@@ -3301,7 +3477,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.export has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.export has a real local result or its exact diagnostic",
-          "duration": 11.675599999999918,
+          "duration": 21.34519999999975,
           "failureMessages": [],
           "meta": {}
         },
@@ -3312,7 +3488,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.get_render_status has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.get_render_status has a real local result or its exact diagnostic",
-          "duration": 14.590900000000033,
+          "duration": 27.325399999999718,
           "failureMessages": [],
           "meta": {}
         },
@@ -3323,7 +3499,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.get_state has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.get_state has a real local result or its exact diagnostic",
-          "duration": 20.89300000000003,
+          "duration": 43.72450000000117,
           "failureMessages": [],
           "meta": {}
         },
@@ -3334,7 +3510,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.list_scenes has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.list_scenes has a real local result or its exact diagnostic",
-          "duration": 6.614599999999996,
+          "duration": 12.324499999998807,
           "failureMessages": [],
           "meta": {}
         },
@@ -3345,7 +3521,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.list_structures has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.list_structures has a real local result or its exact diagnostic",
-          "duration": 7.0412000000000035,
+          "duration": 17.125200000000405,
           "failureMessages": [],
           "meta": {}
         },
@@ -3356,7 +3532,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.load_background has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.load_background has a real local result or its exact diagnostic",
-          "duration": 9.572099999999978,
+          "duration": 22.05160000000069,
           "failureMessages": [],
           "meta": {}
         },
@@ -3367,7 +3543,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.load_data has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.load_data has a real local result or its exact diagnostic",
-          "duration": 10.746700000000033,
+          "duration": 19.731400000000576,
           "failureMessages": [],
           "meta": {}
         },
@@ -3378,7 +3554,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.load_public_density has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.load_public_density has a real local result or its exact diagnostic",
-          "duration": 8.59209999999996,
+          "duration": 20.502199999998993,
           "failureMessages": [],
           "meta": {}
         },
@@ -3389,7 +3565,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.load_scene has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.load_scene has a real local result or its exact diagnostic",
-          "duration": 36.883699999999976,
+          "duration": 77.04600000000028,
           "failureMessages": [],
           "meta": {}
         },
@@ -3400,7 +3576,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.manage_guides has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.manage_guides has a real local result or its exact diagnostic",
-          "duration": 7.684099999999944,
+          "duration": 16.191100000000006,
           "failureMessages": [],
           "meta": {}
         },
@@ -3411,7 +3587,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.measure has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.measure has a real local result or its exact diagnostic",
-          "duration": 9.026899999999955,
+          "duration": 23.063599999999497,
           "failureMessages": [],
           "meta": {}
         },
@@ -3422,7 +3598,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.open_from_chat has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.open_from_chat has a real local result or its exact diagnostic",
-          "duration": 17.613000000000056,
+          "duration": 22.61069999999927,
           "failureMessages": [],
           "meta": {}
         },
@@ -3433,7 +3609,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.pymol_action has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.pymol_action has a real local result or its exact diagnostic",
-          "duration": 10.804599999999937,
+          "duration": 13.759399999999005,
           "failureMessages": [],
           "meta": {}
         },
@@ -3444,7 +3620,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.pymol_actions has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.pymol_actions has a real local result or its exact diagnostic",
-          "duration": 6.169899999999984,
+          "duration": 12.824900000001435,
           "failureMessages": [],
           "meta": {}
         },
@@ -3455,7 +3631,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.quality_assessment has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.quality_assessment has a real local result or its exact diagnostic",
-          "duration": 8.454700000000003,
+          "duration": 21.00199999999859,
           "failureMessages": [],
           "meta": {}
         },
@@ -3466,7 +3642,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.query has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.query has a real local result or its exact diagnostic",
-          "duration": 7.238599999999906,
+          "duration": 12.90020000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -3477,7 +3653,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.redo has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.redo has a real local result or its exact diagnostic",
-          "duration": 31.654499999999985,
+          "duration": 52.178499999999985,
           "failureMessages": [],
           "meta": {}
         },
@@ -3488,7 +3664,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.remove_structure has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.remove_structure has a real local result or its exact diagnostic",
-          "duration": 11.387699999999995,
+          "duration": 23.946500000000015,
           "failureMessages": [],
           "meta": {}
         },
@@ -3499,7 +3675,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.render_image has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.render_image has a real local result or its exact diagnostic",
-          "duration": 14.330500000000029,
+          "duration": 27.85099999999875,
           "failureMessages": [],
           "meta": {}
         },
@@ -3510,7 +3686,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.render_movie has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.render_movie has a real local result or its exact diagnostic",
-          "duration": 118.86879999999996,
+          "duration": 361.51710000000094,
           "failureMessages": [],
           "meta": {}
         },
@@ -3521,7 +3697,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.save_scene has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.save_scene has a real local result or its exact diagnostic",
-          "duration": 6.163499999999999,
+          "duration": 23.487100000000282,
           "failureMessages": [],
           "meta": {}
         },
@@ -3532,7 +3708,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.search_motif has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.search_motif has a real local result or its exact diagnostic",
-          "duration": 8.369500000000016,
+          "duration": 18.71980000000076,
           "failureMessages": [],
           "meta": {}
         },
@@ -3543,7 +3719,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.set_assembly_symmetry has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.set_assembly_symmetry has a real local result or its exact diagnostic",
-          "duration": 6.76400000000001,
+          "duration": 39.01310000000012,
           "failureMessages": [],
           "meta": {}
         },
@@ -3554,7 +3730,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.set_object_visibility has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.set_object_visibility has a real local result or its exact diagnostic",
-          "duration": 13.381399999999985,
+          "duration": 17.046299999999974,
           "failureMessages": [],
           "meta": {}
         },
@@ -3565,7 +3741,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.set_quality_assessment has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.set_quality_assessment has a real local result or its exact diagnostic",
-          "duration": 5.907600000000002,
+          "duration": 11.026100000000952,
           "failureMessages": [],
           "meta": {}
         },
@@ -3576,7 +3752,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.set_selection has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.set_selection has a real local result or its exact diagnostic",
-          "duration": 5.694900000000075,
+          "duration": 17.049399999999878,
           "failureMessages": [],
           "meta": {}
         },
@@ -3587,7 +3763,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.set_trajectory_state has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.set_trajectory_state has a real local result or its exact diagnostic",
-          "duration": 16.749500000000012,
+          "duration": 33.067300000000614,
           "failureMessages": [],
           "meta": {}
         },
@@ -3598,7 +3774,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.transform_object has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.transform_object has a real local result or its exact diagnostic",
-          "duration": 7.510700000000043,
+          "duration": 17.477599999998347,
           "failureMessages": [],
           "meta": {}
         },
@@ -3609,7 +3785,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.undo has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.undo has a real local result or its exact diagnostic",
-          "duration": 23.706800000000044,
+          "duration": 37.61069999999927,
           "failureMessages": [],
           "meta": {}
         },
@@ -3620,7 +3796,7 @@
           "fullName": "StructureService 41-operation implementation matrix structure.validate_render has a real local result or its exact diagnostic",
           "status": "passed",
           "title": "structure.validate_render has a real local result or its exact diagnostic",
-          "duration": 6.763000000000034,
+          "duration": 14.226599999999962,
           "failureMessages": [],
           "meta": {}
         },
@@ -3631,7 +3807,7 @@
           "fullName": "StructureService contract semantics uses expression, level, kind, targets, selections, and anyOf literally",
           "status": "passed",
           "title": "uses expression, level, kind, targets, selections, and anyOf literally",
-          "duration": 19.696699999999964,
+          "duration": 41.206999999998516,
           "failureMessages": [],
           "meta": {}
         },
@@ -3642,7 +3818,7 @@
           "fullName": "StructureService contract semantics reads local PDB biological-assembly metadata only for the matching RCSB fixture",
           "status": "passed",
           "title": "reads local PDB biological-assembly metadata only for the matching RCSB fixture",
-          "duration": 5.016300000000001,
+          "duration": 11.871999999999389,
           "failureMessages": [],
           "meta": {}
         },
@@ -3653,7 +3829,7 @@
           "fullName": "StructureService contract semantics loads a secondary local coordinate fixture through load_data without treating it as density or trajectory data",
           "status": "passed",
           "title": "loads a secondary local coordinate fixture through load_data without treating it as density or trajectory data",
-          "duration": 7.636999999999944,
+          "duration": 15.955900000000838,
           "failureMessages": [],
           "meta": {}
         },
@@ -3664,7 +3840,7 @@
           "fullName": "StructureService contract semantics browses only opaque tokens for files beside the active local source",
           "status": "passed",
           "title": "browses only opaque tokens for files beside the active local source",
-          "duration": 5.721000000000004,
+          "duration": 11.035200000000259,
           "failureMessages": [],
           "meta": {}
         },
@@ -3675,7 +3851,7 @@
           "fullName": "StructureService contract semantics enforces session, revision, atomic, dry-run, and overwrite controls",
           "status": "passed",
           "title": "enforces session, revision, atomic, dry-run, and overwrite controls",
-          "duration": 6.479699999999866,
+          "duration": 14.16939999999886,
           "failureMessages": [],
           "meta": {}
         },
@@ -3686,7 +3862,7 @@
           "fullName": "StructureService contract semantics computes and applies a coordinate-derived CA Kabsch alignment",
           "status": "passed",
           "title": "computes and applies a coordinate-derived CA Kabsch alignment",
-          "duration": 10.925899999999956,
+          "duration": 19.69840000000113,
           "failureMessages": [],
           "meta": {}
         },
@@ -3697,7 +3873,7 @@
           "fullName": "StructureService contract semantics derives a new object without changing its source",
           "status": "passed",
           "title": "derives a new object without changing its source",
-          "duration": 10.404199999999946,
+          "duration": 13.698100000001432,
           "failureMessages": [],
           "meta": {}
         },
@@ -3708,7 +3884,7 @@
           "fullName": "StructureService contract semantics applies affine coordinates and restores them through undo and redo",
           "status": "passed",
           "title": "applies affine coordinates and restores them through undo and redo",
-          "duration": 14.38779999999997,
+          "duration": 22.872699999999895,
           "failureMessages": [],
           "meta": {}
         },
@@ -3719,7 +3895,7 @@
           "fullName": "StructureService contract semantics creates, updates, and removes coordinate-derived guides with revision checks",
           "status": "passed",
           "title": "creates, updates, and removes coordinate-derived guides with revision checks",
-          "duration": 5.7827000000002045,
+          "duration": 10.295500000000175,
           "failureMessages": [],
           "meta": {}
         },
@@ -3730,7 +3906,7 @@
           "fullName": "StructureService contract semantics exposes local direct actions and reports genuine embedded B-factor data without treating it as pLDDT",
           "status": "passed",
           "title": "exposes local direct actions and reports genuine embedded B-factor data without treating it as pLDDT",
-          "duration": 5.944099999999935,
+          "duration": 12.766200000000026,
           "failureMessages": [],
           "meta": {}
         },
@@ -3741,13 +3917,24 @@
           "fullName": "StructureService contract semantics rejects an aborted movie render without leaving generated output behind",
           "status": "passed",
           "title": "rejects an aborted movie render without leaving generated output behind",
-          "duration": 5.3677000000000135,
+          "duration": 10.748799999999392,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": [
+            "StructureService contract semantics"
+          ],
+          "fullName": "StructureService contract semantics cancels ffmpeg after asynchronous movie encoding has started",
+          "status": "passed",
+          "title": "cancels ffmpeg after asynchronous movie encoding has started",
+          "duration": 698.3084000000017,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109986808,
-      "endTime": 1788109987524.3677,
+      "startTime": 1788120561834,
+      "endTime": 1788120564071.3083,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/structure-operation-matrix.test.ts"
@@ -3761,7 +3948,7 @@
           "fullName": "StructureService local raster and scientific analyses renders GFP coordinates to a real PNG and retains a reproducible rendering record",
           "status": "passed",
           "title": "renders GFP coordinates to a real PNG and retains a reproducible rendering record",
-          "duration": 23.404800000000023,
+          "duration": 57.20079999999996,
           "failureMessages": [],
           "meta": {}
         },
@@ -3772,7 +3959,7 @@
           "fullName": "StructureService local raster and scientific analyses rejects unsupported asynchronous image rendering without writing an artifact",
           "status": "passed",
           "title": "rejects unsupported asynchronous image rendering without writing an artifact",
-          "duration": 6.378999999999962,
+          "duration": 7.197900000000004,
           "failureMessages": [],
           "meta": {}
         },
@@ -3783,7 +3970,7 @@
           "fullName": "StructureService local raster and scientific analyses calculates retained MDM2-p53 contacts plus local clashes and hydrogen-bond candidates",
           "status": "passed",
           "title": "calculates retained MDM2-p53 contacts plus local clashes and hydrogen-bond candidates",
-          "duration": 18.7235,
+          "duration": 28.49720000000002,
           "failureMessages": [],
           "meta": {}
         },
@@ -3794,13 +3981,13 @@
           "fullName": "StructureService local raster and scientific analyses exports a selection as parseable PDB and reports unavailable binary geometry precisely",
           "status": "passed",
           "title": "exports a selection as parseable PDB and reports unavailable binary geometry precisely",
-          "duration": 6.478400000000022,
+          "duration": 15.2106,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109990786,
-      "endTime": 1788109990841.4785,
+      "startTime": 1788120573254,
+      "endTime": 1788120573362.2107,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/structure-runtime.test.ts"
@@ -3814,7 +4001,7 @@
           "fullName": "Structure tools through the strict DSH ToolRuntime contract opens, queries, and renders GFP without INVALID_TOOL_OUTPUT",
           "status": "passed",
           "title": "opens, queries, and renders GFP without INVALID_TOOL_OUTPUT",
-          "duration": 191.25390000000004,
+          "duration": 339.3433000000001,
           "failureMessages": [],
           "meta": {}
         },
@@ -3825,13 +4012,13 @@
           "fullName": "Structure tools through the strict DSH ToolRuntime contract executes the eight formerly diagnostic structure operations through ToolRuntime",
           "status": "passed",
           "title": "executes the eight formerly diagnostic structure operations through ToolRuntime",
-          "duration": 425.69169999999997,
+          "duration": 675.3774999999998,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109987989,
-      "endTime": 1788109988605.6917,
+      "startTime": 1788120567428,
+      "endTime": 1788120568443.3774,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/structure-toolruntime.test.ts"
@@ -3845,13 +4032,13 @@
           "fullName": "independent NGS and Rosalind Cordis modules keeps Rosalind history readable while NGS is disabled and restores new NGS calls after re-enabling",
           "status": "passed",
           "title": "keeps Rosalind history readable while NGS is disabled and restores new NGS calls after re-enabling",
-          "duration": 179.2785,
+          "duration": 328.2223,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788109990272,
-      "endTime": 1788109990451.2786,
+      "startTime": 1788120571310,
+      "endTime": 1788120571638.2224,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/workflow-modules.test.ts"

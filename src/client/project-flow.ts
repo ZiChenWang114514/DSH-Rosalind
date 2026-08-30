@@ -1,6 +1,8 @@
-import type { ConversationSnapshot } from "@deepseek-ai/dsh-client-runtime/client";
+import type { ClientContext, ConversationSnapshot, SessionId, WorkspaceId } from "@deepseek-ai/dsh-client-runtime/client";
+import type { IConversation } from "@deepseek-ai/dsh-client-ui-conversation/client";
 
 import { SHOWCASE_CATEGORIES } from "../shared/categories.js";
+import { ensureRosalindSciencePreset, ROSALIND_SCIENCE_AGENT_PRESET } from "./science-mode.js";
 
 export interface ResearchTaskDraft {
   workspaceId: string;
@@ -46,6 +48,100 @@ export interface ResearchProjectHostAdapter {
   applyScienceCapabilities(sessionId: string, moduleIds: readonly string[]): Promise<void>;
   submitResearchPrompt(sessionId: string, prompt: string): Promise<void>;
   showScienceView(sessionId: string): void;
+}
+
+interface AgentPresetConnection {
+  api: {
+    agentPresets: {
+      list(request: Record<string, never>): Promise<{ result: { ok: true; value: { presets: Array<{ id: string }>; authorable: boolean } } | { ok: false; error: { message: string } } }>;
+      copy(request: { from: string; agentPreset: string; name: string }): Promise<{ result: { ok: true; value: { agentPreset: string } } | { ok: false; error: { message: string } } }>;
+      select(request: { sessionId: string; agentPreset: string }): Promise<{
+        result: { ok: true; value: { agentPreset: string } } | { ok: false; error: { message: string } };
+      }>;
+    };
+  };
+}
+
+interface ConversationViewService {
+  selectView(id: string): void;
+}
+
+interface ClientSessionsService {
+  list: {
+    getSnapshot(): {
+      byId: Record<string, { blank: boolean }>;
+    };
+  };
+  scope(sessionId: string): ClientContext | undefined;
+  scopeOf(ctx: ClientContext): string | undefined;
+  open(sessionId: string): void;
+  noteAgentPreset(sessionId: string, agentPreset: string): void;
+}
+
+/**
+ * Join the research-task form to the live DSH services. A selected workspace
+ * always yields a real blank session, and the prompt is submitted through that
+ * session's own input facade.
+ */
+export function createResearchProjectHostAdapter(ctx: ClientContext): ResearchProjectHostAdapter {
+  const connection = ctx.get("connection") as AgentPresetConnection;
+  const sessions = ctx.get("sessions") as unknown as ClientSessionsService;
+
+  function sessionContext(sessionId: string): ClientContext {
+    const scoped = sessions.scope(sessionId);
+    if (!scoped || sessions.scopeOf(scoped) !== sessionId) {
+      throw new Error("The selected DSH session is not ready yet. Please try again.");
+    }
+    return scoped;
+  }
+
+  return {
+    async createOrReuseBlankSession(workspaceId) {
+      const knownSessionIds = new Set(
+        ctx.workspaces.list.getSnapshot().items.find((workspace) => workspace.workspaceId === workspaceId)?.sessionIds ?? [],
+      );
+      const sessionId = await ctx.workspaces.connectWorkspace(workspaceId as WorkspaceId);
+      sessions.open(sessionId);
+      const session = sessions.list.getSnapshot().byId[sessionId];
+      if (!session?.blank) {
+        throw new Error("DSH did not provide a blank research session for the selected workspace.");
+      }
+      sessionContext(sessionId);
+      return { sessionId, reused: knownSessionIds.has(sessionId) };
+    },
+
+    async applyScienceCapabilities(sessionId, moduleIds) {
+      if (moduleIds.length === 0) throw new Error("Choose at least one scientific module.");
+      const session = sessions.list.getSnapshot().byId[sessionId];
+      if (!session?.blank) {
+        throw new Error("Scientific capabilities can only be selected for a blank session.");
+      }
+      await ensureRosalindSciencePreset(connection);
+      const response = await connection.api.agentPresets.select({ sessionId, agentPreset: ROSALIND_SCIENCE_AGENT_PRESET });
+      if (!response.result.ok) throw new Error(response.result.error.message);
+      sessions.noteAgentPreset(sessionId, response.result.value.agentPreset);
+    },
+
+    async submitResearchPrompt(sessionId, prompt) {
+      const scoped = sessionContext(sessionId);
+      const conversation = scoped.get("conversation") as IConversation | undefined;
+      if (!conversation) throw new Error("The selected DSH conversation is not ready yet. Please try again.");
+      conversation.input.for(scoped).setDraft(prompt);
+      conversation.input.for(scoped).submit();
+    },
+
+    showScienceView(sessionId) {
+      const conversation = sessionContext(sessionId).get("conversation") as ConversationViewService | undefined;
+      if (!conversation || typeof conversation.selectView !== "function") {
+        throw new Error("The selected DSH session does not provide the Science view yet.");
+      }
+      conversation.selectView("dsh-rosalind");
+    },
+  };
+}
+
+export function installResearchProjectHostAdapter(ctx: ClientContext): () => void {
+  return setResearchProjectHostAdapter(createResearchProjectHostAdapter(ctx));
 }
 
 let hostAdapter: ResearchProjectHostAdapter | null = null;

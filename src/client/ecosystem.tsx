@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SHOWCASES } from "../generated/catalog.js";
 import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
 
@@ -38,8 +38,29 @@ export interface ScienceEcosystemPanelProps {
 
 function marker(color: string): React.CSSProperties { return { background: color, boxShadow: `0 0 0 4px color-mix(in srgb, ${color} 16%, transparent)` }; }
 
+function useHorizontalTabs(): { containerRef: React.RefObject<HTMLElement>; horizontal: boolean } {
+  const containerRef = useRef<HTMLElement>(null);
+  const [horizontal, setHorizontal] = useState(false);
+  useEffect(() => {
+    const update = (): void => {
+      const width = containerRef.current?.clientWidth ?? window.innerWidth;
+      setHorizontal(width <= 760);
+    };
+    update();
+    window.addEventListener("resize", update);
+    const observer = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(update);
+    if (containerRef.current && observer) observer.observe(containerRef.current);
+    return () => {
+      window.removeEventListener("resize", update);
+      observer?.disconnect();
+    };
+  }, []);
+  return { containerRef, horizontal };
+}
+
 export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }: ScienceEcosystemPanelProps): JSX.Element {
   const [activeId, setActiveId] = useState(SCIENCE_ECOSYSTEMS[0]!.id);
+  const { containerRef, horizontal } = useHorizontalTabs();
   const activeIndex = Math.max(0, SCIENCE_ECOSYSTEMS.findIndex((item) => item.id === activeId));
   const active = SCIENCE_ECOSYSTEMS[activeIndex]!;
   const declaredOperationCount = SCIENCE_ECOSYSTEMS.reduce((sum, item) => sum + item.operationCount, 0);
@@ -52,13 +73,13 @@ export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }:
   }
 
   return (
-    <section className={`drr-ecosystem ${className}`.trim()} aria-label="Scientific capability reference">
+    <section ref={containerRef} className={`drr-ecosystem ${className}`.trim()} aria-label="Scientific capability reference">
       <header className="drr-ecosystem__header">
         <div><p className="drr-ecosystem__eyebrow">Capability reference</p><h2>Scientific capabilities</h2><p>Find a specialist workspace and review its declared contract. Installation or registration does not confirm that a provider is ready for a fresh run.</p></div>
         <dl className="drr-ecosystem__metrics" aria-label="Declared capability contract summary"><div><dt>Declared plugins</dt><dd>{SCIENCE_ECOSYSTEMS.length}</dd></div><div><dt>Declared skills</dt><dd>{SCIENCE_ECOSYSTEMS.reduce((sum, item) => sum + item.skillCount, 0)}</dd></div><div><dt>Declared operations</dt><dd>{declaredOperationCount}</dd></div></dl>
       </header>
       <div className="drr-ecosystem__body">
-        <div className="drr-ecosystem__tabs" role="tablist" aria-label="Scientific plugin workspaces" aria-orientation="vertical">
+        <div className="drr-ecosystem__tabs" role="tablist" aria-label="Scientific plugin workspaces" aria-orientation={horizontal ? "horizontal" : "vertical"}>
           {SCIENCE_ECOSYSTEMS.map((plugin, index) => {
             const selected = plugin.id === active.id;
             return <button id={`science-ecosystem-tab-${plugin.id}`} key={plugin.id} type="button" className={`drr-ecosystem__tab${selected ? " is-active" : ""}`} role="tab" aria-selected={selected} aria-controls={`science-ecosystem-panel-${plugin.id}`} tabIndex={selected ? 0 : -1} onClick={() => setActiveId(plugin.id)} onKeyDown={(event) => {

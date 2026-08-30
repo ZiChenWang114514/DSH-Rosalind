@@ -1,6 +1,6 @@
 {
   "name": "@zichenwang114514/dsh-rosalind",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A reproducible science workbench for DeepSeek Harness",
   "type": "module",
   "main": "lib/index.js",

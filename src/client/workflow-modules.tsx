@@ -31,14 +31,20 @@ export function createNgsWorkbenchClientModule(): Plugin.Object {
 export function createRosalindWorkbenchClientModule(): Plugin.Object {
   return {
     name: "dsh-rosalind-workbench-client",
-    inject: ["slots", "settingsScope", "workspaceSidebar", "theme", "conversation", "sessions", "connection"],
+    inject: ["slots", "settingsScope", "theme", "conversation", "sessions", "connection"],
     apply(ctx: ClientContext): void {
       const moduleSettings = bindModuleSettingsScope(ctx);
-      const ModuleSettingsSection = () => <ProviderSettings scope={moduleSettings} />;
+      let sidebarAvailable = false;
+      const ModuleSettingsSection = () => <>
+        {!sidebarAvailable && <p role="status">当前 DSH 版本尚未提供可扩展工作区侧栏；DSH-Rosalind 已启动，科学视图可在会话中使用。安装包含 workspaceSidebar 的 Harness 构建后会显示“科学”侧栏。</p>}
+        <ProviderSettings scope={moduleSettings} />
+      </>;
       ctx.effect(() => {
+        const scienceMode = registerScienceMode(ctx, moduleSettings);
+        sidebarAvailable = scienceMode.sidebarAvailable;
         setWorkbenchModuleAvailability("rosalind", "available");
         const disposers = [
-          registerScienceMode(ctx),
+          () => scienceMode.dispose(),
           ctx.slots.register({ name: "conversation.hero.brand.mark", priority: -20 }, RosalindBrandMark),
           ctx.slots.register({ name: "conversation.view", id: "dsh-rosalind", order: 30, label: "Science" }, ConversationWorkbenchView),
           ctx.slots.register({ name: "settings.section", id: "dsh-rosalind", order: 45, label: "Rosalind" }, ModuleSettingsSection),
