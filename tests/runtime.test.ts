@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -75,6 +75,41 @@ describe("DSH host contract", () => {
       lfEquivalent: 11,
       windowsEquivalent: 13,
     });
+  });
+
+  it("exports relative to the runtime workspace even when the host process cwd differs", async () => {
+    const runtime = new RosalindRuntime();
+    const workspaceRoot = runtime.catalog.packageRoot;
+    const foreignCwd = mkdtempSync(join(tmpdir(), "dsh-rosalind-cwd-"));
+    const outputDirectory = `.runtime-export-${Date.now()}`;
+    const outputPath = `${outputDirectory}/bundle.json`;
+    try {
+      process.chdir(foreignCwd);
+      const tool = createRosalindTools(runtime).find((candidate) => candidate.name === "rosalind_export")!;
+      await tool.execute({ showcase_id: "sequence-ras-alignment", format: "import-json", output_path: outputPath, approved: true }, { signal: new AbortController().signal } as never);
+      expect(existsSync(join(workspaceRoot, outputPath))).toBe(true);
+      expect(existsSync(join(foreignCwd, outputPath))).toBe(false);
+    } finally {
+      process.chdir(workspaceRoot);
+      rmSync(join(workspaceRoot, outputDirectory), { recursive: true, force: true });
+      rmSync(foreignCwd, { recursive: true, force: true });
+      runtime.dispose();
+    }
+  });
+
+  it("shows scientific error codes and messages in Rosalind result cards", () => {
+    const runtime = new RosalindRuntime();
+    try {
+      const tool = createRosalindTools(runtime).find((candidate) => candidate.name === "rosalind_export")!;
+      const args = { showcase_id: "sequence-ras-alignment", format: "review-json", output_path: "artifacts/existing.json", approved: true };
+      const value = { status: "failed", error: { code: "DESTINATION_EXISTS", message: "The selected export already exists." } };
+      const content = tool.output.render(args, value);
+      const meta = tool.output.presentationMeta?.(args, value);
+      expect(tool.presentResult?.(args, { isError: false, content, ...(meta === undefined ? {} : { meta }) })).toMatchObject({
+        title: "Showcase export failed",
+        content: [{ type: "text", text: "DESTINATION_EXISTS: The selected export already exists." }],
+      });
+    } finally { runtime.dispose(); }
   });
 });
 

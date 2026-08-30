@@ -47,10 +47,35 @@ function summaryOf(value: JsonValue): string {
   return "Scientific workbench result";
 }
 
+function scientificError(value: unknown): { code: string; message: string } | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const error = (value as Record<string, unknown>).error;
+  if (!error || typeof error !== "object" || Array.isArray(error)) return undefined;
+  const code = (error as Record<string, unknown>).code;
+  const message = (error as Record<string, unknown>).message;
+  return typeof code === "string" && typeof message === "string" ? { code, message } : undefined;
+}
+
+function presentedFailure(result: ToolResult): string | undefined {
+  const meta = result.meta && typeof result.meta === "object" && !Array.isArray(result.meta) ? result.meta as Record<string, JsonValue> : undefined;
+  if (typeof meta?.errorCode === "string" && typeof meta.errorMessage === "string") return `${meta.errorCode}: ${meta.errorMessage}`;
+  for (const block of result.content) {
+    if (block.type !== "text") continue;
+    try {
+      const error = scientificError(JSON.parse(block.text));
+      if (error) return `${error.code}: ${error.message}`;
+    } catch { /* Native failures may already be plain text. */ }
+  }
+  return undefined;
+}
+
 const jsonOutput = {
   schema: { type: "object", additionalProperties: true } as const,
   render: (_args: unknown, value: Record<string, JsonValue>) => [{ type: "text" as const, text: JSON.stringify(value, null, 2) }],
-  presentationMeta: (_args: unknown, value: Record<string, JsonValue>) => ({ summary: summaryOf(value) }),
+  presentationMeta: (_args: unknown, value: Record<string, JsonValue>) => {
+    const error = scientificError(value);
+    return { summary: summaryOf(value), ...(error ? { errorCode: error.code, errorMessage: error.message } : {}) };
+  },
 };
 
 function callCard(title: string, args: unknown) {
@@ -60,14 +85,16 @@ function callCard(title: string, args: unknown) {
 function resultCard(title: string, result: ToolResult) {
   const meta = result.meta && typeof result.meta === "object" && !Array.isArray(result.meta) ? result.meta as Record<string, JsonValue> : undefined;
   const summary = typeof meta?.summary === "string" ? meta.summary : undefined;
+  const failure = presentedFailure(result);
   return {
     card: "generic" as const,
-    title: result.isError ? `${title} failed` : title,
-    ...(summary ? { content: [{ type: "text" as const, text: summary }] } : {}),
+    title: result.isError || failure ? `${title} failed` : title,
+    ...(failure || summary ? { content: [{ type: "text" as const, text: failure ?? summary! }] } : {}),
   };
 }
 
 export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] {
+  const workspaceRoot = runtime.catalog.packageRoot;
   return [
     defineTool({
       name: "rosalind_catalog_list",
@@ -272,7 +299,6 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         const showcaseId = String(args.showcase_id);
         const outputPath = String(args.output_path);
         if (!args.approved) return jsonValue({ status: "awaiting_confirmation", showcaseId, outputPath, summary: "Export requires explicit approval for this path." });
-        const workspaceRoot = process.cwd();
         const path = resolveInside(workspaceRoot, outputPath);
         if (existsSync(path) && args.overwrite !== true) return jsonValue({ status: "failed", showcaseId, outputPath, error: { code: "DESTINATION_EXISTS", message: "The export destination already exists; choose a new path or explicitly request overwrite." } });
         const payload = args.format === "review-json" ? runtime.review(showcaseId) : runtime.createImport(showcaseId, "lesson");

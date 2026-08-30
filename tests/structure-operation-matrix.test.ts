@@ -261,4 +261,22 @@ describe("StructureService contract semantics", () => {
     expect(() => readFileSync(`${moviePath}.render.json`)).toThrow();
     rmSync(moviePath, { force: true }); rmSync(`${moviePath}.render.json`, { force: true });
   });
+
+  it("cancels ffmpeg after asynchronous movie encoding has started", async () => {
+    const service = new StructureService(), owner = {}, controller = new AbortController();
+    const opened = successful(await service.execute("structure.open_from_chat", { path: primaryPath, openIntentId: crypto.randomUUID() }, context(owner))), sessionId = opened.viewerSessionId as string;
+    const moviePath = "tests/.structure-running-aborted-render.mp4";
+    try {
+      const render = service.execute("structure.render_movie", {
+        sessionId, outputPath: moviePath, width: 128, height: 128, fps: 30,
+        timeline: [{ kind: "camera_spin", durationSeconds: 2, degrees: 360 }], overwrite: true,
+      }, { session: owner, signal: controller.signal, packageRoot });
+      setTimeout(() => controller.abort(new Error("cancelled during encoding")), 0);
+      await expect(render).rejects.toThrow("cancelled during encoding");
+      expect(() => readFileSync(moviePath)).toThrow();
+      expect(() => readFileSync(`${moviePath}.render.json`)).toThrow();
+    } finally {
+      rmSync(moviePath, { force: true }); rmSync(`${moviePath}.render.json`, { force: true });
+    }
+  }, 10_000);
 });

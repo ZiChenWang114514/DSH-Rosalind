@@ -1,4 +1,4 @@
-import { boundedInteger, boundedValue, controlledHeaders, controlledRequest, ScienceServiceError, type FetchLike, type JsonRecord, type ScienceExecutionContext } from "./literature.js";
+import { boundedInteger, boundedValue, controlledHeaders, controlledRequest, PublicGetCache, publicGetCacheKey, ScienceServiceError, type FetchLike, type JsonRecord, type ScienceExecutionContext } from "./literature.js";
 import { readFile } from "node:fs/promises";
 import { isAbsolute, relative, resolve } from "node:path";
 
@@ -242,7 +242,8 @@ function totalFrom(payload: unknown): number | undefined { const record = asReco
 export class DatabaseService {
   private readonly fetcher: FetchLike;
   private readonly defaultAllowNetwork: boolean;
-  constructor(options: { fetch?: FetchLike; allowNetwork?: boolean } = {}) { this.fetcher = options.fetch ?? globalThis.fetch.bind(globalThis); this.defaultAllowNetwork = options.allowNetwork ?? false; }
+  private readonly publicGetCache: PublicGetCache<DatabaseResult>;
+  constructor(options: { fetch?: FetchLike; allowNetwork?: boolean; cacheTtlMs?: number; cacheMaxEntries?: number } = {}) { this.fetcher = options.fetch ?? globalThis.fetch.bind(globalThis); this.defaultAllowNetwork = options.allowNetwork ?? false; this.publicGetCache = new PublicGetCache(options.cacheTtlMs, options.cacheMaxEntries); }
   listProviders(): readonly DatabaseProvider[] { return DATABASE_PROVIDERS; }
   async execute(operation: string, args: JsonRecord, context: ScienceExecutionContext): Promise<DatabaseResult> {
     const normalized = operation.toLowerCase();
@@ -290,11 +291,14 @@ export class DatabaseService {
     if (!live) return { ok: false, provider: provider.id, operation, records: [], sources: [], diagnostics: ["Live public requests require explicit network authorization."], request, error: { code: "NETWORK_NOT_AUTHORIZED", message: "Set allowNetwork for this call or DSH_ROSALIND_ENABLE_LIVE_NETWORK=1." } };
     if (context.signal.aborted) throw new ScienceServiceError("CANCELLED", "The database request was cancelled before it began.");
     try {
+      const cacheKey = publicGetCacheKey(`${provider.id}:${operation}`, method, url, headers, args);
+      const cached = cacheKey ? this.publicGetCache.get(cacheKey) : undefined;
+      if (cached) return cached;
       const response = await controlledRequest(this.fetcher, url, { method, headers, ...(body === undefined ? {} : { body }) }, context, args);
       const records = recordsFrom(response.payload, route.recordPaths ?? provider.recordPaths, args);
       const nextCursor = nextCursorFrom(response.payload);
       const total = totalFrom(response.payload);
-      return {
+      const result: DatabaseResult = {
         ok: true, provider: provider.id, operation, records,
         sources: [{ name: provider.label, url: url.toString(), checkedAt: new Date().toISOString() }],
         pagination: { page, pageSize, ...(nextCursor ? { nextCursor } : {}), ...(total === undefined ? {} : { total }) },
@@ -305,6 +309,8 @@ export class DatabaseService {
           ...(response.rawOutputPath ? { raw_output_path: response.rawOutputPath } : {}),
         },
       };
+      if (cacheKey && response.cacheable) this.publicGetCache.set(cacheKey, result);
+      return result;
     } catch (error) {
       if (context.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) throw new ScienceServiceError("CANCELLED", "The database request was cancelled.");
       if (error instanceof ScienceServiceError) {

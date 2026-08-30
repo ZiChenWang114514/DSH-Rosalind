@@ -233,7 +233,17 @@ describe("science tool output schemas", () => {
       error: { code: "NETWORK_NOT_AUTHORIZED" },
     });
     expect(violations(literatureTool.output.schema, diagnostic)).toEqual([]);
-    expect(literatureTool.output.render({}, diagnostic)).toHaveLength(1);
-    expect(literatureTool.output.presentationMeta?.({}, diagnostic)).toMatchObject({ status: "failed" });
+    const content = literatureTool.output.render({}, diagnostic);
+    const meta = literatureTool.output.presentationMeta?.({}, diagnostic);
+    expect(content).toHaveLength(1);
+    expect(meta).toMatchObject({ status: "failed" });
+    const presented = { isError: false as const, content, ...(meta === undefined ? {} : { meta }) };
+    expect(literatureTool.presentResult?.({}, presented)).toMatchObject({
+      title: "Literature request failed",
+      content: [{ type: "text", text: expect.stringContaining("NETWORK_NOT_AUTHORIZED") }],
+    });
+    expect(literatureTool.presentResult?.({}, presented)).toMatchObject({
+      content: [{ text: expect.stringContaining(String((diagnostic.error as { message: string }).message)) }],
+    });
   });
 });

@@ -37,6 +37,7 @@ export interface ControlledResponse {
   payload: unknown;
   responseFormat: Exclude<ResponseFormat, "auto">;
   rawOutputPath?: string;
+  cacheable: boolean;
 }
 
 export class ScienceServiceError extends Error {
@@ -51,6 +52,59 @@ const SENSITIVE_REQUEST_HEADERS = new Set([
   "authorization", "proxy-authorization", "cookie", "set-cookie", "host", "origin", "referer",
   "content-length", "connection", "transfer-encoding", "user-agent",
 ]);
+
+const CREDENTIAL_QUERY_KEYS = new Set(["api_key", "apikey", "access_token", "token", "api-token", "subscription-key", "key"]);
+
+/** A small per-service cache for successful anonymous public reads. */
+export class PublicGetCache<T> {
+  private readonly entries = new Map<string, { expiresAt: number; value: T }>();
+
+  constructor(private readonly ttlMs = 30_000, private readonly maxEntries = 64) {}
+
+  get(key: string): T | undefined {
+    const entry = this.entries.get(key);
+    if (!entry) return undefined;
+    if (entry.expiresAt <= Date.now()) {
+      this.entries.delete(key);
+      return undefined;
+    }
+    this.entries.delete(key);
+    this.entries.set(key, entry);
+    return structuredClone(entry.value);
+  }
+
+  set(key: string, value: T): void {
+    if (this.ttlMs <= 0 || this.maxEntries <= 0) return;
+    this.entries.delete(key);
+    while (this.entries.size >= this.maxEntries) {
+      const oldest = this.entries.keys().next().value as string | undefined;
+      if (oldest === undefined) break;
+      this.entries.delete(oldest);
+    }
+    this.entries.set(key, { expiresAt: Date.now() + this.ttlMs, value: structuredClone(value) });
+  }
+}
+
+export function publicGetCacheKey(
+  scope: string,
+  method: string,
+  url: URL,
+  headers: Record<string, string>,
+  args: JsonRecord,
+): string | undefined {
+  if (method.toUpperCase() !== "GET" || args.save_raw === true || headers["x-api-key"]) return undefined;
+  if ([...url.searchParams.keys()].some((key) => CREDENTIAL_QUERY_KEYS.has(key.toLowerCase()))) return undefined;
+  const shaping = Object.fromEntries([
+    "response_format", "record_path", "max_items", "maxItems", "max_depth", "page", "pageSize",
+  ].filter((key) => args[key] !== undefined).map((key) => [key, args[key]]));
+  return JSON.stringify({
+    scope,
+    method: method.toUpperCase(),
+    url: url.toString(),
+    headers: Object.entries(headers).sort(([left], [right]) => left.localeCompare(right)),
+    shaping,
+  });
+}
 
 /** Parse a caller-supplied header object without allowing ambient credentials. */
 export function controlledHeaders(value: unknown, defaults: Record<string, string>): Record<string, string> {
@@ -212,7 +266,18 @@ export async function controlledRequest(
     const rawOutputPath = args.save_raw === true
       ? await saveRawResponse(context.packageRoot, args.raw_output_path, text)
       : undefined;
-    return { payload, responseFormat: selectedFormat, ...(rawOutputPath ? { rawOutputPath } : {}) };
+    const cacheControl = response.headers.get("cache-control")?.toLowerCase() ?? "";
+    const pragma = response.headers.get("pragma")?.toLowerCase() ?? "";
+    const vary = response.headers.get("vary")?.toLowerCase() ?? "";
+    const cacheable = !cacheControl.includes("private")
+      && !cacheControl.includes("no-store")
+      && !cacheControl.includes("no-cache")
+      && !pragma.includes("no-cache")
+      && !vary.includes("authorization")
+      && !vary.includes("cookie")
+      && !response.headers.has("set-cookie")
+      && !response.headers.has("www-authenticate");
+    return { payload, responseFormat: selectedFormat, cacheable, ...(rawOutputPath ? { rawOutputPath } : {}) };
   } catch (error) {
     if (guard.timedOut()) throw new ScienceServiceError("TIMEOUT", `The request exceeded timeout_sec=${timeoutSec}.`);
     if (context.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) {
@@ -375,10 +440,12 @@ function biorxivUrl(args: JsonRecord, fallbackPath: string): URL {
 export class LiteratureService {
   private readonly fetcher: FetchLike;
   private readonly defaultAllowNetwork: boolean;
+  private readonly publicGetCache: PublicGetCache<SourceResult>;
 
-  constructor(options: { fetch?: FetchLike; allowNetwork?: boolean } = {}) {
+  constructor(options: { fetch?: FetchLike; allowNetwork?: boolean; cacheTtlMs?: number; cacheMaxEntries?: number } = {}) {
     this.fetcher = options.fetch ?? globalThis.fetch.bind(globalThis);
     this.defaultAllowNetwork = options.allowNetwork ?? false;
+    this.publicGetCache = new PublicGetCache(options.cacheTtlMs, options.cacheMaxEntries);
   }
 
   async execute(operation: string, args: JsonRecord, context: ScienceExecutionContext): Promise<SourceResult> {
@@ -415,11 +482,14 @@ export class LiteratureService {
     if (context.signal.aborted) throw new ScienceServiceError("CANCELLED", "The literature request was cancelled before it began.");
     try {
       const headers = controlledHeaders(args.headers, { accept: "application/json, application/xml;q=0.8, text/xml;q=0.7" });
+      const cacheKey = publicGetCacheKey(`${service}:${operation}`, method, url, headers, args);
+      const cached = cacheKey ? this.publicGetCache.get(cacheKey) : undefined;
+      if (cached) return cached;
       const response = await controlledRequest(this.fetcher, url, { ...init, headers }, context, args);
       const maxDepth = boundedInteger(args.max_depth, 4, 1, 12, "max_depth");
       const records = recordsFrom(response.payload, args).map((item) => boundedValue(item, maxDepth));
       const sources = [checkedSource(service === "entrez" ? "NCBI Entrez" : service === "pmc" ? "PubMed Central" : "bioRxiv / medRxiv", url.toString())];
-      return {
+      const result: SourceResult = {
         ok: true, service, operation, records, sources,
         diagnostics: records.length ? [] : ["The source returned no matching records."],
         request: {
@@ -428,6 +498,8 @@ export class LiteratureService {
           ...(response.rawOutputPath ? { raw_output_path: response.rawOutputPath } : {}),
         },
       };
+      if (cacheKey && response.cacheable) this.publicGetCache.set(cacheKey, result);
+      return result;
     } catch (error) {
       if (context.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) throw new ScienceServiceError("CANCELLED", "The literature request was cancelled.");
       if (error instanceof ScienceServiceError) {

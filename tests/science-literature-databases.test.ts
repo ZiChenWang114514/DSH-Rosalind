@@ -2,7 +2,7 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { DatabaseService, DATABASE_PROVIDERS } from "../src/host/science/databases.js";
 import { LiteratureService } from "../src/host/science/literature.js";
@@ -114,6 +114,58 @@ describe("LiteratureService", () => {
     const result = await service.execute("biorxiv.request", { timeout_sec: 1 }, context());
     expect(result.error).toMatchObject({ code: "TIMEOUT" });
   }, 2_000);
+
+  it("caches only successful anonymous public GET responses for a short bounded interval", async () => {
+    vi.useFakeTimers();
+    try {
+      let calls = 0;
+      const service = new LiteratureService({
+        cacheTtlMs: 1_000,
+        cacheMaxEntries: 1,
+        fetch: async () => {
+          calls += 1;
+          return new Response(JSON.stringify({ collection: [{ call: calls }] }), { headers: { "content-type": "application/json" } });
+        },
+      });
+      const args = { server: "biorxiv", start: "2026-01-01", end: "2026-01-02" };
+      const first = await service.execute("biorxiv.request", args, context());
+      const cached = await service.execute("biorxiv.request", args, context());
+      expect(calls).toBe(1);
+      expect(cached).toEqual(first);
+      await vi.advanceTimersByTimeAsync(1_001);
+      await service.execute("biorxiv.request", args, context());
+      expect(calls).toBe(2);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it("does not cache failed, credentialed, or response-protected literature requests", async () => {
+    let failedCalls = 0;
+    const failures = new LiteratureService({ fetch: async () => {
+      failedCalls += 1;
+      return jsonFetch(failedCalls === 1 ? { message: "temporary" } : { collection: [{ ok: true }] }, failedCalls === 1 ? 503 : 200)();
+    } });
+    expect((await failures.execute("biorxiv.request", {}, context())).ok).toBe(false);
+    expect((await failures.execute("biorxiv.request", {}, context())).ok).toBe(true);
+    expect(failedCalls).toBe(2);
+
+    let protectedCalls = 0;
+    const protectedService = new LiteratureService({ fetch: async () => {
+      protectedCalls += 1;
+      return new Response(JSON.stringify({ collection: [] }), { headers: { "content-type": "application/json", "cache-control": "private" } });
+    } });
+    await protectedService.execute("biorxiv.request", {}, context());
+    await protectedService.execute("biorxiv.request", {}, context());
+    expect(protectedCalls).toBe(2);
+
+    let credentialedCalls = 0;
+    const credentialed = new LiteratureService({ fetch: async () => {
+      credentialedCalls += 1;
+      return new Response(JSON.stringify({ collection: [] }), { headers: { "content-type": "application/json" } });
+    } });
+    await credentialed.execute("biorxiv.request", { headers: { "x-api-key": "fixture-key" } }, context());
+    await credentialed.execute("biorxiv.request", { headers: { "x-api-key": "fixture-key" } }, context());
+    expect(credentialedCalls).toBe(2);
+  });
 });
 
 describe("DatabaseService", () => {
@@ -197,5 +249,27 @@ describe("DatabaseService", () => {
       await expect(readFile(join(root, "raw/gnomad.json"), "utf8")).resolves.toContain("TP53");
       await expect(service.execute("database.request", { provider: "gnomad-graphql", query_path: "../outside.graphql" }, { ...context(), packageRoot: root })).rejects.toMatchObject({ code: "INVALID_QUERY_PATH" });
     } finally { await rm(root, { recursive: true, force: true }); }
+  });
+
+  it("caches identical anonymous database GETs but not protected responses", async () => {
+    let calls = 0;
+    const service = new DatabaseService({ fetch: async () => {
+      calls += 1;
+      return new Response(JSON.stringify({ results: [{ call: calls }] }), { headers: { "content-type": "application/json" } });
+    } });
+    const args = { provider: "uniprot", query: "KRAS", pageSize: 5 };
+    const first = await service.execute("database.request", args, context());
+    const cached = await service.execute("database.request", args, context());
+    expect(calls).toBe(1);
+    expect(cached).toEqual(first);
+
+    let protectedCalls = 0;
+    const protectedService = new DatabaseService({ fetch: async () => {
+      protectedCalls += 1;
+      return new Response(JSON.stringify({ results: [] }), { headers: { "content-type": "application/json", "set-cookie": "session=private" } });
+    } });
+    await protectedService.execute("database.request", args, context());
+    await protectedService.execute("database.request", args, context());
+    expect(protectedCalls).toBe(2);
   });
 });

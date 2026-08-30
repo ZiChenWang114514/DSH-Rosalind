@@ -10,7 +10,10 @@ function output(serviceId: "slide", operation: string) {
   return {
     schema: scienceOutputSpec(serviceId, operation),
     render: (_args: unknown, value: Record<string, JsonValue>) => [{ type: "text" as const, text: JSON.stringify(value, null, 2) }],
-    presentationMeta: (_args: unknown, value: Record<string, JsonValue>) => ({ status: value.status ?? "completed" }),
+    presentationMeta: (_args: unknown, value: Record<string, JsonValue>) => {
+      const error = scientificError(value);
+      return { status: value.status ?? "completed", ...(error ? { errorCode: error.code, errorMessage: error.message } : {}) };
+    },
   };
 }
 
@@ -30,8 +33,39 @@ function call(title: string, args: unknown) {
   return { card: "generic" as const, title, rawInput: JSON.stringify(args, null, 2) };
 }
 
+function scientificError(value: unknown): { code: string; message: string } | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const error = (value as Record<string, unknown>).error;
+  if (!error || typeof error !== "object" || Array.isArray(error)) return undefined;
+  const code = (error as Record<string, unknown>).code;
+  const message = (error as Record<string, unknown>).message;
+  return typeof code === "string" && typeof message === "string" ? { code, message } : undefined;
+}
+
+function presentedFailure(value: ToolResult): string | undefined {
+  const meta = value.meta && typeof value.meta === "object" && !Array.isArray(value.meta) ? value.meta as Record<string, JsonValue> : undefined;
+  if (typeof meta?.errorCode === "string" && typeof meta.errorMessage === "string") return `${meta.errorCode}: ${meta.errorMessage}`;
+  for (const block of value.content) {
+    if (block.type !== "text") continue;
+    try {
+      const error = scientificError(JSON.parse(block.text));
+      if (error) return `${error.code}: ${error.message}`;
+    } catch { /* Native failures may already be plain text. */ }
+  }
+  return undefined;
+}
+
 function result(title: string, value: ToolResult) {
-  return { card: "generic" as const, title: value.isError ? `${title} failed` : title };
+  const failure = presentedFailure(value);
+  return {
+    card: "generic" as const,
+    title: value.isError || failure ? `${title} failed` : title,
+    ...(failure ? { content: [{ type: "text" as const, text: failure }] } : {}),
+  };
+}
+
+function withFailurePresentation(tool: ToolDefinition, title: string): ToolDefinition {
+  return { ...tool, presentResult: (_args, value) => result(title, value) };
 }
 
 export function createScienceGatewayTools(
@@ -39,12 +73,14 @@ export function createScienceGatewayTools(
   packageRoot: string,
   serviceId?: "literature" | "databases" | "slide",
 ): ToolDefinition[] {
-  if (serviceId === "literature") return [createLiteratureRequestTool(executor, packageRoot)];
-  if (serviceId === "databases") return [createDatabaseRequestTool(executor, packageRoot)];
+  const literature = withFailurePresentation(createLiteratureRequestTool(executor, packageRoot), "Literature request");
+  const databases = withFailurePresentation(createDatabaseRequestTool(executor, packageRoot), "Database request");
+  if (serviceId === "literature") return [literature];
+  if (serviceId === "databases") return [databases];
   if (serviceId === "slide") return createCoreScienceGatewayTools(executor, packageRoot);
   return [
-    createLiteratureRequestTool(executor, packageRoot),
-    createDatabaseRequestTool(executor, packageRoot),
+    literature,
+    databases,
     ...createCoreScienceGatewayTools(executor, packageRoot),
   ];
 }

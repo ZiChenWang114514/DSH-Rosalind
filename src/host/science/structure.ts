@@ -1,5 +1,5 @@
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync, type Dirent } from "node:fs";
-import { execFileSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { tmpdir } from "node:os";
 import { deflateSync } from "node:zlib";
 import { basename, dirname, extname, isAbsolute, relative, resolve } from "node:path";
@@ -38,6 +38,39 @@ function multiplyMatrices(left: number[], right: number[]): number[] { return Ar
 
 function checkAbort(signal: AbortSignal): void {
   if (signal.aborted) throw signal.reason instanceof Error ? signal.reason : new Error("Structure operation cancelled.");
+}
+
+function encodeMovieWithFfmpeg(args: string[], signal: AbortSignal): Promise<void> {
+  checkAbort(signal);
+  return new Promise((resolvePromise, rejectPromise) => {
+    const child = spawn("ffmpeg", args, { windowsHide: true, stdio: ["ignore", "ignore", "pipe"] });
+    let stderr = "";
+    let terminationError: Error | undefined;
+    const abort = () => {
+      terminationError = signal.reason instanceof Error ? signal.reason : new Error("Structure movie encoding cancelled.");
+      child.kill("SIGKILL");
+    };
+    const timeout = setTimeout(() => {
+      terminationError = new Error("ffmpeg exceeded the 120 second movie encoding limit.");
+      child.kill("SIGKILL");
+    }, 120_000);
+    if (signal.aborted) abort(); else signal.addEventListener("abort", abort, { once: true });
+    child.stderr?.on("data", (chunk: Buffer) => {
+      if (stderr.length < 16_384) stderr += chunk.toString("utf8").slice(0, 16_384 - stderr.length);
+    });
+    child.once("error", (error) => {
+      clearTimeout(timeout);
+      signal.removeEventListener("abort", abort);
+      rejectPromise(error);
+    });
+    child.once("close", (code, childSignal) => {
+      clearTimeout(timeout);
+      signal.removeEventListener("abort", abort);
+      if (terminationError) rejectPromise(terminationError);
+      else if (code === 0) resolvePromise();
+      else rejectPromise(new Error(stderr.trim() || `ffmpeg exited with code ${String(code)}${childSignal ? ` (${childSignal})` : ""}.`));
+    });
+  });
 }
 
 function formatFor(path: string): string | null {
@@ -930,7 +963,7 @@ export class StructureService {
     return complete();
   }
 
-  private renderMovie(args: Record<string, unknown>, context: ScienceExecutionContext, session: StructureSession): Record<string, unknown> | ScienceFailure {
+  private async renderMovie(args: Record<string, unknown>, context: ScienceExecutionContext, session: StructureSession): Promise<Record<string, unknown> | ScienceFailure> {
     if (typeof args.outputPath !== "string" || !args.outputPath.trim()) return failure("EXPORT_DESTINATION_REQUIRED", "render_movie requires outputPath.");
     if (extname(args.outputPath).toLowerCase() !== ".mp4") return failure("MOVIE_FORMAT_INVALID", "Local movie rendering writes H.264 MP4 files and requires an .mp4 outputPath.");
     const target = sourcePath(args.outputPath, context.packageRoot); if (typeof target !== "string") return target;
@@ -959,12 +992,17 @@ export class StructureService {
         const raster = localRaster(session, width, height, false, totalRotationDegrees * frame / Math.max(1, frameCount - 1));
         writeFileSync(resolve(temporaryDirectory, `frame-${String(frame + 1).padStart(5, "0")}.png`), raster.png);
       }
-      execFileSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-y", "-framerate", String(fps), "-i", resolve(temporaryDirectory, "frame-%05d.png"), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", target], { windowsHide: true, timeout: 120_000 });
+      await encodeMovieWithFfmpeg(["-hide_banner", "-loglevel", "error", "-y", "-framerate", String(fps), "-i", resolve(temporaryDirectory, "frame-%05d.png"), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", target], context.signal);
       const bytes = statSync(target).size;
       writeFileSync(sidecar, `${JSON.stringify({ schemaVersion: 1, renderer: "DSH-Rosalind local raster plus ffmpeg libx264", generatedAt: new Date().toISOString(), outputPath: relative(context.packageRoot, target), format: "mp4", dimensions: { width, height }, fps, frameCount, durationSeconds: frameCount / fps, sceneRevision: session.revision, timeline, totalRotationDegrees, provenance: "Every encoded frame is an orthographic local-coordinate raster. Rotation is a 2D camera-plane transform, not a Mol* viewport capture." }, null, 2)}\n`, "utf8");
       Object.assign(job, { state: "completed", completedAt: new Date().toISOString(), bytes, sidecarPath: relative(context.packageRoot, sidecar), sceneRevision: session.revision });
       return { ok: true, job, artifact: { outputPath: relative(context.packageRoot, target), sidecarPath: relative(context.packageRoot, sidecar), format: "mp4", bytes }, frameCount, fps, durationSeconds: frameCount / fps, sceneRevision: session.revision, provenance: "H.264 MP4 encoded locally with ffmpeg from data-derived coordinate frames." };
     } catch (cause) {
+      if (context.signal.aborted) {
+        rmSync(target, { force: true }); rmSync(`${target}.render.json`, { force: true });
+        Object.assign(job, { state: "cancelled", cancelledAt: new Date().toISOString() });
+        throw context.signal.reason instanceof Error ? context.signal.reason : new Error("Structure movie encoding cancelled.");
+      }
       const message = cause instanceof Error ? cause.message : String(cause);
       rmSync(target, { force: true }); rmSync(`${target}.render.json`, { force: true });
       Object.assign(job, { state: "failed", failedAt: new Date().toISOString(), error: { code: "MOVIE_RENDER_FAILED", message } });
