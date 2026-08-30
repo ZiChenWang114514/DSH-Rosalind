@@ -9,7 +9,7 @@
   </p>
 
   <p><strong>One hundred reproducible life-science projects, designed for DSH Web.</strong></p>
-  <p><a href="README.zh-CN.md">简体中文</a> · <a href="docs/showcases.md">Showcase catalogue</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/verification.md">Verification</a> · <a href="docs/release-notes-v0.3.4.md">v0.3.4 notes</a></p>
+  <p><a href="README.zh-CN.md">简体中文</a> · <a href="docs/showcases.md">Showcase catalogue</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/verification.md">Verification</a> · <a href="docs/release-notes-v0.3.5.md">v0.3.5 notes</a></p>
 </div>
 
 ## What it is
@@ -49,10 +49,10 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-Download `zichenwang114514-dsh-rosalind-0.3.4.tgz` from GitHub Releases, or build the same version from this tag with `npm run pack:bundle`. Add the archive to DSH Web:
+Download `zichenwang114514-dsh-rosalind-0.3.5.tgz` from GitHub Releases, or build the same version from this tag with `npm run pack:bundle`. Add the archive to DSH Web:
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.4.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.5.tgz
 dsh web --no-open
 ```
 
@@ -65,7 +65,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.4.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.5.tgz
 ```
 
 ## The catalogue

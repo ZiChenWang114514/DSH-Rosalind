@@ -168,6 +168,19 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-layer-list strong { font-size: 9.5px; }.sv-layer-list small { margin-top: 2px; color: var(--rr-muted); font-size: 8px; }
 .sv-layer-note { margin: 0 0 7px; padding: 7px 8px; border: 1px solid var(--rr-line); border-left: 3px solid var(--sv-accent); border-radius: 8px; background: color-mix(in srgb, var(--rr-panel-muted) 58%, transparent); color: var(--rr-ink); font-size: 9px; line-height: 1.5; }
 
+/* Scientific labels remain readable at normal zoom and on high-density screens. */
+.sv-state, .sv-run-state, .sv-quiet-button, .sv-facts dt, .sv-data-note, .sv-limit-note,
+.sv-artifacts h4, .sv-artifacts button span, .sv-artifacts button code, .sv-section-label,
+.sv-run-card code, .sv-timeline strong, .sv-timeline span, .sv-pipeline-grid article > span,
+.sv-pipeline-grid p, .sv-pipeline-grid small, .sv-target-list span, .sv-scene-toolbar span,
+.sv-scene-toolbar button, .sv-colour-toggle button, .sv-scene-state, .sv-scene-summary p,
+.sv-axis, .sv-object-list span, .sv-object-list small, .sv-slide-controls button,
+.sv-slide-map > span, .sv-slide-position, .sv-spatial-layout > section > small,
+.sv-spatial-gene, .sv-layer-list small { font-size: 10px; }
+.sv-sequence-table, .sv-sequence-table thead th, .sv-residues, .sv-layer-note,
+.sv-diagnostics li, .sv-pipeline-grid strong, .sv-target-list strong, .sv-object-list strong,
+.sv-analysis-list article > strong { font-size: 10.5px; }
+
 @keyframes sv-spin { to { transform: rotate(360deg); } }
 @media (max-width: 640px) {
   .sv-head { grid-template-columns: 32px minmax(0, 1fr) auto; }

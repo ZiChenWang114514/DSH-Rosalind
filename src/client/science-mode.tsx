@@ -281,7 +281,7 @@ interface WorkspaceSidebarService {
 interface ThemeService {
   register(definition: { id: string; colorScheme: "light" | "dark"; tokens: Record<string, string> }): () => void;
   setTheme(id: string): void;
-  getTheme(): { preference: string };
+  getTheme(): { preference: string; active?: { colorScheme?: "light" | "dark" } };
 }
 
 interface ConversationService {
@@ -373,8 +373,9 @@ export const ROSALIND_SCIENCE_DARK_THEME = Object.freeze({
   },
 });
 
-function scienceThemeFor(preference: string | undefined): string {
-  return preference?.toLowerCase().includes("dark") ? ROSALIND_SCIENCE_DARK_THEME_ID : ROSALIND_SCIENCE_THEME_ID;
+export function scienceThemeFor(theme: ReturnType<ThemeService["getTheme"]>): string {
+  const colorScheme = theme.active?.colorScheme ?? (theme.preference.toLowerCase().includes("dark") ? "dark" : "light");
+  return colorScheme === "dark" ? ROSALIND_SCIENCE_DARK_THEME_ID : ROSALIND_SCIENCE_THEME_ID;
 }
 
 export interface ScienceModeRegistration {
@@ -402,7 +403,7 @@ export function registerScienceMode(ctx: ClientContext, moduleSettings: Settings
       return session === undefined ? undefined : { id: session.id, blank: session.blank, ...(session.agentPreset ? { agentPreset: session.agentPreset } : {}) };
     },
     selectTheme: () => {
-      const id = scienceThemeFor(theme.getTheme().preference);
+      const id = scienceThemeFor(theme.getTheme());
       theme.setTheme(id);
       return id;
     },

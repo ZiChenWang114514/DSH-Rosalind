@@ -58,6 +58,18 @@ describe("LocalSlideCanvas", () => {
     expect(viewports.at(-1)).toEqual({ zoom: 1, panX: 0, panY: 0 });
   });
 
+  it("creates a slide region with keyboard controls", () => {
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({ setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), save: vi.fn(), restore: vi.fn(), setLineDash: vi.fn(), strokeRect: vi.fn() } as unknown as CanvasRenderingContext2D);
+    const created: Array<{ x: number; y: number; width: number; height: number }> = [];
+    const { getByRole } = render(<LocalSlideCanvas width={1000} height={500} sourceRevision="local:test" tile={null} regions={[]} onCreateRegion={(region) => created.push(region)} />);
+    const canvas = getByRole("img");
+    fireEvent.keyDown(canvas, { key: " " });
+    fireEvent.keyDown(canvas, { key: "ArrowRight", shiftKey: true });
+    fireEvent.keyDown(canvas, { key: "ArrowDown", shiftKey: true });
+    fireEvent.keyDown(canvas, { key: "Enter" });
+    expect(created).toEqual([{ x: 500, y: 250, width: 10, height: 10 }]);
+  });
+
   it("ignores an old Image load after a newer source tile replaces it", () => {
     const context = { setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), save: vi.fn(), restore: vi.fn(), setLineDash: vi.fn(), strokeRect: vi.fn(), drawImage: vi.fn() } as unknown as CanvasRenderingContext2D;
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(context);

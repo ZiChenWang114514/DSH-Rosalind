@@ -39,6 +39,7 @@ function slidePoint(event: PointerEvent<HTMLCanvasElement>, canvas: HTMLCanvasEl
 export function LocalSlideCanvas(props: LocalSlideCanvasProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originRef = useRef<Point | null>(null);
+  const keyboardCursorRef = useRef<Point>({ x: props.width / 2, y: props.height / 2 });
   const imageRef = useRef<{ key: string; image: HTMLImageElement | null } | null>(null);
   const [imageVersion, setImageVersion] = useState(0);
   const [origin, setOrigin] = useState<Point | null>(null);
@@ -102,12 +103,36 @@ export function LocalSlideCanvas(props: LocalSlideCanvasProps): JSX.Element {
   const finish = (end?: Point) => { const start = originRef.current; const finalCursor = end ?? cursor; const region = start && finalCursor ? { x: Math.min(start.x, finalCursor.x), y: Math.min(start.y, finalCursor.y), width: Math.abs(finalCursor.x - start.x), height: Math.abs(finalCursor.y - start.y) } : null; if (region && region.width >= 1 && region.height >= 1) props.onCreateRegion?.(region); originRef.current = null; setOrigin(null); setCursor(null); };
   const keyboard = (event: KeyboardEvent<HTMLCanvasElement>) => {
     const pan = event.shiftKey ? 48 : 20;
+    const roiStep = event.shiftKey ? 10 : 1;
     if (event.key === "Escape") { originRef.current = null; setOrigin(null); setCursor(null); }
+    else if (event.key === " " || event.key === "Spacebar") {
+      event.preventDefault();
+      if (originRef.current && draft) finish();
+      else {
+        const point = keyboardCursorRef.current;
+        originRef.current = point;
+        setOrigin(point);
+        setCursor(point);
+      }
+    }
     else if (event.key === "Home" || event.key === "0") { event.preventDefault(); updateViewport(() => ({ zoom: 1, panX: 0, panY: 0 })); }
     else if (event.key === "+" || event.key === "=") { event.preventDefault(); updateViewport((current) => ({ ...current, zoom: clamp(current.zoom * 1.2, .5, 8) })); }
     else if (event.key === "-" || event.key === "_") { event.preventDefault(); updateViewport((current) => ({ ...current, zoom: clamp(current.zoom / 1.2, .5, 8) })); }
-    else if (event.key.startsWith("Arrow")) { event.preventDefault(); updateViewport((current) => ({ ...current, panX: current.panX + (event.key === "ArrowLeft" ? -pan : event.key === "ArrowRight" ? pan : 0), panY: current.panY + (event.key === "ArrowUp" ? -pan : event.key === "ArrowDown" ? pan : 0) })); }
+    else if (event.key.startsWith("Arrow")) {
+      event.preventDefault();
+      if (originRef.current) {
+        const current = keyboardCursorRef.current;
+        const next = {
+          x: clamp(current.x + (event.key === "ArrowLeft" ? -roiStep : event.key === "ArrowRight" ? roiStep : 0), 0, props.width),
+          y: clamp(current.y + (event.key === "ArrowUp" ? -roiStep : event.key === "ArrowDown" ? roiStep : 0), 0, props.height),
+        };
+        keyboardCursorRef.current = next;
+        setCursor(next);
+      } else {
+        updateViewport((current) => ({ ...current, panX: current.panX + (event.key === "ArrowLeft" ? -pan : event.key === "ArrowRight" ? pan : 0), panY: current.panY + (event.key === "ArrowUp" ? -pan : event.key === "ArrowDown" ? pan : 0) }));
+      }
+    }
     else if (event.key === "Enter" && draft) { event.preventDefault(); finish(); }
   };
-  return <canvas data-slide-pan-x={viewport.panX} data-slide-pan-y={viewport.panY} data-slide-zoom={viewport.zoom} ref={canvasRef} className="sv-slide-canvas" tabIndex={0} role="img" aria-label={props.ariaLabel ?? "Local slide tile preview. Drag to create a rectangular region. Use arrow keys to pan, plus or minus to zoom, and Home to reset the view."} onKeyDown={keyboard} onPointerDown={(event) => { const canvas = canvasRef.current; if (!canvas) return; canvas.setPointerCapture?.(event.pointerId); const point = slidePoint(event, canvas, props.width, props.height, viewport); originRef.current = point; setOrigin(point); setCursor(point); }} onPointerMove={(event) => { const canvas = canvasRef.current; if (originRef.current && canvas) setCursor(slidePoint(event, canvas, props.width, props.height, viewport)); }} onPointerUp={(event) => { const canvas = canvasRef.current; finish(canvas ? slidePoint(event, canvas, props.width, props.height, viewport) : undefined); }} />;
+  return <canvas data-slide-pan-x={viewport.panX} data-slide-pan-y={viewport.panY} data-slide-zoom={viewport.zoom} ref={canvasRef} className="sv-slide-canvas" tabIndex={0} role="img" aria-label={props.ariaLabel ?? "Local slide tile preview. Drag to create a rectangular region. With the keyboard, press Space to start a region, use arrow keys to size it, and press Enter to confirm. Use plus or minus to zoom and Home to reset the view."} onKeyDown={keyboard} onPointerDown={(event) => { const canvas = canvasRef.current; if (!canvas) return; canvas.setPointerCapture?.(event.pointerId); const point = slidePoint(event, canvas, props.width, props.height, viewport); keyboardCursorRef.current = point; originRef.current = point; setOrigin(point); setCursor(point); }} onPointerMove={(event) => { const canvas = canvasRef.current; if (originRef.current && canvas) setCursor(slidePoint(event, canvas, props.width, props.height, viewport)); }} onPointerUp={(event) => { const canvas = canvasRef.current; finish(canvas ? slidePoint(event, canvas, props.width, props.height, viewport) : undefined); }} />;
 }

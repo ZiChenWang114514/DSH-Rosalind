@@ -9,6 +9,7 @@ import {
   ensureRosalindSciencePreset,
   registerScienceMode,
   ROSALIND_SCIENCE_DARK_THEME_ID,
+  scienceThemeFor,
   ScienceSidebar,
   type ScienceModeActions,
 } from "../src/client/science-mode.js";
@@ -47,6 +48,10 @@ function moduleScope(): { getSnapshot(): { status: "ready"; value: ModuleSetting
 }
 
 describe("Rosalind science mode", () => {
+  it("follows the active dark scheme when the user preference is system", () => {
+    expect(scienceThemeFor({ preference: "system", active: { colorScheme: "dark" } })).toBe(ROSALIND_SCIENCE_DARK_THEME_ID);
+  });
+
   it("applies theme and sidebar without composing when no session is active", async () => {
     const adapter = actions(undefined);
     await expect(activateScienceMode(adapter)).resolves.toEqual({ enabled: true, composed: false });

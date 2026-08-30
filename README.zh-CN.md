@@ -2,7 +2,7 @@
   <img src="assets/readme-hero.svg" alt="DSH-Rosalind 可复现科学工作台" width="100%" />
 
   <p><strong>在 DSH Web 中浏览、讲解、回放并复现 100 个生命科学研究案例。</strong></p>
-  <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a> · <a href="docs/release-notes-v0.3.4.md">v0.3.4 更新</a></p>
+  <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a> · <a href="docs/release-notes-v0.3.5.md">v0.3.5 更新</a></p>
 </div>
 
 ## 项目简介
@@ -38,10 +38,10 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-从 GitHub Releases 下载 `zichenwang114514-dsh-rosalind-0.3.4.tgz`，也可以在同名标签执行 `npm run pack:bundle` 构建。将安装包加入 DSH Web：
+从 GitHub Releases 下载 `zichenwang114514-dsh-rosalind-0.3.5.tgz`，也可以在同名标签执行 `npm run pack:bundle` 构建。将安装包加入 DSH Web：
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.4.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.5.tgz
 dsh web --no-open
 ```
 
@@ -54,7 +54,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.4.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.5.tgz
 ```
 
 ## 100 个案例
