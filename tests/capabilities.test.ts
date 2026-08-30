@@ -57,7 +57,7 @@ describe("fixed-version capability registry", () => {
     }
   });
 
-  it("verifies all 55 Skill invocation records", () => {
+  it("checks source Skill invocation metadata without recording execution evidence", () => {
     const skills = createScienceSkills(process.cwd());
     expect(skills).toHaveLength(55);
     for (const skill of skills) {
@@ -71,7 +71,7 @@ describe("fixed-version capability registry", () => {
   it("distinguishes located files from recorded execution evidence", () => {
     const root = process.cwd();
     const manifest = JSON.parse(readFileSync(resolve(root, "capabilities/capability-manifest.json"), "utf8")) as {
-      verificationRuns: Array<{ id: string; status: string; evidencePath: string; testFiles: string[] }>;
+      verificationRuns: Array<{ id: string; status: string; evidencePath: string; machineEvidencePath: string; testFiles: string[]; contentIdentityMatch: boolean }>;
       services: Array<Record<string, any>>;
       skills: Array<Record<string, any>>;
       operations: Array<Record<string, any>>;
@@ -80,12 +80,14 @@ describe("fixed-version capability registry", () => {
       evidencePolicy: string;
       statusDefinitions: Record<string, string>;
     };
-    expect(manifest.evidencePolicy).toContain("proves only implementation reachability");
-    expect(manifest.statusDefinitions.verified).toContain("Fixture-contract verified");
+    expect(manifest.evidencePolicy).toContain("proves implementation reachability and failure behavior only");
+    expect(manifest.statusDefinitions.verified).toContain("successful operation-specific local scientific result");
     const runs = new Map(manifest.verificationRuns.map((run) => [run.id, run]));
     for (const run of runs.values()) {
       expect(run.status).toBe("passed");
       expect(existsSync(resolve(root, run.evidencePath))).toBe(true);
+      expect(existsSync(resolve(root, run.machineEvidencePath))).toBe(true);
+      expect(run.contentIdentityMatch).toBe(true);
       for (const test of run.testFiles) expect(existsSync(resolve(root, test)), test).toBe(true);
     }
     for (const item of [...manifest.services, ...manifest.skills, ...manifest.operations]) {
@@ -108,21 +110,21 @@ describe("fixed-version capability registry", () => {
         expect(readFileSync(resolve(root, evidence.path), "utf8"), `${item.id}.${field}`).toContain(evidence.locator);
       }
       if (item.status === "verified" && item.operation) {
-        expect(item.verificationScope, item.id).toBe("fixture-contract");
-        expect(["successful-local-result", "mixed-success-and-diagnostic", "exact-diagnostic"], item.id).toContain(item.fixtureOutcome);
+        expect(item.verificationScope, item.id).toBe("local-result-fixture-contract");
+        expect(item.fixtureOutcome, item.id).toBe("successful-local-result");
         expect(item.evidence.fixture.kind, item.id).toBe("operation-contract-fixture");
         expect(item.evidence.fixture.assertionLocator, item.id).toBeTypeOf("string");
         expect(readFileSync(resolve(root, item.evidence.fixture.path), "utf8"), item.id).toContain(item.evidence.fixture.assertionLocator);
       }
     }
-    expect(manifest.services.filter((item) => item.status === "verified")).toHaveLength(7);
-    expect(manifest.skills.filter((item) => item.status === "verified")).toHaveLength(55);
-    expect(manifest.operations.filter((item) => item.status === "verified")).toHaveLength(117);
+    expect(manifest.services.filter((item) => item.status === "verified")).toHaveLength(0);
+    expect(manifest.skills.filter((item) => item.status === "verified")).toHaveLength(0);
+    expect(manifest.operations.filter((item) => item.status === "verified")).toHaveLength(65);
     expect(manifest.operations.filter((item) => item.evidence.live.status !== "missing")).toHaveLength(0);
     expect(manifest.operations.filter((item) => item.fixtureOutcome === "exact-diagnostic").length).toBeGreaterThan(0);
     expect(manifest.operations.filter((item) => item.fixtureOutcome === "successful-local-result").length).toBeGreaterThan(0);
     expect(manifest.skills.filter((item) => item.evidence.live.status !== "missing")).toHaveLength(0);
-    expect(manifest.operations.find((item) => item.operation === "plan_nextflow")?.status).toBe("verified");
+    expect(manifest.operations.find((item) => item.operation === "plan_nextflow")?.status).toBe("implemented");
     expect(manifest.operations.find((item) => item.operation === "rosalind.open")?.status).toBe("verified");
     expect(manifest.statusCounts.services!.verified).toBe(manifest.target.verifiedServiceCount);
     expect(manifest.statusCounts.skills!.verified).toBe(manifest.target.verifiedSkillCount);

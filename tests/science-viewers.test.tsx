@@ -124,6 +124,30 @@ describe("science ToolViews", () => {
     expect(screen.getByText("1EMA.pdb")).toBeInTheDocument();
   });
 
+  it("projects returned molecular coordinates with mouse and keyboard controls", () => {
+    const props = settled("structure_query", {
+      state: {
+        atoms: [
+          { id: "C1", x: -2, y: 1, z: 0, element: "C", chain: "A" },
+          { id: "N2", x: 2, y: -1, z: 2, element: "N", chain: "B" },
+          { id: "O3", x: 1, y: 2, z: -2, element: "O", chain: "A" },
+        ],
+        structure: { atomCount: 3, polymerResidueCount: 1 },
+      },
+    });
+    render(<ScienceToolView {...props} />);
+    const projection = screen.getByLabelText(/Interactive molecular projection/);
+    expect(projection).toHaveAttribute("data-structure-projection", "true");
+    fireEvent.keyDown(projection, { key: "ArrowRight" });
+    expect(screen.getByText(/Yaw 32°/)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Zoom molecular projection in"));
+    expect(screen.getByText(/120%/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "element" }));
+    expect(screen.getByRole("button", { name: "element" })).toHaveAttribute("aria-pressed", "true");
+    fireEvent.click(screen.getByLabelText("Reset molecular projection"));
+    expect(screen.getByText(/Yaw 24°/)).toBeInTheDocument();
+  });
+
   it("projects returned slide dimensions, regions, spatial matrix, and layer state", () => {
     const props = settled("slide_get_viewer_state", {
       fileName: "CMU-1-JP2K-33005.svs",
@@ -143,6 +167,23 @@ describe("science ToolViews", () => {
     fireEvent.click(screen.getByRole("tab", { name: "Layers" }));
     expect(screen.getByText("segmentation")).toBeInTheDocument();
     expect(screen.getByRole("checkbox")).toBeChecked();
+  });
+
+  it("mounts the production ScienceToolView with local navigation and read-only layer state", () => {
+    render(<ScienceToolView {...settled("slide_get_viewer_state", {
+      source: { width: 46000, height: 32893 },
+      scientificLayers: [{ id: "segmentation", kind: "segmentation", visible: true }],
+    })} />);
+    const map = screen.getByLabelText("Slide source extent and returned regions");
+    fireEvent.keyDown(map, { key: "+" });
+    expect(screen.getByText(/120%/)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Reset slide view"));
+    expect(screen.getByText(/100%/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("tab", { name: "Layers" }));
+    const visibility = screen.getByRole("checkbox", { name: /segmentation visibility/i });
+    expect(visibility).toBeDisabled();
+    expect(visibility).toBeChecked();
+    expect(screen.getByRole("note")).toHaveTextContent(/read-only.*slide_control_viewer/i);
   });
 
   it("shows host and scientific failures verbatim", () => {

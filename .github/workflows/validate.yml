@@ -86,6 +86,7 @@ jobs:
       - run: test "$(dsh --version)" = "0.1.1-rc.2"
       - run: test "$(pnpm --version)" = "10.15.1"
       - run: npm run pack:bundle
+      - run: npm run test:dsh-profile-evidence
       - name: Install bundle into DSH Web profile
         shell: bash
         run: |
@@ -140,6 +141,7 @@ jobs:
           if ((dsh --version) -ne '0.1.1-rc.2') { throw 'Expected DSH 0.1.1-rc.2.' }
           if ((pnpm --version) -ne '10.15.1') { throw 'Expected pnpm 10.15.1.' }
       - run: npm run pack:bundle
+      - run: npm run test:dsh-profile-evidence
       - name: Install bundle and exercise the packaged page
         shell: pwsh
         run: |

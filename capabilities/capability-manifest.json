@@ -1,31 +1,32 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-29T23:18:42.823Z",
+  "generatedAt": "2026-08-30T01:36:12.550Z",
   "target": {
     "dshVersion": "0.1.1-rc.2",
     "showcaseCount": 23,
     "serviceCount": 7,
     "skillCount": 55,
     "requiredOperationCount": 117,
-    "verifiedServiceCount": 7,
-    "verifiedSkillCount": 55,
-    "verifiedOperationCount": 117,
+    "verifiedServiceCount": 0,
+    "verifiedSkillCount": 0,
+    "verifiedOperationCount": 65,
     "successfulLocalResultOperationCount": 65,
     "exactDiagnosticOperationCount": 30,
     "mixedFixtureOperationCount": 22
   },
   "statusDefinitions": {
     "missing": "No implementation path is recorded.",
-    "implemented": "An implementation path exists, but the required fixture-contract evidence is incomplete.",
-    "verified": "Fixture-contract verified. This may be a successful local result, a mixed success/diagnostic fixture, or an exact unavailable diagnostic; consult fixtureOutcome and live evidence before claiming functional availability."
+    "implemented": "An implementation path exists, but successful operation-specific scientific output or live DSH execution remains incomplete.",
+    "verified": "A successful operation-specific local scientific result is asserted by an executed fixture, or equivalent live DSH evidence is recorded. Exact unavailable diagnostics and combined mixed fixtures do not qualify."
   },
-  "evidencePolicy": "A directory, source locator, registry dispatch, or test-file reference proves only implementation reachability. Operation verified status requires a recorded operation-specific fixture with meaningful input plus an asserted local result or exact diagnostic. Service verified status requires a meaningful service fixture and asserted result or diagnostic. Skill verified status requires a project-authored SKILL.md, DSH SkillRegistry registration/readback, whenToUse and invocation metadata, a registered main-tool or explicit instruction-only execution mode, provider/server mapping where applicable, and an executed meaningful operation/provider fixture. Live evidence is reserved for a real DSH profile or public-service execution; shared null-argument dispatch is never labeled live.",
+  "evidencePolicy": "A directory, source locator, registry dispatch, test-file reference, exact unavailable diagnostic, or combined mixed fixture proves implementation reachability and failure behavior only. Operation verified status requires an executed operation-specific fixture with meaningful input and an asserted successful local scientific result, or equivalent live DSH evidence. Service and Skill verified status require real DSH-profile execution. Shared null-argument dispatch is never labeled live.",
   "verificationRuns": [
     {
       "id": "capability-fixtures-2026-08-30",
       "status": "passed",
       "evidencePath": "docs/evidence/capability-verification.md",
-      "command": "npx vitest run tests/runtime.test.ts tests/science-literature-databases.test.ts tests/database-provider-matrix.test.ts tests/sequence-ngs-operation-matrix.test.ts tests/structure-operation-matrix.test.ts tests/science-slide-parity.test.ts tests/skills-source.test.ts tests/skills-workflow-matrix.test.ts tests/science-integration.test.ts tests/rosalind-operation.test.ts tests/dsh-host-registration.test.ts tests/capabilities.test.ts --reporter=dot",
+      "machineEvidencePath": "capabilities/evidence/capability-fixtures-2026-08-30.json",
+      "command": "npx vitest run tests/runtime.test.ts tests/science-literature-databases.test.ts tests/database-provider-matrix.test.ts tests/sequence-ngs-operation-matrix.test.ts tests/structure-operation-matrix.test.ts tests/science-slide-parity.test.ts tests/skills-source.test.ts tests/skills-workflow-matrix.test.ts tests/science-integration.test.ts tests/rosalind-operation.test.ts tests/dsh-host-registration.test.ts --reporter=dot",
       "testFiles": [
         "tests/runtime.test.ts",
         "tests/science-literature-databases.test.ts",
@@ -37,26 +38,140 @@
         "tests/skills-workflow-matrix.test.ts",
         "tests/science-integration.test.ts",
         "tests/rosalind-operation.test.ts",
-        "tests/dsh-host-registration.test.ts",
-        "tests/capabilities.test.ts"
+        "tests/dsh-host-registration.test.ts"
       ],
+      "contentIdentityFiles": [
+        "capabilities/contracts/ngs.json",
+        "capabilities/contracts/rosalind.json",
+        "capabilities/contracts/sequence.json",
+        "capabilities/contracts/slide.json",
+        "capabilities/contracts/structure.json",
+        "capabilities/sources/README.md",
+        "capabilities/sources/required-operations.json",
+        "package.json",
+        "scripts/generate-capability-manifest.mjs",
+        "scripts/record-capability-verification.mjs",
+        "showcases/catalog.json",
+        "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/candidates.csv",
+        "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/top5_ensemble_ranking.csv",
+        "skills/databases/alphafold-skill/SKILL.md",
+        "skills/databases/bgee-skill/SKILL.md",
+        "skills/databases/bindingdb-skill/SKILL.md",
+        "skills/databases/biobankjapan-phewas-skill/SKILL.md",
+        "skills/databases/biostudies-arrayexpress-skill/SKILL.md",
+        "skills/databases/cbioportal-skill/SKILL.md",
+        "skills/databases/cellxgene-skill/SKILL.md",
+        "skills/databases/chebi-skill/SKILL.md",
+        "skills/databases/chembl-skill/SKILL.md",
+        "skills/databases/civic-skill/SKILL.md",
+        "skills/databases/clinicaltrials-skill/SKILL.md",
+        "skills/databases/clinvar-variation-skill/SKILL.md",
+        "skills/databases/efo-ontology-skill/SKILL.md",
+        "skills/databases/encode-skill/SKILL.md",
+        "skills/databases/ensembl-skill/SKILL.md",
+        "skills/databases/epigraphdb-skill/SKILL.md",
+        "skills/databases/eqtl-catalogue-skill/SKILL.md",
+        "skills/databases/eva-skill/SKILL.md",
+        "skills/databases/finngen-phewas-skill/SKILL.md",
+        "skills/databases/genebass-gene-burden-skill/SKILL.md",
+        "skills/databases/gnomad-graphql-skill/SKILL.md",
+        "skills/databases/gtex-eqtl-skill/SKILL.md",
+        "skills/databases/gwas-catalog-skill/SKILL.md",
+        "skills/databases/human-protein-atlas-skill/SKILL.md",
+        "skills/databases/ipd-skill/SKILL.md",
+        "skills/databases/metabolights-skill/SKILL.md",
+        "skills/databases/mgnify-skill/SKILL.md",
+        "skills/databases/ncbi-clinicaltables-skill/SKILL.md",
+        "skills/databases/ncbi-datasets-skill/SKILL.md",
+        "skills/databases/ncbi-entrez-skill/SKILL.md",
+        "skills/databases/opentargets-skill/SKILL.md",
+        "skills/databases/pharmgkb-skill/SKILL.md",
+        "skills/databases/pride-skill/SKILL.md",
+        "skills/databases/proteomexchange-skill/SKILL.md",
+        "skills/databases/pubchem-pug-skill/SKILL.md",
+        "skills/databases/quickgo-skill/SKILL.md",
+        "skills/databases/rcsb-pdb-skill/SKILL.md",
+        "skills/databases/reactome-skill/SKILL.md",
+        "skills/databases/rhea-skill/SKILL.md",
+        "skills/databases/rnacentral-skill/SKILL.md",
+        "skills/databases/string-skill/SKILL.md",
+        "skills/databases/tpmi-phewas-skill/SKILL.md",
+        "skills/databases/ukb-topmed-phewas-skill/SKILL.md",
+        "skills/databases/uniprot-skill/SKILL.md",
+        "skills/literature/biorxiv-skill/SKILL.md",
+        "skills/literature/ncbi-entrez-skill/SKILL.md",
+        "skills/literature/ncbi-pmc-skill/SKILL.md",
+        "skills/ngs/design-ngs-analysis/SKILL.md",
+        "skills/ngs/ngs-analysis-workbench/SKILL.md",
+        "skills/ngs/run-ngs-analysis/SKILL.md",
+        "skills/ngs/understand-ngs-data/SKILL.md",
+        "skills/ngs/understand-ngs-results/SKILL.md",
+        "skills/sequence/biological-sequence-viewer/SKILL.md",
+        "skills/slide/slide-viewer/SKILL.md",
+        "skills/structure/structure-viewer/SKILL.md",
+        "src/client/components.tsx",
+        "src/client/ecosystem.tsx",
+        "src/client/icons.tsx",
+        "src/client/index.tsx",
+        "src/client/prompt.ts",
+        "src/client/science-viewers.css.ts",
+        "src/client/science-viewers.tsx",
+        "src/client/settings.tsx",
+        "src/client/state.ts",
+        "src/client/styles.ts",
+        "src/client/toolview.tsx",
+        "src/generated/.gitkeep",
+        "src/generated/catalog.ts",
+        "src/host/capabilities.ts",
+        "src/host/catalog.ts",
+        "src/host/providers.ts",
+        "src/host/reproduction.ts",
+        "src/host/runtime.ts",
+        "src/host/science-gateway-tools.ts",
+        "src/host/science-tools.ts",
+        "src/host/science/databases.ts",
+        "src/host/science/literature.ts",
+        "src/host/science/ngs.ts",
+        "src/host/science/runtime.ts",
+        "src/host/science/sequence.ts",
+        "src/host/science/slide.ts",
+        "src/host/science/structure.ts",
+        "src/host/skills.ts",
+        "src/host/tools.ts",
+        "src/host/validators.ts",
+        "src/index.ts",
+        "src/shared/categories.ts",
+        "src/shared/types.ts",
+        "tests/database-provider-matrix.test.ts",
+        "tests/dsh-host-registration.test.ts",
+        "tests/rosalind-operation.test.ts",
+        "tests/runtime.test.ts",
+        "tests/science-integration.test.ts",
+        "tests/science-literature-databases.test.ts",
+        "tests/science-slide-parity.test.ts",
+        "tests/sequence-ngs-operation-matrix.test.ts",
+        "tests/skills-source.test.ts",
+        "tests/skills-workflow-matrix.test.ts",
+        "tests/structure-operation-matrix.test.ts"
+      ],
+      "contentIdentityMatch": true,
       "typecheck": "npx tsc --noEmit --pretty false"
     }
   ],
   "statusCounts": {
     "services": {
-      "verified": 7,
-      "implemented": 0,
+      "verified": 0,
+      "implemented": 7,
       "missing": 0
     },
     "skills": {
-      "verified": 55,
-      "implemented": 0,
+      "verified": 0,
+      "implemented": 55,
       "missing": 0
     },
     "operations": {
-      "verified": 117,
-      "implemented": 0,
+      "verified": 65,
+      "implemented": 52,
       "missing": 0
     }
   },
@@ -70,7 +185,7 @@
       "implementationPath": "src/host/science/literature.ts",
       "fixtureTest": "tests/science-literature-databases.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -127,7 +242,7 @@
       "implementationPath": "src/host/science/databases.ts",
       "fixtureTest": "tests/science-literature-databases.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -183,7 +298,7 @@
       "implementationPath": "src/host/science/sequence.ts",
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -239,7 +354,7 @@
       "implementationPath": "src/host/science/ngs.ts",
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -295,7 +410,7 @@
       "implementationPath": "src/host/science/structure.ts",
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -351,7 +466,7 @@
       "implementationPath": "src/host/science/slide.ts",
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -407,7 +522,7 @@
       "implementationPath": "src/host/science/runtime.ts",
       "fixtureTest": "tests/rosalind-operation.test.ts",
       "liveTest": null,
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -464,7 +579,7 @@
       "implementationPath": "skills/literature/biorxiv-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -492,11 +607,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -534,7 +650,7 @@
       "implementationPath": "skills/literature/ncbi-entrez-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -562,11 +678,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -604,7 +721,7 @@
       "implementationPath": "skills/literature/ncbi-pmc-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -632,11 +749,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -674,7 +792,7 @@
       "implementationPath": "skills/databases/alphafold-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -702,11 +820,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -744,7 +863,7 @@
       "implementationPath": "skills/databases/bgee-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -772,11 +891,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -814,7 +934,7 @@
       "implementationPath": "skills/databases/bindingdb-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -842,11 +962,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -884,7 +1005,7 @@
       "implementationPath": "skills/databases/biobankjapan-phewas-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -912,11 +1033,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -954,7 +1076,7 @@
       "implementationPath": "skills/databases/biostudies-arrayexpress-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -982,11 +1104,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1024,7 +1147,7 @@
       "implementationPath": "skills/databases/cbioportal-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1052,11 +1175,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1094,7 +1218,7 @@
       "implementationPath": "skills/databases/cellxgene-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1122,11 +1246,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1164,7 +1289,7 @@
       "implementationPath": "skills/databases/chebi-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1192,11 +1317,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1234,7 +1360,7 @@
       "implementationPath": "skills/databases/chembl-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1262,11 +1388,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1304,7 +1431,7 @@
       "implementationPath": "skills/databases/civic-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1332,11 +1459,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1374,7 +1502,7 @@
       "implementationPath": "skills/databases/clinicaltrials-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1402,11 +1530,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1444,7 +1573,7 @@
       "implementationPath": "skills/databases/clinvar-variation-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1472,11 +1601,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1514,7 +1644,7 @@
       "implementationPath": "skills/databases/efo-ontology-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1542,11 +1672,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1584,7 +1715,7 @@
       "implementationPath": "skills/databases/encode-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1612,11 +1743,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1654,7 +1786,7 @@
       "implementationPath": "skills/databases/ensembl-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1682,11 +1814,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1724,7 +1857,7 @@
       "implementationPath": "skills/databases/epigraphdb-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1752,11 +1885,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1794,7 +1928,7 @@
       "implementationPath": "skills/databases/eqtl-catalogue-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1822,11 +1956,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1864,7 +1999,7 @@
       "implementationPath": "skills/databases/eva-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1892,11 +2027,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -1934,7 +2070,7 @@
       "implementationPath": "skills/databases/finngen-phewas-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -1962,11 +2098,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2004,7 +2141,7 @@
       "implementationPath": "skills/databases/genebass-gene-burden-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2032,11 +2169,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2074,7 +2212,7 @@
       "implementationPath": "skills/databases/gnomad-graphql-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2102,11 +2240,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2144,7 +2283,7 @@
       "implementationPath": "skills/databases/gtex-eqtl-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2172,11 +2311,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2214,7 +2354,7 @@
       "implementationPath": "skills/databases/gwas-catalog-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2242,11 +2382,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2284,7 +2425,7 @@
       "implementationPath": "skills/databases/human-protein-atlas-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2312,11 +2453,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2354,7 +2496,7 @@
       "implementationPath": "skills/databases/ipd-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2382,11 +2524,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2424,7 +2567,7 @@
       "implementationPath": "skills/databases/metabolights-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2452,11 +2595,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2494,7 +2638,7 @@
       "implementationPath": "skills/databases/mgnify-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2522,11 +2666,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2564,7 +2709,7 @@
       "implementationPath": "skills/databases/ncbi-clinicaltables-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2592,11 +2737,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2634,7 +2780,7 @@
       "implementationPath": "skills/databases/ncbi-datasets-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2662,11 +2808,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2704,7 +2851,7 @@
       "implementationPath": "skills/databases/ncbi-entrez-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2732,11 +2879,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2774,7 +2922,7 @@
       "implementationPath": "skills/databases/opentargets-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2802,11 +2950,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2844,7 +2993,7 @@
       "implementationPath": "skills/databases/pharmgkb-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2872,11 +3021,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2914,7 +3064,7 @@
       "implementationPath": "skills/databases/pride-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -2942,11 +3092,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -2984,7 +3135,7 @@
       "implementationPath": "skills/databases/proteomexchange-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3012,11 +3163,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3054,7 +3206,7 @@
       "implementationPath": "skills/databases/pubchem-pug-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3082,11 +3234,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3124,7 +3277,7 @@
       "implementationPath": "skills/databases/quickgo-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3152,11 +3305,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3194,7 +3348,7 @@
       "implementationPath": "skills/databases/rcsb-pdb-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3222,11 +3376,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3264,7 +3419,7 @@
       "implementationPath": "skills/databases/reactome-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3292,11 +3447,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3334,7 +3490,7 @@
       "implementationPath": "skills/databases/rhea-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3362,11 +3518,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3404,7 +3561,7 @@
       "implementationPath": "skills/databases/rnacentral-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3432,11 +3589,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3474,7 +3632,7 @@
       "implementationPath": "skills/databases/string-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3502,11 +3660,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3544,7 +3703,7 @@
       "implementationPath": "skills/databases/tpmi-phewas-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3572,11 +3731,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3614,7 +3774,7 @@
       "implementationPath": "skills/databases/ukb-topmed-phewas-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3642,11 +3802,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3684,7 +3845,7 @@
       "implementationPath": "skills/databases/uniprot-skill/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-literature-databases.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3712,11 +3873,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3754,7 +3916,7 @@
       "implementationPath": "skills/sequence/biological-sequence-viewer/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/sequence-ngs-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3782,11 +3944,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3824,7 +3987,7 @@
       "implementationPath": "skills/ngs/design-ngs-analysis/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/sequence-ngs-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3852,11 +4015,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3894,7 +4058,7 @@
       "implementationPath": "skills/ngs/ngs-analysis-workbench/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/sequence-ngs-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3922,11 +4086,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -3964,7 +4129,7 @@
       "implementationPath": "skills/ngs/run-ngs-analysis/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/sequence-ngs-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -3992,11 +4157,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -4034,7 +4200,7 @@
       "implementationPath": "skills/ngs/understand-ngs-data/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/sequence-ngs-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -4062,11 +4228,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -4104,7 +4271,7 @@
       "implementationPath": "skills/ngs/understand-ngs-results/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/sequence-ngs-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -4132,11 +4299,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -4174,7 +4342,7 @@
       "implementationPath": "skills/structure/structure-viewer/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/structure-operation-matrix.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -4202,11 +4370,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -4244,7 +4413,7 @@
       "implementationPath": "skills/slide/slide-viewer/SKILL.md",
       "triggerTest": "tests/skills-workflow-matrix.test.ts",
       "workflowTest": "tests/science-slide-parity.test.ts",
-      "status": "verified",
+      "status": "implemented",
       "liveTest": null,
       "evidence": {
         "implementation": {
@@ -4272,11 +4441,12 @@
         },
         "registration": {
           "status": "executed",
-          "path": "tests/capabilities.test.ts",
-          "locator": "verifies all 55 Skill invocation records",
-          "kind": "skill-invocation-metadata-fixture",
+          "path": "tests/dsh-host-registration.test.ts",
+          "locator": "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+          "kind": "dsh-skill-registry-readback-fixture",
+          "assertionLocator": "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });",
           "executionId": "capability-fixtures-2026-08-30",
-          "scope": "skill-whenToUse-and-invocation-metadata"
+          "scope": "dsh-skill-registry-readback-and-invocation"
         },
         "live": {
           "status": "missing",
@@ -4455,8 +4625,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -4482,6 +4652,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -4500,6 +4671,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -4542,6 +4714,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -4600,7 +4779,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -4643,12 +4822,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -4670,6 +4850,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -4688,6 +4869,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -4730,6 +4912,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -4788,7 +4977,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -4831,12 +5020,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -4858,6 +5048,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -4876,6 +5067,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -4918,6 +5110,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -4976,7 +5175,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -5020,11 +5219,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -5046,6 +5246,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -5064,6 +5265,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -5106,6 +5308,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -5168,7 +5377,7 @@
         "ngs-fastq-qc",
         "ngs-single-cell"
       ],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -5211,12 +5420,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -5238,6 +5448,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -5256,6 +5467,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -5298,6 +5510,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -5356,7 +5575,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -5399,12 +5618,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -5426,6 +5646,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -5444,6 +5665,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -5486,6 +5708,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -5544,7 +5773,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -5587,12 +5816,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -5614,6 +5844,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -5632,6 +5863,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -5674,6 +5906,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -5732,7 +5971,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -5775,12 +6014,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -5802,6 +6042,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -5820,6 +6061,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -5862,6 +6104,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -5922,7 +6171,7 @@
       "relatedShowcases": [
         "ngs-fastq-qc"
       ],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -5965,12 +6214,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -5992,6 +6242,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -6010,6 +6261,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -6052,6 +6304,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -6110,7 +6369,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -6153,12 +6412,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -6180,6 +6440,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -6198,6 +6459,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -6240,6 +6502,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -6298,7 +6567,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -6341,12 +6610,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -6368,6 +6638,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -6386,6 +6657,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -6428,6 +6700,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -6486,7 +6765,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -6529,12 +6808,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -6556,6 +6836,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -6574,6 +6855,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -6616,6 +6898,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -6678,7 +6967,7 @@
         "ngs-fastq-qc",
         "ngs-single-cell"
       ],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -6721,12 +7010,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -6748,6 +7038,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -6766,6 +7057,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -6808,6 +7100,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -6866,7 +7165,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -6909,12 +7208,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -6936,6 +7236,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -6954,6 +7255,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -6996,6 +7298,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -7054,7 +7363,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -7097,12 +7406,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -7124,6 +7434,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -7142,6 +7453,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -7184,6 +7496,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -7242,7 +7561,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -7285,12 +7604,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -7312,6 +7632,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -7330,6 +7651,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -7372,6 +7694,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -7430,7 +7759,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -7473,12 +7802,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -7500,6 +7830,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -7518,6 +7849,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -7560,6 +7892,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -7618,7 +7957,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -7661,12 +8000,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -7688,6 +8028,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -7706,6 +8047,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -7748,6 +8090,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -7806,7 +8155,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -7849,12 +8198,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -7876,6 +8226,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -7894,6 +8245,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -7936,6 +8288,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -7994,7 +8353,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -8037,12 +8396,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -8064,6 +8424,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -8082,6 +8443,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -8124,6 +8486,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -8182,7 +8551,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -8225,12 +8594,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -8252,6 +8622,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -8270,6 +8641,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -8312,6 +8684,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -8370,7 +8749,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -8413,12 +8792,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -8440,6 +8820,7 @@
           "active_version_id": {},
           "archived": {},
           "arguments": {},
+          "availability": {},
           "cancellation_requested": {},
           "cancelled": {},
           "catalog_source_checksum": {},
@@ -8458,6 +8839,7 @@
             }
           },
           "engine": {},
+          "errors": {},
           "events": {},
           "executable": {},
           "exit_code": {},
@@ -8500,6 +8882,13 @@
           "workflow_id": {},
           "workflow_version_id": {},
           "workflows": {},
+          "execution_receipt": {},
+          "mcp_server": {},
+          "report": {},
+          "reused": {},
+          "viewer": {},
+          "viewerReady": {},
+          "workspaceSection": {},
           "serviceId": {
             "type": "string",
             "const": "ngs"
@@ -8558,7 +8947,7 @@
       "fixtureTest": "tests/sequence-ngs-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -8601,12 +8990,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "mixed-success-and-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the combined fixture does not prove a successful result for this individual operation"
       ]
     },
     {
@@ -8631,6 +9021,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -8781,8 +9173,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -8811,6 +9203,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -8961,8 +9355,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -8991,6 +9385,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -9142,8 +9538,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific error assertion is recorded"
@@ -9171,6 +9567,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -9323,8 +9721,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -9353,6 +9751,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -9503,8 +9903,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -9533,6 +9933,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -9685,8 +10087,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -9715,6 +10117,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -9865,8 +10269,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -9895,6 +10299,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -10045,8 +10451,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -10075,6 +10481,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -10227,8 +10635,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -10257,6 +10665,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -10409,8 +10819,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -10439,6 +10849,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -10589,8 +11001,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -10619,6 +11031,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -10771,8 +11185,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -10801,6 +11215,8 @@
           "annotations": {},
           "applied": {},
           "artifact": {},
+          "artifactCount": {},
+          "artifacts": {},
           "bases": {},
           "cancelled": {},
           "code": {},
@@ -10951,8 +11367,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -11161,8 +11577,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -11371,8 +11787,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -11581,8 +11997,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -11790,8 +12206,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -11956,7 +12372,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -11998,11 +12414,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -12164,7 +12581,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -12206,11 +12623,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -12372,7 +12790,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -12415,10 +12833,11 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
-        "no real DSH-profile or public-service live execution is recorded"
+        "no real DSH-profile or public-service live execution is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -12625,8 +13044,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -12835,8 +13254,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -13046,8 +13465,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -13212,7 +13631,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -13254,11 +13673,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -13463,8 +13883,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -13630,7 +14050,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -13672,11 +14092,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -13880,8 +14301,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -14089,8 +14510,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -14299,8 +14720,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -14466,7 +14887,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -14508,11 +14929,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -14674,7 +15096,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -14716,11 +15138,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -14882,7 +15305,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -14924,11 +15347,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -15133,8 +15557,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -15344,8 +15768,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -15553,8 +15977,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -15762,8 +16186,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -15973,8 +16397,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -16185,8 +16609,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -16352,7 +16776,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -16394,11 +16818,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -16602,8 +17027,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -16811,8 +17236,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -17021,8 +17446,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -17190,7 +17615,7 @@
       "relatedShowcases": [
         "structure-gfp-figure"
       ],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -17232,11 +17657,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -17398,7 +17824,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -17440,11 +17866,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -17649,8 +18076,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -17816,7 +18243,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -17858,11 +18285,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -18024,7 +18452,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -18066,11 +18494,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -18275,8 +18704,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -18484,8 +18913,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -18692,8 +19121,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -18858,7 +19287,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -18900,11 +19329,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -19109,8 +19539,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -19319,8 +19749,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -19486,7 +19916,7 @@
       "fixtureTest": "tests/structure-operation-matrix.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -19528,11 +19958,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -19728,8 +20159,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific error assertion is recorded"
@@ -19928,8 +20359,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific error assertion is recorded"
@@ -20128,8 +20559,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific error assertion is recorded"
@@ -20328,8 +20759,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific error assertion is recorded"
@@ -20484,7 +20915,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -20526,11 +20957,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -20725,8 +21157,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -20925,8 +21357,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -21125,8 +21557,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -21325,8 +21757,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -21524,8 +21956,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -21723,8 +22155,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -21922,8 +22354,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"
@@ -22121,8 +22553,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -22321,8 +22753,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -22478,7 +22910,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -22520,11 +22952,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -22719,8 +23152,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -22919,8 +23352,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -23076,7 +23509,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -23118,11 +23551,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -23317,8 +23751,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -23517,8 +23951,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -23717,8 +24151,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -23874,7 +24308,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -23916,11 +24350,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -24072,7 +24507,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -24114,11 +24549,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -24313,8 +24749,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -24513,8 +24949,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -24670,7 +25106,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -24712,11 +25148,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -24868,7 +25305,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -24910,11 +25347,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -25066,7 +25504,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -25108,11 +25546,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -25307,8 +25746,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -25464,7 +25903,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -25506,11 +25945,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -25662,7 +26102,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -25704,11 +26144,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -25860,7 +26301,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -25902,11 +26343,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -26101,8 +26543,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -26301,8 +26743,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -26458,7 +26900,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -26500,11 +26942,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -26656,7 +27099,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -26698,11 +27141,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -26854,7 +27298,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -26897,12 +27341,13 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
-        "no operation-specific error assertion is recorded"
+        "no operation-specific error assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -27097,8 +27542,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded",
@@ -27254,7 +27699,7 @@
       "fixtureTest": "tests/science-slide-parity.test.ts",
       "liveTest": null,
       "relatedShowcases": [],
-      "status": "verified",
+      "status": "implemented",
       "evidence": {
         "implementation": {
           "status": "located",
@@ -27296,11 +27741,12 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "exact-diagnostic",
+      "verificationScope": "implementation-and-diagnostic-fixture",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
-        "no operation-specific cancellation assertion is recorded"
+        "no operation-specific cancellation assertion is recorded",
+        "the fixture proves an exact unavailable diagnostic, not a successful scientific result"
       ]
     },
     {
@@ -27494,8 +27940,8 @@
           "scope": "operation-error-or-diagnostic"
         }
       },
-      "verificationScope": "fixture-contract",
       "fixtureOutcome": "successful-local-result",
+      "verificationScope": "local-result-fixture-contract",
       "evidenceGaps": [
         "no real DSH-profile or public-service live execution is recorded",
         "no operation-specific cancellation assertion is recorded"

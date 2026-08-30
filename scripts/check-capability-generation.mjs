@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { cp, mkdir, mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { appendFile, cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
@@ -9,15 +9,19 @@ const committedDirectory = path.join(repositoryRoot, "capabilities");
 const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "dsh-rosalind-capabilities-"));
 const isolatedRepository = path.join(temporaryRoot, "checkout");
 const outputDirectory = path.join(temporaryRoot, "generated");
+const staleFixedInputOutputDirectory = path.join(temporaryRoot, "generated-after-fixed-input-change");
+const staleSourceOutputDirectory = path.join(temporaryRoot, "generated-after-source-change");
 const readJson = async (file) => JSON.parse(await readFile(file, "utf8"));
 const requiredRepositoryPaths = [
+  "package.json",
   "scripts/generate-capability-manifest.mjs",
+  "scripts/record-capability-verification.mjs",
   "capabilities/sources",
   "capabilities/contracts",
-  "showcases/catalog.json",
+  "showcases",
   "docs/evidence/capability-verification.md",
-  "src/host/science",
-  "src/host/science-tools.ts",
+  "capabilities/evidence",
+  "src",
   "tests",
   "skills",
 ];
@@ -71,7 +75,39 @@ try {
     );
   }
 
-  console.log(`Capability generation reproduced 7 services, 55 Skills, 117 operations, and ${contractFiles.length} contracts from repository inputs.`);
+  const candidatesPath = path.join(
+    isolatedRepository,
+    "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/candidates.csv",
+  );
+  const originalCandidates = await readFile(candidatesPath, "utf8");
+  await appendFile(candidatesPath, "\n", "utf8");
+  execFileSync(process.execPath, ["scripts/generate-capability-manifest.mjs"], {
+    cwd: isolatedRepository,
+    env: { ...cleanEnvironment, ROSALIND_CAPABILITY_OUTPUT_DIR: staleFixedInputOutputDirectory },
+    stdio: "pipe",
+  });
+  const staleFixedInputManifest = await readJson(path.join(staleFixedInputOutputDirectory, "capability-manifest.json"));
+  assert.equal(staleFixedInputManifest.verificationRuns[0].status, "not-recorded");
+  assert.equal(staleFixedInputManifest.verificationRuns[0].contentIdentityMatch, false);
+  assert.equal(staleFixedInputManifest.target.verifiedOperationCount, 0);
+  await writeFile(candidatesPath, originalCandidates, "utf8");
+
+  await appendFile(
+    path.join(isolatedRepository, "src", "host", "science", "ngs.ts"),
+    "\n// capability evidence invalidation probe\n",
+    "utf8",
+  );
+  execFileSync(process.execPath, ["scripts/generate-capability-manifest.mjs"], {
+    cwd: isolatedRepository,
+    env: { ...cleanEnvironment, ROSALIND_CAPABILITY_OUTPUT_DIR: staleSourceOutputDirectory },
+    stdio: "pipe",
+  });
+  const staleSourceManifest = await readJson(path.join(staleSourceOutputDirectory, "capability-manifest.json"));
+  assert.equal(staleSourceManifest.verificationRuns[0].status, "not-recorded");
+  assert.equal(staleSourceManifest.verificationRuns[0].contentIdentityMatch, false);
+  assert.equal(staleSourceManifest.target.verifiedOperationCount, 0);
+
+  console.log(`Capability generation reproduced 7 services, 55 Skills, 117 operations, and ${contractFiles.length} contracts; fixed-input and source mutations invalidated executed evidence.`);
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });
 }

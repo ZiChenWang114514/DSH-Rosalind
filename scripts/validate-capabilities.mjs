@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
@@ -41,8 +42,37 @@ const runs = new Map((manifest.verificationRuns ?? []).map((run) => [run.id, run
 for (const run of runs.values()) {
   if (!run.id || !["passed", "not-recorded"].includes(run.status)) failures.push("verification run has an invalid id or status");
   if (!run.evidencePath || !existsSync(path.join(root, run.evidencePath))) failures.push(`${run.id}: verification evidence document is missing`);
+  if (!run.machineEvidencePath || !existsSync(path.join(root, run.machineEvidencePath))) failures.push(`${run.id}: machine-readable verification evidence is missing`);
+  if (run.status === "passed" && run.contentIdentityMatch !== true) failures.push(`${run.id}: passing verification evidence does not match current content`);
   if (!Array.isArray(run.testFiles)) failures.push(`${run.id}: testFiles must be an array`);
   else for (const test of run.testFiles) if (!existsSync(path.join(root, test))) failures.push(`${run.id}: recorded test file does not exist: ${test}`);
+  if (!Array.isArray(run.contentIdentityFiles) || run.contentIdentityFiles.length === 0) {
+    failures.push(`${run.id}: contentIdentityFiles must list the test inputs`);
+    continue;
+  }
+  if (run.testFiles?.some((test) => !run.contentIdentityFiles.includes(test))) {
+    failures.push(`${run.id}: every executed test must be content-bound`);
+  }
+  if (!run.machineEvidencePath || !existsSync(path.join(root, run.machineEvidencePath))) continue;
+  const machineRecord = JSON.parse(readFileSync(path.join(root, run.machineEvidencePath), "utf8"));
+  if (machineRecord.runId !== run.id || machineRecord.status !== "passed") {
+    failures.push(`${run.id}: machine evidence does not identify a passing matching run`);
+    continue;
+  }
+  const recordedFiles = machineRecord.contentIdentityFiles;
+  if (!Array.isArray(recordedFiles) || JSON.stringify([...recordedFiles].sort()) !== JSON.stringify([...run.contentIdentityFiles].sort())) {
+    failures.push(`${run.id}: machine evidence content-identity file list differs from the manifest`);
+    continue;
+  }
+  for (const file of run.contentIdentityFiles) {
+    const absolutePath = path.join(root, file);
+    if (!existsSync(absolutePath)) {
+      failures.push(`${run.id}: content-identity file does not exist: ${file}`);
+      continue;
+    }
+    const digest = createHash("sha256").update(readFileSync(absolutePath)).digest("hex");
+    if (machineRecord.contentIdentities?.[file] !== digest) failures.push(`${run.id}: machine evidence hash differs for ${file}`);
+  }
 }
 
 const evidenceStatuses = new Set(["located", "executed", "referenced", "missing", "not-applicable"]);
@@ -82,21 +112,27 @@ for (const [itemKind, items] of [["service", manifest.services], ["skill", manif
   for (const name of ["implementation", "fixture", "live", "cancellation", "error"]) validateEvidence(item, name, item.evidence?.[name]);
   if (item.evidence?.workflow) validateEvidence(item, "workflow", item.evidence.workflow);
   if (item.evidence?.registration) validateEvidence(item, "registration", item.evidence.registration);
+  if (itemKind === "skill") {
+    const registration = item.evidence?.registration;
+    if (registration?.kind !== "dsh-skill-registry-readback-fixture") failures.push(`${item.id}: Skill registration evidence must be a DSH SkillRegistry readback fixture`);
+    if (registration?.path !== "tests/dsh-host-registration.test.ts") failures.push(`${item.id}: Skill registration evidence must not rely on the manifest-validation test`);
+    if (registration?.scope !== "dsh-skill-registry-readback-and-invocation") failures.push(`${item.id}: Skill registration evidence must identify DSH SkillRegistry readback and invocation`);
+  }
   if (item.evidence?.implementation?.path !== item.implementationPath) failures.push(`${item.id}: implementation evidence must point to implementationPath`);
   if (item.status === "implemented" && (!Array.isArray(item.evidenceGaps) || item.evidenceGaps.length === 0)) failures.push(`${item.id}: implemented status requires explicit missing evidence`);
   if (item.status === "verified") {
     if (item.evidence?.implementation?.status !== "located") failures.push(`${item.id}: verified requires located implementation evidence`);
     if (item.evidence?.fixture?.status !== "executed") failures.push(`${item.id}: verified requires executed fixture evidence`);
     if (itemKind === "operation") {
-      if (!["successful-local-result", "mixed-success-and-diagnostic", "exact-diagnostic"].includes(item.fixtureOutcome)) failures.push(`${item.id}: verified operation requires an explicit fixtureOutcome`);
-      if (item.verificationScope !== "fixture-contract") failures.push(`${item.id}: verified operation must identify fixture-contract scope`);
+      if (item.fixtureOutcome !== "successful-local-result") failures.push(`${item.id}: verified operation requires a successful local-result fixtureOutcome`);
+      if (item.verificationScope !== "local-result-fixture-contract") failures.push(`${item.id}: verified operation must identify local-result-fixture-contract scope`);
       if (item.evidence.fixture.kind !== "operation-contract-fixture") failures.push(`${item.id}: verified operation requires an operation-contract fixture`);
       if (typeof item.evidence.fixture.assertionLocator !== "string" || !item.evidence.fixture.assertionLocator) failures.push(`${item.id}: verified operation requires a result or exact-diagnostic assertion locator`);
     }
     if (itemKind === "skill") {
       if (item.evidence?.fixture?.kind !== "skill-specific-registry-and-tool-fixture") failures.push(`${item.id}: verified Skill requires a Skill-specific registry and tool fixture`);
       if (item.evidence?.workflow?.status !== "executed") failures.push(`${item.id}: verified Skill requires an executed operation or provider workflow fixture`);
-      if (item.evidence?.registration?.status !== "executed") failures.push(`${item.id}: verified Skill requires executed whenToUse and invocation metadata checks`);
+      if (item.evidence?.registration?.status !== "executed") failures.push(`${item.id}: verified Skill requires executed DSH SkillRegistry readback and invocation checks`);
     }
   }
   if (item.evidence?.live?.status === "executed" && !String(item.evidence.live.scope).startsWith("live-")) failures.push(`${item.id}: live evidence must come from a real DSH profile or public-service scope`);

@@ -1,4 +1,4 @@
-import { chmodSync, mkdtempSync, writeFileSync } from "node:fs";
+import { chmodSync, copyFileSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -14,12 +14,13 @@ function callId(value: string): ToolExecutionInput["callId"] {
   return value as ToolExecutionInput["callId"];
 }
 
-function installSlowSnakemake(bin: string): void {
+function installSlowNextflow(bin: string): void {
   if (process.platform === "win32") {
-    writeFileSync(join(bin, "snakemake.cmd"), "@echo off\r\necho bundle lifecycle fixture\r\ntimeout /t 30 /nobreak >nul\r\n", "utf8");
+    copyFileSync(process.execPath, join(bin, "nextflow.exe"));
+    writeFileSync(join(bin, "..", "run"), "console.log('bundle lifecycle fixture'); setTimeout(() => {}, 30000);\n", "utf8");
     return;
   }
-  const executable = join(bin, "snakemake");
+  const executable = join(bin, "nextflow");
   writeFileSync(executable, "#!/bin/sh\necho 'bundle lifecycle fixture'\nsleep 30\n", "utf8");
   chmodSync(executable, 0o755);
 }
@@ -56,7 +57,8 @@ describe("DSH bundle NGS process lifecycle", () => {
     const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-bundle-dispose-"));
     const bin = join(root, "bin");
     await import("node:fs/promises").then(({ mkdir }) => mkdir(bin));
-    installSlowSnakemake(bin);
+    installSlowNextflow(bin);
+    writeFileSync(join(root, "workflow.nf"), "workflow { println 'bundle lifecycle fixture' }\n", "utf8");
     process.env.PATH = `${bin}${process.platform === "win32" ? ";" : ":"}${originalPath ?? ""}`;
 
     const ctx = new Context();
@@ -69,8 +71,17 @@ describe("DSH bundle NGS process lifecycle", () => {
     const allowFixture = ctx.on("tools/pre-execute", async () => ({ kind: "allow" as const }));
     const plugin = ctx.plugin(bundle); await plugin; fibers.push(plugin);
 
-    const planned = await execute(ctx, "ngs_plan_snakemake", {
-      workflow_id: "oai_fastq_qc",
+    const saved = await execute(ctx, "ngs_save_workflow", {
+      workflow_id: "bundle_disposal_nextflow",
+      name: "Bundle disposal Nextflow",
+      engine: "nextflow",
+      source: { kind: "local", root, entrypoint: "workflow.nf" },
+    });
+    expect(saved.isError).toBe(false);
+    if (saved.isError) return;
+
+    const planned = await execute(ctx, "ngs_plan_nextflow", {
+      workflow_id: "bundle_disposal_nextflow",
       run_dir: root,
       display_name: "Bundle disposal fixture",
     });

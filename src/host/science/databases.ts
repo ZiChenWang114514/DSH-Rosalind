@@ -1,4 +1,6 @@
-import { ScienceServiceError, type FetchLike, type JsonRecord, type ScienceExecutionContext } from "./literature.js";
+import { boundedInteger, boundedValue, controlledHeaders, controlledRequest, ScienceServiceError, type FetchLike, type JsonRecord, type ScienceExecutionContext } from "./literature.js";
+import { readFile } from "node:fs/promises";
+import { isAbsolute, relative, resolve } from "node:path";
 
 /** Public-source request adapters for the fixed 0.1.5 database Skills. */
 export interface DatabaseProvider {
@@ -21,7 +23,13 @@ export interface DatabaseResult {
   sources: Array<{ name: string; url: string; checkedAt: string }>;
   pagination?: { page: number; pageSize: number; nextCursor?: string; total?: number };
   diagnostics: string[];
-  request?: { method: string; url: string; bodyFormat?: "json" | "form" | "sparql" };
+  request?: {
+    method: string;
+    url: string;
+    bodyFormat?: "json" | "form" | "sparql";
+    response_format?: "json" | "xml" | "text" | "tsv" | "fasta";
+    raw_output_path?: string;
+  };
   error?: { code: string; message: string; status?: number };
 }
 
@@ -79,10 +87,26 @@ export const DATABASE_PROVIDERS: readonly DatabaseProvider[] = PROVIDER_DEFINITI
 
 function asRecord(value: unknown): JsonRecord | undefined { return value && typeof value === "object" && !Array.isArray(value) ? value as JsonRecord : undefined; }
 function stringValue(value: unknown): string | undefined { if (typeof value === "string" && value.trim()) return value.trim(); if (typeof value === "number") return String(value); return undefined; }
-function integer(value: unknown, fallback: number, max: number): number { const parsed = typeof value === "number" ? value : Number(value); return Number.isInteger(parsed) && parsed >= 0 && parsed <= max ? parsed : fallback; }
 function safePath(value: unknown): string { if (typeof value !== "string" || !value.trim()) return ""; const trimmed = value.trim(); if (trimmed.includes("..")) throw new ScienceServiceError("INVALID_PATH", "Provider paths may not contain '..'."); if (/^https:\/\//.test(trimmed)) return trimmed; if (trimmed.includes("://")) throw new ScienceServiceError("INVALID_PATH", "Provider paths must be relative or use HTTPS."); return trimmed.replace(/^\/+/, ""); }
 function getPath(value: unknown, dottedPath: string): unknown { if (!dottedPath) return value; return dottedPath.split(".").reduce<unknown>((current, key) => asRecord(current)?.[key], value); }
-function recordsFrom(payload: unknown, paths: readonly string[]): unknown[] { if (Array.isArray(payload)) return payload; for (const path of paths) { const selected = getPath(payload, path); if (Array.isArray(selected)) return selected; if (selected && path && typeof selected === "object") return [selected]; } return payload === null || payload === undefined ? [] : [payload]; }
+function recordsFrom(payload: unknown, paths: readonly string[], args: JsonRecord): unknown[] {
+  const recordPath = stringValue(args.record_path);
+  if (recordPath && !/^[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*$/.test(recordPath)) {
+    throw new ScienceServiceError("INVALID_RECORD_PATH", "record_path must use dot-separated object keys.");
+  }
+  const candidates = recordPath ? [recordPath] : paths;
+  let values: unknown[] | undefined;
+  if (Array.isArray(payload)) values = payload;
+  else for (const path of candidates) {
+    const selected = getPath(payload, path);
+    if (Array.isArray(selected)) { values = selected; break; }
+    if (selected && typeof selected === "object" && path) { values = [selected]; break; }
+  }
+  if (!values) values = payload === null || payload === undefined ? [] : [payload];
+  const maxItems = boundedInteger(args.max_items ?? args.maxItems, 20, 1, 500, "max_items");
+  const maxDepth = boundedInteger(args.max_depth, 4, 1, 12, "max_depth");
+  return values.slice(0, maxItems).map((value) => boundedValue(value, maxDepth));
+}
 function identifier(args: JsonRecord): string | undefined { return stringValue(args.identifier) ?? stringValue(args.id) ?? stringValue(args.accession) ?? stringValue(args.variant) ?? stringValue(args.target) ?? stringValue(args.gene); }
 function operationName(args: JsonRecord): string { return (stringValue(args.operation) ?? stringValue(args.action) ?? "").toLowerCase().replace(/[-_]/g, ""); }
 function replaceTemplate(path: string, id: string | undefined, args: JsonRecord): string { return path.replace(/\{([^}]+)\}/g, (_match, key: string) => encodeURIComponent(stringValue(args[key]) ?? (key === "id" ? id ?? "" : ""))); }
@@ -102,10 +126,72 @@ function validateProviderUrl(provider: ProviderDefinition, url: URL): void {
 }
 function setIfMissing(params: URLSearchParams, key: string, value: string): void { if (!params.has(key)) params.set(key, value); }
 function collectParameters(args: JsonRecord): URLSearchParams { const params = new URLSearchParams(); const supplied = asRecord(args.params) ?? (typeof args.query === "object" ? asRecord(args.query) : undefined); if (supplied) for (const [key, value] of Object.entries(supplied)) if (value !== null && value !== undefined && typeof value !== "object") params.set(key, String(value)); return params; }
+function appendFormParameters(params: URLSearchParams, value: unknown): void {
+  if (value === undefined) return;
+  const form = asRecord(value);
+  if (!form) throw new ScienceServiceError("INVALID_FORM_BODY", "form_body must be an object with scalar values.");
+  for (const [key, item] of Object.entries(form)) {
+    if (item === null || item === undefined || typeof item === "object") throw new ScienceServiceError("INVALID_FORM_BODY", "form_body values must be scalar.");
+    params.set(key, String(item));
+  }
+}
 function gtexVariant(args: JsonRecord): string | undefined { const raw = identifier(args); if (!raw) return undefined; if (/^chr.+_b38$/i.test(raw)) return raw; const match = raw.replace(/^chr/i, "").match(/^([^:_-]+)[:_-](\d+)[:_-]([A-Za-z]+)[:_-]([A-Za-z]+)$/); return match ? `chr${match[1]!}_${match[2]!}_${match[3]!.toUpperCase()}_${match[4]!.toUpperCase()}_b38` : raw; }
-function graphqlQuery(provider: DatabaseProvider, args: JsonRecord, page: number, pageSize: number): { query: string; variables: JsonRecord } { const explicit = stringValue(args.query); const variables = asRecord(args.variables) ?? {}; if (explicit) return { query: explicit, variables }; if (provider.id === "opentargets") { const target = stringValue(args.target) ?? stringValue(args.ensemblId) ?? ""; const disease = stringValue(args.disease) ?? stringValue(args.diseaseId) ?? ""; return { query: "query TargetDiseases($ensemblId: String!, $index: Int!, $size: Int!) { target(ensemblId: $ensemblId) { id approvedSymbol associatedDiseases(page: {index: $index, size: $size}) { rows { disease { id name } score } } } }", variables: { ensemblId: target, index: page, size: pageSize, ...(disease ? { diseaseId: disease } : {}), ...variables } }; } if (provider.id === "gnomad-graphql") return { query: "query Gene($geneId: String!) { gene(gene_id: $geneId, reference_genome: GRCh38) { gene_id symbol } }", variables: { geneId: identifier(args) ?? "", ...variables } }; return { query: "query Civic { __typename }", variables }; }
+function packageFile(packageRoot: string, candidate: unknown): string {
+  if (typeof candidate !== "string" || !candidate.trim()) throw new ScienceServiceError("MISSING_GRAPHQL_QUERY", "gnomAD requires query or query_path.");
+  if (isAbsolute(candidate)) throw new ScienceServiceError("INVALID_QUERY_PATH", "query_path must be relative to the DSH-Rosalind package.");
+  const root = resolve(packageRoot);
+  const file = resolve(root, candidate);
+  const rel = relative(root, file);
+  if (!rel || rel.startsWith("..") || isAbsolute(rel)) throw new ScienceServiceError("INVALID_QUERY_PATH", "query_path must remain inside the DSH-Rosalind package.");
+  return file;
+}
+
+async function graphqlQuery(provider: DatabaseProvider, args: JsonRecord, page: number, pageSize: number, packageRoot: string): Promise<{ query: string; variables: JsonRecord }> {
+  let explicit = stringValue(args.query);
+  if (!explicit && args.query_path !== undefined) {
+    try { explicit = (await readFile(packageFile(packageRoot, args.query_path), "utf8")).trim(); }
+    catch (error) {
+      if (error instanceof ScienceServiceError) throw error;
+      throw new ScienceServiceError("QUERY_PATH_NOT_FOUND", `The GraphQL query file could not be read: ${String(args.query_path)}`);
+    }
+  }
+  const variables = asRecord(args.variables) ?? {};
+  if (provider.id === "gnomad-graphql" && !explicit) {
+    throw new ScienceServiceError("MISSING_GRAPHQL_QUERY", "gnomAD requires a non-empty query or query_path.");
+  }
+  if (explicit) return { query: explicit, variables };
+  if (provider.id === "opentargets") {
+    const target = stringValue(args.target) ?? stringValue(args.ensemblId) ?? "";
+    const disease = stringValue(args.disease) ?? stringValue(args.diseaseId) ?? "";
+    return {
+      query: "query TargetDiseases($ensemblId: String!, $index: Int!, $size: Int!) { target(ensemblId: $ensemblId) { id approvedSymbol associatedDiseases(page: {index: $index, size: $size}) { rows { disease { id name } score } } } }",
+      variables: { ensemblId: target, index: page, size: pageSize, ...(disease ? { diseaseId: disease } : {}), ...variables },
+    };
+  }
+  return { query: "query Civic { __typename }", variables };
+}
+
+function biobankJapanEndpointIdentifier(args: JsonRecord): string {
+  const inputs = ["rsid", "grch37", "grch38", "variant"]
+    .map((key) => [key, stringValue(args[key])] as const)
+    .filter((entry): entry is readonly [string, string] => Boolean(entry[1]));
+  if (inputs.length !== 1) {
+    throw new ScienceServiceError("INVALID_BBJ_VARIANT_INPUT", "BioBank Japan requires exactly one of rsid, grch37, grch38, or variant.");
+  }
+  const [kind, value] = inputs[0]!;
+  if (kind === "rsid") {
+    if (!/^rs\d+$/i.test(value)) throw new ScienceServiceError("INVALID_BBJ_VARIANT", "BioBank Japan rsid must be an rsID such as rs7903146.");
+    return value.toLowerCase();
+  }
+  const match = value.match(/^(?:chr)?([0-9XYMT]+):(\d+)(?:-|:)([ACGT]+)(?:-|:)([ACGT]+)$/i);
+  if (!match) throw new ScienceServiceError("INVALID_BBJ_VARIANT", `BioBank Japan ${kind} must use chromosomal chr:pos-ref-alt notation.`);
+  return `${match[1]!.toUpperCase()}:${match[2]}-${match[3]!.toUpperCase()}-${match[4]!.toUpperCase()}`;
+}
+function validateProviderInput(provider: DatabaseProvider, args: JsonRecord): void {
+  if (provider.id === "biobankjapan-phewas") biobankJapanEndpointIdentifier(args);
+}
 function sourceRoute(provider: ProviderDefinition, args: JsonRecord): Route { const requestedPath = safePath(args.path); if (requestedPath) return { path: requestedPath, method: stringValue(args.method)?.toUpperCase() === "POST" ? "POST" : "GET", style: provider.requestStyle }; const operation = operationName(args); return provider.routes?.[operation] ?? provider.routes?.[operation.replace(/s$/, "")] ?? { path: provider.defaultPath }; }
-function plannedPath(provider: ProviderDefinition, route: Route, args: JsonRecord): string { const id = identifier(args); let path = replaceTemplate(route.path, id, args); const operation = operationName(args); if (/\{[^}]+\}/.test(route.path)) return path; const variantProviders = new Set(["biobankjapan-phewas", "finngen-phewas", "tpmi-phewas", "ukb-topmed-phewas"]); if (variantProviders.has(provider.id) && id) return appendIdentifier(path, id); const identifierRoutes = new Set(["entry", "target", "molecule", "gene", "study", "project", "collection", "compound", "term", "event", "participants", "pathways", "rna", "xrefs", "vcv", "rcv", "scv", "refsnp", "prediction", "uniprot", "annotations", "lookup", "variation", "variant", "overlap", "assembly", "dataset", "cid", "name", "fasta"]); if (!identifierRoutes.has(operation)) return path; if (provider.id === "chembl" && ["target", "molecule"].includes(operation) && id) return `${path.replace(/\/$/, "")}/${encodeURIComponent(id)}.json`; if (provider.id === "uniprot" && operation === "entry" && id) return `${path}${encodeURIComponent(id)}`; if (provider.id === "human-protein-atlas" && operation === "gene" && id) return `${encodeURIComponent(id)}.json`; if (provider.id === "pubchem-pug" && operation === "cid" && id) return `${path}${encodeURIComponent(id)}/property/Title/JSON`; if (provider.id === "rcsb-pdb" && operation === "fasta" && id) return `${path}${encodeURIComponent(id)}/download`; return appendIdentifier(path, id); }
+function plannedPath(provider: ProviderDefinition, route: Route, args: JsonRecord): string { const id = provider.id === "biobankjapan-phewas" ? biobankJapanEndpointIdentifier(args) : identifier(args); let path = replaceTemplate(route.path, id, args); const operation = operationName(args); if (/\{[^}]+\}/.test(route.path)) return path; const variantProviders = new Set(["biobankjapan-phewas", "finngen-phewas", "tpmi-phewas", "ukb-topmed-phewas"]); if (variantProviders.has(provider.id) && id) return appendIdentifier(path, id); const identifierRoutes = new Set(["entry", "target", "molecule", "gene", "study", "project", "collection", "compound", "term", "event", "participants", "pathways", "rna", "xrefs", "vcv", "rcv", "scv", "refsnp", "prediction", "uniprot", "annotations", "lookup", "variation", "variant", "overlap", "assembly", "dataset", "cid", "name", "fasta"]); if (!identifierRoutes.has(operation)) return path; if (provider.id === "chembl" && ["target", "molecule"].includes(operation) && id) return `${path.replace(/\/$/, "")}/${encodeURIComponent(id)}.json`; if (provider.id === "uniprot" && operation === "entry" && id) return `${path}${encodeURIComponent(id)}`; if (provider.id === "human-protein-atlas" && operation === "gene" && id) return `${encodeURIComponent(id)}.json`; if (provider.id === "pubchem-pug" && operation === "cid" && id) return `${path}${encodeURIComponent(id)}/property/Title/JSON`; if (provider.id === "rcsb-pdb" && operation === "fasta" && id) return `${path}${encodeURIComponent(id)}/download`; return appendIdentifier(path, id); }
 function addPagination(provider: DatabaseProvider, params: URLSearchParams, page: number, pageSize: number): void { switch (provider.pagination) { case "page": setIfMissing(params, "page", String(page)); setIfMissing(params, provider.id === "gtex-eqtl" ? "itemsPerPage" : "pageSize", String(pageSize)); break; case "page-size": setIfMissing(params, "page", String(page)); setIfMissing(params, "pageSize", String(pageSize)); break; case "offset": setIfMissing(params, "offset", String(page * pageSize)); setIfMissing(params, "limit", String(pageSize)); break; case "cursor": setIfMissing(params, "pageSize", String(pageSize)); break; default: break; } }
 function adaptParameters(provider: DatabaseProvider, args: JsonRecord, params: URLSearchParams, page: number, pageSize: number): void { const id = identifier(args); const op = operationName(args); addPagination(provider, params, page, pageSize); if (provider.id === "gtex-eqtl" && id) setIfMissing(params, "variantId", gtexVariant(args) ?? id); if (provider.id === "clinvar-variation" && !["vcv", "rcv", "scv", "refsnp"].includes(op)) { setIfMissing(params, "terms", id ?? stringValue(args.terms) ?? ""); setIfMissing(params, "maxList", String(pageSize)); } if (provider.id === "uniprot") { if (op !== "entry") { setIfMissing(params, "query", id ?? stringValue(args.term) ?? "*"); setIfMissing(params, "format", "json"); setIfMissing(params, "size", String(pageSize)); } else setIfMissing(params, "format", "json"); } if (provider.id === "ensembl") setIfMissing(params, "content-type", "application/json"); if (provider.id === "chembl" && op === "search") { setIfMissing(params, "q", id ?? stringValue(args.term) ?? ""); setIfMissing(params, "limit", String(pageSize)); } if (provider.id === "bindingdb") setIfMissing(params, "response", "application/json"); if (provider.id === "ncbi-entrez") { setIfMissing(params, "retmode", "json"); setIfMissing(params, "retmax", String(pageSize)); setIfMissing(params, "db", stringValue(args.db) ?? "gene"); if (op === "" || op === "search") setIfMissing(params, "term", stringValue(args.term) ?? id ?? ""); } if (provider.id === "string") { setIfMissing(params, "caller_identity", "dsh-rosalind"); setIfMissing(params, "limit", String(pageSize)); if (id) setIfMissing(params, op === "partners" ? "identifier" : "identifiers", id); setIfMissing(params, "species", String(args.species ?? 9606)); } if (provider.id === "rhea" || provider.id === "bgee") setIfMissing(params, "query", stringValue(args.query) ?? stringValue(args.sparql) ?? "SELECT * WHERE { ?s ?p ?o } LIMIT 10"); }
 function nextCursorFrom(payload: unknown): string | undefined { const record = asRecord(payload); return stringValue(record?.nextPageToken) ?? stringValue(record?.next_cursor) ?? stringValue(record?.nextCursor); }
@@ -122,8 +208,9 @@ export class DatabaseService {
     const provider = PROVIDER_DEFINITIONS.find((candidate) => candidate.id === providerId);
     if (!provider) throw new ScienceServiceError("UNKNOWN_DATABASE_PROVIDER", `Unknown database provider: ${providerId}`);
     if (!(["database.request", "database.search", "database.fetch"].includes(normalized) || normalized.startsWith(`${provider.id}.`))) throw new ScienceServiceError("UNKNOWN_DATABASE_OPERATION", `Unsupported database operation: ${operation}`);
-    const page = integer(args.page, 0, 1_000_000);
-    const pageSize = Math.max(1, integer(args.pageSize ?? args.maxItems ?? args.max_items, 20, 500));
+    validateProviderInput(provider, args);
+    const page = boundedInteger(args.page, 0, 0, 1_000_000, "page");
+    const pageSize = boundedInteger(args.pageSize ?? args.maxItems ?? args.max_items, 20, 1, 500, "pageSize");
     const route = sourceRoute(provider, args);
     const path = plannedPath(provider, route, args);
     const method = route.method ?? provider.method ?? "GET";
@@ -131,29 +218,59 @@ export class DatabaseService {
     const url = joinUrl(provider.baseUrl, path);
     validateProviderUrl(provider, url);
     const params = collectParameters(args);
+    appendFormParameters(params, args.form_body);
     adaptParameters(provider, args, params, page, pageSize);
-    const headers: Record<string, string> = { accept: "application/json" };
+    const headers = controlledHeaders(args.headers, { accept: "application/json" });
     let body: string | undefined;
+    let bodyFormat: "json" | "form" | "sparql" | undefined;
+    if (args.form_body !== undefined && args.json_body !== undefined) {
+      throw new ScienceServiceError("AMBIGUOUS_REQUEST_BODY", "Provide either form_body or json_body, not both.");
+    }
     if (method === "GET") url.search = params.toString();
-    else if (style === "form") { headers["content-type"] = "application/x-www-form-urlencoded"; body = params.toString(); }
-    else if (style === "sparql") { headers["content-type"] = "application/sparql-query"; headers.accept = "application/sparql-results+json, application/json"; body = params.get("query") ?? ""; }
-    else { headers["content-type"] = "application/json"; const explicit = asRecord(args.body) ?? asRecord(args.json_body); body = JSON.stringify(provider.graphql ? graphqlQuery(provider, args, page, pageSize) : explicit ?? Object.fromEntries(params)); }
-    const request: NonNullable<DatabaseResult["request"]> = { method, url: url.toString(), ...(method === "POST" ? { bodyFormat: style === "form" ? "form" : style === "sparql" ? "sparql" : "json" } : {}) };
+    else if (args.form_body !== undefined || style === "form") {
+      headers["content-type"] = "application/x-www-form-urlencoded";
+      body = params.toString();
+      bodyFormat = "form";
+    }
+    else if (style === "sparql") {
+      headers["content-type"] = "application/sparql-query";
+      headers.accept = "application/sparql-results+json, application/json";
+      body = params.get("query") ?? "";
+      bodyFormat = "sparql";
+    } else {
+      headers["content-type"] = "application/json";
+      const explicit = asRecord(args.body) ?? asRecord(args.json_body);
+      body = JSON.stringify(provider.graphql ? await graphqlQuery(provider, args, page, pageSize, context.packageRoot) : explicit ?? Object.fromEntries(params));
+      bodyFormat = "json";
+    }
+    const request: NonNullable<DatabaseResult["request"]> = { method, url: url.toString(), ...(bodyFormat ? { bodyFormat } : {}) };
     const live = context.allowNetwork === true || this.defaultAllowNetwork || process.env.DSH_ROSALIND_ENABLE_LIVE_NETWORK === "1";
     if (!live) return { ok: false, provider: provider.id, operation, records: [], sources: [], diagnostics: ["Live public requests require explicit network authorization."], request, error: { code: "NETWORK_NOT_AUTHORIZED", message: "Set allowNetwork for this call or DSH_ROSALIND_ENABLE_LIVE_NETWORK=1." } };
     if (context.signal.aborted) throw new ScienceServiceError("CANCELLED", "The database request was cancelled before it began.");
     try {
-      const response = await this.fetcher(url, { method, headers, ...(body === undefined ? {} : { body }), signal: context.signal });
-      const text = await response.text();
-      let payload: unknown = text;
-      try { payload = text ? JSON.parse(text) : {}; } catch { /* Some declared sources return FASTA or TSV. */ }
-      if (!response.ok) return { ok: false, provider: provider.id, operation, records: [], sources: [], diagnostics: [`HTTP ${response.status} from ${url.hostname}.`], request, error: { code: "HTTP_ERROR", message: typeof payload === "string" ? payload.slice(0, 500) : `HTTP ${response.status}`, status: response.status } };
-      const records = recordsFrom(payload, route.recordPaths ?? provider.recordPaths);
-      const nextCursor = nextCursorFrom(payload);
-      const total = totalFrom(payload);
-      return { ok: true, provider: provider.id, operation, records, sources: [{ name: provider.label, url: url.toString(), checkedAt: new Date().toISOString() }], pagination: { page, pageSize, ...(nextCursor ? { nextCursor } : {}), ...(total === undefined ? {} : { total }) }, diagnostics: records.length ? [] : ["The source returned no matching records."], request };
+      const response = await controlledRequest(this.fetcher, url, { method, headers, ...(body === undefined ? {} : { body }) }, context, args);
+      const records = recordsFrom(response.payload, route.recordPaths ?? provider.recordPaths, args);
+      const nextCursor = nextCursorFrom(response.payload);
+      const total = totalFrom(response.payload);
+      return {
+        ok: true, provider: provider.id, operation, records,
+        sources: [{ name: provider.label, url: url.toString(), checkedAt: new Date().toISOString() }],
+        pagination: { page, pageSize, ...(nextCursor ? { nextCursor } : {}), ...(total === undefined ? {} : { total }) },
+        diagnostics: records.length ? [] : ["The source returned no matching records."],
+        request: {
+          ...request,
+          response_format: response.responseFormat,
+          ...(response.rawOutputPath ? { raw_output_path: response.rawOutputPath } : {}),
+        },
+      };
     } catch (error) {
       if (context.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) throw new ScienceServiceError("CANCELLED", "The database request was cancelled.");
+      if (error instanceof ScienceServiceError) {
+        return {
+          ok: false, provider: provider.id, operation, records: [], sources: [], diagnostics: [error.message], request,
+          error: { code: error.code, message: error.message, ...(error.status === undefined ? {} : { status: error.status }) },
+        };
+      }
       return { ok: false, provider: provider.id, operation, records: [], sources: [], diagnostics: ["The public source could not be reached."], request, error: { code: "NETWORK_ERROR", message: error instanceof Error ? error.message : String(error) } };
     }
   }

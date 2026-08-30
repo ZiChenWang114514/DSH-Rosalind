@@ -1,5 +1,5 @@
 import type { ToolCallOwnerProps } from "@deepseek-ai/dsh-client-ui-tool/client";
-import { useMemo, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
+import { useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type WheelEvent as ReactWheelEvent } from "react";
 
 type JsonRecord = Record<string, unknown>;
 type ViewerKind = "sequence" | "ngs" | "structure" | "slide";
@@ -326,6 +326,128 @@ function nestedNumber(source: JsonRecord, keys: readonly string[]): number | nul
   return null;
 }
 
+interface ProjectionView {
+  pitch: number;
+  yaw: number;
+  zoom: number;
+}
+
+interface ProjectedAtom {
+  atom: JsonRecord;
+  depth: number;
+  fill: string;
+  id: string;
+  x: number;
+  y: number;
+  z: number;
+}
+
+function clamp(value: number, minimum: number, maximum: number): number {
+  return Math.min(maximum, Math.max(minimum, value));
+}
+
+function stableHue(value: string, fallback: number): number {
+  let hash = fallback || 1;
+  for (const character of value) hash = ((hash * 31) + character.charCodeAt(0)) >>> 0;
+  return hash % 360;
+}
+
+function atomColour(atom: JsonRecord, index: number, colourMode: string): string {
+  const element = (text(atom.element ?? atom.symbol ?? atom.type_symbol ?? atom.label_atom_id) ?? "C").replaceAll(/[^A-Za-z]/g, "").toUpperCase();
+  if (/element/i.test(colourMode)) {
+    const palette: Record<string, string> = { C: "#9db2b7", N: "#6ea8e8", O: "#ec7278", S: "#e0c45a", P: "#d68fe5", H: "#f4f6f6", CL: "#73ba8b", FE: "#cf8c55" };
+    return palette[element] ?? `hsl(${stableHue(element, index)} 52% 63%)`;
+  }
+  const chain = text(atom.chain ?? atom.authAsymId ?? atom.labelAsymId ?? atom.asymId) ?? "structure";
+  return `hsl(${stableHue(chain, index)} 52% 63%)`;
+}
+
+function coordinateAtoms(atoms: JsonRecord[], view: ProjectionView, colourMode: string): ProjectedAtom[] {
+  const positioned = atoms.slice(0, 1_000).flatMap((atom, index) => {
+    const x = number(atom.x ?? atom.Cartn_x);
+    const y = number(atom.y ?? atom.Cartn_y);
+    const z = number(atom.z ?? atom.Cartn_z) ?? 0;
+    return x == null || y == null ? [] : [{ atom, index, x, y, z }];
+  });
+  if (!positioned.length) return [];
+  const mean = positioned.reduce((total, point) => ({ x: total.x + point.x, y: total.y + point.y, z: total.z + point.z }), { x: 0, y: 0, z: 0 });
+  mean.x /= positioned.length; mean.y /= positioned.length; mean.z /= positioned.length;
+  const extent = Math.max(1, ...positioned.map((point) => Math.hypot(point.x - mean.x, point.y - mean.y, point.z - mean.z)));
+  const yaw = view.yaw * Math.PI / 180;
+  const pitch = view.pitch * Math.PI / 180;
+  return positioned.map((point) => {
+    const sourceX = (point.x - mean.x) / extent;
+    const sourceY = (point.y - mean.y) / extent;
+    const sourceZ = (point.z - mean.z) / extent;
+    const afterYawX = (sourceX * Math.cos(yaw)) - (sourceZ * Math.sin(yaw));
+    const afterYawZ = (sourceX * Math.sin(yaw)) + (sourceZ * Math.cos(yaw));
+    const afterPitchY = (sourceY * Math.cos(pitch)) - (afterYawZ * Math.sin(pitch));
+    const depth = (sourceY * Math.sin(pitch)) + (afterYawZ * Math.cos(pitch));
+    const perspective = 1 / (1 + Math.max(-.72, depth * .34));
+    return {
+      atom: point.atom,
+      depth,
+      fill: atomColour(point.atom, point.index, colourMode),
+      id: text(point.atom.id ?? point.atom.serial ?? point.atom.label_atom_id) ?? `atom-${point.index + 1}`,
+      x: 160 + (afterYawX * 72 * view.zoom * perspective),
+      y: 95 - (afterPitchY * 72 * view.zoom * perspective),
+      z: point.z,
+    };
+  }).sort((left, right) => left.depth - right.depth);
+}
+
+function StructureProjection({ atoms, colourMode, representation, onColourModeChange }: { atoms: JsonRecord[]; colourMode: string; representation: string; onColourModeChange: (mode: string) => void }): JSX.Element {
+  const [view, setView] = useState<ProjectionView>({ pitch: -16, yaw: 24, zoom: 1 });
+  const [selected, setSelected] = useState<ProjectedAtom | null>(null);
+  const drag = useRef<{ pointerId: number; x: number; y: number } | null>(null);
+  const points = useMemo(() => coordinateAtoms(atoms, view, colourMode), [atoms, colourMode, view]);
+  const reset = () => { setView({ pitch: -16, yaw: 24, zoom: 1 }); setSelected(null); };
+  const updateZoom = (delta: number) => setView((current) => ({ ...current, zoom: clamp(current.zoom + delta, .45, 3) }));
+  const onKeyDown = (event: KeyboardEvent<SVGSVGElement>) => {
+    const changes: Partial<ProjectionView> = {};
+    if (event.key === "ArrowLeft") changes.yaw = view.yaw - 8;
+    if (event.key === "ArrowRight") changes.yaw = view.yaw + 8;
+    if (event.key === "ArrowUp") changes.pitch = clamp(view.pitch - 8, -85, 85);
+    if (event.key === "ArrowDown") changes.pitch = clamp(view.pitch + 8, -85, 85);
+    if (event.key === "+" || event.key === "=") changes.zoom = clamp(view.zoom + .15, .45, 3);
+    if (event.key === "-" || event.key === "_") changes.zoom = clamp(view.zoom - .15, .45, 3);
+    if (event.key === "0" || event.key.toLowerCase() === "r" || event.key === "Home") { event.preventDefault(); reset(); return; }
+    if (!Object.keys(changes).length) return;
+    event.preventDefault(); setView((current) => ({ ...current, ...changes }));
+  };
+  const onPointerDown = (event: ReactPointerEvent<SVGSVGElement>) => {
+    drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+  const onPointerMove = (event: ReactPointerEvent<SVGSVGElement>) => {
+    const previous = drag.current;
+    if (!previous || previous.pointerId !== event.pointerId) return;
+    const deltaX = event.clientX - previous.x; const deltaY = event.clientY - previous.y;
+    drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+    setView((current) => ({ ...current, pitch: clamp(current.pitch + (deltaY * .55), -85, 85), yaw: current.yaw + (deltaX * .55) }));
+  };
+  const stopDrag = (event: ReactPointerEvent<SVGSVGElement>) => {
+    if (drag.current?.pointerId === event.pointerId) drag.current = null;
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture?.(event.pointerId);
+  };
+  const onWheel = (event: ReactWheelEvent<SVGSVGElement>) => { event.preventDefault(); updateZoom(event.deltaY < 0 ? .12 : -.12); };
+  return <div className="sv-scene" aria-label="Molecular scene state">
+    <div className="sv-scene-toolbar" aria-label="Molecular projection controls">
+      <span>{representation}</span><span>{Math.round(view.zoom * 100)}%</span>
+      <button aria-label="Zoom molecular projection in" onClick={() => updateZoom(.2)} type="button">+</button>
+      <button aria-label="Zoom molecular projection out" onClick={() => updateZoom(-.2)} type="button">−</button>
+      <button aria-label="Reset molecular projection" onClick={reset} type="button">Reset</button>
+    </div>
+    <div className="sv-colour-toggle" aria-label="Molecular projection colour mode" role="group">
+      {(["chain", "element"] as const).map((mode) => <button aria-pressed={colourMode === mode} key={mode} onClick={() => onColourModeChange(mode)} type="button">{mode}</button>)}
+    </div>
+    <svg aria-label={`Interactive molecular projection with ${points.length} returned atom coordinates`} data-structure-projection="true" onKeyDown={onKeyDown} onPointerCancel={stopDrag} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={stopDrag} onWheel={onWheel} preserveAspectRatio="xMidYMid meet" role="application" tabIndex={0} viewBox="0 0 320 190">
+      {points.map((point) => <circle aria-label={`${point.id}: ${point.x.toFixed(1)}, ${point.y.toFixed(1)}, ${point.z.toFixed(1)}`} className={selected?.id === point.id ? "sv-atom sv-atom--selected" : "sv-atom"} cx={point.x} cy={point.y} fill={point.fill} key={point.id} onClick={() => setSelected(point)} r={selected?.id === point.id ? 3.8 : 2.45} />)}
+    </svg>
+    <div aria-live="polite" className="sv-scene-state">Yaw {Math.round(view.yaw)}° · pitch {Math.round(view.pitch)}° · {selected ? `${selected.id} selected` : "drag or use arrow keys"}</div>
+  </div>;
+}
+
 function StructureResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
   const payload = parsed.payload ?? {};
   const state = stateFrom(parsed.payload);
@@ -339,14 +461,12 @@ function StructureResult({ parsed, openFile }: { parsed: ParsedScienceCall; open
   const artifacts = collectArtifacts(payload);
   const scene = record(state.scene ?? payload.scene);
   const representation = text(record(payload.display).representation ?? record(state.display).representation ?? payload.representation) ?? "cartoon";
-  const colorMode = text(record(payload.display).colorMode ?? record(state.display).colorMode ?? payload.colorMode) ?? "chain";
+  const initialColourMode = text(record(payload.display).colorMode ?? record(state.display).colorMode ?? payload.colorMode) ?? "chain";
+  const [colourMode, setColourMode] = useState(initialColourMode);
   return <div className="sv-structure">
     <TabStrip active={active} ariaLabel="Molecular structure result views" labels={["Scene", "Objects", "Analysis"]} onChange={setActive} />
     <div className="sv-panel" role="tabpanel" tabIndex={0}>
-      {active === "Scene" ? <div className="sv-structure-layout"><div className="sv-scene" aria-label="Molecular scene state"><div className="sv-scene-toolbar"><span>{representation}</span><span>{colorMode}</span></div>{atoms.length ? <svg viewBox="0 0 320 190" role="img" aria-label={`${atoms.length} returned atom coordinates`}>{atoms.slice(0, 500).map((atom, index) => {
-        const x = number(atom.x) ?? 0; const y = number(atom.y) ?? 0;
-        return <circle cx={160 + x * 2} cy={95 - y * 2} fill={`hsl(${(index * 29) % 360} 46% 58%)`} key={text(atom.id) ?? String(index)} r="2.2" />;
-      })}</svg> : <div className="sv-scene-summary"><span className="sv-axis sv-axis--x">x</span><span className="sv-axis sv-axis--y">y</span><span className="sv-axis sv-axis--z">z</span><div><strong>Scene state synchronized</strong><p>Geometry remains in the molecular viewer session; this tool result carries scene and object state.</p></div></div>}</div><aside><FactGrid facts={[{ label: "Atoms", value: atomCount == null ? "—" : atomCount.toLocaleString() }, { label: "Residues", value: residueCount == null ? "—" : residueCount.toLocaleString() }, { label: "Ligands", value: ligandCount == null ? "—" : ligandCount.toLocaleString() }, ...scalarFacts(scene, ["sceneRevision", "geometryRevision", "syncStatus"], 3)]} /></aside></div> : null}
+      {active === "Scene" ? <div className="sv-structure-layout">{atoms.length ? <StructureProjection atoms={atoms} colourMode={colourMode} onColourModeChange={setColourMode} representation={representation} /> : <div className="sv-scene" aria-label="Molecular scene state"><div className="sv-scene-toolbar"><span>{representation}</span><span>{initialColourMode}</span></div><div className="sv-scene-summary"><span className="sv-axis sv-axis--x">x</span><span className="sv-axis sv-axis--y">y</span><span className="sv-axis sv-axis--z">z</span><div><strong>Scene state synchronized</strong><p>Geometry remains in the molecular viewer session; this tool result carries scene and object state.</p></div></div></div>}<aside><FactGrid facts={[{ label: "Atoms", value: atomCount == null ? "—" : atomCount.toLocaleString() }, { label: "Residues", value: residueCount == null ? "—" : residueCount.toLocaleString() }, { label: "Ligands", value: ligandCount == null ? "—" : ligandCount.toLocaleString() }, ...scalarFacts(scene, ["sceneRevision", "geometryRevision", "syncStatus"], 3)]} /></aside></div> : null}
       {active === "Objects" ? objects.length ? <div className="sv-object-list">{objects.map((item, index) => <article key={text(item.id ?? item.key) ?? String(index)}><i style={{ background: text(record(item.color).value ?? item.color) ?? `hsl(${index * 67} 45% 55%)` }} /><div><strong>{text(item.label ?? item.name ?? item.id) ?? `Object ${index + 1}`}</strong><span>{text(item.kind ?? item.representation ?? item.component) ?? "structure object"}</span></div><small>{item.visible === false ? "hidden" : "visible"}</small></article>)}</div> : <EmptyResult>No object list was included in this operation result.</EmptyResult> : null}
       {active === "Analysis" ? analyses.length ? <div className="sv-analysis-list">{analyses.slice(0, 30).map((item, index) => <article key={text(item.id) ?? String(index)}><strong>{text(item.type ?? item.kind ?? item.label) ?? `Result ${index + 1}`}</strong><FactGrid facts={scalarFacts(item, ["distanceAngstrom", "distance", "angle", "rmsd", "tmScore", "count"], 4)} /></article>)}</div> : <><FactGrid facts={scalarFacts(payload, ["rmsd", "tmScore", "contactCount", "pairCount", "sasa", "buriedArea"])} /><EmptyResult>No row-level analysis collection was included in this result.</EmptyResult></> : null}
     </div>
@@ -354,7 +474,13 @@ function StructureResult({ parsed, openFile }: { parsed: ParsedScienceCall; open
   </div>;
 }
 
-function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
+interface SlideView {
+  panX: number;
+  panY: number;
+  zoom: number;
+}
+
+export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
   const payload = parsed.payload ?? {};
   const state = stateFrom(parsed.payload);
   const [active, setActive] = useState("Slide");
@@ -370,12 +496,45 @@ function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile
   const artifacts = collectArtifacts(payload);
   const labels = observations != null ? ["Slide", "Spatial", "Layers"] : ["Slide", "Layers"];
   const viewBoxWidth = width ?? 1000; const viewBoxHeight = height ?? 700;
+  const [view, setView] = useState<SlideView>({ panX: 0, panY: 0, zoom: 1 });
+  const drag = useRef<{ pointerId: number; x: number; y: number } | null>(null);
+  const resetView = () => setView({ panX: 0, panY: 0, zoom: 1 });
+  const moveView = (x: number, y: number) => setView((current) => ({ ...current, panX: current.panX + x, panY: current.panY + y }));
+  const zoomView = (delta: number) => setView((current) => ({ ...current, zoom: clamp(current.zoom + delta, .5, 8) }));
+  const onSlideKeyDown = (event: KeyboardEvent<SVGSVGElement>) => {
+    const distance = Math.max(viewBoxWidth, viewBoxHeight) * .045 / view.zoom;
+    if (event.key === "ArrowLeft") { event.preventDefault(); moveView(-distance, 0); }
+    else if (event.key === "ArrowRight") { event.preventDefault(); moveView(distance, 0); }
+    else if (event.key === "ArrowUp") { event.preventDefault(); moveView(0, -distance); }
+    else if (event.key === "ArrowDown") { event.preventDefault(); moveView(0, distance); }
+    else if (event.key === "+" || event.key === "=") { event.preventDefault(); zoomView(.2); }
+    else if (event.key === "-" || event.key === "_") { event.preventDefault(); zoomView(-.2); }
+    else if (event.key === "0" || event.key === "Home") { event.preventDefault(); resetView(); }
+  };
+  const onSlidePointerDown = (event: ReactPointerEvent<SVGSVGElement>) => {
+    drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+  const onSlidePointerMove = (event: ReactPointerEvent<SVGSVGElement>) => {
+    const previous = drag.current;
+    if (!previous || previous.pointerId !== event.pointerId) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - previous.x) / Math.max(1, rect.width)) * viewBoxWidth / view.zoom;
+    const y = ((event.clientY - previous.y) / Math.max(1, rect.height)) * viewBoxHeight / view.zoom;
+    drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+    moveView(x, y);
+  };
+  const stopSlideDrag = (event: ReactPointerEvent<SVGSVGElement>) => {
+    if (drag.current?.pointerId === event.pointerId) drag.current = null;
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture?.(event.pointerId);
+  };
+  const onSlideWheel = (event: ReactWheelEvent<SVGSVGElement>) => { event.preventDefault(); zoomView(event.deltaY < 0 ? .16 : -.16); };
   return <div className="sv-slide">
     <TabStrip active={active} ariaLabel="Slide and spatial result views" labels={labels} onChange={setActive} />
     <div className="sv-panel" role="tabpanel" tabIndex={0}>
-      {active === "Slide" ? <div className="sv-slide-layout"><div className="sv-slide-map"><svg aria-label="Slide source extent and returned regions" preserveAspectRatio="xMidYMid meet" role="img" viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}><defs><pattern height={Math.max(12, viewBoxHeight / 24)} id="sv-tissue" patternUnits="userSpaceOnUse" width={Math.max(12, viewBoxWidth / 32)}><rect fill="var(--sv-slide-tissue)" height="100%" width="100%" /><circle cx="35%" cy="45%" fill="var(--sv-slide-nucleus)" r="11%" /></pattern></defs><rect fill="url(#sv-tissue)" height={viewBoxHeight} rx={viewBoxHeight * .02} width={viewBoxWidth} />{number(bounds.x) != null && number(bounds.y) != null && number(bounds.width) != null && number(bounds.height) != null ? <rect className="sv-view-bounds" fill="none" height={number(bounds.height)!} width={number(bounds.width)!} x={number(bounds.x)!} y={number(bounds.y)!} /> : null}{regions.map((region, index) => <rect className="sv-region" fill="none" height={number(region.height) ?? 0} key={text(region.id) ?? String(index)} width={number(region.width) ?? 0} x={number(region.x) ?? 0} y={number(region.y) ?? 0} />)}</svg><span>{width && height ? `${width.toLocaleString()} × ${height.toLocaleString()} px` : "Source extent unavailable"}</span></div><aside><FactGrid facts={scalarFacts({ ...state, ...source }, ["fileName", "format", "displayMode", "sourceRevision", "stateRevision"], 6)} />{!width || !height ? <p className="sv-data-note">Pixel dimensions were not included in this operation result.</p> : null}</aside></div> : null}
+      {active === "Slide" ? <div className="sv-slide-layout"><div className="sv-slide-map" aria-label="Interactive slide source view"><div className="sv-slide-controls" aria-label="Slide view controls"><button aria-label="Zoom slide in" onClick={() => zoomView(.25)} type="button">+</button><button aria-label="Zoom slide out" onClick={() => zoomView(-.25)} type="button">−</button><button aria-label="Reset slide view" onClick={resetView} type="button">Reset</button></div><svg aria-label="Slide source extent and returned regions" data-slide-view="true" onKeyDown={onSlideKeyDown} onPointerCancel={stopSlideDrag} onPointerDown={onSlidePointerDown} onPointerMove={onSlidePointerMove} onPointerUp={stopSlideDrag} onWheel={onSlideWheel} preserveAspectRatio="xMidYMid meet" role="application" tabIndex={0} viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}><defs><pattern height={Math.max(12, viewBoxHeight / 24)} id="sv-tissue" patternUnits="userSpaceOnUse" width={Math.max(12, viewBoxWidth / 32)}><rect fill="var(--sv-slide-tissue)" height="100%" width="100%" /><circle cx="35%" cy="45%" fill="var(--sv-slide-nucleus)" r="11%" /></pattern></defs><g transform={`translate(${view.panX} ${view.panY}) scale(${view.zoom})`}><rect fill="url(#sv-tissue)" height={viewBoxHeight} rx={viewBoxHeight * .02} width={viewBoxWidth} />{number(bounds.x) != null && number(bounds.y) != null && number(bounds.width) != null && number(bounds.height) != null ? <rect className="sv-view-bounds" fill="none" height={number(bounds.height)!} width={number(bounds.width)!} x={number(bounds.x)!} y={number(bounds.y)!} /> : null}{regions.map((region, index) => <rect className="sv-region" fill="none" height={number(region.height) ?? 0} key={text(region.id) ?? String(index)} width={number(region.width) ?? 0} x={number(region.x) ?? 0} y={number(region.y) ?? 0} />)}</g></svg><span>{width && height ? `${width.toLocaleString()} × ${height.toLocaleString()} px` : "Source extent unavailable"}</span><output aria-live="polite" className="sv-slide-position">{Math.round(view.zoom * 100)}% · x {Math.round(view.panX)} · y {Math.round(view.panY)}</output></div><aside><FactGrid facts={scalarFacts({ ...state, ...source }, ["fileName", "format", "displayMode", "sourceRevision", "stateRevision"], 6)} />{!width || !height ? <p className="sv-data-note">Pixel dimensions were not included in this operation result.</p> : <p className="sv-data-note">Controls update this source-coordinate preview only; no viewer-session change is asserted by this result.</p>}</aside></div> : null}
       {active === "Spatial" ? <div className="sv-spatial-layout"><section><span className="sv-spatial-gene">{text(spatial.gene ?? spatial.selectedGene) ?? "Spatial matrix"}</span><strong>{observations?.toLocaleString() ?? "—"}</strong><small>observations</small></section><section><strong>{genes?.toLocaleString() ?? text(array(spatial.matrixShape)[1]) ?? "—"}</strong><small>genes</small></section><section><FactGrid facts={scalarFacts(spatial, ["nonzero", "min", "max", "mean", "valueScale", "matrixFormat"], 6)} /></section></div> : null}
-      {active === "Layers" ? layers.length ? <div className="sv-layer-list">{layers.map((layer, index) => <label key={text(layer.id) ?? String(index)}><input defaultChecked={layer.visible !== false} type="checkbox" /><i /><span><strong>{text(layer.id ?? layer.name) ?? `Layer ${index + 1}`}</strong><small>{text(layer.kind) ?? "scientific layer"}{text(layer.featureCount) ? ` · ${text(layer.featureCount)} features` : ""}</small></span></label>)}</div> : <EmptyResult>No scientific layer collection was included in this result.</EmptyResult> : null}
+      {active === "Layers" ? layers.length ? <><p className="sv-layer-note" role="note">Layer visibility is read-only in this recorded result. Use the slide_control_viewer tool to change the live viewer session.</p><div className="sv-layer-list">{layers.map((layer, index) => { const layerId = text(layer.id ?? layer.name) ?? `layer-${index + 1}`; return <label key={layerId}><input aria-label={`${layerId} visibility (read-only)`} checked={layer.visible !== false} disabled readOnly type="checkbox" /><i /><span><strong>{layerId}</strong><small>{text(layer.kind) ?? "scientific layer"}{text(layer.featureCount) ? ` · ${text(layer.featureCount)} features` : ""}</small></span></label>; })}</div></> : <EmptyResult>No scientific layer collection was included in this result.</EmptyResult> : null}
     </div>
     <ArtifactButtons artifacts={artifacts} openFile={openFile} />
   </div>;

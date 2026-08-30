@@ -7,6 +7,8 @@ import { CapabilityRegistry, type RuntimeOperationContract } from "./capabilitie
 
 export interface ScienceExecutionContext {
   session: object;
+  /** Stable DSH agent/session identity when the host provides one. */
+  sessionId?: string;
   signal: AbortSignal;
   packageRoot: string;
   allowNetwork?: boolean;
@@ -43,7 +45,7 @@ const SERVICE_OUTPUT_FIELDS: Record<ScienceServiceId, readonly string[]> = {
   ],
   sequence: [
     "action", "alignedLength", "analysis", "annotatedPeptide", "annotation", "annotations",
-    "applied", "artifact", "bases", "cancelled", "code", "codingBases", "columns", "compared",
+    "applied", "artifact", "artifactCount", "artifacts", "bases", "cancelled", "code", "codingBases", "columns", "compared",
     "computedPeptide", "distance", "editableCopy", "format", "gene", "identical", "identity",
     "jobId", "jobs", "location", "matchesAnnotatedTranslation", "meanConservationNormalized",
     "meanIdentity", "meanQualityByCycle", "message", "name", "note", "options", "pairs",
@@ -53,15 +55,16 @@ const SERVICE_OUTPUT_FIELDS: Record<ScienceServiceId, readonly string[]> = {
     "translatedResidues", "translationTable", "viewer", "viewerSessionId",
   ],
   ngs: [
-    "activeVersionId", "active_version_checksum", "active_version_id", "archived", "arguments",
+    "activeVersionId", "active_version_checksum", "active_version_id", "archived", "arguments", "availability",
     "cancellation_requested", "cancelled", "catalog_source_checksum", "checkedAt", "code", "command",
-    "created", "created_at", "cwd", "description", "diagnostic", "diagnostics", "engine", "events",
+    "created", "created_at", "cwd", "description", "diagnostic", "diagnostics", "engine", "errors", "events",
     "executable", "exit_code", "expectedEngine", "explanation", "id", "lineages", "message", "name",
     "observation", "plan_checksum", "plan_id", "plan_name", "process_id", "reachable", "readiness",
     "ready", "reason", "registry_run_id", "requestedEngine", "requestedExecutables", "run_dir", "runs",
     "runtime", "source_available", "source_entrypoint", "state", "stderr_summary", "stdout_summary",
     "summary_path", "target", "target_id", "targets", "updated", "updated_at", "version",
     "version_count", "versions", "workflow", "workflow_id", "workflow_version_id", "workflows",
+    "execution_receipt", "mcp_server", "report", "reused", "viewer", "viewerReady", "workspaceSection",
   ],
   structure: [
     "alignedResidueCount", "applied", "appliedMatrix", "appliedRevision", "atomContactCount", "atomCount",
@@ -196,6 +199,7 @@ function toolDefinition(contract: RuntimeOperationContract, executor: ScienceExe
       const record = args && typeof args === "object" && !Array.isArray(args) ? args as Record<string, unknown> : {};
       return executor.execute(contract.record.serviceId, contract.record.operation, record, {
         session: exec.agent ?? FALLBACK_SESSION,
+        ...(exec.agent?.id ? { sessionId: String(exec.agent.id) } : {}),
         signal: exec.signal,
         packageRoot,
       });

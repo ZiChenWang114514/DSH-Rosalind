@@ -33,6 +33,28 @@ test("viewer tabs support roving keyboard focus", async ({ page }) => {
   await expect(page.getByLabel("Per-column metric track").locator("i")).toHaveCount(9);
 });
 
+test("slide source controls preserve state and explain read-only layer visibility", async ({ page }) => {
+  await page.goto("/?science=slide");
+  const source = page.getByLabel("Slide source extent and returned regions");
+  await source.focus();
+  await page.keyboard.press("+");
+  await expect(page.locator(".sv-slide-position")).toContainText("120%");
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".sv-slide-position")).not.toContainText("x 0");
+  await page.getByLabel("Reset slide view").click();
+  await expect(page.locator(".sv-slide-position")).toHaveText("100% · x 0 · y 0");
+  await expect(page.getByText("46,000 × 32,893 px")).toBeVisible();
+  await expect(page.getByText("CMU-1-JP2K-33005.svs")).toBeVisible();
+  await page.getByRole("tab", { name: "Layers" }).click();
+  const layer = page.getByRole("checkbox", { name: "segmentation visibility (read-only)" });
+  await expect(layer).toBeDisabled();
+  await expect(layer).toBeChecked();
+  await expect(page.getByRole("note")).toHaveText("Layer visibility is read-only in this recorded result. Use the slide_control_viewer tool to change the live viewer session.");
+  await page.getByRole("tab", { name: "Slide" }).click();
+  await expect(page.locator(".sv-slide-position")).toHaveText("100% · x 0 · y 0");
+  await expect(page.getByText("46,000 × 32,893 px")).toBeVisible();
+});
+
 test("dark structure result and narrow slide result retain their scientific state", async ({ page }, testInfo) => {
   if (testInfo.project.name === "chromium-1440") {
     await page.goto("/?science=structure&theme=dark");

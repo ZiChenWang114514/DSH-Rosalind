@@ -32,7 +32,7 @@ const FIXTURES: Record<string, Fixture> = {
   eva: { args: { operation: "species" }, path: "/eva/webservices/rest/v1/meta/species/list" },
   "finngen-phewas": { args: { variant: "rs7903146" }, path: "/api/variant/rs7903146" },
   "genebass-gene-burden": { args: { operation: "gene", identifier: "ENSG00000141510" }, path: "/api/gene/ENSG00000141510" },
-  "gnomad-graphql": { args: { identifier: "ENSG00000141510" }, path: "/api", method: "POST", bodyFormat: "json" },
+  "gnomad-graphql": { args: { identifier: "ENSG00000141510", query: "query { __typename }" }, path: "/api", method: "POST", bodyFormat: "json" },
   "gtex-eqtl": { args: { operation: "variant", variant: "1:154454494:A:C" }, path: "/api/v2/association/singleTissueEqtl" },
   "gwas-catalog": { args: { params: { efoTrait: "EFO_0000270" } }, path: "/gwas/rest/api/v2/associations" },
   "human-protein-atlas": { args: { operation: "gene", identifier: "ENSG00000141510" }, path: "/ENSG00000141510.json" },
@@ -132,6 +132,23 @@ describe("44 fixed-version database providers", () => {
     expect(new URL(observedUrl).pathname).toBe("/eqtl/api/v3/datasets/QTD000001/associations");
   });
 
+  it.each([
+    ["rsid", { rsid: "rs7903146" }, "https://pheweb.jp/api/variant/rs7903146"],
+    ["grch37", { grch37: "chr10:114758349:c:t" }, "https://pheweb.jp/api/variant/10%3A114758349-C-T"],
+    ["grch38", { grch38: "10:112998590:C:T" }, "https://pheweb.jp/api/variant/10%3A112998590-C-T"],
+    ["variant", { variant: "10:114758349:C:T" }, "https://pheweb.jp/api/variant/10%3A114758349-C-T"],
+  ] as const)("maps BioBank Japan %s input to its exact endpoint URL", async (_kind, input, expectedUrl) => {
+    let observedUrl = "";
+    const service = new DatabaseService({ fetch: async (url) => {
+      observedUrl = String(url);
+      return new Response(JSON.stringify({ associations: [record("biobankjapan-phewas")] }), { status: 200, headers: { "content-type": "application/json" } });
+    } });
+    const result = await service.execute("database.request", { provider: "biobankjapan-phewas", ...input }, context());
+    expect(result.ok).toBe(true);
+    expect(observedUrl).toBe(expectedUrl);
+    expect(result.request?.url).toBe(expectedUrl);
+  });
+
   it("rejects arbitrary HTTPS origins before a provider request is sent", async () => {
     let called = false;
     const service = new DatabaseService({ fetch: async () => { called = true; return new Response("{}"); } });
@@ -156,7 +173,7 @@ describe("44 fixed-version database providers", () => {
 });
 
 describe("three fixed-version literature providers", () => {
-  it.each([["biorxiv", { provider: "biorxiv", doi: "10.1101/fixture", action: "details" }], ["entrez", { provider: "entrez", query: "TREM2", pageSize: 2 }], ["pmc", { provider: "pmc", id: "PMC000000", action: "map" }]] as const)("%s executes through a provenance-bearing request", async (provider, args) => {
+  it.each([["biorxiv", { provider: "biorxiv", doi: "10.1101/fixture", action: "details" }], ["entrez", { provider: "entrez", query: "TREM2", pageSize: 2 }], ["pmc", { provider: "pmc", params: { id: "PMC000000" }, action: "map" }]] as const)("%s executes through a provenance-bearing request", async (provider, args) => {
     const service = new LiteratureService({ fetch: async () => new Response(JSON.stringify({ records: [{ id: `${provider}-fixture` }] }), { status: 200, headers: { "content-type": "application/json" } }) });
     const result = await service.execute("literature.request", args, context());
     expect(result.ok).toBe(true); expect(result.sources).toHaveLength(1); expect(result.request?.method).toBe("GET");

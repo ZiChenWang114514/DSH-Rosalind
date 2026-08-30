@@ -1,3 +1,6 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, isAbsolute, relative, resolve } from "node:path";
+
 /**
  * Independent clients for the three public literature sources used by
  * DSH-Rosalind.  The service is deliberately small: callers provide the
@@ -22,16 +25,199 @@ export interface SourceResult {
   sources: Array<{ name: string; url: string; checkedAt: string }>;
   pagination?: { cursor?: number; pageSize?: number; total?: number };
   diagnostics: string[];
-  request?: { method: string; url: string };
+  request?: { method: string; url: string; response_format?: Exclude<ResponseFormat, "auto">; raw_output_path?: string };
   error?: { code: string; message: string; status?: number };
 }
 
 export type FetchLike = (input: string | URL, init?: RequestInit) => Promise<Response>;
 
+export type ResponseFormat = "json" | "xml" | "text" | "tsv" | "fasta" | "auto";
+
+export interface ControlledResponse {
+  payload: unknown;
+  responseFormat: Exclude<ResponseFormat, "auto">;
+  rawOutputPath?: string;
+}
+
 export class ScienceServiceError extends Error {
   constructor(readonly code: string, message: string, readonly status?: number) {
     super(message);
     this.name = "ScienceServiceError";
+  }
+}
+
+const SAFE_REQUEST_HEADERS = new Set(["accept", "accept-language", "content-type", "x-api-key", "x-request-id"]);
+const SENSITIVE_REQUEST_HEADERS = new Set([
+  "authorization", "proxy-authorization", "cookie", "set-cookie", "host", "origin", "referer",
+  "content-length", "connection", "transfer-encoding", "user-agent",
+]);
+
+/** Parse a caller-supplied header object without allowing ambient credentials. */
+export function controlledHeaders(value: unknown, defaults: Record<string, string>): Record<string, string> {
+  if (value === undefined) return { ...defaults };
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new ScienceServiceError("INVALID_HEADERS", "headers must be an object whose values are strings.");
+  }
+  const result = { ...defaults };
+  for (const [rawName, rawValue] of Object.entries(value as JsonRecord)) {
+    const name = rawName.toLowerCase();
+    if (SENSITIVE_REQUEST_HEADERS.has(name) || name.startsWith("sec-")) {
+      throw new ScienceServiceError("SENSITIVE_HEADER_NOT_ALLOWED", `The ${rawName} header is not accepted for public-source requests.`);
+    }
+    if (!SAFE_REQUEST_HEADERS.has(name)) {
+      throw new ScienceServiceError("HEADER_NOT_ALLOWED", `The ${rawName} header is not in the public-source header allowlist.`);
+    }
+    if (typeof rawValue !== "string" || !rawValue.trim() || /[\r\n]/.test(rawValue)) {
+      throw new ScienceServiceError("INVALID_HEADERS", `The ${rawName} header must be a non-empty single-line string.`);
+    }
+    result[name] = rawValue.trim();
+  }
+  return result;
+}
+
+function responseFormat(value: unknown): ResponseFormat {
+  if (value === undefined) return "auto";
+  if (typeof value !== "string" || !["json", "xml", "text", "tsv", "fasta", "auto"].includes(value.toLowerCase())) {
+    throw new ScienceServiceError("INVALID_RESPONSE_FORMAT", "response_format must be json, xml, text, tsv, fasta, or auto.");
+  }
+  return value.toLowerCase() as ResponseFormat;
+}
+
+function inferResponseFormat(requested: ResponseFormat, contentType: string, url: URL, text: string): Exclude<ResponseFormat, "auto"> {
+  if (requested !== "auto") return requested;
+  const normalized = contentType.toLowerCase();
+  if (normalized.includes("json") || /\.json(?:$|[?#])/i.test(url.pathname) || /^[\[{]/.test(text.trimStart())) return "json";
+  if (normalized.includes("tab-separated") || normalized.includes("tsv") || /\.tsv(?:$|[?#])/i.test(url.pathname)) return "tsv";
+  if (normalized.includes("fasta") || /\.(?:fa|fasta|faa|fna)(?:$|[?#])/i.test(url.pathname) || text.trimStart().startsWith(">")) return "fasta";
+  if (normalized.includes("xml") || /\.xml(?:$|[?#])/i.test(url.pathname)) return "xml";
+  return "text";
+}
+
+function parseTsv(text: string): JsonRecord[] {
+  const lines = text.replace(/^\uFEFF/, "").replace(/\r/g, "").split("\n").filter((line) => line.length > 0);
+  if (!lines.length) return [];
+  const headers = lines[0]!.split("\t");
+  if (!headers.every((header) => header.trim())) throw new ScienceServiceError("INVALID_TSV", "TSV responses need a non-empty header row.");
+  return lines.slice(1).map((line) => Object.fromEntries(headers.map((header, index) => [header, line.split("\t")[index] ?? ""])));
+}
+
+function parseFasta(text: string): JsonRecord[] {
+  const rows: JsonRecord[] = [];
+  let current: JsonRecord | undefined;
+  for (const rawLine of text.replace(/\r/g, "").split("\n")) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    if (line.startsWith(">")) {
+      const [id = "", ...description] = line.slice(1).trim().split(/\s+/);
+      if (!id) throw new ScienceServiceError("INVALID_FASTA", "FASTA headers must include an identifier.");
+      current = { id, description: description.join(" "), sequence: "" };
+      rows.push(current);
+    } else if (current) {
+      current.sequence = `${String(current.sequence)}${line.replace(/\s/g, "")}`;
+    } else {
+      throw new ScienceServiceError("INVALID_FASTA", "FASTA content must begin with a header line.");
+    }
+  }
+  return rows;
+}
+
+function parsePayload(text: string, format: Exclude<ResponseFormat, "auto">): unknown {
+  if (format === "json") {
+    try { return text ? JSON.parse(text) : {}; }
+    catch { throw new ScienceServiceError("INVALID_JSON", "The source response was not valid JSON."); }
+  }
+  if (format === "tsv") return parseTsv(text);
+  if (format === "fasta") return parseFasta(text);
+  return text;
+}
+
+/** Compact nested response records without turning a provider response into an unbounded tool result. */
+export function boundedValue(value: unknown, maxDepth: number, depth = 0): unknown {
+  if (value === null || typeof value !== "object") return value;
+  if (depth >= maxDepth) return Array.isArray(value) ? [] : { truncated: true };
+  if (Array.isArray(value)) return value.map((item) => boundedValue(item, maxDepth, depth + 1));
+  return Object.fromEntries(Object.entries(value as JsonRecord).map(([key, item]) => [key, boundedValue(item, maxDepth, depth + 1)]));
+}
+
+export function boundedInteger(value: unknown, fallback: number, min: number, max: number, field: string): number {
+  if (value === undefined) return fallback;
+  const parsed = typeof value === "number" ? value : Number(value);
+  if (!Number.isInteger(parsed) || parsed < min || parsed > max) {
+    throw new ScienceServiceError("INVALID_REQUEST_OPTION", `${field} must be an integer between ${min} and ${max}.`);
+  }
+  return parsed;
+}
+
+function combinedSignal(signal: AbortSignal, timeoutSec: number): { signal: AbortSignal; timedOut: () => boolean; dispose: () => void } {
+  const controller = new AbortController();
+  let timeout = false;
+  const forwardAbort = () => controller.abort(signal.reason);
+  if (signal.aborted) forwardAbort(); else signal.addEventListener("abort", forwardAbort, { once: true });
+  const timer = setTimeout(() => {
+    timeout = true;
+    controller.abort(new Error("request timeout"));
+  }, timeoutSec * 1000);
+  return {
+    signal: controller.signal,
+    timedOut: () => timeout,
+    dispose: () => { clearTimeout(timer); signal.removeEventListener("abort", forwardAbort); },
+  };
+}
+
+async function saveRawResponse(packageRoot: string, rawPath: unknown, text: string): Promise<string> {
+  if (typeof rawPath !== "string" || !rawPath.trim()) {
+    throw new ScienceServiceError("MISSING_RAW_OUTPUT_PATH", "save_raw requires a relative raw_output_path inside the DSH-Rosalind package.");
+  }
+  if (isAbsolute(rawPath)) throw new ScienceServiceError("INVALID_RAW_OUTPUT_PATH", "raw_output_path must be relative to the DSH-Rosalind package.");
+  const root = resolve(packageRoot);
+  const output = resolve(root, rawPath);
+  const rel = relative(root, output);
+  if (!rel || rel.startsWith("..") || isAbsolute(rel)) {
+    throw new ScienceServiceError("INVALID_RAW_OUTPUT_PATH", "raw_output_path must remain inside the DSH-Rosalind package.");
+  }
+  try {
+    await mkdir(dirname(output), { recursive: true });
+    await writeFile(output, text, { encoding: "utf8", flag: "wx" });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "EEXIST") {
+      throw new ScienceServiceError("RAW_OUTPUT_EXISTS", `Raw output already exists: ${rawPath}`);
+    }
+    throw error;
+  }
+  return rel.replaceAll("\\", "/");
+}
+
+export async function controlledRequest(
+  fetcher: FetchLike,
+  url: URL,
+  init: RequestInit,
+  context: ScienceExecutionContext,
+  args: JsonRecord,
+): Promise<ControlledResponse> {
+  const timeoutSec = boundedInteger(args.timeout_sec, 30, 1, 120, "timeout_sec");
+  const requestedFormat = responseFormat(args.response_format);
+  const guard = combinedSignal(context.signal, timeoutSec);
+  try {
+    const response = await fetcher(url, { ...init, signal: guard.signal });
+    const text = await response.text();
+    if (!response.ok) {
+      const message = text.slice(0, 500) || `HTTP ${response.status}`;
+      throw new ScienceServiceError("HTTP_ERROR", message, response.status);
+    }
+    const selectedFormat = inferResponseFormat(requestedFormat, response.headers.get("content-type") ?? "", url, text);
+    const payload = parsePayload(text, selectedFormat);
+    const rawOutputPath = args.save_raw === true
+      ? await saveRawResponse(context.packageRoot, args.raw_output_path, text)
+      : undefined;
+    return { payload, responseFormat: selectedFormat, ...(rawOutputPath ? { rawOutputPath } : {}) };
+  } catch (error) {
+    if (guard.timedOut()) throw new ScienceServiceError("TIMEOUT", `The request exceeded timeout_sec=${timeoutSec}.`);
+    if (context.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) {
+      throw new ScienceServiceError("CANCELLED", "The public-source request was cancelled.");
+    }
+    throw error;
+  } finally {
+    guard.dispose();
   }
 }
 
@@ -60,15 +246,34 @@ function valueAt(object: unknown, key: string): unknown {
   return object && typeof object === "object" ? (object as JsonRecord)[key] : undefined;
 }
 
-function recordsFrom(payload: unknown): unknown[] {
-  if (Array.isArray(payload)) return payload;
+function valueAtPath(object: unknown, dottedPath: string): unknown {
+  if (!dottedPath) return object;
+  if (!/^[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*$/.test(dottedPath)) {
+    throw new ScienceServiceError("INVALID_RECORD_PATH", "record_path must use dot-separated object keys.");
+  }
+  return dottedPath.split(".").reduce<unknown>((current, key) => valueAt(current, key), object);
+}
+
+function recordsFrom(payload: unknown, args: JsonRecord = {}): unknown[] {
+  const requested = args.record_path;
+  const selected = typeof requested === "string" && requested.trim() ? valueAtPath(payload, requested.trim()) : undefined;
+  if (selected !== undefined) {
+    const values = Array.isArray(selected) ? selected : [selected];
+    return values.slice(0, boundedInteger(args.max_items ?? args.maxItems, 10, 1, 100, "max_items"));
+  }
+  let records: unknown[];
+  if (Array.isArray(payload)) return payload.slice(0, boundedInteger(args.max_items ?? args.maxItems, 10, 1, 100, "max_items"));
   if (payload && typeof payload === "object") {
     for (const key of ["collection", "records", "result", "articles", "response"]) {
       const candidate = valueAt(payload, key);
-      if (Array.isArray(candidate)) return candidate;
+      if (Array.isArray(candidate)) {
+        records = candidate;
+        return records.slice(0, boundedInteger(args.max_items ?? args.maxItems, 10, 1, 100, "max_items"));
+      }
     }
   }
-  return payload === null || payload === undefined ? [] : [payload];
+  records = payload === null || payload === undefined ? [] : [payload];
+  return records.slice(0, boundedInteger(args.max_items ?? args.maxItems, 10, 1, 100, "max_items"));
 }
 
 function checkedSource(name: string, url: string): SourceResult["sources"][number] {
@@ -78,13 +283,10 @@ function checkedSource(name: string, url: string): SourceResult["sources"][numbe
 const PMCID_RE = /^PMC(?<accession>\d+)(?:\.(?<version>\d+))?$/i;
 const DOI_RE = /^10\.\d{4,9}\/.+/i;
 const PMC_CLOUD_BASE = "https://pmc-oa-opendata.s3.amazonaws.com/";
+const BIORXIV_BASE = "https://api.biorxiv.org/";
 
 function record(value: unknown): JsonRecord | undefined {
   return value && typeof value === "object" && !Array.isArray(value) ? value as JsonRecord : undefined;
-}
-
-function nestedArg(args: JsonRecord, key: string): unknown {
-  return args[key] ?? valueAt(args.params, key);
 }
 
 function directPmcid(identifier: string): { pmcid: string; version?: number } | undefined {
@@ -154,6 +356,19 @@ function doiPath(doi: string): string {
   return doi.split("/").map((part) => encodeURIComponent(part)).join("/");
 }
 
+function biorxivUrl(args: JsonRecord, fallbackPath: string): URL {
+  const suppliedBase = scalar(args.base_url);
+  if (suppliedBase && suppliedBase !== BIORXIV_BASE.replace(/\/$/, "") && suppliedBase !== BIORXIV_BASE) {
+    throw new ScienceServiceError("INVALID_BIORXIV_BASE_URL", "bioRxiv requests must use https://api.biorxiv.org.");
+  }
+  const suppliedPath = scalar(args.path);
+  const path = suppliedPath ?? fallbackPath;
+  if (/^https?:\/\//i.test(path) || path.includes("..") || path.startsWith("/")) {
+    throw new ScienceServiceError("INVALID_BIORXIV_PATH", "bioRxiv path must be a relative official API path without '..'.");
+  }
+  return new URL(path, BIORXIV_BASE);
+}
+
 export class LiteratureService {
   private readonly fetcher: FetchLike;
   private readonly defaultAllowNetwork: boolean;
@@ -187,6 +402,7 @@ export class LiteratureService {
     url: URL,
     init: RequestInit,
     context: ScienceExecutionContext,
+    args: JsonRecord,
   ): Promise<SourceResult> {
     const method = init.method ?? "GET";
     const request = { method, url: url.toString() };
@@ -195,18 +411,28 @@ export class LiteratureService {
     }
     if (context.signal.aborted) throw new ScienceServiceError("CANCELLED", "The literature request was cancelled before it began.");
     try {
-      const response = await this.fetcher(url, { ...init, signal: context.signal, headers: { accept: "application/json, application/xml;q=0.8, text/xml;q=0.7", ...init.headers } });
-      const text = await response.text();
-      let payload: unknown = text;
-      try { payload = text ? JSON.parse(text) : {}; } catch { /* XML is intentionally retained as text. */ }
-      if (!response.ok) {
-        return { ok: false, service, operation, records: [], sources: [], diagnostics: [`HTTP ${response.status} from ${url.hostname}.`], request, error: { code: "HTTP_ERROR", message: typeof payload === "string" ? payload.slice(0, 500) : `HTTP ${response.status}`, status: response.status } };
-      }
-      const records = recordsFrom(payload);
+      const headers = controlledHeaders(args.headers, { accept: "application/json, application/xml;q=0.8, text/xml;q=0.7" });
+      const response = await controlledRequest(this.fetcher, url, { ...init, headers }, context, args);
+      const maxDepth = boundedInteger(args.max_depth, 4, 1, 12, "max_depth");
+      const records = recordsFrom(response.payload, args).map((item) => boundedValue(item, maxDepth));
       const sources = [checkedSource(service === "entrez" ? "NCBI Entrez" : service === "pmc" ? "PubMed Central" : "bioRxiv / medRxiv", url.toString())];
-      return { ok: true, service, operation, records, sources, diagnostics: records.length ? [] : ["The source returned no matching records."], request };
+      return {
+        ok: true, service, operation, records, sources,
+        diagnostics: records.length ? [] : ["The source returned no matching records."],
+        request: {
+          ...request,
+          response_format: response.responseFormat,
+          ...(response.rawOutputPath ? { raw_output_path: response.rawOutputPath } : {}),
+        },
+      };
     } catch (error) {
       if (context.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) throw new ScienceServiceError("CANCELLED", "The literature request was cancelled.");
+      if (error instanceof ScienceServiceError) {
+        return {
+          ok: false, service, operation, records: [], sources: [], diagnostics: [error.message], request,
+          error: { code: error.code, message: error.message, ...(error.status === undefined ? {} : { status: error.status }) },
+        };
+      }
       return { ok: false, service, operation, records: [], sources: [], diagnostics: ["The public source could not be reached."], request, error: { code: "NETWORK_ERROR", message: error instanceof Error ? error.message : String(error) } };
     }
   }
@@ -224,8 +450,8 @@ export class LiteratureService {
     } else {
       path = `details/${server}/${scalar(args.start) ?? "2020-01-01"}/${scalar(args.end) ?? new Date().toISOString().slice(0, 10)}/${cursor}/json`;
     }
-    const response = await this.request("biorxiv", operation, new URL(path, "https://api.biorxiv.org/"), { method: "GET" }, context);
-    if (response.ok) response.pagination = { cursor, pageSize: integer(args.pageSize ?? args.maxItems, 10, 1, 100) };
+    const response = await this.request("biorxiv", operation, biorxivUrl(args, path), { method: "GET" }, context, args);
+    if (response.ok) response.pagination = { cursor, pageSize: integer(args.pageSize ?? args.maxItems ?? args.max_items, 10, 1, 100) };
     return response;
   }
 
@@ -233,7 +459,7 @@ export class LiteratureService {
     const action = scalar(args.action) ?? (operation.includes("fetch") ? "fetch" : operation.includes("summary") ? "summary" : operation.includes("link") || operation.includes("map") ? "link" : "search");
     const endpoint = action === "fetch" ? "efetch.fcgi" : action === "summary" ? "esummary.fcgi" : action === "link" || action === "map" ? "elink.fcgi" : "esearch.fcgi";
     const url = new URL(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/${endpoint}`);
-    const query = queryFrom(args, ["provider", "action", "allowNetwork", "page", "pageSize", "maxItems"]);
+    const query = queryFrom(args, ["provider", "action", "allowNetwork", "page", "pageSize", "maxItems", "max_items", "timeout_sec", "headers", "response_format", "record_path", "max_depth", "save_raw", "raw_output_path", "params"]);
     query.set("db", scalar(args.db) ?? "pubmed");
     query.set("retmode", scalar(args.retmode) ?? "json");
     if (action === "search") {
@@ -242,7 +468,7 @@ export class LiteratureService {
       query.set("retmax", String(integer(args.pageSize ?? args.maxItems, 10, 1, 100)));
     } else if (scalar(args.id ?? args.ids)) query.set("id", scalar(args.id ?? args.ids)!);
     url.search = query.toString();
-    const response = await this.request("entrez", operation, url, { method: "GET" }, context);
+    const response = await this.request("entrez", operation, url, { method: "GET" }, context, args);
     if (response.ok && action === "search") {
       const root = response.records[0];
       const search = valueAt(root, "esearchresult");
@@ -256,7 +482,15 @@ export class LiteratureService {
 
   private async pmc(operation: string, args: JsonRecord, context: ScienceExecutionContext): Promise<SourceResult> {
     const action = scalar(args.action) ?? (operation.includes("article-dataset") || operation.includes("metadata") ? "article-dataset" : operation.includes("open") || operation.includes("license") ? "open-access" : operation.includes("map") ? "map" : operation.includes("fetch") ? "fetch" : "search");
-    const identifier = scalar(nestedArg(args, "id") ?? nestedArg(args, "identifier") ?? nestedArg(args, "pmcid") ?? nestedArg(args, "pmid") ?? nestedArg(args, "doi"));
+    const params = record(args.params);
+    const identifier = scalar(params?.id);
+    if (!identifier) {
+      return {
+        ok: false, service: "pmc", operation, records: [], sources: [], diagnostics: ["PMC Article Dataset requests require params.id."],
+        request: { method: "GET", url: PMC_CLOUD_BASE },
+        error: { code: "MISSING_PMC_ID", message: "Provide the required params.id identifier." },
+      };
+    }
     if (action === "article-dataset" || action === "metadata" || action === "article-metadata") {
       return this.pmcArticleDataset(operation, identifier, args, context);
     }
@@ -272,7 +506,7 @@ export class LiteratureService {
       if (action === "fetch" && identifier) url.searchParams.set("id", identifier);
       if (action !== "fetch") url.searchParams.set("term", scalar(args.term ?? args.query) ?? "");
     }
-    return this.request("pmc", operation, url, { method: "GET" }, context);
+    return this.request("pmc", operation, url, { method: "GET" }, context, args);
   }
 
   private async pmcArticleDataset(
@@ -312,7 +546,7 @@ export class LiteratureService {
       searchUrl.searchParams.set("term", pmcSearchTerm(identifier));
       searchUrl.searchParams.set("retmode", "json");
       searchUrl.searchParams.set("retmax", String(retmax));
-      const search = await this.request("pmc", operation, searchUrl, { method: "GET" }, context);
+      const search = await this.request("pmc", operation, searchUrl, { method: "GET" }, context, { ...args, save_raw: false });
       if (!search.ok) return search;
       sources.push(...search.sources);
       const payload = record(search.records[0]);
@@ -333,7 +567,7 @@ export class LiteratureService {
       listUrl.searchParams.set("list-type", "2");
       listUrl.searchParams.set("prefix", `${pmcid}.`);
       listUrl.searchParams.set("delimiter", "/");
-      const listed = await this.request("pmc", operation, listUrl, { method: "GET" }, context);
+      const listed = await this.request("pmc", operation, listUrl, { method: "GET" }, context, { ...args, save_raw: false });
       if (!listed.ok) return { ...listed, sources: [...sources, ...listed.sources] };
       sources.push(...listed.sources);
       const xml = scalar(listed.records[0]);
@@ -357,7 +591,7 @@ export class LiteratureService {
     let finalRequest = request;
     for (const versionKey of versionKeys.slice(0, maxItems)) {
       const metadataUrl = new URL(`metadata/${encodeURIComponent(versionKey)}.json`, PMC_CLOUD_BASE);
-      const metadata = await this.request("pmc", operation, metadataUrl, { method: "GET" }, context);
+      const metadata = await this.request("pmc", operation, metadataUrl, { method: "GET" }, context, args);
       finalRequest = metadata.request ?? finalRequest;
       if (!metadata.ok) {
         if (metadata.error?.status === 404) {

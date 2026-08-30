@@ -1,4 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
@@ -18,10 +19,10 @@ const targetCatalog = await readJson(path.join(repositoryRoot, "showcases", "cat
 const targetShowcaseIds = new Set(targetCatalog.plugins.flatMap((plugin) => plugin.showcases.map((item) => item.id)));
 const verificationEvidencePath = "docs/evidence/capability-verification.md";
 const verificationRunId = "capability-fixtures-2026-08-30";
-let verificationRecord = "";
-try { verificationRecord = await readFile(path.join(repositoryRoot, verificationEvidencePath), "utf8"); } catch { /* A missing record keeps every item implemented. */ }
-const verificationRecorded = verificationRecord.includes(`CAPABILITY_RUN_ID: ${verificationRunId}`)
-  && verificationRecord.includes("RESULT: passed");
+const verificationMachineRecordPath = `capabilities/evidence/${verificationRunId}.json`;
+let verificationMachineRecord = null;
+try { verificationMachineRecord = await readJson(path.join(repositoryRoot, verificationMachineRecordPath)); } catch { /* A missing record keeps every item implemented. */ }
+let verificationRecorded = false;
 
 const annotations = new Set(["title", "description", "default", "examples"]);
 
@@ -262,14 +263,69 @@ const verificationTestFiles = [
   "tests/science-integration.test.ts",
   "tests/rosalind-operation.test.ts",
   "tests/dsh-host-registration.test.ts",
-  "tests/capabilities.test.ts",
 ];
+
+const verificationFixedInputFiles = [
+  "package.json",
+  "scripts/generate-capability-manifest.mjs",
+  "scripts/record-capability-verification.mjs",
+  "showcases/catalog.json",
+  "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/candidates.csv",
+  "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/top5_ensemble_ranking.csv",
+];
+
+function relativePath(file) {
+  return path.relative(repositoryRoot, file).split(path.sep).join("/");
+}
+
+async function filesUnder(relativeDirectory) {
+  const directory = path.join(repositoryRoot, relativeDirectory);
+  const files = [];
+  async function visit(currentDirectory) {
+    for (const entry of await readdir(currentDirectory, { withFileTypes: true })) {
+      const file = path.join(currentDirectory, entry.name);
+      if (entry.isDirectory()) await visit(file);
+      else if (entry.isFile()) files.push(relativePath(file));
+    }
+  }
+  await visit(directory);
+  return files.sort();
+}
+
+const verificationIdentityFiles = [...new Set([
+  ...verificationFixedInputFiles,
+  ...verificationTestFiles,
+  ...(await filesUnder("src")),
+  ...(await filesUnder("skills")),
+  ...(await filesUnder("capabilities/contracts")),
+  ...(await filesUnder("capabilities/sources")),
+])].sort();
+
+async function contentIdentity(relativePath) {
+  return createHash("sha256").update(await readFile(path.join(repositoryRoot, relativePath))).digest("hex");
+}
+
+if (
+  verificationMachineRecord?.schemaVersion === 1
+  && verificationMachineRecord.runId === verificationRunId
+  && verificationMachineRecord.status === "passed"
+  && verificationMachineRecord.package?.name === "@zichenwang114514/dsh-rosalind"
+  && typeof verificationMachineRecord.contentIdentities === "object"
+) {
+  verificationRecorded = (await Promise.all(verificationIdentityFiles.map(async (file) => (
+    verificationMachineRecord.contentIdentities[file] === await contentIdentity(file)
+  )))).every(Boolean);
+}
+
 const verificationRuns = [{
   id: verificationRunId,
   status: verificationRecorded ? "passed" : "not-recorded",
   evidencePath: verificationEvidencePath,
+  machineEvidencePath: verificationMachineRecordPath,
   command: `npx vitest run ${verificationTestFiles.join(" ")} --reporter=dot`,
   testFiles: verificationTestFiles,
+  contentIdentityFiles: verificationIdentityFiles,
+  contentIdentityMatch: verificationRecorded,
   typecheck: "npx tsc --noEmit --pretty false",
 }];
 
@@ -446,8 +502,10 @@ for (const operation of operations) {
   const error = executionEvidence(errorLocated, "operation-error-or-diagnostic");
   const required = [implementation.status === "located", fixture.status === "executed", fixture.kind === "operation-contract-fixture", Boolean(fixture.assertionLocator)];
   operation.evidence = { implementation, fixture, live, cancellation, error };
-  operation.verificationScope = "fixture-contract";
   operation.fixtureOutcome = fixtureOutcome(operation);
+  operation.verificationScope = operation.fixtureOutcome === "successful-local-result"
+    ? "local-result-fixture-contract"
+    : "implementation-and-diagnostic-fixture";
   operation.evidenceGaps = [
     ...(!required[0] ? ["implementation locator was not found"] : []),
     ...(!required[1] ? ["operation fixture has no recorded passing execution"] : []),
@@ -456,8 +514,10 @@ for (const operation of operations) {
     "no real DSH-profile or public-service live execution is recorded",
     ...(cancellation.status === "missing" ? ["no operation-specific cancellation assertion is recorded"] : []),
     ...(error.status === "missing" ? ["no operation-specific error assertion is recorded"] : []),
+    ...(operation.fixtureOutcome === "exact-diagnostic" ? ["the fixture proves an exact unavailable diagnostic, not a successful scientific result"] : []),
+    ...(operation.fixtureOutcome === "mixed-success-and-diagnostic" ? ["the combined fixture does not prove a successful result for this individual operation"] : []),
   ];
-  operation.status = required.every(Boolean) ? "verified" : "implemented";
+  operation.status = required.every(Boolean) && operation.fixtureOutcome === "successful-local-result" ? "verified" : "implemented";
 }
 
 for (const service of services) {
@@ -487,7 +547,7 @@ for (const service of services) {
     "no real DSH-profile or public-service live execution is recorded",
     ...(cancellation.status === "missing" ? ["no service-specific cancellation assertion is recorded"] : []),
   ];
-  service.status = required.every(Boolean) ? "verified" : "implemented";
+  service.status = required.every(Boolean) && live.status === "executed" ? "verified" : "implemented";
 }
 
 for (const skill of skills) {
@@ -500,7 +560,11 @@ for (const skill of skills) {
     assertionLocator: "$id is registered from its source document with a resolvable tool and fixture",
   }), "skill-source-registry-tool-provider-and-fixture-mapping");
   const workflow = executionEvidence(await locatedEvidence(skill.workflowTest, serviceFixtureLocator[skill.serviceId], { kind: "test-locator" }), "service-workflow-fixture");
-  const registration = executionEvidence(await locatedEvidence("tests/capabilities.test.ts", "verifies all 55 Skill invocation records", { kind: "skill-invocation-metadata-fixture" }), "skill-whenToUse-and-invocation-metadata");
+  const registration = executionEvidence(await locatedEvidence(
+    "tests/dsh-host-registration.test.ts",
+    "registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills",
+    { kind: "dsh-skill-registry-readback-fixture", assertionLocator: "expect(definition?.invocation).toEqual({ modelInvocable: true, userInvocable: true });" },
+  ), "dsh-skill-registry-readback-and-invocation");
   const live = missingEvidence("live-skill-invocation", "no Skill-specific invocation through a real DSH profile is recorded");
   const cancellation = { status: "not-applicable", path: null, locator: null, executionId: null, scope: "instruction-document" };
   const error = { status: "not-applicable", path: null, locator: null, executionId: null, scope: "instruction-document" };
@@ -509,7 +573,7 @@ for (const skill of skills) {
   skill.verificationScope = "instruction-registration-and-workflow-fixture";
   skill.fixtureOutcome = "registered-skill-with-mapped-workflow-fixture";
   skill.evidenceGaps = ["no model-selected Skill invocation or real public-service execution is recorded"];
-  skill.status = required.every(Boolean) ? "verified" : "implemented";
+  skill.status = required.every(Boolean) && live.status === "executed" ? "verified" : "implemented";
 }
 
 const contractDirectory = path.join(outputDirectory, "contracts");
@@ -536,10 +600,10 @@ const manifest = {
   },
   statusDefinitions: {
     missing: "No implementation path is recorded.",
-    implemented: "An implementation path exists, but the required fixture-contract evidence is incomplete.",
-    verified: "Fixture-contract verified. This may be a successful local result, a mixed success/diagnostic fixture, or an exact unavailable diagnostic; consult fixtureOutcome and live evidence before claiming functional availability.",
+    implemented: "An implementation path exists, but successful operation-specific scientific output or live DSH execution remains incomplete.",
+    verified: "A successful operation-specific local scientific result is asserted by an executed fixture, or equivalent live DSH evidence is recorded. Exact unavailable diagnostics and combined mixed fixtures do not qualify.",
   },
-  evidencePolicy: "A directory, source locator, registry dispatch, or test-file reference proves only implementation reachability. Operation verified status requires a recorded operation-specific fixture with meaningful input plus an asserted local result or exact diagnostic. Service verified status requires a meaningful service fixture and asserted result or diagnostic. Skill verified status requires a project-authored SKILL.md, DSH SkillRegistry registration/readback, whenToUse and invocation metadata, a registered main-tool or explicit instruction-only execution mode, provider/server mapping where applicable, and an executed meaningful operation/provider fixture. Live evidence is reserved for a real DSH profile or public-service execution; shared null-argument dispatch is never labeled live.",
+  evidencePolicy: "A directory, source locator, registry dispatch, test-file reference, exact unavailable diagnostic, or combined mixed fixture proves implementation reachability and failure behavior only. Operation verified status requires an executed operation-specific fixture with meaningful input and an asserted successful local scientific result, or equivalent live DSH evidence. Service and Skill verified status require real DSH-profile execution. Shared null-argument dispatch is never labeled live.",
   verificationRuns,
   statusCounts: {
     services: Object.fromEntries(["verified", "implemented", "missing"].map((status) => [status, services.filter((item) => item.status === status).length])),
