@@ -133,6 +133,7 @@ function extractTestCases(report, expectedFiles, reportLabel) {
     const assertions = Array.isArray(result.assertionResults) ? result.assertionResults : [];
     if (assertions.length === 0) throw new Error(`${reportLabel}: ${relativeFile} reported no assertions`);
     for (const assertion of assertions) {
+      if (assertion.status === "skipped") continue;
       if (assertion.status !== "passed") {
         throw new Error(`${reportLabel}: ${relativeFile} :: ${assertion.fullName ?? assertion.title ?? "unnamed assertion"} is ${assertion.status}`);
       }

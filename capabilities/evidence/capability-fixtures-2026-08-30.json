@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T21:18:44.687Z",
+  "recordedAt": "2026-08-30T21:28:56.029Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
     "version": "0.3.4"
@@ -2118,8 +2118,8 @@
   ],
   "profileInstallation": {
     "archive": "zichenwang114514-dsh-rosalind-0.3.4.tgz",
-    "archiveBytes": 17166887,
-    "archiveSha256": "5e478fd9548746f71bdb45e270ed82c2026b0e0c842b2e09905f9d7912b8b7bf",
+    "archiveBytes": 17166846,
+    "archiveSha256": "16c03e5bf820ff8348d60c22d4907ef48b15088c5e6b99acfcfacbc386aff6ca",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2295,7 +2295,7 @@
     "package.json": "2a79972850d4f2c9b8e81ad17e4cc004de7cde2e9b2ccc48f6354452ac59cbd4",
     "scripts/generate-capability-manifest.mjs": "d745b63b86478a9fa459fb81d2a5596dac46c1505b9db3575ea7ff60ee3ab29f",
     "scripts/lib/capability-evidence.mjs": "0d4ca26443b0f7dba1c6e9a2b5554d31e6615831fc236a26cd4891f5fb2acff9",
-    "scripts/record-capability-verification.mjs": "fad1258e837b0c156db777bfc7d06ad5ace91b4f5fa7ee94b6b1b976fc7c1352",
+    "scripts/record-capability-verification.mjs": "559e62b93522f68d2310294aa2eb8f61eeff1a51fa2af4c375ddff09e5aee907",
     "scripts/validate-capabilities.mjs": "8a9f4919625e2e7c291a6660688f33abf181d79a23a6d96df3e47739685f0366",
     "scripts/verify-dsh-registration.mjs": "6453d7bdb2eab7a0c51a80a793a107431b6bca57def606da9b3d5135a7b19a5a",
     "showcases/catalog.json": "02146f54cbba23a484b87925b7cd0d59ddbf74122702d5ea3018a1c658ea8e73",
