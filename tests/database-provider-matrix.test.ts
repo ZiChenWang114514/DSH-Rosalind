@@ -158,17 +158,73 @@ describe("44 fixed-version database providers", () => {
     expect(new URL(observedUrl).searchParams.get("q")).toBe("aspirin");
   });
 
-  it("maps a top-level NCBI Entrez query to the native term parameter", async () => {
+  it("maps NCBI Entrez search pagination to retstart and retmax", async () => {
     let observedUrl = "";
     const service = new DatabaseService({ fetch: async (input) => {
       observedUrl = String(input);
       return new Response(JSON.stringify({ esearchresult: { idlist: [record("ncbi-entrez")] } }), { status: 200, headers: { "content-type": "application/json" } });
     } });
     const result = await service.execute("database.request", {
-      provider: "ncbi-entrez", operation: "search", query: "TREM2 AND Alzheimer disease",
+      provider: "ncbi-entrez", operation: "search", query: "TREM2 AND Alzheimer disease", page: 2, pageSize: 5,
     }, context());
     expect(result.ok).toBe(true);
-    expect(new URL(observedUrl).searchParams.get("term")).toBe("TREM2 AND Alzheimer disease");
+    const url = new URL(observedUrl);
+    expect(url.searchParams.get("term")).toBe("TREM2 AND Alzheimer disease");
+    expect(url.searchParams.get("retstart")).toBe("10");
+    expect(url.searchParams.get("retmax")).toBe("5");
+    expect(url.searchParams.get("retmode")).toBe("json");
+    expect(url.searchParams.has("page")).toBe(false);
+    expect(url.searchParams.has("pageSize")).toBe(false);
+  });
+
+  it.each([
+    ["summary", { ids: "7157" }, "esummary.fcgi", "gene", "json"],
+    ["fetch", { accession: "NP_000537.3", db: "protein" }, "efetch.fcgi", "protein", "xml"],
+  ] as const)("maps NCBI Entrez %s identifiers and response format", async (operation, input, endpoint, db, retmode) => {
+    let observedUrl = "";
+    const service = new DatabaseService({ fetch: async (request) => {
+      observedUrl = String(request);
+      return new Response(retmode === "xml" ? `<Entrezgene-Set>${"x".repeat(25_000)}</Entrezgene-Set>` : JSON.stringify({ result: { "7157": { uid: "7157" } } }), {
+        status: 200, headers: { "content-type": retmode === "xml" ? "application/xml" : "application/json" },
+      });
+    } });
+    const result = await service.execute("database.request", { provider: "ncbi-entrez", operation, ...input }, context());
+    const url = new URL(observedUrl);
+    expect(result.ok).toBe(true);
+    expect(url.pathname).toBe(`/entrez/eutils/${endpoint}`);
+    expect(url.searchParams.get("id")).toBe(operation === "summary" ? "7157" : "NP_000537.3");
+    expect(url.searchParams.get("db")).toBe(db);
+    expect(url.searchParams.get("retmode")).toBe(retmode);
+    if (operation === "fetch") {
+      expect(String(result.records[0])).toContain("[truncated 5033 characters; use save_raw with raw_output_path to preserve the complete response]");
+      expect(String(result.records[0]).length).toBeLessThan(21_000);
+    }
+  });
+
+  it("maps the NCBI Entrez link source and target databases", async () => {
+    let observedUrl = "";
+    const service = new DatabaseService({ fetch: async (request) => {
+      observedUrl = String(request);
+      return new Response(JSON.stringify({ linksets: [] }), { status: 200, headers: { "content-type": "application/json" } });
+    } });
+    const result = await service.execute("database.request", {
+      provider: "ncbi-entrez", operation: "links", identifier: "7157", dbfrom: "gene", db: "protein",
+    }, context());
+    const url = new URL(observedUrl);
+    expect(result.ok).toBe(true);
+    expect(url.pathname).toBe("/entrez/eutils/elink.fcgi");
+    expect(url.searchParams.get("id")).toBe("7157");
+    expect(url.searchParams.get("dbfrom")).toBe("gene");
+    expect(url.searchParams.get("db")).toBe("protein");
+    expect(url.searchParams.get("retmode")).toBe("json");
+  });
+
+  it("rejects incomplete NCBI Entrez requests before fetch", async () => {
+    let called = false;
+    const service = new DatabaseService({ fetch: async () => { called = true; return new Response("{}"); } });
+    await expect(service.execute("database.request", { provider: "ncbi-entrez", operation: "search" }, context())).rejects.toMatchObject({ code: "MISSING_ENTREZ_TERM" });
+    await expect(service.execute("database.request", { provider: "ncbi-entrez", operation: "fetch", db: "gene" }, context())).rejects.toMatchObject({ code: "MISSING_ENTREZ_IDENTIFIER" });
+    expect(called).toBe(false);
   });
 
   it.each([

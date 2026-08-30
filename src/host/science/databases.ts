@@ -126,6 +126,7 @@ function validateProviderUrl(provider: ProviderDefinition, url: URL): void {
 }
 function setIfMissing(params: URLSearchParams, key: string, value: string): void { if (!params.has(key)) params.set(key, value); }
 function collectParameters(args: JsonRecord): URLSearchParams { const params = new URLSearchParams(); const supplied = asRecord(args.params) ?? (typeof args.query === "object" ? asRecord(args.query) : undefined); if (supplied) for (const [key, value] of Object.entries(supplied)) if (value !== null && value !== undefined && typeof value !== "object") params.set(key, String(value)); return params; }
+function suppliedParameter(args: JsonRecord, key: string): string | undefined { return stringValue(asRecord(args.params)?.[key] ?? (typeof args.query === "object" ? asRecord(args.query)?.[key] : undefined)); }
 function appendFormParameters(params: URLSearchParams, value: unknown): void {
   if (value === undefined) return;
   const form = asRecord(value);
@@ -187,13 +188,54 @@ function biobankJapanEndpointIdentifier(args: JsonRecord): string {
   if (!match) throw new ScienceServiceError("INVALID_BBJ_VARIANT", `BioBank Japan ${kind} must use chromosomal chr:pos-ref-alt notation.`);
   return `${match[1]!.toUpperCase()}:${match[2]}-${match[3]!.toUpperCase()}-${match[4]!.toUpperCase()}`;
 }
+function entrezAction(args: JsonRecord): string {
+  const operation = operationName(args);
+  if (operation) return operation;
+  const path = stringValue(args.path)?.toLowerCase() ?? "";
+  if (path.includes("esummary.fcgi")) return "summary";
+  if (path.includes("efetch.fcgi")) return "fetch";
+  if (path.includes("elink.fcgi")) return "links";
+  return "search";
+}
+function entrezIdentifier(args: JsonRecord): string | undefined { return stringValue(args.ids) ?? identifier(args) ?? suppliedParameter(args, "id"); }
+function entrezTerm(args: JsonRecord): string | undefined { return stringValue(args.term) ?? (typeof args.query === "string" ? stringValue(args.query) : undefined) ?? suppliedParameter(args, "term"); }
+function adaptEntrezParameters(args: JsonRecord, params: URLSearchParams, page: number, pageSize: number): void {
+  const action = entrezAction(args);
+  const requestedId = entrezIdentifier(args);
+  const requestedRetmode = stringValue(args.retmode) ?? suppliedParameter(args, "retmode");
+  if (action === "links") {
+    const explicitDbFrom = stringValue(args.dbfrom) ?? suppliedParameter(args, "dbfrom");
+    const requestedDb = stringValue(args.db) ?? suppliedParameter(args, "db");
+    if (!explicitDbFrom) params.delete("db");
+    else if (requestedDb) setIfMissing(params, "db", requestedDb);
+    params.set("dbfrom", explicitDbFrom ?? requestedDb ?? "gene");
+  } else {
+    setIfMissing(params, "db", stringValue(args.db) ?? "gene");
+    setIfMissing(params, "retstart", String(page * pageSize));
+    setIfMissing(params, "retmax", String(pageSize));
+  }
+  if (action === "search") setIfMissing(params, "term", entrezTerm(args)!);
+  else if (requestedId) setIfMissing(params, "id", requestedId);
+  setIfMissing(params, "retmode", requestedRetmode ?? (action === "fetch" ? "xml" : "json"));
+  if (args.rettype !== undefined) setIfMissing(params, "rettype", String(args.rettype));
+}
 function validateProviderInput(provider: DatabaseProvider, args: JsonRecord): void {
   if (provider.id === "biobankjapan-phewas") biobankJapanEndpointIdentifier(args);
+  if (provider.id === "ncbi-entrez") {
+    const action = entrezAction(args);
+    if (action === "search" && !entrezTerm(args)) {
+      throw new ScienceServiceError("MISSING_ENTREZ_TERM", "NCBI Entrez search requires a non-empty term or query.");
+    }
+    const hasHistoryInput = Boolean(suppliedParameter(args, "query_key") && (suppliedParameter(args, "WebEnv") ?? suppliedParameter(args, "webenv")));
+    if (["summary", "fetch", "links"].includes(action) && !entrezIdentifier(args) && !hasHistoryInput) {
+      throw new ScienceServiceError("MISSING_ENTREZ_IDENTIFIER", `NCBI Entrez ${action} requires id, ids, identifier, accession, or an Entrez history query.`);
+    }
+  }
 }
 function sourceRoute(provider: ProviderDefinition, args: JsonRecord): Route { const requestedPath = safePath(args.path); if (requestedPath) return { path: requestedPath, method: stringValue(args.method)?.toUpperCase() === "POST" ? "POST" : "GET", style: provider.requestStyle }; const operation = operationName(args); return provider.routes?.[operation] ?? provider.routes?.[operation.replace(/s$/, "")] ?? { path: provider.defaultPath }; }
 function plannedPath(provider: ProviderDefinition, route: Route, args: JsonRecord): string { const id = provider.id === "biobankjapan-phewas" ? biobankJapanEndpointIdentifier(args) : identifier(args); let path = replaceTemplate(route.path, id, args); const operation = operationName(args); if (/\{[^}]+\}/.test(route.path)) return path; const variantProviders = new Set(["biobankjapan-phewas", "finngen-phewas", "tpmi-phewas", "ukb-topmed-phewas"]); if (variantProviders.has(provider.id) && id) return appendIdentifier(path, id); const identifierRoutes = new Set(["entry", "target", "molecule", "gene", "study", "project", "collection", "compound", "term", "event", "participants", "pathways", "rna", "xrefs", "vcv", "rcv", "scv", "refsnp", "prediction", "uniprot", "annotations", "lookup", "variation", "variant", "overlap", "assembly", "dataset", "cid", "name", "fasta"]); if (!identifierRoutes.has(operation)) return path; if (provider.id === "chembl" && ["target", "molecule"].includes(operation) && id) return `${path.replace(/\/$/, "")}/${encodeURIComponent(id)}.json`; if (provider.id === "uniprot" && operation === "entry" && id) return `${path}${encodeURIComponent(id)}`; if (provider.id === "human-protein-atlas" && operation === "gene" && id) return `${encodeURIComponent(id)}.json`; if (provider.id === "pubchem-pug" && operation === "cid" && id) return `${path}${encodeURIComponent(id)}/property/Title/JSON`; if (provider.id === "rcsb-pdb" && operation === "fasta" && id) return `${path}${encodeURIComponent(id)}/download`; return appendIdentifier(path, id); }
-function addPagination(provider: DatabaseProvider, params: URLSearchParams, page: number, pageSize: number): void { switch (provider.pagination) { case "page": setIfMissing(params, "page", String(page)); setIfMissing(params, provider.id === "gtex-eqtl" ? "itemsPerPage" : "pageSize", String(pageSize)); break; case "page-size": setIfMissing(params, "page", String(page)); setIfMissing(params, "pageSize", String(pageSize)); break; case "offset": setIfMissing(params, "offset", String(page * pageSize)); setIfMissing(params, "limit", String(pageSize)); break; case "cursor": setIfMissing(params, "pageSize", String(pageSize)); break; default: break; } }
-function adaptParameters(provider: DatabaseProvider, args: JsonRecord, params: URLSearchParams, page: number, pageSize: number): void { const id = identifier(args); const op = operationName(args); addPagination(provider, params, page, pageSize); if (provider.id === "gtex-eqtl" && id) setIfMissing(params, "variantId", gtexVariant(args) ?? id); if (provider.id === "clinvar-variation" && !["vcv", "rcv", "scv", "refsnp"].includes(op)) { setIfMissing(params, "terms", id ?? stringValue(args.terms) ?? ""); setIfMissing(params, "maxList", String(pageSize)); } if (provider.id === "uniprot") { if (op !== "entry") { setIfMissing(params, "query", stringValue(args.query) ?? id ?? stringValue(args.term) ?? "*"); setIfMissing(params, "format", "json"); setIfMissing(params, "size", String(pageSize)); } else setIfMissing(params, "format", "json"); } if (provider.id === "ensembl") setIfMissing(params, "content-type", "application/json"); if (provider.id === "chembl" && op === "search") { setIfMissing(params, "q", stringValue(args.query) ?? id ?? stringValue(args.term) ?? ""); setIfMissing(params, "limit", String(pageSize)); } if (provider.id === "bindingdb") setIfMissing(params, "response", "application/json"); if (provider.id === "ncbi-entrez") { setIfMissing(params, "retmode", "json"); setIfMissing(params, "retmax", String(pageSize)); setIfMissing(params, "db", stringValue(args.db) ?? "gene"); if (op === "" || op === "search") setIfMissing(params, "term", stringValue(args.query) ?? stringValue(args.term) ?? id ?? ""); } if (provider.id === "string") { setIfMissing(params, "caller_identity", "dsh-rosalind"); setIfMissing(params, "limit", String(pageSize)); if (id) setIfMissing(params, op === "partners" ? "identifier" : "identifiers", id); setIfMissing(params, "species", String(args.species ?? 9606)); } if (provider.id === "rhea" || provider.id === "bgee") setIfMissing(params, "query", stringValue(args.query) ?? stringValue(args.sparql) ?? "SELECT * WHERE { ?s ?p ?o } LIMIT 10"); }
+function addPagination(provider: DatabaseProvider, params: URLSearchParams, page: number, pageSize: number): void { if (provider.id === "ncbi-entrez") return; switch (provider.pagination) { case "page": setIfMissing(params, "page", String(page)); setIfMissing(params, provider.id === "gtex-eqtl" ? "itemsPerPage" : "pageSize", String(pageSize)); break; case "page-size": setIfMissing(params, "page", String(page)); setIfMissing(params, "pageSize", String(pageSize)); break; case "offset": setIfMissing(params, "offset", String(page * pageSize)); setIfMissing(params, "limit", String(pageSize)); break; case "cursor": setIfMissing(params, "pageSize", String(pageSize)); break; default: break; } }
+function adaptParameters(provider: DatabaseProvider, args: JsonRecord, params: URLSearchParams, page: number, pageSize: number): void { const id = identifier(args); const op = operationName(args); addPagination(provider, params, page, pageSize); if (provider.id === "gtex-eqtl" && id) setIfMissing(params, "variantId", gtexVariant(args) ?? id); if (provider.id === "clinvar-variation" && !["vcv", "rcv", "scv", "refsnp"].includes(op)) { setIfMissing(params, "terms", id ?? stringValue(args.terms) ?? ""); setIfMissing(params, "maxList", String(pageSize)); } if (provider.id === "uniprot") { if (op !== "entry") { setIfMissing(params, "query", stringValue(args.query) ?? id ?? stringValue(args.term) ?? "*"); setIfMissing(params, "format", "json"); setIfMissing(params, "size", String(pageSize)); } else setIfMissing(params, "format", "json"); } if (provider.id === "ensembl") setIfMissing(params, "content-type", "application/json"); if (provider.id === "chembl" && op === "search") { setIfMissing(params, "q", stringValue(args.query) ?? id ?? stringValue(args.term) ?? ""); setIfMissing(params, "limit", String(pageSize)); } if (provider.id === "bindingdb") setIfMissing(params, "response", "application/json"); if (provider.id === "ncbi-entrez") adaptEntrezParameters(args, params, page, pageSize); if (provider.id === "string") { setIfMissing(params, "caller_identity", "dsh-rosalind"); setIfMissing(params, "limit", String(pageSize)); if (id) setIfMissing(params, op === "partners" ? "identifier" : "identifiers", id); setIfMissing(params, "species", String(args.species ?? 9606)); } if (provider.id === "rhea" || provider.id === "bgee") setIfMissing(params, "query", stringValue(args.query) ?? stringValue(args.sparql) ?? "SELECT * WHERE { ?s ?p ?o } LIMIT 10"); }
 function nextCursorFrom(payload: unknown): string | undefined { const record = asRecord(payload); return stringValue(record?.nextPageToken) ?? stringValue(record?.next_cursor) ?? stringValue(record?.nextCursor); }
 function totalFrom(payload: unknown): number | undefined { const record = asRecord(payload); for (const key of ["totalCount", "total", "count", "totalNumberOfItems"]) { const value = record?.[key]; if (typeof value === "number" && Number.isFinite(value)) return value; } const paging = asRecord(record?.paging_info); const nested = paging?.totalNumberOfItems; return typeof nested === "number" && Number.isFinite(nested) ? nested : undefined; }
 

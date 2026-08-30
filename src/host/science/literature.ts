@@ -133,6 +133,9 @@ function parsePayload(text: string, format: Exclude<ResponseFormat, "auto">): un
 
 /** Compact nested response records without turning a provider response into an unbounded tool result. */
 export function boundedValue(value: unknown, maxDepth: number, depth = 0): unknown {
+  if (typeof value === "string" && value.length > 20_000) {
+    return `${value.slice(0, 20_000)}\n...[truncated ${value.length - 20_000} characters; use save_raw with raw_output_path to preserve the complete response]`;
+  }
   if (value === null || typeof value !== "object") return value;
   if (depth >= maxDepth) return Array.isArray(value) ? [] : { truncated: true };
   if (Array.isArray(value)) return value.map((item) => boundedValue(item, maxDepth, depth + 1));
