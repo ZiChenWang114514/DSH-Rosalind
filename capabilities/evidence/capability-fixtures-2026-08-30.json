@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T21:28:56.029Z",
+  "recordedAt": "2026-08-30T21:38:15.804Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
     "version": "0.3.4"
@@ -2118,8 +2118,8 @@
   ],
   "profileInstallation": {
     "archive": "zichenwang114514-dsh-rosalind-0.3.4.tgz",
-    "archiveBytes": 17166846,
-    "archiveSha256": "16c03e5bf820ff8348d60c22d4907ef48b15088c5e6b99acfcfacbc386aff6ca",
+    "archiveBytes": 17167076,
+    "archiveSha256": "5431b4dc7ae77e0f73a8c7ffa343168152d8aa1b02f6305b9b625078667c2035",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2389,7 +2389,7 @@
     "src/host/science-tools.ts": "9f2b23a03ced99898e7dbcc64dfdc4a88262434520f95386bc54e835f8b7d821",
     "src/host/science/databases.ts": "a4860aa38e6afd2422c16f9e03492da4eda40705bc551bee1d9189b4dcdb2f8b",
     "src/host/science/literature.ts": "7fac2d9a11ddd09b65d0e27dad79527aec1fa3d9944d1e95cb36bacd45e634c4",
-    "src/host/science/ngs.ts": "f1d5e852062ccf74e5eaa4c73802a5befe209b2124382d52b92d341b055c825b",
+    "src/host/science/ngs.ts": "e71a3da49faba376ecac0ef7a53cfdde5c6285fbf6cc0cf2cc1cd057d9d9decb",
     "src/host/science/runtime.ts": "e8e44f66e30a0a77fb16fd62277511a9a54e5b134a51e8a504b3c0e4caa7cbb3",
     "src/host/science/sequence.ts": "9138418a36ef8701d8adf785634e021b46e7e557e1461485da88863121402652",
     "src/host/science/slide.ts": "f6f54437db38981ed2a7bb348f31e739a0adf6d4747680e8af02293b58dc9f49",

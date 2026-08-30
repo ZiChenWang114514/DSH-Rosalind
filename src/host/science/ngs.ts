@@ -692,7 +692,7 @@ export class NgsService {
   private startLocalRun(state: NgsState, run: Run, command: LocalCommand): void {
     let child: ChildProcess;
     try {
-      child = spawn(command.executable, command.arguments, { cwd: command.cwd, windowsHide: true, shell: false });
+      child = spawn(command.executable, command.arguments, { cwd: command.cwd, windowsHide: true, shell: false, detached: process.platform !== "win32" });
     } catch (cause) {
       run.state = "failed"; run.updatedAt = now(); run.exitCode = null;
       run.stderrSummary = cause instanceof Error ? cause.message : String(cause);
@@ -756,9 +756,11 @@ export class NgsService {
         child.kill();
         return waitForProcessExit(child, 5_000);
       }
-      child.kill("SIGTERM");
+      if (child.pid) process.kill(-child.pid, "SIGTERM");
+      else child.kill("SIGTERM");
       if (await waitForProcessExit(child, 5_000)) return true;
-      child.kill("SIGKILL");
+      if (child.pid) process.kill(-child.pid, "SIGKILL");
+      else child.kill("SIGKILL");
       return waitForProcessExit(child, 5_000);
     } catch {
       return child.exitCode !== null || child.signalCode !== null;
