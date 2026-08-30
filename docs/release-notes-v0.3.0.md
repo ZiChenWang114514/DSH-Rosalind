@@ -37,3 +37,5 @@ npm run pack:bundle
 ```
 
 Public release acceptance additionally requires the clean-profile DSH installation check described in [verification.md](verification.md).
+
+The local v0.3.0 candidate completed that check in a DSH Web profile at four viewport sizes; no network-backed scientific operation was invoked.
