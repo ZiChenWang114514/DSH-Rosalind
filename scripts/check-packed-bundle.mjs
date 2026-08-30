@@ -2,12 +2,10 @@ import { existsSync, readFileSync } from "node:fs";
 import { basename } from "node:path";
 import { gunzipSync } from "node:zlib";
 
+import { npmArchiveBaseName } from "./lib/release-paths.mjs";
+
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
-const EXPECTED_PACKAGE_VERSION = "0.3.0";
-if (pkg.version !== EXPECTED_PACKAGE_VERSION) {
-  throw new Error(`Packed bundle check expects package version ${EXPECTED_PACKAGE_VERSION}, found ${String(pkg.version)}.`);
-}
-const archiveName = `${pkg.name.replace(/^@/, "").replace(/\//g, "-")}-${pkg.version}.tgz`;
+const archiveName = npmArchiveBaseName(pkg);
 const archivePath = process.argv[2] ?? process.env.DSH_ROSALIND_BUNDLE_ARCHIVE ?? archiveName;
 if (!existsSync(archivePath)) {
   throw new Error(`Expected npm pack archive ${archivePath} was not found.`);
