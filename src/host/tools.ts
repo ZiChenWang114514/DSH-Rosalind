@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, relative } from "node:path";
 
 import { defineTool, type JsonValue, type ToolDefinition, type ToolResult } from "@deepseek-ai/dsh-tools";
@@ -138,9 +138,35 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         showcase_id: { type: "string", required: true },
         mode: { type: "string", enum: ["lesson", "replay", "reproduce"], required: true },
         provider_id: { type: "string", description: "Use one provider declared by the showcase" },
+        ngs_run_directory: { type: "string", description: "User-owned NGS working directory. Required with the other NGS input fields for an NGS reproduce plan." },
+        ngs_config_file: { type: "string", description: "Scientific NGS configuration file used by the reviewed plan." },
+        ngs_input_paths: { type: "array", items: { type: "string" }, description: "Scientific input files that the selected NGS configuration must reference." },
+        reproduction_run_directory: { type: "string", description: "User-owned output directory retained with a non-NGS scientific reproduce plan." },
+        reproduction_source_paths: { type: "array", items: { type: "string" }, description: "Exact authorized source files retained with a non-NGS scientific reproduce plan." },
+        reproduction_config: { type: "object", additionalProperties: true, description: "Provider- or showcase-specific JSON settings retained with the scientific inputs." },
       },
       output: jsonOutput,
-      async execute(args, exec) { return jsonValue(runtime.plan(sessionFor(exec), args.showcase_id, args.mode as ShowcaseMode, args.provider_id)); },
+      async execute(args, exec) {
+        const suppliedNgsFields = [args.ngs_run_directory, args.ngs_config_file, args.ngs_input_paths].some((value) => value !== undefined);
+        if (suppliedNgsFields && (typeof args.ngs_run_directory !== "string" || typeof args.ngs_config_file !== "string" || !Array.isArray(args.ngs_input_paths))) {
+          throw new Error("An NGS reproduce plan needs ngs_run_directory, ngs_config_file, and ngs_input_paths together.");
+        }
+        const suppliedReproductionFields = [args.reproduction_run_directory, args.reproduction_source_paths, args.reproduction_config].some((value) => value !== undefined);
+        if (suppliedReproductionFields && (typeof args.reproduction_run_directory !== "string" || !Array.isArray(args.reproduction_source_paths))) {
+          throw new Error("A non-NGS reproduce plan needs reproduction_run_directory and reproduction_source_paths together.");
+        }
+        if (suppliedNgsFields && suppliedReproductionFields) throw new Error("Supply either NGS inputs or generic scientific reproduction inputs, not both.");
+        const options = suppliedNgsFields
+          ? { ngs: { runDirectory: args.ngs_run_directory as string, configFile: args.ngs_config_file as string, inputPaths: args.ngs_input_paths as string[] } }
+          : suppliedReproductionFields
+            ? { reproduction: {
+              runDirectory: args.reproduction_run_directory as string,
+              sourcePaths: args.reproduction_source_paths as string[],
+              ...(args.reproduction_config && typeof args.reproduction_config === "object" && !Array.isArray(args.reproduction_config) ? { config: args.reproduction_config as Record<string, never> } : {}),
+            } }
+            : undefined;
+        return jsonValue(runtime.plan(sessionFor(exec), args.showcase_id, args.mode as ShowcaseMode, args.provider_id, options));
+      },
       presentCall: (args) => callCard("Prepare execution plan", args),
       presentResult: (_args, result) => resultCard("Execution plan", result),
     }),
@@ -150,9 +176,20 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       parameters: {
         run_id: { type: "string", required: true },
         acknowledgements: { type: "array", items: { type: "string" }, required: true },
+        ngs_plan_id: { type: "string", description: "Exact reviewed NGS plan ID when this run contains an NGS plan." },
+        ngs_plan_name: { type: "string", description: "Exact reviewed NGS plan name when this run contains an NGS plan." },
+        ngs_plan_checksum: { type: "string", description: "Exact reviewed NGS plan checksum when this run contains an NGS plan." },
       },
       output: jsonOutput,
-      async execute(args, exec) { return jsonValue(runtime.approve(sessionFor(exec), args.run_id, args.acknowledgements)); },
+      async execute(args, exec) {
+        const suppliedIdentity = [args.ngs_plan_id, args.ngs_plan_name, args.ngs_plan_checksum].some((value) => value !== undefined);
+        if (suppliedIdentity && (typeof args.ngs_plan_id !== "string" || typeof args.ngs_plan_name !== "string" || typeof args.ngs_plan_checksum !== "string")) {
+          throw new Error("NGS approval requires ngs_plan_id, ngs_plan_name, and ngs_plan_checksum together.");
+        }
+        return jsonValue(runtime.approve(sessionFor(exec), args.run_id, args.acknowledgements, suppliedIdentity
+          ? { planId: args.ngs_plan_id as string, planName: args.ngs_plan_name as string, planChecksum: args.ngs_plan_checksum as string }
+          : undefined));
+      },
       presentCall: (args) => callCard("Record plan approval", args),
       presentResult: (_args, result) => resultCard("Plan approval", result),
     }),
@@ -181,7 +218,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
       description: "Request cancellation for a queued, awaiting-confirmation, or running DSH-Rosalind run in this session.",
       parameters: { run_id: { type: "string", required: true }, reason: { type: "string", required: true } },
       output: jsonOutput,
-      async execute(args, exec) { return jsonValue(runtime.cancel(sessionFor(exec), args.run_id, args.reason)); },
+      async execute(args, exec) { return jsonValue(await runtime.cancel(sessionFor(exec), args.run_id, args.reason)); },
       presentCall: (args) => callCard("Cancel scientific run", args),
       presentResult: (_args, result) => resultCard("Cancellation status", result),
     }),
@@ -228,16 +265,20 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
         format: { type: "string", enum: ["review-json", "import-json"], required: true },
         output_path: { type: "string", required: true, description: "Relative path beneath the active workspace" },
         approved: { type: "boolean", required: true, description: "Request the write; the DSH host independently asks the user before execution" },
+        overwrite: { type: "boolean", description: "Allow replacement only after the DSH host confirms this exact write request" },
       },
       output: jsonOutput,
       async execute(args) {
-        if (!args.approved) return jsonValue({ status: "awaiting_confirmation", showcaseId: args.showcase_id, outputPath: args.output_path, summary: "Export requires explicit approval for this path." });
+        const showcaseId = String(args.showcase_id);
+        const outputPath = String(args.output_path);
+        if (!args.approved) return jsonValue({ status: "awaiting_confirmation", showcaseId, outputPath, summary: "Export requires explicit approval for this path." });
         const workspaceRoot = process.cwd();
-        const path = resolveInside(workspaceRoot, args.output_path);
-        const payload = args.format === "review-json" ? runtime.review(args.showcase_id) : runtime.createImport(args.showcase_id, "lesson");
+        const path = resolveInside(workspaceRoot, outputPath);
+        if (existsSync(path) && args.overwrite !== true) return jsonValue({ status: "failed", showcaseId, outputPath, error: { code: "DESTINATION_EXISTS", message: "The export destination already exists; choose a new path or explicitly request overwrite." } });
+        const payload = args.format === "review-json" ? runtime.review(showcaseId) : runtime.createImport(showcaseId, "lesson");
         mkdirSync(dirname(path), { recursive: true });
         writeFileSync(path, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
-        return jsonValue({ status: "completed", showcaseId: args.showcase_id, outputPath: relative(workspaceRoot, path), bytes: statSync(path).size, summary: `Exported ${basename(path)}` });
+        return jsonValue({ status: "completed", showcaseId, outputPath: relative(workspaceRoot, path), bytes: statSync(path).size, summary: `Exported ${basename(path)}` });
       },
       presentCall: (args) => callCard("Export showcase material", args),
       presentResult: (_args, result) => resultCard("Showcase export", result),

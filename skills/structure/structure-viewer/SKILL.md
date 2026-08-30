@@ -5,8 +5,24 @@ description: Open, inspect, analyze, and export molecular structure sessions wit
 
 # Molecular Structure Viewer
 
-Open an authorized structure with `structure_open_from_chat` and inspect the active session with `structure_get_state`. Use current session state before reporting selections, residue numbering, chains, calculated properties, render status, or scene contents. Reuse a mounted session rather than opening a duplicate to move or change the display.
+## When to use
 
-Use registered `structure_` operations for requested selection, analysis, scene styling, rendering, animation, and export. Preserve source identity, revision, model and chain selection, calculation parameters, scene state, and output artifact IDs. Export only when requested and only to an authorized destination.
+Use this Skill when an authorized molecular structure needs visual inspection, selection, measurement, analysis, comparison, scene work, rendering, or export. Fixed reference: `structure-viewer-0.1.80/skills/structure-viewer/SKILL.md`. The DSH mapping preserves the fixed-version workflow and uses DSH-Rosalind's registered tools.
 
-Render and analysis jobs may be cancelled only with their exact active job identity and explicit user instruction. Do not turn an unavailable source, viewer, or service into an automatic provider substitution. Treat an unfinished render, an empty selection, or a visual scene as observation rather than structural proof.
+## Tool call sequence
+
+1. Call `structure_open_from_chat` with one authorized structure path, then read `structure_get_state` before reporting atoms, residues, chains, selections, objects, or render state.
+2. Reuse the session with `structure_control_viewer`, `structure_query`, `structure_analyze`, `structure_measure`, or `structure_align_structures` as requested.
+3. Use scene, render, animation, and export tools only for the specific requested output.
+
+## Success and viewer state
+
+Report a viewer as ready only from the returned live state. Measurements and analyses retain their method and parameters; a rendered scene or empty selection is an observation, not structural proof.
+
+## Failure, authorization, and cancellation
+
+Keep source, renderer, and analysis diagnostics explicit. Cancel a render only via `structure_cancel_render` with its exact job identity and explicit user request. `structure_export` needs host approval; do not substitute a viewer or external service when one is unavailable.
+
+## Provenance
+
+Keep source/revision, session, object/model/chain selection, selection expression, analysis method/parameters, scene revision, render job, and output artifact IDs.

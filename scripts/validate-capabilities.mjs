@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { assertObjectJsonSchema } from "@deepseek-ai/dsh-tools";
+import { hasArchiveIdentity, hasPassedVitestCase } from "./lib/capability-evidence.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const manifest = JSON.parse(readFileSync(path.join(root, "capabilities", "capability-manifest.json"), "utf8"));
@@ -13,7 +14,7 @@ const expectTotal = (label, actual, expected) => {
 
 expectTotal("services", manifest.services.length, 7);
 expectTotal("skills", manifest.skills.length, 55);
-expectTotal("operations", manifest.operations.length, 117);
+expectTotal("operations", manifest.operations.length, 121);
 expectTotal("showcases", manifest.target.showcaseCount, 23);
 
 const seen = new Set();
@@ -39,6 +40,7 @@ for (const operation of manifest.operations) {
 }
 
 const runs = new Map((manifest.verificationRuns ?? []).map((run) => [run.id, run]));
+const machineRecords = new Map();
 for (const run of runs.values()) {
   if (!run.id || !["passed", "not-recorded"].includes(run.status)) failures.push("verification run has an invalid id or status");
   if (!run.evidencePath || !existsSync(path.join(root, run.evidencePath))) failures.push(`${run.id}: verification evidence document is missing`);
@@ -55,6 +57,7 @@ for (const run of runs.values()) {
   }
   if (!run.machineEvidencePath || !existsSync(path.join(root, run.machineEvidencePath))) continue;
   const machineRecord = JSON.parse(readFileSync(path.join(root, run.machineEvidencePath), "utf8"));
+  machineRecords.set(run.id, machineRecord);
   if (machineRecord.runId !== run.id || machineRecord.status !== "passed") {
     failures.push(`${run.id}: machine evidence does not identify a passing matching run`);
     continue;
@@ -73,6 +76,22 @@ for (const run of runs.values()) {
     const digest = createHash("sha256").update(readFileSync(absolutePath)).digest("hex");
     if (machineRecord.contentIdentities?.[file] !== digest) failures.push(`${run.id}: machine evidence hash differs for ${file}`);
   }
+  if (machineRecord.schemaVersion !== 2) failures.push(`${run.id}: machine evidence must use schemaVersion 2 with per-case Vitest records`);
+  if (!Array.isArray(machineRecord.testCases) || machineRecord.testCases.length === 0) failures.push(`${run.id}: machine evidence has no per-case Vitest results`);
+  if (!Array.isArray(machineRecord.reports) || machineRecord.reports.length === 0) failures.push(`${run.id}: machine evidence has no Vitest JSON report index`);
+  else for (const report of machineRecord.reports) {
+    if (report?.type !== "vitest-json" || report?.success !== true || typeof report.path !== "string" || !existsSync(path.join(root, report.path))) {
+      failures.push(`${run.id}: a declared Vitest JSON report is missing or unsuccessful`);
+      continue;
+    }
+    try {
+      const payload = JSON.parse(readFileSync(path.join(root, report.path), "utf8"));
+      if (payload.success !== true) failures.push(`${run.id}: ${report.path} does not contain a successful Vitest report`);
+    } catch {
+      failures.push(`${run.id}: ${report.path} is not readable JSON`);
+    }
+  }
+  if (!hasArchiveIdentity(machineRecord)) failures.push(`${run.id}: profile/install evidence must record a tgz name, byte count, SHA-256, source, and source-smoke versus explicit archive status`);
 }
 
 const evidenceStatuses = new Set(["located", "executed", "referenced", "missing", "not-applicable"]);
@@ -101,6 +120,19 @@ function validateEvidence(item, name, evidence) {
     const run = runs.get(evidence.executionId);
     if (!run || run.status !== "passed") failures.push(`${item.id}: ${name} execution does not resolve to a passing run`);
     else if (!run.testFiles.includes(evidence.path)) failures.push(`${item.id}: ${name} execution path is absent from its passing run`);
+    const requiresCaseEvidence = item.status === "verified" && ["fixture", "workflow", "registration", "profile"].includes(name);
+    if (requiresCaseEvidence) {
+      const machineRecord = machineRecords.get(evidence.executionId);
+      if (!hasPassedVitestCase(machineRecord, evidence)) {
+        failures.push(`${item.id}: ${name} cannot be verified without an exact passed Vitest case; skipped or absent cases are not execution evidence`);
+      }
+      if (name === "profile" && !hasArchiveIdentity(machineRecord)) {
+        failures.push(`${item.id}: profile evidence is missing selected/source-smoke archive identity`);
+      }
+      if (name === "profile" && evidence.scope === "release-archive-install" && machineRecord?.profileInstallation?.releaseArchiveValidated !== true) {
+        failures.push(`${item.id}: profile evidence claims a release archive although only source-smoke evidence exists`);
+      }
+    }
   }
 }
 
@@ -109,7 +141,9 @@ for (const [itemKind, items] of [["service", manifest.services], ["skill", manif
   if (!item.implementationPath || !existsSync(path.join(root, item.implementationPath))) {
     failures.push(`${item.id}: ${item.status} requires an existing implementationPath`);
   }
-  for (const name of ["implementation", "fixture", "live", "cancellation", "error"]) validateEvidence(item, name, item.evidence?.[name]);
+  for (const name of ["implementation", "fixture", "registration", "profile", "live", "cancellation", "error"]) {
+    if (item.evidence?.[name]) validateEvidence(item, name, item.evidence[name]);
+  }
   if (item.evidence?.workflow) validateEvidence(item, "workflow", item.evidence.workflow);
   if (item.evidence?.registration) validateEvidence(item, "registration", item.evidence.registration);
   if (itemKind === "skill") {
@@ -118,14 +152,22 @@ for (const [itemKind, items] of [["service", manifest.services], ["skill", manif
     if (registration?.path !== "tests/dsh-host-registration.test.ts") failures.push(`${item.id}: Skill registration evidence must not rely on the manifest-validation test`);
     if (registration?.scope !== "dsh-skill-registry-readback-and-invocation") failures.push(`${item.id}: Skill registration evidence must identify DSH SkillRegistry readback and invocation`);
   }
+  if (itemKind === "operation") {
+    const registration = item.evidence?.registration;
+    if (registration?.status !== "executed" || registration.kind !== "dsh-tool-registry-and-presentation-fixture") {
+      failures.push(`${item.id}: operation requires executed DSH ToolRuntime registry and presentation evidence`);
+    }
+  }
   if (item.evidence?.implementation?.path !== item.implementationPath) failures.push(`${item.id}: implementation evidence must point to implementationPath`);
   if (item.status === "implemented" && (!Array.isArray(item.evidenceGaps) || item.evidenceGaps.length === 0)) failures.push(`${item.id}: implemented status requires explicit missing evidence`);
   if (item.status === "verified") {
     if (item.evidence?.implementation?.status !== "located") failures.push(`${item.id}: verified requires located implementation evidence`);
     if (item.evidence?.fixture?.status !== "executed") failures.push(`${item.id}: verified requires executed fixture evidence`);
     if (itemKind === "operation") {
-      if (item.fixtureOutcome !== "successful-local-result") failures.push(`${item.id}: verified operation requires a successful local-result fixtureOutcome`);
-      if (item.verificationScope !== "local-result-fixture-contract") failures.push(`${item.id}: verified operation must identify local-result-fixture-contract scope`);
+      const verifiedExactNgsDiagnostic = item.serviceId === "ngs" && item.fixtureOutcome === "exact-diagnostic";
+      if (!verifiedExactNgsDiagnostic && item.fixtureOutcome !== "successful-local-result") failures.push(`${item.id}: verified operation requires a successful local-result fixtureOutcome`);
+      if (verifiedExactNgsDiagnostic && item.verificationScope !== "local-exact-diagnostic-fixture-contract") failures.push(`${item.id}: verified NGS diagnostic must identify local-exact-diagnostic-fixture-contract scope`);
+      if (!verifiedExactNgsDiagnostic && item.verificationScope !== "local-result-fixture-contract") failures.push(`${item.id}: verified operation must identify local-result-fixture-contract scope`);
       if (item.evidence.fixture.kind !== "operation-contract-fixture") failures.push(`${item.id}: verified operation requires an operation-contract fixture`);
       if (typeof item.evidence.fixture.assertionLocator !== "string" || !item.evidence.fixture.assertionLocator) failures.push(`${item.id}: verified operation requires a result or exact-diagnostic assertion locator`);
     }
@@ -133,6 +175,17 @@ for (const [itemKind, items] of [["service", manifest.services], ["skill", manif
       if (item.evidence?.fixture?.kind !== "skill-specific-registry-and-tool-fixture") failures.push(`${item.id}: verified Skill requires a Skill-specific registry and tool fixture`);
       if (item.evidence?.workflow?.status !== "executed") failures.push(`${item.id}: verified Skill requires an executed operation or provider workflow fixture`);
       if (item.evidence?.registration?.status !== "executed") failures.push(`${item.id}: verified Skill requires executed DSH SkillRegistry readback and invocation checks`);
+      if (item.evidence?.profile?.status !== "executed" || item.evidence.profile.kind !== "isolated-dsh-profile-skill-readback-fixture") {
+        failures.push(`${item.id}: verified Skill requires isolated DSH profile readback evidence`);
+      }
+    }
+    if (itemKind === "service") {
+      if (item.evidence?.registration?.status !== "executed" || item.evidence.registration.kind !== "dsh-service-operation-registry-fixture") {
+        failures.push(`${item.id}: verified service requires executed DSH operation-registry evidence`);
+      }
+      if (item.evidence?.profile?.status !== "executed" || item.evidence.profile.kind !== "isolated-dsh-profile-service-fixture") {
+        failures.push(`${item.id}: verified service requires an isolated DSH profile mount and representative-call fixture`);
+      }
     }
   }
   if (item.evidence?.live?.status === "executed" && !String(item.evidence.live.scope).startsWith("live-")) failures.push(`${item.id}: live evidence must come from a real DSH profile or public-service scope`);

@@ -8,8 +8,11 @@ playwright-report/
 test-results/
 .dsh-profile/
 .rosalind-runs/
+.slide-*/
 *.tgz
 *.log
+tmp_vitest_*.txt
+capabilities/evidence/capability-fixtures-*vitest.json
 .DS_Store
 reference-plugins/
 workflows/**/.snakemake/

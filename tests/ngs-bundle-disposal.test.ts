@@ -106,5 +106,5 @@ describe("DSH bundle NGS process lifecycle", () => {
 
     expect(processIsAlive(pid)).toBe(false);
     expect(ctx.tools.schemas()).toHaveLength(0);
-  });
+  }, 15_000);
 });

@@ -19,6 +19,7 @@ interface ProviderDefinition {
   enableEnv?: string;
   targetEnv?: string;
   estimatedCostUsd?: { min: number; max: number };
+  executionImplemented?: boolean;
 }
 
 const PUBLIC_APIS = [
@@ -52,12 +53,12 @@ const PROVIDERS: ProviderDefinition[] = [
     kind: "public-api" as const,
     enableEnv: "DSH_ROSALIND_ENABLE_LIVE_NETWORK",
   })),
-  { id: "local-container", label: "Local container runtime", kind: "container", command: "docker" },
-  { id: "ssh-hpc", label: "SSH / HPC", kind: "ssh", command: "ssh", targetEnv: "DSH_ROSALIND_SSH_HOST" },
-  { id: "boltz", label: "Boltz-2", kind: "gpu", command: "boltz", estimatedCostUsd: { min: 0, max: 50 } },
-  { id: "biohub-esm", label: "Biohub ESM", kind: "paid-api", credentialEnv: "BIOHUB_ESM_API_KEY", estimatedCostUsd: { min: 0, max: 100 } },
-  { id: "modal", label: "Modal", kind: "paid-api", command: "modal", credentialEnv: "MODAL_TOKEN_ID", estimatedCostUsd: { min: 0, max: 100 } },
-  { id: "runpod", label: "Runpod", kind: "paid-api", credentialEnv: "RUNPOD_API_KEY", estimatedCostUsd: { min: 0, max: 100 } },
+  { id: "local-container", label: "Local container runtime", kind: "container", command: "docker", executionImplemented: false },
+  { id: "ssh-hpc", label: "SSH / HPC", kind: "ssh", command: "ssh", targetEnv: "DSH_ROSALIND_SSH_HOST", executionImplemented: false },
+  { id: "boltz", label: "Boltz-2", kind: "gpu", command: "boltz", estimatedCostUsd: { min: 0, max: 50 }, executionImplemented: false },
+  { id: "biohub-esm", label: "Biohub ESM", kind: "paid-api", credentialEnv: "BIOHUB_ESM_API_KEY", estimatedCostUsd: { min: 0, max: 100 }, executionImplemented: false },
+  { id: "modal", label: "Modal", kind: "paid-api", command: "modal", credentialEnv: "MODAL_TOKEN_ID", estimatedCostUsd: { min: 0, max: 100 }, executionImplemented: false },
+  { id: "runpod", label: "Runpod", kind: "paid-api", credentialEnv: "RUNPOD_API_KEY", estimatedCostUsd: { min: 0, max: 100 }, executionImplemented: false },
 ];
 
 function commandExists(command: string, environment: ProviderEnvironment): boolean {
@@ -134,8 +135,9 @@ export class ProviderRegistry {
     const commandReady = provider.command === undefined || commandExists(provider.command, this.environment);
     const explicitlyEnabled = provider.enableEnv === undefined || Boolean(this.environment.env[provider.enableEnv]?.trim());
     const targetReady = provider.targetEnv === undefined || Boolean(this.environment.env[provider.targetEnv]?.trim());
+    const executionImplemented = provider.executionImplemented !== false;
     const installed = commandReady && (provider.kind !== "public-api" || explicitlyEnabled);
-    const runnable = installed && credentialConfigured && targetReady;
+    const runnable = installed && credentialConfigured && targetReady && executionImplemented;
 
     if (!commandReady) diagnostics.push(`Required command is unavailable: ${provider.command}.`);
     if (!explicitlyEnabled && provider.enableEnv) {
@@ -143,6 +145,7 @@ export class ProviderRegistry {
     }
     if (!credentialConfigured && provider.credentialEnv) diagnostics.push(`Credential is not configured: ${provider.credentialEnv}.`);
     if (!targetReady && provider.targetEnv) diagnostics.push(`Remote target is not configured: ${provider.targetEnv}.`);
+    if (!executionImplemented) diagnostics.push("Provider discovery is available, but this DSH-Rosalind version does not implement execution for this provider.");
     if (runnable) diagnostics.push("Provider prerequisites are available.");
 
     return {

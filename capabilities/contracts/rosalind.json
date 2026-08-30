@@ -25,6 +25,30 @@
       "execution": {
         "taskSupport": "forbidden"
       }
+    },
+    {
+      "name": "rosalind.settings",
+      "title": "GPT-Rosalind Settings",
+      "description": "Open GPT-Rosalind model access settings.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
     }
   ]
 }

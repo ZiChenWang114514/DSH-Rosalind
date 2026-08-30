@@ -16,19 +16,52 @@
       "path": "previews/rosalind-structure-analysis.svg"
     }
   ],
-  "sources": [],
+  "sources": [
+    "https://www.rcsb.org/structure/1YCR",
+    "https://files.rcsb.org/download/1YCR.pdb"
+  ],
+  "dependencies": {
+    "required_mcp_servers": ["rosalind", "structure"],
+    "required_operations": ["rosalind.open", "structure.open_from_chat", "structure.get_state"],
+    "required_skills": ["rosalind-structure-structure-viewer"],
+    "artifacts": [
+      {
+        "id": "structure-mdm2-p53:inputs/1YCR.pdb",
+        "repository_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb",
+        "role": "input",
+        "source": "Shared pinned input from structure-mdm2-p53."
+      },
+      {
+        "id": "structure-mdm2-p53:outputs/results.json",
+        "repository_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/results.json",
+        "role": "output",
+        "source": "Shared coordinate-analysis result from structure-mdm2-p53."
+      },
+      {
+        "id": "structure-mdm2-p53:outputs/provenance.json",
+        "repository_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/provenance.json",
+        "role": "provenance",
+        "source": "Shared RCSB and method record from structure-mdm2-p53."
+      }
+    ],
+    "provenance": {
+      "reused_cases": ["structure-mdm2-p53"]
+    }
+  },
   "observations": [
-    "The Rosalind launcher was ready and exposed the named scientific area."
+    "The Rosalind launcher was ready and exposed the named scientific area.",
+    "The replay fixture is the pinned RCSB 1YCR structure and its retained interface result."
   ],
   "interpretation": [
-    "The area is available for interactive task discovery in the current Workbench."
+    "The structure-analysis route opens 1YCR with the local Structure service after launching the Workbench area."
   ],
   "limitations": [
-    "The tool response did not expose individual task choices.",
-    "No workspace was opened and no scientific analysis was executed."
+    "The retained launcher observation did not expose individual task choices.",
+    "The retained 1YCR result is a coordinate contact analysis and does not establish binding affinity."
   ],
   "environment": {
     "launcher_ready": true,
-    "scientific_job_executed": false
+    "scientific_job_executed": false,
+    "reproduction_fixture": "structure-mdm2-p53:inputs/1YCR.pdb"
   }
 }

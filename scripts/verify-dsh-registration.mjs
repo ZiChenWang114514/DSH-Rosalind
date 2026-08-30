@@ -2,9 +2,9 @@
 
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { basename, dirname, join, resolve } from "node:path";
+import { basename, dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { Context } from "@deepseek-ai/cordis";
@@ -34,10 +34,16 @@ function commandResult(command, args, options) {
       stderr: "",
     };
   } catch (error) {
+    const details = [
+      error instanceof Error ? error.message : String(error),
+      error && typeof error === "object" && "code" in error ? `code=${String(error.code)}` : "",
+      error && typeof error === "object" && "signal" in error ? `signal=${String(error.signal)}` : "",
+      error && typeof error === "object" && "killed" in error ? `killed=${String(error.killed)}` : "",
+    ].filter(Boolean).join("\n");
     return {
       status: typeof error.status === "number" ? error.status : 1,
       stdout: typeof error.stdout === "string" ? error.stdout : "",
-      stderr: typeof error.stderr === "string" ? error.stderr : String(error),
+      stderr: typeof error.stderr === "string" && error.stderr.length > 0 ? error.stderr : details,
     };
   }
 }
@@ -85,8 +91,10 @@ function bundleArchive(root) {
   const requested = process.env.DSH_ROSALIND_PROFILE_ARCHIVE;
   if (requested) {
     const archive = resolve(requested);
-    assert(readFileSync(archive).byteLength > 0, `Profile evidence archive is unavailable or empty: ${archive}`);
-    return { archive, source: "DSH_ROSALIND_PROFILE_ARCHIVE", sha256: sha256(archive) };
+    assert(extname(archive) === ".tgz" && existsSync(archive) && statSync(archive).isFile(), `Profile evidence archive is not a readable .tgz file: ${archive}`);
+    const bytes = statSync(archive).size;
+    assert(bytes > 0, `Profile evidence archive is unavailable or empty: ${archive}`);
+    return { archive, source: "DSH_ROSALIND_PROFILE_ARCHIVE", kind: "explicit-tgz", releaseArchiveValidated: true, sha256: sha256(archive), bytes };
   }
   const archiveDir = join(root, "archive");
   mkdirSync(archiveDir, { recursive: true });
@@ -100,8 +108,9 @@ function bundleArchive(root) {
   const archives = readdirSync(archiveDir).filter((name) => name.endsWith(".tgz"));
   assert(archives.length === 1, `Expected one current-worktree archive, received ${archives.join(", ") || "none"}`);
   const archive = join(archiveDir, archives[0]);
-  assert(readFileSync(archive).byteLength > 0, `Profile evidence archive is unavailable or empty: ${archive}`);
-  return { archive, source: "current-worktree npm pack --ignore-scripts", sha256: sha256(archive) };
+  const bytes = statSync(archive).size;
+  assert(bytes > 0, `Profile evidence archive is unavailable or empty: ${archive}`);
+  return { archive, source: "current-worktree npm pack --ignore-scripts", kind: "source-smoke", releaseArchiveValidated: false, sha256: sha256(archive), bytes };
 }
 
 function createPnpmShim(root) {
@@ -135,11 +144,18 @@ function summary(result) {
   if (result.isError) return { host: "error", code: result.error.info?.code ?? null, message: result.error.message };
   const value = result.value && typeof result.value === "object" && !Array.isArray(result.value) ? result.value : {};
   const failure = value.error && typeof value.error === "object" && !Array.isArray(value.error) ? value.error : {};
+  const structure = value.structure && typeof value.structure === "object" && !Array.isArray(value.structure) ? value.structure : {};
+  const source = value.source && typeof value.source === "object" && !Array.isArray(value.source) ? value.source : {};
   return {
     host: "success",
     status: typeof value.status === "string" ? value.status : null,
     scientificErrorCode: typeof failure.code === "string" ? failure.code : null,
     total: typeof value.total === "number" ? value.total : null,
+    viewerSessionId: typeof value.viewerSessionId === "string" ? value.viewerSessionId : null,
+    viewer: typeof value.viewer === "string" ? value.viewer : null,
+    atomCount: typeof structure.atomCount === "number" ? structure.atomCount : null,
+    sourceWidth: typeof source.width === "number" ? source.width : null,
+    sourceHeight: typeof source.height === "number" ? source.height : null,
   };
 }
 
@@ -165,9 +181,9 @@ async function run() {
     const calls = [
       ["rosalind", "rosalind_catalog_list", {}],
       ["ngs", "ngs_list_workflows", {}],
-      ["sequence", "sequence_query_viewer", { sessionId: "profile-evidence-missing-session", target: "records" }],
-      ["structure", "structure_get_state", { sessionId: "profile-evidence-missing-session" }],
-      ["slide", "slide_get_viewer_state", { sessionId: "profile-evidence-missing-session" }],
+      ["sequence", "sequence_open_from_chat", { path: "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta", presentation: "inline" }],
+      ["structure", "structure_open_from_chat", { path: "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb", openIntentId: "00000000-0000-4000-8000-000000000001", presentation: "inline" }],
+      ["slide", "slide_open_from_chat", { path: "showcases/slide-viewer/cases/slide-tissue-architecture/outputs/pyramid-metadata.json", presentation: "inline" }],
       ["literature", "literature_request", { provider: "biorxiv", action: "details", allowNetwork: false }],
       ["databases", "database_request", { provider: "uniprot", query: "P01116", allowNetwork: false }],
     ];
@@ -189,12 +205,15 @@ async function run() {
       arguments: {},
       signal: cancelled.signal,
     }));
-    if (schemas.length < 136) throw new Error("Expected the profile to expose at least the 136 Rosalind tools, received " + schemas.length);
+    if (schemas.length < 140) throw new Error("Expected the profile to expose at least the 140 Rosalind tools, received " + schemas.length);
     if (expectedRosalindTools.some((name) => !toolNames.has(name))) throw new Error("A Rosalind orchestration tool was absent from the profile ToolRuntime");
     if (skills.length !== 55 || readBack.some((skill) => !skill.loaded || skill.contentBytes === 0)) {
       throw new Error("Expected 55 readable profile-mounted Skills, received " + skills.length);
     }
     if (representatives.rosalind.result.total !== 23) throw new Error("Rosalind profile call did not return 23 showcases");
+    if (!representatives.sequence.result.viewerSessionId || representatives.sequence.result.viewer !== "alignment") throw new Error("Sequence profile call did not open the retained RAS alignment: " + JSON.stringify(representatives.sequence));
+    if (!representatives.structure.result.viewerSessionId || representatives.structure.result.atomCount !== 818) throw new Error("Structure profile call did not parse the retained 1YCR fixture: " + JSON.stringify(representatives.structure));
+    if (!representatives.slide.result.viewerSessionId || representatives.slide.result.sourceWidth !== 46000 || representatives.slide.result.sourceHeight !== 32893) throw new Error("Slide profile call did not open the retained pyramid metadata: " + JSON.stringify(representatives.slide));
     for (const ecosystem of ["literature", "databases"]) {
       if (representatives[ecosystem].result.scientificErrorCode !== "NETWORK_NOT_AUTHORIZED") {
         throw new Error(ecosystem + " did not stop at the offline authorization check");
@@ -243,7 +262,7 @@ function runIsolatedProfileEvidence() {
     const install = commandResult(process.execPath, [INSTALLED_DSH.bin, "plugin", "--profile", profileName, "add", "--offline", "--ignore-scripts", archive], {
       cwd: SOURCE_ROOT,
       env: environment,
-      timeout: 120_000,
+      timeout: 300_000,
     });
     assert(install.status === 0, commandFailure("dsh plugin profile installation", install));
 
@@ -274,19 +293,22 @@ function runIsolatedProfileEvidence() {
           cwd: SOURCE_ROOT,
         }),
       },
-      timeout: 120_000,
+      timeout: 300_000,
     });
     assert(probe.status === 0, commandFailure("isolated DSH ToolRuntime/SkillRegistry profile probe", probe));
     const markerAt = probe.stdout.lastIndexOf(PROFILE_PROBE_MARKER);
     assert(markerAt >= 0, `The isolated profile probe produced no evidence marker.\n${probe.stdout}`);
     const evidence = JSON.parse(probe.stdout.slice(markerAt + PROFILE_PROBE_MARKER.length).trim());
-    assert(evidence.registration?.totalTools >= 136 && evidence.registration?.rosalindTools === ROSALIND_TOOL_NAMES.length, "The isolated profile probe did not report the Rosalind ToolRuntime contribution");
+    assert(evidence.registration?.totalTools >= 140 && evidence.registration?.rosalindTools === ROSALIND_TOOL_NAMES.length, "The isolated profile probe did not report the Rosalind ToolRuntime contribution");
     assert(evidence.registration?.skillsListed === 55 && evidence.registration?.skillsReadBack === 55, "The isolated profile probe did not read back all 55 Skills");
     return {
       installation: {
         archive: basename(archive),
         archiveSha256: archiveRecord.sha256,
+        archiveBytes: archiveRecord.bytes,
         archiveSource: archiveRecord.source,
+        archiveKind: archiveRecord.kind,
+        releaseArchiveValidated: archiveRecord.releaseArchiveValidated,
         dshVersion: INSTALLED_DSH.version,
         profileBundles: layers,
         configIncludedRosalind: true,
@@ -322,6 +344,12 @@ function valueSummary(result) {
 }
 
 async function main() {
+  // `npm run build` bundles the vendored viewer HTML snapshots, so a complete
+  // bundler + declaration pass can exceed two minutes on a cold Windows host.
+  // Keep the bound generous and overridable instead of racing the build.
+  const buildTimeoutMs = Number(process.env.DSH_ROSALIND_BUILD_TIMEOUT_MS ?? 900_000);
+  const build = npmResult(["run", "build"], { cwd: SOURCE_ROOT, timeout: buildTimeoutMs });
+  assert(build.status === 0, commandFailure("current-worktree build before DSH profile verification", build));
   const bundle = await import("../lib/index.js");
   const ctx = new Context();
   const serviceFibers = [];
@@ -340,8 +368,8 @@ async function main() {
     const operationNames = registry.operations.map((operation) => operation.registeredName);
     const skills = await ctx.skills.list({ cwd: process.cwd() });
 
-    assert(schemas.length === 136, `Expected 136 registered tools, received ${schemas.length}`);
-    assert(operationNames.length === 117, `Expected 117 fixed operations, received ${operationNames.length}`);
+    assert(schemas.length === 140, `Expected 140 registered tools, received ${schemas.length}`);
+    assert(operationNames.length === 121, `Expected 121 fixed operations, received ${operationNames.length}`);
     assert(operationNames.every((name) => names.has(name)), "At least one fixed operation is absent from ToolRuntime");
     assert(SKILL_ADAPTER_TOOL_NAMES.every((name) => names.has(name)), "A Skill adapter tool is absent from ToolRuntime");
     assert(SLIDE_COMPATIBILITY_NAMES.every((name) => names.has(name)), "A Slide compatibility tool is absent from ToolRuntime");

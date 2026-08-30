@@ -1,7 +1,8 @@
 import { createHash, randomUUID } from "node:crypto";
 import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
-import { delimiter, dirname, isAbsolute, resolve } from "node:path";
+import { homedir } from "node:os";
+import { delimiter, dirname, isAbsolute, relative, resolve } from "node:path";
 
 import type { ScienceExecutionContext } from "./sequence.js";
 
@@ -19,12 +20,13 @@ interface PlanValidation {
   workflowVersion: Json;
   source: PathIdentity;
   parameterFiles: Array<{ flag: string; identity: PathIdentity }>;
+  declaredInputs: PathIdentity[];
   executable: PathIdentity;
   workingDirectory: PathIdentity;
   target: Json;
   commandChecksum: string;
 }
-interface Plan { id: string; name: string; checksum: string; workflowId: string; engine: Engine; runDir: string; targetId: string; readiness: Json; createdAt: string; command?: LocalCommand; validation?: PlanValidation; consumedByRunId?: string; }
+interface Plan { id: string; name: string; checksum: string; workflowId: string; engine: Engine; runDir: string; targetId: string; readiness: Json; declaredInputPaths: string[]; scientificInputPaths: string[]; createdAt: string; command?: LocalCommand; validation?: PlanValidation; consumedByRunId?: string; }
 interface Run { id: string; planId: string; workflowId: string; state: RunState; createdAt: string; updatedAt: string; events: Json[]; summaryPath?: string; diagnostic?: Json; command?: LocalCommand; process?: ChildProcess; processId?: number; stdoutSummary?: string; stderrSummary?: string; exitCode?: number | null; cancelRequested?: boolean; }
 interface NgsState { workflows: Map<string, Workflow>; targets: Map<string, Target>; plans: Map<string, Plan>; runs: Map<string, Run>; persistPath?: string; persistenceBlocked?: boolean; restorationDiagnostic?: Json; persistenceDiagnostic?: Json; }
 
@@ -120,7 +122,8 @@ function saveState(state: NgsState): void {
   }
 }
 
-function registryDirectory(packageRoot: string): string {
+function registryDirectory(packageRoot: string, configuredRoot?: string): string {
+  if (configuredRoot) return isAbsolute(configuredRoot) ? configuredRoot : resolve(configuredRoot);
   const ngsStateDirectory = process.env.NGS_ANALYSIS_WORKBENCH_STATE_DIR?.trim();
   if (ngsStateDirectory) return isAbsolute(ngsStateDirectory) ? ngsStateDirectory : resolve(packageRoot, ngsStateDirectory);
   const rosalindStateDirectory = process.env.DSH_ROSALIND_STATE_DIR?.trim();
@@ -128,7 +131,12 @@ function registryDirectory(packageRoot: string): string {
     const root = isAbsolute(rosalindStateDirectory) ? rosalindStateDirectory : resolve(packageRoot, rosalindStateDirectory);
     return resolve(root, "ngs-registry");
   }
-  return resolve(packageRoot, "artifacts", "ngs-registry");
+  const dshHome = process.env.DSH_HOME?.trim();
+  if (dshHome) return resolve(dshHome, "state", "dsh-rosalind", "ngs-registry");
+  const platformState = process.platform === "win32"
+    ? process.env.LOCALAPPDATA?.trim()
+    : process.env.XDG_STATE_HOME?.trim();
+  return resolve(platformState || homedir(), ".dsh", "state", "dsh-rosalind", "ngs-registry");
 }
 
 function recordArray(value: unknown): Json[] {
@@ -224,12 +232,15 @@ function waitForProcessExit(child: ChildProcess, timeoutMs: number): Promise<boo
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      child.off("exit", onExit);
       child.off("close", onClose);
       resolveWait(exited);
     };
+    const onExit = () => finish(true);
     const onClose = () => finish(true);
     const timer = setTimeout(() => finish(false), timeoutMs);
     timer.unref?.();
+    child.once("exit", onExit);
     child.once("close", onClose);
   });
 }
@@ -255,6 +266,11 @@ export class NgsService {
   private readonly activeRuns = new Set<Run>();
   private readonly runOwners = new WeakMap<Run, NgsState>();
   private disposed = false;
+  private readonly registryRoot: string | undefined;
+
+  constructor(options: { registryRoot?: string } = {}) {
+    this.registryRoot = options.registryRoot;
+  }
 
   async execute(operation: string, args: Record<string, unknown>, context: ScienceExecutionContext): Promise<Json> {
     const serverId = NGS_OPERATION_SERVER.get(operation);
@@ -362,7 +378,7 @@ export class NgsService {
     let state = this.sessions.get(session);
     if (!state) {
       const sessionId = this.contextSessionIds.get(session);
-      const persistPath = sessionId ? resolve(registryDirectory(packageRoot), `${safeSessionFileName(sessionId)}.json`) : undefined;
+      const persistPath = sessionId ? resolve(registryDirectory(packageRoot, this.registryRoot), `${safeSessionFileName(sessionId)}.json`) : undefined;
       state = persistPath ? restoreState(persistPath, packageRoot) : undefined;
       state ??= { workflows: new Map(bundledWorkflows(packageRoot).map((workflow) => [workflow.id, workflow])), targets: new Map([["local", { id: "local", title: "Local DSH host", kind: "local", configuredAt: now() }]]), plans: new Map(), runs: new Map(), ...(persistPath ? { persistPath } : {}) };
       saveState(state);
@@ -434,9 +450,35 @@ export class NgsService {
     const activeSource = workflow.versions.find((version) => version.id === workflow.activeVersionId)?.source;
     if (!activeSource || !existsSync(activeSource)) diagnostics.push(`Workflow source is unavailable: ${activeSource ?? workflow.id}.`);
     const inputFile = engine === "nextflow" ? args.params_file : args.config_file;
+    let configurationPath: string | undefined;
     if (typeof inputFile === "string" && inputFile.trim()) {
-      const inputPath = isAbsolute(inputFile) ? inputFile : resolve(runPath, inputFile);
-      if (!existsSync(inputPath)) diagnostics.push(`${engine === "nextflow" ? "Parameter" : "Configuration"} file is unavailable: ${inputFile}.`);
+      configurationPath = isAbsolute(inputFile) ? inputFile : resolve(runPath, inputFile);
+      if (!existsSync(configurationPath)) diagnostics.push(`${engine === "nextflow" ? "Parameter" : "Configuration"} file is unavailable: ${inputFile}.`);
+    }
+    const declaredInputPaths = Array.isArray(args.input_paths) ? args.input_paths.filter((value): value is string => typeof value === "string" && Boolean(value.trim())).map((value) => value.trim()) : [];
+    if (args.input_paths !== undefined && (!Array.isArray(args.input_paths) || declaredInputPaths.length !== args.input_paths.length)) {
+      diagnostics.push("Declared input_paths must contain only non-empty file paths.");
+    }
+    let configurationText: string | undefined;
+    if (configurationPath && existsSync(configurationPath)) {
+      try { configurationText = readFileSync(configurationPath, "utf8"); } catch { diagnostics.push(`Configuration file could not be read: ${inputFile}.`); }
+    }
+    const scientificInputPaths = configurationText === undefined
+      ? []
+      : this.configurationInputPaths(configurationText, configurationPath!, runPath);
+    for (const input of declaredInputPaths) {
+      const inputPath = isAbsolute(input) ? input : resolve(runPath, input);
+      if (!existsSync(inputPath)) {
+        diagnostics.push(`Declared input is unavailable: ${input}.`);
+        continue;
+      }
+      if (!statSync(inputPath).isFile()) {
+        diagnostics.push(`Declared input is not a file: ${input}.`);
+        continue;
+      }
+      if (configurationText !== undefined && !this.configurationReferencesInput(configurationText, configurationPath!, inputPath, runPath)) {
+        diagnostics.push(`Declared input is absent from the selected configuration: ${input}.`);
+      }
     }
     if (target.kind === "ssh") diagnostics.push("SSH execution is configured but has not been authorized or inspected in this DSH session.");
     if (!executable) diagnostics.push(`${engine} executable is unavailable on the local DSH host PATH.`);
@@ -453,6 +495,8 @@ export class NgsService {
       engine,
       target_id: targetId,
       run_dir: runPath,
+      declared_input_paths: declaredInputPaths,
+      scientific_input_paths: scientificInputPaths,
       executable: executable ?? null,
       diagnostics,
       checkedAt: now(),
@@ -464,8 +508,12 @@ export class NgsService {
     const planId = `plan-${randomUUID()}`; const name = typeof args.display_name === "string" && args.display_name.trim() ? args.display_name.trim() : `${workflow.name} plan`;
     const command = readiness.ready === true ? this.localCommand(workflow, readiness, args) : undefined;
     const targetId = typeof args.target_id === "string" ? args.target_id : "local";
-    const validation = command ? this.capturePlanValidation(state, workflow, targetId, command) : undefined;
-    const plan: Plan = { id: planId, name, checksum: digest(canonicalJson({ workflow: workflow.id, version: workflow.activeVersionId, engine, runDir, readiness, command, validation })), workflowId: workflow.id, engine, runDir, targetId, readiness, createdAt: now(), ...(command ? { command } : {}), ...(validation ? { validation } : {}) };
+    const declaredInputPaths = Array.isArray(args.input_paths) ? args.input_paths.filter((value): value is string => typeof value === "string" && Boolean(value.trim())).map((value) => value.trim()) : [];
+    const scientificInputPaths = Array.isArray(readiness.scientific_input_paths)
+      ? readiness.scientific_input_paths.filter((value): value is string => typeof value === "string")
+      : [];
+    const validation = command ? this.capturePlanValidation(state, workflow, targetId, command, [...new Set([...declaredInputPaths, ...scientificInputPaths])]) : undefined;
+    const plan: Plan = { id: planId, name, checksum: digest(canonicalJson({ workflow: workflow.id, version: workflow.activeVersionId, engine, runDir, readiness, declaredInputPaths, scientificInputPaths, command, validation })), workflowId: workflow.id, engine, runDir, targetId, readiness, declaredInputPaths, scientificInputPaths, createdAt: now(), ...(command ? { command } : {}), ...(validation ? { validation } : {}) };
     state.plans.set(planId, plan); return { plan_id: plan.id, plan_name: plan.name, plan_checksum: plan.checksum, workflow_id: plan.workflowId, engine, readiness, command: command ? clone(command) : null, executable: readiness.ready === true, explanation: readiness.ready === true ? "The plan is ready for explicit execution." : "The plan was created for review, but no workflow command can start until the reported runtime issue is resolved." };
   }
 
@@ -557,6 +605,49 @@ export class NgsService {
   private listTargets(state: NgsState): Json { return { targets: [...state.targets.values()].map((target) => clone(target)) }; }
   private configureTarget(state: NgsState, args: Record<string, unknown>): Json { const id = required(args.target_id, "target_id"); const target: Target = { id, title: required(args.title, "title"), kind: "ssh", sshAlias: required(args.ssh_alias, "ssh_alias"), workspaceRoot: required(args.workspace_root, "workspace_root"), ...(typeof args.executor === "string" ? { executor: args.executor } : {}), ...(typeof args.partition === "string" ? { partition: args.partition } : {}), ...(typeof args.account === "string" ? { account: args.account } : {}), configuredAt: now() }; state.targets.set(id, target); return { target: clone(target), status: "configured", diagnostics: ["No SSH connection was attempted. Remote inspection and submission require a separate approved execution request."] }; }
   private inspectTarget(state: NgsState, args: Record<string, unknown>, context: ScienceExecutionContext): Json { assertNotAborted(context.signal); const id = required(args.target_id, "target_id"); const target = state.targets.get(id); if (!target) throw new Error(`Compute target ${id} is unavailable.`); if (target.kind === "ssh") return { target: clone(target), reachable: false, code: "REMOTE_EXECUTION_NOT_AUTHORIZED", diagnostics: ["SSH inspection is a remote operation and needs explicit execution authority; no connection was opened."], requestedExecutables: Array.isArray(args.executable_paths) ? args.executable_paths : [] }; return { target: clone(target), reachable: true, code: "LOCAL_TARGET", runtime: this.runtimeEnvironment(state, { target_id: id }) }; }
+
+  private configurationReferencesInput(configuration: string, configurationPath: string, inputPath: string, runPath: string): boolean {
+    const normalize = (value: string) => value.replace(/\\/g, "/");
+    const candidates = new Set([
+      normalize(inputPath),
+      normalize(relative(dirname(configurationPath), inputPath)),
+      normalize(relative(runPath, inputPath)),
+    ]);
+    return [...candidates].some((candidate) => candidate.length > 0 && configuration.includes(candidate));
+  }
+
+  private configurationInputPaths(configuration: string, configurationPath: string, runPath: string): string[] {
+    const values: string[] = [];
+    const visit = (value: unknown): void => {
+      if (typeof value === "string") values.push(value);
+      else if (Array.isArray(value)) value.forEach(visit);
+      else if (value && typeof value === "object") Object.values(value as Record<string, unknown>).forEach(visit);
+    };
+    try {
+      visit(JSON.parse(configuration));
+    } catch {
+      for (const match of configuration.matchAll(/(?:^|[\s:[{,-])(?:["']([^"']+)["']|([^\s,\]}#]+))/gm)) {
+        const value = (match[1] ?? match[2] ?? "").trim();
+        if (value) values.push(value);
+      }
+    }
+    const discovered = new Set<string>();
+    for (const value of values) {
+      if (!value || /^[a-z][a-z0-9+.-]*:\/\//i.test(value) || /[*?${}]/.test(value)) continue;
+      const candidates = isAbsolute(value)
+        ? [resolve(value)]
+        : [resolve(dirname(configurationPath), value), resolve(runPath, value)];
+      for (const candidate of candidates) {
+        try {
+          if (!existsSync(candidate) || !statSync(candidate).isFile()) continue;
+          const real = realpathSync(candidate);
+          if (real !== realpathSync(configurationPath)) discovered.add(real);
+          break;
+        } catch { /* An unreadable value is handled by normal readiness checks when explicitly declared. */ }
+      }
+    }
+    return [...discovered].sort((left, right) => left.localeCompare(right));
+  }
 
   private localCommand(workflow: Workflow, readiness: Json, args: Record<string, unknown>): LocalCommand {
     const executable = required(readiness.executable, "readiness executable"); const cwd = required(readiness.run_dir, "readiness run_dir");
@@ -651,7 +742,7 @@ export class NgsService {
     };
   }
 
-  private capturePlanValidation(state: NgsState, workflow: Workflow, targetId: string, command: LocalCommand): PlanValidation {
+  private capturePlanValidation(state: NgsState, workflow: Workflow, targetId: string, command: LocalCommand, declaredInputPaths: readonly string[] = []): PlanValidation {
     const version = workflow.versions.find((item) => item.id === workflow.activeVersionId);
     if (!version) throw new Error(`Workflow ${workflow.id} has no active version.`);
     const target = state.targets.get(targetId);
@@ -661,11 +752,13 @@ export class NgsService {
       const index = command.arguments.indexOf(flag);
       if (index >= 0) parameterFiles.push({ flag, identity: this.pathIdentity(command.arguments[index + 1]!, "file") });
     }
+    const declaredInputs = declaredInputPaths.map((input) => this.pathIdentity(isAbsolute(input) ? input : resolve(command.cwd, input), "file"));
     return {
       workflow: { id: workflow.id, engine: workflow.engine, archived: workflow.archived, activeVersionId: workflow.activeVersionId, checksum: digest(canonicalJson(workflow)) },
       workflowVersion: { id: version.id, checksum: digest(canonicalJson(version)) },
       source: this.pathIdentity(version.source, "file"),
       parameterFiles,
+      declaredInputs,
       executable: this.pathIdentity(command.executable, "file"),
       workingDirectory: this.pathIdentity(command.cwd, "directory"),
       target: { id: target.id, checksum: digest(canonicalJson(target)) },
@@ -681,7 +774,7 @@ export class NgsService {
     if (!target) return [`Compute target ${plan.targetId} is no longer available.`];
     let current: PlanValidation;
     try {
-      current = this.capturePlanValidation(state, workflow, plan.targetId, plan.command);
+      current = this.capturePlanValidation(state, workflow, plan.targetId, plan.command, [...new Set([...(plan.declaredInputPaths ?? []), ...(plan.scientificInputPaths ?? [])])]);
     } catch (cause) {
       return [cause instanceof Error ? cause.message : String(cause)];
     }
@@ -690,6 +783,7 @@ export class NgsService {
       ["workflow version", plan.validation.workflowVersion, current.workflowVersion],
       ["workflow source", plan.validation.source, current.source],
       ["parameter/configuration files", plan.validation.parameterFiles, current.parameterFiles],
+      ["declared scientific inputs", plan.validation.declaredInputs, current.declaredInputs],
       ["resolved executable", plan.validation.executable, current.executable],
       ["working directory", plan.validation.workingDirectory, current.workingDirectory],
       ["compute target", plan.validation.target, current.target],

@@ -3,7 +3,7 @@ import { basename } from "node:path";
 import { gunzipSync } from "node:zlib";
 
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
-const EXPECTED_PACKAGE_VERSION = "0.2.0";
+const EXPECTED_PACKAGE_VERSION = "0.3.0";
 if (pkg.version !== EXPECTED_PACKAGE_VERSION) {
   throw new Error(`Packed bundle check expects package version ${EXPECTED_PACKAGE_VERSION}, found ${String(pkg.version)}.`);
 }
@@ -26,7 +26,7 @@ const ROSALIND_TOOL_NAMES = [
 ];
 const PUBLIC_PROVIDER_IDS = ["gtex-eqtl", "clinvar-variation", "ukb-topmed-phewas", "gnomad-graphql"];
 const PUBLIC_PROVIDER_CONTRACTS = ["article-dataset", ...PUBLIC_PROVIDER_IDS];
-const EXPECTED_TOOL_COUNT = 117 + SKILL_ADAPTER_TOOL_NAMES.length + ROSALIND_TOOL_NAMES.length;
+const EXPECTED_TOOL_COUNT = 121 + SKILL_ADAPTER_TOOL_NAMES.length + ROSALIND_TOOL_NAMES.length;
 
 function readEntries(buffer) {
   const entries = [];
@@ -57,6 +57,7 @@ const required = [
   "package/lib/types/client/index.d.ts",
   "package/cordis.patch.yml",
   "package/capabilities/capability-manifest.json",
+  "package/capabilities/sources/skill-source-inventory.json",
   "package/workflows/oai_fastq_qc/workflow/Snakefile",
   "package/workflows/oai_bulk_rnaseq_counts_qc/workflow/Snakefile",
   "package/workflows/oai_scrnaseq_fastq_to_count/workflow/Snakefile",
@@ -65,12 +66,12 @@ const required = [
   "package/THIRD_PARTY_NOTICES.md",
 ];
 const missing = required.filter((entry) => !entryMap.has(entry));
-if (EXPECTED_TOOL_COUNT !== 136) missing.push(`136-tool contract arithmetic (found ${EXPECTED_TOOL_COUNT})`);
+if (EXPECTED_TOOL_COUNT !== 140) missing.push(`140-tool contract arithmetic (found ${EXPECTED_TOOL_COUNT})`);
 const skillCount = entryNames.filter((entry) => entry.startsWith("package/skills/") && entry.endsWith("/SKILL.md")).length;
 const showcaseCount = entryNames.filter((entry) => entry.startsWith("package/showcases/") && entry.endsWith("showcase.json")).length;
 if (skillCount !== 55) missing.push(`55 project Skill documents (found ${skillCount})`);
 if (showcaseCount !== 23) missing.push(`23 showcase manifests (found ${showcaseCount})`);
-const forbidden = entryNames.filter((entry) => /^package\/(?:src|tests|node_modules|reference-plugins)\//.test(entry));
+const forbidden = entryNames.filter((entry) => /^package\/(?:src|tests|node_modules|reference-plugins|assets\/upstream)\//.test(entry));
 for (const workflowId of ["oai_fastq_qc", "oai_bulk_rnaseq_counts_qc", "oai_scrnaseq_fastq_to_count"]) {
   const prefix = `package/workflows/${workflowId}/`;
   const requiredWorkflowFiles = ["workflow/Snakefile", "config/config.yaml", "config/config.schema.yaml", "config/smoke.yaml", "README.md"];
@@ -92,12 +93,39 @@ const capabilityManifestText = fileText("package/capabilities/capability-manifes
 if (capabilityManifestText) {
   const capabilityManifest = JSON.parse(capabilityManifestText);
   const operationCount = capabilityManifest.target?.requiredOperationCount;
-  if (operationCount !== 117) missing.push(`117 fixed operations in capability manifest (found ${String(operationCount)})`);
+  if (operationCount !== 121) missing.push(`121 fixed operations in capability manifest (found ${String(operationCount)})`);
+}
+const skillSourceInventoryText = fileText("package/capabilities/sources/skill-source-inventory.json");
+if (skillSourceInventoryText) {
+  const inventory = JSON.parse(skillSourceInventoryText);
+  if (inventory.schemaVersion !== 2 || inventory.sourceDistribution !== "openai-curated-remote") {
+    missing.push("portable fixed-version Skill provenance inventory v2");
+  }
+  if (!Array.isArray(inventory.skills) || inventory.skills.length !== 55) {
+    missing.push(`55 Skill provenance records (found ${String(inventory.skills?.length)})`);
+  } else {
+    for (const item of inventory.skills) {
+      const bundledPath = `package/${item.bundledSkillDocument}`;
+      const content = entryMap.get(bundledPath);
+      if (!content) {
+        missing.push(`bundled Skill provenance target ${bundledPath}`);
+        continue;
+      }
+      if (!/^codex-plugin:\/\/openai-curated-remote\//.test(item.sourceUri ?? "")) missing.push(`Skill source URI for ${item.sourceName}`);
+      if (!/^[a-f0-9]{64}$/.test(item.sourceContentSha256 ?? "")) missing.push(`Skill source digest for ${item.sourceName}`);
+      const bundledDigest = (await import("node:crypto")).createHash("sha256").update(content).digest("hex");
+      if (bundledDigest !== item.bundledContentSha256) missing.push(`bundled Skill digest for ${item.sourceName}`);
+    }
+  }
 }
 requireTokens("package/lib/index.js", SKILL_ADAPTER_TOOL_NAMES, "Skill adapter tools");
 requireTokens("package/lib/index.js", ROSALIND_TOOL_NAMES, "Rosalind tools");
 requireTokens("package/lib/index.js", PUBLIC_PROVIDER_CONTRACTS, "PMC/provider contracts");
 requireTokens("package/lib/client.js", PUBLIC_PROVIDER_IDS, "client provider contracts");
+const clientText = fileText("package/lib/client.js");
+for (const marker of ["drr-upstream-app__frame", "Full Sequence Viewer connected to DSH", "fixed NGS application"]) {
+  if (clientText.includes(marker)) forbidden.push(`third-party application marker in package/lib/client.js: ${marker}`);
+}
 if (missing.length || forbidden.length) {
   const details = [
     missing.length ? `Missing: ${missing.join(", ")}` : "",
@@ -105,4 +133,4 @@ if (missing.length || forbidden.length) {
   ].filter(Boolean).join("\n");
   throw new Error(`Packed DSH bundle failed content inspection.\n${details}`);
 }
-console.log(`Packed bundle inspection passed: ${basename(archivePath)} contains ${entries.length} files, ${skillCount} project Skills, ${showcaseCount} showcase manifests, and the 136-tool contract (117 fixed operations + ${SKILL_ADAPTER_TOOL_NAMES.length} Skill adapters, including ${SLIDE_COMPATIBILITY_NAMES.length} Slide compatibility tools + ${ROSALIND_TOOL_NAMES.length} Rosalind tools).`);
+console.log(`Packed bundle inspection passed: ${basename(archivePath)} contains ${entries.length} files, ${skillCount} project Skills, ${showcaseCount} showcase manifests, and the 140-tool contract (121 fixed operations + ${SKILL_ADAPTER_TOOL_NAMES.length} Skill adapters, including ${SLIDE_COMPATIBILITY_NAMES.length} Slide compatibility tools + ${ROSALIND_TOOL_NAMES.length} Rosalind tools).`);

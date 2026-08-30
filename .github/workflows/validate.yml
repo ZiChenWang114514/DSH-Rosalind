@@ -86,13 +86,23 @@ jobs:
       - run: test "$(dsh --version)" = "0.1.1-rc.2"
       - run: test "$(pnpm --version)" = "10.15.1"
       - run: npm run pack:bundle
+      - name: Select the exact bundle archive for profile evidence and installation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t archives < <(find "$PWD" -maxdepth 1 -type f -name 'zichenwang114514-dsh-rosalind-*.tgz' -print)
+          test "${#archives[@]}" -eq 1
+          archive="${archives[0]}"
+          test -s "$archive"
+          sha256sum "$archive"
+          echo "DSH_ROSALIND_PROFILE_ARCHIVE=$archive" >> "$GITHUB_ENV"
       - run: npm run test:dsh-profile-evidence
       - name: Install bundle into DSH Web profile
         shell: bash
         run: |
-          tgz="$(find . -maxdepth 1 -name 'zichenwang114514-dsh-rosalind-*.tgz' -print -quit)"
-          test -n "$tgz"
-          dsh plugin --profile web add "$tgz"
+          test -n "${DSH_ROSALIND_PROFILE_ARCHIVE:-}"
+          test -s "$DSH_ROSALIND_PROFILE_ARCHIVE"
+          dsh plugin --profile web add "$DSH_ROSALIND_PROFILE_ARCHIVE"
           dsh --profile web --dump-config > dsh-config.txt
           grep -q "dsh-rosalind" dsh-config.txt
       - name: Start DSH Web and request the packaged page
@@ -141,13 +151,21 @@ jobs:
           if ((dsh --version) -ne '0.1.1-rc.2') { throw 'Expected DSH 0.1.1-rc.2.' }
           if ((pnpm --version) -ne '10.15.1') { throw 'Expected pnpm 10.15.1.' }
       - run: npm run pack:bundle
+      - name: Select the exact bundle archive for profile evidence and installation
+        shell: pwsh
+        run: |
+          $archives = @(Get-ChildItem -LiteralPath $PWD -File -Filter 'zichenwang114514-dsh-rosalind-*.tgz')
+          if ($archives.Count -ne 1) { throw "Expected one bundle archive, received $($archives.Count)." }
+          $archive = $archives[0]
+          if ($archive.Length -le 0) { throw 'The selected bundle archive is empty.' }
+          Get-FileHash -Algorithm SHA256 -LiteralPath $archive.FullName | Format-List
+          "DSH_ROSALIND_PROFILE_ARCHIVE=$($archive.FullName)" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
       - run: npm run test:dsh-profile-evidence
       - name: Install bundle and exercise the packaged page
         shell: pwsh
         run: |
-          $archive = Get-ChildItem -LiteralPath . -Filter 'zichenwang114514-dsh-rosalind-*.tgz' | Select-Object -First 1
-          if (-not $archive) { throw 'The bundle archive was not created.' }
-          dsh plugin --profile web add $archive.FullName
+          if (-not $env:DSH_ROSALIND_PROFILE_ARCHIVE -or -not (Test-Path -LiteralPath $env:DSH_ROSALIND_PROFILE_ARCHIVE -PathType Leaf)) { throw 'The selected bundle archive is unavailable.' }
+          dsh plugin --profile web add $env:DSH_ROSALIND_PROFILE_ARCHIVE
           dsh --profile web --dump-config | Set-Content -LiteralPath dsh-config.txt
           if (-not (Select-String -LiteralPath dsh-config.txt -Pattern 'dsh-rosalind' -Quiet)) { throw 'The installed DSH profile does not include dsh-rosalind.' }
 

@@ -28,6 +28,8 @@ const WRITE_APPROVAL_REASONS: Readonly<Record<string, string>> = {
   rosalind_approve: "Approval is required to authorize the exact DSH-Rosalind plan and its recorded external actions.",
   rosalind_export: "Approval is required to write the requested DSH-Rosalind export to the active workspace.",
   sequence_export_artifact: "Approval is required to write the requested Sequence Viewer artifact.",
+  structure_render_image: "Approval is required before writing a Molecular Structure Viewer image and its rendering record.",
+  structure_render_movie: "Approval is required before writing a Molecular Structure Viewer movie and its rendering record.",
   structure_export: "Approval is required to write the requested Molecular Structure Viewer export.",
   slide_export_dicom_object: "Approval is required before attempting a DICOM export.",
   slide_prepare_dicom_upload: "Approval is required before preparing a DICOM upload.",

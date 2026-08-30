@@ -21,7 +21,7 @@ describe("StructureService retained scientific fixtures", () => {
     const opened = expectSuccess(await service.execute("structure.open_from_chat", { path: "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb" }, context(session)));
     const sessionId = opened.viewerSessionId;
     expect((opened.structure as { atomCount: number }).atomCount).toBe(818);
-    expect(opened).toMatchObject({ viewerReady: false, coordinateLoad: { status: "ready" }, viewerOpen: { renderState: "error" } });
+    expect(opened).toMatchObject({ viewerReady: false, coordinateLoad: { status: "ready" }, viewerOpen: { renderState: "pending", exportRenderer: "ready" } });
     const contacts = expectSuccess(await service.execute("structure.analyze", { sessionId, kind: "contacts", selections: [{ kind: "chain", chain: "A" }, { kind: "chain", chain: "B" }], options: { contactDistanceAngstrom: 4 } }, context(session)));
     expect(contacts.atomContactCount).toBe(105);
     expect(contacts.residuePairCount).toBe(34);
@@ -43,12 +43,12 @@ describe("StructureService retained scientific fixtures", () => {
     expect((state.selection as { atomCount: number }).atomCount).toBeGreaterThan(0);
   });
 
-  it("reports a precise renderer failure without manufacturing an image", async () => {
+  it("requires an output destination instead of manufacturing an image", async () => {
     const service = new StructureService();
     const session = {};
     const opened = expectSuccess(await service.execute("structure.open_from_chat", { path: "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb" }, context(session)));
     const value = await service.execute("structure.render_image", { sessionId: opened.viewerSessionId }, context(session));
-    expect(value).toMatchObject({ ok: false, error: { code: "RENDERER_UNAVAILABLE" } });
+    expect(value).toMatchObject({ ok: false, error: { code: "EXPORT_DESTINATION_REQUIRED" } });
   });
 });
 

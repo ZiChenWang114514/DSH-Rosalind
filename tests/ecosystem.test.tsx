@@ -12,20 +12,21 @@ describe("ScienceEcosystemPanel", () => {
     render(<ScienceEcosystemPanel />);
     expect(screen.getAllByRole("tab")).toHaveLength(7);
     expect(SCIENCE_ECOSYSTEMS.reduce((sum, item) => sum + item.skillCount, 0)).toBe(55);
-    expect(screen.getByText("117")).toBeInTheDocument();
+    expect(screen.getByText("Declared operations")).toBeInTheDocument();
+    expect(screen.getByText("121")).toBeInTheDocument();
     expect(screen.getByRole("tabpanel")).toHaveTextContent("Life Sciences Literature");
   });
 
-  it("supports tab keyboard navigation, panel changes, and a skill switch", () => {
+  it("supports tab keyboard navigation and reports services and Skills without a non-functional switch", () => {
     render(<ScienceEcosystemPanel />);
     const tabs = screen.getAllByRole("tab");
     fireEvent.keyDown(tabs[0]!, { key: "ArrowDown" });
     expect(tabs[1]).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("tabpanel")).toHaveTextContent("Life Sciences Databases");
-    const toggle = screen.getByRole("switch", { name: "Toggle Life Sciences Databases skills" });
-    expect(toggle).toHaveAttribute("aria-checked", "true");
-    fireEvent.click(toggle);
-    expect(toggle).toHaveAttribute("aria-checked", "false");
+    expect(screen.queryByRole("switch")).not.toBeInTheDocument();
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("declared in bundle");
+    expect(screen.getByText(/Installation or registration does not confirm that a provider is ready/)).toBeInTheDocument();
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("change it in DSH settings");
   });
 
   it("makes each example task an actionable button", () => {

@@ -8,6 +8,7 @@ await build({
   format: "cjs",
   target: ["es2022"],
   jsx: "automatic",
+  loader: { ".aln-fasta": "text", ".pdb": "text" },
   sourcemap: true,
   legalComments: "none",
   external: ["react", "react/*", "@deepseek-ai/*"],

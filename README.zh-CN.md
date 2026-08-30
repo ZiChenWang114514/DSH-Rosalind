@@ -2,7 +2,7 @@
   <img src="assets/readme-hero.svg" alt="DSH-Rosalind 可复现科学工作台" width="100%" />
 
   <p><strong>在 DSH Web 中浏览、讲解、回放并复现 23 个生命科学研究案例。</strong></p>
-  <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a></p>
+  <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a> · <a href="docs/release-notes-v0.3.0.md">v0.3.0 更新</a></p>
 </div>
 
 ## 项目简介
@@ -15,17 +15,17 @@ DSH-Rosalind 是面向 [DeepSeek Harness](https://github.com/deepseek-ai/deepsee
 - **Replay**：打开随版本发布且已经检查的文件和预览。
 - **Reproduce**：检查数据、软件、凭据与计算资源，生成步骤清楚的运行计划。
 
-本版本包含七个科学类别、23 个已完成教学与回放验证的案例，以及案例清单引用的 150 个文件。重新运行会根据实际条件完成本地计算、在授权后调用公共服务，或准确说明缺少的运行环境和凭据。案例内容固定到 `rosalind-science-showcases` 提交 `f81e668c69edbfe7863cc936f2d535b61d8df76b`。
+本版本包含七个科学类别、23 个已完成教学与回放检查的案例，以及案例清单引用的 151 个文件。Reproduce 会先生成新的计划，并只在输入与确认齐备时调用现有适配器；本地分析会在适配器已支持时产生新结果，依赖原始来源、远程服务或付费计算的流程则会说明具体条件，或保持等待确认。案例内容固定到 `rosalind-science-showcases` 提交 `f81e668c69edbfe7863cc936f2d535b61d8df76b`。
 
 ## DSH Web 实际界面
 
-以下截图来自安装到全新 DSH `0.1.1-rc.2` Web 配置后的正式安装包。
+以下是 DSH-Rosalind 生成的候选版本参考图。自动浏览器基准运行在组件预览页；隔离 DSH 配置中的宿主注册另有检查。准确范围见[验证记录](docs/verification.md)。
 
 | 浅色项目目录 | 深色 PD-L1 详情 |
 |---|---|
 | ![DSH 浅色主题中的 DSH-Rosalind 项目目录](docs/screenshots/dsh-light-catalogue-1280x720.png) | ![DSH 深色主题中的 PD-L1 纳米抗体证据详情](docs/screenshots/dsh-dark-pdl1-detail-1280x720.png) |
 
-在 720 像素宽的桌面窗口中，DSH 侧栏自动收起，项目变为单列，并保持无横向滚动。
+组件预览页包含 720 像素宽的专用参考图和溢出检查；提供运行中的全新 DSH 配置后，才会执行真实页面浏览器检查。
 
 <p align="center"><img src="docs/screenshots/dsh-light-narrow-720x900.png" alt="窄屏 DSH Web 中的 DSH-Rosalind" width="420" /></p>
 
@@ -38,14 +38,14 @@ npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm
 dsh --version
 ```
 
-从 [v0.2.0 Release](https://github.com/ZiChenWang114514/DSH-Rosalind/releases/tag/v0.2.0) 下载 `zichenwang114514-dsh-rosalind-0.2.0.tgz`，然后安装到 DSH Web：
+当前 v0.3.0 候选版可在本分支执行 `npm run pack:bundle` 生成同名安装包；正式发布后，该文件也会出现在 GitHub Releases。将 `zichenwang114514-dsh-rosalind-0.3.0.tgz` 安装到 DSH Web：
 
 ```powershell
-dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.2.0.tgz
+dsh plugin --profile web add C:\Downloads\zichenwang114514-dsh-rosalind-0.3.0.tgz
 dsh web --no-open
 ```
 
-打开 DSH 输出的地址。空白会话会显示项目目录；选择案例和 Lesson、Replay 或 Reproduce 后，点击 **Add to conversation**。教学提示会先进入会话输入框，您可以检查后再发送。
+打开 DSH 输出的地址。空白会话会直接显示科学任务启动区和项目目录；选择案例后，可执行 **Start lesson**、**Inspect evidence** 或 **Prepare run**。该动作会向当前 DSH 会话提交简洁的科学请求，内部工具名、参数与适配器信息不会出现在用户输入框中。
 
 从源码构建也很直接：
 
@@ -54,7 +54,7 @@ git clone https://github.com/ZiChenWang114514/DSH-Rosalind.git
 cd DSH-Rosalind
 npm ci
 npm run pack:bundle
-dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.2.0.tgz
+dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.0.tgz
 ```
 
 ## 23 个案例
@@ -73,7 +73,7 @@ dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.2.0.tgz
 
 ## 运行与服务
 
-历史教学和回放不需要凭据。新的运行可以使用本地算法、公共数据库、容器、SSH/HPC，以及可选的 Boltz、Biohub ESM、Modal 或 Runpod。涉及付费服务、GPU、远程计算或外部文件写入时，界面会列出服务、资源与费用估计，并等待用户确认。服务失败后会保留原先的选择并给出诊断信息。
+历史教学和回放不需要凭据。新的运行可以使用本地算法、公共数据库、容器、SSH/HPC，以及可选的 Boltz、Biohub ESM、Modal 或 Runpod。具体案例能否产生新结果取决于其适配器、输入来源和计算环境；涉及付费服务、GPU、远程计算或外部文件写入时，界面会列出服务、资源与费用估计，并等待用户确认。服务失败后会保留原先的选择并给出诊断信息。
 
 运行模型可选择 DeepSeek V4 Flash 或 V4 Pro；这项选择影响会话中的讲解方式，不会改变已发布的科学文件。配置说明见[服务与计算资源](docs/providers.md)。
 
@@ -88,7 +88,7 @@ npm run check:bundle
 npm run test:e2e
 ```
 
-发布验证会从保留文件重新计算 RAS 比对、FASTQ 质量、结构接触、空间组学导出和 PD-L1 候选统计。详细数值、视觉尺寸与 DSH 安装检查见[验证记录](docs/verification.md)。
+发布验证会从保留文件重新计算 RAS 比对、FASTQ 质量、结构接触、空间组学导出和 PD-L1 候选统计。历史文件回放不会产生新的科学计算结果。详细数值、浏览器基准和 DSH 安装检查见[验证记录](docs/verification.md)。
 
 ## 许可
 

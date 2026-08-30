@@ -571,7 +571,7 @@ export class SequenceService {
     if (["alignment_metrics", "distance-matrix", "build-tree", "conservation"].includes(analysis)) {
       const metrics = alignmentMetrics(selected);
       result = { ...metrics, ...(analysis === "build-tree" ? { newick: threeTaxonNewick(selected) } : {}) };
-    } else if (["fastq_qc", "quality", "fastq-qc"].includes(analysis)) result = fastqMetrics(selected);
+    } else if (["fastq_qc", "quality", "fastq-qc", "quality-report"].includes(analysis)) result = fastqMetrics(selected);
     else if (["translation", "translate"].includes(analysis)) { const record = selected[0]; if (!record) throw new Error("No sequence record is active."); result = { record: record.id, frame: Number(args.frame ?? 1), peptide: translate(record.sequence, Number(args.frame ?? 1)) }; }
     else if (analysis === "annotation_summary") result = { records: selected.map((record) => ({ id: record.id, length: record.sequence.replace(/-/g, "").length, moleculeType: record.moleculeType, featureCount: record.features.length, features: record.features })), annotationCount: state.annotations.length };
     else if (["genbank_cds_validation", "cds-validation"].includes(analysis)) { const record = selected[0]; if (!record) throw new Error("No GenBank record is active."); result = validateGenBankCds(record, typeof args.gene === "string" ? args.gene : "cI"); }
@@ -670,6 +670,7 @@ export class SequenceService {
     const filename = `${name.replace(/[^A-Za-z0-9._-]/g, "-")}.${format === "fasta" ? "fasta" : format === "newick" ? "nwk" : "json"}`;
     const directory = resolve(context.packageRoot, "artifacts", "sequence-exports"); mkdirSync(directory, { recursive: true }); const path = resolve(directory, filename);
     if (!path.startsWith(directory)) throw new Error("Export destination is outside the managed artifact directory.");
+    if (existsSync(path)) throw new Error(`DESTINATION_EXISTS: Sequence export ${filename} already exists; choose a new name.`);
     const content = format === "fasta" ? state.records.map((record) => `>${record.id} ${record.label}\n${record.sequence}\n`).join("") : format === "newick" ? (threeTaxonNewick(state.records) ?? ";") : JSON.stringify(this.summary(state), null, 2);
     writeFileSync(path, content, "utf8"); return { artifact: { path, format, bytes: Buffer.byteLength(content), generatedAt: new Date().toISOString() } };
   }
@@ -689,5 +690,6 @@ export class SequenceService {
 
 export function asSequenceServiceError(cause: unknown): { code: string; message: string } {
   const error = resultError(cause);
+  if (error.message.startsWith("DESTINATION_EXISTS:")) return { code: "DESTINATION_EXISTS", message: error.message.slice("DESTINATION_EXISTS:".length).trim() };
   return { code: /cancel/i.test(error.message) ? "CANCELLED" : "SEQUENCE_OPERATION_FAILED", message: error.message };
 }

@@ -1,6 +1,6 @@
 {
   "name": "@zichenwang114514/dsh-rosalind",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A reproducible science workbench for DeepSeek Harness",
   "type": "module",
   "main": "lib/index.js",
@@ -23,7 +23,8 @@
     "skills/**",
     "workflows/**",
     "showcases/**",
-    "assets/**",
+    "assets/brand-mark.svg",
+    "assets/readme-hero.svg",
     "docs/**",
     "cordis.patch.yml",
     "README.md",
@@ -49,8 +50,10 @@
     }
   },
   "scripts": {
-    "generate": "node scripts/generate-skills.mjs && node scripts/generate-catalog.mjs",
+    "generate": "node scripts/generate-catalog.mjs",
+    "sync:codex-plugins": "node scripts/generate-skills.mjs && node scripts/generate-skill-source-inventory.mjs",
     "generate:skills": "node scripts/generate-skills.mjs",
+    "generate:skill-sources": "node scripts/generate-skill-source-inventory.mjs",
     "generate:capabilities": "node scripts/generate-capability-manifest.mjs",
     "build": "npm run generate && tsdown && tsc -p tsconfig.build.json && node scripts/build-client.mjs",
     "dev": "tsdown --watch",
@@ -97,14 +100,30 @@
     "@deepseek-ai/dsh-tools": "0.1.1-rc.2"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/cordis": { "optional": true },
-    "@deepseek-ai/dsh-client-runtime": { "optional": true },
-    "@deepseek-ai/dsh-client-ui-conversation": { "optional": true },
-    "@deepseek-ai/dsh-client-ui-layout": { "optional": true },
-    "@deepseek-ai/dsh-client-ui-settings": { "optional": true },
-    "@deepseek-ai/dsh-client-ui-tool": { "optional": true },
-    "@deepseek-ai/dsh-skill": { "optional": true },
-    "@deepseek-ai/dsh-tools": { "optional": true }
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-runtime": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-conversation": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-layout": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-settings": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-tool": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-skill": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",

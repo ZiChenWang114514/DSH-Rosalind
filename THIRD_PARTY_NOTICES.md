@@ -14,4 +14,6 @@ The FASTQ QC lesson includes the first 500 complete records derived from ENA run
 
 The bundled `skills/` documents are authored and maintained by the DSH-Rosalind project. They describe how this package uses its own typed DSH tools to reach the public services named above. The npm package does not include third-party plugin source trees or their documentation.
 
+Fixed plugin names and versions in capability metadata identify the interfaces studied for compatibility. Design-research mirrors, screenshots, and experimental iframe adapters are kept outside the repository and are not compiled into `lib/client.js` or included in the npm archive.
+
 Service names and trademarks identify interoperating public platforms only. They do not imply endorsement or affiliation. Users remain responsible for complying with each service's current terms, licences, rate limits, access rules, and citation guidance.

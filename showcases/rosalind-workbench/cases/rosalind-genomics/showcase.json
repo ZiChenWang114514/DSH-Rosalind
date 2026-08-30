@@ -16,19 +16,59 @@
       "path": "previews/rosalind-genomics.svg"
     }
   ],
-  "sources": [],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "dependencies": {
+    "required_mcp_servers": ["rosalind", "sequence"],
+    "required_operations": ["rosalind.open", "sequence.open_from_chat", "sequence.run_analysis"],
+    "required_skills": ["rosalind-sequence-biological-sequence-viewer"],
+    "artifacts": [
+      {
+        "id": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "role": "input",
+        "source": "Shared aligned FASTA input from sequence-ras-alignment."
+      },
+      {
+        "id": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+        "role": "provenance",
+        "source": "Shared UniProt acquisition record from sequence-ras-alignment."
+      },
+      {
+        "id": "sequence-ras-alignment:outputs/analysis.json",
+        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/analysis.json",
+        "role": "output",
+        "source": "Shared alignment metrics and neighbor-joining result from sequence-ras-alignment."
+      },
+      {
+        "id": "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+        "role": "output",
+        "source": "Shared exploratory neighbor-joining tree from sequence-ras-alignment."
+      }
+    ],
+    "provenance": {
+      "reused_cases": ["sequence-ras-alignment"]
+    }
+  },
   "observations": [
-    "The Rosalind launcher was ready and exposed the named scientific area."
+    "The Rosalind launcher was ready and exposed the named scientific area.",
+    "The replay fixture is the three-row human RAS alignment retained by sequence-ras-alignment."
   ],
   "interpretation": [
-    "The area is available for interactive task discovery in the current Workbench."
+    "The genomics route opens the retained RAS alignment and recomputes its alignment metrics with the local Sequence service."
   ],
   "limitations": [
-    "The tool response did not expose individual task choices.",
-    "No workspace was opened and no scientific analysis was executed."
+    "The retained launcher observation did not expose individual task choices.",
+    "The RAS distance and neighbor-joining results are exploratory and do not provide phylogenetic support values."
   ],
   "environment": {
     "launcher_ready": true,
-    "scientific_job_executed": false
+    "scientific_job_executed": false,
+    "reproduction_fixture": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta"
   }
 }

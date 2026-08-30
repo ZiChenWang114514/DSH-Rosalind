@@ -3,12 +3,19 @@
 import "@testing-library/jest-dom/vitest";
 import type { ToolCallOwnerProps } from "@deepseek-ai/dsh-client-ui-tool/client";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SCIENCE_VIEWER_TOOL_NAMES, ScienceToolView } from "../src/client/science-viewers.js";
 import { ScienceToolCard } from "../src/client/toolview.js";
 
-afterEach(cleanup);
+beforeEach(() => {
+  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+    setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), beginPath: vi.fn(), arc: vi.fn(),
+    fill: vi.fn(), stroke: vi.fn(), fillText: vi.fn(), save: vi.fn(), restore: vi.fn(),
+    setLineDash: vi.fn(), strokeRect: vi.fn(), drawImage: vi.fn(),
+  } as unknown as CanvasRenderingContext2D);
+});
+afterEach(() => { cleanup(); vi.restoreAllMocks(); });
 
 function settled(toolName: string, payload: Record<string, unknown>, overrides: { isError?: boolean; error?: { name: string; code: string } } = {}): ToolCallOwnerProps {
   const block = {
@@ -118,13 +125,14 @@ describe("science ToolViews", () => {
       },
     });
     render(<ScienceToolView {...props} />);
-    expect(screen.getByLabelText("Molecular scene state")).toHaveTextContent("Geometry remains in the molecular viewer session");
+    expect(screen.getByLabelText("Molecular scene state")).toHaveTextContent("Waiting for structure coordinates from the DSH session");
+    expect(screen.getByRole("application", { name: /local molecular coordinate view/i })).toBeInTheDocument();
     expect(screen.getByText("1,866")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("tab", { name: "Objects" }));
     expect(screen.getByText("1EMA.pdb")).toBeInTheDocument();
   });
 
-  it("projects returned molecular coordinates with mouse and keyboard controls", () => {
+  it("passes returned molecular coordinates to the project-owned Canvas", () => {
     const props = settled("structure_query", {
       state: {
         atoms: [
@@ -136,16 +144,49 @@ describe("science ToolViews", () => {
       },
     });
     render(<ScienceToolView {...props} />);
-    const projection = screen.getByLabelText(/Interactive molecular projection/);
-    expect(projection).toHaveAttribute("data-structure-projection", "true");
-    fireEvent.keyDown(projection, { key: "ArrowRight" });
-    expect(screen.getByText(/Yaw 32°/)).toBeInTheDocument();
-    fireEvent.click(screen.getByLabelText("Zoom molecular projection in"));
-    expect(screen.getByText(/120%/)).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "element" }));
-    expect(screen.getByRole("button", { name: "element" })).toHaveAttribute("aria-pressed", "true");
-    fireEvent.click(screen.getByLabelText("Reset molecular projection"));
-    expect(screen.getByText(/Yaw 24°/)).toBeInTheDocument();
+    expect(screen.getByRole("application", { name: /local molecular coordinate view/i })).toBeInTheDocument();
+    expect(screen.getByText("Local coordinate render confirmed · 3 returned coordinates")).toBeInTheDocument();
+    expect(screen.getByLabelText("Molecular scene state")).toHaveAttribute("data-client-render-ready", "true");
+  });
+
+  it("mounts the project-owned Canvas from an open structure coordinate preview", () => {
+    render(<ScienceToolView {...settled("structure_open_from_chat", {
+      viewerReady: false,
+      structure: { atomCount: 2, polymerResidueCount: 1 },
+      coordinatePreview: { atomCount: 2, totalAtomCount: 2, truncated: false },
+      atoms: [{ atomId: "primary:1", x: 0, y: 0, z: 0, element: "C" }, { atomId: "primary:2", x: 2, y: 1, z: 1, element: "O" }],
+    })} />);
+    expect(screen.getByRole("application", { name: /local molecular coordinate view/i })).toBeInTheDocument();
+    expect(screen.getByText("Local coordinate render confirmed · 2 returned coordinates")).toBeInTheDocument();
+  });
+
+  it("renders a host-decoded local slide tile in the Canvas ToolView", () => {
+    render(<ScienceToolView {...settled("slide_query_viewer", {
+      ok: true,
+      mimeType: "image/png",
+      dataUrl: "data:image/png;base64,iVBORw0KGgo=",
+      x: 0,
+      y: 0,
+      width: 64,
+      height: 32,
+      sourceWidth: 1000,
+      sourceHeight: 500,
+      sourceRevision: "local:test",
+    })} />);
+    expect(screen.getByLabelText("Local slide source pixel workspace")).toBeInTheDocument();
+    expect(screen.getByText("1,000 × 500 px")).toBeInTheDocument();
+    expect(screen.getByText(/receives pixel data decoded from the authorized local source tile/i)).toBeInTheDocument();
+  });
+
+  it("uses the decoded preview carried by a local slide open result", () => {
+    render(<ScienceToolView {...settled("slide_open_from_chat", {
+      sourceRevision: "local:slide-preview",
+      source: { format: "tiff", width: 80, height: 40, sourceRevision: "local:slide-preview", previewTile: { dataUrl: "data:image/png;base64,iVBORw0KGgo=", mimeType: "image/png", x: 0, y: 0, width: 80, height: 40, sourceRevision: "local:slide-preview" } },
+      viewerReady: false,
+      renderState: "awaiting-viewer",
+    })} />);
+    expect(screen.getByLabelText("Local slide source pixel workspace")).toBeInTheDocument();
+    expect(screen.getByText(/receives pixel data decoded from the authorized local source tile/i)).toBeInTheDocument();
   });
 
   it("projects returned slide dimensions, regions, spatial matrix, and layer state", () => {
@@ -183,7 +224,7 @@ describe("science ToolViews", () => {
     const visibility = screen.getByRole("checkbox", { name: /segmentation visibility/i });
     expect(visibility).toBeDisabled();
     expect(visibility).toBeChecked();
-    expect(screen.getByRole("note")).toHaveTextContent(/read-only.*slide_control_viewer/i);
+    expect(screen.getByRole("note")).toHaveTextContent(/read-only.*connected slide viewer/i);
   });
 
   it("shows host and scientific failures verbatim", () => {

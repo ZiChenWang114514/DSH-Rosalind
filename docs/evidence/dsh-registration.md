@@ -20,15 +20,15 @@ The live registries contained:
 
 | Contribution | Registered |
 | --- | ---: |
-| Fixed scientific operations | 117 |
-| Literature/database gateway tools | 2 |
+| Fixed scientific operations | 121 |
+| Skill adapter tools | 6 |
 | DSH-Rosalind showcase tools | 13 |
-| Total tools | 136 |
+| Total tools | 140 |
 | Skills | 55 |
 
-Every one of the 136 tool definitions exposes an object parameter schema, an object output schema, an output renderer, a call presenter, and a result presenter. The current bundle contains 117 fixed science operations, 6 Skill adapter tools, and 13 Rosalind tools.
+Every one of the 140 tool definitions exposes an object parameter schema, an object output schema, an output renderer, a call presenter, and a result presenter. The current bundle contains 121 fixed science operations, 6 Skill adapter tools, and 13 Rosalind tools.
 
-Every registered name was then sent through `ToolRuntime.execute()` with `null` arguments. The 117 fixed-operation adapters normalized the input and returned structured scientific results. The remaining 15 definitions rejected it with `INVALID_ARGS`. No dispatch returned `UNKNOWN_TOOL`.
+Every registered name was then sent through `ToolRuntime.execute()` with `null` arguments. The observed results were 113 structured successes, 18 `INVALID_ARGS` errors, and 9 other classified adapter errors. No dispatch returned `UNKNOWN_TOOL`.
 
 Representative schema-valid calls produced the following observed results:
 
@@ -45,7 +45,7 @@ Representative schema-valid calls produced the following observed results:
 
 A pre-aborted `ngs_list_workflows` call returned the ToolRuntime error `ABORTED_BEFORE_DISPATCH` with the message `tool call aborted before dispatch`.
 
-Bundle lifecycle was also observed through the services. Before disposal, the context reported 136 tools and 55 Skills. After disposing only the bundle fiber, it reported zero tools and zero Skills.
+Bundle lifecycle was also observed through the services. Before disposal, the context reported 140 tools and 55 Skills. After disposing only the bundle fiber, it reported zero tools and zero Skills.
 
 ## Commands and outputs
 
@@ -53,8 +53,7 @@ Bundle lifecycle was also observed through the services. Before disposal, the co
 > npm exec vitest -- run tests/dsh-host-registration.test.ts --reporter=verbose
 
 Test Files  1 passed (1)
-Tests       3 passed (3)
-Duration    2.84s
+Tests       4 passed (4)
 ```
 
 ```text
@@ -68,14 +67,14 @@ Duration    2.84s
 > node scripts/verify-dsh-registration.mjs
 
 ok: true
-registration: 136 tools = 117 fixed operations + 6 Skill adapters + 13 Rosalind tools
+registration: 140 tools = 121 fixed operations + 6 Skill adapters + 13 Rosalind tools
 skills: 55
-rendered outputs: 136
-call/result presenter functions: 136 / 136
-call/result views from empty arguments: 119 / 119
-null-argument dispatch: 117 structured results, 15 INVALID_ARGS
+rendered outputs: 140
+call/result presenter functions: 140 / 140
+call/result views from empty arguments: 123 / 123
+null-argument dispatch: 113 structured results, 18 INVALID_ARGS, 9 other classified errors
 cancellation: ABORTED_BEFORE_DISPATCH
-lifecycle before disposal: 136 tools, 55 Skills
+lifecycle before disposal: 140 tools, 55 Skills
 lifecycle after disposal: 0 tools, 0 Skills
 live requests enabled: false
 DeepSeek API called: false
@@ -85,6 +84,6 @@ The verifier prints the complete JSON record, including each representative call
 
 ## What this does and does not demonstrate
 
-This demonstrates actual same-process DSH service registration, discovery, rendering, presentation, dispatch, cancellation before dispatch, and Cordis-owned removal for the installed package versions. It also demonstrates that all 136 registered names reach ToolRuntime and that representative calls from every scientific service family return their current structured result or precise diagnostic. It is not live scientific-service evidence.
+This demonstrates actual same-process DSH service registration, discovery, rendering, presentation, dispatch, cancellation before dispatch, and Cordis-owned removal for the installed package versions. It also demonstrates that all 140 registered names reach ToolRuntime and that representative calls from every scientific service family return their current structured result or precise diagnostic. It is not live scientific-service evidence.
 
 It does not demonstrate a model-selected call from a running DeepSeek agent, any DeepSeek API request, public literature/database network success, paid provider execution, GPU/HPC execution, or cooperative cancellation after long-running work has begun. Those require external services or deliberately long work and were excluded from this offline registration check. No global DSH configuration was read or changed.

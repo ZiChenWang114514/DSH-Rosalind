@@ -1,16 +1,20 @@
-import { execFileSync } from "node:child_process";
+import { execFile } from "node:child_process";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 import { describe, expect, it } from "vitest";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
+const execFileAsync = promisify(execFile);
 
 describe("isolated DSH profile evidence", () => {
-  it("installs the packed bundle, mounts the real DSH services, and records offline behavior", () => {
-    const output = execFileSync(process.execPath, ["scripts/verify-dsh-registration.mjs"], {
+  it("installs the selected packed bundle, mounts the real DSH services, and records offline behavior", async () => {
+    const { stdout: output } = await execFileAsync(process.execPath, ["scripts/verify-dsh-registration.mjs"], {
       cwd: root,
       encoding: "utf8",
-      timeout: 120_000,
+      timeout: 600_000,
       env: {
         ...process.env,
         DSH_ROSALIND_ENABLE_LIVE_NETWORK: "",
@@ -18,7 +22,7 @@ describe("isolated DSH profile evidence", () => {
     });
     const report = JSON.parse(output) as {
       isolatedProfileEvidence: {
-        installation: { configIncludedRosalind: boolean; profileBundles: string[] };
+        installation: { archive: string; archiveSha256: string; archiveBytes: number; archiveSource: string; archiveKind: "explicit-tgz" | "source-smoke"; releaseArchiveValidated: boolean; configIncludedRosalind: boolean; profileBundles: string[] };
         mount: {
           registration: { totalTools: number; rosalindTools: number; skillsListed: number; skillsReadBack: number };
           skills: Array<{ loaded: boolean; contentBytes: number }>;
@@ -29,11 +33,27 @@ describe("isolated DSH profile evidence", () => {
       };
     };
     const evidence = report.isolatedProfileEvidence;
+    const selectedArchive = process.env.DSH_ROSALIND_PROFILE_ARCHIVE;
+
+    if (selectedArchive) {
+      const archive = resolve(selectedArchive);
+      expect(existsSync(archive)).toBe(true);
+      expect(statSync(archive).size).toBeGreaterThan(0);
+      expect(evidence.installation.archive).toBe(archive.split(/[\\/]/).at(-1));
+      expect(evidence.installation.archiveBytes).toBe(statSync(archive).size);
+      expect(evidence.installation.archiveSha256).toBe(createHash("sha256").update(readFileSync(archive)).digest("hex"));
+      expect(evidence.installation.archiveSource).toBe("DSH_ROSALIND_PROFILE_ARCHIVE");
+      expect(evidence.installation.archiveKind).toBe("explicit-tgz");
+      expect(evidence.installation.releaseArchiveValidated).toBe(true);
+    } else {
+      expect(evidence.installation.archiveKind).toBe("source-smoke");
+      expect(evidence.installation.releaseArchiveValidated).toBe(false);
+    }
 
     expect(evidence.installation.configIncludedRosalind).toBe(true);
     expect(evidence.installation.profileBundles).toContain("@zichenwang114514/dsh-rosalind");
     expect(evidence.mount.registration).toMatchObject({ rosalindTools: 13, skillsListed: 55, skillsReadBack: 55 });
-    expect(evidence.mount.registration.totalTools).toBeGreaterThanOrEqual(136);
+    expect(evidence.mount.registration.totalTools).toBeGreaterThanOrEqual(140);
     expect(evidence.mount.skills).toHaveLength(55);
     expect(evidence.mount.skills.every((skill) => skill.loaded && skill.contentBytes > 0)).toBe(true);
     expect(Object.keys(evidence.mount.representatives).sort()).toEqual([
@@ -48,5 +68,5 @@ describe("isolated DSH profile evidence", () => {
       publicServiceExecution: { attempted: false },
     });
     expect(evidence.cleanup.removed).toBe(true);
-  }, 120_000);
+  }, 720_000);
 });

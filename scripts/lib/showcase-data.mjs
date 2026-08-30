@@ -213,7 +213,9 @@ function recipeFor(showcase, categoryId, artifacts) {
 }
 
 async function artifactRef(repositoryRoot, caseRelativePath, entry, role, runDate) {
-  const relativePath = toPosix(path.join(caseRelativePath, entry.path));
+  const relativePath = entry.repository_path
+    ? toPosix(entry.repository_path)
+    : toPosix(path.join(caseRelativePath, entry.path));
   const absolutePath = path.join(repositoryRoot, relativePath);
   const mediaType = mediaTypeFor(relativePath);
   const buffer = canonicalArtifactBuffer(mediaType, await readFile(absolutePath));
@@ -227,12 +229,12 @@ async function artifactRef(repositoryRoot, caseRelativePath, entry, role, runDat
       ? `dsh-rosalind://${relativePath}`
       : undefined;
   return {
-    id: `${caseRelativePath.split("/").at(-1)}:${entry.path}`,
+    id: entry.id ?? `${caseRelativePath.split("/").at(-1)}:${entry.path}`,
     role: finalRole,
     mediaType,
-    source: recordedMetadataDiffers
+    source: entry.source ?? (recordedMetadataDiffers
       ? `Pinned file identity supersedes stale source-manifest metadata (recorded bytes=${entry.bytes ?? "unspecified"}, sha256=${entry.sha256 ?? "unspecified"}).`
-      : undefined,
+      : undefined),
     generatedAt: ["output", "preview", "provenance"].includes(finalRole) ? runDate : undefined,
     path: relativePath,
     resourceUri,
@@ -263,14 +265,16 @@ export async function buildCatalogue(repositoryRoot) {
       const seen = new Set();
       const addEntries = async (entries, role) => {
         for (const entry of entries ?? []) {
-          if (seen.has(entry.path)) continue;
-          seen.add(entry.path);
-          artifacts.push(await artifactRef(repositoryRoot, caseRelativePath, entry, role, manifest.run_date));
+          const artifactPath = entry.repository_path ?? entry.path;
+          if (seen.has(artifactPath)) continue;
+          seen.add(artifactPath);
+          artifacts.push(await artifactRef(repositoryRoot, caseRelativePath, entry, entry.role ?? role, manifest.run_date));
         }
       };
       await addEntries(manifest.inputs, "input");
       await addEntries(manifest.previews, "preview");
       await addEntries(manifest.outputs, "output");
+      await addEntries(manifest.dependencies?.artifacts, "input");
 
       const readmePath = `${caseRelativePath}/README.md`;
       const promptPath = `${caseRelativePath}/${manifest.prompt}`;
@@ -281,6 +285,8 @@ export async function buildCatalogue(repositoryRoot) {
 
       const sourceSection = firstSection(sections, ["source observations", "verified observations", "source and method", "observed interface state", "rosalind observation"]);
       const computedSection = firstSection(sections, ["computed results", "computed result", "viewer analysis", "result", "computed summary", "starter-contract metric", "alignment result carried by the starter contract"]);
+      const dependencySources = manifest.dependencies?.provenance?.sources ?? [];
+      const sources = unique([...(manifest.sources ?? []), ...dependencySources]);
       const sourceObservations = unique(
         sourceSection
           ? splitStatements(sourceSection)
@@ -320,20 +326,20 @@ export async function buildCatalogue(repositoryRoot) {
         promptPath,
         preview,
         artifacts,
-        sources: manifest.sources ?? [],
+        sources,
         observations: sourceObservations,
         computedResults,
         interpretation,
         limitations,
         claims,
-        requiredMcpServers: [requiredService(categoryId)],
-        requiredOperations: REQUIRED_OPERATIONS[manifest.id] ?? [],
-        requiredSkills: requiredSkills(manifest, categoryId),
+        requiredMcpServers: unique(manifest.dependencies?.required_mcp_servers ?? [requiredService(categoryId)]),
+        requiredOperations: unique(manifest.dependencies?.required_operations ?? REQUIRED_OPERATIONS[manifest.id] ?? []),
+        requiredSkills: unique(manifest.dependencies?.required_skills ?? requiredSkills(manifest, categoryId)),
         fixtures: artifacts.filter((item) => item.role === "input").map((item) => item.id),
         expectedArtifacts: artifacts.filter((item) => ["output", "preview", "provenance"].includes(item.role)).map((item) => item.id),
         scientificAssertions: claims.filter((claim) => claim.kind !== "interpretation"),
         visualAssertions: preview ? [{ id: `${manifest.id}:preview`, artifactId: preview.id, requirement: "The preview opens at its native aspect ratio in light and dark Workbench themes." }] : [],
-        provenance: { sourceCommit: SOURCE_COMMIT, sources: manifest.sources ?? [], runDate: manifest.run_date },
+        provenance: { sourceCommit: SOURCE_COMMIT, sources, runDate: manifest.run_date },
         recipe: recipeFor(manifest, categoryId, artifacts),
         modes: ["lesson", "replay", "reproduce"],
         searchText: unique([summary.title, summary.summary, question, categoryId, plugin.name, ...(manifest.sources ?? [])]).join(" ").toLowerCase(),
@@ -472,7 +478,7 @@ export async function validateShowcases(repositoryRoot) {
   if (definitions.length !== 23) errors.push(`Expected 23 showcases, found ${definitions.length}`);
   if (definitions.some((item) => item.status !== "ready")) errors.push("All 23 release showcases must be ready");
   if (new Set(definitions.map((item) => item.id)).size !== definitions.length) errors.push("Showcase IDs must be unique");
-  if (files.length !== 150) errors.push(`Expected 150 committed catalogue/case files, found ${files.length}`);
+  if (files.length !== 151) errors.push(`Expected 151 committed catalogue/case files, found ${files.length}`);
 
   for (const absolutePath of files) {
     const relativePath = toPosix(path.relative(repositoryRoot, absolutePath));

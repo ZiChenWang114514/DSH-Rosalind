@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 
 const fixtures = [
   { kind: "sequence", selector: "sequence", evidence: "P01116" },
-  { kind: "ngs", selector: "ngs", evidence: "Quantification processes active" },
-  { kind: "structure", selector: "structure", evidence: "1,866" },
+  { kind: "ngs", selector: "ngs", evidence: "Quantification processes finished" },
+  { kind: "structure", selector: "structure", evidence: "Local coordinate render confirmed · 4 returned coordinates" },
   { kind: "slide", selector: "slide", evidence: "46,000 × 32,893 px" },
 ] as const;
 
@@ -49,7 +49,7 @@ test("slide source controls preserve state and explain read-only layer visibilit
   const layer = page.getByRole("checkbox", { name: "segmentation visibility (read-only)" });
   await expect(layer).toBeDisabled();
   await expect(layer).toBeChecked();
-  await expect(page.getByRole("note")).toHaveText("Layer visibility is read-only in this recorded result. Use the slide_control_viewer tool to change the live viewer session.");
+  await expect(page.getByRole("note")).toHaveText("Layer visibility is read-only in this recorded result. Change visibility in the connected slide viewer.");
   await page.getByRole("tab", { name: "Slide" }).click();
   await expect(page.locator(".sv-slide-position")).toHaveText("100% · x 0 · y 0");
   await expect(page.getByText("46,000 × 32,893 px")).toBeVisible();
@@ -58,7 +58,7 @@ test("slide source controls preserve state and explain read-only layer visibilit
 test("dark structure result and narrow slide result retain their scientific state", async ({ page }, testInfo) => {
   if (testInfo.project.name === "chromium-1440") {
     await page.goto("/?science=structure&theme=dark");
-    await expect(page.getByLabel("Molecular scene state")).toContainText("Geometry remains in the molecular viewer session");
+    await expect(page.getByLabel("Molecular scene state")).toContainText("Local coordinate render confirmed · 4 returned coordinates");
     await expect(page).toHaveScreenshot("science-structure-dark.png", { fullPage: true, animations: "disabled" });
     return;
   }

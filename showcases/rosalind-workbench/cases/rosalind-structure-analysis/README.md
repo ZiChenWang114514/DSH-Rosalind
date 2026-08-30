@@ -6,10 +6,10 @@
 
 Rosalind Workbench returned schema `life-sciences.launcher/v1`, reported `ready: true`, and displayed its launcher. The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute.
 
-## What this showcase establishes
+## Retained data and replay route
 
-The current Codex environment can open the Rosalind research launcher and present this scientific area as a task category.
+Reproduce opens the structure-analysis area, then passes the shared pinned `1YCR.pdb` fixture to the local Structure service and reads the resulting viewer state. Replay also includes the retained 4 Å MDM2-p53 coordinate-contact result and its RCSB method record from `structure-mdm2-p53`.
 
 ## Limitation
 
-The tool response did not expose the underlying task list, task descriptions, or a resulting workspace. No scientific job was selected or executed. The preview records the observed launcher state only.
+The original launcher observation did not expose the underlying task list or task descriptions. Its recorded ready state does not claim that a scientific job ran; the retained 1YCR result is reported separately and is a coordinate analysis, not an affinity measurement.

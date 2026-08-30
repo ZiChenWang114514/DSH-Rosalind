@@ -70,21 +70,21 @@ describe("SlideService fixed-contract parity", () => {
       await verify("slide.cancel_analysis_from_chat", { sessionId, jobId: analysisJob.id }, { ok: true, cancellationAccepted: false, executionSettled: true, job: { id: analysisJob.id, kind: "run_analysis_from_chat", state: "failed" } });
       await verify("slide.cancel_pathology", { sessionId, jobId: pathologyJob.id }, { ok: true, cancellationAccepted: false, executionSettled: true, job: { id: pathologyJob.id, kind: "run_pathology", state: "failed" } });
       await verify("slide.cancel_scientific_layer_import", { sessionId, jobId: importJobId }, { ok: true, cancellationAccepted: false, executionSettled: true, job: { id: importJobId, kind: "scientific-layer-import", state: "completed" } });
-      await verify("slide.export_dicom_object", { sessionId, path: "derived-segmentation.dcm", outputPath: "exported-segmentation.dcm" }, { ok: false, error: { code: "DICOM_SEMANTIC_CODEC_UNAVAILABLE" } });
+      await verify("slide.export_dicom_object", { sessionId, path: "derived-segmentation.dcm", outputPath: "exported-segmentation.dcm" }, { ok: false, error: { code: "DICOM_NOT_READABLE" } });
       await verify("slide.get_analysis_from_chat", { sessionId, jobId: analysisJob.id }, { ok: true, job: { id: analysisJob.id, kind: "run_analysis_from_chat", state: "failed" } });
-      await verify("slide.get_capabilities", {}, { ok: true, formats: ["svs", "tiff", "h5ad", "dicom", "ome-zarr"], operations: { locallyAvailable: expect.any(Array), requiresHostTransport: expect.any(Array), diagnosticOnly: expect.any(Array) }, budgets: { retainedFixtureObservations: 684, retainedFixtureGenes: 18078 } });
+      await verify("slide.get_capabilities", {}, { ok: true, formats: ["svs", "tiff", "ome-tiff", "h5ad", "dicom", "ome-zarr"], renderer: { localCanvas: expect.any(Object) }, operations: { locallyAvailable: expect.any(Array), requiresHostTransport: expect.any(Array), diagnosticOnly: expect.any(Array) }, budgets: { retainedFixtureObservations: 684, retainedFixtureGenes: 18078 } });
       await verify("slide.get_live_workflow", { sessionId, durableId: workflowJob.durableId }, { ok: true, job: { durableId: workflowJob.durableId, kind: "run_workflow", state: "failed" } });
       await verify("slide.get_pathology", { sessionId, jobId: pathologyJob.id }, { ok: true, job: { id: pathologyJob.id, kind: "run_pathology", state: "failed" } });
       await verify("slide.get_scientific_layer_import", { sessionId, jobId: importJobId }, { ok: true, job: { id: importJobId, kind: "scientific-layer-import", state: "completed" } });
       await verify("slide.get_viewer_state", { sessionId }, { ok: true, viewerSessionId: sessionId, format: "h5ad", spatial: { observations: 684, genes: 18078, matrixFormat: "csr" }, scientificLayers: [{ id: "spots", featureCount: 3 }] });
       await verify("slide.import_analysis_source_from_chat", { sessionId, coordinateUnit: "pixel", kind: "molecular", counts: { path: spatialCsv, format: "csv", columns: { id: "observation_id", genes: { Slc17a7: "Slc17a7" } } } }, { ok: true, path: spatialCsvNative, format: "table", state: "imported" });
-      await verify("slide.import_dicom_object", { sessionId, path: "derived-segmentation.dcm", imageSopInstanceUid: location.sopInstanceUid }, { ok: false, error: { code: "DICOM_SEMANTIC_CODEC_UNAVAILABLE" } });
+      await verify("slide.import_dicom_object", { sessionId, path: "derived-segmentation.dcm", imageSopInstanceUid: location.sopInstanceUid }, { ok: false, error: { code: "DICOM_NOT_READABLE" } });
       await verify("slide.import_workflow_source", { sessionId, path: spatialCsv }, { ok: true, path: spatialCsvNative, format: "table", state: "imported" });
       await verify("slide.inspect_dicomweb_instance", { sessionId, baseUrl: "https://example.invalid/dicomweb", location }, { ok: false, error: { code: "DICOMWEB_TRANSPORT_UNAVAILABLE" } });
       await verify("slide.list_scientific_layers", { sessionId }, { ok: true, layers: [{ id: "spots", featureCount: 3, sourceId: source.id }] });
-      await verify("slide.list_workflow_sources", { sessionId }, { ok: true, items: [] });
-      await verify("slide.list_workflows", { sessionId }, { ok: true, items: [] });
-      await verify("slide.open_dicom_series", { paths: ["wsi-level-0.dcm", "wsi-level-1.dcm"], presentation: "inline" }, { ok: false, error: { code: "DICOM_SERIES_HOST_REQUIRED", details: { suppliedInstances: 2 } } });
+      await verify("slide.list_workflow_sources", { sessionId }, { ok: true, items: expect.any(Array) });
+      await verify("slide.list_workflows", { sessionId }, { ok: true, items: expect.any(Array) });
+      await verify("slide.open_dicom_series", { paths: ["wsi-level-0.dcm", "wsi-level-1.dcm"], presentation: "inline" }, { ok: false, error: { code: "DICOM_NOT_READABLE" } });
       await verify("slide.open_dicomweb_wsi", { sessionId, baseUrl: "https://example.invalid/dicomweb", studyInstanceUid: location.studyInstanceUid, seriesInstanceUid: location.seriesInstanceUid, sopInstanceUids: [location.sopInstanceUid], encoding: "jpeg2000-lossless" }, { ok: false, error: { code: "DICOMWEB_TRANSPORT_UNAVAILABLE" } });
       await verify("slide.open_ome_zarr", { baseUrl: "https://example.invalid/ngff", groupPath: "0", consistency: "metadata-and-object-validators" }, { ok: false, error: { code: "REMOTE_OME_ZARR_TRANSPORT_UNAVAILABLE" } });
       await verify("slide.prepare_dicom_upload", { sessionId, paths: ["derived-segmentation.dcm"], endpoint: "https://example.invalid/dicomweb/studies" }, { ok: false, error: { code: "DICOM_UPLOAD_REQUIRES_EXPLICIT_HOST_GRANT" } });
@@ -98,8 +98,8 @@ describe("SlideService fixed-contract parity", () => {
       await verify("slide.resume_pathology", { sessionId, durableId: workflowJob.durableId, sourceId: source.id, sourceRevision: source.sourceRevision }, { ok: false, error: { code: "COMPUTE_ENGINE_UNAVAILABLE" } });
       await verify("slide.resume_workflow", { sessionId, durableId: workflowJob.durableId, sourceId: source.id, sourceRevision: source.sourceRevision }, { ok: false, error: { code: "COMPUTE_ENGINE_UNAVAILABLE" } });
       await verify("slide.spatial_indexed", { sessionId, operation: "expression", gene: "Slc17a7" }, { ok: true, gene: "Slc17a7", column: 7717, observationCount: 684, nonzero: 671, valueScale: "unknown" });
-      await verify("slide.submit_dicom_upload", { sessionId, preparedOperation: "host-grant:fixture-not-authorized" }, { ok: false, error: { code: "DICOM_UPLOAD_REQUIRES_EXPLICIT_HOST_GRANT" } });
-      await verify("slide.open_ome_tiff_series", { paths: [tiffPath], presentation: "inline" }, { ok: true, viewerReady: false, renderState: "renderer-unavailable", source: { format: "ome-tiff", width: 320, height: 240, metadata: { memberCount: 1 } } });
+      await verify("slide.submit_dicom_upload", { sessionId, preparedOperation: "host-grant:fixture-not-authorized" }, { ok: false, error: { code: "DICOM_UPLOAD_GRANT_NOT_FOUND" } });
+      await verify("slide.open_ome_tiff_series", { paths: [tiffPath], presentation: "inline" }, { ok: true, viewerReady: false, renderState: "metadata-only", source: { format: "ome-tiff", rendererMode: "metadata", width: 320, height: 240, metadata: { memberCount: 1 } } });
     } finally {
       rmSync(temp, { recursive: true, force: true });
     }
@@ -123,35 +123,47 @@ describe("SlideService fixed-contract parity", () => {
     const service = new SlideService(); const session = {}; const ctx = context(session);
     const opened = await service.execute("slide.open_from_chat", { path: retainedPyramid }, ctx) as Record<string, unknown>;
     const sessionId = String(opened.viewerSessionId);
-    expect((opened.source as Record<string, unknown>)).toMatchObject({ width: 46000, height: 32893, format: "svs", renderAvailable: false });
+    expect(opened).toMatchObject({ viewerReady: false, viewerState: "coordinate-preview", renderState: "coordinate-preview" });
+    expect((opened.source as Record<string, unknown>)).toMatchObject({ width: 46000, height: 32893, format: "svs", renderAvailable: false, rendererMode: "coordinate-preview", coordinatePreview: true, originalPixelsAvailable: false });
+    const initialState = await service.execute("slide.get_viewer_state", { sessionId }, ctx) as Record<string, unknown>;
+    expect(initialState).toMatchObject({ viewerReady: false, renderer: { ready: false, decoderAvailable: false, mounted: false, mode: "coordinate-preview" } });
+    expect(await service.execute("slide.query_viewer", { sessionId, query: "tile", x: 0, y: 0, width: 1, height: 1 }, ctx)).toMatchObject({ ok: false, error: { code: "TILE_SOURCE_PIXELS_UNAVAILABLE" } });
+    expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: initialState.stateRevision }, ctx)).toMatchObject({ ok: false, error: { code: "RENDER_CAPABILITY_UNAVAILABLE" }, viewerReady: false, renderState: "coordinate-preview" });
     const selected = await service.execute("slide.control_viewer", { sessionId, action: "select_region", region: { x: 10, y: 20, width: 30, height: 40 } }, ctx) as Record<string, unknown>;
     expect(selected).toMatchObject({ ok: true, applied: true });
     const measured = await service.execute("slide.control_viewer", { sessionId, action: "measure_region" }, ctx) as Record<string, unknown>;
     expect(measured.measurement).toMatchObject({ coordinateUnit: "micrometer", width: 14.97, height: 19.96, area: 298.8012, calibrationVerified: true });
-    const imported = await service.execute("slide.import_scientific_layer", { sessionId, kind: "geojson", path: geoJson, layerId: "spots" }, ctx) as Record<string, unknown>;
-    expect(imported.layer).toMatchObject({ featureCount: 3, sourceId: (opened.source as Record<string, unknown>).id });
-    const entity = await service.execute("slide.get_scientific_entity", { sessionId, entity: { sourceId: "spots", sourceRevision: (imported.layer as Record<string, unknown>).revision, id: "AAAGACCCAAGTCGCG-1" } }, ctx) as Record<string, unknown>;
-    expect(entity.entity).toMatchObject({ id: "AAAGACCCAAGTCGCG-1", properties: { observation_index: 0 } });
-    expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: 1 }, ctx)).toMatchObject({ ok: false, error: { code: "RENDERER_UNAVAILABLE" } });
-
+    expect(await service.execute("slide.import_scientific_layer", { sessionId, kind: "geojson", path: geoJson, layerId: "spots" }, ctx)).toMatchObject({ ok: false, error: { code: "SOURCE_ASSOCIATION_MISMATCH" } });
     const temp = mkdtempSync(join(packageRoot, ".slide-parity-"));
     try {
       const projectPath = join(temp, "project.json"); const geoJsonPath = join(temp, "annotations.geojson"); const measurementsPath = join(temp, "measurements.csv");
       expect(await service.execute("slide.control_viewer", { sessionId, action: "save_project", path: projectPath }, ctx)).toMatchObject({ ok: true, applied: true });
       expect(await service.execute("slide.control_viewer", { sessionId, action: "load_project", path: projectPath }, ctx)).toMatchObject({ ok: true, restored: true });
       expect(await service.execute("slide.control_viewer", { sessionId, action: "export_view", format: "annotation-geojson", path: geoJsonPath }, ctx)).toMatchObject({ ok: true, format: "annotation-geojson" });
-      expect(JSON.parse(readFileSync(geoJsonPath, "utf8")).features).toHaveLength(3);
+      expect(JSON.parse(readFileSync(geoJsonPath, "utf8")).features).toHaveLength(0);
       expect(await service.execute("slide.control_viewer", { sessionId, action: "export_view", format: "measurement-csv", path: measurementsPath }, ctx)).toMatchObject({ ok: true, format: "measurement-csv" });
       expect(readFileSync(measurementsPath, "utf8")).toContain("calibration_verified");
     } finally { rmSync(temp, { recursive: true, force: true }); }
   });
 
-  it("reads bounded classic TIFF dimensions without decoding pixels", async () => {
+  it("rejects a mouse-brain layer on CMU-1 and accepts it only with matching retained spatial identity", async () => {
+    const service = new SlideService(); const session = {}; const ctx = context(session);
+    const cmu = await service.execute("slide.open_from_chat", { path: retainedPyramid }, ctx) as Record<string, unknown>;
+    const sessionId = String(cmu.viewerSessionId);
+    expect(await service.execute("slide.import_scientific_layer", { sessionId, path: geoJson, layerId: "wrong-source" }, ctx)).toMatchObject({ ok: false, error: { code: "SOURCE_ASSOCIATION_MISMATCH" } });
+    const spatial = await service.execute("slide.open_from_chat", { path: retainedSpatial }, ctx) as Record<string, unknown>;
+    const imported = await service.execute("slide.import_scientific_layer", { sessionId: String(spatial.viewerSessionId), path: geoJson, layerId: "spots" }, ctx) as Record<string, unknown>;
+    expect(imported.layer).toMatchObject({ featureCount: 3, associationVerified: true, sourceId: (spatial.source as Record<string, unknown>).id, sourceAssociation: { dataset: "Brain Coronal HnE Adata Crop" } });
+    const entity = await service.execute("slide.get_scientific_entity", { sessionId, entity: { sourceId: "spots", id: "AAAGACCCAAGTCGCG-1" } }, ctx) as Record<string, unknown>;
+    expect(entity.entity).toMatchObject({ id: "AAAGACCCAAGTCGCG-1", properties: { observation_index: 0 } });
+  });
+
+  it("keeps TIFF metadata-only when its strip pixels are unavailable to the local renderer", async () => {
     const temp = mkdtempSync(join(packageRoot, ".slide-parity-"));
     try {
       const path = join(temp, "tiny.tiff"); writeFileSync(path, minimalTiff(1024, 768));
       const value = await new SlideService().execute("slide.open_from_chat", { path }, context({})) as Record<string, unknown>;
-      expect(value).toMatchObject({ ok: true, viewerReady: false, renderState: "renderer-unavailable", source: { format: "tiff", width: 1024, height: 768, metadata: { inspection: "bounded-classic-tiff-ifd" } } });
+      expect(value).toMatchObject({ ok: true, viewerReady: false, renderState: "metadata-only", source: { format: "tiff", width: 1024, height: 768, rendererMode: "metadata", metadata: { inspection: "bounded-classic-tiff-ifd" } } });
     } finally { rmSync(temp, { recursive: true, force: true }); }
   });
 

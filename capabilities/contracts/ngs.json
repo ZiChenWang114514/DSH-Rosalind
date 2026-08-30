@@ -2606,6 +2606,91 @@
         "openWorldHint": false
       },
       "execution": {}
+    },
+    {
+      "name": "open_ngs_workbench",
+      "title": "Open NGS workbench",
+      "description": "Open the read-only workspace for NGS runs, workflows, and compute targets.",
+      "inputSchema": {
+        "properties": {},
+        "title": "open_ngs_workbenchArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "open_ngs_workbenchArguments",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "list_compute_target_summaries",
+      "title": "List compute target summaries",
+      "description": "List app-safe configuration facts without workflow-readiness claims.",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_compute_target_summariesArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "list_compute_target_summariesArguments",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
+    },
+    {
+      "name": "get_ngs_run_report",
+      "title": "Get NGS run report",
+      "description": "Return the local completed-result projection for the global app.",
+      "inputSchema": {
+        "properties": {
+          "registry_run_id": {
+            "title": "Registry Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "title": "get_ngs_run_reportArguments",
+        "type": "object"
+      },
+      "dshInputSchema": {
+        "type": "object",
+        "title": "get_ngs_run_reportArguments",
+        "properties": {
+          "registry_run_id": {
+            "type": "string",
+            "title": "Registry Run Id"
+          }
+        },
+        "required": [
+          "registry_run_id"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {}
     }
   ]
 }

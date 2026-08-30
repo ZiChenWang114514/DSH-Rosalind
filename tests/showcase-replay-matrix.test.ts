@@ -74,6 +74,7 @@ describe("23-case showcase replay scientific matrix", () => {
           const result = await runtime.run(session, plan.id, new AbortController().signal);
           expect(result.state, `${mode}:${entry.id}: ${result.error?.message ?? ""}`).toBe("completed");
           expect(result.progress, `${mode}:${entry.id}`).toBe(1);
+          if (mode === "replay") expect(result.artifacts.some((artifact) => artifact.source?.startsWith("replay-content:available; opened ")), entry.id).toBe(true);
         }
       }
     } finally {
@@ -106,7 +107,7 @@ describe("23-case showcase replay scientific matrix", () => {
     replaceSameLength(root, entry.artifacts.find((item) => item.path?.endsWith("human-RAS-UniProt-SV1.aln-fasta"))!.path!, "\nMTEYKLVVVG", "\nATEYKLVVVG");
     const result = validateShowcase(root, entry);
     expect(result.ok).toBe(false);
-    expect(result.checks.filter((item) => item.category === "file-structure").every((item) => item.ok)).toBe(true);
+    expect(result.checks.find((item) => item.name === "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta")?.ok).toBe(false);
     expect(result.checks.some((item) => item.category === "input-driven-recomputation" && item.name.startsWith("RAS distance") && !item.ok)).toBe(true);
   });
 });

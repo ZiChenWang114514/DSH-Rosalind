@@ -200,6 +200,46 @@ describe("NgsService local engine execution", () => {
     await service.dispose();
   });
 
+  it("captures every configuration-referenced scientific input and rejects changed input bytes before execution", async () => {
+    const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-scientific-input-"));
+    const bin = join(root, "bin");
+    const workflow = join(root, "workflow.nf");
+    const params = join(root, "params.json");
+    const input = join(root, "sample_R1.fastq.gz");
+    const secondInput = join(root, "sample_R2.fastq.gz");
+    await import("node:fs/promises").then(({ mkdir }) => mkdir(bin));
+    installFakeEngine(bin, "nextflow");
+    writeFileSync(workflow, "workflow { println 'fixture' }\n", "utf8");
+    writeFileSync(input, "original-fastq-fixture\n", "utf8");
+    writeFileSync(secondInput, "original-mate-fixture\n", "utf8");
+    writeFileSync(params, JSON.stringify({ samples: [{ r1: "sample_R1.fastq.gz", r2: "sample_R2.fastq.gz" }] }), "utf8");
+    process.env.PATH = `${bin}${process.platform === "win32" ? ";" : ":"}${originalPath ?? ""}`;
+
+    const service = new NgsService(); const session = {};
+    await service.execute("save_workflow", { workflow_id: "scientific-input-nextflow", name: "Scientific input Nextflow", engine: "nextflow", source: { kind: "local", root, entrypoint: "workflow.nf" } }, context(session, root));
+    const plan = await service.execute("plan_nextflow", {
+      workflow_id: "scientific-input-nextflow",
+      run_dir: root,
+      params_file: params,
+      input_paths: [input],
+    }, context(session, root));
+    expect(plan).toMatchObject({
+      executable: true,
+      readiness: {
+        ready: true,
+        declared_input_paths: [input],
+        scientific_input_paths: expect.arrayContaining([input, secondInput]),
+      },
+    });
+
+    writeFileSync(secondInput, "changed-undeclared-mate-fixture\n", "utf8");
+    const rejected = await service.execute("execute_plan", { plan_id: plan.plan_id, plan_name: plan.plan_name, plan_checksum: plan.plan_checksum }, context(session, root));
+    expect(rejected).toMatchObject({ ok: false, status: "blocked", code: "PLAN_INPUT_CHANGED", process_started: false });
+    expect(rejected.diagnostics).toContain("declared scientific inputs changed after the plan was created.");
+    expect(await service.execute("list_ngs_runs", {}, context(session, root))).toMatchObject({ runs: [] });
+    await service.dispose();
+  });
+
   it.runIf(process.platform === "win32")("passes Windows metacharacters, quotes, spaces, and Unicode as literal native argv", async () => {
     const root = mkdtempSync(join(tmpdir(), "dsh rosalind ngs unicode-测试-"));
     const bin = join(root, "bin");

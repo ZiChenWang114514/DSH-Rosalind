@@ -5,7 +5,24 @@ description: Inspect NGS inputs and evidence before choosing a workflow.
 
 # Understand NGS Data
 
-Inspect available reads, matrices, metadata, references, prior plans, runs, and result artifacts without choosing a workflow, installing software,
-transforming inputs, or creating an execution plan. Record identity, role, provenance, observed state, assay, sample relationships, and material limitations.
+## When to use
 
-Separate what is observed from what is inferred. Explain which questions the available material can support and what is absent or uncertain. Do not create a run merely to preserve an inspection summary.
+Use this Skill when the user asks what NGS material exists, how samples relate, whether inputs are usable, or which analyses the material could support. Fixed reference: `ngs-analysis-workbench-0.2.16/skills/understand-ngs-data/SKILL.md`. The DSH mapping preserves the fixed-version workflow and uses DSH-Rosalind's registered tools.
+
+## Tool call sequence
+
+1. Inventory reads, BCL material, alignments, VCFs, count matrices, single-cell objects, metadata, references, plans, runs, and existing results.
+2. Use parsers, manifests, and recorded run metadata rather than filename guesses.
+3. Create a `starting_point_assessment` with identities, relationships, provenance, supportable tasks, missing information, and one justified handoff. Do not choose a workflow, transform inputs, install software, or create a plan.
+
+## Success and viewer state
+
+The assessment distinguishes observations from inferences and identifies the material that a later scientific decision can use. It does not show readiness, execution, or results.
+
+## Failure, authorization, and cancellation
+
+Conflicting, missing, or unusable material is reported directly. This inspection-oriented Skill has no execution job, cancellation action, or approval request.
+
+## Provenance
+
+Keep each artifact's identity, role, assay, source, reference/annotation context, sample relationships, durable run identities, and constraints.

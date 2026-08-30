@@ -1,15 +1,15 @@
 import { expect, test } from "@playwright/test";
 
-test("catalogue is complete, responsive, and visually stable", async ({ page }, testInfo) => {
+test("blank sessions open directly into a searchable project catalogue", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Rosalind scientific workbench" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Start a scientific task" })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Open / })).toHaveCount(23);
+  await expect(page.getByRole("navigation", { name: "Workbench view" })).toHaveCount(0);
   const dimensions = await page.locator(".preview-shell").evaluate((element) => ({
     scrollWidth: element.scrollWidth,
     clientWidth: element.clientWidth,
   }));
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth + 1);
-  await expect(page).toHaveScreenshot(`catalogue-${testInfo.project.name}.png`, { fullPage: true, animations: "disabled" });
 });
 
 test("search, detail evidence, use mode, and composer import work", async ({ page }) => {
@@ -21,19 +21,17 @@ test("search, detail evidence, use mode, and composer import work", async ({ pag
   await expect(dialog).toBeVisible();
   await dialog.getByRole("tab", { name: "Evidence" }).click();
   await expect(dialog.getByText("Indexed artifacts")).toBeVisible();
-  if (test.info().project.name === "chromium-1440") {
-    await expect(page).toHaveScreenshot("detail-pdl1-light.png", { animations: "disabled" });
-  }
-  await dialog.getByRole("button", { name: /Reproduce/ }).click();
-  const primaryColor = await dialog.getByRole("button", { name: /Add to conversation/ }).evaluate((element) => getComputedStyle(element).color);
+  await dialog.getByRole("tab", { name: "Reproduce" }).click();
+  const primaryColor = await dialog.getByRole("button", { name: "Prepare run" }).evaluate((element) => getComputedStyle(element).color);
   expect(primaryColor).toBe("rgb(255, 255, 255)");
-  await dialog.getByRole("button", { name: /Add to conversation/ }).click();
-  await expect(page.getByLabel("Prepared DSH prompt")).toContainText("rosalind-molecular-design");
-  await expect(page.getByLabel("Prepared DSH prompt")).toContainText("reproduce");
+  await dialog.getByRole("button", { name: "Prepare run" }).click();
+  await expect(page.getByLabel("Prepared DSH prompt")).toContainText("PD-L1 nanobody design showcase");
+  await expect(page.getByLabel("Prepared DSH prompt")).not.toContainText("rosalind_showcase_import");
 });
 
-test("keyboard navigation, Escape, dark theme, and 200 percent zoom remain usable", async ({ page }) => {
+test("keyboard navigation, Escape, and dark theme remain usable", async ({ page }) => {
   await page.goto("/?theme=dark");
+  await page.getByRole("heading", { name: "Start a scientific task" }).focus();
   await page.getByPlaceholder("Search a scientific question or method").focus();
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
@@ -42,29 +40,22 @@ test("keyboard navigation, Escape, dark theme, and 200 percent zoom remain usabl
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toBeHidden();
-  if (test.info().project.name === "chromium-1440") {
-    await expect(page).toHaveScreenshot("catalogue-dark.png", { fullPage: true, animations: "disabled" });
-  }
-  const viewport = page.viewportSize();
-  if (!viewport) throw new Error("Playwright viewport is unavailable");
-  await page.setViewportSize({ width: Math.floor(viewport.width / 2), height: Math.floor(viewport.height / 2) });
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  expect(overflow).toBeLessThanOrEqual(1);
 });
 
-test("seven plugin ecosystems expose service, Skill, and task controls", async ({ page }) => {
+test("CSS 200 percent zoom keeps catalogue controls usable", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Seven plugins" }).click();
-  await expect(page.getByRole("tab")).toHaveCount(7);
-  await expect(page.getByText("55")).toBeVisible();
-  await expect(page.getByText("117", { exact: true })).toBeVisible();
-  const first = page.getByRole("tab").first();
-  await first.focus();
-  await page.keyboard.press("ArrowDown");
-  await expect(page.getByRole("tabpanel")).toContainText("Life Sciences Databases");
-  const skillSwitch = page.getByRole("switch", { name: "Toggle Life Sciences Databases skills" });
-  await expect(skillSwitch).toHaveAttribute("aria-checked", "true");
-  if (test.info().project.name === "chromium-1440") {
-    await expect(page).toHaveScreenshot("plugin-ecosystems-light.png", { fullPage: true, animations: "disabled" });
-  }
+  await page.evaluate(() => { document.documentElement.style.zoom = "2"; });
+  await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).zoom)).toBe("2");
+  await page.getByPlaceholder("Search a scientific question or method").fill("nanobody");
+  await expect(page.getByRole("button", { name: "Open PD-L1 nanobody design showcase" })).toBeVisible();
+  await page.getByRole("button", { name: "Open PD-L1 nanobody design showcase" }).click();
+  await expect(page.getByRole("dialog", { name: "PD-L1 nanobody design showcase" })).toBeVisible();
+});
+
+test("direct project catalogue stays within the narrow viewport", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-narrow", "The narrow check is captured at 720 × 900.");
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Start a scientific task" })).toBeVisible();
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
 });

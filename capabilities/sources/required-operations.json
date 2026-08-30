@@ -39,6 +39,10 @@
             "structure-gfp-figure",
             "structure-mdm2-p53"
           ]
+        },
+        {
+          "id": "rosalind.rosalind_settings",
+          "cases": []
         }
       ]
     },
@@ -148,6 +152,24 @@
         },
         {
           "id": "ngs-compute.list_compute_targets",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "id": "ngs-app",
+      "version": "current installed contract",
+      "operations": [
+        {
+          "id": "ngs-app.get_ngs_run_report",
+          "cases": []
+        },
+        {
+          "id": "ngs-app.list_compute_target_summaries",
+          "cases": []
+        },
+        {
+          "id": "ngs-app.open_ngs_workbench",
           "cases": []
         }
       ]

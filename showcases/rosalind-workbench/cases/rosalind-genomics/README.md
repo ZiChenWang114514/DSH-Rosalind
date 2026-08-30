@@ -6,10 +6,10 @@
 
 Rosalind Workbench returned schema `life-sciences.launcher/v1`, reported `ready: true`, and displayed its launcher. The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute.
 
-## What this showcase establishes
+## Retained data and replay route
 
-The current Codex environment can open the Rosalind research launcher and present this scientific area as a task category.
+Reproduce opens the genomics area, then passes the shared three-row human RAS alignment to the local Sequence service and recomputes alignment metrics. Replay includes the retained RAS metrics and exploratory neighbor-joining tree from `sequence-ras-alignment`.
 
 ## Limitation
 
-The tool response did not expose the underlying task list, task descriptions, or a resulting workspace. No scientific job was selected or executed. The preview records the observed launcher state only.
+The original launcher observation did not expose the underlying task list or task descriptions. The RAS tree uses uncorrected p-distance and has no substitution model or support assessment.

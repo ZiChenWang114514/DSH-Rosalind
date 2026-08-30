@@ -1,5 +1,7 @@
 import type { ToolCallOwnerProps } from "@deepseek-ai/dsh-client-ui-tool/client";
 import { useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type WheelEvent as ReactWheelEvent } from "react";
+import { LocalSlideCanvas, type SlideRectangle, type SlideTile } from "./viewers/slide/canvas.js";
+import { LocalStructureCanvas, type StructureCanvasAtom } from "./viewers/structure/canvas.js";
 
 type JsonRecord = Record<string, unknown>;
 type ViewerKind = "sequence" | "ngs" | "structure" | "slide";
@@ -454,19 +456,32 @@ function StructureResult({ parsed, openFile }: { parsed: ParsedScienceCall; open
   const [active, setActive] = useState("Scene");
   const objects = findArray(payload, state, ["objects", "structures", "structureObjects", "layers", "layerSummaries"]);
   const analyses = findArray(payload, state, ["analyses", "measurements", "results", "contacts", "hydrogenBonds", "clashes"]);
-  const atoms = findArray(payload, state, ["atoms"]);
+  const atoms = findArray(payload, state, ["atoms", "items"]);
   const atomCount = nestedNumber({ ...payload, ...state }, ["atomCount", "atoms"]);
   const residueCount = nestedNumber({ ...payload, ...state }, ["polymerResidueCount", "residueCount", "residues"]);
   const ligandCount = nestedNumber({ ...payload, ...state }, ["ligandCount", "ligands"]);
   const artifacts = collectArtifacts(payload);
   const scene = record(state.scene ?? payload.scene);
+  const structure = record(payload.structure ?? state.structure);
   const representation = text(record(payload.display).representation ?? record(state.display).representation ?? payload.representation) ?? "cartoon";
   const initialColourMode = text(record(payload.display).colorMode ?? record(state.display).colorMode ?? payload.colorMode) ?? "chain";
   const [colourMode, setColourMode] = useState(initialColourMode);
+  const viewerAtoms = useMemo(() => atoms.flatMap((atom, index): StructureCanvasAtom[] => {
+    const coordinates = record(atom.coordinates);
+    const x = number(coordinates.x ?? atom.x), y = number(coordinates.y ?? atom.y), z = number(coordinates.z ?? atom.z);
+    if (x == null || y == null || z == null) return [];
+    return [{
+      atomId: text(atom.atomId ?? atom.id ?? atom.key) ?? `atom-${index + 1}`,
+      element: text(atom.element) ?? "C",
+      ...(text(atom.objectId) ? { objectId: text(atom.objectId)! } : {}),
+      x, y, z,
+    }];
+  }), [atoms]);
+  const [renderedAtomCount, setRenderedAtomCount] = useState<number | null>(null);
   return <div className="sv-structure">
     <TabStrip active={active} ariaLabel="Molecular structure result views" labels={["Scene", "Objects", "Analysis"]} onChange={setActive} />
     <div className="sv-panel" role="tabpanel" tabIndex={0}>
-      {active === "Scene" ? <div className="sv-structure-layout">{atoms.length ? <StructureProjection atoms={atoms} colourMode={colourMode} onColourModeChange={setColourMode} representation={representation} /> : <div className="sv-scene" aria-label="Molecular scene state"><div className="sv-scene-toolbar"><span>{representation}</span><span>{initialColourMode}</span></div><div className="sv-scene-summary"><span className="sv-axis sv-axis--x">x</span><span className="sv-axis sv-axis--y">y</span><span className="sv-axis sv-axis--z">z</span><div><strong>Scene state synchronized</strong><p>Geometry remains in the molecular viewer session; this tool result carries scene and object state.</p></div></div></div>}<aside><FactGrid facts={[{ label: "Atoms", value: atomCount == null ? "—" : atomCount.toLocaleString() }, { label: "Residues", value: residueCount == null ? "—" : residueCount.toLocaleString() }, { label: "Ligands", value: ligandCount == null ? "—" : ligandCount.toLocaleString() }, ...scalarFacts(scene, ["sceneRevision", "geometryRevision", "syncStatus"], 3)]} /></aside></div> : null}
+      {active === "Scene" ? <div className="sv-structure-layout"><div className="sv-scene sv-scene--molstar" aria-label="Molecular scene state" data-client-render-ready={viewerAtoms.length > 0 && renderedAtomCount !== null ? "true" : "false"}><LocalStructureCanvas atoms={viewerAtoms} onRenderReady={({ renderedAtomCount: count }) => setRenderedAtomCount(count)} /><div aria-live="polite" className="sv-scene-state">{viewerAtoms.length === 0 ? "Waiting for structure coordinates from the DSH session" : renderedAtomCount !== null ? `Local coordinate render confirmed · ${renderedAtomCount.toLocaleString()} returned coordinates` : `Loading ${viewerAtoms.length.toLocaleString()} returned coordinates`}</div></div><aside><FactGrid facts={[{ label: "Atoms", value: atomCount == null ? "—" : atomCount.toLocaleString() }, { label: "Residues", value: residueCount == null ? "—" : residueCount.toLocaleString() }, { label: "Ligands", value: ligandCount == null ? "—" : ligandCount.toLocaleString() }, ...scalarFacts(scene, ["sceneRevision", "geometryRevision", "syncStatus"], 3)]} /></aside></div> : null}
       {active === "Objects" ? objects.length ? <div className="sv-object-list">{objects.map((item, index) => <article key={text(item.id ?? item.key) ?? String(index)}><i style={{ background: text(record(item.color).value ?? item.color) ?? `hsl(${index * 67} 45% 55%)` }} /><div><strong>{text(item.label ?? item.name ?? item.id) ?? `Object ${index + 1}`}</strong><span>{text(item.kind ?? item.representation ?? item.component) ?? "structure object"}</span></div><small>{item.visible === false ? "hidden" : "visible"}</small></article>)}</div> : <EmptyResult>No object list was included in this operation result.</EmptyResult> : null}
       {active === "Analysis" ? analyses.length ? <div className="sv-analysis-list">{analyses.slice(0, 30).map((item, index) => <article key={text(item.id) ?? String(index)}><strong>{text(item.type ?? item.kind ?? item.label) ?? `Result ${index + 1}`}</strong><FactGrid facts={scalarFacts(item, ["distanceAngstrom", "distance", "angle", "rmsd", "tmScore", "count"], 4)} /></article>)}</div> : <><FactGrid facts={scalarFacts(payload, ["rmsd", "tmScore", "contactCount", "pairCount", "sasa", "buriedArea"])} /><EmptyResult>No row-level analysis collection was included in this result.</EmptyResult></> : null}
     </div>
@@ -485,8 +500,8 @@ export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; o
   const state = stateFrom(parsed.payload);
   const [active, setActive] = useState("Slide");
   const source = record(payload.source ?? state.source);
-  const width = number(source.width ?? payload.width ?? state.width);
-  const height = number(source.height ?? payload.height ?? state.height);
+  const width = number(source.width ?? payload.sourceWidth ?? state.sourceWidth ?? payload.width ?? state.width);
+  const height = number(source.height ?? payload.sourceHeight ?? state.sourceHeight ?? payload.height ?? state.height);
   const bounds = record(payload.visibleBounds ?? state.visibleBounds);
   const regions = findArray(payload, state, ["selectedRegions", "regions", "annotations"]);
   const layers = findArray(payload, state, ["scientificLayers", "layers", "items"]);
@@ -497,6 +512,20 @@ export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; o
   const labels = observations != null ? ["Slide", "Spatial", "Layers"] : ["Slide", "Layers"];
   const viewBoxWidth = width ?? 1000; const viewBoxHeight = height ?? 700;
   const [view, setView] = useState<SlideView>({ panX: 0, panY: 0, zoom: 1 });
+  const sourceRevision = text(payload.sourceRevision ?? state.sourceRevision ?? source.sourceRevision ?? source.revision);
+  const tile = useMemo<SlideTile | null>(() => {
+    const preview = record(payload.previewTile ?? state.previewTile ?? source.previewTile);
+    const dataUrl = text(payload.dataUrl ?? state.dataUrl ?? preview.dataUrl);
+    const tileWidth = number(payload.width ?? state.width ?? preview.width), tileHeight = number(payload.height ?? state.height ?? preview.height);
+    const revision = text(payload.sourceRevision ?? state.sourceRevision ?? preview.sourceRevision ?? source.sourceRevision);
+    if (!dataUrl || tileWidth == null || tileHeight == null || !revision) return null;
+    return { dataUrl, x: number(payload.x ?? state.x ?? preview.x) ?? 0, y: number(payload.y ?? state.y ?? preview.y) ?? 0, width: tileWidth, height: tileHeight, sourceRevision: revision };
+  }, [payload, state]);
+  const canvasRegions = useMemo(() => regions.flatMap((region, index): SlideRectangle[] => {
+    const x = number(region.x), y = number(region.y), regionWidth = number(region.width), regionHeight = number(region.height);
+    if (x == null || y == null || regionWidth == null || regionHeight == null) return [];
+    return [{ id: text(region.id) ?? `region-${index + 1}`, x, y, width: regionWidth, height: regionHeight, ...(text(region.label) ? { label: text(region.label)! } : {}) }];
+  }), [regions]);
   const drag = useRef<{ pointerId: number; x: number; y: number } | null>(null);
   const resetView = () => setView({ panX: 0, panY: 0, zoom: 1 });
   const moveView = (x: number, y: number) => setView((current) => ({ ...current, panX: current.panX + x, panY: current.panY + y }));
@@ -532,9 +561,9 @@ export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; o
   return <div className="sv-slide">
     <TabStrip active={active} ariaLabel="Slide and spatial result views" labels={labels} onChange={setActive} />
     <div className="sv-panel" role="tabpanel" tabIndex={0}>
-      {active === "Slide" ? <div className="sv-slide-layout"><div className="sv-slide-map" aria-label="Interactive slide source view"><div className="sv-slide-controls" aria-label="Slide view controls"><button aria-label="Zoom slide in" onClick={() => zoomView(.25)} type="button">+</button><button aria-label="Zoom slide out" onClick={() => zoomView(-.25)} type="button">−</button><button aria-label="Reset slide view" onClick={resetView} type="button">Reset</button></div><svg aria-label="Slide source extent and returned regions" data-slide-view="true" onKeyDown={onSlideKeyDown} onPointerCancel={stopSlideDrag} onPointerDown={onSlidePointerDown} onPointerMove={onSlidePointerMove} onPointerUp={stopSlideDrag} onWheel={onSlideWheel} preserveAspectRatio="xMidYMid meet" role="application" tabIndex={0} viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}><defs><pattern height={Math.max(12, viewBoxHeight / 24)} id="sv-tissue" patternUnits="userSpaceOnUse" width={Math.max(12, viewBoxWidth / 32)}><rect fill="var(--sv-slide-tissue)" height="100%" width="100%" /><circle cx="35%" cy="45%" fill="var(--sv-slide-nucleus)" r="11%" /></pattern></defs><g transform={`translate(${view.panX} ${view.panY}) scale(${view.zoom})`}><rect fill="url(#sv-tissue)" height={viewBoxHeight} rx={viewBoxHeight * .02} width={viewBoxWidth} />{number(bounds.x) != null && number(bounds.y) != null && number(bounds.width) != null && number(bounds.height) != null ? <rect className="sv-view-bounds" fill="none" height={number(bounds.height)!} width={number(bounds.width)!} x={number(bounds.x)!} y={number(bounds.y)!} /> : null}{regions.map((region, index) => <rect className="sv-region" fill="none" height={number(region.height) ?? 0} key={text(region.id) ?? String(index)} width={number(region.width) ?? 0} x={number(region.x) ?? 0} y={number(region.y) ?? 0} />)}</g></svg><span>{width && height ? `${width.toLocaleString()} × ${height.toLocaleString()} px` : "Source extent unavailable"}</span><output aria-live="polite" className="sv-slide-position">{Math.round(view.zoom * 100)}% · x {Math.round(view.panX)} · y {Math.round(view.panY)}</output></div><aside><FactGrid facts={scalarFacts({ ...state, ...source }, ["fileName", "format", "displayMode", "sourceRevision", "stateRevision"], 6)} />{!width || !height ? <p className="sv-data-note">Pixel dimensions were not included in this operation result.</p> : <p className="sv-data-note">Controls update this source-coordinate preview only; no viewer-session change is asserted by this result.</p>}</aside></div> : null}
+      {active === "Slide" ? <div className="sv-slide-layout"><div className="sv-slide-map" aria-label="Interactive slide source view">{tile && width && height && sourceRevision ? <LocalSlideCanvas ariaLabel="Local slide source pixel workspace" height={height} regions={canvasRegions} sourceRevision={sourceRevision} tile={tile} width={width} /> : <><div className="sv-slide-controls" aria-label="Slide view controls"><button aria-label="Zoom slide in" onClick={() => zoomView(.25)} type="button">+</button><button aria-label="Zoom slide out" onClick={() => zoomView(-.25)} type="button">−</button><button aria-label="Reset slide view" onClick={resetView} type="button">Reset</button></div><svg aria-label="Slide source extent and returned regions" data-slide-view="true" onKeyDown={onSlideKeyDown} onPointerCancel={stopSlideDrag} onPointerDown={onSlidePointerDown} onPointerMove={onSlidePointerMove} onPointerUp={stopSlideDrag} onWheel={onSlideWheel} preserveAspectRatio="xMidYMid meet" role="application" tabIndex={0} viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}><defs><pattern height={Math.max(12, viewBoxHeight / 24)} id="sv-tissue" patternUnits="userSpaceOnUse" width={Math.max(12, viewBoxWidth / 32)}><rect fill="var(--sv-slide-tissue)" height="100%" width="100%" /><circle cx="35%" cy="45%" fill="var(--sv-slide-nucleus)" r="11%" /></pattern></defs><g transform={`translate(${view.panX} ${view.panY}) scale(${view.zoom})`}><rect fill="url(#sv-tissue)" height={viewBoxHeight} rx={viewBoxHeight * .02} width={viewBoxWidth} />{number(bounds.x) != null && number(bounds.y) != null && number(bounds.width) != null && number(bounds.height) != null ? <rect className="sv-view-bounds" fill="none" height={number(bounds.height)!} width={number(bounds.width)!} x={number(bounds.x)!} y={number(bounds.y)!} /> : null}{regions.map((region, index) => <rect className="sv-region" fill="none" height={number(region.height) ?? 0} key={text(region.id) ?? String(index)} width={number(region.width) ?? 0} x={number(region.x) ?? 0} y={number(region.y) ?? 0} />)}</g></svg><output aria-live="polite" className="sv-slide-position">{Math.round(view.zoom * 100)}% · x {Math.round(view.panX)} · y {Math.round(view.panY)}</output></>}<span>{width && height ? `${width.toLocaleString()} × ${height.toLocaleString()} px` : "Source extent unavailable"}</span></div><aside><FactGrid facts={scalarFacts({ ...state, ...source }, ["fileName", "format", "displayMode", "sourceRevision", "stateRevision"], 6)} />{tile ? <p className="sv-data-note">This project-owned Canvas receives pixel data decoded from the authorized local source tile.</p> : !width || !height ? <p className="sv-data-note">Pixel dimensions were not included in this operation result.</p> : <p className="sv-data-note">This operation supplied source dimensions and regions without original pixels; the patterned area is a coordinate preview.</p>}</aside></div> : null}
       {active === "Spatial" ? <div className="sv-spatial-layout"><section><span className="sv-spatial-gene">{text(spatial.gene ?? spatial.selectedGene) ?? "Spatial matrix"}</span><strong>{observations?.toLocaleString() ?? "—"}</strong><small>observations</small></section><section><strong>{genes?.toLocaleString() ?? text(array(spatial.matrixShape)[1]) ?? "—"}</strong><small>genes</small></section><section><FactGrid facts={scalarFacts(spatial, ["nonzero", "min", "max", "mean", "valueScale", "matrixFormat"], 6)} /></section></div> : null}
-      {active === "Layers" ? layers.length ? <><p className="sv-layer-note" role="note">Layer visibility is read-only in this recorded result. Use the slide_control_viewer tool to change the live viewer session.</p><div className="sv-layer-list">{layers.map((layer, index) => { const layerId = text(layer.id ?? layer.name) ?? `layer-${index + 1}`; return <label key={layerId}><input aria-label={`${layerId} visibility (read-only)`} checked={layer.visible !== false} disabled readOnly type="checkbox" /><i /><span><strong>{layerId}</strong><small>{text(layer.kind) ?? "scientific layer"}{text(layer.featureCount) ? ` · ${text(layer.featureCount)} features` : ""}</small></span></label>; })}</div></> : <EmptyResult>No scientific layer collection was included in this result.</EmptyResult> : null}
+      {active === "Layers" ? layers.length ? <><p className="sv-layer-note" role="note">Layer visibility is read-only in this recorded result. Change visibility in the connected slide viewer.</p><div className="sv-layer-list">{layers.map((layer, index) => { const layerId = text(layer.id ?? layer.name) ?? `layer-${index + 1}`; return <label key={layerId}><input aria-label={`${layerId} visibility (read-only)`} checked={layer.visible !== false} disabled readOnly type="checkbox" /><i /><span><strong>{layerId}</strong><small>{text(layer.kind) ?? "scientific layer"}{text(layer.featureCount) ? ` · ${text(layer.featureCount)} features` : ""}</small></span></label>; })}</div></> : <EmptyResult>No scientific layer collection was included in this result.</EmptyResult> : null}
     </div>
     <ArtifactButtons artifacts={artifacts} openFile={openFile} />
   </div>;

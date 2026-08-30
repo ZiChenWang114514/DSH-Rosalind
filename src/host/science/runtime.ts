@@ -60,7 +60,7 @@ function openRosalind(args: Record<string, unknown>, context: ScienceExecutionCo
     providerId,
     availableServices: ["literature", "databases", "sequence", "ngs", "structure", "slide", "rosalind"],
     skillCount: 55,
-    operationCount: 117,
+    operationCount: 121,
   };
   if (area !== "molecular-design" || (providerId && providerId !== "local-replay")) return base;
   const caseRoot = resolve(context.packageRoot, "showcases/rosalind-workbench/cases/rosalind-molecular-design");
@@ -117,9 +117,14 @@ export class ScienceRuntime implements ScienceExecutor {
         case "structure": result = await this.structure.execute(operation, args, context); break;
         case "slide": result = await this.slide.execute(operation, args, context); break;
         case "rosalind":
-          if (operation !== "rosalind.open") throw new Error(`Unknown Rosalind operation: ${operation}`);
-          result = openRosalind(args, context);
-          break;
+          if (operation === "rosalind.settings") {
+            // Mirrors the fixed rosalind 0.2.2-research-preview response, which
+            // reports a ready settings surface instead of a workbench area.
+            result = { schemaVersion: "life-sciences.settings/v1", ready: true, view: "settings" };
+            break;
+          }
+          if (operation === "rosalind.open") { result = openRosalind(args, context); break; }
+          throw new Error(`Unknown Rosalind operation: ${operation}`);
         default: throw new Error(`Unknown science service: ${serviceId}`);
       }
       return normalize(serviceId, operation, result);

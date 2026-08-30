@@ -8,11 +8,25 @@ export interface WorkbenchBridge {
 
 interface WorkbenchState {
   selectedCaseId: string | null;
-  detailTab: "overview" | "evidence" | "reproduce";
+  detailTab: DetailTab;
   mode: ShowcaseMode;
   bridge: WorkbenchBridge;
   notice: string | null;
 }
+
+export type DetailTab = "overview" | "evidence" | "reproduce";
+
+const MODE_FOR_TAB: Record<DetailTab, ShowcaseMode> = {
+  overview: "lesson",
+  evidence: "replay",
+  reproduce: "reproduce",
+};
+
+const TAB_FOR_MODE: Record<ShowcaseMode, DetailTab> = {
+  lesson: "overview",
+  replay: "evidence",
+  reproduce: "reproduce",
+};
 
 const listeners = new Set<() => void>();
 let state: WorkbenchState = {
@@ -23,7 +37,8 @@ let state: WorkbenchState = {
   notice: null,
 };
 
-let pendingPrompt: string | null = null;
+const selectedModes = new Map<string, ShowcaseMode>();
+let pendingPrompt: { text: string; autoSubmit: boolean } | null = null;
 
 function emit(): void {
   for (const listener of listeners) listener();
@@ -48,19 +63,18 @@ export function useWorkbenchState(): WorkbenchState {
 }
 
 export function openShowcase(caseId: string): void {
-  update({ selectedCaseId: caseId, detailTab: "overview", mode: "lesson", notice: null });
+  const mode = selectedModes.get(caseId) ?? "lesson";
+  update({ selectedCaseId: caseId, detailTab: TAB_FOR_MODE[mode], mode, notice: null });
 }
 
 export function closeShowcase(): void {
   update({ selectedCaseId: null, notice: null });
 }
 
-export function setDetailTab(detailTab: WorkbenchState["detailTab"]): void {
-  update({ detailTab });
-}
-
-export function setShowcaseMode(mode: ShowcaseMode): void {
-  update({ mode });
+export function setDetailTab(detailTab: DetailTab): void {
+  const mode = MODE_FOR_TAB[detailTab];
+  if (state.selectedCaseId) selectedModes.set(state.selectedCaseId, mode);
+  update({ detailTab, mode });
 }
 
 export function setWorkbenchBridge(bridge: WorkbenchBridge): () => void {
@@ -78,11 +92,11 @@ export function showNotice(notice: string | null): void {
   update({ notice });
 }
 
-export function stageConversationPrompt(prompt: string): void {
-  pendingPrompt = prompt;
+export function stageConversationPrompt(prompt: string, options: { autoSubmit?: boolean } = {}): void {
+  pendingPrompt = { text: prompt, autoSubmit: options.autoSubmit ?? false };
 }
 
-export function consumeConversationPrompt(): string | null {
+export function consumeConversationPrompt(): { text: string; autoSubmit: boolean } | null {
   const prompt = pendingPrompt;
   pendingPrompt = null;
   return prompt;

@@ -6,10 +6,10 @@
 
 Rosalind Workbench returned schema `life-sciences.launcher/v1`, reported `ready: true`, and displayed its launcher. The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute.
 
-## What this showcase establishes
+## Retained request and replay route
 
-The current Codex environment can open the Rosalind research launcher and present this scientific area as a task category.
+Reproduce opens the scientific-compute area and performs the three local NGS discovery requests retained in `inputs/runtime-discovery-request.json`: workflow inventory, runtime-environment discovery, and compute-target discovery. This route has no biological input file and does not create a plan or start a job.
 
 ## Limitation
 
-The tool response did not expose the underlying task list, task descriptions, or a resulting workspace. No scientific job was selected or executed. The preview records the observed launcher state only.
+The original launcher observation did not expose the underlying task list or task descriptions. Discovery responses describe the active host only; they do not demonstrate workflow execution or scientific analysis.

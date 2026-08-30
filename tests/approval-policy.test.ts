@@ -46,6 +46,8 @@ describe("DSH host approval policy", () => {
       ["rosalind_export", { showcase_id: "sequence-ras-alignment", format: "review-json", output_path: "artifacts/approval-denied.json", approved: true }],
       ["sequence_export_artifact", { sessionId: "missing", format: "json" }],
       ["structure_export", { sessionId: "missing", format: "scene-json", outputPath: "artifacts/approval-denied-scene.json", overwrite: true }],
+      ["structure_render_image", { sessionId: "missing", outputPath: "artifacts/approval-denied.png", overwrite: true }],
+      ["structure_render_movie", { sessionId: "missing", outputPath: "artifacts/approval-denied.mp4", overwrite: true }],
       ["slide_control_viewer", { sessionId: "missing", action: "save_project" }],
       ["slide_export_dicom_object", { path: "input.dcm", outputPath: "output.dcm" }],
       ["slide_prepare_dicom_upload", { paths: ["input.dcm"], endpoint: "https://example.invalid/dicomweb" }],

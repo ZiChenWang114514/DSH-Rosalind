@@ -118,6 +118,9 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-colour-toggle button { text-transform: capitalize; }
 .sv-scene svg { position: relative; z-index: 1; width: 100%; height: 180px; cursor: grab; touch-action: none; }
 .sv-scene svg:active { cursor: grabbing; }
+.sv-scene--canvas::before { display: none; }
+.sv-structure-canvas { position: relative; z-index: 1; display: block; width: 100%; height: 180px; background: color-mix(in srgb, var(--rr-panel-muted) 72%, transparent); color: var(--rr-muted); cursor: grab; touch-action: none; }
+.sv-structure-canvas:active { cursor: grabbing; }
 .sv-atom { cursor: pointer; opacity: .92; stroke: rgba(11,18,22,.35); stroke-width: .65px; vector-effect: non-scaling-stroke; }
 .sv-atom:hover, .sv-atom--selected { stroke: white; stroke-width: 1.5px; opacity: 1; }
 .sv-scene-state { position: absolute; z-index: 2; right: 7px; bottom: 7px; max-width: calc(100% - 14px); overflow: hidden; padding: 3px 6px; border-radius: 6px; background: rgba(5,9,11,.65); color: rgba(255,255,255,.74); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 7px; text-overflow: ellipsis; white-space: nowrap; }
@@ -142,6 +145,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-slide-map { position: relative; display: grid; min-height: 188px; place-items: center; overflow: hidden; border: 1px solid var(--rr-line); border-radius: 10px; background: #f1e7e9; }
 .sv-slide-map svg { width: calc(100% - 18px); height: 160px; cursor: grab; filter: saturate(.72); touch-action: none; }
 .sv-slide-map svg:active { cursor: grabbing; }
+.sv-slide-canvas { display: block; width: calc(100% - 18px); height: 160px; border-radius: 7px; cursor: crosshair; touch-action: none; }
 .sv-slide-controls { position: absolute; z-index: 2; top: 7px; left: 7px; display: flex; gap: 3px; }
 .sv-slide-controls button { min-height: 21px; padding: 2px 6px; border: 1px solid rgba(50,36,42,.24); border-radius: 6px; background: rgba(255,255,255,.84); color: #5e4150; cursor: pointer; font-size: 8px; font-weight: 700; }
 .sv-slide-controls button:hover { border-color: color-mix(in srgb, var(--sv-accent) 55%, transparent); color: var(--sv-accent); }
@@ -170,7 +174,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
   .sv-run-layout, .sv-structure-layout, .sv-slide-layout { grid-template-columns: 1fr; }
   .sv-spatial-layout { grid-template-columns: repeat(2, 1fr); }
   .sv-spatial-layout > section:last-child { grid-column: 1 / -1; }
-  .sv-scene, .sv-scene svg { min-height: 160px; height: 160px; }
+  .sv-scene, .sv-scene svg, .sv-structure-canvas { min-height: 160px; height: 160px; }
 }
 @media (prefers-reduced-motion: reduce) { .sv-loading > i { animation: none; } }
 :root[data-theme="dark"] .sv-root--slide, :root[style*="color-scheme: dark"] .sv-root--slide, [data-theme="dark"] .sv-root--slide { --sv-slide-tissue: #5c3f4c; --sv-slide-nucleus: #b7799f; }

@@ -45,6 +45,38 @@ describe("generated showcase catalogue", () => {
     }
   });
 
+  it("declares the real cross-service fixtures used by the three Rosalind launchers", async () => {
+    const catalogue = await buildCatalogue(repositoryRoot);
+    const structure = catalogue.find((item) => item.id === "rosalind-structure-analysis");
+    expect(structure).toMatchObject({
+      requiredMcpServers: ["rosalind", "structure"],
+      requiredOperations: ["rosalind.open", "structure.open_from_chat", "structure.get_state"],
+      requiredSkills: ["rosalind-structure-structure-viewer"],
+    });
+    expect(structure?.fixtures).toContain("structure-mdm2-p53:inputs/1YCR.pdb");
+    expect(structure?.expectedArtifacts).toContain("structure-mdm2-p53:outputs/results.json");
+    expect(structure?.artifacts.find((item) => item.id === "structure-mdm2-p53:inputs/1YCR.pdb")?.source).toContain("structure-mdm2-p53");
+
+    const genomics = catalogue.find((item) => item.id === "rosalind-genomics");
+    expect(genomics).toMatchObject({
+      requiredMcpServers: ["rosalind", "sequence"],
+      requiredOperations: ["rosalind.open", "sequence.open_from_chat", "sequence.run_analysis"],
+      requiredSkills: ["rosalind-sequence-biological-sequence-viewer"],
+    });
+    expect(genomics?.fixtures).toContain("sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta");
+    expect(genomics?.expectedArtifacts).toContain("sequence-ras-alignment:outputs/analysis.json");
+    expect(genomics?.artifacts.find((item) => item.id === "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta")?.source).toContain("sequence-ras-alignment");
+
+    const compute = catalogue.find((item) => item.id === "rosalind-scientific-compute");
+    expect(compute).toMatchObject({
+      requiredMcpServers: ["rosalind", "ngs"],
+      requiredOperations: ["rosalind.open", "list_workflows", "get_runtime_environment", "list_compute_targets"],
+      requiredSkills: ["rosalind-ngs-ngs-analysis-workbench"],
+    });
+    expect(compute?.fixtures).toContain("rosalind-scientific-compute:inputs/runtime-discovery-request.json");
+    expect(compute?.recipe.requiredInputs).toContain("showcases/rosalind-workbench/cases/rosalind-scientific-compute/inputs/runtime-discovery-request.json");
+  });
+
   it("retains exact artifact sizes, recorded hashes, and browser-safe previews", async () => {
     const catalogue = await buildCatalogue(repositoryRoot);
     const ras = catalogue.find((item) => item.id === "sequence-ras-alignment");
@@ -70,10 +102,10 @@ describe("scientific acceptance records", () => {
     expect(values.pdl1).toEqual({ candidates: 20, topFiveRows: 5, ensemblePredictions: 25, firstCandidate: "NB13_E104Q" });
   });
 
-  it("parses the complete 150-file release snapshot", async () => {
+  it("parses the complete 151-file release snapshot", async () => {
     const report = await validateShowcases(repositoryRoot);
     expect(report.errors).toEqual([]);
-    expect(report).toMatchObject({ ok: true, pluginCount: 7, showcaseCount: 23, fileCount: 150 });
-    expect(Object.values(report.parsedByType).reduce((sum, count) => sum + count, 0)).toBe(150);
+    expect(report).toMatchObject({ ok: true, pluginCount: 7, showcaseCount: 23, fileCount: 151 });
+    expect(Object.values(report.parsedByType).reduce((sum, count) => sum + count, 0)).toBe(151);
   });
 });

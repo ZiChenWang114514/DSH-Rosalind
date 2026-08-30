@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { ConversationSnapshot } from "@deepseek-ai/dsh-client-runtime/client";
 import type { EmptyWorkspaceOwnerProps, HeroBrandMarkOwnerProps } from "@deepseek-ai/dsh-client-ui-conversation/client";
 
 import { PREVIEW_DATA_URLS, SHOWCASE_BY_ID, SHOWCASES, SHOWCASE_FILE_COUNT, SHOWCASE_SOURCE_COMMIT } from "../generated/catalog.js";
@@ -6,19 +7,19 @@ import { SHOWCASE_CATEGORIES, categoryById } from "../shared/categories.js";
 import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
 import { ArrowIcon, CategoryIcon, CheckIcon, CloseIcon, FileIcon, PlayIcon, RosalindMark, SearchIcon } from "./icons.js";
 import { buildConversationPrompt } from "./prompt.js";
-import { ScienceEcosystemPanel } from "./ecosystem.js";
 import {
   closeShowcase,
   consumeConversationPrompt,
   getWorkbenchState,
   openShowcase,
   setDetailTab,
-  setShowcaseMode,
   setWorkbenchBridge,
   showNotice,
   stageConversationPrompt,
   useWorkbenchState,
 } from "./state.js";
+import { publishConversationNodes, useRosalindProjectSummary } from "./session-evidence.js";
+import type { RosalindProjectSummary } from "./session-evidence.js";
 
 type InputActions = { setDraft: (text: string) => void; submit?: () => void };
 
@@ -40,22 +41,45 @@ export interface WorkbenchProps {
   session?: boolean;
   hero?: boolean;
   inputActions?: InputActions;
+  projectSummary?: RosalindProjectSummary | null;
 }
 
-export function Workbench({ session = false, hero = false, inputActions }: WorkbenchProps): JSX.Element {
+function SessionProjectPanel({ summary }: { summary: RosalindProjectSummary | null | undefined }): JSX.Element {
+  if (!summary) {
+    return <section className="rr-session-project" aria-labelledby="rr-session-project-title"><span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span><h2 id="rr-session-project-title">Choose a project to begin</h2><p>Start from the new-session project search, then this view will keep the relevant research status and next action close to the conversation.</p></section>;
+  }
+  const facts = [
+    summary.mode ? `Mode: ${summary.mode}` : null,
+    summary.status ? `Status: ${summary.status}` : null,
+    summary.runId ? `Run: ${summary.runId}` : null,
+    summary.providerId ? `Provider: ${summary.providerId}` : null,
+    summary.artifactCount !== null ? `${summary.artifactCount} artifacts` : null,
+  ].filter((fact): fact is string => fact !== null);
+  const displayTitle = summary.title
+    ?? (summary.showcaseId ? SHOWCASE_BY_ID.get(summary.showcaseId)?.title : undefined)
+    ?? "Research project";
+  return <section className="rr-session-project" aria-labelledby="rr-session-project-title">
+    <span className="rr-kicker"><span className="rr-kicker-dot" /> Current project</span>
+    <div className="rr-session-project__body"><div><h2 id="rr-session-project-title">{displayTitle}</h2>{facts.length > 0 && <p className="rr-session-project__facts">{facts.join(" · ")}</p>}</div><p className="rr-session-project__next"><strong>Next step</strong>{summary.nextAction ?? "Continue the current research task in the conversation."}</p></div>
+  </section>;
+}
+
+export function Workbench({ session = false, hero = false, inputActions, projectSummary }: WorkbenchProps): JSX.Element {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [runnableOnly, setRunnableOnly] = useState(false);
-  const [workspaceView, setWorkspaceView] = useState<"projects" | "plugins">("projects");
-
   useEffect(() => {
     if (!inputActions) return undefined;
     const staged = consumeConversationPrompt();
-    if (staged) inputActions.setDraft(staged);
+    if (staged) {
+      inputActions.setDraft(staged.text);
+      if (staged.autoSubmit) inputActions.submit?.();
+    }
     return setWorkbenchBridge({
       importCase(showcase, mode) {
         inputActions.setDraft(buildConversationPrompt(showcase, mode));
-        showNotice("The teaching prompt is ready in the DSH composer.");
+        inputActions.submit?.();
+        showNotice("The scientific request was added to the conversation.");
       },
     });
   }, [inputActions]);
@@ -68,22 +92,21 @@ export function Workbench({ session = false, hero = false, inputActions }: Workb
       .filter((showcase) => !normalized || showcase.searchText.includes(normalized));
   }, [categoryId, query, runnableOnly]);
 
+  if (session) {
+    return <section className="rr-root rr-root--session" aria-label="DSH-Rosalind current project"><SessionProjectPanel summary={projectSummary} /></section>;
+  }
+
   return (
     <section className={`rr-root${session ? " rr-root--session" : ""}${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind scientific workbench">
-      <header className="rr-hero-head">
+      {hero ? <header className="rr-launch">
+        <span className="rr-launch-mark"><RosalindMark size={28} /></span>
+        <div><span className="rr-kicker"><span className="rr-kicker-dot" /> Research preview</span><h1>Start a scientific task</h1><p>Choose a checked project to learn from retained evidence, inspect results, or prepare the next run.</p></div>
+        <span className="rr-launch-count">23 projects</span>
+      </header> : <header className="rr-hero-head">
         <span className="rr-kicker"><span className="rr-kicker-dot" /> Research preview · 23 projects</span>
         <h1 className="rr-title">Rosalind scientific workbench</h1>
         <p className="rr-subtitle">Learn from versioned evidence, replay checked results, or prepare a fresh run across literature, databases, sequences, NGS, structures, pathology, spatial biology, and molecular design.</p>
-      </header>
-      <nav className="rr-workbench-nav" aria-label="Workbench view">
-        <button type="button" aria-pressed={workspaceView === "projects"} onClick={() => setWorkspaceView("projects")}>23 projects</button>
-        <button type="button" aria-pressed={workspaceView === "plugins"} onClick={() => setWorkspaceView("plugins")}>Seven plugins</button>
-      </nav>
-      {workspaceView === "plugins" ? <ScienceEcosystemPanel onExample={(example) => {
-        if (inputActions) inputActions.setDraft(example.prompt);
-        else stageConversationPrompt(example.prompt);
-        showNotice("The scientific task is ready for a DSH conversation.");
-      }} /> : <>
+      </header>}
       <div className="rr-toolbar">
         <label className="rr-search">
           <SearchIcon size={17} />
@@ -96,7 +119,7 @@ export function Workbench({ session = false, hero = false, inputActions }: Workb
         </select>
         <label className="rr-count">
           <input type="checkbox" checked={runnableOnly} onChange={(event) => setRunnableOnly(event.target.checked)} />
-          <span>Reproduce path</span><strong>{filtered.length}</strong>
+          <span>Run recipe available</span><strong>{filtered.length}</strong>
         </label>
       </div>
       <div className="rr-grid">
@@ -120,7 +143,6 @@ export function Workbench({ session = false, hero = false, inputActions }: Workb
         <span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span>
         <span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span>
       </footer>
-      </>}
     </section>
   );
 }
@@ -172,10 +194,10 @@ function Reproduce({ showcase }: { showcase: ShowcaseDefinition }): JSX.Element 
   );
 }
 
-const MODE_COPY: Record<ShowcaseMode, { label: string; description: string }> = {
-  lesson: { label: "Lesson", description: "Teach from checked evidence" },
-  replay: { label: "Replay", description: "Open retained results" },
-  reproduce: { label: "Reproduce", description: "Prepare a fresh run" },
+const MODE_COPY: Record<ShowcaseMode, { action: string }> = {
+  lesson: { action: "Start lesson" },
+  replay: { action: "Inspect evidence" },
+  reproduce: { action: "Prepare run" },
 };
 
 export function ShowcaseDetailOverlay(): JSX.Element | null {
@@ -213,9 +235,8 @@ export function ShowcaseDetailOverlay(): JSX.Element | null {
         </div>
         <main className="rr-detail-body">{detailTab === "overview" ? <Overview showcase={showcase} /> : detailTab === "evidence" ? <Evidence showcase={showcase} /> : <Reproduce showcase={showcase} />}</main>
         <footer className="rr-detail-foot">
-          <div className="rr-mode-picker" aria-label="How to use this project">{showcase.modes.map((candidate) => <button key={candidate} type="button" className="rr-mode" aria-pressed={mode === candidate} onClick={() => setShowcaseMode(candidate)}><strong>{MODE_COPY[candidate].label}</strong><span>{MODE_COPY[candidate].description}</span></button>)}</div>
           {notice && <span className="rr-notice" role="status">{notice}</span>}
-          <div className="rr-actions"><button type="button" className="rr-button" onClick={() => setDetailTab("evidence")}><FileIcon size={15} />Files</button><button type="button" className="rr-button rr-button--primary" onClick={importCase}><PlayIcon size={15} />Add to conversation</button></div>
+          <div className="rr-actions"><button type="button" className="rr-button rr-button--primary" onClick={importCase}><PlayIcon size={15} />{MODE_COPY[mode].action}</button></div>
         </footer>
       </div>
     </div>
@@ -230,7 +251,7 @@ export function HeroWorkspacePicker(props: EmptyWorkspaceOwnerProps): JSX.Elemen
   useEffect(() => setWorkbenchBridge({
     startSession(showcase, mode) {
       const prompt = buildConversationPrompt(showcase, mode);
-      stageConversationPrompt(prompt);
+      stageConversationPrompt(prompt, { autoSubmit: true });
       if (props.selectedId) props.onPick(props.selectedId);
       else showNotice("Choose a DSH workspace first; the selected project will remain open.");
     },
@@ -238,8 +259,17 @@ export function HeroWorkspacePicker(props: EmptyWorkspaceOwnerProps): JSX.Elemen
   return <Workbench hero />;
 }
 
-export function ConversationWorkbenchView(props: { inputActions: InputActions }): JSX.Element {
-  return <Workbench session inputActions={props.inputActions} />;
+type ConversationNodes = ConversationSnapshot["nodes"];
+
+const EMPTY_NODES: ConversationNodes = [];
+
+export function ConversationWorkbenchView(props: { inputActions: InputActions; useSession?: (selector: (snapshot: ConversationSnapshot) => ConversationNodes) => ConversationNodes }): JSX.Element {
+  const nodes = props.useSession ? props.useSession((snapshot) => snapshot.nodes) : EMPTY_NODES;
+  const projectSummary = useRosalindProjectSummary();
+  useEffect(() => {
+    publishConversationNodes(nodes);
+  }, [nodes]);
+  return <Workbench session inputActions={props.inputActions} projectSummary={projectSummary} />;
 }
 
 export function checkReadyIcon(): JSX.Element {

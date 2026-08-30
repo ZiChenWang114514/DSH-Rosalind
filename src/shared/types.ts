@@ -118,6 +118,55 @@ export interface ExecutionPlan {
   confirmationReasons: string[];
 }
 
+/**
+ * User-selected scientific inputs for an NGS showcase. These paths are kept
+ * with the DSH run so that planning, approval, execution, and later status
+ * all describe the same proposed workflow invocation.
+ */
+export interface NgsReproductionInputs {
+  runDirectory: string;
+  configFile: string;
+  inputPaths: readonly string[];
+}
+
+export type ReproductionConfigValue =
+  | null
+  | boolean
+  | number
+  | string
+  | ReproductionConfigValue[]
+  | { [key: string]: ReproductionConfigValue };
+
+/**
+ * User-authorized files and settings for a non-NGS scientific reproduction.
+ * The immutable copy retained on the run is also the filesystem allow-list
+ * used by the selected local science service.
+ */
+export interface ShowcaseReproductionInputs {
+  runDirectory: string;
+  sourcePaths: readonly string[];
+  config?: Readonly<Record<string, ReproductionConfigValue>>;
+}
+
+export interface ShowcaseRunProgress {
+  inputs: ShowcaseReproductionInputs;
+}
+
+/** The three immutable identifiers returned by the NGS planner. */
+export interface NgsPlanIdentity {
+  planId: string;
+  planName: string;
+  planChecksum: string;
+}
+
+/** NGS-specific state exposed with a Rosalind run snapshot. */
+export interface NgsRunProgress {
+  inputs: NgsReproductionInputs;
+  pendingPlan?: NgsPlanIdentity;
+  approvedPlan?: NgsPlanIdentity;
+  registryRunId?: string;
+}
+
 export interface RunEvent {
   at: string;
   state: RunState;
@@ -138,6 +187,8 @@ export interface RunSnapshot {
   artifacts: ArtifactRef[];
   events: RunEvent[];
   error?: { code: string; message: string };
+  ngs?: NgsRunProgress;
+  reproduction?: ShowcaseRunProgress;
 }
 
 export interface ReviewReport {

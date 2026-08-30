@@ -20,9 +20,10 @@ function registryName(sessionId: string): string {
 describe("NgsService durable registry", () => {
   it("consumes an execution plan once and restores the same receipt in a new service instance", async () => {
     const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-registry-"));
+    const registryRoot = join(root, "profile-state", "ngs-registry");
     const sessionId = "persistent-session";
     const firstSession = {};
-    const first = new NgsService();
+    const first = new NgsService({ registryRoot });
     const planned = await first.execute("plan_snakemake", {
       workflow_id: "oai_fastq_qc",
       run_dir: root,
@@ -50,12 +51,12 @@ describe("NgsService durable registry", () => {
       consumed: true,
     });
 
-    const registryPath = join(root, "artifacts", "ngs-registry", registryName(sessionId));
+    const registryPath = join(registryRoot, registryName(sessionId));
     expect(existsSync(registryPath)).toBe(true);
     expect(JSON.parse(readFileSync(registryPath, "utf8"))).toMatchObject({ schema: "dsh-rosalind-ngs-registry-v1" });
     await first.dispose();
 
-    const second = new NgsService();
+    const second = new NgsService({ registryRoot });
     const restored = await second.execute("get_ngs_run", {
       registry_run_id: started.registry_run_id,
     }, context({}, root, sessionId));
@@ -70,7 +71,7 @@ describe("NgsService durable registry", () => {
   it("marks a saved active controller as orphaned instead of claiming it is still running", async () => {
     const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-orphan-"));
     const sessionId = "orphan-session";
-    const registryDirectory = join(root, "artifacts", "ngs-registry");
+    const registryDirectory = join(root, "profile-state", "ngs-registry");
     const registryPath = join(registryDirectory, registryName(sessionId));
     mkdirSync(registryDirectory, { recursive: true });
     writeFileSync(registryPath, `${JSON.stringify({
@@ -90,7 +91,7 @@ describe("NgsService durable registry", () => {
       }],
     }, null, 2)}\n`, "utf8");
 
-    const service = new NgsService();
+    const service = new NgsService({ registryRoot: registryDirectory });
     const restored = await service.execute("get_ngs_run", {
       registry_run_id: "run-orphaned",
     }, context({}, root, sessionId));
@@ -104,10 +105,11 @@ describe("NgsService durable registry", () => {
 
   it("keeps colliding normalized session IDs in separate digest-named registry files", async () => {
     const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-collision-"));
-    const service = new NgsService();
+    const registryDirectory = join(root, "profile-state", "ngs-registry");
+    const service = new NgsService({ registryRoot: registryDirectory });
     await service.execute("list_workflows", {}, context({}, root, "sample/a"));
     await service.execute("list_workflows", {}, context({}, root, "sample?a"));
-    const files = readdirSync(join(root, "artifacts", "ngs-registry")).filter((name) => name.endsWith(".json"));
+    const files = readdirSync(registryDirectory).filter((name) => name.endsWith(".json"));
     expect(files).toContain(registryName("sample/a"));
     expect(files).toContain(registryName("sample?a"));
     expect(new Set(files).size).toBe(2);
@@ -119,11 +121,11 @@ describe("NgsService durable registry", () => {
     ["unknown schema", "schema-session", '{"schema":"future-registry-v9","sentinel":true}\n', "REGISTRY_UNKNOWN_SCHEMA"],
   ])("preserves original bytes and reports restoration diagnostics for %s", async (_label, sessionId, original, code) => {
     const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-preserve-"));
-    const registryDirectory = join(root, "artifacts", "ngs-registry");
+    const registryDirectory = join(root, "profile-state", "ngs-registry");
     const registryPath = join(registryDirectory, registryName(sessionId));
     mkdirSync(registryDirectory, { recursive: true });
     writeFileSync(registryPath, original, "utf8");
-    const service = new NgsService();
+    const service = new NgsService({ registryRoot: registryDirectory });
     const result = await service.execute("list_workflows", {}, context({}, root, sessionId));
     expect(result.registry_restoration).toMatchObject({ code, original_preserved: true, path: registryPath });
     expect(readFileSync(registryPath, "utf8")).toBe(original);

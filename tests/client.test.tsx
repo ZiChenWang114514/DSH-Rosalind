@@ -1,14 +1,16 @@
 // @vitest-environment jsdom
 
 import "@testing-library/jest-dom/vitest";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ShowcaseDetailOverlay, Workbench } from "../src/client/components.js";
-import { closeShowcase } from "../src/client/state.js";
+import { ConversationWorkbenchView, ShowcaseDetailOverlay, Workbench } from "../src/client/components.js";
+import { publishConversationNodes } from "../src/client/session-evidence.js";
+import { closeShowcase, consumeConversationPrompt, stageConversationPrompt } from "../src/client/state.js";
 
 afterEach(() => {
   closeShowcase();
+  publishConversationNodes([]);
   cleanup();
 });
 
@@ -18,12 +20,15 @@ describe("Workbench catalogue", () => {
     expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(23);
     const category = screen.getByRole("combobox", { name: "Filter by scientific area" });
     expect(within(category).getAllByRole("option")).toHaveLength(8);
-    expect(screen.getByText("150 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
+    expect(screen.getByText("151 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
   });
 
-  it("uses a height-limited catalogue inside the blank-session hero", () => {
-    const { container } = render(<Workbench hero />);
-    expect(container.querySelector(".rr-root--hero")).toBeInTheDocument();
+  it("shows a compact project search and task launch area in a blank session", () => {
+    render(<Workbench hero />);
+    expect(screen.getByRole("heading", { name: "Start a scientific task" })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(23);
+    expect(screen.getByPlaceholderText("Search a scientific question or method")).toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "Workbench view" })).not.toBeInTheDocument();
   });
 
   it("searches scientific content and filters by category", () => {
@@ -36,17 +41,64 @@ describe("Workbench catalogue", () => {
     expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(3);
   });
 
-  it("opens details, changes use mode, and prepares a conversation prompt", () => {
+  it("starts the selected project with a natural request and submits it", () => {
     const setDraft = vi.fn();
-    render(<><Workbench inputActions={{ setDraft }} /><ShowcaseDetailOverlay /></>);
+    const submit = vi.fn();
+    render(<><Workbench inputActions={{ setDraft, submit }} /><ShowcaseDetailOverlay /></>);
     fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
     const dialog = screen.getByRole("dialog", { name: "Human RAS protein alignment" });
     expect(within(dialog).getByText("Scientific question")).toBeInTheDocument();
-    fireEvent.click(within(dialog).getByRole("button", { name: /Reproduce/ }));
-    fireEvent.click(within(dialog).getByRole("button", { name: /Add to conversation/ }));
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Reproduce" }));
+    fireEvent.click(within(dialog).getByRole("button", { name: "Prepare run" }));
     expect(setDraft).toHaveBeenCalledTimes(1);
-    expect(setDraft.mock.calls[0]?.[0]).toContain("reproduce");
-    expect(setDraft.mock.calls[0]?.[0]).toContain("sequence-ras-alignment");
+    expect(submit).toHaveBeenCalledTimes(1);
+    expect(setDraft.mock.calls[0]?.[0]).toContain("Human RAS protein alignment");
+    expect(setDraft.mock.calls[0]?.[0]).not.toContain("rosalind_showcase_import");
+    expect(setDraft.mock.calls[0]?.[0]).not.toContain("adapter");
+  });
+
+  it("remembers the last selected mode for each project", () => {
+    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    const dialog = screen.getByRole("dialog", { name: "Human RAS protein alignment" });
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Reproduce" }));
+    fireEvent.click(within(dialog).getByRole("button", { name: "Close project details" }));
+    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    expect(within(screen.getByRole("dialog")).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("preserves a staged blank-session request for direct submission", () => {
+    stageConversationPrompt("Help me inspect this project.", { autoSubmit: true });
+    expect(consumeConversationPrompt()).toEqual({ text: "Help me inspect this project.", autoSubmit: true });
+  });
+
+  it("keeps the conversation view focused on the current project and next step", async () => {
+    const node = {
+      kind: "tool-result",
+      callId: "rosalind-project-1",
+      call: { name: "rosalind_showcase_import", argsRaw: '{"showcase_id":"sequence-ras-alignment","mode":"replay"}' },
+      content: [{ type: "text", text: JSON.stringify({ showcase_id: "sequence-ras-alignment", title: "Human RAS protein alignment", mode: "replay", next_action: "Inspect the retained alignment evidence." }) }],
+      isError: false,
+    };
+    render(<ConversationWorkbenchView inputActions={{ setDraft: vi.fn() }} useSession={(() => [node]) as never} />);
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Human RAS protein alignment" })).toBeInTheDocument());
+    expect(screen.getByText("Next step")).toBeInTheDocument();
+    expect(screen.getByText("Inspect the retained alignment evidence.")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /^Open / })).not.toBeInTheDocument();
+  });
+
+  it("maps recorded project identity to a public title without exposing internal identifiers", async () => {
+    const node = {
+      kind: "tool-result",
+      callId: "plan-only-1",
+      call: { name: "rosalind_status", argsRaw: '{"run_id":"run-private"}' },
+      content: [{ type: "text", text: JSON.stringify({ id: "run-private", showcaseId: "sequence-ras-alignment", state: "running" }) }],
+      isError: false,
+    };
+    render(<ConversationWorkbenchView inputActions={{ setDraft: vi.fn() }} useSession={(() => [node]) as never} />);
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Human RAS protein alignment" })).toBeInTheDocument());
+    expect(document.body).not.toHaveTextContent("sequence-ras-alignment");
+    expect(document.body).not.toHaveTextContent("rosalind_status");
   });
 
   it("closes project details with Escape", () => {

@@ -17,17 +17,17 @@ changes.
 ## Executed fixture set
 
 ```text
-npx vitest run tests/runtime.test.ts tests/science-literature-databases.test.ts tests/database-provider-matrix.test.ts tests/sequence-ngs-operation-matrix.test.ts tests/structure-operation-matrix.test.ts tests/science-slide-parity.test.ts tests/skills-source.test.ts tests/skills-workflow-matrix.test.ts tests/science-integration.test.ts tests/rosalind-operation.test.ts tests/dsh-host-registration.test.ts --reporter=dot
+npm run verify:capability-fixtures
 ```
 
 Observed result:
 
 ```text
-Test Files  11 passed (11)
-Tests       203 passed (203)
+Test Files  24 passed (24)
+Tests       303 passed (303)
 ```
 
-This run exercised service implementations, loaded all 55 bundled Skills, dispatched the 117-operation registry, and executed the Sequence, NGS, Structure, and Slide matrices. The host-registration test mounted Cordis and the local DSH ToolRuntime/SkillRegistry services, listed every registered Skill, read each definition back, and asserted its model/user invocation metadata. This is the recorded Skill registration evidence. Its shared null-argument dispatch demonstrates registration and reachability only; it is not live-operation evidence. `tests/capabilities.test.ts` remains a source-level manifest check and is deliberately excluded from this execution record.
+This run exercised service implementations, loaded all 55 bundled Skills, dispatched the 121-operation registry, and executed the Sequence, NGS, Structure, and Slide matrices. The host-registration test mounted Cordis and the local DSH ToolRuntime/SkillRegistry services, listed every registered Skill, read each definition back, and asserted its model/user invocation metadata. This is the recorded Skill registration evidence. Its shared null-argument dispatch demonstrates registration and reachability only; it is not live-operation evidence. `tests/capabilities.test.ts` remains a source-level manifest check and is deliberately excluded from this execution record.
 
 ## Evidence interpretation
 
@@ -35,19 +35,19 @@ A source directory, implementation filename, test filename, or showcase referenc
 
 Operation `verified` status in the capability manifest requires a locatable source implementation plus an executed operation-specific fixture containing meaningful input and an asserted successful local scientific result. Exact unavailable diagnostics and combined mixed fixtures remain `implemented`. Each operation records `fixtureOutcome` as `successful-local-result`, `mixed-success-and-diagnostic`, or `exact-diagnostic`; live DSH-profile and public-service evidence remain separate. A source locator, registry count, shared null-argument dispatch, operation name, or exact failure diagnostic supports implemented status only.
 
-No run in this record used a real DSH profile or a real public-service request. Consequently, all live evidence fields remain `missing`. Shared pre-dispatch cancellation is retained only as host-level behavior; operation cancellation evidence is recorded only for a directly asserted cancellation operation.
+The record includes an isolated temporary DSH profile created from a current-worktree source-smoke archive. It confirms installation, registration, Skill readback, and representative local execution; it is not a validated release archive. No public-service request was sent. Shared pre-dispatch cancellation is retained only as host-level behavior; operation cancellation evidence is recorded only for a directly asserted cancellation operation.
 
 Current generated status:
 
 ```text
-Services    0 verified, 7 implemented, 0 missing
-Skills      0 verified, 55 implemented, 0 missing
-Operations 65 verified, 52 implemented, 0 missing
+Services    7 verified, 0 implemented, 0 missing
+Skills      55 verified, 0 implemented, 0 missing
+Operations 118 verified, 3 implemented, 0 missing
 ```
 
-For the 117 operation fixtures, the manifest records 65 successful local-result contracts, 22 mixed success/diagnostic contracts, and 30 exact diagnostic contracts. These figures describe the fixtures, not public-service availability.
+For the 121 operation fixtures, the manifest records 120 successful local-result contracts and one exact diagnostic contract. These figures describe the fixtures, not public-service availability.
 
-The 65 verified operation fixtures assert successful local scientific results. The remaining 52 operations retain implementation and diagnostic evidence while awaiting operation-specific successful output or live DSH execution. The retained fixtures include concrete NGS plan/readiness records, precise diagnostics for unavailable Slide and Structure actions, and the molecular-design result for `rosalind.open`.
+The 118 verified operations assert successful local scientific results with operation-specific evidence. Three NGS operations retain `implemented` status because their current successful fixture is shared and does not yet identify each operation separately. The exact diagnostic fixture remains implemented. This status is kept distinct from public-provider readiness.
 
 All 55 Skills have a project-authored `SKILL.md`, DSH SkillRegistry registration/readback, invocation metadata, a registered main tool or one of three explicit instruction-only execution modes, provider/server mapping where applicable, and a link to an executed meaningful provider or operation fixture. This does not claim that a running model autonomously selected the Skill.
 

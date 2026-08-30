@@ -1,26 +1,33 @@
 ---
 name: pride-skill
-description: Use PRIDE through DSH-Rosalind's typed public-service request tool.
+description: Use PRIDE through the fixed DSH-Rosalind service contract.
 ---
 
 # PRIDE
 
-Use `database_request` with `provider: "pride"`. Select the source requested by the user. Do not silently replace a requested service with another provider, mirror, archive, or identifier resolver.
+## When to use
+
+Use this Skill for PRIDE Archive project discovery or a project accession. Its fixed reference is `life-sciences-databases-0.1.5/skills/pride-skill/SKILL.md`; the DSH mapping below preserves that source workflow while routing execution through the registered DSH service.
 
 ## Fixed provider contract
 
-The registered provider is `pride` (PRIDE Archive) at `https://www.ebi.ac.uk/pride/ws/archive/v2`. Its default relative route is `projects`; named `operation` values are `project`. Pagination mode is `page-size`. Use only a named operation or a relative path documented by that official service. The runtime rejects undeclared origins and non-HTTPS absolute paths.
+The registered provider is `pride` (PRIDE Archive) at `https://www.ebi.ac.uk/pride/ws/archive/v2`. Its default relative route is `projects`; named `operation` values are `project`; pagination mode is `page-size`. Use only a named operation or an official relative path accepted by that provider.
 
-Use `id`, `identifier`, `accession`, `variant`, `target`, `gene`, `disease`, `dataset`, `term`, or typed `params` only when the selected operation accepts them. GraphQL and POST providers use `query`, `variables`, `body`, or `json_body`; do not invent fields that the source does not define.
+## Tool call sequence
 
-## Request and pagination
+1. Confirm that the requested scientific source matches `pride` and identify the smallest relevant question.
+2. Call `database_request` with `provider: "pride"`, `allowNetwork: true`, and projects with a small search query, or project with PXD accession. Use the explicit action requested by the source contract.
+3. Keep one bounded page at a time. Use the returned pagination cursor or page only when the user asks for more.
+4. Read the returned `status`, `records`, `sources`, `request`, and `pagination` before presenting a scientific conclusion.
 
-Use the typed fields accepted by the selected provider. Start with a narrow query and one modest page; retain the returned cursor, page token, offset, or HATEOAS link when more records are requested. Do not enlarge a request merely because the first response is incomplete. Request raw or machine-readable output only when the user asks for it, and report a saved artifact path instead of pasting a large payload.
+## Success and interpretation
 
-## Evidence and reporting
+On `status: "completed"`, report project metadata and study records. Cite only returned `sources`; distinguish source observations from analysis. For raw or machine-readable output, request it explicitly and provide the generated artifact path rather than pasting an unbounded payload.
 
-Keep the provider, request parameters, identifiers, response time, official source URL, and returned record identifiers with the result. Link substantive claims only to returned source records. Separate returned observations from interpretation, describe empty or failed responses plainly, and refresh stale network results before relying on them in a long conversation.
+## Failure, authorization, and cancellation
 
-## Authorization and cancellation
+Live public requests need the host approval produced by `allowNetwork: true`. If approval is denied or the service returns `NETWORK_NOT_AUTHORIZED`, say that the selected source was not contacted; do not query a mirror or another provider. Preserve source-specific validation, HTTP, rate-limit, and empty-result diagnostics. The call receives the conversation cancellation signal; after cancellation, do not reissue it unless the user asks again.
 
-This Skill uses only the registered public-service provider. Respect any host prompt or user restriction on external access, and do not use a different service when the requested one is unavailable. A request inherits conversation cancellation; after cancellation, do not reissue it unless the user asks again.
+## Provenance and viewer handoff
+
+Keep provider, operation, identifiers, typed parameters, request URL or method, checked time, returned record IDs, pagination state, and source URLs with the result. This Skill has no embedded viewer: if a returned accession is later opened in a Sequence, Structure, or Slide session, record that viewer session separately instead of treating a search result as viewer evidence.

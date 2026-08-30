@@ -5,7 +5,11 @@
   "status": "ready",
   "run_date": "2026-08-29",
   "prompt": "prompt.md",
-  "inputs": [],
+  "inputs": [
+    {
+      "path": "inputs/runtime-discovery-request.json"
+    }
+  ],
   "outputs": [
     {
       "path": "outputs/launcher-observation.json"
@@ -17,18 +21,29 @@
     }
   ],
   "sources": [],
+  "dependencies": {
+    "required_mcp_servers": ["rosalind", "ngs"],
+    "required_operations": ["rosalind.open", "list_workflows", "get_runtime_environment", "list_compute_targets"],
+    "required_skills": ["rosalind-ngs-ngs-analysis-workbench"],
+    "provenance": {
+      "reused_cases": [],
+      "input_note": "This launcher route queries local NGS workflow and compute capability metadata. It does not accept a biological data file."
+    }
+  },
   "observations": [
-    "The Rosalind launcher was ready and exposed the named scientific area."
+    "The Rosalind launcher was ready and exposed the named scientific area.",
+    "The retained request records the exact local workflow, runtime, and compute-target discovery calls."
   ],
   "interpretation": [
-    "The area is available for interactive task discovery in the current Workbench."
+    "The scientific-compute route discovers local NGS workflow and compute capability metadata after opening the Workbench area."
   ],
   "limitations": [
-    "The tool response did not expose individual task choices.",
-    "No workspace was opened and no scientific analysis was executed."
+    "The retained launcher observation did not expose individual task choices.",
+    "The route discovers host capability only; it does not submit a workflow or claim a biological result."
   ],
   "environment": {
     "launcher_ready": true,
-    "scientific_job_executed": false
+    "scientific_job_executed": false,
+    "reproduction_fixture": "inputs/runtime-discovery-request.json"
   }
 }

@@ -34,7 +34,7 @@ describe("Rosalind operation contract", () => {
       providerId: "local-replay",
       availableServices: ["literature", "databases", "sequence", "ngs", "structure", "slide", "rosalind"],
       skillCount: 55,
-      operationCount: 117,
+      operationCount: 121,
       retainedDesign: {
         candidateCount: 20,
         topFiveCount: 5,

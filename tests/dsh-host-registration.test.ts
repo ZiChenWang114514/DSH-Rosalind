@@ -30,6 +30,8 @@ const APPROVAL_PROTECTED_TOOL_NAMES = new Set([
   "ngs_execute_plan",
   "rosalind_approve",
   "sequence_export_artifact",
+  "structure_render_image",
+  "structure_render_movie",
   "structure_export",
   "slide_export_dicom_object",
   "slide_prepare_dicom_upload",
@@ -79,15 +81,15 @@ afterEach(async () => {
 });
 
 describe("DSH bundle registration through Cordis services", () => {
-  it("registers 117 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills", async () => {
+  it("registers 121 fixed operations, six Skill adapters, 13 Rosalind tools, and 55 Skills", async () => {
     const fixture = await mountHarness();
     const registry = new CapabilityRegistry();
     const schemas = fixture.ctx.tools.schemas();
     const registeredNames = new Set(schemas.map((schema) => schema.name));
     const operationNames = registry.operations.map((operation) => operation.registeredName);
 
-    expect(schemas).toHaveLength(136);
-    expect(new Set(operationNames).size).toBe(117);
+    expect(schemas).toHaveLength(140);
+    expect(new Set(operationNames).size).toBe(121);
     expect(operationNames.every((name) => registeredNames.has(name))).toBe(true);
     expect(GATEWAY_NAMES.every((name) => registeredNames.has(name))).toBe(true);
     expect(ROSALIND_TOOL_NAMES.every((name) => registeredNames.has(name))).toBe(true);
@@ -110,7 +112,7 @@ describe("DSH bundle registration through Cordis services", () => {
     for (const fiber of fixture.serviceFibers) await fiber.dispose();
   });
 
-  it("checks every registered schema and presentation contract, then dispatches all 136 names through ToolRuntime", async () => {
+  it("checks every registered schema and presentation contract, then dispatches all 140 names through ToolRuntime", async () => {
     const { ctx } = await mountHarness();
     const schemas = ctx.tools.schemas();
 
@@ -150,7 +152,13 @@ describe("DSH bundle registration through Cordis services", () => {
       expect(catalogue).toMatchObject({ isError: false, value: { total: 23 } });
 
       const workbench = await execute(ctx, "rosalind_open", {});
-      expect(workbench).toMatchObject({ isError: false, value: { status: "completed", operationCount: 117, skillCount: 55 } });
+      expect(workbench).toMatchObject({ isError: false, value: { status: "completed", operationCount: 121, skillCount: 55 } });
+
+      const sequenceOpen = await execute(ctx, "sequence_open_from_chat", {
+        path: "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
+      });
+      expect(sequenceOpen).toMatchObject({ isError: false, value: { status: "completed", viewer: "alignment" } });
+      if (!sequenceOpen.isError) expect(sequenceOpen.value).toMatchObject({ state: { viewer: "alignment", records: expect.any(Array) } });
 
       const workflows = await execute(ctx, "ngs_list_workflows", {});
       expect(workflows.isError).toBe(false);

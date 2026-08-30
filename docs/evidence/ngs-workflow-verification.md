@@ -2,7 +2,7 @@
 
 Date: 2026-08-30
 
-The v0.2.0 candidate includes three project-authored Snakemake workflows whose directory names and runtime identities match the retained showcase evidence:
+The v0.3.0 candidate includes three project-authored Snakemake workflows whose directory names and runtime identities match the retained showcase evidence:
 
 - `oai_fastq_qc`
 - `oai_bulk_rnaseq_counts_qc`

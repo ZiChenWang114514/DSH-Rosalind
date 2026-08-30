@@ -15,7 +15,11 @@ const readJson = async (file) => JSON.parse(await readFile(file, "utf8"));
 const requiredRepositoryPaths = [
   "package.json",
   "scripts/generate-capability-manifest.mjs",
+  "scripts/lib/capability-evidence.mjs",
   "scripts/record-capability-verification.mjs",
+  "scripts/validate-capabilities.mjs",
+  "scripts/verify-dsh-registration.mjs",
+  "vitest.dsh-profile-evidence.config.ts",
   "capabilities/sources",
   "capabilities/contracts",
   "showcases",
@@ -58,7 +62,7 @@ try {
   assert.deepStrictEqual(withoutGeneratedAt(generatedManifest), withoutGeneratedAt(committedManifest));
   assert.equal(generatedManifest.target.serviceCount, 7);
   assert.equal(generatedManifest.target.skillCount, 55);
-  assert.equal(generatedManifest.target.requiredOperationCount, 117);
+  assert.equal(generatedManifest.target.requiredOperationCount, 121);
 
   const committedContractDirectory = path.join(committedDirectory, "contracts");
   const generatedContractDirectory = path.join(outputDirectory, "contracts");
@@ -107,7 +111,7 @@ try {
   assert.equal(staleSourceManifest.verificationRuns[0].contentIdentityMatch, false);
   assert.equal(staleSourceManifest.target.verifiedOperationCount, 0);
 
-  console.log(`Capability generation reproduced 7 services, 55 Skills, 117 operations, and ${contractFiles.length} contracts; fixed-input and source mutations invalidated executed evidence.`);
+  console.log(`Capability generation reproduced 7 services, 55 Skills, 121 operations, and ${contractFiles.length} contracts; fixed-input and source mutations invalidated executed evidence.`);
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });
 }

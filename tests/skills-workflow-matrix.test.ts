@@ -121,14 +121,14 @@ const SKILL_WORKFLOW_MATRIX: readonly SkillEvidence[] = [
     serviceId: "ngs",
     sourceName: "design-ngs-analysis",
     executionMode: "reasoning-only",
-    semanticEvidence: /read-only and does not register or execute a workflow/,
+    semanticEvidence: /read-only: it does not call a run, registration, install, or download tool/,
   },
   {
     id: "rosalind-ngs-ngs-analysis-workbench",
     serviceId: "ngs",
     sourceName: "ngs-analysis-workbench",
     executionMode: "routing",
-    semanticEvidence: /Route a concrete goal directly to its focused skill/,
+    semanticEvidence: /Route data identity and usability questions to Understand NGS Data/,
   },
   {
     id: "rosalind-ngs-run-ngs-analysis",
@@ -143,7 +143,7 @@ const SKILL_WORKFLOW_MATRIX: readonly SkillEvidence[] = [
     serviceId: "ngs",
     sourceName: "understand-ngs-data",
     executionMode: "inspection-guided",
-    semanticEvidence: /without choosing a workflow, installing software,\s+transforming inputs, or creating an execution plan/,
+    semanticEvidence: /Do not choose a workflow, transform inputs, install software, or create a plan/,
   },
   {
     id: "rosalind-ngs-understand-ngs-results",
@@ -206,6 +206,29 @@ afterAll(async () => {
 });
 
 describe("55-Skill executable workflow evidence", () => {
+  it("uses concrete runtime-accepted defaults for all literature Skills", () => {
+    const expected = new Map([
+      ["biorxiv-skill", "details"],
+      ["ncbi-entrez-skill", "search"],
+      ["ncbi-pmc-skill", "search"],
+    ]);
+    for (const [name, action] of expected) {
+      const content = readFileSync(resolve(repositoryRoot, `skills/literature/${name}/SKILL.md`), "utf8");
+      expect(content, name).toContain(`Start with \`${action}\``);
+      expect(content, name).not.toMatch(/matching literature action|selected server's details/);
+    }
+  });
+  it("documents only route names that actually match each provider default path", () => {
+    const content = (sourceName: string) => localRegistrations.get(`rosalind-databases-${sourceName}`)?.content ?? "";
+
+    expect(content("chebi")).toContain("Start with `search`");
+    expect(content("chembl")).toContain("Start with `search`");
+    expect(content("cbioportal")).toContain("Use the explicit action requested by the source contract.");
+    expect(content("clinicaltrials")).toContain("Use the explicit action requested by the source contract.");
+    expect(content("cbioportal")).not.toContain("Start with `mutations`");
+    expect(content("clinicaltrials")).not.toContain("Start with `metadata`");
+  });
+
   it("declares exactly the same 55 IDs as the production Skill specifications", () => {
     expect(SKILL_WORKFLOW_MATRIX).toHaveLength(55);
     expect(new Set(SKILL_WORKFLOW_MATRIX.map((item) => item.id)).size).toBe(55);

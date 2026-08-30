@@ -13,12 +13,12 @@ function violations(schema: JsonSchemaNode, value: unknown): string[] {
 }
 
 describe("science tool output schemas", () => {
-  it("declares a strict normalized result contract for all 117 fixed operations", () => {
+  it("declares a strict normalized result contract for all 121 fixed operations", () => {
     const runtime = new ScienceRuntime();
     const registry = new CapabilityRegistry();
     const tools = createScienceTools(runtime, registry);
 
-    expect(tools).toHaveLength(117);
+    expect(tools).toHaveLength(121);
     for (const [index, tool] of tools.entries()) {
       const contract = registry.operations[index]!;
       const schema = tool.output.schema;
@@ -88,6 +88,52 @@ describe("science tool output schemas", () => {
     ]));
     expect(violations(schema, {
       serviceId: "slide", operation: "list_workflows", status: "completed", workflows: [],
+    }).length).toBeGreaterThan(0);
+  });
+
+  it("keeps structure contracts operation-specific and type-safe", () => {
+    const tools = createScienceTools(new ScienceRuntime(), new CapabilityRegistry());
+    const getState = tools.find((candidate) => candidate.name === "structure_get_state")!;
+    const renderStatus = tools.find((candidate) => candidate.name === "structure_get_render_status")!;
+
+    // These fields occur in the real state result.  A different operation must
+    // never be able to smuggle them through with a plausible but wrong type.
+    expect(violations(getState.output.schema, {
+      serviceId: "structure", operation: "get_state", status: "completed",
+      sceneRevision: "1", viewerReady: "true",
+    })).toEqual(expect.arrayContaining([
+      '"value.sceneRevision" must be a number',
+      '"value.viewerReady" must be a boolean',
+    ]));
+    expect(violations(getState.output.schema, {
+      serviceId: "structure", operation: "get_state", status: "completed", job: { id: "render-1", state: "completed" },
+    })).toContain('"value.job" is not a declared property (additionalProperties: false)');
+    expect(violations(renderStatus.output.schema, {
+      serviceId: "structure", operation: "get_render_status", status: "completed", job: { id: "render-1", state: 7 },
+    })).toContain('"value.job.state" must be a string');
+    expect(violations(renderStatus.output.schema, {
+      serviceId: "structure", operation: "get_render_status", status: "running",
+    })).toEqual(expect.arrayContaining([expect.stringContaining("value.status")]));
+  });
+
+  it("accepts nullable viewer payloads only where the fixed contract permits them", () => {
+    const tools = createScienceTools(new ScienceRuntime(), new CapabilityRegistry());
+    const slideOpen = tools.find((candidate) => candidate.name === "slide_open_from_chat")!;
+    expect(violations(slideOpen.output.schema, {
+      serviceId: "slide", operation: "slide.open_from_chat", status: "completed", ok: true,
+      previewTile: null,
+    })).toEqual([]);
+    const structureState = tools.find((candidate) => candidate.name === "structure_get_state")!;
+    expect(violations(structureState.output.schema, {
+      serviceId: "structure", operation: "get_state", status: "completed", previewTile: null,
+    })).toContain('"value.previewTile" is not a declared property (additionalProperties: false)');
+    const structureQuery = tools.find((candidate) => candidate.name === "structure_query")!;
+    expect(violations(structureQuery.output.schema, {
+      serviceId: "structure", operation: "structure.query", status: "completed",
+      ok: true, level: "atom", items: [], total: 0, nextCursor: null, sceneRevision: 1,
+    })).toEqual([]);
+    expect(violations(structureQuery.output.schema, {
+      serviceId: "structure", operation: "structure.query", status: "completed", nextCursor: 7,
     }).length).toBeGreaterThan(0);
   });
 

@@ -2,15 +2,13 @@ import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
 
 export function buildConversationPrompt(showcase: ShowcaseDefinition, mode: ShowcaseMode): string {
   const modeInstruction: Record<ShowcaseMode, string> = {
-    lesson: "Teach this case from its retained evidence. Explain the scientific question, observations, computed results, interpretation, limitations, and sources.",
-    replay: "Open the retained outputs and previews for this case. Verify claims against the indexed artifacts before summarizing them.",
-    reproduce: "Prepare a fresh execution plan for this case. Check provider readiness first and request my confirmation before any network, paid, GPU, SSH/HPC, or external-write step.",
+    lesson: "Guide me through the scientific question, the recorded observations and results, their interpretation, limitations, and sources.",
+    replay: "Inspect the retained evidence and outputs with me, and distinguish what the project records from what still needs verification.",
+    reproduce: "Help me prepare a fresh run. Start by reviewing the required inputs and readiness, then ask before any network, paid, GPU, SSH/HPC, or external-write work.",
   };
 
   return [
-    `Import the DSH-Rosalind showcase \"${showcase.title}\" (${showcase.id}) in ${mode} mode.`,
+    `I want to work with the research project \"${showcase.title}\".`,
     modeInstruction[mode],
-    `Call rosalind_showcase_import with showcase_id=\"${showcase.id}\" and mode=\"${mode}\" to load its conversation bundle.`,
-    `Use adapter \"${showcase.recipe.adapter}\" and keep source observations, computed results, scientific interpretation, and limitations in separate sections.`,
   ].join("\n\n");
 }

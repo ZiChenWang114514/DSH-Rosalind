@@ -132,6 +132,45 @@ describe("44 fixed-version database providers", () => {
     expect(new URL(observedUrl).pathname).toBe("/eqtl/api/v3/datasets/QTD000001/associations");
   });
 
+  it("maps a top-level UniProt query to the native query parameter", async () => {
+    let observedUrl = "";
+    const service = new DatabaseService({ fetch: async (input) => {
+      observedUrl = String(input);
+      return new Response(JSON.stringify([record("uniprot")]), { status: 200, headers: { "content-type": "application/json" } });
+    } });
+    const result = await service.execute("database.request", {
+      provider: "uniprot", operation: "search", query: "kinase AND organism_id:9606",
+    }, context());
+    expect(result.ok).toBe(true);
+    expect(new URL(observedUrl).searchParams.get("query")).toBe("kinase AND organism_id:9606");
+  });
+
+  it("maps a top-level ChEMBL query to the native q parameter", async () => {
+    let observedUrl = "";
+    const service = new DatabaseService({ fetch: async (input) => {
+      observedUrl = String(input);
+      return new Response(JSON.stringify({ molecules: [record("chembl")] }), { status: 200, headers: { "content-type": "application/json" } });
+    } });
+    const result = await service.execute("database.request", {
+      provider: "chembl", operation: "search", query: "aspirin",
+    }, context());
+    expect(result.ok).toBe(true);
+    expect(new URL(observedUrl).searchParams.get("q")).toBe("aspirin");
+  });
+
+  it("maps a top-level NCBI Entrez query to the native term parameter", async () => {
+    let observedUrl = "";
+    const service = new DatabaseService({ fetch: async (input) => {
+      observedUrl = String(input);
+      return new Response(JSON.stringify({ esearchresult: { idlist: [record("ncbi-entrez")] } }), { status: 200, headers: { "content-type": "application/json" } });
+    } });
+    const result = await service.execute("database.request", {
+      provider: "ncbi-entrez", operation: "search", query: "TREM2 AND Alzheimer disease",
+    }, context());
+    expect(result.ok).toBe(true);
+    expect(new URL(observedUrl).searchParams.get("term")).toBe("TREM2 AND Alzheimer disease");
+  });
+
   it.each([
     ["rsid", { rsid: "rs7903146" }, "https://pheweb.jp/api/variant/rs7903146"],
     ["grch37", { grch37: "chr10:114758349:c:t" }, "https://pheweb.jp/api/variant/10%3A114758349-C-T"],

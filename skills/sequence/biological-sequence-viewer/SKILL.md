@@ -5,10 +5,25 @@ description: Open and inspect biological sequence, alignment, annotation, and se
 
 # Biological Sequence and Alignment Viewer
 
-Use `sequence_open_from_chat` with an exact authorized local path to create a viewer session. A successful call creates a session but does not prove that the viewer has rendered. Read current state with `sequence_query_viewer` before reporting selection, coordinates, records, metrics, or analysis results.
+## When to use
 
-For an existing viewer card, reuse its session with `sequence_control_viewer`; use its display-mode action to move it to the side pane rather than opening a duplicate. Use `sequence_run_analysis` only for a requested analysis and retain its inputs, selected records, coordinate convention, method, and result identifiers. Use `sequence_cancel_job` only for the exact running job the user asks to stop.
+Use this Skill when the user wants to open, inspect, analyze, safely edit, or export an authorized local FASTA, FASTQ, GenBank, EMBL, alignment, chromatogram, or SnapGene artifact. Fixed reference: `sequence-viewer-0.1.43/skills/biological-sequence-viewer/SKILL.md`. The DSH mapping preserves the fixed-version workflow and uses DSH-Rosalind's registered tools.
 
-Edits and exports require explicit user intent. Use `sequence_export_artifact` for requested outputs, keep private artifacts private unless an authorized destination is confirmed, and identify the saved artifact and its source revision. Page record, feature, chromatogram, and alignment queries rather than inferring undisplayed content. Preserve imported annotation qualifiers and coordinate provenance.
+## Tool call sequence
 
-Do not read raw file bytes merely to open the viewer, do not claim an unsupported viewer comparison, and do not repeat a cancelled action automatically. Record source identity, revision, viewer session, analysis parameters, and generated artifact IDs in scientific reporting.
+1. Resolve one authorized local path and call `sequence_open_from_chat` with that exact path.
+2. Read `sequence_query_viewer` using the returned session identity before answering questions about records, coordinates, selection, metrics, or visible tracks.
+3. Use `sequence_control_viewer` for the existing session; `sequence_run_analysis` only for a requested translation, QC, distance/tree, or alignment analysis.
+4. Use `sequence_edit_copy` and `sequence_export_artifact` only after the user asks to create a copy or output.
+
+## Success and viewer state
+
+Opening confirms session creation, not an already-rendered visual. Report live viewer state, including coordinate conventions and current reference, after a successful state query. Keep the current card/session when moving the viewer to the side pane instead of opening a duplicate.
+
+## Failure, authorization, and cancellation
+
+An unavailable, changed, or unauthorized file must be reported with its diagnostic; do not guess a new source. Use `sequence_cancel_job` only for the exact running job requested by the user. Exports and edits need the host approval for their target path; a cancelled job is never automatically restarted.
+
+## Provenance
+
+Keep source path and revision, viewer session, selected records and coordinate basis, analysis arguments, job/result identifiers, annotation qualifiers, and exported artifact path. A viewer selection alone is not a biological interpretation.

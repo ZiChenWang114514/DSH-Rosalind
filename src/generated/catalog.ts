@@ -8,7 +8,7 @@ export const SHOWCASE_SOURCE = {
 } as const;
 
 export const SHOWCASE_SOURCE_COMMIT = "f81e668c69edbfe7863cc936f2d535b61d8df76b";
-export const SHOWCASE_FILE_COUNT = 150;
+export const SHOWCASE_FILE_COUNT = 151;
 export const PREVIEW_DATA_URLS: Record<string, string> = {
   "literature-trem2-landscape": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyMDAgNzIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+VFJFTTIgYW5kIG1pY3JvZ2xpYSBwdWJsaWNhdGlvbiBsYW5kc2NhcGU8L3RpdGxlPgogIDxkZXNjIGlkPSJkZXNjIj5BIGRhdGVkIFB1Yk1lZCBzbmFwc2hvdCBvZiB0ZW4gcmVjb3JkcyBwbHVzIG9uZSBzZXBhcmF0ZWx5IGlkZW50aWZpZWQgYmlvUnhpdiBwcmVwcmludC48L2Rlc2M+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMwODE4MjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxMDJmM2MiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MjAiIHJ4PSIyOCIgZmlsbD0idXJsKCNiZykiLz4KICA8dGV4dCB4PSI3MCIgeT0iODIiIGZpbGw9IiNmNGZiZmYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM4IiBmb250LXdlaWdodD0iNzAwIj5UUkVNMiDDlyBtaWNyb2dsaWE8L3RleHQ+CiAgPHRleHQgeD0iNzAiIHk9IjEyMSIgZmlsbD0iIzllY2JkNyIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiPkRhdGVkIGxpdGVyYXR1cmUgc25hcHNob3QgwrcgMjkgQXVnIDIwMjY8L3RleHQ+CiAgPHJlY3QgeD0iNzAiIHk9IjE2NSIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxODAiIHJ4PSIyMiIgZmlsbD0iIzEyM2Y0ZCIgc3Ryb2tlPSIjNDljNWI2Ii8+CiAgPHRleHQgeD0iMTAyIiB5PSIyMTAiIGZpbGw9IiM5ZmYzZGYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4Ij5QVUJNRUQgUkVTVUxUUzwvdGV4dD4KICA8dGV4dCB4PSIxMDIiIHk9IjI4NSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNzIiIGZvbnQtd2VpZ2h0PSI3MDAiPjEwPC90ZXh0PgogIDx0ZXh0IHg9IjEwMiIgeT0iMzIwIiBmaWxsPSIjYjhkZmU3IiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyI+VGl0bGUvYWJzdHJhY3QgcXVlcnksIGRhdGUgc29ydGVkPC90ZXh0PgogIDxyZWN0IHg9IjQxMCIgeT0iMTY1IiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE4MCIgcng9IjIyIiBmaWxsPSIjMTkzNjRmIiBzdHJva2U9IiM3YWE3ZmYiLz4KICA8dGV4dCB4PSI0NDIiIHk9IjIxMCIgZmlsbD0iI2I3ZDBmZiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPkFSVElDTEUgVFlQRVM8L3RleHQ+CiAgPHRleHQgeD0iNDQyIiB5PSIyNjYiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iNzAwIj42IHJldmlld3M8L3RleHQ+CiAgPHRleHQgeD0iNDQyIiB5PSIzMDgiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iNzAwIj40IHJlc2VhcmNoPC90ZXh0PgogIDxyZWN0IHg9Ijc1MCIgeT0iMTY1IiB3aWR0aD0iMzgwIiBoZWlnaHQ9IjE4MCIgcng9IjIyIiBmaWxsPSIjNDAyZjRkIiBzdHJva2U9IiNkYzk0ZmYiLz4KICA8dGV4dCB4PSI3ODIiIHk9IjIxMCIgZmlsbD0iI2VkYzVmZiIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPlBSRVBSSU5ULCBLRVBUIFNFUEFSQVRFPC90ZXh0PgogIDx0ZXh0IHg9Ijc4MiIgeT0iMjU3IiBmaWxsPSIjZmZmZmZmIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCI+R1BSMzQgw5cgVFJFTTIgbWV0YWJvbGlzbTwvdGV4dD4KICA8dGV4dCB4PSI3ODIiIHk9IjI5MiIgZmlsbD0iI2U0Y2NlOSIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciPmJpb1J4aXYgwrcgMjAyNS0wNC0wMzwvdGV4dD4KICA8dGV4dCB4PSI3ODIiIHk9IjMyMCIgZmlsbD0iI2U0Y2NlOSIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciPk5vIGxpbmtlZCBwdWJsaWNhdGlvbiByZXR1cm5lZDwvdGV4dD4KICA8dGV4dCB4PSI3MCIgeT0iNDA4IiBmaWxsPSIjZGZmNWZhIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjcwMCI+VmlzaWJsZSB0aGVtZXMgaW4gdGhlIHJldHJpZXZlZCByZWNvcmRzPC90ZXh0PgogIDxnIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4Ij4KICAgIDxyZWN0IHg9IjcwIiB5PSI0NDUiIHdpZHRoPSIzMjAiIGhlaWdodD0iNzAiIHJ4PSIxNiIgZmlsbD0iIzE2NGI1NiIvPjx0ZXh0IHg9Ijk0IiB5PSI0ODciIGZpbGw9IiNlYWZmZmYiPlI0N0ggYW5kIGRpc2Vhc2UgbW9kZWxzPC90ZXh0PgogICAgPHJlY3QgeD0iNDEwIiB5PSI0NDUiIHdpZHRoPSIzMjAiIGhlaWdodD0iNzAiIHJ4PSIxNiIgZmlsbD0iIzE2NGI1NiIvPjx0ZXh0IHg9IjQzNCIgeT0iNDg3IiBmaWxsPSIjZWFmZmZmIj5Jbmp1cnkgYW5kIGluZmxhbW1hdGlvbjwvdGV4dD4KICAgIDxyZWN0IHg9Ijc1MCIgeT0iNDQ1IiB3aWR0aD0iMzgwIiBoZWlnaHQ9IjcwIiByeD0iMTYiIGZpbGw9IiMxNjRiNTYiLz48dGV4dCB4PSI3NzQiIHk9IjQ4NyIgZmlsbD0iI2VhZmZmZiI+TWV0YWJvbGlzbSBhbmQgdGhlcmFwZXV0aWMgdGFyZ2V0aW5nPC90ZXh0PgogICAgPHJlY3QgeD0iNzAiIHk9IjUzNSIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI3MCIgcng9IjE2IiBmaWxsPSIjMjQzZTVkIi8+PHRleHQgeD0iOTQiIHk9IjU3NyIgZmlsbD0iI2VhZjJmZiI+R2xpb21hIGltbXVuZSBlbnZpcm9ubWVudDwvdGV4dD4KICAgIDxyZWN0IHg9IjQxMCIgeT0iNTM1IiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjcwIiByeD0iMTYiIGZpbGw9IiMyNDNlNWQiLz48dGV4dCB4PSI0MzQiIHk9IjU3NyIgZmlsbD0iI2VhZjJmZiI+TW9sZWN1bGFyIHNpbXVsYXRpb248L3RleHQ+CiAgICA8cmVjdCB4PSI3NTAiIHk9IjUzNSIgd2lkdGg9IjM4MCIgaGVpZ2h0PSI3MCIgcng9IjE2IiBmaWxsPSIjMjQzZTVkIi8+PHRleHQgeD0iNzc0IiB5PSI1NzciIGZpbGw9IiNlYWYyZmYiPklubmF0ZSBpbW11bmUgbWVtb3J5PC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI3MCIgeT0iNjY1IiBmaWxsPSIjOGViN2MzIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSI+U291cmNlIG9ic2VydmF0aW9ucyBhbmQgcHJvamVjdC1hdXRob3JlZCB0aGVtZSBsYWJlbHMgYXJlIHJlY29yZGVkIHNlcGFyYXRlbHkgaW4gb3V0cHV0cy8uPC90ZXh0Pgo8L3N2Zz4K",
   "literature-pmc-availability": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyMDAgNzIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+UE1DIG9wZW4tYWNjZXNzIGF2YWlsYWJpbGl0eSBmb3IgUE1DMzI1NzMwMTwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPkEgc291cmNlLWJhY2tlZCBhdmFpbGFiaWxpdHkgc3VtbWFyeSBzaG93aW5nIGlkZW50aWZpZXJzLCBsaWNlbnNlLCBzdGF0dXMgZmxhZ3MsIGFuZCBmaWxlIHR5cGVzLjwvZGVzYz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MjAiIHJ4PSIzMCIgZmlsbD0iI2YzZjdmNiIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1NSIgcng9IjMwIiBmaWxsPSIjMTQzZDNhIi8+CiAgPHRleHQgeD0iNzAiIHk9IjcwIiBmaWxsPSIjZmZmZmZmIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzOCIgZm9udC13ZWlnaHQ9IjcwMCI+UE1DIGF2YWlsYWJpbGl0eSBjaGVjazwvdGV4dD4KICA8dGV4dCB4PSI3MCIgeT0iMTEyIiBmaWxsPSIjYmZlMWRiIiBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSI+UE1DMzI1NzMwMSDCtyBjaGVja2VkIDI5IEF1ZyAyMDI2PC90ZXh0PgogIDxjaXJjbGUgY3g9IjEwNDAiIGN5PSI3OCIgcj0iNDUiIGZpbGw9IiMzMWI3N2EiLz48cGF0aCBkPSJNMTAxOCA3OGwxNSAxNiAzMC0zNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjcwIiB5PSIyMjIiIGZpbGw9IiMxNzNiMzgiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIj5BcnRpY2xlIGlkZW50aWZpZXJzPC90ZXh0PgogIDxnIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIj4KICAgIDxyZWN0IHg9IjcwIiB5PSIyNTAiIHdpZHRoPSIzMjAiIGhlaWdodD0iODYiIHJ4PSIxNiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjY2FkYmQ3Ii8+PHRleHQgeD0iOTUiIHk9IjI4NCIgZmlsbD0iIzZhN2Q3OSIgZm9udC1zaXplPSIxNSI+UE1DSUQ8L3RleHQ+PHRleHQgeD0iOTUiIHk9IjMxNiIgZmlsbD0iIzE2M2MzOCIgZm9udC1zaXplPSIyNSIgZm9udC13ZWlnaHQ9IjcwMCI+UE1DMzI1NzMwMTwvdGV4dD4KICAgIDxyZWN0IHg9IjQxMCIgeT0iMjUwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9Ijg2IiByeD0iMTYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2NhZGJkNyIvPjx0ZXh0IHg9IjQzNSIgeT0iMjg0IiBmaWxsPSIjNmE3ZDc5IiBmb250LXNpemU9IjE1Ij5QTUlEPC90ZXh0Pjx0ZXh0IHg9IjQzNSIgeT0iMzE2IiBmaWxsPSIjMTYzYzM4IiBmb250LXNpemU9IjI1IiBmb250LXdlaWdodD0iNzAwIj4yMjI1MzU5NzwvdGV4dD4KICAgIDxyZWN0IHg9Ijc1MCIgeT0iMjUwIiB3aWR0aD0iMzgwIiBoZWlnaHQ9Ijg2IiByeD0iMTYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2NhZGJkNyIvPjx0ZXh0IHg9Ijc3NSIgeT0iMjg0IiBmaWxsPSIjNmE3ZDc5IiBmb250LXNpemU9IjE1Ij5ET0k8L3RleHQ+PHRleHQgeD0iNzc1IiB5PSIzMTYiIGZpbGw9IiMxNjNjMzgiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiPjEwLjEzNzEvam91cm5hbC5wcGF0LjEwMDI0ODU8L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjcwIiB5PSIzOTgiIGZpbGw9IiMxNzNiMzgiIGZvbnQtZmFtaWx5PSJJbnRlcixTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIj5BdmFpbGFiaWxpdHkgYW5kIHN0YXR1czwvdGV4dD4KICA8ZyBmb250LWZhbWlseT0iSW50ZXIsU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+CiAgICA8cmVjdCB4PSI3MCIgeT0iNDI2IiB3aWR0aD0iMjUwIiBoZWlnaHQ9Ijc0IiByeD0iMTgiIGZpbGw9IiNkOGY0ZTYiLz48dGV4dCB4PSI5NCIgeT0iNDcyIiBmaWxsPSIjMTc2NTQxIj5PcGVuIGFjY2VzcyDCtyBZZXM8L3RleHQ+CiAgICA8cmVjdCB4PSIzNDAiIHk9IjQyNiIgd2lkdGg9IjIyMCIgaGVpZ2h0PSI3NCIgcng9IjE4IiBmaWxsPSIjZTNlZWZjIi8+PHRleHQgeD0iMzY0IiB5PSI0NzIiIGZpbGw9IiMyNzVjOTMiPkxpY2Vuc2UgwrcgQ0MgQlk8L3RleHQ+CiAgICA8cmVjdCB4PSI1ODAiIHk9IjQyNiIgd2lkdGg9IjI1MCIgaGVpZ2h0PSI3NCIgcng9IjE4IiBmaWxsPSIjZWVmMWYwIi8+PHRleHQgeD0iNjA0IiB5PSI0NzIiIGZpbGw9IiM0MzU0NTEiPlJldHJhY3RlZCDCtyBObzwvdGV4dD4KICAgIDxyZWN0IHg9Ijg1MCIgeT0iNDI2IiB3aWR0aD0iMjgwIiBoZWlnaHQ9Ijc0IiByeD0iMTgiIGZpbGw9IiNlZWYxZjAiLz48dGV4dCB4PSI4NzQiIHk9IjQ3MiIgZmlsbD0iIzQzNTQ1MSI+TWFudXNjcmlwdCDCtyBObzwvdGV4dD4KICA8L2c+CiAgPHRleHQgeD0iNzAiIHk9IjU2NSIgZmlsbD0iIzE3M2IzOCIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiPkFydGljbGUgZmlsZXMgcmVwb3J0ZWQgYnkgdGhlIGRhdGFzZXQ8L3RleHQ+CiAgPGcgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTkiIGZvbnQtd2VpZ2h0PSI3MDAiPgogICAgPHJlY3QgeD0iNzAiIHk9IjU5MiIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI2MiIgcng9IjMxIiBmaWxsPSIjMTQzZDNhIi8+PHRleHQgeD0iMTMxIiB5PSI2MzEiIGZpbGw9IiNmZmYiPlBERjwvdGV4dD4KICAgIDxyZWN0IHg9IjI3MCIgeT0iNTkyIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjYyIiByeD0iMzEiIGZpbGw9IiMxNDNkM2EiLz48dGV4dCB4PSIzMjYiIHk9IjYzMSIgZmlsbD0iI2ZmZiI+WE1MPC90ZXh0PgogICAgPHJlY3QgeD0iNDcwIiB5PSI1OTIiIHdpZHRoPSIyMzAiIGhlaWdodD0iNjIiIHJ4PSIzMSIgZmlsbD0iIzE0M2QzYSIvPjx0ZXh0IHg9IjUyMiIgeT0iNjMxIiBmaWxsPSIjZmZmIj5QbGFpbiB0ZXh0PC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI3NTAiIHk9IjYyMCIgZmlsbD0iIzYwNzc3MyIgZm9udC1mYW1pbHk9IkludGVyLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiPjIyIG1lZGlhIFVSTHMgd2VyZSBsaXN0ZWQgaW4gdGhlIGNvbXBhY3QgcmVzcG9uc2UuPC90ZXh0Pgo8L3N2Zz4K",
@@ -5488,14 +5488,14 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/rosalind-workbench/cases/rosalind-structure-analysis/README.md",
-        "bytes": 755
+        "bytes": 991
       },
       {
         "id": "rosalind-structure-analysis:prompt.md",
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/rosalind-workbench/cases/rosalind-structure-analysis/prompt.md",
-        "bytes": 126
+        "bytes": 236
       },
       {
         "id": "rosalind-structure-analysis:previews/rosalind-structure-analysis.svg",
@@ -5513,20 +5513,49 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "generatedAt": "2026-08-29",
         "path": "showcases/rosalind-workbench/cases/rosalind-structure-analysis/outputs/launcher-observation.json",
         "bytes": 434
+      },
+      {
+        "id": "structure-mdm2-p53:inputs/1YCR.pdb",
+        "role": "input",
+        "mediaType": "chemical/x-pdb",
+        "source": "Shared pinned input from structure-mdm2-p53.",
+        "path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb",
+        "bytes": 94041
+      },
+      {
+        "id": "structure-mdm2-p53:outputs/results.json",
+        "role": "output",
+        "mediaType": "application/json",
+        "source": "Shared coordinate-analysis result from structure-mdm2-p53.",
+        "generatedAt": "2026-08-29",
+        "path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/results.json",
+        "bytes": 1146
+      },
+      {
+        "id": "structure-mdm2-p53:outputs/provenance.json",
+        "role": "provenance",
+        "mediaType": "application/json",
+        "source": "Shared RCSB and method record from structure-mdm2-p53.",
+        "generatedAt": "2026-08-29",
+        "path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/provenance.json",
+        "bytes": 557
       }
     ],
-    "sources": [],
+    "sources": [
+      "https://www.rcsb.org/structure/1YCR",
+      "https://files.rcsb.org/download/1YCR.pdb"
+    ],
     "observations": [
       "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
       "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute."
     ],
     "computedResults": [],
     "interpretation": [
-      "The area is available for interactive task discovery in the current Workbench."
+      "The structure-analysis route opens 1YCR with the local Structure service after launching the Workbench area."
     ],
     "limitations": [
-      "The tool response did not expose individual task choices.",
-      "No workspace was opened and no scientific analysis was executed."
+      "The retained launcher observation did not expose individual task choices.",
+      "The retained 1YCR result is a coordinate contact analysis and does not establish binding affinity."
     ],
     "claims": [
       {
@@ -5535,7 +5564,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-structure-analysis:README.md",
-          "rosalind-structure-analysis:prompt.md"
+          "rosalind-structure-analysis:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
         ]
       },
       {
@@ -5544,34 +5575,45 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-structure-analysis:README.md",
-          "rosalind-structure-analysis:prompt.md"
+          "rosalind-structure-analysis:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
         ]
       },
       {
         "id": "rosalind-structure-analysis:interpretation:1",
-        "statement": "The area is available for interactive task discovery in the current Workbench.",
+        "statement": "The structure-analysis route opens 1YCR with the local Structure service after launching the Workbench area.",
         "kind": "interpretation",
         "artifactIds": [
           "rosalind-structure-analysis:previews/rosalind-structure-analysis.svg",
-          "rosalind-structure-analysis:outputs/launcher-observation.json"
+          "rosalind-structure-analysis:outputs/launcher-observation.json",
+          "structure-mdm2-p53:outputs/results.json",
+          "structure-mdm2-p53:outputs/provenance.json"
         ]
       }
     ],
     "requiredMcpServers": [
-      "rosalind"
+      "rosalind",
+      "structure"
     ],
     "requiredOperations": [
       "rosalind.open",
-      "structure.open_from_chat"
+      "structure.open_from_chat",
+      "structure.get_state"
     ],
-    "requiredSkills": [],
+    "requiredSkills": [
+      "rosalind-structure-structure-viewer"
+    ],
     "fixtures": [
       "rosalind-structure-analysis:README.md",
-      "rosalind-structure-analysis:prompt.md"
+      "rosalind-structure-analysis:prompt.md",
+      "structure-mdm2-p53:inputs/1YCR.pdb"
     ],
     "expectedArtifacts": [
       "rosalind-structure-analysis:previews/rosalind-structure-analysis.svg",
-      "rosalind-structure-analysis:outputs/launcher-observation.json"
+      "rosalind-structure-analysis:outputs/launcher-observation.json",
+      "structure-mdm2-p53:outputs/results.json",
+      "structure-mdm2-p53:outputs/provenance.json"
     ],
     "scientificAssertions": [
       {
@@ -5580,7 +5622,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-structure-analysis:README.md",
-          "rosalind-structure-analysis:prompt.md"
+          "rosalind-structure-analysis:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
         ]
       },
       {
@@ -5589,7 +5633,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-structure-analysis:README.md",
-          "rosalind-structure-analysis:prompt.md"
+          "rosalind-structure-analysis:prompt.md",
+          "structure-mdm2-p53:inputs/1YCR.pdb",
+          "structure-mdm2-p53:outputs/provenance.json"
         ]
       }
     ],
@@ -5602,7 +5648,10 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "provenance": {
       "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
-      "sources": [],
+      "sources": [
+        "https://www.rcsb.org/structure/1YCR",
+        "https://files.rcsb.org/download/1YCR.pdb"
+      ],
       "runDate": "2026-08-29"
     },
     "recipe": {
@@ -5613,11 +5662,14 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "strategy": "local",
       "requiredInputs": [
         "showcases/rosalind-workbench/cases/rosalind-structure-analysis/README.md",
-        "showcases/rosalind-workbench/cases/rosalind-structure-analysis/prompt.md"
+        "showcases/rosalind-workbench/cases/rosalind-structure-analysis/prompt.md",
+        "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb"
       ],
       "expectedOutputs": [
         "showcases/rosalind-workbench/cases/rosalind-structure-analysis/previews/rosalind-structure-analysis.svg",
-        "showcases/rosalind-workbench/cases/rosalind-structure-analysis/outputs/launcher-observation.json"
+        "showcases/rosalind-workbench/cases/rosalind-structure-analysis/outputs/launcher-observation.json",
+        "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/results.json",
+        "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/provenance.json"
       ],
       "checks": [
         "Verify every referenced artifact before presenting a scientific claim.",
@@ -5630,7 +5682,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "replay",
       "reproduce"
     ],
-    "searchText": "rosalind structure-analysis launcher verified ready launcher state for the structure-analysis area. workbench rosalind workbench"
+    "searchText": "rosalind structure-analysis launcher verified ready launcher state for the structure-analysis area. workbench rosalind workbench https://www.rcsb.org/structure/1ycr https://files.rcsb.org/download/1ycr.pdb"
   },
   {
     "id": "rosalind-genomics",
@@ -5659,14 +5711,14 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/rosalind-workbench/cases/rosalind-genomics/README.md",
-        "bytes": 725
+        "bytes": 852
       },
       {
         "id": "rosalind-genomics:prompt.md",
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/rosalind-workbench/cases/rosalind-genomics/prompt.md",
-        "bytes": 116
+        "bytes": 224
       },
       {
         "id": "rosalind-genomics:previews/rosalind-genomics.svg",
@@ -5684,20 +5736,59 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "generatedAt": "2026-08-29",
         "path": "showcases/rosalind-workbench/cases/rosalind-genomics/outputs/launcher-observation.json",
         "bytes": 424
+      },
+      {
+        "id": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "role": "input",
+        "mediaType": "text/x-fasta",
+        "source": "Shared aligned FASTA input from sequence-ras-alignment.",
+        "path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "bytes": 786
+      },
+      {
+        "id": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+        "role": "provenance",
+        "mediaType": "application/json",
+        "source": "Shared UniProt acquisition record from sequence-ras-alignment.",
+        "generatedAt": "2026-08-29",
+        "path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+        "bytes": 2089
+      },
+      {
+        "id": "sequence-ras-alignment:outputs/analysis.json",
+        "role": "output",
+        "mediaType": "application/json",
+        "source": "Shared alignment metrics and neighbor-joining result from sequence-ras-alignment.",
+        "generatedAt": "2026-08-29",
+        "path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/analysis.json",
+        "bytes": 1252
+      },
+      {
+        "id": "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+        "role": "output",
+        "mediaType": "text/x-newick",
+        "source": "Shared exploratory neighbor-joining tree from sequence-ras-alignment.",
+        "generatedAt": "2026-08-29",
+        "path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+        "bytes": 68
       }
     ],
-    "sources": [],
+    "sources": [
+      "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+      "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+      "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+    ],
     "observations": [
       "Rosalind Workbench returned schema life-sciences.launcher/v1, reported ready: true, and displayed its launcher.",
       "The visible scientific areas included molecular design, structure analysis, genomics, and scientific compute."
     ],
     "computedResults": [],
     "interpretation": [
-      "The area is available for interactive task discovery in the current Workbench."
+      "The genomics route opens the retained RAS alignment and recomputes its alignment metrics with the local Sequence service."
     ],
     "limitations": [
-      "The tool response did not expose individual task choices.",
-      "No workspace was opened and no scientific analysis was executed."
+      "The retained launcher observation did not expose individual task choices.",
+      "The RAS distance and neighbor-joining results are exploratory and do not provide phylogenetic support values."
     ],
     "claims": [
       {
@@ -5706,7 +5797,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-genomics:README.md",
-          "rosalind-genomics:prompt.md"
+          "rosalind-genomics:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
         ]
       },
       {
@@ -5715,34 +5808,47 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-genomics:README.md",
-          "rosalind-genomics:prompt.md"
+          "rosalind-genomics:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
         ]
       },
       {
         "id": "rosalind-genomics:interpretation:1",
-        "statement": "The area is available for interactive task discovery in the current Workbench.",
+        "statement": "The genomics route opens the retained RAS alignment and recomputes its alignment metrics with the local Sequence service.",
         "kind": "interpretation",
         "artifactIds": [
           "rosalind-genomics:previews/rosalind-genomics.svg",
-          "rosalind-genomics:outputs/launcher-observation.json"
+          "rosalind-genomics:outputs/launcher-observation.json",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+          "sequence-ras-alignment:outputs/analysis.json",
+          "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk"
         ]
       }
     ],
     "requiredMcpServers": [
-      "rosalind"
+      "rosalind",
+      "sequence"
     ],
     "requiredOperations": [
       "rosalind.open",
-      "list_workflows"
+      "sequence.open_from_chat",
+      "sequence.run_analysis"
     ],
-    "requiredSkills": [],
+    "requiredSkills": [
+      "rosalind-sequence-biological-sequence-viewer"
+    ],
     "fixtures": [
       "rosalind-genomics:README.md",
-      "rosalind-genomics:prompt.md"
+      "rosalind-genomics:prompt.md",
+      "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta"
     ],
     "expectedArtifacts": [
       "rosalind-genomics:previews/rosalind-genomics.svg",
-      "rosalind-genomics:outputs/launcher-observation.json"
+      "rosalind-genomics:outputs/launcher-observation.json",
+      "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+      "sequence-ras-alignment:outputs/analysis.json",
+      "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk"
     ],
     "scientificAssertions": [
       {
@@ -5751,7 +5857,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-genomics:README.md",
-          "rosalind-genomics:prompt.md"
+          "rosalind-genomics:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
         ]
       },
       {
@@ -5760,7 +5868,9 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-genomics:README.md",
-          "rosalind-genomics:prompt.md"
+          "rosalind-genomics:prompt.md",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
+          "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
         ]
       }
     ],
@@ -5773,7 +5883,11 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "provenance": {
       "sourceCommit": "f81e668c69edbfe7863cc936f2d535b61d8df76b",
-      "sources": [],
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+      ],
       "runDate": "2026-08-29"
     },
     "recipe": {
@@ -5784,11 +5898,15 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "strategy": "local",
       "requiredInputs": [
         "showcases/rosalind-workbench/cases/rosalind-genomics/README.md",
-        "showcases/rosalind-workbench/cases/rosalind-genomics/prompt.md"
+        "showcases/rosalind-workbench/cases/rosalind-genomics/prompt.md",
+        "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta"
       ],
       "expectedOutputs": [
         "showcases/rosalind-workbench/cases/rosalind-genomics/previews/rosalind-genomics.svg",
-        "showcases/rosalind-workbench/cases/rosalind-genomics/outputs/launcher-observation.json"
+        "showcases/rosalind-workbench/cases/rosalind-genomics/outputs/launcher-observation.json",
+        "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+        "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/analysis.json",
+        "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/RAS-P01116-P01111-P01112-NJ.nwk"
       ],
       "checks": [
         "Verify every referenced artifact before presenting a scientific claim.",
@@ -5801,7 +5919,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "replay",
       "reproduce"
     ],
-    "searchText": "rosalind genomics launcher verified ready launcher state for the genomics area. workbench rosalind workbench"
+    "searchText": "rosalind genomics launcher verified ready launcher state for the genomics area. workbench rosalind workbench https://rest.uniprot.org/uniprotkb/p01116.fasta https://rest.uniprot.org/uniprotkb/p01111.fasta https://rest.uniprot.org/uniprotkb/p01112.fasta"
   },
   {
     "id": "rosalind-scientific-compute",
@@ -5830,14 +5948,21 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/rosalind-workbench/cases/rosalind-scientific-compute/README.md",
-        "bytes": 755
+        "bytes": 960
       },
       {
         "id": "rosalind-scientific-compute:prompt.md",
         "role": "input",
         "mediaType": "text/markdown",
         "path": "showcases/rosalind-workbench/cases/rosalind-scientific-compute/prompt.md",
-        "bytes": 126
+        "bytes": 195
+      },
+      {
+        "id": "rosalind-scientific-compute:inputs/runtime-discovery-request.json",
+        "role": "input",
+        "mediaType": "application/json",
+        "path": "showcases/rosalind-workbench/cases/rosalind-scientific-compute/inputs/runtime-discovery-request.json",
+        "bytes": 640
       },
       {
         "id": "rosalind-scientific-compute:previews/rosalind-scientific-compute.svg",
@@ -5864,11 +5989,11 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     ],
     "computedResults": [],
     "interpretation": [
-      "The area is available for interactive task discovery in the current Workbench."
+      "The scientific-compute route discovers local NGS workflow and compute capability metadata after opening the Workbench area."
     ],
     "limitations": [
-      "The tool response did not expose individual task choices.",
-      "No workspace was opened and no scientific analysis was executed."
+      "The retained launcher observation did not expose individual task choices.",
+      "The route discovers host capability only; it does not submit a workflow or claim a biological result."
     ],
     "claims": [
       {
@@ -5877,7 +6002,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-scientific-compute:README.md",
-          "rosalind-scientific-compute:prompt.md"
+          "rosalind-scientific-compute:prompt.md",
+          "rosalind-scientific-compute:inputs/runtime-discovery-request.json"
         ]
       },
       {
@@ -5886,12 +6012,13 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-scientific-compute:README.md",
-          "rosalind-scientific-compute:prompt.md"
+          "rosalind-scientific-compute:prompt.md",
+          "rosalind-scientific-compute:inputs/runtime-discovery-request.json"
         ]
       },
       {
         "id": "rosalind-scientific-compute:interpretation:1",
-        "statement": "The area is available for interactive task discovery in the current Workbench.",
+        "statement": "The scientific-compute route discovers local NGS workflow and compute capability metadata after opening the Workbench area.",
         "kind": "interpretation",
         "artifactIds": [
           "rosalind-scientific-compute:previews/rosalind-scientific-compute.svg",
@@ -5900,16 +6027,22 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       }
     ],
     "requiredMcpServers": [
-      "rosalind"
+      "rosalind",
+      "ngs"
     ],
     "requiredOperations": [
       "rosalind.open",
+      "list_workflows",
+      "get_runtime_environment",
       "list_compute_targets"
     ],
-    "requiredSkills": [],
+    "requiredSkills": [
+      "rosalind-ngs-ngs-analysis-workbench"
+    ],
     "fixtures": [
       "rosalind-scientific-compute:README.md",
-      "rosalind-scientific-compute:prompt.md"
+      "rosalind-scientific-compute:prompt.md",
+      "rosalind-scientific-compute:inputs/runtime-discovery-request.json"
     ],
     "expectedArtifacts": [
       "rosalind-scientific-compute:previews/rosalind-scientific-compute.svg",
@@ -5922,7 +6055,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-scientific-compute:README.md",
-          "rosalind-scientific-compute:prompt.md"
+          "rosalind-scientific-compute:prompt.md",
+          "rosalind-scientific-compute:inputs/runtime-discovery-request.json"
         ]
       },
       {
@@ -5931,7 +6065,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
         "kind": "observation",
         "artifactIds": [
           "rosalind-scientific-compute:README.md",
-          "rosalind-scientific-compute:prompt.md"
+          "rosalind-scientific-compute:prompt.md",
+          "rosalind-scientific-compute:inputs/runtime-discovery-request.json"
         ]
       }
     ],
@@ -5955,7 +6090,8 @@ export const SHOWCASES: ShowcaseDefinition[] = [
       "strategy": "local",
       "requiredInputs": [
         "showcases/rosalind-workbench/cases/rosalind-scientific-compute/README.md",
-        "showcases/rosalind-workbench/cases/rosalind-scientific-compute/prompt.md"
+        "showcases/rosalind-workbench/cases/rosalind-scientific-compute/prompt.md",
+        "showcases/rosalind-workbench/cases/rosalind-scientific-compute/inputs/runtime-discovery-request.json"
       ],
       "expectedOutputs": [
         "showcases/rosalind-workbench/cases/rosalind-scientific-compute/previews/rosalind-scientific-compute.svg",

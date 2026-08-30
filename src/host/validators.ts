@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
 
 import type { ShowcaseDefinition } from "../shared/types.js";
@@ -48,16 +49,38 @@ export function artifactByteCounts(bytes: Uint8Array): { actual: number; lfEquiv
   };
 }
 
+/**
+ * The catalogue records text identity as UTF-8 after CRLF has been normalized
+ * to LF. Binary artifacts retain their original bytes. This mirrors the
+ * catalogue generator so a checkout on Windows and one on Unix validate the
+ * same declared artifact identity.
+ */
+export function canonicalArtifactBuffer(mediaType: string, bytes: Uint8Array): Buffer {
+  const isText = mediaType.startsWith("text/")
+    || mediaType === "application/json"
+    || mediaType === "application/geo+json"
+    || mediaType === "image/svg+xml"
+    || mediaType.startsWith("chemical/");
+  if (!isText) return Buffer.from(bytes);
+  return Buffer.from(Buffer.from(bytes).toString("utf8").replace(/\r\n/g, "\n"), "utf8");
+}
+
+export function canonicalArtifactSha256(mediaType: string, bytes: Uint8Array): string {
+  return createHash("sha256").update(canonicalArtifactBuffer(mediaType, bytes)).digest("hex");
+}
+
 function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationResult["checks"] {
   return entry.artifacts.map((artifact) => {
     if (!artifact.path) return { category: "file-structure", name: artifact.id, ok: true, actual: "resource", expected: "resource" };
     const absolute = resolveInside(root, artifact.path);
     if (!existsSync(absolute)) return { category: "file-structure", name: artifact.id, ok: false, actual: "missing", expected: "present" };
-    const actualBytes = statSync(absolute).size;
-    const expected = artifact.bytes ?? actualBytes;
     const bytes = readFileSync(absolute);
-    const byteCounts = artifactByteCounts(bytes);
-    const isEquivalent = expected === actualBytes || expected === byteCounts.lfEquivalent || expected === byteCounts.windowsEquivalent;
+    const actualBytes = statSync(absolute).size;
+    const canonicalBytes = canonicalArtifactBuffer(artifact.mediaType, bytes);
+    const expected = artifact.bytes;
+    const byteCountOk = expected === undefined || expected === canonicalBytes.length;
+    const actualSha256 = canonicalArtifactSha256(artifact.mediaType, bytes);
+    const sha256Ok = artifact.sha256 === undefined || artifact.sha256 === actualSha256;
     const text = bytes.toString("utf8");
     let structureOk = bytes.length > 0;
     try {
@@ -76,9 +99,9 @@ function validateArtifacts(root: string, entry: ShowcaseDefinition): ValidationR
     return {
       category: "file-structure",
       name: artifact.id,
-      ok: isEquivalent && structureOk,
-      actual: `${actualBytes} bytes; ${structureOk ? "structure parsed" : "invalid structure"}`,
-      expected: `${expected} bytes (LF/CRLF equivalent accepted); structure parsed`,
+      ok: byteCountOk && sha256Ok && structureOk,
+      actual: `${actualBytes} physical bytes; ${canonicalBytes.length} canonical UTF-8/LF bytes; sha256 ${actualSha256}; ${structureOk ? "structure parsed" : "invalid structure"}`,
+      expected: `${expected === undefined ? "byte count unspecified" : `${expected} canonical UTF-8/LF bytes`}; ${artifact.sha256 === undefined ? "sha256 unspecified" : `sha256 ${artifact.sha256}`}; structure parsed`,
     };
   });
 }
