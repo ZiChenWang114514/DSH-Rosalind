@@ -1,17 +1,22 @@
 import { describe, expect, it } from "vitest";
 import path from "node:path";
-import { buildCatalogue, scientificAcceptance, validateShowcases } from "../scripts/lib/showcase-data.mjs";
+import { buildCatalogue, reproductionRouteIds, scientificAcceptance, validateShowcases } from "../scripts/lib/showcase-data.mjs";
+import { REPRODUCIBLE_SHOWCASE_IDS } from "../src/host/reproduction.js";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
 
 describe("generated showcase catalogue", () => {
-  it("builds 100 ready, searchable, three-mode definitions in seven categories", async () => {
+  it("builds 100 ready, searchable definitions with only recorded fresh-run routes", async () => {
     const catalogue = await buildCatalogue(repositoryRoot);
+    const routedIds = await reproductionRouteIds(repositoryRoot);
     expect(catalogue).toHaveLength(100);
+    expect(routedIds).toHaveLength(23);
+    expect(REPRODUCIBLE_SHOWCASE_IDS).toEqual(routedIds);
+    expect(new Set(catalogue.filter((showcase) => showcase.modes.includes("reproduce")).map((showcase) => showcase.id))).toEqual(new Set(routedIds));
     expect(new Set(catalogue.map((item) => item.categoryId))).toEqual(new Set(["literature", "databases", "sequence", "ngs", "structure", "slide", "workbench"]));
     for (const showcase of catalogue) {
       expect(showcase.status).toBe("ready");
-      expect(showcase.modes).toEqual(["lesson", "replay", "reproduce"]);
+      expect(showcase.modes.slice(0, 2)).toEqual(["lesson", "replay"]);
       expect(showcase.question.length).toBeGreaterThan(10);
       expect(showcase.searchText).toContain(showcase.title.toLowerCase());
       expect(showcase.recipe.adapter).toBeTruthy();

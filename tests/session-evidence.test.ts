@@ -1,11 +1,15 @@
 // @vitest-environment jsdom
 import { act, renderHook } from "@testing-library/react";
+import { startTransition } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 
 import {
   currentEvidence,
+  getSnapshotVersion,
   publishConversationNodes,
+  seedEvidenceFromGlobal,
   setWorkbenchModuleAvailability,
+  useSessionEvidence,
   useRosalindProjectSummary,
   useWorkbenchDataFlow,
 } from "../src/client/session-evidence.js";
@@ -16,11 +20,12 @@ function toolResult(
   args: Record<string, unknown>,
   payload: Record<string, unknown>,
   isError = false,
+  time = 1,
 ): Record<string, unknown> {
   return {
     kind: "tool-result",
     seq: Number(callId.replace(/\D/g, "")) || 1,
-    time: 1,
+    time,
     callId,
     call: { name: toolName, argsRaw: JSON.stringify(args) },
     content: [{ type: "text", text: JSON.stringify(payload) }],
@@ -29,6 +34,7 @@ function toolResult(
 }
 
 afterEach(() => {
+  delete (globalThis as Record<string, unknown>).__DSH_ROSALIND_SESSION_EVIDENCE__;
   setWorkbenchModuleAvailability("ngs", "unknown");
   setWorkbenchModuleAvailability("rosalind", "unknown");
   publishConversationNodes([]);
@@ -201,5 +207,49 @@ describe("Rosalind project session evidence", () => {
       updatedAt: null,
       nextAction: "Start the approved run.",
     });
+  });
+
+  it("uses the newest timed NGS and project evidence despite duplicates and out-of-order nodes", () => {
+    publishConversationNodes([
+      toolResult("workflows-new", "ngs_list_workflows", {}, { status: "completed", operation: "list_workflows", workflows: [{ id: "new" }] }, false, 30),
+      toolResult("run-b", "ngs_get_ngs_run", { registry_run_id: "run-b" }, { status: "completed", operation: "get_ngs_run", registry_run_id: "run-b", state: "running" }, false, 20),
+      toolResult("project-new", "rosalind_status", { run_id: "project-run" }, { id: "project-run", showcaseId: "case-a", state: "completed" }, false, 40),
+      toolResult("workflows-old", "ngs_list_workflows", {}, { status: "completed", operation: "list_workflows", workflows: [{ id: "old" }] }, false, 10),
+      toolResult("run-a", "ngs_get_ngs_run", { registry_run_id: "run-a" }, { status: "completed", operation: "get_ngs_run", registry_run_id: "run-a", state: "completed" }, false, 15),
+      toolResult("project-old", "rosalind_plan", { showcase_id: "case-a", mode: "replay" }, { id: "project-run", showcaseId: "case-a", state: "queued" }, false, 5),
+      toolResult("workflows-new", "ngs_list_workflows", {}, { status: "completed", operation: "list_workflows", workflows: [{ id: "stale-duplicate" }] }, false, 25),
+    ]);
+
+    expect(currentEvidence().ngs.workflows?.payload.workflows).toEqual([{ id: "new" }]);
+    expect([...currentEvidence().ngs.runDetails.keys()]).toEqual(["run-a", "run-b"]);
+    expect(currentEvidence().rosalind).toMatchObject({ runId: "project-run", status: "completed" });
+  });
+
+  it("resets the conversation signature when evidence is initialized again from the host global", () => {
+    const nodes = [toolResult("call-repeat", "ngs_list_workflows", {}, { status: "completed", operation: "list_workflows", workflows: [{ id: "conversation" }] })];
+    publishConversationNodes(nodes);
+    const beforeSeed = getSnapshotVersion();
+    (globalThis as Record<string, unknown>).__DSH_ROSALIND_SESSION_EVIDENCE__ = {
+      ngs: { workflows: { callId: "seed", toolName: "ngs_list_workflows", status: "completed", workflows: [{ id: "seed" }] } },
+    };
+    seedEvidenceFromGlobal();
+    expect(currentEvidence().ngs.workflows?.payload.workflows).toEqual([{ id: "seed" }]);
+
+    publishConversationNodes(nodes);
+    expect(getSnapshotVersion()).toBe(beforeSeed + 2);
+    expect(currentEvidence().ngs.workflows?.payload.workflows).toEqual([{ id: "conversation" }]);
+  });
+
+  it("keeps concurrent external-store subscribers on the same published evidence object", () => {
+    const first = renderHook(() => useSessionEvidence());
+    const second = renderHook(() => useSessionEvidence());
+
+    publishConversationNodes([toolResult("shared-call", "ngs_list_workflows", {}, { status: "completed", operation: "list_workflows", workflows: [{ id: "before-refresh" }] }, false, 10)]);
+    act(() => startTransition(() => {
+      publishConversationNodes([toolResult("shared-call", "ngs_list_workflows", {}, { status: "completed", operation: "list_workflows", workflows: [{ id: "after-refresh" }] }, false, 20)]);
+    }));
+
+    expect(first.result.current).toBe(second.result.current);
+    expect(first.result.current.ngs.workflows?.payload.workflows).toEqual([{ id: "after-refresh" }]);
   });
 });

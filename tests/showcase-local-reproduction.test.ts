@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { SHOWCASES } from "../src/generated/catalog.js";
-import { reproduceShowcase, type NgsReproductionRequest } from "../src/host/reproduction.js";
+import { REPRODUCIBLE_SHOWCASE_IDS, reproduceShowcase, type NgsReproductionRequest } from "../src/host/reproduction.js";
 import type { ScienceExecutionContext, ScienceExecutor } from "../src/host/science-tools.js";
 import { NgsService } from "../src/host/science/ngs.js";
 import { SequenceService } from "../src/host/science/sequence.js";
@@ -70,6 +70,12 @@ class RunnableNgsExecutor implements ScienceExecutor {
   }
 }
 
+class PermissiveRouteExecutor implements ScienceExecutor {
+  async execute(): Promise<JsonRecord> {
+    return { status: "completed", ok: true };
+  }
+}
+
 function showcase(id: string) {
   const value = SHOWCASES.find((item) => item.id === id);
   if (!value) throw new Error(`Missing showcase ${id}.`);
@@ -112,6 +118,29 @@ function ngsContext(request: NgsReproductionRequest, packageRoot = process.cwd()
 }
 
 describe("local showcase reproduction", () => {
+  it("keeps every declared reproduction ID connected to a host route", async () => {
+    for (const id of REPRODUCIBLE_SHOWCASE_IDS) {
+      const item = showcase(id);
+      const result = await reproduceShowcase(item, item.recipe.providerIds[0]!, new PermissiveRouteExecutor(), {
+        session: {}, signal: new AbortController().signal, packageRoot: process.cwd(),
+      });
+      expect(result.error?.code, id).not.toBe("REPRODUCTION_ROUTE_UNAVAILABLE");
+    }
+  });
+
+  it("rejects a showcase without a registered fresh-run route before calling a science service", async () => {
+    const executor = new RunnableNgsExecutor();
+    const result = await reproduceShowcase(showcase("literature-kras-g12c"), "local-replay", executor, {
+      session: {}, signal: new AbortController().signal, packageRoot: process.cwd(),
+    });
+    expect(result).toMatchObject({
+      status: "failed",
+      steps: [],
+      error: { code: "REPRODUCTION_ROUTE_UNAVAILABLE", message: expect.stringContaining("lesson and replay") },
+    });
+    expect(executor.calls).toEqual([]);
+  });
+
   it("recomputes the retained sequence cases that include their scientific inputs", async () => {
     const lambda = await run("sequence-lambda-annotation");
     expect(lambda.status).toBe("completed");

@@ -4,6 +4,7 @@ import { isAbsolute, relative, resolve } from "node:path";
 
 import type { JsonValue } from "@deepseek-ai/dsh-tools";
 
+import reproductionRouteIds from "../../showcases/reproduction-routes.json" with { type: "json" };
 import type { NgsPlanIdentity, NgsReproductionInputs, ShowcaseDefinition, ShowcaseReproductionInputs } from "../shared/types.js";
 export type { NgsPlanIdentity } from "../shared/types.js";
 import { resolveInside } from "./catalog.js";
@@ -42,6 +43,13 @@ export type ShowcaseReproductionContext = ScienceExecutionContext & {
 };
 
 type CallSpec = [serviceId: string, operation: string, args: Record<string, unknown>];
+
+export const REPRODUCIBLE_SHOWCASE_IDS: readonly string[] = Object.freeze([...reproductionRouteIds]);
+const REPRODUCIBLE_SHOWCASES = new Set(REPRODUCIBLE_SHOWCASE_IDS);
+
+export function hasReproductionRoute(showcaseId: string): boolean {
+  return REPRODUCIBLE_SHOWCASES.has(showcaseId);
+}
 
 function casePath(showcase: ShowcaseDefinition, relative: string): string {
   return `${showcase.readmePath.slice(0, -"README.md".length)}${relative}`;
@@ -569,6 +577,17 @@ export async function reproduceShowcase(
   context: ShowcaseReproductionContext,
 ): Promise<ReproductionResult> {
   const steps: ReproductionStepResult[] = [];
+  if (!hasReproductionRoute(showcase.id)) {
+    return {
+      status: "failed",
+      summary: `${showcase.title}: no fresh-run reproduction route is registered.`,
+      steps,
+      error: {
+        code: "REPRODUCTION_ROUTE_UNAVAILABLE",
+        message: `${showcase.id} supports lesson and replay from its reviewed records, but it has no registered fresh-run reproduction route.`,
+      },
+    };
+  }
   const viewerSessions = new Map<string, string>();
   const sourceRequirement = SOURCE_REQUIRED_REPRODUCTIONS[showcase.id];
   if (sourceRequirement) {

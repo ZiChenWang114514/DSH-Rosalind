@@ -99,6 +99,15 @@ describe("provider diagnostics", () => {
 });
 
 describe("run lifecycle", () => {
+  it("rejects unsupported reproduce plans before creating a run", () => {
+    const runtime = new RosalindRuntime();
+    try {
+      expect(() => runtime.plan({}, "literature-kras-g12c", "reproduce")).toThrow("literature-kras-g12c does not support reproduce");
+    } finally {
+      runtime.dispose();
+    }
+  });
+
   it("completes lesson, replay, and local reproduce runs", async () => {
     const runtime = new RosalindRuntime();
     const session = {};

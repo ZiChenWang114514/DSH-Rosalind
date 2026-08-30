@@ -116,7 +116,7 @@ function validateScientificRecord(root: string, entry: ShowcaseDefinition): Vali
     check("showcase is ready", entry.status, "ready"),
     check("lesson mode declared", entry.modes.includes("lesson"), true),
     check("replay mode declared", entry.modes.includes("replay"), true),
-    check("reproduce mode declared", entry.modes.includes("reproduce"), true),
+    check("showcase modes are recognized and unique", entry.modes.every((mode) => ["lesson", "replay", "reproduce"].includes(mode)) && new Set(entry.modes).size === entry.modes.length, true),
     check("source observations recorded", entry.observations.length > 0, true),
     check("scientific assertions recorded", entry.scientificAssertions.length > 0, true),
     check("scientific interpretation recorded", entry.interpretation.length > 0, true),

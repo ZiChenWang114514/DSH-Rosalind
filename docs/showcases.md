@@ -1,6 +1,6 @@
 # Showcase catalogue
 
-This release contains 100 lesson-and-replay-ready projects from the reviewed showcase snapshot at commit `f8c2ea83ac3b3b9258b160b80039dc3db37d76c4`. Every project exposes lesson, replay, and reproduce records. Reproduce runs a registered local operation, prepares an authorized public request, or reports the missing renderer, service, credential, input, or compute resource. A completed replay does not imply that a fresh run completed.
+This release contains 100 lesson-and-replay-ready projects from the reviewed showcase snapshot at commit `f8c2ea83ac3b3b9258b160b80039dc3db37d76c4`. Of these, 23 have registered fresh-run reproduction routes and expose `reproduce`; the remaining 77 retain `lesson` and `replay` only. A reproduction route runs a registered local operation, prepares an authorized public request, or reports the required input, service, credential, renderer, or compute resource. A completed replay does not imply that a fresh run completed.
 
 | Area | Projects | Representative scope |
 |---|---:|---|
@@ -16,7 +16,7 @@ The machine-readable catalogue below is the complete ID index; every entry point
 
 ## What a project record contains
 
-Each `ShowcaseDefinition` identifies the scientific question, original plugin, source records, inputs, outputs, preview, reproduction adapter, providers, validation checks, and scientific claims. The fields for observations, computed results, interpretation, and limitations remain distinct. A generated conversation bundle acts as a file index; the referenced files remain the evidence.
+Each `ShowcaseDefinition` identifies the scientific question, original plugin, source records, inputs, outputs, preview, available modes, providers, validation checks, and scientific claims. For the 23 routed projects, it also identifies a fresh-run reproduction adapter. The fields for observations, computed results, interpretation, and limitations remain distinct. A generated conversation bundle acts as a file index; the referenced files remain the evidence.
 
 The machine-readable source is [`showcases/catalog.json`](../showcases/catalog.json). Each case directory includes a README, prompt, manifest, inputs or retained outputs, preview material, and provenance where supplied by the source snapshot.
 

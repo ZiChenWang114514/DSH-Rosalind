@@ -356,6 +356,44 @@ function fingerprint(node: unknown): string | null {
   return typeof call?.name === "string" ? String(record.callId ?? "") : null;
 }
 
+function nodeOrder(node: unknown, index: number): { time: number; seq: number; index: number } {
+  const record = node && typeof node === "object" ? node as Record<string, unknown> : {};
+  return {
+    time: typeof record.time === "number" && Number.isFinite(record.time) ? record.time : 0,
+    seq: typeof record.seq === "number" && Number.isFinite(record.seq) ? record.seq : 0,
+    index,
+  };
+}
+
+/**
+ * DSH snapshots can repeat a settled call while a conversation refresh is in
+ * flight, and callers are not required to pass the nodes in chronological
+ * order. Keep the newest copy of each call and then replay the evidence in a
+ * stable time/sequence order so later scientific results take precedence.
+ */
+function orderedConversationNodes(nodes: readonly unknown[]): unknown[] {
+  const unkeyed: Array<{ node: unknown; order: ReturnType<typeof nodeOrder> }> = [];
+  const calls = new Map<string, { node: unknown; order: ReturnType<typeof nodeOrder> }>();
+  nodes.forEach((node, index) => {
+    const order = nodeOrder(node, index);
+    const callId = fingerprint(node);
+    if (!callId) {
+      unkeyed.push({ node, order });
+      return;
+    }
+    const previous = calls.get(callId);
+    if (!previous
+      || order.time > previous.order.time
+      || (order.time === previous.order.time && order.seq > previous.order.seq)
+      || (order.time === previous.order.time && order.seq === previous.order.seq && order.index > previous.order.index)) {
+      calls.set(callId, { node, order });
+    }
+  });
+  return [...unkeyed, ...calls.values()]
+    .sort((left, right) => left.order.time - right.order.time || left.order.seq - right.order.seq || left.order.index - right.order.index)
+    .map((item) => item.node);
+}
+
 function recordArray(value: unknown): Record<string, unknown>[] {
   return Array.isArray(value)
     ? value.filter((item): item is Record<string, unknown> => Boolean(item && typeof item === "object" && !Array.isArray(item)))
@@ -440,10 +478,9 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
   const seenActivity = new Set<string>();
   const seenResults = new Set<string>();
   const seenSources = new Set<string>();
-  const seenNgs = new Set<string>();
-  for (const node of nodes) {
+  for (const node of orderedConversationNodes(nodes)) {
     const mark = fingerprint(node);
-    if (mark != null) marks.push(mark);
+    if (mark != null) marks.push(JSON.stringify(node) ?? mark);
     const parsed = textPayload(node);
     if (!parsed) continue;
     const { toolName, args, payload } = parsed;
@@ -488,8 +525,7 @@ export function publishConversationNodes(nodes: readonly unknown[]): void {
       rosalind = rosalindSummaryFromEvidence(toolName, args, payload, rosalind);
     } else if (toolName.startsWith("ngs_")) {
       const operation = typeof payload.operation === "string" ? payload.operation : toolName.replace(/^ngs_/, "");
-      if (!completed(payload) || seenNgs.has(operation)) continue;
-      seenNgs.add(operation);
+      if (!completed(payload)) continue;
       if (operation === "list_workflows") ngs.workflows = evidence;
       else if (operation === "list_compute_targets") ngs.targets = evidence;
       else if (operation === "list_ngs_runs") ngs.runs = evidence;
@@ -559,6 +595,7 @@ export function seedEvidenceFromGlobal(): void {
     ngs?: { workflows?: unknown; targets?: unknown; runs?: unknown; lineages?: unknown; runDetails?: Array<Record<string, unknown>>; observations?: Array<Record<string, unknown>> };
   } | undefined;
   if (!seed?.ngs) return;
+  lastSignature = null;
   const asRecord = (value: unknown): Record<string, unknown> | null => (value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : null);
   const item = (value: unknown): SessionToolEvidence | null => {
     const record = asRecord(value);

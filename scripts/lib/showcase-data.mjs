@@ -258,8 +258,19 @@ async function readCatalog(repositoryRoot) {
   return JSON.parse(await readFile(catalogPath, "utf8"));
 }
 
+export async function reproductionRouteIds(repositoryRoot) {
+  const routePath = path.join(repositoryRoot, "showcases", "reproduction-routes.json");
+  const ids = JSON.parse(await readFile(routePath, "utf8"));
+  if (!Array.isArray(ids) || ids.some((id) => typeof id !== "string" || !id.trim())) {
+    throw new Error("showcases/reproduction-routes.json must contain non-empty showcase IDs");
+  }
+  if (new Set(ids).size !== ids.length) throw new Error("showcases/reproduction-routes.json contains duplicate showcase IDs");
+  return ids;
+}
+
 export async function buildCatalogue(repositoryRoot) {
   const catalog = await readCatalog(repositoryRoot);
+  const reproductionIds = new Set(await reproductionRouteIds(repositoryRoot));
   const definitions = [];
 
   for (const plugin of catalog.plugins) {
@@ -369,11 +380,14 @@ export async function buildCatalogue(repositoryRoot) {
         provenance: { sourceCommit: SOURCE_COMMIT, sources, runDate: manifest.run_date, records: manifest.provenance ?? [] },
         reproductionSteps: unique(manifest.reproduction ?? []),
         recipe: recipeFor(manifest, categoryId, artifacts),
-        modes: ["lesson", "replay", "reproduce"],
+        modes: reproductionIds.has(manifest.id) ? ["lesson", "replay", "reproduce"] : ["lesson", "replay"],
         searchText: unique([summary.title, summary.summary, question, categoryId, plugin.name, ...(manifest.sources ?? [])]).join(" ").toLowerCase(),
       });
     }
   }
+  const catalogueIds = new Set(definitions.map((definition) => definition.id));
+  const unknownRoute = [...reproductionIds].find((id) => !catalogueIds.has(id));
+  if (unknownRoute) throw new Error(`Reproduction route ${unknownRoute} does not match a catalogue showcase`);
   return definitions;
 }
 

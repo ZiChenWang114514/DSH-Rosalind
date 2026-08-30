@@ -1465,8 +1465,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "kras g12c literature trail which primary studies connect kras g12c structural biology and covalent inhibition? literature life sciences literature https://pubmed.ncbi.nlm.nih.gov/24256730/ https://pubmed.ncbi.nlm.nih.gov/26739882/ https://pubmed.ncbi.nlm.nih.gov/31820981/ https://pubmed.ncbi.nlm.nih.gov/39215000/ https://pmc.ncbi.nlm.nih.gov/articles/pmc4274051/ https://pmc.ncbi.nlm.nih.gov/articles/pmc11364849/"
   },
@@ -1790,8 +1789,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "spatial transcriptomics methods which open methods papers support visium qc, normalization, and region-aware analysis? which publicly inspectable methods papers support data handling, artifact correction, denoising, spatial analysis, and region-aware inference? literature life sciences literature https://pubmed.ncbi.nlm.nih.gov/34083791/ https://pubmed.ncbi.nlm.nih.gov/35102346/ https://pubmed.ncbi.nlm.nih.gov/35624112/ https://pubmed.ncbi.nlm.nih.gov/35927477/ https://pubmed.ncbi.nlm.nih.gov/35482478/ https://pmc.ncbi.nlm.nih.gov/articles/pmc8763026/ https://pmc.ncbi.nlm.nih.gov/articles/pmc8828470/ https://pmc.ncbi.nlm.nih.gov/articles/pmc9142522/ https://pmc.ncbi.nlm.nih.gov/articles/pmc10229080/ https://pmc.ncbi.nlm.nih.gov/articles/pmc9154247/"
   },
@@ -2109,8 +2107,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "nanobody binding assay evidence which open methods describe orthogonal affinity and specificity measurements for nanobodies? which publicly inspectable records support an orthogonal affinity and specificity measurement strategy for nanobodies? literature life sciences literature https://pubmed.ncbi.nlm.nih.gov/39572731/ https://pubmed.ncbi.nlm.nih.gov/36700149/ https://pubmed.ncbi.nlm.nih.gov/40362285/ https://pubmed.ncbi.nlm.nih.gov/36439110/ https://pmc.ncbi.nlm.nih.gov/articles/pmc9869787/ https://pmc.ncbi.nlm.nih.gov/articles/pmc12071740/ https://pmc.ncbi.nlm.nih.gov/articles/pmc9682242/"
   },
@@ -3697,8 +3694,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "kras g12c public evidence map how do structure, variant, target, and compound databases describe kras g12c? how do exact public protein, variant, compound, and structure records describe the kras g12c research theme? databases life sciences databases https://www.uniprot.org/uniprotkb/p01116/entry https://www.ncbi.nlm.nih.gov/clinvar/variation/12578/ https://www.ebi.ac.uk/chembl/explore/compound/chembl4535757 https://www.rcsb.org/structure/6oim"
   },
@@ -4143,8 +4139,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "pd-l1 sequence and structure records which identifiers connect pd-l1 sequence, structures, and binding evidence? which exact public records connect the full-length human pd-l1 sequence and topology to a structure-level observation of small-molecule binding? databases life sciences databases https://www.uniprot.org/uniprotkb/q9nzq7/entry https://www.rcsb.org/structure/5j89"
   },
@@ -4594,8 +4589,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "petase sequence–structure map how can petase sequence, structure, and catalytic annotations be connected? how do exact public sequence, catalytic-reaction, and crystal-structure records describe ispetase? databases life sciences databases https://www.uniprot.org/uniprotkb/a0a0k8p6t7/entry https://www.rcsb.org/structure/5xjh https://www.rhea-db.org/rhea/49528"
   },
@@ -5046,8 +5040,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "airway rna-seq dataset discovery which public study and sample records support a small airway dexamethasone analysis? which public study record supports planning a small airway smooth-muscle dexamethasone rna-seq analysis, and what must be verified before a donor-aware model can be justified? databases life sciences databases https://www.ebi.ac.uk/biostudies/studies/e-geod-52778"
   },
@@ -6688,8 +6681,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "public sequence example acquisition how can a bundled public example be acquired and opened with source metadata? can a compact public protein record be acquired from its official endpoint, pinned to an accession and sequence version, and checked locally before it is opened in a sequence viewer? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta"
   },
@@ -7249,8 +7241,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "alignment guide tree how do pairwise distances support an explicitly exploratory guide tree? how do pairwise differences among reviewed human kras, nras, and hras sequences support a small exploratory guide tree? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta https://rest.uniprot.org/uniprotkb/p01111.fasta https://rest.uniprot.org/uniprotkb/p01112.fasta"
   },
@@ -7695,8 +7686,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "motif search and navigation where does a documented protein motif occur across displayed records? where does the compact protein query g....gks occur in reviewed human kras, nras, and hras, and what can this search establish? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta https://rest.uniprot.org/uniprotkb/p01111.fasta https://rest.uniprot.org/uniprotkb/p01112.fasta"
   },
@@ -8075,8 +8065,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "annotation and evidence tracks how can public annotations and a regional evidence track be attached and queried? can a compact regional fasta and gff3 track preserve the exact source coordinates and strand of λ ci and the three right-operator annotations? sequence biological sequence & alignment viewer https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=nc_001416.1&rettype=gbwithparts&retmode=text"
   },
@@ -8426,8 +8415,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "alignment row grouping how can rows be selected, grouped, hidden, and restored without changing matrix order? can human ras alignment rows be grouped by explicit hypervariable-region features while preserving the original matrix order? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta https://rest.uniprot.org/uniprotkb/p01111.fasta https://rest.uniprot.org/uniprotkb/p01112.fasta"
   },
@@ -8786,8 +8774,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "reversible sequence copy edit how can a copied sequence be edited while retaining source provenance? can residue 12 of reviewed human kras be changed from glycine to cysteine in a derived protein-sequence copy while proving that the source remains unchanged? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta"
   },
@@ -9130,8 +9117,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "sequence job cancellation how can a disposable analysis job be cancelled and its status inspected? can a running sequence calculation be stopped without changing its source or leaving a partial result that could be mistaken for a completed analysis? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta"
   },
@@ -9475,8 +9461,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "sequence session save and restore which view, selection, and artifact state survive a private session round trip? can source identity, selected coordinates, and view settings be represented without absolute paths and restored to an equivalent local json state? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta"
   },
@@ -9899,8 +9884,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "sequence research export how can typed sequence, table, figure, and session artifacts be exported with provenance? can an exact public sequence, deterministic analyses, source provenance, and a data-rich preview be assembled into one reproducible package whose members can be verified independently? sequence biological sequence & alignment viewer https://rest.uniprot.org/uniprotkb/p01116.fasta"
   },
@@ -11200,8 +11184,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "compute target inventory which local and ssh compute targets are registered and inspectable? ngs ngs analysis workbench installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract https://www.openssh.com/"
   },
@@ -11658,8 +11641,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "ssh compute target configuration how can nonsecret ssh and workspace references be registered for a remote target? ngs ngs analysis workbench https://www.openssh.com/ installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract"
   },
@@ -12072,8 +12054,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "runtime environment inspection which executables and environment facts are available on the selected target? ngs ngs analysis workbench installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract https://www.nextflow.io/docs/latest/ https://snakemake.readthedocs.io/"
   },
@@ -12611,8 +12592,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "nextflow readiness report is a selected workflow and compute target ready for an immediate nextflow plan? ngs ngs analysis workbench installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract https://github.com/nf-core/demo/tree/1.2.0 https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_r1.fastq.gz"
   },
@@ -13257,8 +13237,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "snakemake readiness report is a selected pipeline and environment ready for a snakemake plan? ngs ngs analysis workbench installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract https://snakemake.readthedocs.io/ https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_r1.fastq.gz"
   },
@@ -13648,8 +13627,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "saved workflow registration how can a public workflow reference be saved without executing it? can a transparent fastq qc definition be registered for reuse while keeping the public reads and generated results outside the saved workflow root? ngs ngs analysis workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz"
   },
@@ -14074,8 +14052,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "workflow version lifecycle how are workflow versions listed, updated, and activated with inspectable identifiers? can a workflow revision add reviewable qc evidence while preserving both immutable workbench versions and a visible text diff? ngs ngs analysis workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz"
   },
@@ -14422,8 +14399,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "workflow archive and restore how can a disposable saved workflow be archived and restored safely? can a disposable saved workflow be hidden and restored without losing its active version identity? ngs ngs analysis workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz"
   },
@@ -14945,8 +14921,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "small workflow execution how is an approved small plan executed and its registry identifier retained? what integrity, composition, and bounded phred-quality measurements are produced when the transparent version 2 qc core runs on the compact public fixture? ngs ngs analysis workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz"
   },
@@ -15364,8 +15339,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "run observation and lineage how are live status, final receipt, and parent-child run history interpreted? what does workbench history report before a short local state timeline is compared with actual qc artifacts? ngs ngs analysis workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz"
   },
@@ -15805,8 +15779,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "run analysis summary how can a completed run receive an evidence-linked scientific summary? what happens when an evidence-linked scientific summary is submitted while no registered workbench run exists? ngs ngs analysis workbench installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_r1.fastq.gz"
   },
@@ -16203,8 +16176,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "disposable run cancellation how is a temporary run cancelled and its terminal state verified? what cancellation evidence is available when a planned temporary workbench run could not be registered? ngs ngs analysis workbench installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract installed-plugin://rosalind-workbench/tool-contract https://www.nextflow.io/docs/latest/reference/cli.html"
   },
@@ -18117,8 +18089,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "residue selection and distance can an exact residue selection and distance measurement be reproduced in lysozyme? what is the closest deposited heavy-atom distance between lysozyme residues glu a:35 and asp a:52 in rcsb 1lyz? structure molecular structure viewer https://www.rcsb.org/structure/1lyz https://files.rcsb.org/download/1lyz.pdb"
   },
@@ -18547,8 +18518,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "heme contact environment which residues contact the heme group in myoglobin within a stated cutoff? what protein contact shell and iron-centered geometry are present around hem a:155 in deposited model 1 of rcsb 1mbn? structure molecular structure viewer https://www.rcsb.org/structure/1mbn https://files.rcsb.org/download/1mbn.pdb"
   },
@@ -18909,8 +18879,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "protein–dna hydrogen-bond screen which geometry-screened hydrogen bonds occur at a compact protein–dna interface? which protein–dna atom pairs in deposited model 1 of rcsb 1lmb satisfy a transparent heavy-atom donor/acceptor geometry screen? structure molecular structure viewer https://www.rcsb.org/structure/1lmb https://files.rcsb.org/download/1lmb.pdb"
   },
@@ -19250,8 +19219,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "whole-structure clash screen how can a bounded clash analysis be interpreted without treating crystal contacts as errors? do any admitted heavy-atom pairs in deposited model 1 of rcsb 1crn exceed a 0.4 å van der waals overlap under an explicit local method? structure molecular structure viewer https://www.rcsb.org/structure/1crn https://files.rcsb.org/download/1crn.pdb"
   },
@@ -19633,8 +19601,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "protein–inhibitor pocket inspection which pocket residues surround a bound kinase inhibitor? which protein residues in deposited model 1 of rcsb 1iep have a heavy atom within 4.0 å of bound sti a:201? structure molecular structure viewer https://www.rcsb.org/structure/1iep https://files.rcsb.org/download/1iep.pdb"
   },
@@ -20044,8 +20011,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "paired-structure rmsd how do alignment diagnostics change between open and closed conformations? which parts of *e. coli* adenylate kinase move most between the deposited open and ap5-bound conformations? structure molecular structure viewer https://www.rcsb.org/structure/4ake https://files.rcsb.org/download/4ake.pdb https://www.rcsb.org/structure/1ake https://files.rcsb.org/download/1ake.pdb"
   },
@@ -20360,8 +20326,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "geometric motif search can a small catalytic geometry be used to search public pdb assemblies? can the deposited geometry of the trypsin catalytic triad serve as an explicit query for similar residue arrangements in public pdb assemblies? structure molecular structure viewer https://www.rcsb.org/structure/3ptb https://files.rcsb.org/download/3ptb.pdb https://search.rcsb.org/"
   },
@@ -20715,8 +20680,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "public density-map inspection how does a public experimental map support cautious model-density inspection? does the retained public map contain positive density at the deposited atoms of gfp residues 65–67 under a stated, reproducible sampling method? structure molecular structure viewer https://www.rcsb.org/structure/1gfl https://files.rcsb.org/download/1gfl.pdb https://files.rcsb.org/download/1gfl-sf.cif https://www.ebi.ac.uk/pdbe/coordinates/files/1gfl.ccp4"
   },
@@ -21023,8 +20987,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "assembly and symmetry comparison how do deposited assembly and symmetry annotations alter structural interpretation? how does the public assembly record describe the organization of the 4v1w apoferritin shell? structure molecular structure viewer https://www.rcsb.org/structure/4v1w https://files.rcsb.org/download/4v1w.cif https://data.rcsb.org/rest/v1/core/entry/4v1w https://data.rcsb.org/rest/v1/core/assembly/4v1w/1 https://www.ebi.ac.uk/emdb/emd-2788"
   },
@@ -21371,8 +21334,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "residue quality assessment which public quality metrics identify residues requiring cautious interpretation? which public quality observations identify parts of the deposited 4.70 å apoferritin model that merit closer inspection? structure molecular structure viewer https://www.rcsb.org/structure/4v1w https://files.rcsb.org/download/4v1w.cif https://files.rcsb.org/validation/view/4v1w_full_validation.pdf"
   },
@@ -21845,8 +21807,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "reproducible molecular storyboard how can a multi-step camera and styling scene be saved and restored? can open and ap5-bound adenylate kinase be represented as named molecular scenes whose object visibility, transforms, styling, and camera state can be restored exactly? structure molecular structure viewer https://www.rcsb.org/structure/4ake https://www.rcsb.org/structure/1ake https://files.rcsb.org/download/4ake.pdb https://files.rcsb.org/download/1ake.pdb"
   },
@@ -22309,8 +22270,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "trajectory and movie export how can a short public trajectory be styled, sampled, rendered, and cancelled safely? can a public psf/dcd pair be verified, reduced to an inspectable five-frame subset, and prepared for structure viewer playback, movie rendering, and export without overstating unexecuted viewer work? structure molecular structure viewer https://doi.org/10.6084/m9.figshare.5108170.v1 https://api.figshare.com/v2/articles/5108170 https://ndownloader.figshare.com/files/8672230 https://ndownloader.figshare.com/files/8672074 https://github.com/mdanalysis/mdanalysisdata/blob/master/mdanalysisdata/adk_equilibrium.py"
   },
@@ -24057,8 +24017,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "local dicom whole-slide series how is a local dicom wsi series inspected and opened with frame-aware metadata? can the six publicly pinned cmu-1 dicom wsi members be acquired exactly and admitted by the current slide viewer parser? slide slide viewer https://huggingface.co/datasets/erikgabr/wsi-testdata/resolve/main/dicom/cmu-1-jp2k-33005/metadata.json https://huggingface.co/api/datasets/erikgabr/wsi-testdata/tree/main/dicom/cmu-1-jp2k-33005?recursive=false&expand=false https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
   },
@@ -24393,8 +24352,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "dicomweb whole-slide query how can a bounded dicomweb query identify a tiled wsi instance before opening it? can a public idc wsi selection with three sm instances be identified, completely pinned at its selected delivery representations, and opened by the current slide viewer dicomweb adapter? slide slide viewer https://raw.githubusercontent.com/imagingdatacommons/wg26-2026-connectathon-idc/main/data/manifest/wg26_selection.json https://learn.canceridc.dev/portal/proxy-policy"
   },
@@ -24682,8 +24640,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "ome-tiff series import how are ome dimensions and tiff members validated for a microscopy series? does the official synthetic ome-tiff contain a self-consistent c/z/t plane map, and what did the current slide viewer session actually acknowledge? slide slide viewer https://downloads.openmicroscopy.org/images/ome-tiff/2016-06/bioformats-artificial/multi-channel-z-series.ome.tif https://downloads.openmicroscopy.org/images/ome-tiff/2016-06/bioformats-artificial/readme.txt https://ome-model.readthedocs.io/en/stable/developers/sample-files.html"
   },
@@ -24964,8 +24921,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "ome-zarr multiscale image how are multiscale arrays and coordinate transforms inspected in ome-zarr? can a public idr ngff v0.4 image be characterized reproducibly from a compact metadata read, and did the current viewer create a usable session? slide slide viewer https://idr.github.io/ome-ngff-samples/ https://livingobjects.ebi.ac.uk/idr/zarr/v0.4/idr0101a/13457537.zarr"
   },
@@ -25361,8 +25317,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "roi annotation and measurement how can a user-authored region produce inspectable geometry and measurement tables? can an inspectable region geometry produce reproducible pixel and physical measurements while preserving its exact source association? slide slide viewer https://openslide.cs.cmu.edu/download/openslide-testdata/aperio/cmu-1-jp2k-33005.svs"
   },
@@ -25695,8 +25650,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "scientific layer import how are source tables mapped into a source-aligned scientific layer? can the retained mouse-brain observation table and demonstration geometry be mapped to the correct source, coordinate frame, matrix revision, and entity semantics before viewer import? slide slide viewer https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad https://doi.org/10.6084/m9.figshare.13604177.v1"
   },
@@ -26032,8 +25986,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "pathology workflow receipt how is a pathology analysis started, inspected, cancelled, and resumed with explicit status? which state evidence would be required to inspect, cancel, or recover a bounded pathology research job without confusing request acceptance with completed work? slide slide viewer https://openslide.cs.cmu.edu/download/openslide-testdata/aperio/cmu-1-jp2k-33005.svs https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
   },
@@ -26509,8 +26462,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "saved workflow recovery how are saved inputs reauthorized before a microscopy workflow resumes? which fields must remain stable, and which identities must change, when a saved microscopy workflow is recovered under fresh source authorization? slide slide viewer https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad https://doi.org/10.6084/m9.figshare.13604177.v1"
   },
@@ -26852,8 +26804,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "source authorization renewal how can an expired local-source authorization be renewed and verified? how can a reviewer verify that a renewed source and scientific-layer lease still refers to the same scientific content and entity collection? slide slide viewer https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad https://doi.org/10.6084/m9.figshare.13604177.v1"
   },
@@ -27189,8 +27140,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "dicom import and export preparation how are dicom objects inspected, prepared, and submitted for a reproducible export lesson? which metadata and safety checks can be completed locally before any dicom object import, export, or dicomweb upload is authorized? slide slide viewer https://dicom.nema.org/medical/dicom/current/output/chtml/part18/sect_f.2.html https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_b.5.html"
   },
@@ -27512,8 +27462,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "spatial research package which artifacts preserve spatial observations, layers, workflow receipts, and source references? which retained artifacts make the licensed mouse-brain spatial observations, selected expression values, source-associated geometry, and scientific-layer mapping independently inspectable? slide slide viewer https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad https://doi.org/10.6084/m9.figshare.13604177.v1 https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
   },
@@ -29841,8 +29790,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "trastuzumab cdr refinement how can cdr substitutions be prioritized without changing the her2 epitope hypothesis? which trastuzumab cdr positions directly contact her2 in public pdb 1n8z, and which distant positions can be reserved for conservative exploration? workbench rosalind workbench https://www.rcsb.org/structure/1n8z https://files.rcsb.org/download/1n8z.pdb"
   },
@@ -30181,8 +30129,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "egfr vhh candidate design which public egfr structural features support a compact vhh design exercise? workbench rosalind workbench https://www.rcsb.org/structure/4krl installed-plugin://rosalind-workbench/tool-contract"
   },
@@ -30524,8 +30471,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "il-6r vhh candidate design how can an il-6r extracellular-domain sequence guide a reproducible vhh design lesson? workbench rosalind workbench https://www.uniprot.org/uniprotkb/p08887/entry https://rest.uniprot.org/uniprotkb/p08887.json installed-plugin://rosalind-workbench/tool-contract"
   },
@@ -30841,8 +30787,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "antibody breadth across target variants which conserved target residues should be retained when proposing broader antibody recognition? workbench rosalind workbench https://www.uniprot.org/ installed-plugin://rosalind-workbench/tool-contract"
   },
@@ -31326,8 +31271,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "imatinib–abl1 docking lesson how does the abl1 inactive conformation organize an imatinib docking exercise? which abl1 pocket contacts are shared or changed between the experimental imatinib and nilotinib complexes? workbench rosalind workbench https://www.rcsb.org/structure/1iep https://www.rcsb.org/structure/3cs9 https://pubchem.ncbi.nlm.nih.gov/compound/5291 https://pubchem.ncbi.nlm.nih.gov/compound/644241"
   },
@@ -31910,8 +31854,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "jak2 selectivity design which pocket comparisons are required before proposing jak2-selective binders? what do same-ligand jak1/jak2 structures and a jak2-selective inhibitor structure reveal about pocket similarity and compound-specific contacts? workbench rosalind workbench https://www.rcsb.org/structure/3eyg https://www.rcsb.org/structure/3fup https://www.rcsb.org/structure/3krr https://pubchem.ncbi.nlm.nih.gov/compound/9926791 https://pubchem.ncbi.nlm.nih.gov/compound/46398810"
   },
@@ -32430,8 +32373,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "kras g12c covalent ligand design how can the switch-ii pocket support a transparent covalent-design lesson? which switch-ii pocket contacts recur in experimental kras g12c complexes of sotorasib and adagrasib? workbench rosalind workbench https://www.rcsb.org/structure/6oim https://www.rcsb.org/structure/6usz https://pubchem.ncbi.nlm.nih.gov/compound/137278711 https://pubchem.ncbi.nlm.nih.gov/compound/138611145"
   },
@@ -32987,8 +32929,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "egfr t790m inhibitor comparison which structural observations distinguish inhibitor binding to egfr t790m? which contacts and cys797 covalent geometry are observed for rociletinib and osimertinib in experimental egfr t790m structures? workbench rosalind workbench https://www.rcsb.org/structure/5xdk https://www.rcsb.org/structure/6jx0 https://pubchem.ncbi.nlm.nih.gov/compound/57335384 https://pubchem.ncbi.nlm.nih.gov/compound/71496458"
   },
@@ -33519,8 +33460,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "mdm2–p53 inhibitor pharmacophore which p53 hotspot contacts define an inspectable mdm2 inhibitor design exercise? which mdm2 residues contact the p53 transactivation peptide and the experimental nutlin-3a pose, and how much do those contact sets overlap? workbench rosalind workbench https://www.rcsb.org/structure/1ycr https://www.rcsb.org/structure/4hg7 https://pubchem.ncbi.nlm.nih.gov/compound/11433190"
   },
@@ -34071,8 +34011,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "ace inhibitor logd and pka how do ionizable groups alter the qualitative property profile of public ace inhibitors? how do ionizable groups and polarity differ among captopril, enalapril, and lisinopril when exact public compound records are combined with transparent local calculations? workbench rosalind workbench https://pubchem.ncbi.nlm.nih.gov/compound/44093 https://pubchem.ncbi.nlm.nih.gov/compound/5388962 https://pubchem.ncbi.nlm.nih.gov/compound/5362119"
   },
@@ -34560,8 +34499,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "therapeutic antibody developability comparison how can sequence-derived liabilities be compared for two therapeutic antibodies? what sequence-derived follow-up flags appear when the variable domains of the herceptin fab in pdb 1n8z and the pembrolizumab fab in pdb 5dk3 are analyzed with one transparent method? workbench rosalind workbench https://www.rcsb.org/structure/1n8z https://www.rcsb.org/structure/5dk3"
   },
@@ -35077,8 +35015,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "vhh aggregation-risk screen which exposed hydrophobic and charge patterns deserve follow-up in vhh candidates? which hydrophobic, charged, and chemical-liability sequence patterns merit experimental follow-up in three exact public vhh records? workbench rosalind workbench https://www.rcsb.org/structure/5m2w https://www.rcsb.org/structure/6waq https://www.rcsb.org/structure/4krl"
   },
@@ -35595,8 +35532,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "kinase inhibitor metabolism-risk review which structural alerts and public metabolism records should be reviewed for kinase inhibitors? how can exact public structures and official label statements be combined with transparent structural prompts for imatinib, gefitinib, and erlotinib? workbench rosalind workbench https://pubchem.ncbi.nlm.nih.gov/compound/5291 https://pubchem.ncbi.nlm.nih.gov/compound/123631 https://pubchem.ncbi.nlm.nih.gov/compound/176870 https://dailymed.nlm.nih.gov/dailymed/druginfo.cfm?setid=7b7cc194-29e4-4484-a364-a1ac7d7d6cf5 https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1a3c0ce7-06a1-4e04-9106-14ddb2a866a5&version=4 https://dailymed.nlm.nih.gov/dailymed/druginfo.cfm?setid=4cff04f5-3693-4d87-a9f8-a2b195e3d26e"
   },
@@ -35979,8 +35915,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "oral candidate property comparison how can five public molecular-property records support a transparent oral-candidate comparison? what can a reproducible molecule-only descriptor table reveal about five orally administered kinase-inhibitor reference drugs, and what remains unresolved? workbench rosalind workbench https://pubchem.ncbi.nlm.nih.gov/compound/5291 https://pubchem.ncbi.nlm.nih.gov/compound/123631 https://pubchem.ncbi.nlm.nih.gov/compound/176870 https://pubchem.ncbi.nlm.nih.gov/compound/71496458 https://pubchem.ncbi.nlm.nih.gov/compound/5329102"
   },
@@ -36344,8 +36279,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "petase mutation map where do reported petase substitutions lie relative to the catalytic region? workbench rosalind workbench https://www.rcsb.org/structure/5xjh installed-plugin://rosalind-workbench/tool-contract"
   },
@@ -36684,8 +36618,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "gfp chromophore pocket which residues form the local environment of the mature gfp chromophore? workbench rosalind workbench https://www.rcsb.org/structure/1ema installed-plugin://rosalind-workbench/tool-contract"
   },
@@ -37081,8 +37014,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "human ras isoform comparison which conserved and divergent positions distinguish hras, kras, and nras? which conserved and divergent positions distinguish reviewed human kras, nras, and hras sequences? workbench rosalind workbench https://rest.uniprot.org/uniprotkb/p01116.fasta https://rest.uniprot.org/uniprotkb/p01111.fasta https://rest.uniprot.org/uniprotkb/p01112.fasta"
   },
@@ -37477,8 +37409,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "adenylate kinase conformations how does a paired-structure comparison illustrate open and ligand-bound conformations? how do the public 4ake open structure and ap5-bound 1ake structure differ in a transparent chain-a coordinate comparison? workbench rosalind workbench https://www.rcsb.org/structure/4ake https://www.rcsb.org/structure/1ake https://files.rcsb.org/download/4ake.pdb https://files.rcsb.org/download/1ake.pdb"
   },
@@ -37879,8 +37810,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "breast cancer visium workflow how can a public visium dataset support spatial qc and region-aware exploration? what study-level qc facts can be reproduced from a public breast-cancer visium collection before downloading expression matrices and images? workbench rosalind workbench https://cellxgene.cziscience.com/collections/bfd55632-15e2-4dde-a1b9-02ade511fc4d https://doi.org/10.1016/j.labinv.2023.100258"
   },
@@ -38249,8 +38179,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "public fastq quality workflow which bounded quality metrics can be reproduced from a small public read subset? which sequence and base-quality metrics are reproducible from the first 500 complete reads of public ena run drr037765? workbench rosalind workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz"
   },
@@ -38621,8 +38550,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "single-cell tumour microenvironment how should public single-cell tumour data be prepared for cell-state exploration? what public metadata must be verified before cell-state exploration of an untreated triple-negative breast-cancer single-cell atlas? workbench rosalind workbench https://cellxgene.cziscience.com/collections/ceef2841-5333-46ac-92ef-ccbe0c20fe55"
   },
@@ -38905,8 +38833,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "variant-to-pathway evidence chain how can one public variant be connected to gene and pathway evidence without overstating causality? how can the public rs7903146 c>t record be connected to tcf7l2 and a curated wnt pathway without implying that a database link proves molecular or clinical causality? workbench rosalind workbench https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/ https://rest.ensembl.org/variation/homo_sapiens/rs7903146 https://reactome.org/content/detail/r-hsa-201923 https://reactome.org/content/detail/r-hsa-201722"
   },
@@ -39248,8 +39175,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "pd-l1 binding assay plan which orthogonal public assay methods could test ranked pd-l1 nanobody candidates? which orthogonal assays could determine whether five computationally prioritized kn035 variants retain pd-l1 binding, block pd-1, and behave acceptably as purified vhhs? workbench rosalind workbench https://pmc.ncbi.nlm.nih.gov/articles/pmc5341541/ https://www.rcsb.org/structure/5jds https://www.uniprot.org/uniprotkb/q9nzq7/entry"
   },
@@ -39773,8 +39699,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "boltz repeated-sampling receipt how should fixed inputs, seeds, and ranking criteria be recorded across repeated structure predictions? how stable is the model-based ranking of five kn035-derived pd-l1 nanobody candidates across five fixed-seed boltz-2 diffusion samples per candidate? workbench rosalind workbench https://github.com/jwohlwend/boltz https://www.rcsb.org/structure/5jds https://www.uniprot.org/uniprotkb/q9nzq7/entry"
   },
@@ -40202,8 +40127,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "nextflow and snakemake comparison how do two workflow engines represent an equivalent small scientific computation? can nextflow dsl2 and snakemake describe the same bounded fastq quality calculation while sharing one scientific implementation and one output contract? workbench rosalind workbench https://ftp.sra.ebi.ac.uk/vol1/fastq/drr037/drr037765/drr037765.fastq.gz https://www.nextflow.io/docs/latest/ https://snakemake.readthedocs.io/"
   },
@@ -40579,8 +40503,7 @@ export const SHOWCASES: ShowcaseDefinition[] = [
     },
     "modes": [
       "lesson",
-      "replay",
-      "reproduce"
+      "replay"
     ],
     "searchText": "cross-tool research export which files preserve source, parameters, outputs, previews, and limitations across scientific viewers? can selected evidence from four different rosalind teaching cases be packaged for inspection and transfer while keeping public observations, computed results, experimental plans, workflow plans, and provenance distinguishable? workbench rosalind workbench https://www.researchobject.org/ro-crate/1.1/ https://github.com/researchobject/ro-crate"
   }

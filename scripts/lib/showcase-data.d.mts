@@ -6,6 +6,7 @@ export function toPosix(value: string): string;
 export function mediaTypeFor(filePath: string): string;
 export function markdownSections(markdown: string): Map<string, string>;
 export function buildCatalogue(repositoryRoot: string): Promise<ShowcaseDefinition[]>;
+export function reproductionRouteIds(repositoryRoot: string): Promise<string[]>;
 export function caseFiles(repositoryRoot: string): Promise<string[]>;
 export function parseCsv(text: string): string[][];
 export function parseFasta(text: string): Array<{ id: string; sequence: string }>;
