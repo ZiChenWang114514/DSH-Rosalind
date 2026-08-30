@@ -77,7 +77,7 @@ export const WORKBENCH_CSS = String.raw`
 .rr-portal-capabilities { display: flex; justify-content: center; gap: 7px; overflow: hidden; white-space: nowrap; }
 .rr-portal-capabilities span { padding: 5px 9px; border: 1px solid var(--rr-line); border-radius: 999px; color: var(--rr-muted); font-size: 8.5px; }
 .rr-root { width: min(1100px, calc(100vw - 52px)); margin: 0 auto; padding: 18px 0 48px; }
-.rr-root--hero { width: 100%; max-height: min(650px, calc(100vh - 270px)); min-height: 390px; padding: 15px 14px 30px; overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable; border: 1px solid var(--rr-line); border-radius: 22px; background: color-mix(in srgb, var(--rr-panel) 92%, transparent); }
+.rr-root--hero { container-type: inline-size; width: 100%; max-height: min(650px, calc(100vh - 270px)); min-height: 390px; padding: 15px 14px 30px; overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable; border: 1px solid var(--rr-line); border-radius: 22px; background: color-mix(in srgb, var(--rr-panel) 92%, transparent); }
 .rr-root--session { width: 100%; max-width: 1220px; padding: 28px 30px 90px; }
 .rr-session-project { display: grid; gap: 12px; max-width: 820px; padding: 17px 18px; border: 1px solid var(--rr-line); border-radius: 16px; background: linear-gradient(130deg, color-mix(in srgb, var(--rr-accent-soft) 46%, var(--rr-panel-solid)), var(--rr-panel-solid)); }
 .rr-session-project .rr-kicker { width: max-content; padding: 0; border: 0; background: transparent; font-size: 8.5px; }
@@ -262,6 +262,15 @@ export const WORKBENCH_CSS = String.raw`
 
 @keyframes rr-fade { from { opacity: 0 } to { opacity: 1 } }
 @keyframes rr-rise { from { opacity: 0; transform: translateY(9px) scale(.985) } to { opacity: 1; transform: translateY(0) scale(1) } }
+@container (max-width: 600px) {
+  .rr-root--hero .rr-launch { grid-template-columns: auto minmax(0, 1fr); }
+  .rr-root--hero .rr-launch-count { display: none; }
+  .rr-root--hero .rr-toolbar { grid-template-columns: 1fr; }
+  .rr-root--hero .rr-search { grid-column: auto; }
+  .rr-root--hero .rr-select { min-width: 0; }
+  .rr-root--hero .rr-count { justify-self: start; }
+  .rr-root--hero .rr-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 840px) {
   .rr-portal { min-height: 610px; max-height: min(720px, calc(100vh - 220px)); padding-inline: 20px; }
   .rr-portal-main { grid-template-columns: 1fr; gap: 21px; align-content: center; padding: 30px 6px 20px; }
