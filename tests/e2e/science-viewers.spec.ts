@@ -33,6 +33,28 @@ test("viewer tabs support roving keyboard focus", async ({ page }) => {
   await expect(page.getByLabel("Per-column metric track").locator("i")).toHaveCount(9);
 });
 
+test("structure canvas redraws after the workspace width changes", async ({ page }) => {
+  await page.setViewportSize({ width: 720, height: 900 });
+  await page.goto("/?science=structure");
+  const canvas = page.getByRole("application", { name: /Local molecular coordinate view/ });
+  await expect(canvas).toBeVisible();
+  const dimensions = () => canvas.evaluate((element) => {
+    const surface = element as HTMLCanvasElement;
+    return { backingWidth: surface.width, clientWidth: surface.clientWidth, ratio: window.devicePixelRatio || 1 };
+  });
+  await expect.poll(async () => {
+    const value = await dimensions();
+    return value.backingWidth === Math.round(value.clientWidth * value.ratio);
+  }).toBe(true);
+  const narrow = await dimensions();
+
+  await page.setViewportSize({ width: 1180, height: 900 });
+  await expect.poll(async () => {
+    const value = await dimensions();
+    return value.clientWidth > narrow.clientWidth && value.backingWidth === Math.round(value.clientWidth * value.ratio);
+  }).toBe(true);
+});
+
 test("slide source controls preserve state and explain read-only layer visibility", async ({ page }) => {
   await page.goto("/?science=slide");
   const source = page.getByLabel("Slide source extent and returned regions");
