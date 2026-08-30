@@ -6,6 +6,8 @@ const client = readFileSync("lib/client.js", "utf8");
 const expectedInject = [
   "@deepseek-ai/dsh-client-runtime",
   "@deepseek-ai/dsh-client-ui-conversation",
+  "@deepseek-ai/dsh-client-ui-workspace",
+  "@deepseek-ai/dsh-client-ui-theme",
   "@deepseek-ai/dsh-client-ui-settings",
   "@deepseek-ai/dsh-client-ui-layout",
   "@deepseek-ai/dsh-client-ui-tool",

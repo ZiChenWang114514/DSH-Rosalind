@@ -14,6 +14,17 @@ import { registerSequenceClientModule } from "./modules/sequence.js";
 import { registerSlideClientModule } from "./modules/slide.js";
 import { registerStructureClientModule } from "./modules/structure.js";
 export { ScienceEcosystemPanel, SCIENCE_ECOSYSTEMS } from "./ecosystem.js";
+export {
+  activateScienceMode,
+  registerScienceMode,
+  ROSALIND_SCIENCE_AGENT_PRESET,
+  ROSALIND_SCIENCE_THEME,
+  ROSALIND_SCIENCE_THEME_ID,
+  SCIENCE_CONVERSATION_VIEW_ID,
+  SCIENCE_SIDEBAR_VIEW_ID,
+  ScienceModeIcon,
+  ScienceSidebar,
+} from "./science-mode.js";
 export { registerSequenceClientModule, SEQUENCE_CLIENT_MODULE } from "./modules/sequence.js";
 export { registerSlideClientModule, SLIDE_CLIENT_MODULE } from "./modules/slide.js";
 export { registerStructureClientModule, STRUCTURE_CLIENT_MODULE } from "./modules/structure.js";
