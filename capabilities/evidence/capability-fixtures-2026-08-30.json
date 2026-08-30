@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T20:29:25.225Z",
+  "recordedAt": "2026-08-30T21:04:51.677Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
     "version": "0.3.4"
@@ -2118,8 +2118,8 @@
   ],
   "profileInstallation": {
     "archive": "zichenwang114514-dsh-rosalind-0.3.4.tgz",
-    "archiveBytes": 17166932,
-    "archiveSha256": "9b5ca8af94569609d594d0f716aadfde0252bd0d4b00fddbe35dfb532c1b2101",
+    "archiveBytes": 17166879,
+    "archiveSha256": "cf5b00855f491750e9c6e26a1fd18cc388b4315908bbbf29cdb173f3b34bb4cb",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2297,7 +2297,7 @@
     "scripts/lib/capability-evidence.mjs": "0d4ca26443b0f7dba1c6e9a2b5554d31e6615831fc236a26cd4891f5fb2acff9",
     "scripts/record-capability-verification.mjs": "fad1258e837b0c156db777bfc7d06ad5ace91b4f5fa7ee94b6b1b976fc7c1352",
     "scripts/validate-capabilities.mjs": "8a9f4919625e2e7c291a6660688f33abf181d79a23a6d96df3e47739685f0366",
-    "scripts/verify-dsh-registration.mjs": "3b4628875530a72f6c01d86417196c9636423517a9f832220a4ca4f958c565d6",
+    "scripts/verify-dsh-registration.mjs": "6453d7bdb2eab7a0c51a80a793a107431b6bca57def606da9b3d5135a7b19a5a",
     "showcases/catalog.json": "02146f54cbba23a484b87925b7cd0d59ddbf74122702d5ea3018a1c658ea8e73",
     "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/candidates.csv": "bab5e24ca736a2d7f46ba1234a450df100c4094bd672f8711dd70d6d32d35daf",
     "showcases/rosalind-workbench/cases/rosalind-molecular-design/outputs/top5_ensemble_ranking.csv": "93103f2c3cc891dbf907b6c13f25e2c79320e377a1f2d00c52f5d09be2469955",
