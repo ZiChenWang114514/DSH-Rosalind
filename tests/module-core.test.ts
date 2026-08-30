@@ -215,6 +215,35 @@ describe("Cordis module core", () => {
     }
   });
 
+  it("reports every missing module when multiple Rosalind dependencies are disabled", async () => {
+    const { ctx } = await mount();
+    await ctx.rosalindModules.disable("sequence");
+    await ctx.rosalindModules.disable("ngs");
+
+    const rejected = await execute(ctx, "rosalind_plan", { showcase_id: "rosalind-fastq-qc", mode: "lesson" });
+    expect(rejected.isError).toBe(true);
+    if (rejected.isError) {
+      expect(rejected.error.message).toMatch(/sequence.*ngs.*disabled/i);
+    }
+
+    const opened = await execute(ctx, "rosalind_open", {});
+    expect(opened).toMatchObject({
+      isError: false,
+      value: {
+        operationCount: 83,
+        skillCount: 49,
+      },
+    });
+    if (!opened.isError) {
+      expect((opened.value as { availableServices: string[] }).availableServices).not.toEqual(expect.arrayContaining(["sequence", "ngs"]));
+    }
+
+    await ctx.rosalindModules.enable("sequence");
+    await ctx.rosalindModules.enable("ngs");
+    const restored = await execute(ctx, "rosalind_plan", { showcase_id: "rosalind-fastq-qc", mode: "lesson" });
+    expect(restored.isError).toBe(false);
+  });
+
   it("keeps one NGS session registry across module suspension and reactivation", async () => {
     const { ctx } = await mount();
     const workflowId = "module_core_retained_workflow";
@@ -248,19 +277,81 @@ describe("Cordis module core", () => {
     expect(ctx.rosalindModules.status("ngs").status).toBe("active");
 
     await ctx.rosalindModules.enable("sequence");
+    await ctx.rosalindModules.enable("sequence");
     expect(settings?.snapshot()).toMatchObject({
       "dsh-rosalind-modules": {
         modules: { sequence: true, ngs: true, rosalind: true },
       },
     });
+    expect(ctx.tools.get("sequence_open_from_chat")).toBeDefined();
+
+    await ctx.rosalindModules.disable("sequence");
+    await ctx.rosalindModules.disable("sequence");
+    expect(settings?.snapshot()).toMatchObject({
+      "dsh-rosalind-modules": {
+        modules: { sequence: false, ngs: true, rosalind: true },
+      },
+    });
+    expect(ctx.tools.get("sequence_open_from_chat")).toBeUndefined();
+
+    await ctx.rosalindModules.enable("sequence");
+    expect(ctx.rosalindModules.status("sequence")).toMatchObject({ status: "active", enabled: true });
+  });
+
+  it("retains module state after a settings write error and clears the diagnostic on retry", async () => {
+    const ctx = new Context();
+    const definitions: ModuleDefinition[] = MODULE_IDS.map((id) => ({
+      id,
+      name: id,
+      version: "1.0.0",
+      pluginId: id,
+      plugin: { name: id, apply() {} },
+      toolCount: 0,
+      skillCount: 0,
+      showcaseCount: 0,
+      checkProviders: () => [],
+    }));
+    let rejectWrite = true;
+    const persist = vi.fn(async () => {
+      if (rejectWrite) {
+        rejectWrite = false;
+        throw new Error("fixture settings write failed");
+      }
+    });
+    const registry = new ModuleRegistry(ctx, definitions, { persist });
+    try {
+      await registry.start();
+      await expect(registry.disable("literature")).rejects.toThrow(/fixture settings write failed/);
+      expect(registry.status("literature")).toMatchObject({ status: "disabled", enabled: false });
+      expect(registry.status("databases").issues).toContainEqual(expect.stringContaining("settings could not be saved"));
+
+      await registry.disable("literature");
+      expect(registry.status("databases").issues).toEqual([]);
+      expect(persist).toHaveBeenCalledTimes(2);
+    } finally {
+      await registry.destroy();
+    }
   });
 
   it("reports provider setup and startup failures, then disposes every active Fiber", async () => {
     const ctx = new Context();
     const disposed: ModuleId[] = [];
+    let sequenceStarts = 0;
+    let failedSequenceFiberDisposals = 0;
+    let databaseProviderFails = true;
     const definitions: ModuleDefinition[] = MODULE_IDS.map((id) => {
       const plugin: Plugin<void> = id === "sequence"
-        ? { name: id, apply() { throw new Error("fixture startup failure"); } }
+        ? {
+            name: id,
+            apply(moduleContext) {
+              sequenceStarts += 1;
+              if (sequenceStarts === 1) {
+                moduleContext.effect(() => () => { failedSequenceFiberDisposals += 1; }, "fixture failed startup cleanup");
+                throw new Error("fixture startup failure");
+              }
+              return () => { disposed.push(id); };
+            },
+          }
         : { name: id, apply() { return () => { disposed.push(id); }; } };
       return {
         id,
@@ -271,28 +362,44 @@ describe("Cordis module core", () => {
         toolCount: 0,
         skillCount: 0,
         showcaseCount: 0,
-        checkProviders: () => id === "literature" ? [{
-          id: "fixture-provider",
-          label: "Fixture provider",
-          kind: "public-api",
-          installed: false,
-          credentialRequired: false,
-          credentialConfigured: true,
-          runnable: false,
-          diagnostics: ["Provider setup is incomplete."],
-          checkedAt: "2026-08-30T00:00:00.000Z",
-        }] : [],
+        checkProviders: () => {
+          if (id === "databases" && databaseProviderFails) throw new Error("fixture provider status failure");
+          return id === "literature" ? [{
+            id: "fixture-provider",
+            label: "Fixture provider",
+            kind: "public-api",
+            installed: false,
+            credentialRequired: false,
+            credentialConfigured: true,
+            runnable: false,
+            diagnostics: ["Provider setup is incomplete."],
+            checkedAt: "2026-08-30T00:00:00.000Z",
+          }] : [];
+        },
       };
     });
     const sharedDispose = vi.fn();
     const registry = new ModuleRegistry(ctx, definitions, { disposeShared: sharedDispose });
     await registry.start();
     expect(registry.status("literature")).toMatchObject({ status: "needs_setup", issues: [expect.stringContaining("Provider setup is incomplete")] });
+    expect(registry.status("databases")).toMatchObject({ status: "error", issues: [expect.stringContaining("fixture provider status failure")] });
+    expect(registry.isActive("databases")).toBe(false);
     expect(registry.status("sequence")).toMatchObject({ status: "error", issues: [expect.stringContaining("fixture startup failure")] });
+    expect(registry.isActive("sequence")).toBe(false);
+    expect(failedSequenceFiberDisposals).toBe(1);
+
+    databaseProviderFails = false;
+    expect(registry.status("databases")).toMatchObject({ status: "active", issues: [] });
+    expect(registry.isActive("databases")).toBe(true);
+
+    await registry.enable("sequence");
+    await registry.enable("sequence");
+    expect(registry.status("sequence")).toMatchObject({ status: "active", enabled: true, issues: [] });
+    expect(registry.isActive("sequence")).toBe(true);
 
     await registry.destroy();
     expect(sharedDispose).toHaveBeenCalledOnce();
     expect(registry.list().every((status) => status.status === "disabled")).toBe(true);
-    expect(disposed.sort()).toEqual(MODULE_IDS.filter((id) => id !== "sequence").sort());
+    expect(disposed.sort()).toEqual(MODULE_IDS.slice().sort());
   });
 });

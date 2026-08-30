@@ -46,11 +46,18 @@ export class ModuleRegistry {
   status(id: ModuleId): ModuleStatus {
     const definition = this.definition(id);
     const isEnabled = this.enabled.get(id) === true;
-    const providers = definition.checkProviders();
+    let providers: ReturnType<ModuleDefinition["checkProviders"]> = [];
+    let providerCheckError: string | undefined;
+    try {
+      providers = definition.checkProviders();
+    } catch (cause) {
+      providerCheckError = `Provider status check failed: ${errorMessage(cause)}`;
+    }
     const providerIssues = providers
       .filter((provider) => !provider.runnable)
       .flatMap((provider) => provider.diagnostics.map((diagnostic) => `${provider.label}: ${diagnostic}`));
     const issues = [
+      ...(providerCheckError ? [providerCheckError] : []),
       ...providerIssues,
       ...(this.persistenceIssue ? [this.persistenceIssue] : []),
     ];
@@ -61,6 +68,8 @@ export class ModuleRegistry {
       ? "disabled"
       : startupError
         ? "error"
+        : providerCheckError
+          ? "error"
         : this.active.has(id) && providers.length > 0 && !providers.some((provider) => provider.runnable)
           ? "needs_setup"
           : this.active.has(id)
@@ -87,7 +96,13 @@ export class ModuleRegistry {
   }
 
   isActive(id: ModuleId): boolean {
-    return this.enabled.get(id) === true && this.active.has(id) && !this.errors.has(id);
+    if (this.enabled.get(id) !== true || !this.active.has(id) || this.errors.has(id)) return false;
+    try {
+      this.definition(id).checkProviders();
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   start(initial: Partial<ModuleEnabledState> = {}): Promise<void> {
@@ -159,7 +174,14 @@ export class ModuleRegistry {
       await fiber;
       this.active.add(id);
     } catch (cause) {
-      this.errors.set(id, `Module startup failed: ${errorMessage(cause)}`);
+      this.fibers.delete(id);
+      let issue = `Module startup failed: ${errorMessage(cause)}`;
+      try {
+        await fiber.dispose();
+      } catch (disposeCause) {
+        issue += ` Module cleanup failed: ${errorMessage(disposeCause)}`;
+      }
+      this.errors.set(id, issue);
     }
   }
 

@@ -14,7 +14,8 @@ import type {
   ShowcaseDefinition,
   ShowcaseMode,
 } from "../shared/types.js";
-import { MODULE_IDS, moduleIdForPlugin, type ModuleId } from "../modules/types.js";
+import { modulesRequiredByShowcase } from "../modules/dependencies.js";
+import type { ModuleId } from "../modules/types.js";
 import { resolveInside, ShowcaseCatalog } from "./catalog.js";
 import { ProviderRegistry, providerRequiresConfirmation } from "./providers.js";
 import { reproduceShowcase, type NgsReproductionRequest, type ReproductionResult } from "./reproduction.js";
@@ -598,14 +599,7 @@ export class RosalindRuntime {
   }
 
   private requiredModules(showcase: ShowcaseDefinition): ModuleId[] {
-    const required = new Set<ModuleId>(["rosalind"]);
-    const owner = moduleIdForPlugin(showcase.pluginId);
-    if (owner) required.add(owner);
-    for (const server of showcase.requiredMcpServers) {
-      const suffix = server.split(":").at(-1);
-      if (suffix && MODULE_IDS.includes(suffix as ModuleId)) required.add(suffix as ModuleId);
-    }
-    return MODULE_IDS.filter((id) => required.has(id));
+    return modulesRequiredByShowcase(showcase);
   }
 
   private assertShowcaseAvailable(showcase: ShowcaseDefinition, action: string): void {
