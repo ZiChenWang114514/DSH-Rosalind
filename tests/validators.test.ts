@@ -8,6 +8,12 @@ import type { ShowcaseDefinition } from "../src/shared/types.js";
 import { canonicalArtifactBuffer, canonicalArtifactSha256, validateShowcase } from "../src/host/validators.js";
 
 function fixtureEntry(artifact: ShowcaseDefinition["artifacts"][number]): ShowcaseDefinition {
+  const claim = {
+    id: "validator-fixture:computed:1",
+    statement: "The fixture artifact was generated.",
+    kind: "computed" as const,
+    artifactIds: [artifact.id],
+  };
   return {
     id: "validator-fixture",
     pluginId: "test",
@@ -27,13 +33,13 @@ function fixtureEntry(artifact: ShowcaseDefinition["artifacts"][number]): Showca
     computedResults: ["A fixture result."],
     interpretation: ["A fixture interpretation."],
     limitations: ["A fixture limitation."],
-    claims: [],
+    claims: [claim],
     requiredMcpServers: ["test"],
     requiredOperations: ["test.validate"],
     requiredSkills: ["test-validator"],
     fixtures: [artifact.id],
     expectedArtifacts: [artifact.id],
-    scientificAssertions: [],
+    scientificAssertions: [claim],
     visualAssertions: [],
     provenance: { sourceCommit: "fixture", sources: [], runDate: "2026-08-30" },
     recipe: { adapter: "fixture", providerIds: ["local"], strategy: "local", requiredInputs: [], expectedOutputs: [], checks: [] },
@@ -48,6 +54,10 @@ function artifactRecord(bytes: number, sha256: string) {
 
 function artifactCheck(result: ReturnType<typeof validateShowcase>) {
   return result.checks.find((item) => item.name === "validator-fixture:artifact.txt")!;
+}
+
+function scientificCheck(result: ReturnType<typeof validateShowcase>, name: string) {
+  return result.checks.find((item) => item.name === name)!;
 }
 
 describe("canonical text artifact validation", () => {
@@ -81,5 +91,30 @@ describe("canonical text artifact validation", () => {
     } finally {
       rmSync(root, { recursive: true, force: true });
     }
+  });
+});
+
+describe("scientific record validation", () => {
+  it("rejects duplicate artifact and claim IDs", () => {
+    const artifact = artifactRecord(11, "e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee");
+    const entry = fixtureEntry(artifact);
+    entry.artifacts.push({ ...artifact });
+    entry.claims.push({ ...entry.claims[0]! });
+
+    const result = validateShowcase(process.cwd(), entry);
+    expect(scientificCheck(result, "artifact IDs are unique").ok).toBe(false);
+    expect(scientificCheck(result, "claim IDs are unique").ok).toBe(false);
+  });
+
+  it("rejects scientific assertions that drift from observation and computed claims", () => {
+    const artifact = artifactRecord(11, "e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee");
+    const entry = fixtureEntry(artifact);
+    entry.scientificAssertions[0] = {
+      ...entry.scientificAssertions[0]!,
+      statement: "A different statement was inserted.",
+    };
+
+    const result = validateShowcase(process.cwd(), entry);
+    expect(scientificCheck(result, "scientific assertions match observation and computed claims").ok).toBe(false);
   });
 });

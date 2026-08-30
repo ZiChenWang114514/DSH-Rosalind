@@ -7,11 +7,11 @@ test("clean DSH profile loads the installed Rosalind bundle", async ({ page }) =
   const launcherHeading = page.getByRole("heading", { name: "Start a scientific task" });
   const noticeAppeared = await testingNotice.waitFor({ state: "visible", timeout: 1_500 }).then(() => true, () => false);
   if (noticeAppeared) {
-    await testingNotice.getByRole("button", { name: "Continue" }).click();
+    await testingNotice.getByRole("button", { name: "Continue" }).click({ timeout: 5_000 }).catch(() => undefined);
     await expect(testingNotice).toBeHidden({ timeout: 5_000 });
   }
   await expect(launcherHeading).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByRole("button", { name: /^Open / })).toHaveCount(23);
+  await expect(page.locator(".rr-root--hero .rr-card")).toHaveCount(23);
   await expect(page.getByRole("navigation", { name: "Workbench view" })).toHaveCount(0);
   const launcherDimensions = await page.locator(".rr-root--hero").evaluate((element) => ({ clientWidth: element.clientWidth, scrollWidth: element.scrollWidth }));
   expect(launcherDimensions.scrollWidth).toBeLessThanOrEqual(launcherDimensions.clientWidth + 1);

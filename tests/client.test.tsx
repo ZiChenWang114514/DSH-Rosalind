@@ -108,4 +108,37 @@ describe("Workbench catalogue", () => {
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
+
+  it("keeps modal focus inside the project details", () => {
+    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+    fireEvent.click(screen.getByRole("button", { name: "Open Provenance-bearing GFP figure" }));
+    const dialog = screen.getByRole("dialog");
+    const close = within(dialog).getByRole("button", { name: "Close project details" });
+    const action = within(dialog).getByRole("button", { name: "Start lesson" });
+
+    action.focus();
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(close).toHaveFocus();
+
+    fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
+    expect(action).toHaveFocus();
+  });
+
+  it("uses roving focus and linked panels for project detail tabs", () => {
+    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    const dialog = screen.getByRole("dialog");
+    const tabs = within(dialog).getAllByRole("tab");
+    const selected = within(dialog).getByRole("tab", { selected: true });
+    const selectedIndex = tabs.indexOf(selected);
+    const next = tabs[(selectedIndex + 1) % tabs.length]!;
+
+    expect(selected).toHaveAttribute("tabindex", "0");
+    expect(next).toHaveAttribute("tabindex", "-1");
+    selected.focus();
+    fireEvent.keyDown(selected, { key: "ArrowRight" });
+    expect(next).toHaveFocus();
+    expect(next).toHaveAttribute("aria-selected", "true");
+    expect(within(dialog).getByRole("tabpanel")).toHaveAttribute("aria-labelledby", next.id);
+  });
 });
