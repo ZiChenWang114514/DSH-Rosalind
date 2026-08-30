@@ -105,23 +105,23 @@ describe("ProviderSettings", () => {
     render(<ProviderSettings scope={new FakeSettingsScope(value)} />);
 
     expect(screen.getByRole("heading", { name: /DSH-Rosalind 模块设置/ })).toBeInTheDocument();
-    expect(screen.getByText(/插件清单仍显示一个 DSH-Rosalind/)).toBeInTheDocument();
+    expect(screen.getByText(/DSH 将它显示为一个 DSH-Rosalind 插件/)).toBeInTheDocument();
     expect(screen.getAllByRole("switch")).toHaveLength(7);
-    expect(screen.getByText("需要配置")).toBeInTheDocument();
-    expect(screen.getByText("出现错误")).toBeInTheDocument();
+    expect(screen.getByText("等待配置")).toBeInTheDocument();
+    expect(screen.getByText("运行异常")).toBeInTheDocument();
     expect(screen.getAllByText("已停用").length).toBeGreaterThan(0);
-    expect(screen.getByText(/不代表工具曾经成功执行/)).toBeInTheDocument();
+    expect(screen.getByText(/不代表工具已经成功运行/)).toBeInTheDocument();
   });
 
   it("writes the complete desired module selection and follows the live snapshot", async () => {
     const scope = new FakeSettingsScope();
     render(<ProviderSettings scope={scope} />);
-    const toggle = screen.getByRole("switch", { name: "停用Biological Sequence Viewer" });
+    const toggle = screen.getByRole("switch", { name: "停用 Biological Sequence Viewer" });
     fireEvent.click(toggle);
 
     await waitFor(() => expect(scope.writes).toHaveLength(1));
     expect(scope.writes[0]).toMatchObject({ field: "modules", value: { sequence: false, ngs: true, rosalind: true } });
-    expect(screen.getByRole("switch", { name: "启用Biological Sequence Viewer" })).toHaveAttribute("aria-checked", "false");
+    expect(screen.getByRole("switch", { name: "启用 Biological Sequence Viewer" })).toHaveAttribute("aria-checked", "false");
     expect(within(screen.getByRole("article", { name: "Biological Sequence Viewer" })).getAllByText("已停用").length).toBeGreaterThan(0);
   });
 
@@ -142,41 +142,46 @@ describe("ProviderSettings", () => {
     });
     render(<ProviderSettings scope={new FakeSettingsScope(value)} />);
     const card = screen.getByRole("article", { name: "Life Sciences Literature" });
-    fireEvent.click(within(card).getByText("查看 Skills、工具、Showcases 与配置提示"));
+    fireEvent.click(within(card).getByText("查看技能、工具、案例与配置说明"));
 
     expect(within(card).getByText(/literature_request/)).toBeInTheDocument();
     expect(within(card).getByText("rosalind-literature-ncbi-entrez")).toBeInTheDocument();
     expect(within(card).getByText(/DSH_ROSALIND_ENABLE_LIVE_NETWORK/)).toBeInTheDocument();
-    expect(within(card).getByLabelText("Life Sciences Literature provider readiness")).toHaveTextContent("NCBI Entrez：缺少凭据；凭据未配置");
-    expect(within(card).getByRole("heading", { name: /已审核 Showcases/ })).toBeInTheDocument();
+    expect(within(card).getByLabelText("Life Sciences Literature 服务准备情况")).toHaveTextContent("NCBI Entrez：缺少凭据；凭据未配置");
+    expect(within(card).getByRole("heading", { name: /已审核案例/ })).toBeInTheDocument();
   });
 
   it("reports rejected writes without changing the selected state", async () => {
     const scope = new FakeSettingsScope();
     scope.failNextWrite = new Error("host refused fixture write");
     render(<ProviderSettings scope={scope} />);
-    fireEvent.click(screen.getByRole("switch", { name: "停用NGS Analysis Workbench" }));
+    fireEvent.click(screen.getByRole("switch", { name: "停用 NGS Analysis Workbench" }));
 
-    expect(await screen.findByRole("alert")).toHaveTextContent("设置保存失败：host refused fixture write");
-    expect(screen.getByRole("switch", { name: "停用NGS Analysis Workbench" })).toHaveAttribute("aria-checked", "true");
+    expect(await screen.findByRole("alert")).toHaveTextContent("保存设置失败：host refused fixture write");
+    expect(screen.getByRole("switch", { name: "停用 NGS Analysis Workbench" })).toHaveAttribute("aria-checked", "true");
   });
 
   it("uses native keyboard controls and a scrollable responsive layout", () => {
     render(<ProviderSettings scope={new FakeSettingsScope()} />);
     const page = screen.getByRole("region", { name: "DSH-Rosalind 模块设置" });
     const grid = screen.getByLabelText("七个科学模块");
-    expect(page).toHaveStyle({ overflowY: "auto" });
-    expect(page.style.maxHeight).toContain("100dvh");
-    expect(grid.style.gridTemplateColumns).toContain("minmax(min(100%, 25rem)");
+    expect(page).toHaveClass("rr-settings");
+    expect(grid).toHaveClass("rr-settings__grid");
     expect(screen.getAllByRole("switch").every((control) => control.tagName === "BUTTON")).toBe(true);
-    expect(screen.getAllByText("查看 Skills、工具、Showcases 与配置提示").every((summary) => summary.tagName === "SUMMARY")).toBe(true);
+    expect(screen.getAllByText("查看技能、工具、案例与配置说明").every((summary) => summary.tagName === "SUMMARY")).toBe(true);
   });
 
   it("handles loading and unavailable settings without editable controls", () => {
     const { rerender } = render(<ProviderSettings scope={new FakeSettingsScope(null, "loading")} />);
-    expect(screen.getByText("正在读取主机设置与模块状态…")).toBeInTheDocument();
+    expect(screen.getByText("正在读取设置与模块状态…")).toBeInTheDocument();
     expect(screen.queryAllByRole("switch")).toHaveLength(0);
     rerender(<ProviderSettings scope={new FakeSettingsScope(null, "unavailable")} />);
-    expect(screen.getByRole("alert")).toHaveTextContent("当前连接无法读取主机设置");
+    expect(screen.getByRole("alert")).toHaveTextContent("当前连接无法读取设置");
+  });
+
+  it("uses namespaced CSS classes instead of inline layout styles", () => {
+    render(<ProviderSettings scope={new FakeSettingsScope()} />);
+    expect(screen.getAllByRole("article").every((card) => card.getAttribute("style") === null)).toBe(true);
+    expect(screen.getByRole("article", { name: "Life Sciences Literature" })).toHaveClass("rr-settings__card");
   });
 });

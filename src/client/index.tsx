@@ -7,6 +7,7 @@ import type {} from "@deepseek-ai/dsh-client-ui-tool/client";
 import { ShowcaseDetailOverlay, ShowcaseDetailPanel, Workbench } from "./components.js";
 import { installResearchProjectHostAdapter } from "./project-flow.js";
 import { ProviderSettings } from "./settings.js";
+import { SETTINGS_CSS } from "./settings-styles.js";
 import { SCIENCE_VIEWER_CSS } from "./science-viewers.css.js";
 import { installWorkbenchStyles, WORKBENCH_CSS } from "./styles.js";
 import { RosalindToolCard, ScienceToolCard } from "./toolview.js";
@@ -19,6 +20,8 @@ export {
   activateScienceMode,
   registerScienceMode,
   ROSALIND_SCIENCE_AGENT_PRESET,
+  ROSALIND_SCIENCE_DARK_THEME,
+  ROSALIND_SCIENCE_DARK_THEME_ID,
   ROSALIND_SCIENCE_THEME,
   ROSALIND_SCIENCE_THEME_ID,
   SCIENCE_CONVERSATION_VIEW_ID,
@@ -44,7 +47,7 @@ export const name = "dsh-rosalind-client";
 export const inject = ["slots"];
 
 function installStyles(): () => void {
-  return installWorkbenchStyles(`${WORKBENCH_CSS}\n${SCIENCE_VIEWER_CSS}`);
+  return installWorkbenchStyles(`${WORKBENCH_CSS}\n${SCIENCE_VIEWER_CSS}\n${SETTINGS_CSS}`);
 }
 
 export function apply(ctx: ClientContext): void {

@@ -7,6 +7,7 @@ import { MODULE_SETTING_IDS, type ModuleSettingId, type ModuleSettingsView, type
 export const SCIENCE_SIDEBAR_VIEW_ID = "science";
 export const SCIENCE_CONVERSATION_VIEW_ID = "dsh-rosalind";
 export const ROSALIND_SCIENCE_THEME_ID = "rosalind-science";
+export const ROSALIND_SCIENCE_DARK_THEME_ID = "rosalind-science-dark";
 export const ROSALIND_SCIENCE_AGENT_PRESET = "rosalind-science";
 
 export interface ScienceModeSession {
@@ -17,7 +18,7 @@ export interface ScienceModeSession {
 
 export interface ScienceModeActions {
   currentSession(): ScienceModeSession | undefined;
-  selectTheme(): void;
+  selectTheme(): string | undefined;
   selectSidebar(): void;
   selectConversationView(sessionId: string): void;
   composeBlankSession(sessionId: string): Promise<ScienceCompositionResult>;
@@ -88,6 +89,7 @@ function result(snapshot: ScienceModeSnapshot): ScienceModeResult {
 export function createScienceModeController(actions: ScienceModeActions): ScienceModeController {
   let enabled = false;
   let priorTheme: string | undefined;
+  let scienceTheme: string | undefined;
   let priorSidebar: string | undefined;
   const prepared = new Map<string, PreparedSession>();
   const listeners = new Set<() => void>();
@@ -158,9 +160,12 @@ export function createScienceModeController(actions: ScienceModeActions): Scienc
       try { actions.restoreConversationView(current.id, preparedSession.view); }
       catch (cause) { notes.push(`原会话视图未恢复：${cause instanceof Error ? cause.message : String(cause)}`); }
     } else if (current && preparedSession && !actions.restoreConversationView) notes.push("当前 Harness 未提供会话视图读取接口，保留科学视图。");
-    if (priorTheme) {
+    const currentTheme = actions.currentTheme?.();
+    if (priorTheme && (currentTheme === undefined || currentTheme === scienceTheme || currentTheme === priorTheme)) {
       try { actions.restoreTheme?.(priorTheme); }
       catch (cause) { notes.push(`原主题未恢复：${cause instanceof Error ? cause.message : String(cause)}`); }
+    } else if (priorTheme && currentTheme !== scienceTheme) {
+      notes.push("保留了你在科学模式中选择的新主题。");
     }
     if (priorSidebar) {
       try { actions.restoreSidebar?.(priorSidebar); }
@@ -168,6 +173,7 @@ export function createScienceModeController(actions: ScienceModeActions): Scienc
     }
     prepared.clear();
     enabled = false;
+    scienceTheme = undefined;
     publish({ enabled: false, composed: false, busy: false, ...(current ? { sessionId: current.id } : {}), message: notes.length > 0 ? `科学模式已关闭；${notes.join(" ")}` : "已恢复启用科学模式前的主题、侧栏与会话状态。" });
     return result(snapshot);
   }
@@ -185,7 +191,7 @@ export function createScienceModeController(actions: ScienceModeActions): Scienc
       priorTheme = actions.currentTheme?.();
       priorSidebar = actions.currentSidebar?.();
       enabled = true;
-      actions.selectTheme();
+      scienceTheme = actions.selectTheme() ?? ROSALIND_SCIENCE_THEME_ID;
       actions.selectSidebar();
       publish({ enabled: true, composed: false, busy: true });
       await prepareCurrentSession();
@@ -206,10 +212,10 @@ export interface ScienceSidebarProps {
 }
 
 const STATE_LABELS: Record<ModuleSettingState, string> = {
-  active: "正常运行",
+  active: "运行正常",
   disabled: "已停用",
-  needs_setup: "需要配置",
-  error: "出现错误",
+  needs_setup: "等待配置",
+  error: "运行异常",
 };
 
 function moduleColor(id: ModuleSettingId): string {
@@ -337,6 +343,40 @@ export const ROSALIND_SCIENCE_THEME = Object.freeze({
   },
 });
 
+export const ROSALIND_SCIENCE_DARK_THEME = Object.freeze({
+  id: ROSALIND_SCIENCE_DARK_THEME_ID,
+  colorScheme: "dark" as const,
+  tokens: {
+    "--dsw-alias-bg-base": "#171c1a",
+    "--dsw-alias-bg-layer-1": "#202724",
+    "--dsw-alias-bg-layer-2": "#29312e",
+    "--dsw-alias-border-l2": "rgba(222, 235, 228, 0.12)",
+    "--dsw-alias-brand-primary": "#8eb5a7",
+    "--dsw-alias-brand-text": "#b9d8cd",
+    "--dsw-alias-button-primary-fill": "#587f71",
+    "--dsw-alias-button-primary-hover": "#6d9a89",
+    "--dsw-alias-interactive-bg-active": "rgba(142, 181, 167, 0.18)",
+    "--dsw-alias-interactive-bg-hover": "rgba(142, 181, 167, 0.1)",
+    "--dsw-alias-label-primary": "#edf1ef",
+    "--dsw-alias-label-secondary": "#bbc4c0",
+    "--rr-bg": "#171c1a",
+    "--rr-panel": "rgba(31, 38, 35, .88)",
+    "--rr-panel-solid": "#202724",
+    "--rr-panel-muted": "#29312e",
+    "--rr-ink": "#edf1ef",
+    "--rr-muted": "#bbc4c0",
+    "--rr-faint": "#9aa6a0",
+    "--rr-line": "rgba(222, 235, 228, .12)",
+    "--rr-accent": "#8eb5a7",
+    "--rr-accent-ink": "#b9d8cd",
+    "--rr-accent-soft": "#2a423a",
+  },
+});
+
+function scienceThemeFor(preference: string | undefined): string {
+  return preference?.toLowerCase().includes("dark") ? ROSALIND_SCIENCE_DARK_THEME_ID : ROSALIND_SCIENCE_THEME_ID;
+}
+
 export interface ScienceModeRegistration {
   sidebarAvailable: boolean;
   dispose(): void;
@@ -361,7 +401,11 @@ export function registerScienceMode(ctx: ClientContext, moduleSettings: Settings
       const session = state.current === undefined ? undefined : state.byId[state.current];
       return session === undefined ? undefined : { id: session.id, blank: session.blank, ...(session.agentPreset ? { agentPreset: session.agentPreset } : {}) };
     },
-    selectTheme: () => { theme.setTheme(ROSALIND_SCIENCE_THEME_ID); },
+    selectTheme: () => {
+      const id = scienceThemeFor(theme.getTheme().preference);
+      theme.setTheme(id);
+      return id;
+    },
     selectSidebar: () => { workspaceSidebar?.select(SCIENCE_SIDEBAR_VIEW_ID); },
     selectConversationView(sessionId) {
       const conversation = sessions.scope(sessionId)?.get("conversation") as ConversationService | undefined;
@@ -393,6 +437,7 @@ export function registerScienceMode(ctx: ClientContext, moduleSettings: Settings
   };
   const controller = createScienceModeController(actions);
   const disposeTheme = theme.register(ROSALIND_SCIENCE_THEME);
+  const disposeDarkTheme = theme.register(ROSALIND_SCIENCE_DARK_THEME);
   const disposeSidebar = workspaceSidebar?.register({
     id: SCIENCE_SIDEBAR_VIEW_ID,
     label: "科学",
@@ -405,6 +450,7 @@ export function registerScienceMode(ctx: ClientContext, moduleSettings: Settings
     dispose() {
       controller.dispose();
       disposeSidebar?.();
+      disposeDarkTheme();
       disposeTheme();
     },
   };

@@ -8,6 +8,7 @@ import {
   createScienceModeController,
   ensureRosalindSciencePreset,
   registerScienceMode,
+  ROSALIND_SCIENCE_DARK_THEME_ID,
   ScienceSidebar,
   type ScienceModeActions,
 } from "../src/client/science-mode.js";
@@ -128,6 +129,27 @@ describe("Rosalind science mode", () => {
     expect(adapter.selectPreset).toHaveBeenCalledWith("blank-1", "standard");
   });
 
+  it("uses a dark science theme for dark users and preserves a later manual theme choice", async () => {
+    let selectedTheme = "dark";
+    const adapter = Object.assign(actions({ id: "blank-1", blank: true, agentPreset: "standard" }), {
+      currentTheme: vi.fn(() => selectedTheme),
+      selectTheme: vi.fn(() => {
+        selectedTheme = ROSALIND_SCIENCE_DARK_THEME_ID;
+        return ROSALIND_SCIENCE_DARK_THEME_ID;
+      }),
+      restoreTheme: vi.fn(),
+      selectPreset: vi.fn(async () => ({ selected: true })),
+    });
+    const controller = createScienceModeController(adapter);
+    await controller.toggle();
+    expect(adapter.selectTheme).toHaveBeenCalledOnce();
+    expect(selectedTheme).toBe(ROSALIND_SCIENCE_DARK_THEME_ID);
+    selectedTheme = "user-picked-theme";
+    await controller.toggle();
+    expect(adapter.restoreTheme).not.toHaveBeenCalled();
+    expect(controller.getSnapshot().message).toMatch(/保留了你在科学模式中选择的新主题/);
+  });
+
   it("composes the same blank session again after science mode is disabled", async () => {
     const adapter = Object.assign(actions({ id: "blank-1", blank: true, agentPreset: "standard" }), {
       selectPreset: vi.fn(async () => ({ selected: true })),
@@ -183,9 +205,9 @@ describe("Rosalind science mode", () => {
     const { rerender } = render(<ScienceSidebar wide controller={controller} moduleSettings={scope as never} />);
     const list = screen.getByRole("list");
     expect(within(list).getAllByRole("listitem")).toHaveLength(7);
-    expect(screen.getByText("需要配置")).toBeTruthy();
+    expect(screen.getByText("等待配置")).toBeTruthy();
     expect(screen.getByText("已停用")).toBeTruthy();
-    expect(screen.getByText("出现错误")).toBeTruthy();
+    expect(screen.getByText("运行异常")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "启用科学模式" }));
     await waitFor(() => expect(screen.getByText("恢复原主题与会话")).toBeTruthy());
     rerender(<ScienceSidebar wide={false} controller={controller} moduleSettings={scope as never} />);
@@ -206,6 +228,7 @@ describe("Rosalind science mode", () => {
   it("keeps the plugin usable when an older Harness has no workspace sidebar service", () => {
     const register = vi.fn(() => vi.fn());
     const disposeTheme = vi.fn();
+    const disposeDarkTheme = vi.fn();
     const unsubscribeSessions = vi.fn();
     const ctx = {
       get(name: string) {
@@ -215,11 +238,12 @@ describe("Rosalind science mode", () => {
         return { list: { getSnapshot: () => ({ current: undefined, byId: {} }), subscribe: vi.fn(() => unsubscribeSessions) }, scope: () => undefined, noteAgentPreset: vi.fn() };
       },
     } as never;
-    register.mockReturnValue(disposeTheme);
+    register.mockReturnValueOnce(disposeTheme).mockReturnValueOnce(disposeDarkTheme);
     const registration = registerScienceMode(ctx, moduleScope() as never);
     expect(registration.sidebarAvailable).toBe(false);
     registration.dispose();
     expect(unsubscribeSessions).toHaveBeenCalledOnce();
     expect(disposeTheme).toHaveBeenCalledOnce();
+    expect(disposeDarkTheme).toHaveBeenCalledOnce();
   });
 });
