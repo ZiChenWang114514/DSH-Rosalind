@@ -1,9 +1,8 @@
-import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { assertObjectJsonSchema } from "@deepseek-ai/dsh-tools";
-import { hasArchiveIdentity, hasPassedVitestCase } from "./lib/capability-evidence.mjs";
+import { capabilityContentDigest, hasArchiveIdentity, hasPassedVitestCase } from "./lib/capability-evidence.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const manifest = JSON.parse(readFileSync(path.join(root, "capabilities", "capability-manifest.json"), "utf8"));
@@ -73,7 +72,7 @@ for (const run of runs.values()) {
       failures.push(`${run.id}: content-identity file does not exist: ${file}`);
       continue;
     }
-    const digest = createHash("sha256").update(readFileSync(absolutePath)).digest("hex");
+    const digest = capabilityContentDigest(readFileSync(absolutePath));
     if (machineRecord.contentIdentities?.[file] !== digest) failures.push(`${run.id}: machine evidence hash differs for ${file}`);
   }
   if (machineRecord.schemaVersion !== 2) failures.push(`${run.id}: machine evidence must use schemaVersion 2 with per-case Vitest records`);

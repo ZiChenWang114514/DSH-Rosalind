@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { publicVitestCommand, sanitizeVitestReport } from "./lib/capability-evidence.mjs";
+import { capabilityContentDigest, publicVitestCommand, sanitizeVitestReport } from "./lib/capability-evidence.mjs";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
 const runId = "capability-fixtures-2026-08-30";
@@ -107,7 +106,7 @@ async function contentIdentityFiles() {
 
 async function digest(relativeFile) {
   const content = await readFile(path.join(repositoryRoot, relativeFile));
-  return createHash("sha256").update(content).digest("hex");
+  return capabilityContentDigest(content);
 }
 
 function runVitest(vitestCli, files, reportPath, config) {

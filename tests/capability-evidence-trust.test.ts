@@ -3,13 +3,19 @@ import { describe, expect, it } from "vitest";
 // The verification helper is deliberately plain Node ESM because the release
 // validator runs before TypeScript is compiled.
 // @ts-expect-error The Node-side helper has no emitted declaration file.
-import { hasArchiveIdentity, hasPassedVitestCase, publicVitestCommand, sanitizeVitestReport } from "../scripts/lib/capability-evidence.mjs";
+import { capabilityContentDigest, hasArchiveIdentity, hasPassedVitestCase, publicVitestCommand, sanitizeVitestReport } from "../scripts/lib/capability-evidence.mjs";
 
 describe("capability execution evidence", () => {
   const evidence = {
     path: "tests/structure-runtime.test.ts",
     testCase: "StructureService local raster and scientific analyses renders GFP coordinates to a real PNG and retains a reproducible rendering record",
   };
+
+  it("uses a source digest that is stable across worktree line endings", () => {
+    expect(capabilityContentDigest("alpha\nbeta\n")).toBe(capabilityContentDigest("alpha\r\nbeta\r\n"));
+    expect(capabilityContentDigest("alpha\nbeta\n")).toBe(capabilityContentDigest("alpha\rbeta\r"));
+    expect(capabilityContentDigest("alpha\nbeta\n")).not.toBe(capabilityContentDigest("alpha\ngamma\n"));
+  });
 
   it("accepts only the exact passed Vitest case for a capability", () => {
     const record = { testCases: [{ ...evidence, file: evidence.path, fullName: evidence.testCase, status: "passed" }] };

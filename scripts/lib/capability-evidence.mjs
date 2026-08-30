@@ -1,3 +1,10 @@
+import { createHash } from "node:crypto";
+
+export function capabilityContentDigest(content) {
+  const text = Buffer.isBuffer(content) ? content.toString("utf8") : String(content);
+  return createHash("sha256").update(text.replace(/\r\n?/g, "\n"), "utf8").digest("hex");
+}
+
 export function normaliseCapabilityEvidenceFile(file) {
   return String(file ?? "").split("\\").join("/");
 }

@@ -1,6 +1,7 @@
-import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+
+import { capabilityContentDigest } from "./lib/capability-evidence.mjs";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
 const coveragePath = process.env.ROSALIND_COVERAGE_PATH
@@ -362,7 +363,7 @@ const verificationIdentityFiles = [...new Set([
 ])].filter((file) => file !== "src/generated/catalog.ts" && file !== "src/generated/.gitkeep").sort();
 
 async function contentIdentity(relativePath) {
-  return createHash("sha256").update(await readFile(path.join(repositoryRoot, relativePath))).digest("hex");
+  return capabilityContentDigest(await readFile(path.join(repositoryRoot, relativePath)));
 }
 
 if (
