@@ -1,11 +1,11 @@
 // @vitest-environment jsdom
 
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { LocalStructureCanvas } from "../src/client/viewers/structure/canvas.js";
 
-afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+afterEach(() => { cleanup(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 function canvasContext(): CanvasRenderingContext2D {
   return { setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), beginPath: vi.fn(), arc: vi.fn(), fill: vi.fn(), stroke: vi.fn(), fillText: vi.fn() } as unknown as CanvasRenderingContext2D;
@@ -22,6 +22,34 @@ function mount(onSelectAtom = vi.fn()) {
 }
 
 describe("LocalStructureCanvas", () => {
+  it("redraws its backing buffer when the workspace changes size", () => {
+    const context = canvasContext();
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(context);
+    let width = 200;
+    let height = 160;
+    vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockImplementation(() => width);
+    vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockImplementation(() => height);
+    let notifyResize: ResizeObserverCallback | undefined;
+    class WorkspaceResizeObserver {
+      constructor(callback: ResizeObserverCallback) { notifyResize = callback; }
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    }
+    vi.stubGlobal("ResizeObserver", WorkspaceResizeObserver);
+
+    const { getByRole } = render(<LocalStructureCanvas atoms={[{ atomId: "primary:1", element: "C", x: 0, y: 0, z: 0 }]} />);
+    const canvas = getByRole("application") as HTMLCanvasElement;
+    expect(canvas.width).toBe(200);
+    expect(canvas.height).toBe(160);
+
+    width = 360;
+    height = 220;
+    act(() => notifyResize?.([], {} as ResizeObserver));
+    expect(canvas.width).toBe(360);
+    expect(canvas.height).toBe(220);
+  });
+
   it("selects a clicked atom and supports Escape and Home", () => {
     const { canvas, onSelectAtom } = mount();
     fireEvent(canvas, new MouseEvent("pointerdown", { bubbles: true, clientX: 100, clientY: 80 }));

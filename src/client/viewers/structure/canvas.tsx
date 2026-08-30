@@ -38,7 +38,20 @@ function projected(atoms: readonly StructureCanvasAtom[], canvas: HTMLCanvasElem
 export function LocalStructureCanvas(props: LocalStructureCanvasProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null), dragRef = useRef<DragState | null>(null), reportedRenderRef = useRef<string | null>(null);
   const [viewport, setViewport] = useState<Viewport>({ scale: 1, x: 0, y: 0 });
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const selected = useMemo(() => new Set(props.selectedAtomIds ?? []), [props.selectedAtomIds]);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || typeof ResizeObserver === "undefined") return undefined;
+    const updateSize = () => {
+      const next = { width: Math.max(1, canvas.clientWidth), height: Math.max(1, canvas.clientHeight) };
+      setCanvasSize((current) => current.width === next.width && current.height === next.height ? current : next);
+    };
+    updateSize();
+    const observer = new ResizeObserver(updateSize);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const canvas = canvasRef.current; if (!canvas) return; const context = canvas.getContext("2d"); if (!context) return;
     const ratio = window.devicePixelRatio || 1, width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
@@ -49,7 +62,7 @@ export function LocalStructureCanvas(props: LocalStructureCanvasProps): JSX.Elem
     if (!dots.length) { context.fillStyle = props.background === "dark" ? "#d7e3f4" : props.background === "light" ? "#526170" : getComputedStyle(canvas).color; context.font = "14px system-ui"; context.textAlign = "center"; context.fillText("No queried coordinates are available for this view.", width / 2, height / 2); }
     const renderKey = `${dots.length}:${width}:${height}:${props.background ?? "light"}`;
     if (reportedRenderRef.current !== renderKey) { reportedRenderRef.current = renderKey; props.onRenderReady?.({ renderedAtomCount: dots.length }); }
-  }, [props.atoms, props.background, selected, viewport]);
+  }, [canvasSize, props.atoms, props.background, selected, viewport]);
   const point = (event: PointerEvent<HTMLCanvasElement>): Point => { const canvas = canvasRef.current!, box = canvas.getBoundingClientRect(); return { x: event.clientX - box.left, y: event.clientY - box.top }; };
   const nearest = (event: PointerEvent<HTMLCanvasElement>) => { const canvas = canvasRef.current; if (!canvas) return null; const at = point(event); return projected(props.atoms, canvas, viewport).reduce<{ atom: StructureCanvasAtom; distance: number } | null>((best, dot) => { const distance = Math.hypot(dot.x - at.x, dot.y - at.y); return distance <= Math.max(10, dot.radius * 2) && (!best || distance < best.distance) ? { atom: dot.atom, distance } : best; }, null)?.atom ?? null; };
   const keyboard = (event: KeyboardEvent<HTMLCanvasElement>) => { if (event.key === "Home") { event.preventDefault(); setViewport({ scale: 1, x: 0, y: 0 }); } if (event.key === "Escape") props.onSelectAtom?.(null); };
