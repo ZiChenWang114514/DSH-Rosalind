@@ -27,7 +27,7 @@ export interface ScienceExecutor {
 
 const FALLBACK_SESSION = {};
 
-type ScienceServiceId = "literature" | "databases" | "sequence" | "ngs" | "structure" | "slide" | "rosalind";
+export type ScienceServiceId = "literature" | "databases" | "sequence" | "ngs" | "structure" | "slide" | "rosalind";
 
 /**
  * Known result fields emitted by each fixed-version service. The runtime adds
@@ -459,6 +459,12 @@ function toolDefinition(contract: RuntimeOperationContract, executor: ScienceExe
   };
 }
 
-export function createScienceTools(executor: ScienceExecutor, registry = new CapabilityRegistry()): ToolDefinition[] {
-  return registry.operations.map((contract) => toolDefinition(contract, executor, registry.packageRoot));
+export function createScienceTools(
+  executor: ScienceExecutor,
+  registry = new CapabilityRegistry(),
+  serviceId?: ScienceServiceId,
+): ToolDefinition[] {
+  return registry.operations
+    .filter((contract) => serviceId === undefined || contract.record.serviceId === serviceId)
+    .map((contract) => toolDefinition(contract, executor, registry.packageRoot));
 }

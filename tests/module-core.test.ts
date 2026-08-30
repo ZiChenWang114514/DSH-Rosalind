@@ -1,0 +1,187 @@
+import { Context, type Fiber, type Plugin } from "@deepseek-ai/cordis";
+import SkillRegistry from "@deepseek-ai/dsh-skill";
+import { SettingsProvider, type SettingsNamespace } from "@deepseek-ai/dsh-settings";
+import SystemPrompt from "@deepseek-ai/dsh-system-prompt";
+import ToolRuntime, { type ToolExecutionInput } from "@deepseek-ai/dsh-tools";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import * as bundle from "../src/index.js";
+import { ModuleRegistry } from "../src/modules/registry.js";
+import { MODULE_IDS, type ModuleDefinition, type ModuleId } from "../src/modules/types.js";
+
+class MemorySettingsProvider extends SettingsProvider {
+  readonly writable = true;
+  private storedDocument: Record<string, unknown>;
+
+  constructor(ctx: Context, initial: Record<string, unknown>) {
+    super(ctx);
+    this.storedDocument = structuredClone(initial);
+  }
+
+  snapshot(): Record<string, unknown> {
+    return structuredClone(this.storedDocument);
+  }
+
+  protected async load(): Promise<Record<string, unknown>> {
+    return this.snapshot();
+  }
+
+  protected async persist(ns: SettingsNamespace, section: Record<string, unknown>): Promise<void> {
+    this.storedDocument[String(ns)] = structuredClone(section);
+  }
+}
+
+interface HarnessFixture {
+  ctx: Context;
+  fibers: Fiber[];
+  settings?: MemorySettingsProvider;
+}
+
+const fixtures: HarnessFixture[] = [];
+
+function callId(value: string): ToolExecutionInput["callId"] {
+  return value as ToolExecutionInput["callId"];
+}
+
+async function mount(initialSettings?: Record<string, unknown>): Promise<HarnessFixture> {
+  const ctx = new Context();
+  const fibers: Fiber[] = [];
+  let settings: MemorySettingsProvider | undefined;
+  if (initialSettings) {
+    const settingsFiber = ctx.plugin(MemorySettingsProvider, initialSettings);
+    await settingsFiber;
+    fibers.push(settingsFiber);
+    settings = ctx.settings as MemorySettingsProvider;
+  }
+  const systemPrompt = ctx.plugin(SystemPrompt, {});
+  await systemPrompt;
+  const tools = ctx.plugin(ToolRuntime, { mode: "native" });
+  await tools;
+  const skills = ctx.plugin(SkillRegistry, {});
+  await skills;
+  const root = ctx.plugin(bundle);
+  await root;
+  fibers.unshift(root, skills, tools, systemPrompt);
+  const fixture = { ctx, fibers, ...(settings ? { settings } : {}) };
+  fixtures.push(fixture);
+  return fixture;
+}
+
+async function execute(ctx: Context, name: string, args: unknown) {
+  return ctx.tools.execute({ callId: callId(`module-core-${name}`), name, arguments: args, signal: new AbortController().signal });
+}
+
+afterEach(async () => {
+  for (const fixture of fixtures.splice(0).reverse()) {
+    for (const fiber of fixture.fibers) await fiber.dispose();
+  }
+});
+
+describe("Cordis module core", () => {
+  it("exposes seven independently managed modules with catalogue-derived metadata", async () => {
+    const { ctx } = await mount();
+    const statuses = ctx.rosalindModules.list();
+    expect(statuses.map((status) => status.id)).toEqual(MODULE_IDS);
+    expect(statuses.map(({ id, version, toolCount, skillCount, showcaseCount }) => ({ id, version, toolCount, skillCount, showcaseCount }))).toEqual([
+      { id: "literature", version: "0.1.5", toolCount: 1, skillCount: 3, showcaseCount: 3 },
+      { id: "databases", version: "0.1.5", toolCount: 1, skillCount: 44, showcaseCount: 3 },
+      { id: "sequence", version: "0.1.43", toolCount: 13, skillCount: 1, showcaseCount: 3 },
+      { id: "ngs", version: "0.2.16", toolCount: 25, skillCount: 5, showcaseCount: 3 },
+      { id: "structure", version: "0.1.80", toolCount: 41, skillCount: 1, showcaseCount: 3 },
+      { id: "slide", version: "0.1.56", toolCount: 44, skillCount: 1, showcaseCount: 4 },
+      { id: "rosalind", version: "0.2.2-research-preview", toolCount: 15, skillCount: 0, showcaseCount: 4 },
+    ]);
+    expect(statuses.every((status) => status.enabled)).toBe(true);
+    expect(ctx.rosalindModules.status("sequence")).toMatchObject({ status: "active", providers: [{ id: "local-sequence", runnable: true }] });
+  });
+
+  it("disables and re-enables one Fiber without affecting the other modules", async () => {
+    const { ctx } = await mount();
+    expect(ctx.tools.schemas()).toHaveLength(140);
+    expect(await ctx.skills.list({ cwd: process.cwd() })).toHaveLength(55);
+
+    await ctx.rosalindModules.disable("sequence");
+    expect(ctx.rosalindModules.status("sequence")).toMatchObject({ status: "disabled", enabled: false });
+    expect(ctx.tools.schemas()).toHaveLength(127);
+    expect(await ctx.skills.list({ cwd: process.cwd() })).toHaveLength(54);
+    expect(ctx.tools.get("ngs_list_workflows")).toBeDefined();
+
+    await ctx.rosalindModules.enable("sequence");
+    expect(ctx.rosalindModules.status("sequence")).toMatchObject({ status: "active", enabled: true });
+    expect(ctx.tools.schemas()).toHaveLength(140);
+    expect(await ctx.skills.list({ cwd: process.cwd() })).toHaveLength(55);
+  });
+
+  it("retains a Rosalind run while its registrations are temporarily disabled", async () => {
+    const { ctx } = await mount();
+    const planned = await execute(ctx, "rosalind_plan", { showcase_id: "sequence-ras-alignment", mode: "lesson" });
+    expect(planned.isError).toBe(false);
+    if (planned.isError) return;
+    const runId = String((planned.value as Record<string, unknown>).id);
+
+    await ctx.rosalindModules.disable("rosalind");
+    expect(ctx.tools.get("rosalind_status")).toBeUndefined();
+    await ctx.rosalindModules.enable("rosalind");
+    const status = await execute(ctx, "rosalind_status", { run_id: runId });
+    expect(status).toMatchObject({ isError: false, value: { id: runId, showcaseId: "sequence-ras-alignment" } });
+  });
+
+  it("restores and persists the seven-module selection through DSH settings", async () => {
+    const initial = {
+      "dsh-rosalind-modules": {
+        modules: { sequence: false },
+      },
+    };
+    const { ctx, settings } = await mount(initial);
+    await vi.waitFor(() => expect(ctx.rosalindModules.status("sequence").status).toBe("disabled"));
+    expect(ctx.rosalindModules.status("ngs").status).toBe("active");
+
+    await ctx.rosalindModules.enable("sequence");
+    expect(settings?.snapshot()).toMatchObject({
+      "dsh-rosalind-modules": {
+        modules: { sequence: true, ngs: true, rosalind: true },
+      },
+    });
+  });
+
+  it("reports provider setup and startup failures, then disposes every active Fiber", async () => {
+    const ctx = new Context();
+    const disposed: ModuleId[] = [];
+    const definitions: ModuleDefinition[] = MODULE_IDS.map((id) => {
+      const plugin: Plugin<void> = id === "sequence"
+        ? { name: id, apply() { throw new Error("fixture startup failure"); } }
+        : { name: id, apply() { return () => { disposed.push(id); }; } };
+      return {
+        id,
+        name: id,
+        version: "1.0.0",
+        pluginId: id,
+        plugin,
+        toolCount: 0,
+        skillCount: 0,
+        showcaseCount: 0,
+        checkProviders: () => id === "literature" ? [{
+          id: "fixture-provider",
+          label: "Fixture provider",
+          kind: "public-api",
+          installed: false,
+          credentialRequired: false,
+          credentialConfigured: true,
+          runnable: false,
+          diagnostics: ["Provider setup is incomplete."],
+          checkedAt: "2026-08-30T00:00:00.000Z",
+        }] : [],
+      };
+    });
+    const sharedDispose = vi.fn();
+    const registry = new ModuleRegistry(ctx, definitions, { disposeShared: sharedDispose });
+    await registry.start();
+    expect(registry.status("literature")).toMatchObject({ status: "needs_setup", issues: [expect.stringContaining("Provider setup is incomplete")] });
+    expect(registry.status("sequence")).toMatchObject({ status: "error", issues: [expect.stringContaining("fixture startup failure")] });
+
+    await registry.destroy();
+    expect(sharedDispose).toHaveBeenCalledOnce();
+    expect(registry.list().every((status) => status.status === "disabled")).toBe(true);
+    expect(disposed.sort()).toEqual(MODULE_IDS.filter((id) => id !== "sequence").sort());
+  });
+});

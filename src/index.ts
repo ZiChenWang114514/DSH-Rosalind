@@ -1,13 +1,9 @@
 import type { Context } from "@deepseek-ai/cordis";
 import "@deepseek-ai/dsh-skill";
 
-import { RosalindRuntime } from "./host/runtime.js";
-import { createRosalindTools } from "./host/tools.js";
-import { createScienceSkills } from "./host/skills.js";
-import { CapabilityRegistry } from "./host/capabilities.js";
-import { createScienceGatewayTools } from "./host/science-gateway-tools.js";
-import { createScienceTools } from "./host/science-tools.js";
-import { ScienceRuntime } from "./host/science/runtime.js";
+import { createRosalindModuleComposition } from "./modules/definitions.js";
+import { ModuleRegistry } from "./modules/registry.js";
+import { installModuleSettings, persistModuleSettings } from "./modules/settings.js";
 
 export * from "./shared/types.js";
 export * from "./shared/categories.js";
@@ -20,6 +16,17 @@ export { CapabilityRegistry } from "./host/capabilities.js";
 export { createScienceTools } from "./host/science-tools.js";
 export { ScienceRuntime } from "./host/science/runtime.js";
 export { validateShowcase } from "./host/validators.js";
+export { createRosalindModuleComposition } from "./modules/definitions.js";
+export { ModuleRegistry } from "./modules/registry.js";
+export { DEFAULT_MODULE_SETTINGS, MODULE_SETTINGS_NAMESPACE, MODULE_SETTINGS_SCHEMA } from "./modules/settings.js";
+export { MODULE_IDS } from "./modules/types.js";
+export type { ModuleDefinition, ModuleEnabledState, ModuleId, ModuleState, ModuleStatus } from "./modules/types.js";
+
+declare module "@deepseek-ai/cordis" {
+  interface Context {
+    rosalindModules: ModuleRegistry;
+  }
+}
 
 export const name = "dsh-rosalind";
 export const inject = ["tools", "skills"];
@@ -38,12 +45,14 @@ const WRITE_APPROVAL_REASONS: Readonly<Record<string, string>> = {
 
 const SLIDE_WRITE_ACTIONS = new Set(["save_project", "resume_project_save", "export_view"]);
 
-export function apply(ctx: Context): void {
-  const capabilities = new CapabilityRegistry();
-  const science = new ScienceRuntime();
-  const runtime = new RosalindRuntime({ science });
-  ctx.effect(() => {
-    const approvalListener = ctx.on("tools/pre-execute", async (exec, next) => {
+export async function apply(ctx: Context): Promise<() => Promise<void>> {
+  const composition = createRosalindModuleComposition();
+  const modules = new ModuleRegistry(ctx, composition.definitions, {
+    persist: (enabled) => persistModuleSettings(ctx, enabled),
+    disposeShared: () => composition.dispose(),
+  });
+  ctx.provide("rosalindModules", modules);
+  const approvalListener = ctx.on("tools/pre-execute", async (exec, next) => {
       const decision = await next();
       if (decision.kind !== "allow") return decision;
       const args = exec.arguments && typeof exec.arguments === "object" && !Array.isArray(exec.arguments)
@@ -63,18 +72,11 @@ export function apply(ctx: Context): void {
         return { kind: "ask" as const, reason: `Approval is required to perform the Slide Viewer ${args.action} file operation.` };
       }
       return decision;
-    });
-    const disposers = [
-      approvalListener,
-      ...createRosalindTools(runtime).map((tool) => ctx.tools.register(tool)),
-      ...createScienceTools(science, capabilities).map((tool) => ctx.tools.register(tool)),
-      ...createScienceGatewayTools(science, capabilities.packageRoot).map((tool) => ctx.tools.register(tool)),
-      ...createScienceSkills(capabilities.packageRoot).map((skill) => ctx.skills.register(skill)),
-    ];
-    return async () => {
-      runtime.dispose();
-      await science.dispose();
-      for (const dispose of disposers.reverse()) dispose();
-    };
-  }, "dsh-rosalind: tools");
+  });
+  await modules.start();
+  installModuleSettings(ctx, modules);
+  return async () => {
+    approvalListener();
+    await modules.destroy();
+  };
 }

@@ -5,7 +5,7 @@ import type { SkillRegistration } from "@deepseek-ai/dsh-skill";
 
 import { findPackageRoot, resolveInside } from "./catalog.js";
 
-interface SkillSpec {
+export interface SkillSpec {
   serviceId: "literature" | "databases" | "sequence" | "ngs" | "structure" | "slide";
   sourceName: string;
   title: string;
@@ -81,8 +81,8 @@ function instructionBody(spec: SkillSpec, packageRoot: string): string {
   return stripFrontmatter(readFileSync(sourceSkillPath(spec, packageRoot), "utf8"));
 }
 
-export function createScienceSkills(packageRoot = findPackageRoot()): SkillRegistration[] {
-  return SCIENCE_SKILL_SPECS.map((spec) => {
+export function createScienceSkills(packageRoot = findPackageRoot(), serviceId?: SkillSpec["serviceId"]): SkillRegistration[] {
+  return SCIENCE_SKILL_SPECS.filter((spec) => serviceId === undefined || spec.serviceId === serviceId).map((spec) => {
     const path = sourceSkillPath(spec, packageRoot);
     return {
       name: runtimeName(spec),

@@ -97,7 +97,9 @@
     "@deepseek-ai/dsh-client-ui-settings": "0.1.1-rc.2",
     "@deepseek-ai/dsh-client-ui-tool": "0.1.1-rc.2",
     "@deepseek-ai/dsh-skill": "0.1.1-rc.2",
-    "@deepseek-ai/dsh-tools": "0.1.1-rc.2"
+    "@deepseek-ai/dsh-settings": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-tools": "0.1.1-rc.2",
+    "@deepseek-ai/schemastery": "^3.18.1"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
@@ -121,7 +123,13 @@
     "@deepseek-ai/dsh-skill": {
       "optional": true
     },
+    "@deepseek-ai/dsh-settings": {
+      "optional": true
+    },
     "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
       "optional": true
     }
   },
@@ -133,7 +141,9 @@
     "@deepseek-ai/dsh-client-ui-settings": "0.1.1-rc.2",
     "@deepseek-ai/dsh-client-ui-tool": "0.1.1-rc.2",
     "@deepseek-ai/dsh-skill": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-settings": "0.1.1-rc.2",
     "@deepseek-ai/dsh-tools": "0.1.1-rc.2",
+    "@deepseek-ai/schemastery": "^3.18.1",
     "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",

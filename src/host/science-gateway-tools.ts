@@ -32,8 +32,12 @@ function result(title: string, value: ToolResult) {
   return { card: "generic" as const, title: value.isError ? `${title} failed` : title };
 }
 
-export function createScienceGatewayTools(executor: ScienceExecutor, packageRoot: string): ToolDefinition[] {
-  return [
+export function createScienceGatewayTools(
+  executor: ScienceExecutor,
+  packageRoot: string,
+  serviceId?: "literature" | "databases" | "slide",
+): ToolDefinition[] {
+  const tools = [
     defineTool({
       name: "literature_request",
       description: "Query bioRxiv/medRxiv, NCBI Entrez, or PubMed Central with explicit pagination and provenance.",
@@ -217,4 +221,11 @@ export function createScienceGatewayTools(executor: ScienceExecutor, packageRoot
       presentResult: (_args, value) => result("Scientific layer query", value),
     }),
   ];
+  if (serviceId === undefined) return tools;
+  const prefixes: Record<NonNullable<typeof serviceId>, readonly string[]> = {
+    literature: ["literature_"],
+    databases: ["database_"],
+    slide: ["slide_"],
+  };
+  return tools.filter((tool) => prefixes[serviceId].some((prefix) => tool.name.startsWith(prefix)));
 }
