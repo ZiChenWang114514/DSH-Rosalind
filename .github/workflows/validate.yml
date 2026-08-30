@@ -54,6 +54,14 @@ jobs:
       - run: npm ci
       - run: npm install --global pnpm@10.15.1
       - run: npm run validate
+      - name: Preserve capability reports after a failed validation
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capability-reports-${{ matrix.os }}
+          path: capabilities/evidence/*.vitest.json
+          if-no-files-found: warn
+          retention-days: 1
 
   browser:
     name: Browser interaction and layout
