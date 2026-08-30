@@ -49,8 +49,9 @@ describe("LocalSlideCanvas", () => {
   it("ignores an old Image load after a newer source tile replaces it", () => {
     const context = { setTransform: vi.fn(), clearRect: vi.fn(), fillRect: vi.fn(), save: vi.fn(), restore: vi.fn(), setLineDash: vi.fn(), strokeRect: vi.fn(), drawImage: vi.fn() } as unknown as CanvasRenderingContext2D;
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(context);
-    const images: Array<{ onload: null | (() => void); onerror: null | (() => void); src: string }> = [];
+    const images: Array<{ decoding: string; loading: string; onload: null | (() => void); onerror: null | (() => void); src: string }> = [];
     class DeferredImage {
+      decoding = "auto"; loading = "auto";
       onload: null | (() => void) = null; onerror: null | (() => void) = null; private value = "";
       set src(value: string) { this.value = value; images.push(this); }
       get src() { return this.value; }
@@ -61,6 +62,7 @@ describe("LocalSlideCanvas", () => {
     const rendered = render(<LocalSlideCanvas width={10} height={10} sourceRevision="source-a" tile={tileA} regions={[]} />);
     rendered.rerender(<LocalSlideCanvas width={10} height={10} sourceRevision="source-b" tile={tileB} regions={[]} />);
     expect(images).toHaveLength(2);
+    expect(images[1]).toMatchObject({ decoding: "async", loading: "eager" });
     act(() => images[0]!.onload?.());
     expect(context.drawImage).not.toHaveBeenCalled();
     act(() => images[1]!.onload?.());

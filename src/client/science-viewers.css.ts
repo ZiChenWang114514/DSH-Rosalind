@@ -25,7 +25,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-head-copy { min-width: 0; }
 .sv-head-copy strong, .sv-head-copy span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sv-head-copy strong { font-size: 11.5px; font-weight: 720; }
-.sv-head-copy span { margin-top: 2px; color: var(--rr-muted); font-size: 9.5px; }
+.sv-head-copy span { margin-top: 2px; color: var(--rr-muted); font-size: 10px; }
 .sv-state, .sv-run-state { display: inline-flex; align-items: center; width: max-content; min-height: 21px; padding: 3px 7px; border-radius: 999px; background: var(--rr-panel-muted); color: var(--rr-muted); font-size: 8.5px; font-weight: 720; letter-spacing: .045em; text-transform: uppercase; }
 .sv-state::before, .sv-run-state::before { content: ""; width: 5px; height: 5px; margin-right: 5px; border-radius: 50%; background: currentColor; }
 .sv-state--complete, .sv-state--completed, .sv-state--ready, .sv-run-state--complete { color: #4c8463; background: color-mix(in srgb, #62a77f 12%, var(--rr-panel-solid)); }
@@ -42,7 +42,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-toolbar { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-bottom: 1px solid var(--rr-line); background: var(--rr-panel-solid); }
 .sv-toolbar label { min-width: 0; flex: 1; }
 .sv-toolbar input { width: 100%; height: 30px; padding: 0 10px; border: 1px solid var(--rr-line); border-radius: 8px; background: var(--rr-panel-muted); font-size: 9.5px; }
-.sv-toolbar > span { color: var(--rr-muted); font-size: 9px; white-space: nowrap; }
+.sv-toolbar > span { color: var(--rr-muted); font-size: 9.5px; white-space: nowrap; }
 .sv-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 6px; width: 100%; margin: 0; }
 .sv-facts > div { min-width: 0; padding: 8px; border: 1px solid var(--rr-line); border-radius: 9px; background: color-mix(in srgb, var(--rr-panel-muted) 58%, transparent); }
 .sv-facts dt { overflow: hidden; color: var(--rr-muted); font-size: 8px; font-weight: 650; letter-spacing: .045em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
@@ -56,7 +56,8 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-error { margin: 10px; padding: 12px; border: 1px solid color-mix(in srgb, #bc5659 28%, var(--rr-line)); border-radius: 10px; background: color-mix(in srgb, #bc5659 8%, var(--rr-panel-solid)); }
 .sv-error strong { color: #a44f51; font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; }
 .sv-error p { margin: 5px 0 0; color: var(--rr-ink); font-size: 10px; line-height: 1.5; }
-.sv-data-note { margin: 8px 2px 0; color: var(--rr-muted); font-size: 8.5px; line-height: 1.45; }
+.sv-data-note, .sv-limit-note { margin: 8px 2px 0; color: var(--rr-muted); font-size: 9px; line-height: 1.5; }
+.sv-limit-note { padding: 7px 8px; border-left: 3px solid var(--sv-accent); background: var(--sv-accent-soft); }
 .sv-artifacts { padding: 0 10px 10px; }
 .sv-artifacts h4 { margin: 0 0 6px; color: var(--rr-muted); font-size: 8px; letter-spacing: .05em; text-transform: uppercase; }
 .sv-artifacts > div { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 1px; }
@@ -64,7 +65,7 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-artifacts button span { color: var(--sv-accent); font-size: 8px; font-weight: 720; text-transform: uppercase; }
 .sv-artifacts button code { overflow: hidden; font-size: 8.5px; text-overflow: ellipsis; white-space: nowrap; }
 
-.sv-sequence-table-wrap { overflow-x: auto; }
+.sv-sequence-table-wrap { max-height: 360px; overflow: auto; scrollbar-gutter: stable; }
 .sv-sequence-table { width: 100%; border-collapse: collapse; font-size: 9px; }
 .sv-sequence-table th, .sv-sequence-table td { padding: 7px 8px; border-bottom: 1px solid var(--rr-line); text-align: left; white-space: nowrap; }
 .sv-sequence-table thead th { color: var(--rr-muted); font-size: 7.5px; font-weight: 650; letter-spacing: .045em; text-transform: uppercase; }
@@ -160,12 +161,12 @@ export const SCIENCE_VIEWER_CSS = String.raw`
 .sv-spatial-gene { margin-bottom: 4px; color: var(--sv-accent); font-size: 8px; font-weight: 750; text-transform: uppercase; }
 .sv-layer-list { display: grid; gap: 6px; }
 .sv-layer-list label { display: grid; grid-template-columns: auto 4px minmax(0, 1fr); gap: 8px; align-items: center; padding: 8px; border: 1px solid var(--rr-line); border-radius: 8px; cursor: pointer; }
-.sv-layer-list label:has(input:disabled) { cursor: default; }
-.sv-layer-list input:disabled { opacity: .72; }
+.sv-layer-list label:has(input:disabled), .sv-layer-list label.sv-layer--readonly { cursor: default; border-style: dashed; background: color-mix(in srgb, var(--rr-panel-muted) 62%, transparent); }
+.sv-layer-list input:disabled { opacity: 1; accent-color: var(--sv-accent); }
 .sv-layer-list label > i { width: 4px; height: 26px; border-radius: 3px; background: var(--sv-accent); }
 .sv-layer-list strong, .sv-layer-list small { display: block; }
 .sv-layer-list strong { font-size: 9.5px; }.sv-layer-list small { margin-top: 2px; color: var(--rr-muted); font-size: 8px; }
-.sv-layer-note { margin: 0 0 7px; padding: 7px 8px; border: 1px solid var(--rr-line); border-radius: 8px; color: var(--rr-muted); font-size: 8px; line-height: 1.45; }
+.sv-layer-note { margin: 0 0 7px; padding: 7px 8px; border: 1px solid var(--rr-line); border-left: 3px solid var(--sv-accent); border-radius: 8px; background: color-mix(in srgb, var(--rr-panel-muted) 58%, transparent); color: var(--rr-ink); font-size: 9px; line-height: 1.5; }
 
 @keyframes sv-spin { to { transform: rotate(360deg); } }
 @media (max-width: 640px) {

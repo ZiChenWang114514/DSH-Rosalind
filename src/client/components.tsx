@@ -411,7 +411,7 @@ export function ShowcaseDetailPanel(): JSX.Element | null {
       onKeyDown={(event) => { if (event.key === "Escape") { event.preventDefault(); closeShowcase(); } }}
     >
         <header className="rr-detail-head">
-          {preview ? <img className="rr-preview" src={preview} alt="" /> : <div className="rr-preview-fallback"><CategoryIcon icon={category.icon} size={36} /></div>}
+          {preview ? <img alt="" className="rr-preview" decoding="async" loading="lazy" src={preview} /> : <div className="rr-preview-fallback"><CategoryIcon icon={category.icon} size={36} /></div>}
           <div><span className="rr-detail-category"><CategoryIcon icon={category.icon} size={15} />{category.label}</span><h2 id="rr-detail-title" className="rr-detail-title">{showcase.title}</h2><p className="rr-detail-summary">{showcase.summary}</p></div>
           <button type="button" className="rr-close" aria-label="Back to scientific modules" onClick={closeShowcase}><CloseIcon size={18} /></button>
         </header>

@@ -24,6 +24,7 @@ for (const fixture of fixtures) {
 
 test("viewer tabs support roving keyboard focus", async ({ page }) => {
   await page.goto("/?science=sequence");
+  await expect(page.getByRole("tablist")).toHaveAttribute("aria-orientation", "horizontal");
   const alignment = page.getByRole("tab", { name: "Alignment" });
   await alignment.focus();
   await page.keyboard.press("ArrowRight");
@@ -31,6 +32,16 @@ test("viewer tabs support roving keyboard focus", async ({ page }) => {
   await expect(metrics).toBeFocused();
   await expect(metrics).toHaveAttribute("aria-selected", "true");
   await expect(page.getByLabel("Per-column metric track").locator("i")).toHaveCount(9);
+});
+
+test("structure wheel zoom stays inside the scientific canvas", async ({ page }) => {
+  await page.goto("/?science=structure");
+  const canvas = page.getByRole("application", { name: /Local molecular coordinate view/ });
+  await canvas.hover();
+  const before = await page.evaluate(() => window.scrollY);
+  await page.mouse.wheel(0, -160);
+  await expect.poll(async () => Number(await canvas.getAttribute("data-view-scale"))).toBeGreaterThan(1);
+  expect(await page.evaluate(() => window.scrollY)).toBe(before);
 });
 
 test("structure canvas redraws after the workspace width changes", async ({ page }) => {

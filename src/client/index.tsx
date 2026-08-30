@@ -7,7 +7,7 @@ import type {} from "@deepseek-ai/dsh-client-ui-tool/client";
 import { ShowcaseDetailOverlay, ShowcaseDetailPanel, Workbench } from "./components.js";
 import { ProviderSettings } from "./settings.js";
 import { SCIENCE_VIEWER_CSS } from "./science-viewers.css.js";
-import { WORKBENCH_CSS } from "./styles.js";
+import { installWorkbenchStyles, WORKBENCH_CSS } from "./styles.js";
 import { RosalindToolCard, ScienceToolCard } from "./toolview.js";
 import { createNgsWorkbenchClientModule, createRosalindWorkbenchClientModule } from "./workflow-modules.js";
 import { registerSequenceClientModule } from "./modules/sequence.js";
@@ -43,14 +43,7 @@ export const name = "dsh-rosalind-client";
 export const inject = ["slots"];
 
 function installStyles(): () => void {
-  const id = "dsh-rosalind-styles";
-  const existing = document.getElementById(id);
-  if (existing) return () => undefined;
-  const style = document.createElement("style");
-  style.id = id;
-  style.textContent = `${WORKBENCH_CSS}\n${SCIENCE_VIEWER_CSS}`;
-  document.head.append(style);
-  return () => style.remove();
+  return installWorkbenchStyles(`${WORKBENCH_CSS}\n${SCIENCE_VIEWER_CSS}`);
 }
 
 export function apply(ctx: ClientContext): void {

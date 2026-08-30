@@ -1,10 +1,11 @@
 import type { ToolCallOwnerProps } from "@deepseek-ai/dsh-client-ui-tool/client";
-import { useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type WheelEvent as ReactWheelEvent } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { LocalSlideCanvas, type SlideRectangle, type SlideTile } from "./viewers/slide/canvas.js";
-import { LocalStructureCanvas, type StructureCanvasAtom } from "./viewers/structure/canvas.js";
+import { LocalStructureCanvas, STRUCTURE_CANVAS_RENDER_LIMIT, type StructureCanvasAtom } from "./viewers/structure/canvas.js";
 
 type JsonRecord = Record<string, unknown>;
 type ViewerKind = "sequence" | "ngs" | "structure" | "slide";
+export const SEQUENCE_RECORD_RENDER_LIMIT = 250;
 
 interface ParsedScienceCall {
   args: JsonRecord;
@@ -89,6 +90,24 @@ function prettyLabel(value: string): string {
   return value.replace(/^(sequence|ngs|structure|slide)_/, "").replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function domToken(value: string): string {
+  return value.replaceAll(/[^A-Za-z0-9_-]/g, "");
+}
+
+function useNonPassiveWheel<T extends Element>(handler: (event: WheelEvent) => void) {
+  const elementRef = useRef<T | null>(null);
+  const handlerRef = useRef(handler);
+  handlerRef.current = handler;
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element) return undefined;
+    const listener = (event: Event) => handlerRef.current(event as WheelEvent);
+    element.addEventListener("wheel", listener, { passive: false });
+    return () => element.removeEventListener("wheel", listener);
+  }, []);
+  return elementRef;
+}
+
 function jsonObject(raw: string | null | undefined): JsonRecord {
   if (!raw) return {};
   try { return record(JSON.parse(raw)); } catch { return {}; }
@@ -161,18 +180,19 @@ function collectArtifacts(value: unknown, depth = 0, found = new Map<string, Art
   return [...found.values()].slice(0, 8);
 }
 
-function ToolHeader({ kind, operation, parsed, inspect }: { kind: ViewerKind; operation: string; parsed: ParsedScienceCall; inspect?: () => void }): JSX.Element {
+function ToolHeader({ kind, operation, parsed, inspect, titleId }: { kind: ViewerKind; operation: string; parsed: ParsedScienceCall; inspect?: () => void; titleId: string }): JSX.Element {
   const titles: Record<ViewerKind, string> = { sequence: "Sequence & alignment", ngs: "NGS workbench", structure: "Molecular structure", slide: "Slide & spatial" };
   const state = parsed.running ? "running" : parsed.error ? "failed" : text(parsed.payload?.state ?? parsed.payload?.status) ?? "complete";
   return <header className="sv-head">
     <div className={`sv-app-mark sv-app-mark--${kind}`} aria-hidden="true">{kind === "sequence" ? "Aa" : kind === "ngs" ? "NG" : kind === "structure" ? "3D" : "WS"}</div>
-    <div className="sv-head-copy"><strong>{titles[kind]}</strong><span>{prettyLabel(operation)}</span></div>
+    <div className="sv-head-copy"><strong id={titleId}>{titles[kind]}</strong><span>{prettyLabel(operation)}</span></div>
     <span className={`sv-state sv-state--${state.replaceAll(/[^a-z-]/gi, "").toLowerCase()}`}>{state}</span>
     {inspect ? <button className="sv-quiet-button" onClick={inspect} type="button">Inspect call</button> : null}
   </header>;
 }
 
-function TabStrip({ active, labels, onChange, ariaLabel }: { active: string; labels: readonly string[]; onChange: (value: string) => void; ariaLabel: string }): JSX.Element {
+function TabStrip({ active, labels, onChange, ariaLabel, idPrefix, panelId }: { active: string; labels: readonly string[]; onChange: (value: string) => void; ariaLabel: string; idPrefix: string; panelId: string }): JSX.Element {
+  const tabs = useRef<Array<HTMLButtonElement | null>>([]);
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight" && event.key !== "Home" && event.key !== "End") return;
     event.preventDefault();
@@ -180,17 +200,19 @@ function TabStrip({ active, labels, onChange, ariaLabel }: { active: string; lab
     const label = labels[next];
     if (label) {
       onChange(label);
-      const tabs = event.currentTarget.parentElement?.querySelectorAll<HTMLElement>("[role='tab']");
-      tabs?.item(next).focus();
+      tabs.current[next]?.focus();
     }
   };
-  return <div className="sv-tabs" role="tablist" aria-label={ariaLabel}>{labels.map((label, index) => <button
+  return <div className="sv-tabs" role="tablist" aria-label={ariaLabel} aria-orientation="horizontal">{labels.map((label, index) => <button
+    aria-controls={panelId}
     aria-selected={active === label}
     className="sv-tab"
+    id={`${idPrefix}-${domToken(label.toLowerCase())}`}
     key={label}
     onClick={() => onChange(label)}
     onKeyDown={(event) => onKeyDown(event, index)}
     role="tab"
+    ref={(element) => { tabs.current[index] = element; }}
     tabIndex={active === label ? 0 : -1}
     type="button"
   >{label}</button>)}</div>;
@@ -220,6 +242,8 @@ function findArray(payload: JsonRecord, state: JsonRecord, keys: readonly string
 }
 
 function SequenceResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
+  const tabIdPrefix = `sv-tabs-${domToken(useId())}`;
+  const panelId = `${tabIdPrefix}-panel`;
   const payload = parsed.payload ?? {};
   const state = stateFrom(parsed.payload);
   const inferredMode = text(payload.viewer ?? state.viewer) === "alignment" || findArray(payload, state, ["records", "rows"]).length > 1 ? "Alignment" : "Sequence";
@@ -228,11 +252,23 @@ function SequenceResult({ parsed, openFile }: { parsed: ParsedScienceCall; openF
   const records = findArray(payload, state, ["records", "rows"]);
   const result = record(payload.result);
   const columns = findArray(result, payload, ["columns"]);
-  const visibleRecords = records.filter((item) => `${text(item.id) ?? ""} ${text(item.label) ?? ""}`.toLowerCase().includes(filter.toLowerCase()));
+  const matchingRecords = records.filter((item) => `${text(item.id) ?? ""} ${text(item.label) ?? ""}`.toLowerCase().includes(filter.toLowerCase()));
+  const visibleRecords = matchingRecords.slice(0, SEQUENCE_RECORD_RENDER_LIMIT);
+  const tableScrollRef = useRef<HTMLDivElement>(null);
+  const tableScrollPosition = useRef({ left: 0, top: 0 });
   const facts = scalarFacts({ ...state, ...result }, ["recordCount", "rowCount", "alignedLength", "meanIdentity", "meanConservationNormalized", "readCount", "bases", "q30Fraction"]);
   const artifacts = collectArtifacts(payload);
   const hasMetrics = columns.length > 0 || facts.some((fact) => /identity|conservation|q30/i.test(fact.label));
   const labels = hasMetrics ? [inferredMode, "Metrics"] : [inferredMode];
+  const selectTab = (next: string) => {
+    if (active === inferredMode && tableScrollRef.current) tableScrollPosition.current = { left: tableScrollRef.current.scrollLeft, top: tableScrollRef.current.scrollTop };
+    setActive(next);
+  };
+  useLayoutEffect(() => {
+    if (active !== inferredMode || !tableScrollRef.current) return;
+    tableScrollRef.current.scrollLeft = tableScrollPosition.current.left;
+    tableScrollRef.current.scrollTop = tableScrollPosition.current.top;
+  }, [active, inferredMode]);
   let content: JSX.Element;
   if (active === "Metrics") {
     content = <>
@@ -243,7 +279,7 @@ function SequenceResult({ parsed, openFile }: { parsed: ParsedScienceCall; openF
       })}</div> : <EmptyResult>The result contains summary metrics without per-column values.</EmptyResult>}
     </>;
   } else if (visibleRecords.length) {
-    content = <div className="sv-sequence-table-wrap">
+    content = <div className="sv-sequence-table-wrap" ref={tableScrollRef}>
       <table className="sv-sequence-table">
         <thead><tr><th>Record</th><th>Type</th><th>Length</th><th>Result projection</th></tr></thead>
         <tbody>{visibleRecords.map((item, index) => {
@@ -258,15 +294,16 @@ function SequenceResult({ parsed, openFile }: { parsed: ParsedScienceCall; openF
           </tr>;
         })}</tbody>
       </table>
+      {matchingRecords.length > visibleRecords.length ? <p className="sv-limit-note" role="status">Showing the first {visibleRecords.length.toLocaleString()} of {matchingRecords.length.toLocaleString()} matching records. Refine the filter to inspect another range.</p> : null}
       {visibleRecords.every((item) => !text(item.sequence)) ? <p className="sv-data-note">This tool result carries record identity and lengths; residue strings remain in the active viewer session or source file.</p> : null}
     </div>;
   } else {
     content = <EmptyResult>No sequence records are present in this tool result.</EmptyResult>;
   }
   return <div className="sv-sequence">
-    <div className="sv-toolbar" data-sequence-toolbar-controls="dsh"><label><span className="sr-only">Filter sequence records</span><input onChange={(event) => setFilter(event.target.value)} placeholder="Filter records" type="search" value={filter} /></label><span>{visibleRecords.length} record{visibleRecords.length === 1 ? "" : "s"}</span></div>
-    <TabStrip active={active} ariaLabel="Sequence result views" labels={labels} onChange={setActive} />
-    <div className="sv-panel" role="tabpanel" tabIndex={0}>
+    <div className="sv-toolbar" data-sequence-toolbar-controls="dsh"><label><span className="sr-only">Filter sequence records</span><input onChange={(event) => setFilter(event.target.value)} placeholder="Filter records" type="search" value={filter} /></label><span>{matchingRecords.length} record{matchingRecords.length === 1 ? "" : "s"}</span></div>
+    <TabStrip active={active} ariaLabel="Sequence result views" idPrefix={tabIdPrefix} labels={labels} onChange={selectTab} panelId={panelId} />
+    <div aria-labelledby={`${tabIdPrefix}-${domToken(active.toLowerCase())}`} className="sv-panel" id={panelId} role="tabpanel" tabIndex={0}>
       {content}
     </div>
     <ArtifactButtons artifacts={artifacts} openFile={openFile} />
@@ -281,6 +318,8 @@ function statusTone(status: string): string {
 }
 
 function NgsResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
+  const tabIdPrefix = `sv-tabs-${domToken(useId())}`;
+  const panelId = `${tabIdPrefix}-panel`;
   const payload = parsed.payload ?? {};
   const [active, setActive] = useState("Runs");
   const workflows = findArray(payload, payload, ["workflows", "pipelines", "versions"]);
@@ -310,8 +349,8 @@ function NgsResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: 
     content = targets.length ? <div className="sv-target-list">{targets.map((target, index) => <article key={text(target.id) ?? String(index)}><i /><div><strong>{text(target.title ?? target.id) ?? `Target ${index + 1}`}</strong><span>{text(target.kind ?? target.status) ?? "compute target"}</span></div></article>)}</div> : <><FactGrid facts={scalarFacts(record(payload.runtime), ["platform", "node", "nextflow", "snakemake"])} /><EmptyResult>{diagnostics[0] ?? "No compute target list was included in this operation result."}</EmptyResult></>;
   }
   return <div className="sv-ngs">
-    <TabStrip active={active} ariaLabel="NGS result views" labels={labels} onChange={setActive} />
-    <div className="sv-panel sv-ngs-panel" role="tabpanel" tabIndex={0}>
+    <TabStrip active={active} ariaLabel="NGS result views" idPrefix={tabIdPrefix} labels={labels} onChange={setActive} panelId={panelId} />
+    <div aria-labelledby={`${tabIdPrefix}-${domToken(active.toLowerCase())}`} className="sv-panel sv-ngs-panel" id={panelId} role="tabpanel" tabIndex={0}>
       {content}
     </div>
     <ArtifactButtons artifacts={artifacts} openFile={openFile} />
@@ -374,7 +413,8 @@ function coordinateAtoms(atoms: JsonRecord[], view: ProjectionView, colourMode: 
   if (!positioned.length) return [];
   const mean = positioned.reduce((total, point) => ({ x: total.x + point.x, y: total.y + point.y, z: total.z + point.z }), { x: 0, y: 0, z: 0 });
   mean.x /= positioned.length; mean.y /= positioned.length; mean.z /= positioned.length;
-  const extent = Math.max(1, ...positioned.map((point) => Math.hypot(point.x - mean.x, point.y - mean.y, point.z - mean.z)));
+  let extent = 1;
+  for (const point of positioned) extent = Math.max(extent, Math.hypot(point.x - mean.x, point.y - mean.y, point.z - mean.z));
   const yaw = view.yaw * Math.PI / 180;
   const pitch = view.pitch * Math.PI / 180;
   return positioned.map((point) => {
@@ -405,6 +445,7 @@ function StructureProjection({ atoms, colourMode, representation, onColourModeCh
   const points = useMemo(() => coordinateAtoms(atoms, view, colourMode), [atoms, colourMode, view]);
   const reset = () => { setView({ pitch: -16, yaw: 24, zoom: 1 }); setSelected(null); };
   const updateZoom = (delta: number) => setView((current) => ({ ...current, zoom: clamp(current.zoom + delta, .45, 3) }));
+  const wheelRef = useNonPassiveWheel<SVGSVGElement>((event) => { event.preventDefault(); updateZoom(event.deltaY < 0 ? .12 : -.12); });
   const onKeyDown = (event: KeyboardEvent<SVGSVGElement>) => {
     const changes: Partial<ProjectionView> = {};
     if (event.key === "ArrowLeft") changes.yaw = view.yaw - 8;
@@ -432,7 +473,6 @@ function StructureProjection({ atoms, colourMode, representation, onColourModeCh
     if (drag.current?.pointerId === event.pointerId) drag.current = null;
     if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture?.(event.pointerId);
   };
-  const onWheel = (event: ReactWheelEvent<SVGSVGElement>) => { event.preventDefault(); updateZoom(event.deltaY < 0 ? .12 : -.12); };
   return <div className="sv-scene" aria-label="Molecular scene state">
     <div className="sv-scene-toolbar" aria-label="Molecular projection controls">
       <span>{representation}</span><span>{Math.round(view.zoom * 100)}%</span>
@@ -443,7 +483,7 @@ function StructureProjection({ atoms, colourMode, representation, onColourModeCh
     <div className="sv-colour-toggle" aria-label="Molecular projection colour mode" role="group">
       {(["chain", "element"] as const).map((mode) => <button aria-pressed={colourMode === mode} key={mode} onClick={() => onColourModeChange(mode)} type="button">{mode}</button>)}
     </div>
-    <svg aria-label={`Interactive molecular projection with ${points.length} returned atom coordinates`} data-structure-projection="true" onKeyDown={onKeyDown} onPointerCancel={stopDrag} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={stopDrag} onWheel={onWheel} preserveAspectRatio="xMidYMid meet" role="application" tabIndex={0} viewBox="0 0 320 190">
+    <svg aria-label={`Interactive molecular projection with ${points.length} returned atom coordinates`} data-structure-projection="true" onKeyDown={onKeyDown} onPointerCancel={stopDrag} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={stopDrag} preserveAspectRatio="xMidYMid meet" ref={wheelRef} role="application" tabIndex={0} viewBox="0 0 320 190">
       {points.map((point) => <circle aria-label={`${point.id}: ${point.x.toFixed(1)}, ${point.y.toFixed(1)}, ${point.z.toFixed(1)}`} className={selected?.id === point.id ? "sv-atom sv-atom--selected" : "sv-atom"} cx={point.x} cy={point.y} fill={point.fill} key={point.id} onClick={() => setSelected(point)} r={selected?.id === point.id ? 3.8 : 2.45} />)}
     </svg>
     <div aria-live="polite" className="sv-scene-state">Yaw {Math.round(view.yaw)}° · pitch {Math.round(view.pitch)}° · {selected ? `${selected.id} selected` : "drag or use arrow keys"}</div>
@@ -451,6 +491,8 @@ function StructureProjection({ atoms, colourMode, representation, onColourModeCh
 }
 
 function StructureResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
+  const tabIdPrefix = `sv-tabs-${domToken(useId())}`;
+  const panelId = `${tabIdPrefix}-panel`;
   const payload = parsed.payload ?? {};
   const state = stateFrom(parsed.payload);
   const [active, setActive] = useState("Scene");
@@ -466,22 +508,28 @@ function StructureResult({ parsed, openFile }: { parsed: ParsedScienceCall; open
   const representation = text(record(payload.display).representation ?? record(state.display).representation ?? payload.representation) ?? "cartoon";
   const initialColourMode = text(record(payload.display).colorMode ?? record(state.display).colorMode ?? payload.colorMode) ?? "chain";
   const [colourMode, setColourMode] = useState(initialColourMode);
-  const viewerAtoms = useMemo(() => atoms.flatMap((atom, index): StructureCanvasAtom[] => {
-    const coordinates = record(atom.coordinates);
-    const x = number(coordinates.x ?? atom.x), y = number(coordinates.y ?? atom.y), z = number(coordinates.z ?? atom.z);
-    if (x == null || y == null || z == null) return [];
-    return [{
-      atomId: text(atom.atomId ?? atom.id ?? atom.key) ?? `atom-${index + 1}`,
-      element: text(atom.element) ?? "C",
-      ...(text(atom.objectId) ? { objectId: text(atom.objectId)! } : {}),
-      x, y, z,
-    }];
-  }), [atoms]);
+  const viewerAtoms = useMemo(() => {
+    const visible: StructureCanvasAtom[] = [];
+    for (let index = 0; index < atoms.length && visible.length < STRUCTURE_CANVAS_RENDER_LIMIT; index += 1) {
+      const atom = atoms[index];
+      if (!atom) continue;
+      const coordinates = record(atom.coordinates);
+      const x = number(coordinates.x ?? atom.x), y = number(coordinates.y ?? atom.y), z = number(coordinates.z ?? atom.z);
+      if (x == null || y == null || z == null) continue;
+      visible.push({
+        atomId: text(atom.atomId ?? atom.id ?? atom.key) ?? `atom-${index + 1}`,
+        element: text(atom.element) ?? "C",
+        ...(text(atom.objectId) ? { objectId: text(atom.objectId)! } : {}),
+        x, y, z,
+      });
+    }
+    return visible;
+  }, [atoms]);
   const [renderedAtomCount, setRenderedAtomCount] = useState<number | null>(null);
   return <div className="sv-structure">
-    <TabStrip active={active} ariaLabel="Molecular structure result views" labels={["Scene", "Objects", "Analysis"]} onChange={setActive} />
-    <div className="sv-panel" role="tabpanel" tabIndex={0}>
-      {active === "Scene" ? <div className="sv-structure-layout"><div className="sv-scene sv-scene--molstar" aria-label="Molecular scene state" data-client-render-ready={viewerAtoms.length > 0 && renderedAtomCount !== null ? "true" : "false"}><LocalStructureCanvas atoms={viewerAtoms} onRenderReady={({ renderedAtomCount: count }) => setRenderedAtomCount(count)} /><div aria-live="polite" className="sv-scene-state">{viewerAtoms.length === 0 ? "Waiting for structure coordinates from the DSH session" : renderedAtomCount !== null ? `Local coordinate render confirmed · ${renderedAtomCount.toLocaleString()} returned coordinates` : `Loading ${viewerAtoms.length.toLocaleString()} returned coordinates`}</div></div><aside><FactGrid facts={[{ label: "Atoms", value: atomCount == null ? "—" : atomCount.toLocaleString() }, { label: "Residues", value: residueCount == null ? "—" : residueCount.toLocaleString() }, { label: "Ligands", value: ligandCount == null ? "—" : ligandCount.toLocaleString() }, ...scalarFacts(scene, ["sceneRevision", "geometryRevision", "syncStatus"], 3)]} /></aside></div> : null}
+    <TabStrip active={active} ariaLabel="Molecular structure result views" idPrefix={tabIdPrefix} labels={["Scene", "Objects", "Analysis"]} onChange={setActive} panelId={panelId} />
+    <div aria-labelledby={`${tabIdPrefix}-${domToken(active.toLowerCase())}`} className="sv-panel" id={panelId} role="tabpanel" tabIndex={0}>
+      {active === "Scene" ? <div className="sv-structure-layout"><div className="sv-scene sv-scene--molstar" aria-label="Molecular scene state" data-client-render-ready={viewerAtoms.length > 0 && renderedAtomCount !== null ? "true" : "false"}><LocalStructureCanvas atoms={viewerAtoms} onRenderReady={({ renderedAtomCount: count }) => setRenderedAtomCount(count)} /><div aria-live="polite" className="sv-scene-state">{viewerAtoms.length === 0 ? "Waiting for structure coordinates from the DSH session" : renderedAtomCount !== null ? `Local coordinate render confirmed · ${renderedAtomCount.toLocaleString()}${atoms.length > renderedAtomCount ? ` of ${atoms.length.toLocaleString()}` : ""} returned coordinates` : `Loading ${viewerAtoms.length.toLocaleString()}${atoms.length > viewerAtoms.length ? ` of ${atoms.length.toLocaleString()}` : ""} returned coordinates`}</div></div><aside><FactGrid facts={[{ label: "Atoms", value: atomCount == null ? "—" : atomCount.toLocaleString() }, { label: "Residues", value: residueCount == null ? "—" : residueCount.toLocaleString() }, { label: "Ligands", value: ligandCount == null ? "—" : ligandCount.toLocaleString() }, ...scalarFacts(scene, ["sceneRevision", "geometryRevision", "syncStatus"], 3)]} /></aside></div> : null}
       {active === "Objects" ? objects.length ? <div className="sv-object-list">{objects.map((item, index) => <article key={text(item.id ?? item.key) ?? String(index)}><i style={{ background: text(record(item.color).value ?? item.color) ?? `hsl(${index * 67} 45% 55%)` }} /><div><strong>{text(item.label ?? item.name ?? item.id) ?? `Object ${index + 1}`}</strong><span>{text(item.kind ?? item.representation ?? item.component) ?? "structure object"}</span></div><small>{item.visible === false ? "hidden" : "visible"}</small></article>)}</div> : <EmptyResult>No object list was included in this operation result.</EmptyResult> : null}
       {active === "Analysis" ? analyses.length ? <div className="sv-analysis-list">{analyses.slice(0, 30).map((item, index) => <article key={text(item.id) ?? String(index)}><strong>{text(item.type ?? item.kind ?? item.label) ?? `Result ${index + 1}`}</strong><FactGrid facts={scalarFacts(item, ["distanceAngstrom", "distance", "angle", "rmsd", "tmScore", "count"], 4)} /></article>)}</div> : <><FactGrid facts={scalarFacts(payload, ["rmsd", "tmScore", "contactCount", "pairCount", "sasa", "buriedArea"])} /><EmptyResult>No row-level analysis collection was included in this result.</EmptyResult></> : null}
     </div>
@@ -496,6 +544,9 @@ interface SlideView {
 }
 
 export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; openFile: (path: string) => void }): JSX.Element {
+  const tabIdPrefix = `sv-tabs-${domToken(useId())}`;
+  const panelId = `${tabIdPrefix}-panel`;
+  const tissuePatternId = `sv-tissue-${domToken(useId())}`;
   const payload = parsed.payload ?? {};
   const state = stateFrom(parsed.payload);
   const [active, setActive] = useState("Slide");
@@ -530,6 +581,7 @@ export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; o
   const resetView = () => setView({ panX: 0, panY: 0, zoom: 1 });
   const moveView = (x: number, y: number) => setView((current) => ({ ...current, panX: current.panX + x, panY: current.panY + y }));
   const zoomView = (delta: number) => setView((current) => ({ ...current, zoom: clamp(current.zoom + delta, .5, 8) }));
+  const wheelRef = useNonPassiveWheel<SVGSVGElement>((event) => { event.preventDefault(); zoomView(event.deltaY < 0 ? .16 : -.16); });
   const onSlideKeyDown = (event: KeyboardEvent<SVGSVGElement>) => {
     const distance = Math.max(viewBoxWidth, viewBoxHeight) * .045 / view.zoom;
     if (event.key === "ArrowLeft") { event.preventDefault(); moveView(-distance, 0); }
@@ -557,13 +609,12 @@ export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; o
     if (drag.current?.pointerId === event.pointerId) drag.current = null;
     if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture?.(event.pointerId);
   };
-  const onSlideWheel = (event: ReactWheelEvent<SVGSVGElement>) => { event.preventDefault(); zoomView(event.deltaY < 0 ? .16 : -.16); };
   return <div className="sv-slide">
-    <TabStrip active={active} ariaLabel="Slide and spatial result views" labels={labels} onChange={setActive} />
-    <div className="sv-panel" role="tabpanel" tabIndex={0}>
-      {active === "Slide" ? <div className="sv-slide-layout"><div className="sv-slide-map" aria-label="Interactive slide source view">{tile && width && height && sourceRevision ? <LocalSlideCanvas ariaLabel="Local slide source pixel workspace" height={height} regions={canvasRegions} sourceRevision={sourceRevision} tile={tile} width={width} /> : <><div className="sv-slide-controls" aria-label="Slide view controls"><button aria-label="Zoom slide in" onClick={() => zoomView(.25)} type="button">+</button><button aria-label="Zoom slide out" onClick={() => zoomView(-.25)} type="button">−</button><button aria-label="Reset slide view" onClick={resetView} type="button">Reset</button></div><svg aria-label="Slide source extent and returned regions" data-slide-view="true" onKeyDown={onSlideKeyDown} onPointerCancel={stopSlideDrag} onPointerDown={onSlidePointerDown} onPointerMove={onSlidePointerMove} onPointerUp={stopSlideDrag} onWheel={onSlideWheel} preserveAspectRatio="xMidYMid meet" role="application" tabIndex={0} viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}><defs><pattern height={Math.max(12, viewBoxHeight / 24)} id="sv-tissue" patternUnits="userSpaceOnUse" width={Math.max(12, viewBoxWidth / 32)}><rect fill="var(--sv-slide-tissue)" height="100%" width="100%" /><circle cx="35%" cy="45%" fill="var(--sv-slide-nucleus)" r="11%" /></pattern></defs><g transform={`translate(${view.panX} ${view.panY}) scale(${view.zoom})`}><rect fill="url(#sv-tissue)" height={viewBoxHeight} rx={viewBoxHeight * .02} width={viewBoxWidth} />{number(bounds.x) != null && number(bounds.y) != null && number(bounds.width) != null && number(bounds.height) != null ? <rect className="sv-view-bounds" fill="none" height={number(bounds.height)!} width={number(bounds.width)!} x={number(bounds.x)!} y={number(bounds.y)!} /> : null}{regions.map((region, index) => <rect className="sv-region" fill="none" height={number(region.height) ?? 0} key={text(region.id) ?? String(index)} width={number(region.width) ?? 0} x={number(region.x) ?? 0} y={number(region.y) ?? 0} />)}</g></svg><output aria-live="polite" className="sv-slide-position">{Math.round(view.zoom * 100)}% · x {Math.round(view.panX)} · y {Math.round(view.panY)}</output></>}<span>{width && height ? `${width.toLocaleString()} × ${height.toLocaleString()} px` : "Source extent unavailable"}</span></div><aside><FactGrid facts={scalarFacts({ ...state, ...source }, ["fileName", "format", "displayMode", "sourceRevision", "stateRevision"], 6)} />{tile ? <p className="sv-data-note">This project-owned Canvas receives pixel data decoded from the authorized local source tile.</p> : !width || !height ? <p className="sv-data-note">Pixel dimensions were not included in this operation result.</p> : <p className="sv-data-note">This operation supplied source dimensions and regions without original pixels; the patterned area is a coordinate preview.</p>}</aside></div> : null}
+    <TabStrip active={active} ariaLabel="Slide and spatial result views" idPrefix={tabIdPrefix} labels={labels} onChange={setActive} panelId={panelId} />
+    <div aria-labelledby={`${tabIdPrefix}-${domToken(active.toLowerCase())}`} className="sv-panel" id={panelId} role="tabpanel" tabIndex={0}>
+      {active === "Slide" ? <div className="sv-slide-layout"><div className="sv-slide-map" aria-label="Interactive slide source view">{tile && width && height && sourceRevision ? <LocalSlideCanvas ariaLabel="Local slide source pixel workspace" height={height} regions={canvasRegions} sourceRevision={sourceRevision} tile={tile} width={width} /> : <><div className="sv-slide-controls" aria-label="Slide view controls"><button aria-label="Zoom slide in" onClick={() => zoomView(.25)} type="button">+</button><button aria-label="Zoom slide out" onClick={() => zoomView(-.25)} type="button">−</button><button aria-label="Reset slide view" onClick={resetView} type="button">Reset</button></div><svg aria-label="Slide source extent and returned regions" data-slide-view="true" onKeyDown={onSlideKeyDown} onPointerCancel={stopSlideDrag} onPointerDown={onSlidePointerDown} onPointerMove={onSlidePointerMove} onPointerUp={stopSlideDrag} preserveAspectRatio="xMidYMid meet" ref={wheelRef} role="application" tabIndex={0} viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}><defs><pattern height={Math.max(12, viewBoxHeight / 24)} id={tissuePatternId} patternUnits="userSpaceOnUse" width={Math.max(12, viewBoxWidth / 32)}><rect fill="var(--sv-slide-tissue)" height="100%" width="100%" /><circle cx="35%" cy="45%" fill="var(--sv-slide-nucleus)" r="11%" /></pattern></defs><g transform={`translate(${view.panX} ${view.panY}) scale(${view.zoom})`}><rect fill={`url(#${tissuePatternId})`} height={viewBoxHeight} rx={viewBoxHeight * .02} width={viewBoxWidth} />{number(bounds.x) != null && number(bounds.y) != null && number(bounds.width) != null && number(bounds.height) != null ? <rect className="sv-view-bounds" fill="none" height={number(bounds.height)!} width={number(bounds.width)!} x={number(bounds.x)!} y={number(bounds.y)!} /> : null}{regions.map((region, index) => <rect className="sv-region" fill="none" height={number(region.height) ?? 0} key={text(region.id) ?? String(index)} width={number(region.width) ?? 0} x={number(region.x) ?? 0} y={number(region.y) ?? 0} />)}</g></svg><output aria-live="polite" className="sv-slide-position">{Math.round(view.zoom * 100)}% · x {Math.round(view.panX)} · y {Math.round(view.panY)}</output></>}<span>{width && height ? `${width.toLocaleString()} × ${height.toLocaleString()} px` : "Source extent unavailable"}</span></div><aside><FactGrid facts={scalarFacts({ ...state, ...source }, ["fileName", "format", "displayMode", "sourceRevision", "stateRevision"], 6)} />{tile ? <p className="sv-data-note">This project-owned Canvas receives pixel data decoded from the authorized local source tile.</p> : !width || !height ? <p className="sv-data-note">Pixel dimensions were not included in this operation result.</p> : <p className="sv-data-note">This operation supplied source dimensions and regions without original pixels; the patterned area is a coordinate preview.</p>}</aside></div> : null}
       {active === "Spatial" ? <div className="sv-spatial-layout"><section><span className="sv-spatial-gene">{text(spatial.gene ?? spatial.selectedGene) ?? "Spatial matrix"}</span><strong>{observations?.toLocaleString() ?? "—"}</strong><small>observations</small></section><section><strong>{genes?.toLocaleString() ?? text(array(spatial.matrixShape)[1]) ?? "—"}</strong><small>genes</small></section><section><FactGrid facts={scalarFacts(spatial, ["nonzero", "min", "max", "mean", "valueScale", "matrixFormat"], 6)} /></section></div> : null}
-      {active === "Layers" ? layers.length ? <><p className="sv-layer-note" role="note">Layer visibility is read-only in this recorded result. Change visibility in the connected slide viewer.</p><div className="sv-layer-list">{layers.map((layer, index) => { const layerId = text(layer.id ?? layer.name) ?? `layer-${index + 1}`; return <label key={layerId}><input aria-label={`${layerId} visibility (read-only)`} checked={layer.visible !== false} disabled readOnly type="checkbox" /><i /><span><strong>{layerId}</strong><small>{text(layer.kind) ?? "scientific layer"}{text(layer.featureCount) ? ` · ${text(layer.featureCount)} features` : ""}</small></span></label>; })}</div></> : <EmptyResult>No scientific layer collection was included in this result.</EmptyResult> : null}
+      {active === "Layers" ? layers.length ? <><p className="sv-layer-note" role="note">Layer visibility is read-only in this recorded result. Change visibility in the connected slide viewer.</p><div className="sv-layer-list">{layers.map((layer, index) => { const layerId = text(layer.id ?? layer.name) ?? `layer-${index + 1}`; return <label className="sv-layer--readonly" key={layerId}><input aria-label={`${layerId} visibility (read-only)`} checked={layer.visible !== false} disabled readOnly type="checkbox" /><i /><span><strong>{layerId}</strong><small>{text(layer.kind) ?? "scientific layer"}{text(layer.featureCount) ? ` · ${text(layer.featureCount)} features` : ""}</small></span></label>; })}</div></> : <EmptyResult>No scientific layer collection was included in this result.</EmptyResult> : null}
     </div>
     <ArtifactButtons artifacts={artifacts} openFile={openFile} />
   </div>;
@@ -572,8 +623,9 @@ export function SlideResult({ parsed, openFile }: { parsed: ParsedScienceCall; o
 export function ScienceToolView(props: ToolCallOwnerProps): JSX.Element {
   const parsed = useMemo(() => parseCall(props), [props.block]);
   const kind = viewerKind(props.toolName);
-  return <article className={`sv-root sv-root--${kind}`} data-science-viewer={kind} data-tool-name={props.toolName} aria-label={`${prettyLabel(props.toolName)} result`}>
-    <ToolHeader {...(props.inspect ? { inspect: props.inspect } : {})} kind={kind} operation={props.toolName} parsed={parsed} />
+  const titleId = `sv-title-${domToken(useId())}`;
+  return <article aria-label={`${prettyLabel(props.toolName)} result`} aria-labelledby={titleId} className={`sv-root sv-root--${kind}`} data-science-viewer={kind} data-tool-name={props.toolName}>
+    <ToolHeader {...(props.inspect ? { inspect: props.inspect } : {})} kind={kind} operation={props.toolName} parsed={parsed} titleId={titleId} />
     {parsed.running ? <div className="sv-loading" aria-live="polite" role="status"><i /><div><strong>Scientific operation in progress</strong><span>The viewer will use the durable tool result when it arrives.</span></div></div> : parsed.error ? <div className="sv-error" role="alert"><strong>{parsed.error.code ?? "Scientific operation failed"}</strong><p>{parsed.error.message}</p></div> : kind === "sequence" ? <SequenceResult openFile={props.openFile} parsed={parsed} /> : kind === "ngs" ? <NgsResult openFile={props.openFile} parsed={parsed} /> : kind === "structure" ? <StructureResult openFile={props.openFile} parsed={parsed} /> : <SlideResult openFile={props.openFile} parsed={parsed} />}
   </article>;
 }

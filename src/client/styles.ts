@@ -5,8 +5,8 @@ export const WORKBENCH_CSS = String.raw`
   --rr-panel-solid: #fffefa;
   --rr-panel-muted: #efede7;
   --rr-ink: #242b29;
-  --rr-muted: #68716d;
-  --rr-faint: #929995;
+  --rr-muted: #58635f;
+  --rr-faint: #6d7772;
   --rr-line: rgba(46, 60, 54, .12);
   --rr-accent: #537d70;
   --rr-accent-ink: #2d584b;
@@ -21,8 +21,8 @@ export const WORKBENCH_CSS = String.raw`
   --rr-panel-solid: #202724;
   --rr-panel-muted: #29312e;
   --rr-ink: #edf1ef;
-  --rr-muted: #aab3af;
-  --rr-faint: #7f8a85;
+  --rr-muted: #bbc4c0;
+  --rr-faint: #9aa6a0;
   --rr-line: rgba(222, 235, 228, .12);
   --rr-accent: #8eb5a7;
   --rr-accent-ink: #b9d8cd;
@@ -470,3 +470,28 @@ export const WORKBENCH_CSS = String.raw`
 .rr-science-sidebar__activate--compact { width: 36px; min-height: 36px; padding: 0; border-radius: 9px; }
 .rr-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 `;
+
+let styleUsers = 0;
+let ownedStyle: HTMLStyleElement | null = null;
+
+/** Install the shared client stylesheet and keep it until the final instance disposes. */
+export function installWorkbenchStyles(content: string): () => void {
+  const id = "dsh-rosalind-styles";
+  styleUsers += 1;
+  if (!document.getElementById(id)) {
+    ownedStyle = document.createElement("style");
+    ownedStyle.id = id;
+    ownedStyle.textContent = content;
+    document.head.append(ownedStyle);
+  }
+  let active = true;
+  return () => {
+    if (!active) return;
+    active = false;
+    styleUsers = Math.max(0, styleUsers - 1);
+    if (styleUsers === 0 && ownedStyle) {
+      ownedStyle.remove();
+      ownedStyle = null;
+    }
+  };
+}

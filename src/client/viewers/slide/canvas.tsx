@@ -45,7 +45,7 @@ export function LocalSlideCanvas(props: LocalSlideCanvasProps): JSX.Element {
   useEffect(() => {
     if (!tileKey || !props.tile) { imageRef.current = null; setImageVersion((version) => version + 1); return undefined; }
     let active = true;
-    const image = new Image(); imageRef.current = { key: tileKey, image: null };
+    const image = new Image(); image.decoding = "async"; image.loading = "eager"; imageRef.current = { key: tileKey, image: null };
     image.onload = () => { if (active && imageRef.current?.key === tileKey) { imageRef.current = { key: tileKey, image }; setImageVersion((version) => version + 1); } };
     image.onerror = () => { if (active && imageRef.current?.key === tileKey) { imageRef.current = { key: tileKey, image: null }; setImageVersion((version) => version + 1); } };
     image.src = props.tile.dataUrl;

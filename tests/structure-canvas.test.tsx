@@ -1,9 +1,10 @@
 // @vitest-environment jsdom
 
+import "@testing-library/jest-dom/vitest";
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { LocalStructureCanvas } from "../src/client/viewers/structure/canvas.js";
+import { LocalStructureCanvas, STRUCTURE_CANVAS_RENDER_LIMIT } from "../src/client/viewers/structure/canvas.js";
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
@@ -61,6 +62,26 @@ describe("LocalStructureCanvas", () => {
     expect(canvas.dataset.viewScale).toBe("1");
     fireEvent.keyDown(canvas, { key: "Escape" });
     expect(onSelectAtom).toHaveBeenLastCalledWith(null);
+  });
+
+  it("uses a native non-passive wheel listener and prevents page scrolling", () => {
+    const addEventListener = vi.spyOn(HTMLCanvasElement.prototype, "addEventListener");
+    const { canvas } = mount();
+    const wheel = new WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: -1 });
+    fireEvent(canvas, wheel);
+    expect(wheel.defaultPrevented).toBe(true);
+    expect(addEventListener.mock.calls.some(([type, , options]) => type === "wheel" && typeof options === "object" && options?.passive === false)).toBe(true);
+  });
+
+  it("caps very large coordinate arrays without argument-spread failures", () => {
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(canvasContext());
+    const atoms = Array.from({ length: STRUCTURE_CANVAS_RENDER_LIMIT * 3 }, (_, index) => ({ atomId: `atom-${index}`, element: "C", x: index, y: index % 37, z: index % 19 }));
+    const onRenderReady = vi.fn();
+    const { getByRole } = render(<LocalStructureCanvas atoms={atoms} onRenderReady={onRenderReady} />);
+    const canvas = getByRole("application");
+    expect(canvas).toHaveAttribute("data-source-atom-count", String(atoms.length));
+    expect(canvas).toHaveAttribute("data-rendered-atom-count", String(STRUCTURE_CANVAS_RENDER_LIMIT));
+    expect(onRenderReady).toHaveBeenCalledWith({ renderedAtomCount: STRUCTURE_CANVAS_RENDER_LIMIT });
   });
 
   it("does not turn a long drag ending with a tiny move into an atom selection", () => {

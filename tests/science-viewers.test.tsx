@@ -83,6 +83,8 @@ describe("science ToolViews", () => {
       result: { rowCount: 3, alignedLength: 191, meanIdentity: 0.9284467713787081, columns: [{ column: 1, identity: 1 }, { column: 2, identity: 0.667 }] },
     });
     render(<ScienceToolView {...props} />);
+    expect(screen.getByRole("article", { name: "Sequence & alignment" })).toBeInTheDocument();
+    expect(screen.getByRole("tablist")).toHaveAttribute("aria-orientation", "horizontal");
     expect(screen.getByRole("table")).toHaveTextContent("P01116");
     expect(screen.getByText(/residue strings remain in the active viewer session/i)).toBeInTheDocument();
     fireEvent.click(screen.getByTitle("showcases/ras.aln-fasta"));
@@ -94,7 +96,24 @@ describe("science ToolViews", () => {
     fireEvent.keyDown(alignment, { key: "ArrowRight" });
     expect(screen.getByRole("tab", { name: "Metrics" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("tab", { name: "Metrics" })).toHaveFocus();
+    expect(screen.getByRole("tab", { name: "Metrics" })).toHaveAttribute("aria-controls", screen.getByRole("tabpanel").id);
+    expect(screen.getByRole("tabpanel")).toHaveAttribute("aria-labelledby", screen.getByRole("tab", { name: "Metrics" }).id);
     expect(screen.getByLabelText("Per-column metric track").querySelectorAll("i")).toHaveLength(2);
+  });
+
+  it("limits a large sequence result and restores table scrolling after a tab change", () => {
+    const records = Array.from({ length: 1_000 }, (_, index) => ({ id: `record-${index}`, label: `Sequence ${index}`, length: 120 }));
+    render(<ScienceToolView {...settled("sequence_query_viewer", { viewer: "alignment", state: { records }, result: { columns: [{ column: 1, identity: 1 }] } })} />);
+    expect(screen.getAllByRole("row")).toHaveLength(251);
+    expect(screen.getByRole("status")).toHaveTextContent("Showing the first 250 of 1,000 matching records");
+    const tableScroller = document.querySelector<HTMLElement>(".sv-sequence-table-wrap")!;
+    tableScroller.scrollLeft = 91;
+    tableScroller.scrollTop = 73;
+    fireEvent.click(screen.getByRole("tab", { name: "Metrics" }));
+    fireEvent.click(screen.getByRole("tab", { name: "Alignment" }));
+    const restoredScroller = document.querySelector<HTMLElement>(".sv-sequence-table-wrap")!;
+    expect(restoredScroller.scrollLeft).toBe(91);
+    expect(restoredScroller.scrollTop).toBe(73);
   });
 
   it("uses NGS workflow and run records for the catalogue and timeline views", () => {
@@ -200,6 +219,11 @@ describe("science ToolViews", () => {
       scientificLayers: [{ id: "segmentation", kind: "segmentation", featureCount: 245, visible: true }],
     });
     render(<ScienceToolView {...props} />);
+    const sourceView = screen.getByLabelText("Slide source extent and returned regions");
+    const wheel = new WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: -1 });
+    fireEvent(sourceView, wheel);
+    expect(wheel.defaultPrevented).toBe(true);
+    expect(screen.getByText(/116%/)).toBeInTheDocument();
     expect(screen.getByText("46,000 × 32,893 px")).toBeInTheDocument();
     expect(screen.getByLabelText("Slide source extent and returned regions").querySelectorAll(".sv-region")).toHaveLength(1);
     fireEvent.click(screen.getByRole("tab", { name: "Spatial" }));
@@ -208,6 +232,17 @@ describe("science ToolViews", () => {
     fireEvent.click(screen.getByRole("tab", { name: "Layers" }));
     expect(screen.getByText("segmentation")).toBeInTheDocument();
     expect(screen.getByRole("checkbox")).toBeChecked();
+    expect(screen.getByRole("checkbox").closest("label")).toHaveClass("sv-layer--readonly");
+  });
+
+  it("uses instance-unique SVG definitions for multiple slide results", () => {
+    const result = settled("slide_get_viewer_state", { source: { width: 100, height: 50 } });
+    render(<><ScienceToolView {...result} /><ScienceToolView {...result} /></>);
+    const patterns = [...document.querySelectorAll<SVGPatternElement>("pattern")];
+    expect(patterns).toHaveLength(2);
+    expect(new Set(patterns.map((pattern) => pattern.id)).size).toBe(2);
+    const fills = [...document.querySelectorAll<SVGRectElement>("svg > g > rect")].map((rect) => rect.getAttribute("fill"));
+    expect(fills).toEqual(patterns.map((pattern) => `url(#${pattern.id})`));
   });
 
   it("mounts the production ScienceToolView with local navigation and read-only layer state", () => {
