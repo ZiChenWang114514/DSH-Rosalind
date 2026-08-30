@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "recordedAt": "2026-08-30T20:33:06.123Z",
+  "archive": "zichenwang114514-dsh-rosalind-0.3.4.tgz",
+  "archiveBytes": 17166964,
+  "archiveSha256": "1837eee76e99a2a924e16422f488a6163cf2a54f6e38fd0d9b6777aa505d2dcf",
+  "archiveKind": "explicit-tgz",
+  "releaseArchiveValidated": true,
+  "dshVersion": "0.1.1-rc.2",
+  "cleanProfile": {
+    "name": "evidence",
+    "bundles": [
+      "@deepseek-ai/dsh-base",
+      "@zichenwang114514/dsh-rosalind"
+    ]
+  },
+  "registration": {
+    "totalTools": 165,
+    "bundleTools": 140,
+    "rosalindTools": 13,
+    "skillsListed": 55,
+    "skillsReadBack": 55
+  },
+  "representatives": {
+    "rosalind": {
+      "tool": "rosalind_catalog_list",
+      "result": {
+        "host": "success",
+        "status": null,
+        "scientificErrorCode": null,
+        "total": 100,
+        "viewerSessionId": null,
+        "viewer": null,
+        "atomCount": null,
+        "sourceWidth": null,
+        "sourceHeight": null
+      }
+    },
+    "ngs": {
+      "tool": "ngs_list_workflows",
+      "result": {
+        "host": "success",
+        "status": "completed",
+        "scientificErrorCode": null,
+        "total": null,
+        "viewerSessionId": null,
+        "viewer": null,
+        "atomCount": null,
+        "sourceWidth": null,
+        "sourceHeight": null
+      }
+    },
+    "sequence": {
+      "tool": "sequence_open_from_chat",
+      "result": {
+        "host": "success",
+        "status": "completed",
+        "scientificErrorCode": null,
+        "total": null,
+        "viewerSessionId": "3e1e7607-75fd-46c7-be7c-33adb7daa1dd",
+        "viewer": "alignment",
+        "atomCount": null,
+        "sourceWidth": null,
+        "sourceHeight": null
+      }
+    },
+    "structure": {
+      "tool": "structure_open_from_chat",
+      "result": {
+        "host": "success",
+        "status": "completed",
+        "scientificErrorCode": null,
+        "total": null,
+        "viewerSessionId": "cdeea251-8092-43fc-b2a4-838e762ac7a8",
+        "viewer": null,
+        "atomCount": 818,
+        "sourceWidth": null,
+        "sourceHeight": null
+      }
+    },
+    "slide": {
+      "tool": "slide_open_from_chat",
+      "result": {
+        "host": "success",
+        "status": "completed",
+        "scientificErrorCode": null,
+        "total": null,
+        "viewerSessionId": "093f596f-b43d-40ff-99d4-4fc63ed0537d",
+        "viewer": null,
+        "atomCount": null,
+        "sourceWidth": 46000,
+        "sourceHeight": 32893
+      }
+    },
+    "literature": {
+      "tool": "literature_request",
+      "result": {
+        "host": "success",
+        "status": "failed",
+        "scientificErrorCode": "NETWORK_NOT_AUTHORIZED",
+        "total": null,
+        "viewerSessionId": null,
+        "viewer": null,
+        "atomCount": null,
+        "sourceWidth": null,
+        "sourceHeight": null
+      }
+    },
+    "databases": {
+      "tool": "database_request",
+      "result": {
+        "host": "success",
+        "status": "failed",
+        "scientificErrorCode": "NETWORK_NOT_AUTHORIZED",
+        "total": null,
+        "viewerSessionId": null,
+        "viewer": null,
+        "atomCount": null,
+        "sourceWidth": null,
+        "sourceHeight": null
+      }
+    }
+  },
+  "cancellation": {
+    "host": "error",
+    "code": "ABORTED_BEFORE_DISPATCH",
+    "message": "tool call aborted before dispatch"
+  },
+  "execution": {
+    "localProfileMount": true,
+    "fixtureOrLocalExecution": true,
+    "publicServiceExecution": {
+      "attempted": false,
+      "reason": "network is disabled for this verifier"
+    }
+  },
+  "packedInspection": "Packed bundle inspection passed: zichenwang114514-dsh-rosalind-0.3.4.tgz contains 1470 files, 55 project Skills, 100 showcase manifests, and the 140-tool contract (121 fixed operations + 6 Skill adapters, including 4 Slide compatibility tools + 13 Rosalind tools)."
+}

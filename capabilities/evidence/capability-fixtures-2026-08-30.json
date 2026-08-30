@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T20:11:26.172Z",
+  "recordedAt": "2026-08-30T20:29:25.225Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
-    "version": "0.3.3"
+    "version": "0.3.4"
   },
   "command": "npx vitest run tests/runtime.test.ts tests/capability-evidence-trust.test.ts tests/science-literature-databases.test.ts tests/database-provider-matrix.test.ts tests/sequence-ngs-operation-matrix.test.ts tests/rosalind-ngs-production.test.ts tests/ngs-local-execution.test.ts tests/ngs-mcp-facades.test.ts tests/ngs-persistence.test.ts tests/science-output-schema.test.ts tests/structure-operation-matrix.test.ts tests/structure-toolruntime.test.ts tests/structure-runtime.test.ts tests/structure-canvas.test.tsx tests/science-slide-parity.test.ts tests/science-slide-runtime.test.ts tests/science-slide-canvas.test.tsx tests/skills-source.test.ts tests/skills-workflow-matrix.test.ts tests/skills-registry-trace.test.ts tests/science-integration.test.ts tests/rosalind-operation.test.ts tests/dsh-host-registration.test.ts tests/module-core.test.ts tests/science-module-registration.test.ts tests/source-modules.test.ts tests/workflow-modules.test.ts --reporter=json --outputFile=<repo>/capabilities/evidence/capability-fixtures-2026-08-30.vitest.json && npx vitest run --config vitest.dsh-profile-evidence.config.ts tests/dsh-isolated-profile-evidence.test.ts --reporter=json --outputFile=<repo>/capabilities/evidence/capability-fixtures-2026-08-30.profile-vitest.json",
   "testFiles": [
@@ -2117,9 +2117,9 @@
     }
   ],
   "profileInstallation": {
-    "archive": "zichenwang114514-dsh-rosalind-0.3.3.tgz",
-    "archiveBytes": 17166356,
-    "archiveSha256": "604500ad7e8b0c5e9bfc27234e1963e18c502614c5e15a815b178dd26090887a",
+    "archive": "zichenwang114514-dsh-rosalind-0.3.4.tgz",
+    "archiveBytes": 17166932,
+    "archiveSha256": "9b5ca8af94569609d594d0f716aadfde0252bd0d4b00fddbe35dfb532c1b2101",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2292,7 +2292,7 @@
     "capabilities/sources/README.md": "9acdf3c369cd8bff4b441d499b74e60e6012a9a6410e8dfd0f04780ce6b905eb",
     "capabilities/sources/required-operations.json": "066ed5b95a571de3974d47d0b093a6bb5aa6da546be6f01131c055c14b734334",
     "capabilities/sources/skill-source-inventory.json": "59ee263c2d6788f6a19720396e3e2e3b01f9dd90b0e5821d5cff5e9284f492bf",
-    "package.json": "c7c9016a713d09ff16f8f75b5b3aca23a00ee7baa03ac41db209311f2ed44cf8",
+    "package.json": "2a79972850d4f2c9b8e81ad17e4cc004de7cde2e9b2ccc48f6354452ac59cbd4",
     "scripts/generate-capability-manifest.mjs": "d745b63b86478a9fa459fb81d2a5596dac46c1505b9db3575ea7ff60ee3ab29f",
     "scripts/lib/capability-evidence.mjs": "0d4ca26443b0f7dba1c6e9a2b5554d31e6615831fc236a26cd4891f5fb2acff9",
     "scripts/record-capability-verification.mjs": "fad1258e837b0c156db777bfc7d06ad5ace91b4f5fa7ee94b6b1b976fc7c1352",

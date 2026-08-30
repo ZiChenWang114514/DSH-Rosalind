@@ -24,7 +24,7 @@
     "updated": 0,
     "didUpdate": false
   },
-  "startTime": 1788120577812,
+  "startTime": 1788121651179,
   "success": true,
   "testResults": [
     {
@@ -36,13 +36,13 @@
           "fullName": "isolated DSH profile evidence installs the selected packed bundle, mounts the real DSH services, and records offline behavior",
           "status": "passed",
           "title": "installs the selected packed bundle, mounts the real DSH services, and records offline behavior",
-          "duration": 53673.2269,
+          "duration": 58838.940899999994,
           "failureMessages": [],
           "meta": {}
         }
       ],
-      "startTime": 1788120578612,
-      "endTime": 1788120632285.2268,
+      "startTime": 1788121651988,
+      "endTime": 1788121710826.941,
       "status": "passed",
       "message": "",
       "name": "<repo>/tests/dsh-isolated-profile-evidence.test.ts"

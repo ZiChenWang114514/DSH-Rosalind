@@ -70,11 +70,10 @@ jobs:
   dsh-bundle:
     name: DSH 0.1.1-rc.2 bundle
     runs-on: ubuntu-latest
-    env:
-      # A fresh, job-scoped profile prevents a runner's prior settings or
-      # extensions from contributing to this installation check.
-      DSH_HOME: ${{ runner.temp }}/dsh-rosalind-profile
     steps:
+      - name: Use a fresh DSH profile
+        shell: bash
+        run: echo "DSH_HOME=$RUNNER_TEMP/dsh-rosalind-profile" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -135,9 +134,10 @@ jobs:
   dsh-bundle-windows:
     name: DSH 0.1.1-rc.2 bundle on Windows
     runs-on: windows-latest
-    env:
-      DSH_HOME: ${{ runner.temp }}/dsh-rosalind-profile
     steps:
+      - name: Use a fresh DSH profile
+        shell: pwsh
+        run: '"DSH_HOME=$env:RUNNER_TEMP\dsh-rosalind-profile" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append'
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
