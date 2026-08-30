@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "session_kind": "portable-view-state-rehearsal",
+  "source": {
+    "relative_path": "inputs/P01116.fasta",
+    "accession": "P01116",
+    "sequence_version": 1,
+    "molecule": "protein",
+    "sequence_length": 189,
+    "response_sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6",
+    "sequence_sha256": "1d5a9ab11f64cb886d8ffa08a153c412b2d190fcf70e5690cd4b4c7efcdee53a"
+  },
+  "view_state": {
+    "mode": "sequence",
+    "record_id": "P01116",
+    "orientation": "forward",
+    "residue_palette": "protein-clustal",
+    "wrap_width": 60,
+    "features_visible": true,
+    "translations_visible": false,
+    "selected_range": {
+      "start_1based": 10,
+      "end_1based": 17,
+      "sequence": "GAGGVGKS"
+    }
+  },
+  "analysis_state": {
+    "scope": "full-record",
+    "coordinate_system": "1-based inclusive"
+  },
+  "viewer_workflow": {
+    "status": "rehearsed",
+    "capabilities": [
+      "sequence-viewer.sequence_open_from_chat",
+      "sequence-viewer.sequence_save_session",
+      "sequence-viewer.sequence_restore_session",
+      "sequence-viewer.sequence_query_viewer"
+    ]
+  }
+}

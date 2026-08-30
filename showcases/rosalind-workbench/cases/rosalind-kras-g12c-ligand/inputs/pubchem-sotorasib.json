@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 137278711,
+        "MolecularFormula": "C30H30F2N6O3",
+        "MolecularWeight": "560.6",
+        "SMILES": "C[C@H]1CN(CCN1C2=NC(=O)N(C3=NC(=C(C=C32)F)C4=C(C=CC=C4F)O)C5=C(C=CN=C5C(C)C)C)C(=O)C=C",
+        "ConnectivitySMILES": "CC1CN(CCN1C2=NC(=O)N(C3=NC(=C(C=C32)F)C4=C(C=CC=C4F)O)C5=C(C=CN=C5C(C)C)C)C(=O)C=C",
+        "InChIKey": "NXQKSXLFSAEQCZ-SFHVURJKSA-N",
+        "XLogP": 4,
+        "TPSA": 102,
+        "HBondDonorCount": 1,
+        "HBondAcceptorCount": 7,
+        "RotatableBondCount": 5,
+        "Title": "Sotorasib"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "showcase.provenance/v1",
+  "case_id": "rosalind-breast-visium",
+  "scientific_evidence": {
+    "source": "inputs/cellxgene-collection.json",
+    "source_record": "https://cellxgene.cziscience.com/collections/bfd55632-15e2-4dde-a1b9-02ade511fc4d",
+    "retrieved_at_utc": "2026-08-29T18:22:33.632996Z",
+    "acquisition": "CELLxGENE skill scripts/rest_request.py against the official curation API",
+    "computation": "build_case.py",
+    "outputs": ["outputs/visium-metadata-summary.json", "outputs/dataset-qc-table.csv"],
+    "method": "Deterministic validation and grouping of 15 de-identified public Visium dataset metadata records; participant labels were removed before publication."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 898,
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "limitation": "The launcher response did not receive spatial data or produce a Visium result."
+  }
+}

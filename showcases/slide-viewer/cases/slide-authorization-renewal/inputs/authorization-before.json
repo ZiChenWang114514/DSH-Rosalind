@@ -1,0 +1,25 @@
+{
+  "manifest_version": "1.0.0",
+  "snapshot": "before_renewal",
+  "session_id": "fixture-session-spatial-01",
+  "source": {
+    "source_id": "fixture-source-hne-01",
+    "source_revision": "sha256:9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd",
+    "public_url": "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "bytes": 94259482,
+    "lease_label": "fixture-source-lease-01",
+    "expires_at": "2026-08-30T01:00:00Z",
+    "state": "expired"
+  },
+  "scientific_layer": {
+    "layer_id": "fixture-layer-spots-01",
+    "layer_source_revision": "sha256:e529e286575eab027726d8e78a53e71b0fdf858723578a0da34b5a0acd4e1ed7",
+    "entity_kind": "visium_capture_spot",
+    "entity_count": 684,
+    "lease_label": "fixture-layer-lease-01",
+    "expires_at": "2026-08-30T01:00:00Z",
+    "state": "expired"
+  },
+  "credentials_included": false,
+  "viewer_execution": false
+}

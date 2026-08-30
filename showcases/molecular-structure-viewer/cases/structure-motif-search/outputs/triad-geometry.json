@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-motif-search",
+  "run_date": "2026-08-30",
+  "source": {
+    "accession": "3PTB",
+    "url": "https://files.rcsb.org/download/3PTB.pdb",
+    "path": "inputs/3PTB.pdb",
+    "bytes": 183384,
+    "sha256": "288f7954d4d013fa8eab3808e1037e2958e2dcd12c9eca65a3f1014404a9f9a2"
+  },
+  "selection": [
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 57,
+      "residue": "HIS",
+      "atom_names": [
+        "C",
+        "CA",
+        "CB",
+        "CD2",
+        "CE1",
+        "CG",
+        "N",
+        "ND1",
+        "NE2",
+        "O"
+      ],
+      "ca_xyz_angstrom": [
+        6.33,
+        17.945,
+        25.109
+      ]
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 102,
+      "residue": "ASP",
+      "atom_names": [
+        "C",
+        "CA",
+        "CB",
+        "CG",
+        "N",
+        "O",
+        "OD1",
+        "OD2"
+      ],
+      "ca_xyz_angstrom": [
+        10.245,
+        14.271,
+        21.59
+      ]
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 195,
+      "residue": "SER",
+      "atom_names": [
+        "C",
+        "CA",
+        "CB",
+        "N",
+        "O",
+        "OG"
+      ],
+      "ca_xyz_angstrom": [
+        0.298,
+        12.64,
+        23.25
+      ]
+    }
+  ],
+  "method": "Euclidean distances from deposited Cartesian coordinates; no hydrogens or protonation model added.",
+  "ca_pair_distances": [
+    {
+      "pair": [
+        "HIS57:CA",
+        "ASP102:CA"
+      ],
+      "distance_angstrom": 6.419413
+    },
+    {
+      "pair": [
+        "HIS57:CA",
+        "SER195:CA"
+      ],
+      "distance_angstrom": 8.245237
+    },
+    {
+      "pair": [
+        "ASP102:CA",
+        "SER195:CA"
+      ],
+      "distance_angstrom": 10.215604
+    }
+  ],
+  "candidate_catalytic_atom_distances": [
+    {
+      "pair": [
+        "HIS57:ND1",
+        "ASP102:OD1"
+      ],
+      "distance_angstrom": 3.468968
+    },
+    {
+      "pair": [
+        "HIS57:ND1",
+        "ASP102:OD2"
+      ],
+      "distance_angstrom": 2.669607
+    },
+    {
+      "pair": [
+        "HIS57:NE2",
+        "SER195:OG"
+      ],
+      "distance_angstrom": 2.959605
+    }
+  ],
+  "public_motif_request": {
+    "publicPdbId": "3PTB",
+    "residues": [
+      {
+        "numbering": "author",
+        "authAsymId": "A",
+        "authSeqId": 57,
+        "structOperId": "1"
+      },
+      {
+        "numbering": "author",
+        "authAsymId": "A",
+        "authSeqId": 102,
+        "structOperId": "1"
+      },
+      {
+        "numbering": "author",
+        "authAsymId": "A",
+        "authSeqId": 195,
+        "structOperId": "1"
+      }
+    ],
+    "atomPairing": "SIDE_CHAIN",
+    "motifPruning": "KRUSKAL",
+    "rmsdCutoffAngstrom": 2.0,
+    "backboneDistanceTolerance": 1.0,
+    "sideChainDistanceTolerance": 1.0,
+    "angleTolerance": 20.0,
+    "limit": 10,
+    "matchesPerHit": 3,
+    "offset": 0
+  },
+  "interpretation_scope": "The distances describe one deposited geometry. Similar geometry alone does not establish function or catalytic competence."
+}

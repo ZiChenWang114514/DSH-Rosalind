@@ -1,0 +1,517 @@
+{
+  "schema": "structure-viewer.operation-evidence/v1",
+  "case_id": "structure-mdm2-p53",
+  "source": "RCSB PDB 1YCR retained at inputs/1YCR.pdb",
+  "session_scope": "one mounted viewer session; nonportable internal identifiers omitted",
+  "sanitization": "sessionId, callerId, and commandId values were removed because they carry no scientific meaning; operation parameters, timestamps, revisions, messages, and scientific results are unchanged.",
+  "observation_scope": "Exact model-tool receipts from one recoverable mounted viewer session; derived objects and visual changes did not modify the retained PDB.",
+  "scientific_links": {
+    "structure_control_viewer": "Enabled the sequence strip and measurement display with atom picking for interface inspection.",
+    "structure_manage_guides": "Computed a best-fit plane from all 113 atoms of p53 chain B.",
+    "structure_derive_object": "Created an immutable-source copy with chain B renamed to P for explicit p53 identity.",
+    "structure_pymol_actions": "Authenticated the complete typed action vocabulary at scene revision 1.",
+    "structure_pymol_action": "Added a sticks layer for chain B while retaining the full-complex cartoon."
+  },
+  "operation_receipts": [
+    {
+      "operation": "structure_control_viewer",
+      "startedAtUtc": "2026-08-29T18:55:14.913Z",
+      "completedAtUtc": "2026-08-29T18:55:15.282Z",
+      "arguments": {
+        "action": "set_workspace_options",
+        "sequenceVisible": true,
+        "measurementsVisible": true,
+        "selectionGranularity": "atom"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Updated the molecular workspace."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Updated the molecular workspace.",
+          "state": {}
+        }
+      }
+    },
+    {
+      "operation": "structure_browse_related_data",
+      "startedAtUtc": "2026-08-29T18:54:57.933Z",
+      "completedAtUtc": "2026-08-29T18:54:58.033Z",
+      "arguments": {
+        "internal_identifiers_omitted": true
+      },
+      "response": {
+        "content": [],
+        "structuredContent": {
+          "available": false,
+          "message": "Workspace read access is unavailable because active workspace roots were not bound to this viewer session."
+        }
+      }
+    },
+    {
+      "operation": "structure_pymol_actions",
+      "startedAtUtc": "2026-08-29T18:54:58.033Z",
+      "completedAtUtc": "2026-08-29T18:54:58.138Z",
+      "arguments": {},
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Authenticated 24 molecular workspace actions at scene revision 1."
+          }
+        ],
+        "structuredContent": {
+          "actions": [
+            "focus",
+            "select",
+            "show",
+            "show_as",
+            "hide",
+            "color",
+            "label",
+            "object_visibility",
+            "volume_visibility",
+            "measurement_visibility",
+            "restore_scene",
+            "remove_object",
+            "derive_object",
+            "save_scene",
+            "undo",
+            "redo",
+            "preset",
+            "clip",
+            "camera",
+            "analyze",
+            "measure",
+            "frame",
+            "workspace",
+            "align"
+          ],
+          "colors": [
+            "chain",
+            "element",
+            "residue",
+            "bfactor",
+            "secondary_structure",
+            "hydrophobicity",
+            "occupancy",
+            "sequence_id",
+            "formal_charge",
+            "partial_charge",
+            "residue_charge",
+            "molecule_type",
+            "carbohydrate",
+            "interaction_type",
+            "illustrative",
+            "native",
+            "uniform"
+          ],
+          "examples": [
+            {
+              "action": {
+                "kind": "show",
+                "representation": "sticks",
+                "target": {
+                  "kind": "all",
+                  "objectId": "primary"
+                }
+              },
+              "expectedRevision": 1
+            },
+            {
+              "action": {
+                "kind": "label",
+                "mode": "residue",
+                "size": 12,
+                "target": {
+                  "kind": "all",
+                  "objectId": "primary"
+                },
+                "visible": true
+              },
+              "expectedRevision": 1
+            },
+            {
+              "action": {
+                "analysis": "sasa",
+                "kind": "analyze",
+                "options": {
+                  "minAreaSquareAngstrom": 50,
+                  "relativeSasaReference": "tien_2013_maximum",
+                  "sasaAggregation": "residue"
+                },
+                "selections": [
+                  {
+                    "kind": "all",
+                    "objectId": "primary"
+                  },
+                  {
+                    "component": "protein",
+                    "kind": "component",
+                    "objectId": "primary"
+                  }
+                ]
+              },
+              "expectedRevision": 1
+            },
+            {
+              "action": {
+                "explorerVisible": true,
+                "kind": "workspace",
+                "renderPanelVisible": false,
+                "selectionGranularity": "residue",
+                "workbenchVisible": true
+              },
+              "expectedRevision": 1
+            }
+          ],
+          "menuFamilies": [
+            "action",
+            "show",
+            "hide",
+            "label",
+            "color"
+          ],
+          "representations": [
+            "cartoon",
+            "backbone",
+            "putty",
+            "surface",
+            "gaussian_surface",
+            "ball_and_stick",
+            "sticks",
+            "lines",
+            "points",
+            "spheres",
+            "ellipsoid",
+            "carbohydrate",
+            "gaussian_volume",
+            "label",
+            "orientation",
+            "plane",
+            "polyhedron",
+            "interactions"
+          ],
+          "sceneRevision": 1,
+          "selectionGranularities": [
+            "atom",
+            "residue",
+            "chain",
+            "object"
+          ],
+          "selectionLanguageVersion": 1
+        }
+      }
+    },
+    {
+      "operation": "structure_manage_guides",
+      "startedAtUtc": "2026-08-29T18:55:23.120Z",
+      "completedAtUtc": "2026-08-29T18:55:23.827Z",
+      "arguments": {
+        "expectedRevision": 1,
+        "operation": {
+          "kind": "create",
+          "guideKind": "plane",
+          "id": "p53-peptide-plane",
+          "label": "p53 bound peptide best-fit plane",
+          "color": "#F59E0B",
+          "opacity": 0.28,
+          "planeVariant": "rectangle",
+          "scaleFactor": 1.1,
+          "visible": true,
+          "target": {
+            "kind": "chain",
+            "objectId": "primary",
+            "chain": "B"
+          }
+        }
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "1 saved molecular guide at scene revision 2."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "1 saved molecular guide at scene revision 2.",
+          "state": {
+            "appliedRevision": 2,
+            "sceneGuides": [
+              {
+                "color": "#F59E0B",
+                "opacity": 0.28,
+                "orientationVisual": "box",
+                "planeVariant": "rectangle",
+                "scaleFactor": 1.1,
+                "computedGeometryRevision": 0,
+                "createdAt": 1788029723669,
+                "id": "p53-peptide-plane",
+                "invalidationReason": null,
+                "kind": "plane",
+                "label": "p53 bound peptide best-fit plane",
+                "provenance": "Exact snapshot of 113 atoms; least-squares plane through the current Cartesian coordinates.",
+                "sourceAtomCount": 113,
+                "sourceAtomIds": [
+                  "primary|ASM-1|705",
+                  "primary|ASM-1|706",
+                  "primary|ASM-1|707",
+                  "primary|ASM-1|708",
+                  "primary|ASM-1|709",
+                  "primary|ASM-1|710",
+                  "primary|ASM-1|711",
+                  "primary|ASM-1|712",
+                  "primary|ASM-1|713",
+                  "primary|ASM-1|714",
+                  "primary|ASM-1|715",
+                  "primary|ASM-1|716",
+                  "primary|ASM-1|717",
+                  "primary|ASM-1|718",
+                  "primary|ASM-1|719",
+                  "primary|ASM-1|720",
+                  "primary|ASM-1|721",
+                  "primary|ASM-1|722",
+                  "primary|ASM-1|723",
+                  "primary|ASM-1|724",
+                  "primary|ASM-1|725",
+                  "primary|ASM-1|726",
+                  "primary|ASM-1|727",
+                  "primary|ASM-1|728",
+                  "primary|ASM-1|729",
+                  "primary|ASM-1|730",
+                  "primary|ASM-1|731",
+                  "primary|ASM-1|732",
+                  "primary|ASM-1|733",
+                  "primary|ASM-1|734",
+                  "primary|ASM-1|735",
+                  "primary|ASM-1|736",
+                  "primary|ASM-1|737",
+                  "primary|ASM-1|738",
+                  "primary|ASM-1|739",
+                  "primary|ASM-1|740",
+                  "primary|ASM-1|741",
+                  "primary|ASM-1|742",
+                  "primary|ASM-1|743",
+                  "primary|ASM-1|744",
+                  "primary|ASM-1|745",
+                  "primary|ASM-1|746",
+                  "primary|ASM-1|747",
+                  "primary|ASM-1|748",
+                  "primary|ASM-1|749",
+                  "primary|ASM-1|750",
+                  "primary|ASM-1|751",
+                  "primary|ASM-1|752",
+                  "primary|ASM-1|753",
+                  "primary|ASM-1|754",
+                  "primary|ASM-1|755",
+                  "primary|ASM-1|756",
+                  "primary|ASM-1|757",
+                  "primary|ASM-1|758",
+                  "primary|ASM-1|759",
+                  "primary|ASM-1|760",
+                  "primary|ASM-1|761",
+                  "primary|ASM-1|762",
+                  "primary|ASM-1|763",
+                  "primary|ASM-1|764",
+                  "primary|ASM-1|765",
+                  "primary|ASM-1|766",
+                  "primary|ASM-1|767",
+                  "primary|ASM-1|768",
+                  "primary|ASM-1|769",
+                  "primary|ASM-1|770",
+                  "primary|ASM-1|771",
+                  "primary|ASM-1|772",
+                  "primary|ASM-1|773",
+                  "primary|ASM-1|774",
+                  "primary|ASM-1|775",
+                  "primary|ASM-1|776",
+                  "primary|ASM-1|777",
+                  "primary|ASM-1|778",
+                  "primary|ASM-1|779",
+                  "primary|ASM-1|780",
+                  "primary|ASM-1|781",
+                  "primary|ASM-1|782",
+                  "primary|ASM-1|783",
+                  "primary|ASM-1|784",
+                  "primary|ASM-1|785",
+                  "primary|ASM-1|786",
+                  "primary|ASM-1|787",
+                  "primary|ASM-1|788",
+                  "primary|ASM-1|789",
+                  "primary|ASM-1|790",
+                  "primary|ASM-1|791",
+                  "primary|ASM-1|792",
+                  "primary|ASM-1|793",
+                  "primary|ASM-1|794",
+                  "primary|ASM-1|795",
+                  "primary|ASM-1|796",
+                  "primary|ASM-1|797",
+                  "primary|ASM-1|798",
+                  "primary|ASM-1|799",
+                  "primary|ASM-1|800",
+                  "primary|ASM-1|801",
+                  "primary|ASM-1|802",
+                  "primary|ASM-1|803",
+                  "primary|ASM-1|804",
+                  "primary|ASM-1|805",
+                  "primary|ASM-1|806",
+                  "primary|ASM-1|807",
+                  "primary|ASM-1|808",
+                  "primary|ASM-1|809",
+                  "primary|ASM-1|810",
+                  "primary|ASM-1|811",
+                  "primary|ASM-1|812",
+                  "primary|ASM-1|813",
+                  "primary|ASM-1|814",
+                  "primary|ASM-1|815",
+                  "primary|ASM-1|816",
+                  "primary|ASM-1|817"
+                ],
+                "sourceObjectIds": [
+                  "primary"
+                ],
+                "valid": true,
+                "visible": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_derive_object",
+      "startedAtUtc": "2026-08-29T18:55:34.018Z",
+      "completedAtUtc": "2026-08-29T18:55:34.516Z",
+      "arguments": {
+        "expectedRevision": 2,
+        "sourceObjectId": "primary",
+        "objectId": "p53-chain-labeled-copy",
+        "label": "1YCR copy with p53 peptide renamed to chain P",
+        "operations": [
+          {
+            "kind": "rename_chain",
+            "from": "B",
+            "to": "P"
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Created non-destructive derived object p53-chain-labeled-copy; source primary is unchanged."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Created non-destructive derived object p53-chain-labeled-copy; source primary is unchanged.",
+          "state": {
+            "appliedRevision": 3,
+            "object": {
+              "construction": {
+                "dynamicBonds": false,
+                "kind": "model",
+                "modelIndex": 0
+              },
+              "constructionOptions": {
+                "assemblies": [],
+                "assembliesTruncated": false,
+                "assemblyCount": 0,
+                "modelCount": 1,
+                "models": [
+                  {
+                    "index": 0,
+                    "modelNumber": 1
+                  }
+                ],
+                "modelsTruncated": false,
+                "operatorCount": 1,
+                "operators": [
+                  {
+                    "assemblyId": null,
+                    "instanceId": "1_555",
+                    "modelNumber": 1,
+                    "name": "1_555",
+                    "operatorIds": [],
+                    "unitCount": 2
+                  }
+                ],
+                "operatorsTruncated": false
+              },
+              "derived": true,
+              "fileName": "p53-chain-labeled-copy.mmcif",
+              "frameCount": 1,
+              "id": "p53-chain-labeled-copy",
+              "label": "1YCR copy with p53 peptide renamed to chain P",
+              "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "operationCount": 1,
+              "primary": false,
+              "sourceObjectId": "primary",
+              "visible": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_pymol_action",
+      "startedAtUtc": "2026-08-29T18:55:42.877Z",
+      "completedAtUtc": "2026-08-29T18:55:51.464Z",
+      "arguments": {
+        "expectedRevision": 3,
+        "action": {
+          "kind": "show",
+          "representation": "sticks",
+          "target": {
+            "kind": "chain",
+            "objectId": "primary",
+            "chain": "B"
+          }
+        }
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Applied 2 live style layers and 0 annotations at scene revision 4."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Applied 2 live style layers and 0 annotations at scene revision 4.",
+          "state": {
+            "annotationCount": 0,
+            "appliedRevision": 4,
+            "layerCount": 2
+          }
+        }
+      }
+    }
+  ],
+  "blocked_operations": {
+    "structure_browse_related_data": "The operation returned available=false because active workspace roots were not bound to the viewer session.",
+    "structure_load_background": "Not invoked because structure_browse_related_data returned no authenticated PNG/JPEG token; fabricating a token would violate the installed viewer contract."
+  }
+}

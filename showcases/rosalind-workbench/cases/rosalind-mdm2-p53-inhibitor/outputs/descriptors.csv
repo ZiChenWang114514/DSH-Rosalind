@@ -1,0 +1,2 @@
+compound,role,pubchem_cid,molecular_formula_pubchem,molecular_weight_pubchem,xlogp_pubchem,tpsa_pubchem,hbond_donors_pubchem,hbond_acceptors_pubchem,rotatable_bonds_pubchem,molecular_weight_rdkit,clogp_rdkit,tpsa_rdkit,hbond_donors_rdkit,hbond_acceptors_rdkit,rotatable_bonds_rdkit,canonical_smiles_rdkit,inchi_key_pubchem
+Nutlin-3a,4HG7 ligand,11433190,C30H30Cl2N4O4,581.5,5.2,83.5,1,5,6,581.5,5.886,83.47,1,5,6,COc1ccc(C2=NC(c3ccc(Cl)cc3)C(c3ccc(Cl)cc3)N2C(=O)N2CCNC(=O)C2)c(OC(C)C)c1,BDUHCSBCVGXTJM-WUFINQPMSA-N

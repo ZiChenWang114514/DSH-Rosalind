@@ -1,0 +1,50 @@
+{
+  "schema": "gpt-science.ngs-operation-receipt/v1",
+  "case_id": "ngs-ssh-target",
+  "operation": "ngs-compute.configure_ssh_target",
+  "started_at_utc": "2026-08-29T18:56:10.746Z",
+  "finished_at_utc": "2026-08-29T18:56:10.883Z",
+  "arguments": {
+    "target_id": "<authorized-ssh-compute-target>",
+    "title": "Authorized SSH compute target",
+    "ssh_alias": "<not-retained>",
+    "workspace_root": "<temporary-workspace>",
+    "executor": "local_process"
+  },
+  "response": {
+    "target_id": "<authorized-ssh-compute-target>",
+    "title": "Authorized SSH compute target",
+    "provider": "ngs-compute",
+    "controller_transport": "ssh",
+    "workspace_access": "remote_filesystem",
+    "executor": "local_process",
+    "workspace_root": "<temporary-workspace>"
+  },
+  "operation_succeeded": true,
+  "post_registration_inspection": {
+    "started_at_utc": "2026-08-29T18:56:21.319Z",
+    "finished_at_utc": "2026-08-29T18:56:25.651Z",
+    "target_reached": true,
+    "platform": "linux x86_64",
+    "workspace_exists": false,
+    "python3": "ready",
+    "java": "ready",
+    "docker": "ready",
+    "docker_daemon_reachable": true,
+    "nextflow": "missing",
+    "snakemake": "missing",
+    "fastqc": "missing",
+    "multiqc": "missing",
+    "samtools": "missing"
+  },
+  "sanitization": {
+    "credentials_retained": false,
+    "private_address_retained": false,
+    "username_retained": false,
+    "host_fingerprint_retained": false,
+    "host_specific_executable_paths_retained": false,
+    "aliases_retained": false,
+    "environment_specific_workspace_paths_retained": false
+  },
+  "limitation": "Registration and inspection establish a callable SSH target reference and bounded runtime facts; they do not establish workflow readiness or create the configured workspace."
+}

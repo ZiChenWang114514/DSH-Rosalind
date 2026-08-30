@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-08-29T19:06:06.529Z",
+  "workbench_version": "0.2.16",
+  "registered_count": 3,
+  "registered_targets": [
+    {
+      "public_label": "local controller",
+      "provider": "ngs-analysis-workbench",
+      "controller_transport": "local_process",
+      "executor": "local_process",
+      "workspace_access": "local_filesystem",
+      "listing_observed": true,
+      "runtime_snapshot_observed": true
+    },
+    {
+      "public_label": "previously registered SSH context",
+      "provider": "ngs-compute",
+      "controller_transport": "ssh",
+      "executor": "local_process",
+      "workspace_access": "remote_filesystem",
+      "listing_observed": true,
+      "inspection_status": "unreachable"
+    },
+    {
+      "public_label": "authorized SSH compute target",
+      "provider": "ngs-compute",
+      "controller_transport": "ssh",
+      "executor": "local_process",
+      "workspace_access": "remote_filesystem",
+      "listing_observed": true,
+      "registration_observed": true,
+      "inspection_status": "reachable",
+      "workflow_controllers": "missing"
+    }
+  ],
+  "sanitization": {
+    "aliases_retained": false,
+    "hostnames_retained": false,
+    "usernames_retained": false,
+    "addresses_retained": false,
+    "fingerprints_retained": false,
+    "workspace_paths_retained": false
+  },
+  "claims_not_supported": [
+    "The unreachable registered SSH context is runnable.",
+    "Registration makes the authorized SSH compute target workflow-ready.",
+    "Any target is ready for a particular NGS workflow."
+  ]
+}

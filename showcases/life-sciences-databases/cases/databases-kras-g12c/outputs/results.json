@@ -1,0 +1,36 @@
+{
+  "showcase_id": "databases-kras-g12c",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "protein": {
+    "uniprot_accession": "P01116",
+    "entry_id": "RASK_HUMAN",
+    "reviewed": true,
+    "length_aa": 189,
+    "reference_residue_12": "G"
+  },
+  "variant": {
+    "clinvar_variation_id": "12578",
+    "transcript_hgvs": "NM_004985.5(KRAS):c.34G>T (p.Gly12Cys)",
+    "search_term": "KRAS G12C",
+    "records_total": 12,
+    "records_retained": 10
+  },
+  "compound": {
+    "name": "SOTORASIB",
+    "chembl_id": "CHEMBL4535757",
+    "max_phase": 4,
+    "first_approval_year": 2021
+  },
+  "structure": {
+    "pdb_id": "6OIM",
+    "title": "Crystal Structure of human KRAS G12C covalently bound to AMG 510",
+    "method": "X-RAY DIFFRACTION",
+    "resolution_angstrom": 1.65
+  },
+  "interpretation": "The four identifiers describe the same research theme at protein, allele, compound, and covalent-complex levels; they do not constitute a treatment recommendation.",
+  "limitations": [
+    "The ClinVar search response is a ten-record retained slice of twelve matches.",
+    "ChEMBL maximum phase and first approval are database fields, not comparative efficacy measures.",
+    "One crystal structure cannot establish behavior across all KRAS G12C states or cellular contexts."
+  ]
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Crambin heavy-atom overlap diagnostic</title><desc id="desc">Nonbonded heavy-atom overlap screen for RCSB 1CRN.</desc>
+<rect width="1200" height="675" fill="#160b0b"/><text x="70" y="75" fill="#fca5a5" font-family="Segoe UI,Arial" font-size="27">RCSB 1CRN · model 1 · heavy atoms</text>
+<text x="70" y="155" fill="#fff7ed" font-family="Segoe UI,Arial" font-size="48" font-weight="700">Nonbonded overlap diagnostic</text>
+<text x="70" y="220" fill="#fed7aa" font-family="Segoe UI,Arial" font-size="26">327 atoms · 51,964 tested pairs · overlap &gt; 0.4 Å</text>
+<rect x="65" y="280" width="1070" height="265" rx="18" fill="#2b1515"/><text x="80" y="370" fill="#bbf7d0" font-family="Segoe UI,Arial" font-size="28">No overlaps above the stated threshold.</text>
+<text x="70" y="615" fill="#a8a29e" font-family="Segoe UI,Arial" font-size="20">0 diagnostic rows; absence or presence is not a validation verdict.</text>
+</svg>

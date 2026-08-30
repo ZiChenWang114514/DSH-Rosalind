@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-molecular-design",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect a reproducible public-data molecular-design analysis for sequence-derived antibody candidate properties; open the workbench only and do not execute a scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "observed_at_utc": "2026-08-29T18:17:30.000Z",
+  "recorded_at_utc": "2026-08-29T18:21:16.629Z",
+  "limitation": "This observation verifies launcher readiness only. The retained Boltz-2 scientific results came from a separately completed local GPU run; this Rosalind call did not run or reproduce them."
+}

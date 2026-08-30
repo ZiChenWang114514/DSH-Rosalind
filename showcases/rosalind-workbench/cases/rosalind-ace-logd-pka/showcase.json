@@ -1,0 +1,127 @@
+{
+  "id": "rosalind-ace-logd-pka",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "adme-and-developability",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open",
+    "rosalind-workbench.public-evidence"
+  ],
+  "rosalind_tasks": [
+    "predict-ace-inhibitor-logd-pka"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "PubChem PUG REST",
+      "Python 3.14",
+      "RDKit 2026.03.5"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus CID-exact PubChem evidence and deterministic local ACE-inhibitor descriptor and ionization review",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 738
+    },
+    {
+      "path": "inputs/compounds.csv",
+      "bytes": 1316
+    },
+    {
+      "path": "scripts/analyze.py",
+      "bytes": 6495
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/descriptor-comparison.csv",
+      "bytes": 465
+    },
+    {
+      "path": "outputs/ionization-evidence.csv",
+      "bytes": 792
+    },
+    {
+      "path": "outputs/result-summary.json",
+      "bytes": 1250
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 541
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6559
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2470
+    }
+  ],
+  "sources": [
+    "https://pubchem.ncbi.nlm.nih.gov/compound/44093",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5388962",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5362119"
+  ],
+  "observations": [
+    "PubChem records report XLogP values of 0.3, -0.1, and -2.9 for captopril, enalapril, and lisinopril.",
+    "The retained pKa annotations are 3.7/9.8, 3.0/5.4, and 2.5/4.0/6.7/10.1, respectively.",
+    "The local descriptor table was reproduced with RDKit 2026.03.5.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The structures span different polarity and ionization regimes; computed descriptors organize chemical hypotheses without quantifying plasma LogD or clinical absorption."
+  ],
+  "limitations": [
+    "PubChem XLogP and RDKit MolLogP are computed descriptors, not clinical ADME measurements.",
+    "A uniform experimental LogD at pH 7.4 was not available for all three retained records.",
+    "Macro-pKa annotations do not uniquely specify every microspecies in a multi-ionizable compound.",
+    "The Rosalind operation opened only the task chooser; no Rosalind scientific job or laboratory experiment was executed."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://pubchem.ncbi.nlm.nih.gov/compound/44093",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/5388962",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/5362119"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/compounds.csv",
+        "scripts/analyze.py"
+      ],
+      "outputs": [
+        "outputs/descriptor-comparison.csv",
+        "outputs/ionization-evidence.csv",
+        "outputs/result-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The launcher observation records the exact Rosalind chooser response and does not represent scientific execution. Exact public compound records feed a retained local script; the resulting tables distinguish source annotations from computed descriptors."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-ace-logd-pka/scripts/analyze.py from the repository root.",
+    "Invoke mcp__rosalind__rosalind_open with task_context ACE inhibitor ionization and lipophilicity teaching case, then compare the response with outputs/rosalind-open-observation.json.",
+    "Compare the three output files and SVG preview with the retained artifacts."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local"
+  }
+}

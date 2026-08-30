@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-quality-assessment",
+  "retrieval_date": "2026-08-30",
+  "sources": [
+    {
+      "path": "inputs/4V1W.cif",
+      "url": "https://files.rcsb.org/download/4V1W.cif",
+      "bytes": 3116021,
+      "sha256": "df1780420f4c23a2ab4c91790c49690de20be1536c8913374e4406666b4bcba2"
+    },
+    {
+      "path": "inputs/4v1w_full_validation.pdf",
+      "url": "https://files.rcsb.org/validation/view/4v1w_full_validation.pdf",
+      "bytes": 1460859,
+      "sha256": "903827d08ce1fef99fbdb3c019d635b2075d83e11cb233eaef5cc5c0ee6d89d2"
+    }
+  ],
+  "report": {
+    "pdb_id": "4V1W",
+    "emdb_id": "EMD-2788",
+    "report_generated": "Mar 9, 2026 \u2013 05:35 AM UTC",
+    "page_count": 56,
+    "reported_resolution_angstrom": 4.7,
+    "recommended_contour_level": 0.16,
+    "software": {
+      "wwpdb_validation_pipeline": "2.49",
+      "molprobity": "4-5-2 with Phenix2.0",
+      "mapq": "1.9.13"
+    }
+  },
+  "global_metrics": {
+    "clashscore_per_1000_atoms_including_hydrogens": 8,
+    "close_contact_count": 517,
+    "bond_length_outlier_count_abs_z_gt_5": 48,
+    "bond_angle_outlier_count_abs_z_gt_5": 298,
+    "ramachandran_outlier_count": 24,
+    "non_rotameric_sidechain_count": 265,
+    "suggested_sidechain_flip_count": 24,
+    "chirality_outliers": 0,
+    "planarity_outliers": 0
+  },
+  "map_model_fit": {
+    "backbone_atoms_inside_map_percent": 86,
+    "all_non_hydrogen_atoms_inside_map_percent": 54,
+    "whole_model_atom_inclusion": 0.535,
+    "whole_model_q_score": 0.296,
+    "chain_a_atom_inclusion": 0.532,
+    "chain_a_q_score": 0.297
+  },
+  "repeated_residue_observation": {
+    "ramachandran_outlier": "GLY 156",
+    "affected_chains": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X"
+    ],
+    "affected_chain_count": 24,
+    "evidence": "The report lists one GLY 156 Ramachandran outlier in every deposited chain."
+  },
+  "interpretation_scope": "These are wwPDB validation observations for the deposited 4.70 \u00c5 EM model and linked map. They identify review targets, not automatically incorrect residues."
+}

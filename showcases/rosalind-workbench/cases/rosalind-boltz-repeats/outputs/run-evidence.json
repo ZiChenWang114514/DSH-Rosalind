@@ -1,0 +1,69 @@
+{
+  "showcase_id": "rosalind-boltz-repeats",
+  "inspection_date": "2026-08-30",
+  "model": "Boltz-2",
+  "historical_execution": "Locally managed GPU run completed before this public case snapshot",
+  "hardware_reported_by_prior_run": "four RTX 4090 GPUs",
+  "cost": "local open-source execution; no paid API",
+  "initial_screen": {
+    "candidates": 20,
+    "successful_predictions": 20
+  },
+  "ensemble_confirmation": {
+    "candidates": 5,
+    "diffusion_samples_per_candidate": 5,
+    "seed": 20260829,
+    "successful_predictions": 25
+  },
+  "retained_raw_confidence_records": 25,
+  "structure_files_observed_during_source_run_inspection": 25,
+  "structure_files_copied_into_showcase": 0,
+  "top_five": [
+    {
+      "rank": 1,
+      "candidate": "NB13_E104Q",
+      "mutation": "E104Q",
+      "ensemble_score_mean": 0.9174960599015332,
+      "ensemble_score_sd": 0.00803181364699208,
+      "protein_iptm_mean": 0.9238613247871399,
+      "severe_clash_models": 0
+    },
+    {
+      "rank": 2,
+      "candidate": "NB16_L110I",
+      "mutation": "L110I",
+      "ensemble_score_mean": 0.8996902251613071,
+      "ensemble_score_sd": 0.01564953470601683,
+      "protein_iptm_mean": 0.9107698559761047,
+      "severe_clash_models": 1
+    },
+    {
+      "rank": 3,
+      "candidate": "NB17_V111I",
+      "mutation": "V111I",
+      "ensemble_score_mean": 0.8902916556227278,
+      "ensemble_score_sd": 0.019185545454166765,
+      "protein_iptm_mean": 0.9046230912208557,
+      "severe_clash_models": 0
+    },
+    {
+      "rank": 4,
+      "candidate": "NB05_S31N",
+      "mutation": "S31N",
+      "ensemble_score_mean": 0.8882764548321218,
+      "ensemble_score_sd": 0.011269088095593061,
+      "protein_iptm_mean": 0.9055001020431519,
+      "severe_clash_models": 1
+    },
+    {
+      "rank": 5,
+      "candidate": "NB11_F103Y",
+      "mutation": "F103Y",
+      "ensemble_score_mean": 0.8679852542431035,
+      "ensemble_score_sd": 0.017114620531438487,
+      "protein_iptm_mean": 0.8859325408935547,
+      "severe_clash_models": 0
+    }
+  ],
+  "current_action": "retained and inspected prior evidence; Boltz was not rerun for this showcase update"
+}

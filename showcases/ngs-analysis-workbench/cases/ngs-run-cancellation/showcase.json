@@ -1,0 +1,131 @@
+{
+  "id": "ngs-run-cancellation",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "recovery",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_workflows",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_workflows",
+      "Python 3.14 subprocess and tempfile",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 691
+    },
+    {
+      "path": "scripts/run_cancellation_demo.py",
+      "bytes": 2777
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/cancellation-observation.json",
+      "bytes": 852
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1272
+    },
+    {
+      "path": "outputs/cancel-ngs-run-receipt.json",
+      "bytes": 715
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 763
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 7686
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 1736
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1658
+    }
+  ],
+  "sources": [
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract",
+    "https://www.nextflow.io/docs/latest/reference/cli.html"
+  ],
+  "observations": [
+    "The case-owned local Python child reported running before cancellation was requested.",
+    "The child reached a terminated process state, was no longer running, and its temporary directory was removed.",
+    "cancel_ngs_run was called only for the reserved temporary identity; Workbench reported that the registry run did not exist, so no existing run was affected.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The receipts distinguish successful local child termination from a rejected Workbench cancellation request; completed Workbench cancellation remains unavailable without a registered temporary run."
+  ],
+  "limitations": [
+    "The local child process performed no NGS computation and cannot demonstrate a successful Workbench cancellation.",
+    "The Workbench operation was called, but no temporary registry run existed to cancel.",
+    "The observed Windows termination exit code is meaningful only with the explicit termination timeline.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution or cancellation.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract",
+        "https://www.nextflow.io/docs/latest/reference/cli.html"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "scripts/run_cancellation_demo.py"
+      ],
+      "outputs": [
+        "outputs/cancellation-observation.json",
+        "outputs/provenance.json",
+        "outputs/cancel-ngs-run-receipt.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Local Python supplied the disposable process timeline; Workbench supplied the exact rejected cancellation response; Rosalind supplied only the retained task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/run_cancellation_demo.py outputs/cancellation-observation.json.",
+    "Confirm the retained running, cancellation, terminated, stopped-child, and cleanup observations.",
+    "Call cancel_ngs_run only for the reserved temporary identity or a newly created case-owned temporary run and compare the response with outputs/cancel-ngs-run-receipt.json.",
+    "Call mcp__rosalind__rosalind_open with the task_context retained in outputs/rosalind-open-observation.json and compare the exact response.",
+    "For ngs-run-cancellation, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "workflow_execution_performed": false,
+    "workbench_run_registered": false,
+    "disposable_local_process_executed": true,
+    "temporary_directory_removed": true,
+    "workbench_cancellation_operation_called": true,
+    "registered_run_affected": false
+  }
+}

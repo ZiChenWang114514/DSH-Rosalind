@@ -1,0 +1,781 @@
+{
+  "showcase_id": "rosalind-boltz-repeats",
+  "record_count": 25,
+  "records": [
+    {
+      "candidate": "NB13_E104Q",
+      "model": 0,
+      "run_relative_path": "ensemble_outputs\\gpu0\\boltz_results_gpu0\\predictions\\NB13_E104Q\\confidence_NB13_E104Q_model_0.json",
+      "source_bytes": 655,
+      "payload": {
+        "confidence_score": 0.9345738291740417,
+        "ptm": 0.9022728204727173,
+        "iptm": 0.9192563891410828,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9192563891410828,
+        "complex_plddt": 0.9384031891822815,
+        "complex_iplddt": 0.936710000038147,
+        "complex_pde": 0.3303280174732208,
+        "complex_ipde": 0.7651290893554688,
+        "chains_ptm": {
+          "0": 0.9100202322006226,
+          "1": 0.9853108525276184
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9100202322006226,
+            "1": 0.814062237739563
+          },
+          "1": {
+            "0": 0.9192563891410828,
+            "1": 0.9853108525276184
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB13_E104Q",
+      "model": 1,
+      "run_relative_path": "ensemble_outputs\\gpu0\\boltz_results_gpu0\\predictions\\NB13_E104Q\\confidence_NB13_E104Q_model_1.json",
+      "source_bytes": 657,
+      "payload": {
+        "confidence_score": 0.9307470321655273,
+        "ptm": 0.9175133109092712,
+        "iptm": 0.9342299103736877,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9342299103736877,
+        "complex_plddt": 0.9298762679100037,
+        "complex_iplddt": 0.921853244304657,
+        "complex_pde": 0.30115488171577454,
+        "complex_ipde": 0.5772181749343872,
+        "chains_ptm": {
+          "0": 0.9210668802261353,
+          "1": 0.9866907000541687
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9210668802261353,
+            "1": 0.8339184522628784
+          },
+          "1": {
+            "0": 0.9342299103736877,
+            "1": 0.9866907000541687
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB13_E104Q",
+      "model": 2,
+      "run_relative_path": "ensemble_outputs\\gpu0\\boltz_results_gpu0\\predictions\\NB13_E104Q\\confidence_NB13_E104Q_model_2.json",
+      "source_bytes": 657,
+      "payload": {
+        "confidence_score": 0.9299629330635071,
+        "ptm": 0.908538281917572,
+        "iptm": 0.9216263890266418,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9216263890266418,
+        "complex_plddt": 0.9320470690727234,
+        "complex_iplddt": 0.9342443346977234,
+        "complex_pde": 0.32110026478767395,
+        "complex_ipde": 0.7134559154510498,
+        "chains_ptm": {
+          "0": 0.9152796864509583,
+          "1": 0.9854993224143982
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9152796864509583,
+            "1": 0.8210278153419495
+          },
+          "1": {
+            "0": 0.9216263890266418,
+            "1": 0.9854993224143982
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB13_E104Q",
+      "model": 3,
+      "run_relative_path": "ensemble_outputs\\gpu0\\boltz_results_gpu0\\predictions\\NB13_E104Q\\confidence_NB13_E104Q_model_3.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9287765622138977,
+        "ptm": 0.8908491730690002,
+        "iptm": 0.9071326851844788,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9071326851844788,
+        "complex_plddt": 0.9341874718666077,
+        "complex_iplddt": 0.9347202181816101,
+        "complex_pde": 0.3429206907749176,
+        "complex_ipde": 0.817269504070282,
+        "chains_ptm": {
+          "0": 0.8988624215126038,
+          "1": 0.9833204746246338
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8988624215126038,
+            "1": 0.7964527606964111
+          },
+          "1": {
+            "0": 0.9071326851844788,
+            "1": 0.9833204746246338
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB13_E104Q",
+      "model": 4,
+      "run_relative_path": "ensemble_outputs\\gpu0\\boltz_results_gpu0\\predictions\\NB13_E104Q\\confidence_NB13_E104Q_model_4.json",
+      "source_bytes": 654,
+      "payload": {
+        "confidence_score": 0.9277828335762024,
+        "ptm": 0.92252516746521,
+        "iptm": 0.9370612502098083,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9370612502098083,
+        "complex_plddt": 0.9254632592201233,
+        "complex_iplddt": 0.917495846748352,
+        "complex_pde": 0.2952338755130768,
+        "complex_ipde": 0.5424176454544067,
+        "chains_ptm": {
+          "0": 0.9276801943778992,
+          "1": 0.9878250360488892
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9276801943778992,
+            "1": 0.8430880308151245
+          },
+          "1": {
+            "0": 0.9370612502098083,
+            "1": 0.9878250360488892
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB16_L110I",
+      "model": 0,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB16_L110I\\confidence_NB16_L110I_model_0.json",
+      "source_bytes": 655,
+      "payload": {
+        "confidence_score": 0.9406898617744446,
+        "ptm": 0.8995996117591858,
+        "iptm": 0.9222111701965332,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9222111701965332,
+        "complex_plddt": 0.9453094601631165,
+        "complex_iplddt": 0.9415854215621948,
+        "complex_pde": 0.3340517282485962,
+        "complex_ipde": 0.8200253248214722,
+        "chains_ptm": {
+          "0": 0.9005655646324158,
+          "1": 0.984519898891449
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9005655646324158,
+            "1": 0.8089082837104797
+          },
+          "1": {
+            "0": 0.9222111701965332,
+            "1": 0.984519898891449
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB16_L110I",
+      "model": 1,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB16_L110I\\confidence_NB16_L110I_model_1.json",
+      "source_bytes": 657,
+      "payload": {
+        "confidence_score": 0.9393194317817688,
+        "ptm": 0.8929557800292969,
+        "iptm": 0.9168798923492432,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9168798923492432,
+        "complex_plddt": 0.944929301738739,
+        "complex_iplddt": 0.9426761865615845,
+        "complex_pde": 0.34170758724212646,
+        "complex_ipde": 0.8885243535041809,
+        "chains_ptm": {
+          "0": 0.8944900631904602,
+          "1": 0.9834492206573486
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8944900631904602,
+            "1": 0.7985538244247437
+          },
+          "1": {
+            "0": 0.9168798923492432,
+            "1": 0.9834492206573486
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB16_L110I",
+      "model": 2,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB16_L110I\\confidence_NB16_L110I_model_2.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9349870681762695,
+        "ptm": 0.8911992907524109,
+        "iptm": 0.9127967357635498,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9127967357635498,
+        "complex_plddt": 0.9405345916748047,
+        "complex_iplddt": 0.9384075999259949,
+        "complex_pde": 0.34851884841918945,
+        "complex_ipde": 0.9562676548957825,
+        "chains_ptm": {
+          "0": 0.897427499294281,
+          "1": 0.9829243421554565
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.897427499294281,
+            "1": 0.7948081493377686
+          },
+          "1": {
+            "0": 0.9127967357635498,
+            "1": 0.9829243421554565
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB16_L110I",
+      "model": 3,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB16_L110I\\confidence_NB16_L110I_model_3.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9342965483665466,
+        "ptm": 0.8810602426528931,
+        "iptm": 0.8952910304069519,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8952910304069519,
+        "complex_plddt": 0.9440478682518005,
+        "complex_iplddt": 0.9396277070045471,
+        "complex_pde": 0.3636860251426697,
+        "complex_ipde": 1.097330093383789,
+        "chains_ptm": {
+          "0": 0.8895856738090515,
+          "1": 0.9790592193603516
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8895856738090515,
+            "1": 0.7717772126197815
+          },
+          "1": {
+            "0": 0.8952910304069519,
+            "1": 0.9790592193603516
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB16_L110I",
+      "model": 4,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB16_L110I\\confidence_NB16_L110I_model_4.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9268572926521301,
+        "ptm": 0.8910293579101562,
+        "iptm": 0.9066704511642456,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9066704511642456,
+        "complex_plddt": 0.9319040179252625,
+        "complex_iplddt": 0.930330216884613,
+        "complex_pde": 0.3493892550468445,
+        "complex_ipde": 0.9010553359985352,
+        "chains_ptm": {
+          "0": 0.8988678455352783,
+          "1": 0.9816680550575256
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8988678455352783,
+            "1": 0.7941293716430664
+          },
+          "1": {
+            "0": 0.9066704511642456,
+            "1": 0.9816680550575256
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB17_V111I",
+      "model": 0,
+      "run_relative_path": "ensemble_outputs\\gpu1\\boltz_results_gpu1\\predictions\\NB17_V111I\\confidence_NB17_V111I_model_0.json",
+      "source_bytes": 658,
+      "payload": {
+        "confidence_score": 0.9395200610160828,
+        "ptm": 0.9116138219833374,
+        "iptm": 0.9223281741142273,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9223281741142273,
+        "complex_plddt": 0.9438180327415466,
+        "complex_iplddt": 0.9425476789474487,
+        "complex_pde": 0.32277312874794006,
+        "complex_ipde": 0.8341091871261597,
+        "chains_ptm": {
+          "0": 0.9196690320968628,
+          "1": 0.9848882555961609
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9196690320968628,
+            "1": 0.8230518698692322
+          },
+          "1": {
+            "0": 0.9223281741142273,
+            "1": 0.9848882555961609
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB17_V111I",
+      "model": 1,
+      "run_relative_path": "ensemble_outputs\\gpu1\\boltz_results_gpu1\\predictions\\NB17_V111I\\confidence_NB17_V111I_model_1.json",
+      "source_bytes": 654,
+      "payload": {
+        "confidence_score": 0.9379510283470154,
+        "ptm": 0.8927817940711975,
+        "iptm": 0.8991237282752991,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8991237282752991,
+        "complex_plddt": 0.9476578235626221,
+        "complex_iplddt": 0.9447828531265259,
+        "complex_pde": 0.346039354801178,
+        "complex_ipde": 1.19869065284729,
+        "chains_ptm": {
+          "0": 0.9022692441940308,
+          "1": 0.9832620620727539
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9022692441940308,
+            "1": 0.7939669489860535
+          },
+          "1": {
+            "0": 0.8991237282752991,
+            "1": 0.9832620620727539
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB17_V111I",
+      "model": 2,
+      "run_relative_path": "ensemble_outputs\\gpu1\\boltz_results_gpu1\\predictions\\NB17_V111I\\confidence_NB17_V111I_model_2.json",
+      "source_bytes": 655,
+      "payload": {
+        "confidence_score": 0.9247215390205383,
+        "ptm": 0.8817615509033203,
+        "iptm": 0.8843438029289246,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8843438029289246,
+        "complex_plddt": 0.9348160028457642,
+        "complex_iplddt": 0.934735894203186,
+        "complex_pde": 0.3610389232635498,
+        "complex_ipde": 1.483805775642395,
+        "chains_ptm": {
+          "0": 0.8959508538246155,
+          "1": 0.9818148016929626
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8959508538246155,
+            "1": 0.7746393084526062
+          },
+          "1": {
+            "0": 0.8843438029289246,
+            "1": 0.9818148016929626
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB17_V111I",
+      "model": 3,
+      "run_relative_path": "ensemble_outputs\\gpu1\\boltz_results_gpu1\\predictions\\NB17_V111I\\confidence_NB17_V111I_model_3.json",
+      "source_bytes": 658,
+      "payload": {
+        "confidence_score": 0.9233726859092712,
+        "ptm": 0.9148557782173157,
+        "iptm": 0.9293096661567688,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9293096661567688,
+        "complex_plddt": 0.9218883514404297,
+        "complex_iplddt": 0.9148678183555603,
+        "complex_pde": 0.30912941694259644,
+        "complex_ipde": 0.8326051831245422,
+        "chains_ptm": {
+          "0": 0.9196005463600159,
+          "1": 0.9861566424369812
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9196005463600159,
+            "1": 0.8298865556716919
+          },
+          "1": {
+            "0": 0.9293096661567688,
+            "1": 0.9861566424369812
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB17_V111I",
+      "model": 4,
+      "run_relative_path": "ensemble_outputs\\gpu1\\boltz_results_gpu1\\predictions\\NB17_V111I\\confidence_NB17_V111I_model_4.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9184280633926392,
+        "ptm": 0.892669141292572,
+        "iptm": 0.8880100846290588,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8880100846290588,
+        "complex_plddt": 0.9260324835777283,
+        "complex_iplddt": 0.9174914956092834,
+        "complex_pde": 0.3493982255458832,
+        "complex_ipde": 1.5486456155776978,
+        "chains_ptm": {
+          "0": 0.9085832834243774,
+          "1": 0.9822021126747131
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9085832834243774,
+            "1": 0.7773104310035706
+          },
+          "1": {
+            "0": 0.8880100846290588,
+            "1": 0.9822021126747131
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB05_S31N",
+      "model": 0,
+      "run_relative_path": "ensemble_outputs\\gpu2\\boltz_results_gpu2\\predictions\\NB05_S31N\\confidence_NB05_S31N_model_0.json",
+      "source_bytes": 657,
+      "payload": {
+        "confidence_score": 0.9323750734329224,
+        "ptm": 0.8870311975479126,
+        "iptm": 0.8957332968711853,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8957332968711853,
+        "complex_plddt": 0.9415355324745178,
+        "complex_iplddt": 0.9360047578811646,
+        "complex_pde": 0.3586595356464386,
+        "complex_ipde": 1.2431772947311401,
+        "chains_ptm": {
+          "0": 0.8971134424209595,
+          "1": 0.9807990789413452
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8971134424209595,
+            "1": 0.7881296873092651
+          },
+          "1": {
+            "0": 0.8957332968711853,
+            "1": 0.9807990789413452
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB05_S31N",
+      "model": 1,
+      "run_relative_path": "ensemble_outputs\\gpu2\\boltz_results_gpu2\\predictions\\NB05_S31N\\confidence_NB05_S31N_model_1.json",
+      "source_bytes": 658,
+      "payload": {
+        "confidence_score": 0.9314514994621277,
+        "ptm": 0.8981261849403381,
+        "iptm": 0.9065784215927124,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9065784215927124,
+        "complex_plddt": 0.9376697540283203,
+        "complex_iplddt": 0.9373023509979248,
+        "complex_pde": 0.34528157114982605,
+        "complex_ipde": 1.1075044870376587,
+        "chains_ptm": {
+          "0": 0.9065133333206177,
+          "1": 0.9821347594261169
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9065133333206177,
+            "1": 0.8019915819168091
+          },
+          "1": {
+            "0": 0.9065784215927124,
+            "1": 0.9821347594261169
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB05_S31N",
+      "model": 2,
+      "run_relative_path": "ensemble_outputs\\gpu2\\boltz_results_gpu2\\predictions\\NB05_S31N\\confidence_NB05_S31N_model_2.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.928943932056427,
+        "ptm": 0.8934659957885742,
+        "iptm": 0.9064947366714478,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9064947366714478,
+        "complex_plddt": 0.9345561861991882,
+        "complex_iplddt": 0.9339422583580017,
+        "complex_pde": 0.35098809003829956,
+        "complex_ipde": 1.070054292678833,
+        "chains_ptm": {
+          "0": 0.9002304673194885,
+          "1": 0.9818741083145142
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9002304673194885,
+            "1": 0.7998820543289185
+          },
+          "1": {
+            "0": 0.9064947366714478,
+            "1": 0.9818741083145142
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB05_S31N",
+      "model": 3,
+      "run_relative_path": "ensemble_outputs\\gpu2\\boltz_results_gpu2\\predictions\\NB05_S31N\\confidence_NB05_S31N_model_3.json",
+      "source_bytes": 657,
+      "payload": {
+        "confidence_score": 0.9246596693992615,
+        "ptm": 0.898749589920044,
+        "iptm": 0.9115645289421082,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9115645289421082,
+        "complex_plddt": 0.9279334545135498,
+        "complex_iplddt": 0.9196503758430481,
+        "complex_pde": 0.34388595819473267,
+        "complex_ipde": 1.1845041513442993,
+        "chains_ptm": {
+          "0": 0.9024410247802734,
+          "1": 0.9825260043144226
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9024410247802734,
+            "1": 0.7972531318664551
+          },
+          "1": {
+            "0": 0.9115645289421082,
+            "1": 0.9825260043144226
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB05_S31N",
+      "model": 4,
+      "run_relative_path": "ensemble_outputs\\gpu2\\boltz_results_gpu2\\predictions\\NB05_S31N\\confidence_NB05_S31N_model_4.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9196146130561829,
+        "ptm": 0.9054140448570251,
+        "iptm": 0.9071295261383057,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9071295261383057,
+        "complex_plddt": 0.9227358102798462,
+        "complex_iplddt": 0.9137735962867737,
+        "complex_pde": 0.32861199975013733,
+        "complex_ipde": 1.2136842012405396,
+        "chains_ptm": {
+          "0": 0.917600691318512,
+          "1": 0.9834874272346497
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.917600691318512,
+            "1": 0.7936386466026306
+          },
+          "1": {
+            "0": 0.9071295261383057,
+            "1": 0.9834874272346497
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB11_F103Y",
+      "model": 0,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB11_F103Y\\confidence_NB11_F103Y_model_0.json",
+      "source_bytes": 655,
+      "payload": {
+        "confidence_score": 0.9245209097862244,
+        "ptm": 0.880754292011261,
+        "iptm": 0.8862236738204956,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8862236738204956,
+        "complex_plddt": 0.9340952038764954,
+        "complex_iplddt": 0.9269363880157471,
+        "complex_pde": 0.355987548828125,
+        "complex_ipde": 1.2036405801773071,
+        "chains_ptm": {
+          "0": 0.8953067660331726,
+          "1": 0.9836902618408203
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8953067660331726,
+            "1": 0.7697753310203552
+          },
+          "1": {
+            "0": 0.8862236738204956,
+            "1": 0.9836902618408203
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB11_F103Y",
+      "model": 1,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB11_F103Y\\confidence_NB11_F103Y_model_1.json",
+      "source_bytes": 658,
+      "payload": {
+        "confidence_score": 0.9240545630455017,
+        "ptm": 0.9026086926460266,
+        "iptm": 0.9181909561157227,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.9181909561157227,
+        "complex_plddt": 0.9255204796791077,
+        "complex_iplddt": 0.9035288095474243,
+        "complex_pde": 0.31591933965682983,
+        "complex_ipde": 0.8393974304199219,
+        "chains_ptm": {
+          "0": 0.9119765162467957,
+          "1": 0.9854932427406311
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9119765162467957,
+            "1": 0.8027706742286682
+          },
+          "1": {
+            "0": 0.9181909561157227,
+            "1": 0.9854932427406311
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB11_F103Y",
+      "model": 2,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB11_F103Y\\confidence_NB11_F103Y_model_2.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9191778302192688,
+        "ptm": 0.8733119368553162,
+        "iptm": 0.8717942237854004,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8717942237854004,
+        "complex_plddt": 0.9310236573219299,
+        "complex_iplddt": 0.922873318195343,
+        "complex_pde": 0.3625439703464508,
+        "complex_ipde": 1.3838801383972168,
+        "chains_ptm": {
+          "0": 0.8944427967071533,
+          "1": 0.9818874597549438
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8944427967071533,
+            "1": 0.7552843689918518
+          },
+          "1": {
+            "0": 0.8717942237854004,
+            "1": 0.9818874597549438
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB11_F103Y",
+      "model": 3,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB11_F103Y\\confidence_NB11_F103Y_model_3.json",
+      "source_bytes": 656,
+      "payload": {
+        "confidence_score": 0.9160903096199036,
+        "ptm": 0.8829988837242126,
+        "iptm": 0.8817057609558105,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8817057609558105,
+        "complex_plddt": 0.9246864318847656,
+        "complex_iplddt": 0.911934494972229,
+        "complex_pde": 0.34699299931526184,
+        "complex_ipde": 1.173419713973999,
+        "chains_ptm": {
+          "0": 0.9031878113746643,
+          "1": 0.9823514819145203
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.9031878113746643,
+            "1": 0.7664853930473328
+          },
+          "1": {
+            "0": 0.8817057609558105,
+            "1": 0.9823514819145203
+          }
+        }
+      }
+    },
+    {
+      "candidate": "NB11_F103Y",
+      "model": 4,
+      "run_relative_path": "ensemble_outputs\\gpu3\\boltz_results_gpu3\\predictions\\NB11_F103Y\\confidence_NB11_F103Y_model_4.json",
+      "source_bytes": 657,
+      "payload": {
+        "confidence_score": 0.8986159563064575,
+        "ptm": 0.8780338764190674,
+        "iptm": 0.8717480897903442,
+        "ligand_iptm": 0.0,
+        "protein_iptm": 0.8717480897903442,
+        "complex_plddt": 0.9053329229354858,
+        "complex_iplddt": 0.8398613929748535,
+        "complex_pde": 0.3524644076824188,
+        "complex_ipde": 1.4782160520553589,
+        "chains_ptm": {
+          "0": 0.8990451693534851,
+          "1": 0.9827355742454529
+        },
+        "pair_chains_iptm": {
+          "0": {
+            "0": 0.8990451693534851,
+            "1": 0.7484531998634338
+          },
+          "1": {
+            "0": 0.8717480897903442,
+            "1": 0.9827355742454529
+          }
+        }
+      }
+    }
+  ]
+}

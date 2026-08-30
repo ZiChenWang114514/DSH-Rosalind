@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/catalog.schema.json",
-  "catalog_version": "1.0.0",
-  "updated": "2026-08-29",
+  "catalog_version": "2.0.0",
+  "updated": "2026-08-30",
   "plugins": [
     {
       "id": "life-sciences-literature",
@@ -17,7 +17,24 @@
           "summary": "Search PubMed and bioRxiv/medRxiv for TREM2 research in microglia.",
           "next_step": "Open the case README to present the dated literature snapshot and theme summary.",
           "case_path": "showcases/life-sciences-literature/cases/literature-trem2-landscape",
-          "preview": "showcases/life-sciences-literature/cases/literature-trem2-landscape/previews/trem2-landscape.svg"
+          "preview": "showcases/life-sciences-literature/cases/literature-trem2-landscape/previews/trem2-landscape.svg",
+          "domain": "evidence-synthesis",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "public literature APIs and local Python",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "dated public literature API evidence, deterministic local classification, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         },
         {
           "id": "literature-pmc-availability",
@@ -26,7 +43,24 @@
           "summary": "Check PMC availability for a validated PMID or DOI.",
           "next_step": "Open the case README to present the identifier, license, and file-availability report.",
           "case_path": "showcases/life-sciences-literature/cases/literature-pmc-availability",
-          "preview": "showcases/life-sciences-literature/cases/literature-pmc-availability/previews/pmc-availability.svg"
+          "preview": "showcases/life-sciences-literature/cases/literature-pmc-availability/previews/pmc-availability.svg",
+          "domain": "evidence-synthesis",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "public literature APIs and local Python",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "dated PMC Article Dataset evidence, deterministic local availability summary, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         },
         {
           "id": "literature-preprint-publication-link",
@@ -35,7 +69,105 @@
           "summary": "Compare a preprint with its linked peer-reviewed publication.",
           "next_step": "Open the case README to present the versioned preprint-to-publication timeline.",
           "case_path": "showcases/life-sciences-literature/cases/literature-preprint-publication-link",
-          "preview": "showcases/life-sciences-literature/cases/literature-preprint-publication-link/previews/preprint-publication.svg"
+          "preview": "showcases/life-sciences-literature/cases/literature-preprint-publication-link/previews/preprint-publication.svg",
+          "domain": "evidence-synthesis",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "public literature APIs and local Python",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "dated medRxiv, PubMed, and DOI evidence, deterministic local chronology, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "literature-kras-g12c",
+          "title": "KRAS G12C literature trail",
+          "status": "ready",
+          "summary": "Which primary studies connect KRAS G12C structural biology and covalent inhibition?",
+          "next_step": "Rebuild the dated PubMed and PMC timeline, then verify how each primary study links KRAS G12C structure to covalent inhibition.",
+          "case_path": "showcases/life-sciences-literature/cases/literature-kras-g12c",
+          "preview": "showcases/life-sciences-literature/cases/literature-kras-g12c/previews/preview.svg",
+          "domain": "evidence-synthesis",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Literature",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "dated PubMed and PMC evidence, deterministic local four-record timeline, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "literature-visium-methods",
+          "title": "Spatial transcriptomics methods",
+          "status": "ready",
+          "summary": "Which open methods papers support Visium QC, normalization, and region-aware analysis?",
+          "next_step": "Compare the five retained PubMed and PMC methods across Visium quality control, normalization, and region-aware analysis.",
+          "case_path": "showcases/life-sciences-literature/cases/literature-visium-methods",
+          "preview": "showcases/life-sciences-literature/cases/literature-visium-methods/previews/preview.svg",
+          "domain": "evidence-synthesis",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Literature",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "dated PubMed and PMC evidence, deterministic local five-method workflow map, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "literature-nanobody-assays",
+          "title": "Nanobody binding assay evidence",
+          "status": "ready",
+          "summary": "Which open methods describe orthogonal affinity and specificity measurements for nanobodies?",
+          "next_step": "Trace the retained nanobody methods into an orthogonal assay plan pairing affinity measurements with specificity controls.",
+          "case_path": "showcases/life-sciences-literature/cases/literature-nanobody-assays",
+          "preview": "showcases/life-sciences-literature/cases/literature-nanobody-assays/previews/preview.svg",
+          "domain": "evidence-synthesis",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Literature",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "dated PubMed and PMC evidence, deterministic local orthogonal-assay map, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         }
       ]
     },
@@ -53,7 +185,24 @@
           "summary": "Combine public genetics, expression, and target evidence for IL6R and asthma.",
           "next_step": "Open the case README to present the three-source IL6R evidence map.",
           "case_path": "showcases/life-sciences-databases/cases/databases-il6r-asthma",
-          "preview": "showcases/life-sciences-databases/cases/databases-il6r-asthma/previews/il6r-asthma.svg"
+          "preview": "showcases/life-sciences-databases/cases/databases-il6r-asthma/previews/il6r-asthma.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases public API evidence and local JSON aggregation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained Open Targets, GWAS Catalog, and GTEx observations plus a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         },
         {
           "id": "databases-variant-interpretation",
@@ -62,7 +211,24 @@
           "summary": "Combine ClinVar, gnomAD, Ensembl, and cohort evidence for one variant.",
           "next_step": "Open the case README to present the allele-resolved rs7903146 report.",
           "case_path": "showcases/life-sciences-databases/cases/databases-variant-interpretation",
-          "preview": "showcases/life-sciences-databases/cases/databases-variant-interpretation/previews/variant-rs7903146.svg"
+          "preview": "showcases/life-sciences-databases/cases/databases-variant-interpretation/previews/variant-rs7903146.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases public API evidence and allele-resolved JSON aggregation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained ClinVar, Ensembl, and UKB-TOPMed allele-specific observations plus a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         },
         {
           "id": "databases-egfr-landscape",
@@ -71,7 +237,132 @@
           "summary": "Connect EGFR structure, pathway, ligand, and pharmacology records.",
           "next_step": "Open the case README to present the EGFR protein-to-drug knowledge map.",
           "case_path": "showcases/life-sciences-databases/cases/databases-egfr-landscape",
-          "preview": "showcases/life-sciences-databases/cases/databases-egfr-landscape/previews/egfr-landscape.svg"
+          "preview": "showcases/life-sciences-databases/cases/databases-egfr-landscape/previews/egfr-landscape.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases public API evidence and identifier-preserving JSON aggregation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained UniProt, ChEMBL, RCSB, and Reactome observations plus a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "databases-kras-g12c",
+          "title": "KRAS G12C public evidence map",
+          "status": "ready",
+          "summary": "How do structure, variant, target, and compound databases describe KRAS G12C?",
+          "next_step": "Reconcile the retained UniProt, ClinVar, ChEMBL, and RCSB records by allele, protein, compound, and structure identifiers.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-kras-g12c",
+          "preview": "showcases/life-sciences-databases/cases/databases-kras-g12c/previews/preview.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases uniprot-skill, clinvar-variation-skill, chembl-skill, and rcsb-pdb-skill",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained public protein, allele, compound, and structure responses with deterministic identifier checks and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "databases-pdl1",
+          "title": "PD-L1 sequence and structure records",
+          "status": "ready",
+          "summary": "Which identifiers connect PD-L1 sequence, structures, and binding evidence?",
+          "next_step": "Verify the human PD-L1 topology against the retained UniProt record and map it to the inhibitor-bound RCSB structure.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-pdl1",
+          "preview": "showcases/life-sciences-databases/cases/databases-pdl1/previews/preview.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases uniprot-skill and rcsb-pdb-skill",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained human PD-L1 topology and inhibitor-bound structure responses with deterministic extraction and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "databases-petase",
+          "title": "PETase sequence–structure map",
+          "status": "ready",
+          "summary": "How can PETase sequence, structure, and catalytic annotations be connected?",
+          "next_step": "Check the IsPETase catalytic residues against the retained UniProt sequence and RCSB 5XJH structure annotations.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-petase",
+          "preview": "showcases/life-sciences-databases/cases/databases-petase/previews/preview.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases uniprot-skill and rcsb-pdb-skill",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained IsPETase sequence, catalytic, and structure responses with deterministic residue checks and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "databases-airway-rnaseq",
+          "title": "Airway RNA-seq dataset discovery",
+          "status": "ready",
+          "summary": "Which public study and sample records support a small airway dexamethasone analysis?",
+          "next_step": "Recount dexamethasone treatments and airway cell-line samples from the retained E-GEOD-52778 study metadata.",
+          "case_path": "showcases/life-sciences-databases/cases/databases-airway-rnaseq",
+          "preview": "showcases/life-sciences-databases/cases/databases-airway-rnaseq/previews/preview.svg",
+          "domain": "public-data-integration",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Life Sciences Databases biostudies-arrayexpress-skill",
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "retained E-GEOD-52778 study metadata with deterministic treatment and cell-line counts plus a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         }
       ]
     },
@@ -87,9 +378,26 @@
           "title": "Lambda genome annotation and cI translation",
           "status": "ready",
           "summary": "Versioned NCBI genome annotation with an independently verified reverse-strand cI translation.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Recompute the reverse-strand NC_001416.1 cI translation and confirm its 714 bases produce the annotated 237-residue protein.",
           "case_path": "showcases/biological-sequence-viewer/cases/sequence-lambda-annotation",
-          "preview": "showcases/biological-sequence-viewer/cases/sequence-lambda-annotation/previews/lambda-annotation.svg"
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-lambda-annotation/previews/lambda-annotation.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "versioned NCBI GenBank extraction and code-11 cI translation, plus a documented unconfirmed Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         },
         {
           "id": "sequence-ras-alignment",
@@ -98,16 +406,308 @@
           "summary": "Compare KRAS, NRAS, and HRAS conservation, distances, and an exploratory NJ tree.",
           "next_step": "Open the case README to present the verified alignment, matrix, tree, and preview.",
           "case_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment",
-          "preview": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/previews/ras-alignment.svg"
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/previews/ras-alignment.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "sequence-viewer.sequence_open_from_chat",
+            "sequence-viewer.sequence_control_viewer",
+            "sequence-viewer.sequence_run_analysis",
+            "sequence-viewer.sequence_query_viewer",
+            "sequence-viewer.sequence_export_artifact",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json",
+              "Historical completed Sequence Viewer calls recovered from source task archived-sequence-viewer-task"
+            ],
+            "device": "local",
+            "implementation": "verified RAS alignment, p-distance, and exploratory tree calculations retained from local evidence, plus an unconfirmed Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         },
         {
           "id": "sequence-fastq-qc",
           "title": "Public-read FASTQ quality exploration",
           "status": "ready",
           "summary": "Deterministic 500-read ENA subset with sequence and Phred-quality metrics.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Recalculate read count, total bases, and Q30 fraction for the first 500 DRR037765 records while retaining the subset limitation.",
           "case_path": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc",
-          "preview": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/previews/fastq-qc.svg"
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/previews/fastq-qc.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "pinned ENA first-500-read extraction and deterministic Phred+33 metrics, plus an unconfirmed Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-public-example",
+          "title": "Public sequence example acquisition",
+          "status": "ready",
+          "summary": "How can a bundled public example be acquired and opened with source metadata?",
+          "next_step": "Revalidate the reviewed UniProt P01116 sequence length and version before opening the public KRAS example.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-public-example",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-public-example/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "interface",
+          "difficulty": "beginner",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "UniProt REST and local Python",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "official UniProt P01116 SV=1 acquisition and deterministic local sequence checks, plus failed Viewer acquisition and confirmation diagnostics and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-guide-tree",
+          "title": "Alignment guide tree",
+          "status": "ready",
+          "summary": "How do pairwise distances support an explicitly exploratory guide tree?",
+          "next_step": "Recompute the three RAS pairwise p-distances and confirm the exploratory neighbor-joining guide-tree topology.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-guide-tree",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-guide-tree/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "sequence-viewer.sequence_open_from_chat",
+            "sequence-viewer.sequence_run_analysis",
+            "sequence-viewer.sequence_query_viewer",
+            "sequence-viewer.sequence_export_artifact",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json",
+              "Historical completed Sequence Viewer calls recovered from source task archived-sequence-viewer-task"
+            ],
+            "device": "local",
+            "implementation": "deterministic local RAS p-distance and exact three-taxon NJ calculation, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-motif-search",
+          "title": "Motif search and navigation",
+          "status": "ready",
+          "summary": "Where does a documented protein motif occur across displayed records?",
+          "next_step": "Repeat the exact GxxxxGKS motif scan and verify every reported coordinate across the displayed RAS records.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-motif-search",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-motif-search/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "sequence-viewer.sequence_open_from_chat",
+            "sequence-viewer.sequence_control_viewer",
+            "sequence-viewer.sequence_query_viewer",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3 standard-library regular expressions",
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json",
+              "Historical completed Sequence Viewer calls recovered from source task archived-sequence-viewer-task"
+            ],
+            "device": "local",
+            "implementation": "verified local exact-coordinate G....GKS scan, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-annotation-track",
+          "title": "Annotation and evidence tracks",
+          "status": "ready",
+          "summary": "How can public annotations and a regional evidence track be attached and queried?",
+          "next_step": "Re-extract the NC_001416.1 regional FASTA and source-linked GFF3 features, then query their coordinate agreement.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-annotation-track",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-annotation-track/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "verified local NC_001416.1 regional FASTA and GFF3 extraction, one timed-out Viewer track attempt, and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-row-groups",
+          "title": "Alignment row grouping",
+          "status": "ready",
+          "summary": "How can rows be selected, grouped, hidden, and restored without changing matrix order?",
+          "next_step": "Apply the retained HRAS, KRAS, and NRAS grouping plan and confirm that hiding and restoring rows preserves alignment order.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-row-groups",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-row-groups/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "interface",
+          "difficulty": "intermediate",
+          "evidence_level": "interface-observation",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "verified local sequence-derived RAS row-group plan, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-edit-copy",
+          "title": "Reversible sequence copy edit",
+          "status": "ready",
+          "summary": "How can a copied sequence be edited while retaining source provenance?",
+          "next_step": "Repeat the P01116 Gly12-to-Cys edit on a copy and verify that the original sequence and source provenance remain unchanged.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-edit-copy",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-edit-copy/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "verified local single-residue P01116 G12C copy transformation, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-job-cancel",
+          "title": "Sequence job cancellation",
+          "status": "ready",
+          "summary": "How can a disposable analysis job be cancelled and its status inspected?",
+          "next_step": "Launch the disposable KRAS-window analysis, cancel it, and compare the retained pre-cancel and terminal-state records.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-job-cancel",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-job-cancel/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "recovery",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "UniProt REST and local Python subprocess",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "temporary local KRAS-window subprocess cancellation with pre- and post-state checks, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-session-restore",
+          "title": "Sequence session save and restore",
+          "status": "ready",
+          "summary": "Which view, selection, and artifact state survive a private session round trip?",
+          "next_step": "Restore the relative-path KRAS session manifest and verify its sequence, selection, view, and artifact checks.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-session-restore",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-session-restore/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "recovery",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "UniProt REST and local Python",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "portable local relative-path KRAS manifest and exact restoration checks, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "sequence-export-package",
+          "title": "Sequence research export",
+          "status": "ready",
+          "summary": "How can typed sequence, table, figure, and session artifacts be exported with provenance?",
+          "next_step": "Inspect the deterministic P01116 ZIP and confirm that sequence, analysis, provenance, and preview files remain mutually consistent.",
+          "case_path": "showcases/biological-sequence-viewer/cases/sequence-export-package",
+          "preview": "showcases/biological-sequence-viewer/cases/sequence-export-package/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "export",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "UniProt REST and local Python",
+              "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+            ],
+            "device": "local",
+            "implementation": "deterministic local P01116 source-analysis-provenance-preview ZIP verification, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+            "status": "verified"
+          }
         }
       ]
     },
@@ -123,27 +723,454 @@
           "title": "FASTQ QC workflow readiness",
           "status": "ready",
           "summary": "Live workflow discovery, assay-aware QC design, and verified compute-readiness report.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Refresh the oai_fastq_qc workflow and compute-readiness evidence before retrieving reads or starting quality control.",
           "case_path": "showcases/ngs-analysis-workbench/cases/ngs-fastq-qc",
-          "preview": "showcases/ngs-analysis-workbench/cases/ngs-fastq-qc/previews/ngs-fastq-qc.svg"
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-fastq-qc/previews/ngs-fastq-qc.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.get_runtime_environment",
+            "ngs-analysis-workbench.check_nextflow_readiness",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__get_runtime_environment",
+              "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
         },
         {
           "id": "ngs-bulk-rnaseq",
           "title": "Bulk RNA-seq workflow design",
           "status": "ready",
           "summary": "Live bundled-workflow evidence and a study-design-aware bulk RNA-seq plan.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Recheck the oai_bulk_rnaseq_counts_qc version and study-design contrasts before retrieving inputs or running quantification.",
           "case_path": "showcases/ngs-analysis-workbench/cases/ngs-bulk-rnaseq",
-          "preview": "showcases/ngs-analysis-workbench/cases/ngs-bulk-rnaseq/previews/ngs-bulk-rnaseq.svg"
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-bulk-rnaseq/previews/ngs-bulk-rnaseq.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.check_nextflow_readiness",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
         },
         {
           "id": "ngs-single-cell",
           "title": "Single-cell RNA-seq workflow design",
           "status": "ready",
           "summary": "Live bundled-workflow evidence and a chemistry-aware FASTQ-to-count plan.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Recheck the oai_scrnaseq_fastq_to_count version and chemistry-aware sample plan before generating a count matrix.",
           "case_path": "showcases/ngs-analysis-workbench/cases/ngs-single-cell",
-          "preview": "showcases/ngs-analysis-workbench/cases/ngs-single-cell/previews/ngs-single-cell.svg"
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-single-cell/previews/ngs-single-cell.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.check_nextflow_readiness",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-compute-inventory",
+          "title": "Compute target inventory",
+          "status": "ready",
+          "summary": "Which local and SSH compute targets are registered and inspectable?",
+          "next_step": "Refresh the local and SSH target inventory, then compare the recorded runtime facts and bounded OpenSSH observations.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-compute-inventory",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-compute-inventory/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "interface",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-compute.list_compute_targets",
+            "ngs-compute.inspect_compute_target",
+            "ngs-analysis-workbench.get_runtime_environment",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_compute__list_compute_targets",
+              "mcp__ngs_compute__inspect_compute_target",
+              "mcp__ngs_analysis_workbench__get_runtime_environment",
+              "OpenSSH for Windows",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller with sanitized SSH observations",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-ssh-target",
+          "title": "SSH compute target configuration",
+          "status": "ready",
+          "summary": "How can nonsecret SSH and workspace references be registered for a remote target?",
+          "next_step": "Repeat the OpenSSH BatchMode inspection and verify that only nonsecret host and workspace references appear in the registered target.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-ssh-target",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-ssh-target/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "interface",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-compute.configure_ssh_target",
+            "ngs-compute.list_compute_targets",
+            "ngs-compute.inspect_compute_target",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_compute__configure_ssh_target",
+              "mcp__ngs_compute__list_compute_targets",
+              "mcp__ngs_compute__inspect_compute_target",
+              "OpenSSH for Windows",
+              "Docker CLI",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller with sanitized SSH observations",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-runtime-inspection",
+          "title": "Runtime environment inspection",
+          "status": "ready",
+          "summary": "Which executables and environment facts are available on the selected target?",
+          "next_step": "Compare the Workbench runtime snapshot with the sanitized remote PATH and Docker availability observations.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-runtime-inspection",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-runtime-inspection/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.get_runtime_environment",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__get_runtime_environment",
+              "OpenSSH for Windows",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller with sanitized SSH observations",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-nextflow-readiness",
+          "title": "Nextflow readiness report",
+          "status": "ready",
+          "summary": "Is a selected workflow and compute target ready for an immediate Nextflow plan?",
+          "next_step": "Recheck nf-core and target readiness, then compare the blocked Nextflow result with the retained Python FASTQ reference metrics.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-nextflow-readiness",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-nextflow-readiness/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.get_runtime_environment",
+            "ngs-analysis-workbench.check_nextflow_readiness",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__get_runtime_environment",
+              "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+              "Python 3.14",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-snakemake-readiness",
+          "title": "Snakemake readiness report",
+          "status": "ready",
+          "summary": "Is a selected pipeline and environment ready for a Snakemake plan?",
+          "next_step": "Recheck the Snakemake environment and compare its blocked readiness result with the retained Python FASTQ reference metrics.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-snakemake-readiness",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-snakemake-readiness/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.get_runtime_environment",
+            "ngs-analysis-workbench.check_snakemake_readiness",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__get_runtime_environment",
+              "mcp__ngs_analysis_workbench__check_snakemake_readiness",
+              "Python 3.14",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-workflow-save",
+          "title": "Saved workflow registration",
+          "status": "ready",
+          "summary": "How can a public workflow reference be saved without executing it?",
+          "next_step": "Inspect the saved case-owned Snakemake definition and 24-read public fixture while confirming that no workflow run was started.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-workflow-save",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-workflow-save/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.save_workflow",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__save_workflow",
+              "Python 3.14 standard library",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-workflow-versions",
+          "title": "Workflow version lifecycle",
+          "status": "ready",
+          "summary": "How are workflow versions listed, updated, and activated with inspectable identifiers?",
+          "next_step": "Compare the two immutable workflow versions and verify the retained diff for quality-control and validation changes.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-workflow-versions",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-workflow-versions/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.update_workflow",
+            "ngs-analysis-workbench.list_workflow_versions",
+            "ngs-analysis-workbench.activate_workflow_version",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__update_workflow",
+              "mcp__ngs_analysis_workbench__list_workflow_versions",
+              "mcp__ngs_analysis_workbench__activate_workflow_version",
+              "Python 3.14 difflib",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-workflow-archive",
+          "title": "Workflow archive and restore",
+          "status": "ready",
+          "summary": "How can a disposable saved workflow be archived and restored safely?",
+          "next_step": "Repeat the case-owned workflow archive and restore cycle, confirming the same version digest after reactivation.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-workflow-archive",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-workflow-archive/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "recovery",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.archive_workflow",
+            "ngs-analysis-workbench.list_workflows",
+            "ngs-analysis-workbench.restore_workflow",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__archive_workflow",
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "mcp__ngs_analysis_workbench__restore_workflow",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-run-execution",
+          "title": "Small workflow execution",
+          "status": "ready",
+          "summary": "How is an approved small plan executed and its registry identifier retained?",
+          "next_step": "Recompute the local FASTQ quality metrics and distinguish that execution from the rehearsed Workbench and Snakemake operations.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-run-execution",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-run-execution/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "ngs-analysis-workbench.get_runtime_environment",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__get_runtime_environment",
+              "Python 3.14 standard library",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-run-observation",
+          "title": "Run observation and lineage",
+          "status": "ready",
+          "summary": "How are live status, final receipt, and parent-child run history interpreted?",
+          "next_step": "Validate the three-event run-state timeline against the retained FASTQ quality output and its parent-child lineage fields.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-run-observation",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-run-observation/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_ngs_runs",
+            "ngs-analysis-workbench.list_ngs_run_lineages",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_ngs_runs",
+              "mcp__ngs_analysis_workbench__list_ngs_run_lineages",
+              "Python 3.14 local JSONL state timeline",
+              "Python 3.14 QC output inspection",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-run-summary",
+          "title": "Run analysis summary",
+          "status": "ready",
+          "summary": "How can a completed run receive an evidence-linked scientific summary?",
+          "next_step": "Recompute the FASTQ reference metrics and reassess each scientific summary statement against the retained evidence.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-run-summary",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-run-summary/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflow_versions",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflow_versions",
+              "Python 3.14 standard library",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "ngs-run-cancellation",
+          "title": "Disposable run cancellation",
+          "status": "ready",
+          "summary": "How is a temporary run cancelled and its terminal state verified?",
+          "next_step": "Repeat the disposable Python child-process cancellation and verify both terminal state and temporary-file cleanup.",
+          "case_path": "showcases/ngs-analysis-workbench/cases/ngs-run-cancellation",
+          "preview": "showcases/ngs-analysis-workbench/cases/ngs-run-cancellation/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "recovery",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "ngs-analysis-workbench.list_workflows",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "mcp__ngs_analysis_workbench__list_workflows",
+              "Python 3.14 subprocess and tempfile",
+              "mcp__rosalind__rosalind_open"
+            ],
+            "device": "local controller",
+            "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+            "status": "verified"
+          }
         }
       ]
     },
@@ -161,7 +1188,34 @@
           "summary": "Analyze 4 Å contacts and p53 hotspot residues in RCSB 1YCR.",
           "next_step": "Open the case README to inspect the pinned structure, locally recomputed contacts, starter-contract buried area, and viewer execution status.",
           "case_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53",
-          "preview": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/previews/mdm2-p53.svg"
+          "preview": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/previews/mdm2-p53.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "structure-viewer.structure_control_viewer",
+            "structure-viewer.structure_derive_object",
+            "structure-viewer.structure_manage_guides",
+            "structure-viewer.structure_pymol_action",
+            "structure-viewer.structure_pymol_actions",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Molecular Structure Viewer and local analysis",
+              "mcp__structure_viewer__structure_control_viewer",
+              "mcp__structure_viewer__structure_derive_object",
+              "mcp__structure_viewer__structure_manage_guides",
+              "mcp__structure_viewer__structure_pymol_action",
+              "mcp__structure_viewer__structure_pymol_actions",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "public data, free reproducible computation, and exact mounted-viewer operation receipts",
+            "status": "verified"
+          }
         },
         {
           "id": "structure-adenylate-kinase",
@@ -170,7 +1224,26 @@
           "summary": "Align RCSB 4AKE and 1AKE and report structural comparison metrics.",
           "next_step": "Open the case README to inspect the pinned structures, AP5 observations, starter-contract alignment metrics, and viewer execution status.",
           "case_path": "showcases/molecular-structure-viewer/cases/structure-adenylate-kinase",
-          "preview": "showcases/molecular-structure-viewer/cases/structure-adenylate-kinase/previews/adenylate-kinase.svg"
+          "preview": "showcases/molecular-structure-viewer/cases/structure-adenylate-kinase/previews/adenylate-kinase.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB 4AKE and 1AKE coordinate snapshots",
+              "Molecular Structure Viewer 0.1.80 starter-example contract",
+              "local deterministic PDB record and digest checks",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Pinned 4AKE and 1AKE digest, atom, C-alpha, and AP5 checks with a clearly labeled Mol* TM-align starter-contract target; no current-host viewer alignment receipt",
+            "status": "verified"
+          }
         },
         {
           "id": "structure-gfp-figure",
@@ -179,7 +1252,363 @@
           "summary": "Style the 1EMA chromophore and render a publication-ready image.",
           "next_step": "Open the case README to present the inspected PNG, contact analysis, and render provenance.",
           "case_path": "showcases/molecular-structure-viewer/cases/structure-gfp-figure",
-          "preview": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/previews/gfp.png"
+          "preview": "showcases/molecular-structure-viewer/cases/structure-gfp-figure/previews/gfp.png",
+          "domain": "structure-and-sequence",
+          "case_type": "render",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "structure-viewer.structure_render_image",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Molecular Structure Viewer PNG and render provenance sidecar",
+              "RCSB PDB 1EMA coordinate snapshot and Python 3 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "viewer-generated 1600 by 1200 PNG verified against its render sidecar and a deterministic 4.0 angstrom CRO contact shell computed from the retained byte-identical RCSB 1EMA input",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-residue-selection",
+          "title": "Residue selection and distance",
+          "status": "ready",
+          "summary": "Can an exact residue selection and distance measurement be reproduced in lysozyme?",
+          "next_step": "Recalculate the closest heavy-atom distance for the author-numbered lysozyme residues in the retained RCSB coordinates.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-residue-selection",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-residue-selection/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB coordinate snapshot",
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "deterministic closest-heavy-atom Euclidean distance over exact author-numbered residue selections",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-heme-contacts",
+          "title": "Heme contact environment",
+          "status": "ready",
+          "summary": "Which residues contact the heme group in myoglobin within a stated cutoff?",
+          "next_step": "Recompute the 4.0 Å myoglobin heme shell and compare residue contacts with the Fe-centered geometry.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-heme-contacts",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-heme-contacts/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB coordinate snapshot",
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "deterministic 4.0 Å heavy-atom heme shell plus explicit Fe-centered coordinate geometry",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-dna-hydrogen-bonds",
+          "title": "Protein–DNA hydrogen-bond screen",
+          "status": "ready",
+          "summary": "Which geometry-screened hydrogen bonds occur at a compact protein–DNA interface?",
+          "next_step": "Repeat the donor-acceptor distance and direction screen across the retained protein-DNA interface coordinates.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-dna-hydrogen-bonds",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-dna-hydrogen-bonds/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB coordinate snapshot",
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "deterministic cross-interface donor/acceptor distance and heavy-atom direction screen",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-clash-screen",
+          "title": "Whole-structure clash screen",
+          "status": "ready",
+          "summary": "How can a bounded clash analysis be interpreted without treating crystal contacts as errors?",
+          "next_step": "Recompute the heavy-atom van der Waals overlaps after applying the documented covalent exclusions to the 1CRN snapshot.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-clash-screen",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-clash-screen/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB coordinate snapshot",
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "deterministic heavy-atom van der Waals overlap diagnostic with explicit covalent graph exclusions",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-ligand-pocket",
+          "title": "Protein–inhibitor pocket inspection",
+          "status": "ready",
+          "summary": "Which pocket residues surround a bound kinase inhibitor?",
+          "next_step": "Regenerate the 4.0 Å residue shell around the exact bound imatinib copy in the retained ABL1 structure.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-ligand-pocket",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-ligand-pocket/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB coordinate snapshot",
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "deterministic 4.0 Å closest-heavy-atom shell around one exact bound-ligand copy",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-rmsd-alignment",
+          "title": "Paired-structure RMSD",
+          "status": "ready",
+          "summary": "How do alignment diagnostics change between open and closed conformations?",
+          "next_step": "Repeat the chain-A C-alpha correspondence and NumPy Kabsch fit for the retained open and closed adenylate kinase structures.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-rmsd-alignment",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-rmsd-alignment/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14",
+              "NumPy 2.5.1",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Exact chain-A C-alpha correspondence and unweighted NumPy Kabsch calculation over retained RCSB coordinate snapshots",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-motif-search",
+          "title": "Geometric motif search",
+          "status": "ready",
+          "summary": "Can a small catalytic geometry be used to search public PDB assemblies?",
+          "next_step": "Verify the 3PTB catalytic-triad distances and compare them with the retained public geometric-motif request.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-motif-search",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-motif-search/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 with NumPy 2.5.1",
+              "Molecular Structure Viewer 0.1.80 session attempt",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Deposited 3PTB catalytic-triad distance calculation plus an exact retained public motif request and an explicit unacknowledged-viewer receipt",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-density-map",
+          "title": "Public density-map inspection",
+          "status": "ready",
+          "summary": "How does a public experimental map support cautious model-density inspection?",
+          "next_step": "Recheck the CCP4 header and trilinear map samples around residues 65-67 of 1GFL before interpreting model-density agreement.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-density-map",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-density-map/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 with NumPy 2.5.1",
+              "RCSB and PDBe public downloads",
+              "Molecular Structure Viewer 0.1.80 density-discovery attempt",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Direct CCP4 header verification and periodic trilinear atom sampling at 1GFL residues 65-67 with a separate viewer-attempt record",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-assembly-symmetry",
+          "title": "Assembly and symmetry comparison",
+          "status": "ready",
+          "summary": "How do deposited assembly and symmetry annotations alter structural interpretation?",
+          "next_step": "Repeat the deterministic reduction of RCSB 4V1W entry and assembly-1 symmetry metadata, noting interpretation changes.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-assembly-symmetry",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-assembly-symmetry/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "RCSB Data API",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Dated retrieval and deterministic reduction of official RCSB 4V1W entry and biological assembly 1 symmetry metadata",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-quality-assessment",
+          "title": "Residue quality assessment",
+          "status": "ready",
+          "summary": "Which public quality metrics identify residues requiring cautious interpretation?",
+          "next_step": "Re-extract the named geometry and map-model metrics from the retained 4V1W wwPDB validation report.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-quality-assessment",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-quality-assessment/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14",
+              "PyMuPDF",
+              "wwPDB full EM validation report",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Deterministic extraction of named global geometry and map-model fit observations from the retained current 4V1W wwPDB PDF report",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-scene-storyboard",
+          "title": "Reproducible molecular storyboard",
+          "status": "ready",
+          "summary": "How can a multi-step camera and styling scene be saved and restored?",
+          "next_step": "Restore the exact local camera and style state, then compare the C-alpha Kabsch and domain-analysis observations.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-scene-storyboard",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-scene-storyboard/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "render",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "structure-viewer.structure_get_state",
+            "structure-viewer.structure_add_structure",
+            "structure-viewer.structure_transform_object",
+            "structure-viewer.structure_set_object_visibility",
+            "structure-viewer.structure_undo",
+            "structure-viewer.structure_redo",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.12.13",
+              "NumPy 2.5.2",
+              "mcp__structure_viewer__structure_transform_object",
+              "mcp__structure_viewer__structure_set_object_visibility",
+              "mcp__structure_viewer__structure_undo",
+              "mcp__structure_viewer__structure_redo",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Pinned RCSB coordinates, deterministic C-alpha Kabsch and domain analysis, exact local JSON restoration, and mounted-viewer object transform, visibility, undo, and redo receipts",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "structure-trajectory-movie",
+          "title": "Trajectory and movie export",
+          "status": "ready",
+          "summary": "How can a short public trajectory be styled, sampled, rendered, and cancelled safely?",
+          "next_step": "Reload the five extracted PSF/DCD frames, recompute the sampled structural metrics, and review the unexecuted movie steps separately.",
+          "case_path": "showcases/molecular-structure-viewer/cases/structure-trajectory-movie",
+          "preview": "showcases/molecular-structure-viewer/cases/structure-trajectory-movie/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "render",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.12.13",
+              "MDAnalysis 2.10.0",
+              "NumPy 2.5.2",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "Figshare source identity verification, full PSF/DCD compatibility inspection, five-frame DCD extraction and reload, sampled structural metrics, and unexecuted viewer movie and export rehearsals",
+            "status": "verified"
+          }
         }
       ]
     },
@@ -197,16 +1626,53 @@
           "summary": "Verify a pinned CC0 Aperio slide and its multiresolution TIFF structure.",
           "next_step": "Open the case README to inspect the verified source, pyramid metadata, and viewer execution status.",
           "case_path": "showcases/slide-viewer/cases/slide-tissue-architecture",
-          "preview": "showcases/slide-viewer/cases/slide-tissue-architecture/previews/tissue-architecture.svg"
+          "preview": "showcases/slide-viewer/cases/slide-tissue-architecture/previews/tissue-architecture.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "OpenSlide public index",
+              "PowerShell SHA-256",
+              "tiffinfo 4.7.1",
+              "Slide Viewer state operations",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "pinned CMU-1 integrity verification, TIFF pyramid calculation, fresh viewer receipts, and a separately retained Rosalind task-chooser invocation",
+            "status": "verified"
+          }
         },
         {
           "id": "slide-spatial-expression",
           "title": "Mouse-brain spatial expression",
           "status": "ready",
           "summary": "Indexed Slc17a7 and Gad1 expression summaries for a licensed public H5AD.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Recompute Slc17a7 and Gad1 summaries across all 684 H5AD observations and establish the matrix scale before anatomical interpretation.",
           "case_path": "showcases/slide-viewer/cases/slide-spatial-expression",
-          "preview": "showcases/slide-viewer/cases/slide-spatial-expression/previews/spatial-expression.svg"
+          "preview": "showcases/slide-viewer/cases/slide-spatial-expression/previews/spatial-expression.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Slide Viewer and local Python",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "licensed H5AD index inspection and complete 684-observation Slc17a7/Gad1 descriptive statistics, with a callable-analysis operation comparison and separately preserved Rosalind task-chooser evidence",
+            "status": "verified"
+          }
         },
         {
           "id": "slide-segmentation-overlay",
@@ -215,7 +1681,24 @@
           "summary": "Create provenance-bearing GeoJSON demonstration geometry from exact spatial coordinates.",
           "next_step": "Open the case README to inspect the GeoJSON, coordinate association, and recorded rendering limitation.",
           "case_path": "showcases/slide-viewer/cases/slide-segmentation-overlay",
-          "preview": "showcases/slide-viewer/cases/slide-segmentation-overlay/previews/segmentation-overlay.svg"
+          "preview": "showcases/slide-viewer/cases/slide-segmentation-overlay/previews/segmentation-overlay.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Slide Viewer and local Python",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "three 16-segment demonstration polygons constructed from exact H5AD spatial coordinates, with retained source association, coordinate frame, observation identities, and separate Rosalind task-chooser evidence",
+            "status": "verified"
+          }
         },
         {
           "id": "slide-research-export",
@@ -224,7 +1707,323 @@
           "summary": "Export all 684 observations with coordinates, QC fields, and two indexed genes.",
           "next_step": "Open the case README to inspect the complete CSV, provenance, and matrix-scale limitation.",
           "case_path": "showcases/slide-viewer/cases/slide-research-export",
-          "preview": "showcases/slide-viewer/cases/slide-research-export/previews/research-export.svg"
+          "preview": "showcases/slide-viewer/cases/slide-research-export/previews/research-export.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "export",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Slide Viewer and local Python",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "complete 684-row source-indexed spatial table assembly for two verified gene columns, with identifier-safe CSV fields, retained matrix provenance, independent summary checks, and separate Rosalind task-chooser evidence",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-local-dicom",
+          "title": "Local DICOM whole-slide series",
+          "status": "ready",
+          "summary": "How is a local DICOM WSI series inspected and opened with frame-aware metadata?",
+          "next_step": "Reinspect all six CMU-1 DICOM members and compare their frame-aware metadata with the recorded parser admission result.",
+          "case_path": "showcases/slide-viewer/cases/slide-local-dicom",
+          "preview": "showcases/slide-viewer/cases/slide-local-dicom/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "interface",
+          "difficulty": "advanced",
+          "evidence_level": "interface-observation",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Hugging Face HTTPS",
+              "PowerShell SHA-256",
+              "slide-viewer.slide_open_dicom_series",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "six-member CMU-1 acquisition, exact local integrity verification, recorded DICOM parser admission check, and a separately retained Rosalind task-chooser invocation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-dicomweb",
+          "title": "DICOMweb whole-slide query",
+          "status": "ready",
+          "summary": "How can a bounded DICOMweb query identify a tiled WSI instance before opening it?",
+          "next_step": "Repeat the bounded IDC DICOMweb query and verify the three metadata representations and fourteen frame references before opening.",
+          "case_path": "showcases/slide-viewer/cases/slide-dicomweb",
+          "preview": "showcases/slide-viewer/cases/slide-dicomweb/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "interface-observation",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "IDC anonymous DICOMweb HTTPS",
+              "Python multipart payload hashing",
+              "slide-viewer DICOMweb guarded operations",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "complete three-metadata and fourteen-frame representation pins, recorded guarded DICOMweb results, and a separately retained Rosalind task-chooser invocation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-ome-tiff",
+          "title": "OME-TIFF series import",
+          "status": "ready",
+          "summary": "How are OME dimensions and TIFF members validated for a microscopy series?",
+          "next_step": "Reparse the official OME-XML and compare C, Z, and T dimensions with TIFF member counts and authorization state.",
+          "case_path": "showcases/slide-viewer/cases/slide-ome-tiff",
+          "preview": "showcases/slide-viewer/cases/slide-ome-tiff/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "interface",
+          "difficulty": "intermediate",
+          "evidence_level": "interface-observation",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "OME HTTPS",
+              "Python standard-library OME-XML parsing",
+              "tiffinfo 4.7.1",
+              "slide-viewer.slide_open_ome_tiff_series",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "official OME-TIFF integrity check, deterministic C/Z/T topology comparison, recorded source-authorization state, and a separately retained Rosalind task-chooser invocation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-ome-zarr",
+          "title": "OME-Zarr multiscale image",
+          "status": "ready",
+          "summary": "How are multiscale arrays and coordinate transforms inspected in OME-Zarr?",
+          "next_step": "Validate the three retained NGFF metadata objects and recompute the axis-aware multiscale coordinate transforms.",
+          "case_path": "showcases/slide-viewer/cases/slide-ome-zarr",
+          "preview": "showcases/slide-viewer/cases/slide-ome-zarr/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "interface",
+          "difficulty": "intermediate",
+          "evidence_level": "interface-observation",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "IDR anonymous HTTPS",
+              "Python standard-library JSON checks",
+              "slide-viewer.slide_open_ome_zarr",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "three-object NGFF metadata verification, axis-aware topology calculation, recorded public-root open outcomes, and a separately retained Rosalind task-chooser invocation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-roi-measurement",
+          "title": "ROI annotation and measurement",
+          "status": "ready",
+          "summary": "How can a user-authored region produce inspectable geometry and measurement tables?",
+          "next_step": "Recompute the pinned CMU-1 region geometry and measurement table before attempting viewer annotation export.",
+          "case_path": "showcases/slide-viewer/cases/slide-roi-measurement",
+          "preview": "showcases/slide-viewer/cases/slide-roi-measurement/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local source verification and deterministic geometry checks",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "pinned CMU-1 metadata and deterministic ROI calculations; viewer authoring and export actions remain rehearsed contracts",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-scientific-layers",
+          "title": "Scientific layer import",
+          "status": "ready",
+          "summary": "How are source tables mapped into a source-aligned scientific layer?",
+          "next_step": "Verify the retained JSON, GeoJSON, and CSV source mapping before rehearsing import of the source-aligned scientific layer.",
+          "case_path": "showcases/slide-viewer/cases/slide-scientific-layers",
+          "preview": "showcases/slide-viewer/cases/slide-scientific-layers/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "slide-viewer.slide_import_scientific_layer",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local JSON, GeoJSON, CSV, and source-pin verification",
+              "Slide Viewer temporary scientific-layer import, cancellation request, and status follow-up",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "licensed spatial source mapping plus a genuine temporary GeoJSON import, unsuccessful cancellation request, revoked-authorization follow-up, and unchanged Rosalind task-chooser evidence",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-pathology-workflow",
+          "title": "Pathology workflow receipt",
+          "status": "ready",
+          "summary": "How is a pathology analysis started, inspected, cancelled, and resumed with explicit status?",
+          "next_step": "Revalidate the CMU-1 pathology lifecycle record from start through cancellation and resume, keeping rehearsed viewer actions distinct.",
+          "case_path": "showcases/slide-viewer/cases/slide-pathology-workflow",
+          "preview": "showcases/slide-viewer/cases/slide-pathology-workflow/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local Python JSON and CSV validation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "OpenSlide CMU-1 source plan, deterministic pathology lifecycle validation, and an observed Rosalind task-chooser invocation; all Slide Viewer operations remain rehearsed",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-workflow-recovery",
+          "title": "Saved workflow recovery",
+          "status": "ready",
+          "summary": "How are saved inputs reauthorized before a microscopy workflow resumes?",
+          "next_step": "Compare the saved-workflow manifests before and after reauthorization of the pinned public H5AD input.",
+          "case_path": "showcases/slide-viewer/cases/slide-workflow-recovery",
+          "preview": "showcases/slide-viewer/cases/slide-workflow-recovery/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "recovery",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "slide-viewer.slide_import_workflow_source",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local Python JSON and CSV validation",
+              "Slide Viewer guarded workflow source, run, and list operations",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "exact recovery-fixture comparison plus a read-only temporary source import, two admitted region-QC tasks, process-local task listing, repeated isolated-worker failure evidence, and an unchanged Rosalind task-chooser observation",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-authorization-renewal",
+          "title": "Source authorization renewal",
+          "status": "ready",
+          "summary": "How can an expired local-source authorization be renewed and verified?",
+          "next_step": "Verify the source-and-layer authorization change for the pinned H5AD and its 684 capture-spot entities.",
+          "case_path": "showcases/slide-viewer/cases/slide-authorization-renewal",
+          "preview": "showcases/slide-viewer/cases/slide-authorization-renewal/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "recovery",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local Python JSON and CSV validation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "exact source-and-layer authorization manifest comparison for a pinned public H5AD and 684 capture-spot entities plus an observed Rosalind task-chooser invocation; all Slide Viewer operations remain rehearsed",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-dicom-export",
+          "title": "DICOM import and export preparation",
+          "status": "ready",
+          "summary": "How are DICOM objects inspected, prepared, and submitted for a reproducible export lesson?",
+          "next_step": "Revalidate the DICOM 2026c metadata-only WSI fixture and inspect the local export plan before submission.",
+          "case_path": "showcases/slide-viewer/cases/slide-dicom-export",
+          "preview": "showcases/slide-viewer/cases/slide-dicom-export/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "export",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local Python DICOM JSON and CSV validation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "DICOM 2026c metadata-only WSI fixture validation, local export planning, and an observed Rosalind task-chooser invocation; all Slide Viewer operations remain rehearsed",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "slide-spatial-research-package",
+          "title": "Spatial research package",
+          "status": "ready",
+          "summary": "Which artifacts preserve spatial observations, layers, workflow receipts, and source references?",
+          "next_step": "Check the hash-pinned spatial artifact inventory across source references, layers, workflow records, and export files.",
+          "case_path": "showcases/slide-viewer/cases/slide-spatial-research-package",
+          "preview": "showcases/slide-viewer/cases/slide-spatial-research-package/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "export",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "local repository path, byte-count, hash, JSON, GeoJSON, and CSV validation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "hash-pinned inventory of retained licensed spatial artifacts; viewer layer, workflow, and export actions remain unexecuted",
+            "status": "verified"
+          }
         }
       ]
     },
@@ -240,36 +2039,840 @@
           "title": "PD-L1 nanobody design showcase",
           "status": "ready",
           "summary": "Twenty KN035-derived designs, Boltz-2 ensemble ranking, and retained best structure.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "next_step": "Audit the 20 initial and 25 ensemble Boltz-2 predictions, inspect the NB13_E104Q structure, and define experimental affinity and developability tests.",
           "case_path": "showcases/rosalind-workbench/cases/rosalind-molecular-design",
-          "preview": "showcases/rosalind-workbench/cases/rosalind-molecular-design/previews/pdl1-nanobody.svg"
+          "preview": "showcases/rosalind-workbench/cases/rosalind-molecular-design/previews/pdl1-nanobody.svg",
+          "domain": "protein-and-antibody-design",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "design-pdl1-nanobodies"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Boltz-2 in a completed local GPU run",
+              "Python and Gemmi scoring scripts retained with the public case",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local GPU compute for the retained scientific results; local workstation for launcher observation and evidence inspection",
+            "implementation": "retained public-target KN035 design and Boltz-2 ensemble results plus a separately recorded Rosalind launcher observation; no Rosalind scientific job executed",
+            "status": "verified"
+          }
         },
         {
           "id": "rosalind-structure-analysis",
-          "title": "Rosalind structure-analysis launcher",
+          "title": "KRAS G12C prediction and confidence review",
           "status": "ready",
-          "summary": "Verified ready launcher state for the structure-analysis area.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "summary": "Which regions of a free KRAS G12C prediction require cautious structural interpretation?",
+          "next_step": "Repeat the residue-level quality analysis on the public PDB 6OIM KRAS G12C coordinates and flag low-confidence regions.",
           "case_path": "showcases/rosalind-workbench/cases/rosalind-structure-analysis",
-          "preview": "showcases/rosalind-workbench/cases/rosalind-structure-analysis/previews/rosalind-structure-analysis.svg"
+          "preview": "showcases/rosalind-workbench/cases/rosalind-structure-analysis/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "predict-kras-g12c"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "public PDB 6OIM coordinate retrieval and deterministic residue-level structure-quality analysis plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+            "status": "verified"
+          }
         },
         {
           "id": "rosalind-genomics",
-          "title": "Rosalind genomics launcher",
+          "title": "Dexamethasone airway RNA-seq",
           "status": "ready",
-          "summary": "Verified ready launcher state for the genomics area.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "summary": "Which genes and pathways change in a small public dexamethasone airway RNA-seq study?",
+          "next_step": "Reanalyze the GSE52778 dexamethasone-versus-untreated Cuffdiff table and verify the reported gene and pathway changes.",
           "case_path": "showcases/rosalind-workbench/cases/rosalind-genomics",
-          "preview": "showcases/rosalind-workbench/cases/rosalind-genomics/previews/rosalind-genomics.svg"
+          "preview": "showcases/rosalind-workbench/cases/rosalind-genomics/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "analyze-airway-rnaseq"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "deterministic analysis of the public GSE52778 Dex-versus-untreated processed Cuffdiff table plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+            "status": "verified"
+          }
         },
         {
           "id": "rosalind-scientific-compute",
-          "title": "Rosalind scientific-compute launcher",
+          "title": "GB1 sequence embeddings",
           "status": "ready",
-          "summary": "Verified ready launcher state for the scientific-compute area.",
-          "next_step": "Open the case README to inspect the verified evidence, results, and limitations.",
+          "summary": "How can 500 public GB1 variants be embedded with a free local protein model and timed reproducibly?",
+          "next_step": "Recreate the 80-dimensional one-hot encodings for the first 500 ProteinGym GB1 variants and compare timing metrics.",
           "case_path": "showcases/rosalind-workbench/cases/rosalind-scientific-compute",
-          "preview": "showcases/rosalind-workbench/cases/rosalind-scientific-compute/previews/rosalind-scientific-compute.svg"
+          "preview": "showcases/rosalind-workbench/cases/rosalind-scientific-compute/previews/preview.svg",
+          "domain": "scientific-computing",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "embed-gb1-sequences"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "ProteinGym v1.3 first-500-row extraction and deterministic four-site 80-dimensional one-hot encoding plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-trastuzumab-cdr",
+          "title": "Trastuzumab CDR refinement",
+          "status": "ready",
+          "summary": "How can CDR substitutions be prioritized without changing the HER2 epitope hypothesis?",
+          "next_step": "Recompute PDB 1N8Z CDR-to-HER2 contacts and restrict substitution review to supported non-contact positions.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-trastuzumab-cdr",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-trastuzumab-cdr/previews/preview.svg",
+          "domain": "protein-and-antibody-design",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "improve-trastuzumab-cdrs"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "public PDB 1N8Z CDR-to-HER2 contact mapping and conservative non-contact exploration plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-egfr-vhh",
+          "title": "EGFR VHH candidate design",
+          "status": "ready",
+          "summary": "Which public EGFR structural features support a compact VHH design exercise?",
+          "next_step": "Inspect the PDB 4KRL EGFR-7D12 interface and identify which recorded structural features could support a VHH design exercise.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-egfr-vhh",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-egfr-vhh/previews/preview.svg",
+          "domain": "protein-and-antibody-design",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB public record inspection",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "case-specific review of the published PDB 4KRL EGFR-7D12 complex plus a genuine Rosalind task-chooser observation; no design or coordinate analysis was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-il6r-vhh",
+          "title": "IL-6R VHH candidate design",
+          "status": "ready",
+          "summary": "How can an IL-6R extracellular-domain sequence guide a reproducible VHH design lesson?",
+          "next_step": "Review the UniProt P08887 extracellular-domain sequence and state what additional evidence is needed before proposing VHH candidates.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-il6r-vhh",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-il6r-vhh/previews/preview.svg",
+          "domain": "protein-and-antibody-design",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "UniProt REST public record inspection",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "case-specific review of the reviewed human UniProt P08887 receptor record plus a genuine Rosalind task-chooser observation; no sequence or antibody computation was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-antibody-breadth",
+          "title": "Antibody breadth across target variants",
+          "status": "ready",
+          "summary": "Which conserved target residues should be retained when proposing broader antibody recognition?",
+          "next_step": "Test whether the retained UniProt records are sufficient for residue-conservation claims before proposing broader recognition.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-antibody-breadth",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-antibody-breadth/previews/preview.svg",
+          "domain": "protein-and-antibody-design",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "UniProt public source sufficiency review",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "case-specific review of whether the retained UniProt source supports conservation claims plus a genuine Rosalind task-chooser observation; no sequence or antibody analysis was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-imatinib-abl1",
+          "title": "Imatinib–ABL1 docking lesson",
+          "status": "ready",
+          "summary": "How does the ABL1 inactive conformation organize an imatinib docking exercise?",
+          "next_step": "Compare retained ABL1-imatinib contacts with fixed-CID PubChem descriptors, without treating the exercise as a new docking result.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-imatinib-abl1",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-imatinib-abl1/previews/preview.svg",
+          "domain": "small-molecule-design-and-docking",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "dock-imatinib-abl1"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Python 3.14 coordinate analysis",
+              "RDKit descriptor calculation",
+              "Matplotlib preview rendering"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; retained experimental PDB poses were analyzed locally with fixed-CID PubChem records, and no Rosalind scientific job or new docking was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-jak2-selectivity",
+          "title": "JAK2 selectivity design",
+          "status": "ready",
+          "summary": "Which pocket comparisons are required before proposing JAK2-selective binders?",
+          "next_step": "Recheck the three kinase structures, homology-mapped contacts, and PubChem descriptors before prioritizing JAK2 pocket differences.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-jak2-selectivity",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-jak2-selectivity/previews/preview.svg",
+          "domain": "small-molecule-design-and-docking",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "design-jak2-binders"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Python 3.14 coordinate and sequence analysis",
+              "RDKit descriptor calculation",
+              "Matplotlib preview rendering"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; three retained experimental PDB poses were compared locally with homology-mapped contacts and fixed-CID PubChem descriptors, and no Rosalind design or docking service was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-kras-g12c-ligand",
+          "title": "KRAS G12C covalent ligand design",
+          "status": "ready",
+          "summary": "How can the switch-II pocket support a transparent covalent-design lesson?",
+          "next_step": "Compare the retained sotorasib and adagrasib poses, covalent-link records, and PubChem descriptors around the switch-II pocket.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-kras-g12c-ligand",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-kras-g12c-ligand/previews/preview.svg",
+          "domain": "small-molecule-design-and-docking",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Python 3.14 coordinate analysis",
+              "RDKit descriptor calculation",
+              "Matplotlib preview rendering"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; experimental sotorasib and adagrasib poses were analyzed locally with covalent-link records and fixed-CID PubChem descriptors, and no Rosalind scientific job or new docking was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-egfr-t790m",
+          "title": "EGFR T790M inhibitor comparison",
+          "status": "ready",
+          "summary": "Which structural observations distinguish inhibitor binding to EGFR T790M?",
+          "next_step": "Reassess the retained rociletinib and osimertinib EGFR T790M poses using their covalent links and fixed-CID descriptors.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-egfr-t790m",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-egfr-t790m/previews/preview.svg",
+          "domain": "small-molecule-design-and-docking",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Python 3.14 coordinate analysis",
+              "RDKit descriptor calculation",
+              "Matplotlib preview rendering"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; experimental rociletinib and osimertinib EGFR T790M poses were compared locally with covalent-link records and fixed-CID PubChem descriptors, and no Rosalind scientific job or new docking was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-mdm2-p53-inhibitor",
+          "title": "MDM2–p53 inhibitor pharmacophore",
+          "status": "ready",
+          "summary": "Which p53 hotspot contacts define an inspectable MDM2 inhibitor design exercise?",
+          "next_step": "Map the p53 hotspot contacts from the retained peptide complex onto the Nutlin-3a structure and descriptor comparison.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-mdm2-p53-inhibitor",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-mdm2-p53-inhibitor/previews/preview.svg",
+          "domain": "small-molecule-design-and-docking",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "Python 3.14 coordinate and sequence analysis",
+              "RDKit descriptor calculation",
+              "Matplotlib preview rendering"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; experimental MDM2-p53 peptide and MDM2-Nutlin-3a structures were compared locally with fixed-CID PubChem descriptors, and no Rosalind scientific job or docking was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-ace-logd-pka",
+          "title": "ACE inhibitor LogD and pKa",
+          "status": "ready",
+          "summary": "How do ionizable groups alter the qualitative property profile of public ACE inhibitors?",
+          "next_step": "Recompute the ACE-inhibitor descriptors and ionization review from the exact retained PubChem compound identifiers.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-ace-logd-pka",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-ace-logd-pka/previews/preview.svg",
+          "domain": "adme-and-developability",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open",
+            "rosalind-workbench.public-evidence"
+          ],
+          "rosalind_tasks": [
+            "predict-ace-inhibitor-logd-pka"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "PubChem PUG REST",
+              "Python 3.14",
+              "RDKit 2026.03.5"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus CID-exact PubChem evidence and deterministic local ACE-inhibitor descriptor and ionization review",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-antibody-developability",
+          "title": "Therapeutic antibody developability comparison",
+          "status": "ready",
+          "summary": "How can sequence-derived liabilities be compared for two therapeutic antibodies?",
+          "next_step": "Repeat the variable-domain motif, charge, pI, and hydrophobic-window calculations on the exact public Fab sequences.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-antibody-developability",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-antibody-developability/previews/preview.svg",
+          "domain": "adme-and-developability",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open",
+            "rosalind-workbench.public-evidence"
+          ],
+          "rosalind_tasks": [
+            "assess-antibody-developability"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "RCSB PDB REST and FASTA",
+              "Python 3.14 standard library"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus exact public Fab chain sequences and deterministic variable-domain motif, charge, pI, and hydrophobic-window calculations",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-vhh-aggregation",
+          "title": "VHH aggregation-risk screen",
+          "status": "ready",
+          "summary": "Which exposed hydrophobic and charge patterns deserve follow-up in VHH candidates?",
+          "next_step": "Recalculate sequence-only hydrophobic, charge, pI, and motif indicators for the retained public VHH chains.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-vhh-aggregation",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-vhh-aggregation/previews/preview.svg",
+          "domain": "adme-and-developability",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open",
+            "rosalind-workbench.public-evidence"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "RCSB PDB REST and FASTA",
+              "Python 3.14 standard library"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus exact public VHH polymer sequences and deterministic sequence-only hydrophobic, charge, pI, and motif calculations",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-kinase-metabolism",
+          "title": "Kinase inhibitor metabolism-risk review",
+          "status": "ready",
+          "summary": "Which structural alerts and public metabolism records should be reviewed for kinase inhibitors?",
+          "next_step": "Reconcile PubChem structures, DailyMed metabolism statements, and local SMARTS alerts for each retained kinase inhibitor.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-kinase-metabolism",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-kinase-metabolism/previews/preview.svg",
+          "domain": "adme-and-developability",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open",
+            "rosalind-workbench.public-evidence"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "PubChem PUG REST",
+              "DailyMed public labels",
+              "Python 3.14",
+              "RDKit 2026.03.5"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus exact public kinase-inhibitor structures joined to official metabolism statements and transparent local SMARTS prompts",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-oral-candidates",
+          "title": "Oral candidate property comparison",
+          "status": "ready",
+          "summary": "How can five public molecular-property records support a transparent oral-candidate comparison?",
+          "next_step": "Recompute descriptors and threshold counts for the five CID-exact oral reference drugs in the retained comparison.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-oral-candidates",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-oral-candidates/previews/preview.svg",
+          "domain": "adme-and-developability",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open",
+            "rosalind-workbench.public-evidence"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "PubChem PUG REST",
+              "Python 3.14",
+              "RDKit 2026.03.5"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus five CID-exact oral reference drugs with deterministic local molecular descriptors and explicit threshold counts",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-petase-mutations",
+          "title": "PETase mutation map",
+          "status": "ready",
+          "summary": "Where do reported PETase substitutions lie relative to the catalytic region?",
+          "next_step": "Inspect PDB 5XJH and identify the coordinate and activity evidence still needed to place reported PETase substitutions.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-petase-mutations",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-petase-mutations/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "map-petase-mutations"
+          ],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB public record inspection",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "case-specific review of the public PDB 5XJH PETase structure plus a genuine Rosalind task-chooser observation; no coordinate, mutation, or activity analysis was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-gfp-pocket",
+          "title": "GFP chromophore pocket",
+          "status": "ready",
+          "summary": "Which residues form the local environment of the mature GFP chromophore?",
+          "next_step": "Inspect PDB 1EMA and identify the coordinate analysis needed to define the mature GFP chromophore environment.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-gfp-pocket",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-gfp-pocket/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "RCSB PDB public record inspection",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local",
+            "implementation": "case-specific review of the public PDB 1EMA GFP structure plus a genuine Rosalind task-chooser observation; no coordinate, sequence, or fluorescence analysis was run",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-ras-isoforms",
+          "title": "Human RAS isoform comparison",
+          "status": "ready",
+          "summary": "Which conserved and divergent positions distinguish HRAS, KRAS, and NRAS?",
+          "next_step": "Repeat the deterministic comparison of the reviewed HRAS, KRAS, and NRAS UniProt sequences and verify divergent positions.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-ras-isoforms",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-ras-isoforms/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind-workbench.public-evidence",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "UniProtKB reviewed SV1 records and Python 3 standard library"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus deterministic comparison of three retained UniProtKB-reviewed RAS sequences",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-adenylate-kinase",
+          "title": "Adenylate kinase conformations",
+          "status": "ready",
+          "summary": "How does a paired-structure comparison illustrate open and ligand-bound conformations?",
+          "next_step": "Recompute the Kabsch comparison of RCSB 4AKE and 1AKE and relate the coordinate shift to AP5 binding.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-adenylate-kinase",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-adenylate-kinase/previews/preview.svg",
+          "domain": "structure-and-sequence",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind-workbench.public-evidence",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "RCSB PDB 4AKE and 1AKE with local Python NumPy Kabsch analysis"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus digest-verified local coordinate comparison of open and AP5-bound adenylate kinase",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-breast-visium",
+          "title": "Breast cancer Visium workflow",
+          "status": "ready",
+          "summary": "How can a public Visium dataset support spatial QC and region-aware exploration?",
+          "next_step": "Repeat quality checks across the 15 retained breast-cancer Visium metadata records before planning region-aware exploration.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-breast-visium",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-breast-visium/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind-workbench.public-evidence",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "compare-pathology-visium"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "CZ CELLxGENE Discover API via cellxgene-skill and local Python standard library"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus deterministic QC of 15 official breast-cancer Visium metadata records",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-fastq-qc",
+          "title": "Public FASTQ quality workflow",
+          "status": "ready",
+          "summary": "Which bounded quality metrics can be reproduced from a small public read subset?",
+          "next_step": "Recompute quality metrics for the first 500 complete ENA DRR037765 reads and compare them with the retained result.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-fastq-qc",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-fastq-qc/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "intermediate",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind-workbench.public-evidence",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "European Nucleotide Archive DRR037765 and local Python standard library"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus deterministic FASTQ metrics from the first 500 complete records of a retained public ENA object",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-single-cell-tme",
+          "title": "Single-cell tumour microenvironment",
+          "status": "ready",
+          "summary": "How should public single-cell tumour data be prepared for cell-state exploration?",
+          "next_step": "Repeat preparation checks on the retained treatment-naive TNBC CELLxGENE metadata before proposing cell-state analysis.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-single-cell-tme",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-single-cell-tme/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind-workbench.public-evidence",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Rosalind Workbench mcp__rosalind__rosalind_open",
+              "CZ CELLxGENE Discover API via cellxgene-skill and local Python standard library"
+            ],
+            "device": "local",
+            "implementation": "Genuine Rosalind task-chooser observation plus deterministic preparation checks over official treatment-naive TNBC single-cell collection metadata",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-variant-pathway",
+          "title": "Variant-to-pathway evidence chain",
+          "status": "ready",
+          "summary": "How can one public variant be connected to gene and pathway evidence without overstating causality?",
+          "next_step": "Revalidate the rs7903146 C-to-T path across ClinVar, Ensembl, and Reactome without converting association into causality.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-variant-pathway",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-variant-pathway/previews/preview.svg",
+          "domain": "genomics-and-pathology",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind-workbench.public-evidence",
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "public ClinVar, Ensembl, and Reactome records",
+              "local deterministic identifier-path validation",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "allele-specific rs7903146 C>T identifier path assembled from retained public records; genuine Rosalind launcher observation recorded separately",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-pdl1-assay-plan",
+          "title": "PD-L1 binding assay plan",
+          "status": "ready",
+          "summary": "Which orthogonal public assay methods could test ranked PD-L1 nanobody candidates?",
+          "next_step": "Review the KN035 evidence and recalculate the 96-well layout for orthogonal PD-L1 affinity and specificity assays.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-pdl1-assay-plan",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-pdl1-assay-plan/previews/preview.svg",
+          "domain": "scientific-computing",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [
+            "price-pdl1-assays"
+          ],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "public KN035 literature and structural records",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "literature-backed orthogonal assay design and deterministic 96-well allocation; no wet-lab or pricing execution",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-boltz-repeats",
+          "title": "Boltz repeated-sampling receipt",
+          "status": "ready",
+          "summary": "How should fixed inputs, seeds, and ranking criteria be recorded across repeated structure predictions?",
+          "next_step": "Audit the fixed inputs, seeds, and rankings for the five-by-five retained Boltz-2 repeat set before any rerun.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-boltz-repeats",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-boltz-repeats/previews/preview.svg",
+          "domain": "scientific-computing",
+          "case_type": "analysis",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Boltz-2 in a completed local GPU run",
+              "local Python evidence inspection and compact export",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local GPU compute for the historical run; local workstation for evidence inspection",
+            "implementation": "20-candidate Boltz-2 screen followed by five fixed-seed diffusion samples for each of the top five candidates; no model rerun during this update",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-nextflow-snakemake",
+          "title": "Nextflow and Snakemake comparison",
+          "status": "ready",
+          "summary": "How do two workflow engines represent an equivalent small scientific computation?",
+          "next_step": "Compare the retained Nextflow DSL2 and Snakemake definitions against the directly executed Python FASTQ quality computation.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-nextflow-snakemake",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-nextflow-snakemake/previews/preview.svg",
+          "domain": "scientific-computing",
+          "case_type": "workflow",
+          "difficulty": "advanced",
+          "evidence_level": "computed-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "Nextflow DSL2 and Snakemake definitions retained without engine execution",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "shared Python FASTQ QC executed directly; workflow definitions authored and readiness recorded; both workflow engines unavailable and unexecuted",
+            "status": "verified"
+          }
+        },
+        {
+          "id": "rosalind-cross-tool-export",
+          "title": "Cross-tool research export",
+          "status": "ready",
+          "summary": "Which files preserve source, parameters, outputs, previews, and limitations across scientific viewers?",
+          "next_step": "Validate the RO-Crate 1.1 metadata and fixed-timestamp ZIP against all 16 retained cross-case evidence artifacts.",
+          "case_path": "showcases/rosalind-workbench/cases/rosalind-cross-tool-export",
+          "preview": "showcases/rosalind-workbench/cases/rosalind-cross-tool-export/previews/preview.svg",
+          "domain": "scientific-computing",
+          "case_type": "export",
+          "difficulty": "advanced",
+          "evidence_level": "multi-tool-result",
+          "capabilities": [
+            "rosalind.rosalind_open"
+          ],
+          "rosalind_tasks": [],
+          "execution": {
+            "actual_tools": [
+              "Python 3.14 standard library",
+              "retained evidence from the GB1, PD-L1 assay, Boltz-2, and workflow-definition cases",
+              "Rosalind Workbench mcp__rosalind__rosalind_open"
+            ],
+            "device": "local Windows workstation",
+            "implementation": "deterministic RO-Crate 1.1 directory and fixed-timestamp ZIP built from 16 existing case-specific evidence artifacts",
+            "status": "verified"
+          }
         }
       ]
     }

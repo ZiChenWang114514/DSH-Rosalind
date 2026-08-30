@@ -1,0 +1,46 @@
+{
+  "showcase_id": "slide-ome-zarr",
+  "check_date": "2026-08-30",
+  "source": {
+    "root": "https://livingobjects.ebi.ac.uk/idr/zarr/v0.4/idr0101A/13457537.zarr",
+    "catalogue": "https://idr.github.io/ome-ngff-samples/",
+    "license": "CC BY 4.0",
+    "idr_accession": "idr0101A",
+    "image_id": "13457537"
+  },
+  "metadata_resources": [
+    {"path": ".zgroup", "http_status": 200, "bytes": 24, "sha256": "2383746e67b4bcc2762b3f100f06c3fa2d5f149ab5a8e5da5d33521464a01959", "etag": "\"e20297935e73dd0154104d4ea53040ab\"", "last_modified": "Tue, 31 Mar 2026 10:15:36 GMT"},
+    {"path": ".zattrs", "http_status": 200, "bytes": 6245, "sha256": "68dfe7805bf4f5ce32d7ca227c7568486bb3ab73977d7a9d9a5c17fbf9865e7b", "etag": "\"aa83e5dc87a61469d72525ed18c19a9c\"", "last_modified": "Tue, 31 Mar 2026 10:15:35 GMT"},
+    {"path": "0/.zarray", "http_status": 200, "bytes": 439, "sha256": "4dabce2b3545b4c21804615cd6f9c8c6ddd467e8d84a5318dbcf9eb31287cce1", "etag": "\"2be81594a34fb8182d98fb6fa3292d1c\"", "last_modified": "Tue, 31 Mar 2026 10:15:36 GMT"}
+  ],
+  "ngff_summary": {
+    "zarr_format": 2,
+    "ngff_version": "0.4",
+    "axes": ["t", "c", "z", "y", "x"],
+    "level0_shape": [18, 6, 12, 223, 198],
+    "level0_chunks": [1, 1, 1, 223, 198],
+    "dtype": "<u2",
+    "dataset_paths": ["0", "1", "2"],
+    "level0_scale": [1.0, 1.0, 0.4, 0.108335, 0.108335],
+    "level0_translation": [0, 0, 1.2, 52.109135, 60.88427],
+    "omero_channel_count": 6
+  },
+  "slide_viewer_checks": [
+    {"operation": "mcp__slide_viewer__slide_open_ome_zarr", "arguments": "public root plus consistency=metadata-and-object-validators", "result": "validation error", "message": "Directory consistency is not a public HTTPS source option."},
+    {"operation": "mcp__slide_viewer__slide_open_ome_zarr", "arguments": "public root with default public-source consistency", "result": "timeout", "message": "The operation was aborted due to timeout."}
+  ],
+  "viewer_session_id": null,
+  "render_evidence": false,
+  "calculation": {
+    "algorithm": "interpret level-0 Zarr shape using the declared axis order t,c,z,y,x",
+    "dimensions": {"t": 18, "c": 6, "z": 12, "y": 223, "x": 198},
+    "metadata_resources_checked": 3,
+    "metadata_bytes_checked": 6708
+  },
+  "interpretation": "The retained metadata establishes a three-level NGFF v0.4 image with six channels, twelve Z planes, and eighteen time points. It does not establish a mounted viewer or biological registration.",
+  "limitations": [
+    "Only required metadata anchors were read; no image chunks or full remote-store inventory were copied.",
+    "ETags are transport validators and are not independent publisher checksums.",
+    "No viewer session, scene state, plane selection, layer change, or render was returned."
+  ]
+}

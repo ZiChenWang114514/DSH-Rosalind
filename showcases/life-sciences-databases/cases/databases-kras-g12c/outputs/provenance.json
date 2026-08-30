@@ -1,0 +1,19 @@
+{
+  "case_id": "databases-kras-g12c",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "queries": [
+    {"skill": "uniprot-skill", "path": "uniprotkb/P01116?format=json", "raw": "inputs/uniprot-P01116.json"},
+    {"skill": "clinvar-variation-skill", "action": "search", "terms": "KRAS G12C", "max_items": 10, "raw": "inputs/clinvar-KRAS-G12C-search.json"},
+    {"skill": "chembl-skill", "path": "molecule/search.json", "params": {"q": "sotorasib", "limit": 10}, "raw": "inputs/chembl-sotorasib-search.json"},
+    {"skill": "rcsb-pdb-skill", "path": "core/entry/6oim", "raw": "inputs/rcsb-6OIM.json"}
+  ],
+  "computation": "scripts/build_case.py",
+  "scientific_output": "outputs/results.json",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "observed_at_utc": "2026-08-29T18:14:05.242Z",
+    "scientific_job_executed": false,
+    "note": "The call opened only the task chooser; the four retained API responses support the scientific summary."
+  }
+}

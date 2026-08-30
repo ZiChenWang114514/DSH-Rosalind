@@ -1,0 +1,13 @@
+field,before,after,expectation,result
+source.public_url,https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad,https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad,unchanged,pass
+source.bytes,94259482,94259482,unchanged,pass
+source.sha256,9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd,9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd,unchanged,pass
+source.matrix,X,X,unchanged,pass
+source.source_revision,sha256:9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd,sha256:9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd,unchanged,pass
+source.authorization_alias,expired-fixture-lease,fresh-fixture-lease,changed,pass
+cancel_A.durable_id,fixture-workflow-cancel-A,fixture-workflow-cancel-A,unchanged,pass
+cancel_A.status,cancelled,cancelled,unchanged,pass
+cancel_A.resume_attempted,false,false,must_be_false,pass
+recover_B.durable_id,fixture-workflow-recover-B,fixture-workflow-recover-B,unchanged,pass
+recover_B.attempt,1,2,incremented,pass
+recover_B.source_mapping,fixture-source-hne-v1,fixture-source-hne-v2,changed_with_same_revision,pass

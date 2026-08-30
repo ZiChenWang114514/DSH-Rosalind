@@ -1,0 +1,117 @@
+{
+  "id": "literature-nanobody-assays",
+  "plugin_id": "life-sciences-literature",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "evidence-synthesis",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Literature",
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "dated PubMed and PMC evidence, deterministic local orthogonal-assay map, and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 557
+    },
+    {
+      "path": "scripts/summarize.py",
+      "bytes": 1941
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/sources.json",
+      "bytes": 4613
+    },
+    {
+      "path": "outputs/results.json",
+      "bytes": 2215
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 730
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2608
+    }
+  ],
+  "sources": [
+    "https://pubmed.ncbi.nlm.nih.gov/39572731/",
+    "https://pubmed.ncbi.nlm.nih.gov/36700149/",
+    "https://pubmed.ncbi.nlm.nih.gov/40362285/",
+    "https://pubmed.ncbi.nlm.nih.gov/36439110/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9869787/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12071740/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9682242/"
+  ],
+  "observations": [
+    "The recorded PubMed searches retained one BLI kinetics protocol and three records matching nanobody, surface plasmon resonance, and ELISA title-or-abstract terms.",
+    "Three selected application records resolved to PMC open-access records; the selected BLI protocol had no PMC record on the retrieval date.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation."
+  ],
+  "interpretation": [
+    "The record set supports teaching an orthogonal strategy that combines label-free kinetics with plate-based binding or specificity measurements without comparing cross-paper numerical values."
+  ],
+  "limitations": [
+    "PubMed query-term matches do not verify protocol quality.",
+    "The selected papers use different targets and experimental systems.",
+    "PMC access status is time-sensitive and bibliographic discoverability does not imply open full text.",
+    "The Rosalind call opened only the task chooser and did not execute a scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "NCBI Entrez E-Utilities PubMed ESearch, ESummary, and EFetch",
+        "PMC Article Dataset identifier lookups"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "scripts/summarize.py"
+      ],
+      "outputs": [
+        "outputs/sources.json",
+        "outputs/results.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The literature APIs supplied bibliographic, query-match, and PMC observations; the local script produced the deterministic assay map; the separate Rosalind observation preserves the exact task-chooser response and states that no scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Repeat both retained PubMed searches and compare the returned PMID slices with outputs/query-verification.json.",
+    "Repeat identifier-specific PMC lookups before making current access or license statements.",
+    "Run python scripts/summarize.py from the case directory and compare outputs/results.json.",
+    "Inspect the preview against the retained assay-evidence map.",
+    "Compare any new Rosalind launcher response with outputs/rosalind-open-observation.json without treating it as assay evidence."
+  ],
+  "environment": {
+    "retrieval_date_utc": "2026-08-29",
+    "cost": "free",
+    "data": "public",
+    "device": "local"
+  }
+}

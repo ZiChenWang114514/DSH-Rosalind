@@ -1,0 +1,45 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-run-execution",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.655Z",
+      "arguments": {
+        "target_id": "local"
+      },
+      "response": {
+        "ok": true,
+        "host": {
+          "os": "windows",
+          "arch": "amd64"
+        },
+        "commands": {
+          "nextflow": "missing",
+          "snakemake": "missing",
+          "java": "ready",
+          "docker": "ready"
+        },
+        "docker_daemon_reachable": false,
+        "controller_candidates": 0
+      }
+    }
+  ],
+  "failed_operations": [],
+  "not_executed_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__execute_plan",
+      "status": "not_executed",
+      "reason": "Readiness was blocked and no immutable plan was created; therefore no approval request or run was possible."
+    }
+  ],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

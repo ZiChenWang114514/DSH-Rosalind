@@ -1,0 +1,174 @@
+{
+  "id": "ngs-snakemake-readiness",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_workflows",
+    "ngs-analysis-workbench.get_runtime_environment",
+    "ngs-analysis-workbench.check_snakemake_readiness",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_workflows",
+      "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "mcp__ngs_analysis_workbench__check_snakemake_readiness",
+      "Python 3.14",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/source-and-fixture.md",
+      "bytes": 757
+    },
+    {
+      "path": "inputs/public-fixture.fastq",
+      "bytes": 1330
+    },
+    {
+      "path": "config/config.json",
+      "bytes": 115
+    },
+    {
+      "path": "config/README.md",
+      "bytes": 402
+    },
+    {
+      "path": "workflow/Snakefile",
+      "bytes": 365
+    },
+    {
+      "path": "scripts/reference_fastq_stats.py",
+      "bytes": 2409
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/readiness.json",
+      "bytes": 873
+    },
+    {
+      "path": "outputs/reference-fastq-stats.json",
+      "bytes": 430
+    },
+    {
+      "path": "outputs/native-check.txt",
+      "bytes": 763
+    },
+    {
+      "path": "outputs/plan-snakemake-receipt.json",
+      "bytes": 1919
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1008
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 769
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 5407
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 8852
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1959
+    }
+  ],
+  "sources": [
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract",
+    "https://snakemake.readthedocs.io/",
+    "https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_R1.fastq.gz"
+  ],
+  "observations": [
+    "The bundled oai_fastq_qc workflow was observed at version version-8e0c15a605d394be27a4e68246a061ef.",
+    "The earlier Windows-local readiness result was blocked because Snakemake was missing and no compatible controller candidate existed.",
+    "After repair, the Linux SSH runtime exposed Snakemake 9.26.0 and a reachable Docker 29.7.2 server with an active controller candidate.",
+    "The retained Snakemake workflow completed fastq_stats and all with exit code 0 after its configuration was corrected to call python3.",
+    "The refreshed Workbench readiness call failed when the Windows-hosted plugin converted the remote POSIX run directory to a backslash-prefixed path.",
+    "plan_snakemake was called with the same workflow, target, runtime snapshot, configuration, and temporary run directory; it returned module 'os' has no attribute 'fchmod'.",
+    "The direct Python reference computation validated two complete 301-base FASTQ records and produced the retained statistics JSON.",
+    "rosalind_open returned the ready launcher view for this case-specific task context; no scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The retained fixture, configuration, and native definition now support a verified native Snakemake execution lesson; Windows path and plan-registry errors still prevent a Workbench plan and run."
+  ],
+  "limitations": [
+    "The minimal native Snakemake workflow executed; FastQC, MultiQC, trimming, a Workbench plan, and a registered run did not execute.",
+    "The planner operation was reached, but its Windows plan-registry step failed before a plan identity was returned.",
+    "The two-record public prefix is too small for library-quality or biological conclusions.",
+    "The retained statistics-only workflow does not demonstrate the full bundled FASTQ QC method.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract",
+        "https://snakemake.readthedocs.io/",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_R1.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/source-and-fixture.md",
+        "inputs/public-fixture.fastq",
+        "config/config.json",
+        "config/README.md",
+        "workflow/Snakefile",
+        "scripts/reference_fastq_stats.py"
+      ],
+      "outputs": [
+        "outputs/readiness.json",
+        "outputs/reference-fastq-stats.json",
+        "outputs/native-check.txt",
+        "outputs/plan-snakemake-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/operation-evidence.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Workbench supplied the blocked readiness response and exact planner error; local Python produced the fixture statistics; Rosalind supplied only the retained launcher response."
+    }
+  ],
+  "reproduction": [
+    "Read config/README.md, refresh the local runtime, and call ngs-analysis-workbench.check_snakemake_readiness for oai_fastq_qc with a new absolute run directory.",
+    "Call ngs-analysis-workbench.plan_snakemake with the same binding and retain the returned plan identity or exact error in outputs/plan-snakemake-receipt.json.",
+    "If Snakemake exists, run snakemake --snakefile workflow/Snakefile --configfile config/config.json --cores 1 --dry-run; otherwise retain the observed absence without claiming a dry run.",
+    "Run python scripts/reference_fastq_stats.py inputs/public-fixture.fastq and compare the output with outputs/reference-fastq-stats.json.",
+    "Call mcp__rosalind__rosalind_open with the case-specific task_context and compare its response with outputs/rosalind-open-observation.json.",
+    "For ngs-snakemake-readiness, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "readiness_id": "readiness-f9ab8db3cacca2f7598dd971fcf54fd2",
+    "observed_at": "2026-08-29T17:38:45Z",
+    "workflow_execution_performed": true,
+    "workbench_registered_run_created": false,
+    "reference_computation_performed": true,
+    "plan_operation_called": true,
+    "plan_created": false
+  }
+}

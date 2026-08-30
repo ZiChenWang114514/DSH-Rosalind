@@ -1,0 +1,10 @@
+case_id,from_state,event,to_state,expected_allowed,observed_allowed,reason
+P01,planned,admit_with_current_capability,admitted,true,true,requires exact operation kind and fresh authorization
+P02,running,cancel_accepted,cancel_requested,true,true,cancellation request accepted only
+P03,cancel_requested,workers_drained,cancelled_settled,true,true,executionSettled must be true
+P04,cancel_requested,terminal_success,succeeded,false,false,cancel request cannot imply success
+P05,cancelled_settled,resume_admitted,resumed_running,false,false,terminal cancellation is not resumable
+P06,running,process_interrupted,interrupted_recoverable,true,true,durable identity and unchanged inputs required
+P07,interrupted_recoverable,resume_admitted,resumed_running,true,true,fresh authorization and new attempt required
+P08,resumed_running,terminal_success,succeeded,true,true,terminal result required
+P09,planned,terminal_success,succeeded,false,false,no job was admitted

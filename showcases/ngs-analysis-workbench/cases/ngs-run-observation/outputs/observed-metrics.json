@@ -1,0 +1,26 @@
+{
+  "observation_mode": "bounded local state-machine rehearsal",
+  "workbench_observe_ngs_run_performed": false,
+  "registry_run_id": null,
+  "event_count": 3,
+  "states": [
+    "prepared",
+    "running",
+    "completed"
+  ],
+  "terminal_state": "completed",
+  "output_metrics_observed": {
+    "records": 24,
+    "bases": 11304,
+    "gc_percent": 28.848195329087048,
+    "mean_phred": 37.2997169143666,
+    "q20_percent": 99.27459306440198,
+    "q30_percent": 96.78874734607218
+  },
+  "evidence_paths": [
+    "../ngs-run-execution/outputs/qc-summary.json",
+    "../ngs-run-execution/outputs/read-metrics.csv",
+    "../ngs-run-execution/outputs/cycle-quality.csv",
+    "outputs/local-run-timeline.jsonl"
+  ]
+}

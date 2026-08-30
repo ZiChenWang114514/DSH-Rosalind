@@ -1,0 +1,391 @@
+{
+  "accno" : "E-GEOD-52778",
+  "attributes" : [ {
+    "name" : "Title",
+    "value" : "Human Airway Smooth Muscle Transcriptome Changes in Response to Asthma Medications"
+  }, {
+    "name" : "ReleaseDate",
+    "value" : "2014-01-01"
+  }, {
+    "name" : "RootPath",
+    "value" : "E-GEOD-52778"
+  }, {
+    "name" : "AttachTo",
+    "value" : "ArrayExpress"
+  } ],
+  "section" : {
+    "accno" : "s-E-GEOD-52778",
+    "type" : "Study",
+    "attributes" : [ {
+      "name" : "Title",
+      "value" : "Human Airway Smooth Muscle Transcriptome Changes in Response to Asthma Medications"
+    }, {
+      "name" : "Study type",
+      "value" : "RNA-seq of coding RNA",
+      "valqual" : [ {
+        "name" : "Ontology",
+        "value" : "EFO"
+      }, {
+        "name" : "TermId",
+        "value" : "EFO_0003738"
+      } ]
+    }, {
+      "name" : "Organism",
+      "value" : "Homo sapiens"
+    }, {
+      "name" : "Description",
+      "value" : "Rationale: Asthma is a chronic inflammatory airway disease. The most common medications used for its treatment are β2-agonists and glucocorticosteroids, and one of the primary tissues that these drugs target in the treatment of asthma is the airway smooth muscle. We used RNA-Seq to characterize the human airway smooth muscle (HASM) transcriptome at baseline and under three asthma treatment conditions. Methods: The Illumina TruSeq assay was used to prepare 75bp paired-end libraries for HASM cells from four white male donors under four treatment conditions: 1) no treatment; 2) treatment with a β2-agonist (i.e. Albuterol, 1μM for 18h); 3) treatment with a glucocorticosteroid (i.e. Dexamethasone (Dex), 1μM for 18h); 4) simultaneous treatment with a β2-agonist and glucocorticoid, and the libraries were sequenced with an Illumina Hi-Seq 2000 instrument. The Tuxedo Suite Tools were used to align reads to the hg19 reference genome, assemble transcripts, and perform differential expression analysis using the protocol described in https://github.com/blancahimes/taffeta mRNA profiles obtained via RNA-Seq for four primary human airway smooth muscle cell lines that were treated with dexamethasone, albuterol, dexamethasone+albuterol or were left untreated."
+    } ],
+    "links" : [ [ {
+      "url" : "SRP033351",
+      "attributes" : [ {
+        "name" : "Type",
+        "value" : "ENA"
+      } ]
+    } ] ],
+    "subsections" : [ [ {
+      "accno" : "P-GSE52778-4",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-GSE52778-4"
+      }, {
+        "name" : "Type",
+        "value" : "normalization data transformation protocol"
+      }, {
+        "name" : "Description",
+        "value" : "Illumina Casava1.8 software used for basecalling. Sequenced reads were trimmed by 12bp then mapped to hg19 whole genome using tophat v.2.0.4 with parameters -G [hg19_ERCC_gtf] --no-novel-juncs --transcriptome-only For each sample, Cufflinks (v.2.0.2) was used to quantify External RNA Controls Consortium (ERCC) Spike-In and hg19 transcripts based on reads that mapped to the provided hg19 and ERCC reference files. Differential expression of genes and transcripts in samples treated with Dex vs. Untreated samples was obtained using Cuffdiff (v.2.0.2) with the quantified transcripts computed by Cufflinks (v.2.0.2), while applying bias correction. Options: -p 12 --min-outlier-p 0.05 -b [hg19_reference_index] -u [hg19_gtf] -L Dex,Control [List of accepted_hits.bam for each sample sorted by condition (i.e. Dex,Control)] CummeRbund R package (v.0.1.3) was used to create FPKM matrix of all samples Genome_build: hg19 Supplementary_files_format_and_content: tab-delimited text files on Series record include FPKM values for each sample (ALL_Sample_FPKM_Matrix.txt) and gene-based differential expression results for Dex vs. Untreated condition (Dex_vs_Untreated_gene_exp.diff)"
+      } ]
+    }, {
+      "accno" : "P-GSE52778-1",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-GSE52778-1"
+      }, {
+        "name" : "Type",
+        "value" : "sample treatment protocol"
+      }, {
+        "name" : "Description",
+        "value" : "Cells from each donor were treated with 1 μM dexamethasone, 1 μM albuterol, both dexamethasone and albuterol, or control vehicle for 18 h."
+      } ]
+    }, {
+      "accno" : "P-GSE52778-3",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-GSE52778-3"
+      }, {
+        "name" : "Type",
+        "value" : "nucleic acid library construction protocol"
+      }, {
+        "name" : "Description",
+        "value" : "Total RNA was extracted using the miRNAeasy mini kit (Qiagen Sciences, Inc., Germantown, MD). TruSeq RNA Sample Prep Kit v2 (Illumina, Inc., San Diego, CA)."
+      } ]
+    }, {
+      "accno" : "P-GSE52778-2",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-GSE52778-2"
+      }, {
+        "name" : "Type",
+        "value" : "growth protocol"
+      }, {
+        "name" : "Description",
+        "value" : "Primary ASM cells were isolated from four white aborted lung transplant donors with no chronic illness. Passages 4�to 7 ASM cells maintained in Ham's F12 medium supplemented with 10% FBS were used in all experiments."
+      } ]
+    } ], {
+      "type" : "Author",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Blanca Himes"
+      }, {
+        "name" : "Email",
+        "value" : "blanca.himes@channing.harvard.edu"
+      }, {
+        "name" : "Phone",
+        "value" : "617 525 2291"
+      }, {
+        "name" : "Role",
+        "value" : "submitter"
+      }, {
+        "name" : "affiliation",
+        "value" : "o1",
+        "reference" : true
+      } ]
+    }, {
+      "type" : "Author",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Quan Lu"
+      } ]
+    }, {
+      "accno" : "o1",
+      "type" : "Organization",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Brigham and Women's Hospital"
+      }, {
+        "name" : "Address",
+        "value" : "Brigham and Women's Hospital, 181 Longwood Ave, Boston, MA, USA"
+      } ]
+    }, {
+      "accno" : "24926665",
+      "type" : "Publication",
+      "attributes" : [ {
+        "name" : "Title",
+        "value" : "RNA-Seq transcriptome profiling identifies CRISPLD2 as a glucocorticoid responsive gene that modulates cytokine function in airway smooth muscle cells."
+      }, {
+        "name" : "Authors",
+        "value" : "Himes BE, Jiang X, Wagner P, Hu R, Wang Q, Klanderman B, Whitaker RM4, Duan Q, Lasky-Su J, Nikolos C, Jester W, Johnson M, Panettieri RA Jr, Tantisira KG, Weiss ST, Lu Q"
+      }, {
+        "name" : "DOI",
+        "value" : "10.1371/journal.pone.0099625"
+      } ],
+      "links" : [ {
+        "url" : "10.1371/journal.pone.0099625",
+        "attributes" : [ {
+          "name" : "Type",
+          "value" : "DOI"
+        } ]
+      } ]
+    }, {
+      "accno" : "s-samples-factors-E-GEOD-52778",
+      "type" : "Samples",
+      "attributes" : [ {
+        "name" : "Sample count",
+        "value" : "16"
+      }, {
+        "name" : "Experimental Factors",
+        "value" : "treatment",
+        "valqual" : [ {
+          "name" : "TermName",
+          "value" : "treatment"
+        } ]
+      } ],
+      "subsections" : [ {
+        "accno" : "exp_factor-E-GEOD-52778",
+        "type" : "Experimental Factors",
+        "attributes" : [ {
+          "name" : "Treatment",
+          "value" : "untreated"
+        }, {
+          "name" : "Treatment",
+          "value" : "albuterol and dexamethasone"
+        }, {
+          "name" : "Treatment",
+          "value" : "dexamethasone"
+        }, {
+          "name" : "Treatment",
+          "value" : "albuterol"
+        } ],
+        "subsections" : [ [ {
+          "accno" : "factors_0",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "treatment",
+            "value" : "albuterol"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508570,SRS508574,SRS508578,SRS508582"
+            } ]
+          } ]
+        }, {
+          "accno" : "factors_1",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "treatment",
+            "value" : "albuterol and dexamethasone"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508569,SRS508573,SRS508577,SRS508581"
+            } ]
+          } ]
+        }, {
+          "accno" : "factors_2",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "treatment",
+            "value" : "dexamethasone"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508567,SRS508572,SRS508576,SRS508580"
+            } ]
+          } ]
+        }, {
+          "accno" : "factors_3",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "treatment",
+            "value" : "untreated"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508568,SRS508571,SRS508575,SRS508579"
+            } ]
+          } ]
+        } ] ]
+      }, {
+        "accno" : "source_chars-E-GEOD-52778",
+        "type" : "Source Characteristics",
+        "attributes" : [ {
+          "name" : "Cell type",
+          "value" : "airway smooth muscle cell"
+        }, {
+          "name" : "Organism",
+          "value" : "Homo sapiens"
+        }, {
+          "name" : "Organism part",
+          "value" : "lung"
+        }, {
+          "name" : "Cell line",
+          "value" : "N052611"
+        }, {
+          "name" : "Cell line",
+          "value" : "N061011"
+        }, {
+          "name" : "Cell line",
+          "value" : "N080611"
+        }, {
+          "name" : "Cell line",
+          "value" : "N61311"
+        } ],
+        "subsections" : [ [ {
+          "accno" : "source_0",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "cell line",
+            "value" : "N052611"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508571-SRS508574"
+            } ]
+          } ]
+        }, {
+          "accno" : "source_1",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "cell line",
+            "value" : "N061011"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508579-SRS508582"
+            } ]
+          } ]
+        }, {
+          "accno" : "source_2",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "cell line",
+            "value" : "N080611"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508575-SRS508578"
+            } ]
+          } ]
+        }, {
+          "accno" : "source_3",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "cell line",
+            "value" : "N61311"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "4",
+            "valqual" : [ {
+              "name" : "url",
+              "value" : "https://www.ebi.ac.uk/ena/browser/view/SRS508567-SRS508570"
+            } ]
+          } ]
+        } ] ]
+      } ]
+    }, {
+      "accno" : "s-assays-data-E-GEOD-52778",
+      "type" : "Assays and Data",
+      "attributes" : [ {
+        "name" : "Assay count",
+        "value" : "16"
+      }, {
+        "name" : "Technology",
+        "value" : "Sequencing assay"
+      }, {
+        "name" : "Assay by Molecule",
+        "value" : "RNA assay"
+      } ],
+      "subsections" : [ {
+        "accno" : "mt-E-GEOD-52778",
+        "type" : "MAGE-TAB Files",
+        "files" : [ [ {
+          "path" : "E-GEOD-52778.idf.txt",
+          "size" : 5045,
+          "attributes" : [ {
+            "name" : "Type",
+            "value" : "IDF File"
+          }, {
+            "name" : "Format",
+            "value" : "tab-delimited text"
+          }, {
+            "name" : "Description",
+            "value" : "Investigation Design Format (IDF)"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "E-GEOD-52778.sdrf.txt",
+          "size" : 18168,
+          "attributes" : [ {
+            "name" : "Type",
+            "value" : "SDRF File"
+          }, {
+            "name" : "Format",
+            "value" : "tab-delimited text"
+          }, {
+            "name" : "Description",
+            "value" : "Sample and Data Relationship Format (SDRF)"
+          } ],
+          "type" : "file"
+        } ] ]
+      } ]
+    }, {
+      "accno" : "score-E-GEOD-52778",
+      "type" : "MINSEQE Score",
+      "attributes" : [ {
+        "name" : "Exp. Design",
+        "value" : "-"
+      }, {
+        "name" : "Protocols",
+        "value" : "*"
+      }, {
+        "name" : "Raw",
+        "value" : "*"
+      }, {
+        "name" : "Variables",
+        "value" : "*"
+      }, {
+        "name" : "Processed",
+        "value" : "-"
+      } ]
+    } ]
+  },
+  "type" : "submission"
+}

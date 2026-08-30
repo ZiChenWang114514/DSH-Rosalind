@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 71496458,
+        "MolecularFormula": "C28H33N7O2",
+        "MolecularWeight": "499.6",
+        "SMILES": "CN1C=C(C2=CC=CC=C21)C3=NC(=NC=C3)NC4=C(C=C(C(=C4)NC(=O)C=C)N(C)CCN(C)C)OC",
+        "ConnectivitySMILES": "CN1C=C(C2=CC=CC=C21)C3=NC(=NC=C3)NC4=C(C=C(C(=C4)NC(=O)C=C)N(C)CCN(C)C)OC",
+        "InChIKey": "DUYJMQONPNNFPI-UHFFFAOYSA-N",
+        "XLogP": 3.7,
+        "TPSA": 87.6,
+        "HBondDonorCount": 2,
+        "HBondAcceptorCount": 7,
+        "RotatableBondCount": 10,
+        "Title": "Osimertinib"
+      }
+    ]
+  }
+}

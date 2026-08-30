@@ -1,0 +1,82 @@
+{
+  "id": "structure-density-map",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 with NumPy 2.5.1",
+      "RCSB and PDBe public downloads",
+      "Molecular Structure Viewer 0.1.80 density-discovery attempt",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Direct CCP4 header verification and periodic trilinear atom sampling at 1GFL residues 65-67 with a separate viewer-attempt record",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/1GFL.pdb", "bytes": 360126, "sha256": "60eb370ad1a2c7c63382399d8655e0448fc29acc2a436e1a6112a5d599390d6f"},
+    {"path": "inputs/1GFL-sf.cif", "bytes": 1539665, "sha256": "a7796fb33f9fd9f96561af7d9d1c1c92508322aedab8e4d4ebd5e4556cfbe9bb"},
+    {"path": "inputs/1gfl.ccp4", "bytes": 4720256, "sha256": "03b3c72115869c7511178fb719620577a5e7f7ccd544a8151b971c72c7434f69"},
+    {"path": "inputs/acquisition.md", "bytes": 705}
+  ],
+  "outputs": [
+    {"path": "outputs/density-map-inspection.json", "bytes": 7123},
+    {"path": "outputs/viewer-attempt.json", "bytes": 759},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 637}
+  ],
+  "previews": [
+    {"path": "previews/preview.svg", "bytes": 2693}
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1GFL",
+    "https://files.rcsb.org/download/1GFL.pdb",
+    "https://files.rcsb.org/download/1GFL-sf.cif",
+    "https://www.ebi.ac.uk/pdbe/coordinates/files/1gfl.ccp4"
+  ],
+  "observations": [
+    "The retained map is a 96 by 96 by 128 float32 CCP4 grid with header RMS 0.288208067 map units.",
+    "Mean atom-sampled values for chain-A Ser65, Tyr66, and Gly67 are 2.951909, 3.002100, and 3.054613 header-RMS units.",
+    "All 21 selected atoms are at or above one header RMS under the declared interpolation method."
+  ],
+  "interpretation": [
+    "The retained public map has positive sampled support at the deposited atoms of residues 65-67 under the stated method."
+  ],
+  "limitations": [
+    "The values are direct CCP4 samples and are not a Molecular Structure Viewer density_fit result.",
+    "The calculation is not a crystallographic refinement score or difference-map analysis.",
+    "No current-host viewer render or successful viewer density-discovery receipt is claimed.",
+    "rosalind_open did not submit 1GFL coordinates, structure factors, or map data, inspect density, or execute a Rosalind scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": ["https://files.rcsb.org/download/1GFL.pdb", "https://files.rcsb.org/download/1GFL-sf.cif", "https://www.ebi.ac.uk/pdbe/coordinates/files/1gfl.ccp4"],
+      "inputs": ["inputs/1GFL.pdb", "inputs/1GFL-sf.cif", "inputs/1gfl.ccp4", "inputs/acquisition.md"],
+      "outputs": ["outputs/density-map-inspection.json", "outputs/viewer-attempt.json", "outputs/rosalind-open-observation.json", "scripts/inspect_density_map.py"],
+      "previews": ["previews/preview.svg"],
+      "note": "Map bytes, structure factors, coordinates, header, array statistics, sampling method, and viewer status are retained; the separate genuine Rosalind task-chooser observation states that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/inspect_density_map.py.",
+    "Confirm the retained hashes and compare the regenerated atom samples with the preview.",
+    "Run viewer density operations separately only after an acknowledged mounted session is available."
+  ],
+  "environment": {
+    "python": "3.14.0",
+    "numpy": "2.5.1",
+    "map_format": "CCP4 mode 2 little-endian float32",
+    "cost": "free",
+    "data": "public"
+  }
+}

@@ -1,0 +1,3 @@
+# Versioned KRAS public-record acquisition
+
+Acquire reviewed human KRAS `P01116` from the official UniProtKB FASTA endpoint, verify `SV=1`, retain exact response provenance, and compute sequence composition plus five coordinate-pinned motif checks locally. Invoke `mcp__rosalind__rosalind_open` once and retain its exact task-chooser response with UTC and local timestamps in `outputs/rosalind-open-observation.json`; state explicitly that this launcher invocation does not prove a Rosalind scientific run. Treat the Sequence Viewer acquisition, open, and query actions as rehearsed unless a mounted viewer supplies live results.

@@ -1,0 +1,54 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-workflow-archive",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__archive_workflow",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:50:49.500Z",
+      "arguments": {},
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "archived": true,
+        "version_preserved": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__list_workflows",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.696Z",
+      "arguments": {
+        "include_archived": true
+      },
+      "response": {
+        "ok": true,
+        "count": 14,
+        "bundled_workflows_present": true,
+        "temporary_evidence_workflow_archived": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__restore_workflow",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:50:49.600Z",
+      "arguments": {},
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "restored": true,
+        "archived": false,
+        "version_preserved": true,
+        "finally_rearchived": true
+      }
+    }
+  ],
+  "failed_operations": [],
+  "not_executed_operations": [],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

@@ -1,0 +1,5 @@
+feature_id,type,label,local_start_1based,local_end_1based_inclusive,strand,source_accession,source_start_1based,source_end_1based_inclusive
+cI_CDS,CDS,cI,48,761,-,NC_001416.1,37227,37940
+OR3,regulatory_region,OR3,772,788,+,NC_001416.1,37951,37967
+OR2,regulatory_region,OR2,795,811,+,NC_001416.1,37974,37990
+OR1,regulatory_region,OR1,819,835,+,NC_001416.1,37998,38014

@@ -1,0 +1,159 @@
+{
+  "id": "rosalind-egfr-t790m",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "small-molecule-design-and-docking",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Python 3.14 coordinate analysis",
+      "RDKit descriptor calculation",
+      "Matplotlib preview rendering"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; experimental rociletinib and osimertinib EGFR T790M poses were compared locally with covalent-link records and fixed-CID PubChem descriptors, and no Rosalind scientific job or new docking was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/case-config.json",
+      "bytes": 1011
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 897
+    },
+    {
+      "path": "inputs/source-metadata.json",
+      "bytes": 2652
+    },
+    {
+      "path": "inputs/5XDK.pdb",
+      "bytes": 250776
+    },
+    {
+      "path": "inputs/6JX0.pdb",
+      "bytes": 247779
+    },
+    {
+      "path": "inputs/pubchem-rociletinib.json",
+      "bytes": 612
+    },
+    {
+      "path": "inputs/pubchem-osimertinib.json",
+      "bytes": 599
+    },
+    {
+      "path": "scripts/fetch_public_inputs.py",
+      "bytes": 3949
+    },
+    {
+      "path": "scripts/analyze_case.py",
+      "bytes": 16410
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/contacts.csv",
+      "bytes": 2510
+    },
+    {
+      "path": "outputs/contact-overlap.csv",
+      "bytes": 687
+    },
+    {
+      "path": "outputs/descriptors.csv",
+      "bytes": 694
+    },
+    {
+      "path": "outputs/analysis-summary.json",
+      "bytes": 14902
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 644
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 116427
+    },
+    {
+      "path": "previews/preview.png",
+      "bytes": 84044
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/5XDK",
+    "https://www.rcsb.org/structure/6JX0",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/57335384",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/71496458"
+  ],
+  "observations": [
+    "The genuine mcp__rosalind__rosalind_open call returned the exact message 'Rosalind Workbench is ready. Choose a research task in the app.' and ready=true; it opened only the task chooser.",
+    "PDB LINK records place the Cys797-ligand covalent bonds at 1.83 angstrom for rociletinib and 1.80 angstrom for osimertinib.",
+    "The 4.0-angstrom analysis found 14 EGFR contact residues for rociletinib and 17 for osimertinib.",
+    "Twelve exact residue labels are shared between the deposited poses, producing a Jaccard value of 0.6316."
+  ],
+  "interpretation": [
+    "The deposited inhibitors share a core ATP-site environment and Cys797 attachment while differing in peripheral contacts and molecular descriptors."
+  ],
+  "limitations": [
+    "The Rosalind launcher observation does not show that EGFR docking, inhibitor analysis, or another scientific job was executed.",
+    "No docking, reaction simulation, biochemical assay, cellular experiment, or clinical analysis was performed.",
+    "Both constructs contain T790M, so mutant-versus-wild-type selectivity was not measured.",
+    "Static distance contacts do not quantify bond energetics, dynamics, resistance, or efficacy."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "RCSB PDB 5XDK revision 1.2",
+        "RCSB PDB 6JX0 revision 1.3",
+        "PubChem CID 57335384",
+        "PubChem CID 71496458"
+      ],
+      "inputs": [
+        "inputs/5XDK.pdb",
+        "inputs/6JX0.pdb",
+        "inputs/pubchem-rociletinib.json",
+        "inputs/pubchem-osimertinib.json",
+        "inputs/source-metadata.json"
+      ],
+      "outputs": [
+        "outputs/contacts.csv",
+        "outputs/contact-overlap.csv",
+        "outputs/descriptors.csv",
+        "outputs/analysis-summary.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg",
+        "previews/preview.png"
+      ],
+      "note": "The local scripts retain covalent-link evidence and compute contact, overlap, descriptor, summary, and preview artifacts; the separate Rosalind observation records chooser readiness and no scientific job."
+    }
+  ],
+  "reproduction": [
+    "Call mcp__rosalind__rosalind_open with task_context 'Document the EGFR T790M inhibitor-pose showcase; open the task chooser only and do not start a scientific job.' and record the exact response separately as outputs/rosalind-open-observation.json.",
+    "Run python scripts/analyze_case.py from the case directory.",
+    "Optionally run python scripts/fetch_public_inputs.py first to refresh current RCSB entry revisions.",
+    "Inspect source-metadata.json, contacts.csv, and analysis-summary.json before interpretation."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public RCSB PDB and PubChem records",
+    "device": "local",
+    "network_required_for_refresh_only": true
+  }
+}

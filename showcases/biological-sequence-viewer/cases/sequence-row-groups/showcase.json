@@ -1,0 +1,124 @@
+{
+  "id": "sequence-row-groups",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "interface",
+  "difficulty": "intermediate",
+  "evidence_level": "interface-observation",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "verified local sequence-derived RAS row-group plan, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 589,
+      "sha256": "30bf5e3ddf5bd3b4463c26780340c0948f5e2dc3f6b6616a683d5dff461de0d8"
+    },
+    {
+      "path": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+      "bytes": 786,
+      "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/row-metrics-and-groups.csv",
+      "bytes": 369,
+      "sha256": "37b0e4a81a8366cb36329dab416968b16af0fab6aadef7a8ab9690f864b77a4a"
+    },
+    {
+      "path": "outputs/row-group-plan.json",
+      "bytes": 2544,
+      "sha256": "961f495567775dacb7505cd8189ec2669dab75914c938a0cb82422e4a517f71d"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 836,
+      "sha256": "47783d06d581daeb03aabe6e15bbd748467198d82f53493f27095198e70e964e"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 624,
+      "sha256": "698e0d91431c35d845892543aa42db4b03943ef63c557f20dff11b8387223d34"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2636,
+      "sha256": "b3e98796ac524433b486f67fc20cd72ed65848db0fed4bd7ab6128fd2c8d6a9e"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "observations": [
+    "P01116, P01111, and P01112 contain 8, 3, and 4 K/R residues, respectively, in residues 166-185.",
+    "The same records contain 1, 1, and 2 cysteines, respectively, before terminal residues 186-189.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "Two explicit grouping plans expose contrasting hypervariable-region composition while retaining the original row order."
+  ],
+  "limitations": [
+    "The grouping rules are transparent teaching choices for three sequences, not biological classifiers.",
+    "rosalind_open did not execute a scientific job and did not create the row groups.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "UniProtKB P01116, P01111, and P01112 official FASTA endpoints"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "build_case.py"
+      ],
+      "outputs": [
+        "outputs/row-metrics-and-groups.csv",
+        "outputs/row-group-plan.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local script produces the grouping evidence; the separate Rosalind observation preserves the genuine task-chooser response and states that no scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run python showcases/biological-sequence-viewer/cases/sequence-row-groups/build_case.py.",
+    "Confirm both the original and post-assignment order are P01116, P01111, P01112.",
+    "Treat a later sequence.edit_copy row-group action as a separate live run.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_status": "rehearsed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

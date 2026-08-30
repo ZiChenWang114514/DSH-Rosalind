@@ -1,0 +1,59 @@
+{
+  "showcase_id": "rosalind-kras-g12c-ligand",
+  "retrieved_on": "2026-08-30",
+  "coordinate_format": "legacy PDB text from the current RCSB entry revision",
+  "structures": [
+    {
+      "pdb_id": "6OIM",
+      "label": "KRAS-G12C-sotorasib",
+      "coordinate_url": "https://files.rcsb.org/download/6OIM.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/6OIM",
+      "entry_url": "https://www.rcsb.org/structure/6OIM",
+      "title": "Crystal Structure of human KRAS G12C covalently bound to AMG 510",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 1.65,
+      "initial_release_date": "2019-11-06T00:00:00.000+00:00",
+      "revision_date": "2024-11-13T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 4,
+      "pdb_doi": "10.2210/pdb6oim/pdb",
+      "primary_citation_doi": "10.1038/s41586-019-1694-1"
+    },
+    {
+      "pdb_id": "6USZ",
+      "label": "KRAS-G12C-adagrasib",
+      "coordinate_url": "https://files.rcsb.org/download/6USZ.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/6USZ",
+      "entry_url": "https://www.rcsb.org/structure/6USZ",
+      "title": "Identification of the Clinical Development Candidate MRTX849, a Covalent KRASG12C Inhibitor for the Treatment of Cancer",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.03,
+      "initial_release_date": "2020-04-22T00:00:00.000+00:00",
+      "revision_date": "2024-11-20T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 3,
+      "pdb_doi": "10.2210/pdb6usz/pdb",
+      "primary_citation_doi": "10.1021/acs.jmedchem.9b02052"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Sotorasib",
+      "role": "6OIM ligand",
+      "pubchem_cid": 137278711,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/137278711/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/137278711",
+      "title": "Sotorasib",
+      "inchi_key": "NXQKSXLFSAEQCZ-SFHVURJKSA-N"
+    },
+    {
+      "name": "Adagrasib",
+      "role": "6USZ ligand",
+      "pubchem_cid": 138611145,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/138611145/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/138611145",
+      "title": "Adagrasib",
+      "inchi_key": "PEMUGDMSUDYLHU-ZEQRLZLVSA-N"
+    }
+  ]
+}

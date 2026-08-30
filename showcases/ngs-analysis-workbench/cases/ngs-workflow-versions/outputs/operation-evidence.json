@@ -1,0 +1,63 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-workflow-versions",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__update_workflow",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:50:49.280Z",
+      "arguments": {},
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "updated": true,
+        "active_version_id": "version-d427cae49dc240bf248e03d6c3bfbb3a",
+        "source_sha256": "sha256:e45290e57e1babf0336acb0fd9a6657f3df69188f501cdbab2d62c806924f0cb",
+        "source_root_removed": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__list_workflow_versions",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.730Z",
+      "arguments": {},
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "count": 2,
+        "versions": [
+          {
+            "version_id": "version-3eea4823aa0dd3d782f036b96a931bc1",
+            "active": false
+          },
+          {
+            "version_id": "version-d427cae49dc240bf248e03d6c3bfbb3a",
+            "active": true
+          }
+        ],
+        "source_roots_removed": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__activate_workflow_version",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:50:49.400Z",
+      "arguments": {},
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "activation_sequence_succeeded": true,
+        "first_version_activated": true,
+        "second_version_reactivated": true,
+        "final_active_version_id": "version-d427cae49dc240bf248e03d6c3bfbb3a"
+      }
+    }
+  ],
+  "failed_operations": [],
+  "not_executed_operations": [],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

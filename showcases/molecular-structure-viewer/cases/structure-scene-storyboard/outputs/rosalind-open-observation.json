@@ -1,0 +1,13 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "structure-scene-storyboard",
+  "observed_at_utc": "2026-08-29T18:07:20.195Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect the Rosalind task chooser for the verified 4AKE and 1AKE molecular-scene storyboard showcase."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit 4AKE or 1AKE, create or restore molecular scenes, or run any Rosalind scientific job."
+}

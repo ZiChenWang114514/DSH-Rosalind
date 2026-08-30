@@ -2,8 +2,6 @@
 
 `catalog.json` is the canonical inventory. Each plugin directory explains its demonstrations, evidence, outputs, previews, and scientific limitations.
 
-The framework contains 23 registered modules. All 23 provide inspected lesson and replay packages; each reproduce path either calls an implemented local or authorized service capability or returns a precise diagnostic for unavailable data, credentials, compute, or client rendering.
+The framework contains exactly 100 `ready` modules across seven plugin families. `coverage.json` and `COVERAGE.md` currently map 35 of 117 public scientific operations with qualifying execution evidence and all 12 Rosalind official tasks to concrete teaching cases. Attempted operations that failed, timed out, remained unavailable, or were only rehearsed are retained in case evidence without being counted as verified coverage.
 
-## Text artifact identity
-
-For text, JSON, SVG, and chemical text files, the recorded `bytes` and `sha256` describe UTF-8 bytes after every CRLF line ending has been normalized to LF. This keeps a Windows checkout and a Unix checkout equivalent while leaving binary files unchanged. Validation reports both the physical file size and the canonical size, and rejects a declared digest or canonical byte count after content is changed.
+Catalogue totals and coverage are generated from `catalog.json`; historical reports retain the state that was observed when they were written.

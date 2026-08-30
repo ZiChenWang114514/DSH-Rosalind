@@ -1,0 +1,6 @@
+name,cid,rdkit_mol_wt,rdkit_mol_logp,rdkit_tpsa,hbd,hba,rotatable_bonds,aromatic_ring_count,fraction_csp3,qed,lipinski_threshold_exceedances,veber_threshold_exceedances
+Imatinib,5291,493.62,4.59,86.28,2,7,7,4,0.241,0.389,0,0
+Gefitinib,123631,446.91,4.28,68.74,1,7,8,3,0.364,0.518,0,0
+Erlotinib,176870,393.44,3.41,74.73,1,7,10,3,0.273,0.418,0,0
+Osimertinib,71496458,499.62,4.51,87.55,2,7,10,4,0.250,0.311,0,0
+Sunitinib,5329102,398.48,3.33,77.23,3,3,7,2,0.364,0.626,0,0

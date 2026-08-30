@@ -1,0 +1,13 @@
+{
+  "showcase_id": "slide-pathology-workflow",
+  "verification_kind": "deterministic local pathology state-machine validation",
+  "source_pin_checked": true,
+  "transition_cases": 9,
+  "allowed_cases": 6,
+  "rejected_cases": 3,
+  "all_checks_passed": true,
+  "rosalind_launcher_invoked": true,
+  "rosalind_scientific_task_executed": false,
+  "viewer_operations_executed": false,
+  "remote_workflow_executed": false
+}

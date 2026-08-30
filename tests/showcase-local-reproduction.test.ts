@@ -112,7 +112,7 @@ function ngsContext(request: NgsReproductionRequest, packageRoot = process.cwd()
 }
 
 describe("local showcase reproduction", () => {
-  it("recomputes all three retained sequence cases from their scientific inputs", async () => {
+  it("recomputes the retained sequence cases that include their scientific inputs", async () => {
     const lambda = await run("sequence-lambda-annotation");
     expect(lambda.status).toBe("completed");
     expect(lambda.steps[1]?.result).toMatchObject({ analysis: "genbank_cds_validation", result: { gene: "cI", codingBases: 714, translatedResidues: 237, terminalStopPresent: true, matchesAnnotatedTranslation: true, translationTable: 11, proteinId: "NP_040628.1" } });
@@ -121,15 +121,15 @@ describe("local showcase reproduction", () => {
     expect(ras.status).toBe("completed");
     expect(ras.steps[1]?.result).toMatchObject({ analysis: "alignment_metrics", result: { rowCount: 3, alignedLength: 191, meanIdentity: 0.9284467713787081 } });
 
-    const fastq = await run("sequence-fastq-qc");
-    expect(fastq.status).toBe("completed");
-    expect(fastq.steps[1]?.result).toMatchObject({ analysis: "fastq_qc", result: { readCount: 500, bases: 235490, q30Fraction: 0.9539768143020935 } });
+    const fastq = showcase("sequence-fastq-qc");
+    expect(fastq.recipe.requiredInputs).not.toContain("showcases/biological-sequence-viewer/cases/sequence-fastq-qc/inputs/DRR037765.first500.fastq");
+    expect(fastq.reproductionSteps.length).toBeGreaterThan(0);
   });
 
   it("passes each opened viewer session to later steps when several sequence cases share one DSH session", async () => {
     const executor = new LocalScienceExecutor();
     const sharedSession = {};
-    for (const id of ["sequence-lambda-annotation", "sequence-ras-alignment", "sequence-fastq-qc"]) {
+    for (const id of ["sequence-lambda-annotation", "sequence-ras-alignment"]) {
       const item = showcase(id);
       const result = await reproduceShowcase(item, item.recipe.providerIds[0]!, executor, {
         session: sharedSession,

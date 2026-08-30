@@ -93,13 +93,13 @@ describe("Cordis module core", () => {
     const statuses = ctx.rosalindModules.list();
     expect(statuses.map((status) => status.id)).toEqual(MODULE_IDS);
     expect(statuses.map(({ id, version, toolCount, skillCount, showcaseCount }) => ({ id, version, toolCount, skillCount, showcaseCount }))).toEqual([
-      { id: "literature", version: "0.1.5", toolCount: 1, skillCount: 3, showcaseCount: 3 },
-      { id: "databases", version: "0.1.5", toolCount: 1, skillCount: 44, showcaseCount: 3 },
-      { id: "sequence", version: "0.1.43", toolCount: 13, skillCount: 1, showcaseCount: 3 },
-      { id: "ngs", version: "0.2.16", toolCount: 25, skillCount: 5, showcaseCount: 3 },
-      { id: "structure", version: "0.1.80", toolCount: 41, skillCount: 1, showcaseCount: 3 },
-      { id: "slide", version: "0.1.56", toolCount: 44, skillCount: 1, showcaseCount: 4 },
-      { id: "rosalind", version: "0.2.2-research-preview", toolCount: 15, skillCount: 0, showcaseCount: 4 },
+      { id: "literature", version: "0.1.5", toolCount: 1, skillCount: 3, showcaseCount: 6 },
+      { id: "databases", version: "0.1.5", toolCount: 1, skillCount: 44, showcaseCount: 7 },
+      { id: "sequence", version: "0.1.43", toolCount: 13, skillCount: 1, showcaseCount: 12 },
+      { id: "ngs", version: "0.2.16", toolCount: 25, skillCount: 5, showcaseCount: 15 },
+      { id: "structure", version: "0.1.80", toolCount: 41, skillCount: 1, showcaseCount: 15 },
+      { id: "slide", version: "0.1.56", toolCount: 44, skillCount: 1, showcaseCount: 15 },
+      { id: "rosalind", version: "0.2.2-research-preview", toolCount: 15, skillCount: 0, showcaseCount: 30 },
     ]);
     expect(statuses.every((status) => status.enabled)).toBe(true);
     expect(ctx.rosalindModules.status("sequence")).toMatchObject({ status: "active", providers: [{ id: "local-sequence", runnable: true }] });

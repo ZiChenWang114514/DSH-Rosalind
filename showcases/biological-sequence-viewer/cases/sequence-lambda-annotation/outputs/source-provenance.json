@@ -6,5 +6,5 @@
   "bytes": 176721,
   "sha256": "3c624302adeeb3c00649f549903ab781b9e75bab16069ae655833d536407367f",
   "viewer_status": "session_created_but_card_not_mounted",
-  "viewer_status": "session_created_but_card_not_mounted"
+  "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
 }

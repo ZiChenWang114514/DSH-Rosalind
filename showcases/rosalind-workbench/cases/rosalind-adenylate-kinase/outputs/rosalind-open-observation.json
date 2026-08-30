@@ -1,0 +1,18 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-adenylate-kinase",
+  "observed_at_utc": "2026-08-29T18:20:51.563Z",
+  "observed_at_local": "2026-08-30T02:20:51.563+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "case_id": "rosalind-adenylate-kinase",
+    "task_context": "Open Rosalind Workbench for the public RCSB 4AKE and 1AKE deterministic adenylate-kinase conformation showcase; do not submit structures or execute a Rosalind scientific task.",
+    "execute_scientific_task": false
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "response_schema": "life-sciences.launcher/v1",
+  "response_view": "launcher",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit 4AKE or 1AKE, align either structure, or execute a Rosalind scientific task."
+}

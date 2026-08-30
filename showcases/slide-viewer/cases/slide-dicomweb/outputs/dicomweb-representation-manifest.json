@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "metadata": [
+    {
+      "request": {
+        "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/metadata",
+        "accept": "application/dicom+json"
+      },
+      "size": "14707",
+      "sha256": "2b2f3a05d44361045cfbcd8a006255c54937b4b66f412d4d034c12a7f15f7feb"
+    },
+    {
+      "request": {
+        "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.17.0/metadata",
+        "accept": "application/dicom+json"
+      },
+      "size": "14704",
+      "sha256": "40508485dac058051430769ee5c5e255c03d12892f998c67aa2fdd6ad7705ee3"
+    },
+    {
+      "request": {
+        "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.24.0/metadata",
+        "accept": "application/dicom+json"
+      },
+      "size": "14384",
+      "sha256": "e882d82bbc97ac9965e3357b44ada89372390e17ead12e21357cbffa7dc9566e"
+    }
+  ],
+  "frames": [
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/1",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "9820",
+      "sha256": "7e4fa20ef53095cf0101eb3efbf074ceb1bb0e1849f4bfa4be1a041535b24526"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/2",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "35882",
+      "sha256": "25168338e4ede47743591b452309067bbee4444cc2a94363b8de737cfc27d7f5"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/3",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "26444",
+      "sha256": "a290abbbe09ab6995b40d9fe0d0a2148845aabacdba78799e35b0c8631b6dece"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/4",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "2932",
+      "sha256": "58dc17b49c174a28ecb474499bed6a4b8db32e055e2dca5adc95dff70a87baed"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/5",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "19506",
+      "sha256": "b71f46b653f34593bccfe1c5f62072e493f3de58c8cb46eecc26b7d817ffd66a"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/6",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "46346",
+      "sha256": "b2ee07c25e5f0284c5bc84932206cb729bd8fea68bbbbc1f6416a63182914a3a"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/7",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "38222",
+      "sha256": "57452fa24ed2cd97e12d9b8f7b38d9fdf4f6a4d2fe034a8c9dc99c94dec2374f"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/8",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "2932",
+      "sha256": "58dc17b49c174a28ecb474499bed6a4b8db32e055e2dca5adc95dff70a87baed"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/9",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "10696",
+      "sha256": "61bc3c497df8b50ce1520e72d4fbf92723a2b55941e41a4c7bd9f0c5f303b3be"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/10",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "25672",
+      "sha256": "9dcd318d3012b86f1aa2b0b0741956d410278e5707946f023e7a14295bec1008"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/11",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "23652",
+      "sha256": "4249803b7e5a9789964bb9a73a81a560dd16127fc630d845d7024d7efd965de7"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0/frames/12",
+      "accept": "multipart/related; type=\"image/jpeg\"; transfer-syntax=1.2.840.10008.1.2.4.50",
+      "mediaType": "image/jpeg",
+      "transferSyntaxUid": "1.2.840.10008.1.2.4.50",
+      "size": "2932",
+      "sha256": "58dc17b49c174a28ecb474499bed6a4b8db32e055e2dca5adc95dff70a87baed"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.17.0/frames/1",
+      "accept": "multipart/related; type=\"application/octet-stream\"; transfer-syntax=1.2.840.10008.1.2.1",
+      "mediaType": "application/octet-stream",
+      "transferSyntaxUid": "1.2.840.10008.1.2.1",
+      "size": "1773387",
+      "sha256": "c5a35d9023f0257eba18b5d0cec7024f6b3ecddd5777c4fe942c35b2ba05e01e"
+    },
+    {
+      "key": "studies/2.25.326831351899246997718579660054873448065/series/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0/instances/1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.24.0/frames/1",
+      "accept": "multipart/related; type=\"application/octet-stream\"; transfer-syntax=1.2.840.10008.1.2.1",
+      "mediaType": "application/octet-stream",
+      "transferSyntaxUid": "1.2.840.10008.1.2.1",
+      "size": "1773387",
+      "sha256": "c5a35d9023f0257eba18b5d0cec7024f6b3ecddd5777c4fe942c35b2ba05e01e"
+    }
+  ]
+}

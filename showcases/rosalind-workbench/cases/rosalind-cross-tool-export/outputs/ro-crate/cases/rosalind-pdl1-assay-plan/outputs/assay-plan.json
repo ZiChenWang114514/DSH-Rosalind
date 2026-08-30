@@ -1,0 +1,106 @@
+{
+  "showcase_id": "rosalind-pdl1-assay-plan",
+  "evidence_class": "experimental plan; no wet-lab measurements",
+  "candidate_panel": [
+    "NB13_E104Q",
+    "NB16_L110I",
+    "NB17_V111I",
+    "NB05_S31N",
+    "NB11_F103Y",
+    "KN035_parent"
+  ],
+  "candidate_basis": "five candidates prioritized by the retained Boltz-2 ensemble case plus the KN035 parent control",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "expression and sample quality",
+      "measurements": [
+        "yield",
+        "analytical SEC monomer fraction",
+        "DSF or nanoDSF melting transition"
+      ],
+      "decision_rule": "Do not interpret weak binding for a sample that fails identity or monodispersity checks."
+    },
+    {
+      "stage": 2,
+      "name": "direct binding by BLI",
+      "proposed_setup": "biotinylated human PD-L1 extracellular domain on streptavidin sensors; monomeric VHH in solution",
+      "proposed_analyte_concentrations_nM": [
+        0.625,
+        1.25,
+        2.5,
+        5,
+        10
+      ],
+      "association_seconds": 120,
+      "dissociation_seconds": 320,
+      "controls": [
+        "reference sensor",
+        "KN035 parent",
+        "nonbinding VHH",
+        "buffer-only analyte"
+      ],
+      "reported_outputs": [
+        "raw sensorgrams",
+        "reference-subtracted sensorgrams",
+        "kon",
+        "koff",
+        "KD",
+        "fit residuals"
+      ],
+      "note": "Concentrations and immobilization format are proposed for this plan and require pilot optimization."
+    },
+    {
+      "stage": 3,
+      "name": "PD-1/PD-L1 competitive ELISA",
+      "plate_design": {
+        "candidates": 6,
+        "concentrations_nM": [
+          0.3,
+          1,
+          3,
+          10,
+          30,
+          100
+        ],
+        "technical_replicates": 2,
+        "candidate_wells": 72,
+        "control_wells": 24,
+        "total_wells": 96
+      },
+      "reported_outputs": [
+        "background-subtracted absorbance",
+        "four-parameter dose-response fit",
+        "IC50 with confidence interval"
+      ]
+    },
+    {
+      "stage": 4,
+      "name": "cell-surface orthogonal check",
+      "proposal": "flow cytometry on PD-L1-positive and matched PD-L1-negative cells, with viability and isotype controls",
+      "reported_outputs": [
+        "median fluorescence intensity",
+        "specific-to-negative-cell signal ratio",
+        "replicate variability"
+      ]
+    }
+  ],
+  "decision_sequence": [
+    "Review sample quality before affinity ranking.",
+    "Require interpretable sensorgrams and acceptable residuals before quoting kinetic constants.",
+    "Compare direct binding with competitive inhibition; discordant candidates require investigation.",
+    "Advance candidates only after a cell-surface specificity check."
+  ],
+  "procurement": {
+    "vendor_quotes_collected": false,
+    "cost_claim": "No purchasing price is reported.",
+    "quote_inputs_needed": [
+      "protein format and purity",
+      "biosensor type and pack size",
+      "plate and detection chemistry",
+      "instrument access",
+      "replicate count"
+    ]
+  },
+  "wet_lab_executed": false
+}

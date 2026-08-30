@@ -1,0 +1,78 @@
+{
+  "execution_mode": "local scientific-core execution with rehearsed Workbench lifecycle",
+  "workbench_execute_plan_performed": false,
+  "workflow_engine_performed": false,
+  "scientific_core_performed": true,
+  "command": [
+    "python",
+    "workflow/scripts/qc_core.py",
+    "--input",
+    "inputs/DRR037765-first-24.fastq",
+    "--summary",
+    "outputs/qc-summary.json",
+    "--reads",
+    "outputs/read-metrics.csv",
+    "--cycles",
+    "outputs/cycle-quality.csv",
+    "--q20",
+    "20",
+    "--q30",
+    "30",
+    "--timeline",
+    "../ngs-run-observation/outputs/local-run-timeline.jsonl",
+    "--log",
+    "outputs/run-log.txt"
+  ],
+  "cwd": "showcases/ngs-analysis-workbench/cases/ngs-run-execution",
+  "python": "3.14.0",
+  "exit_code": 0,
+  "input": {
+    "path": "inputs/DRR037765-first-24.fastq",
+    "bytes": 23031,
+    "sha256": "1091da980ce003fd7b3981c9ea1fc002a399eb030553adfb395c277046e61ff4"
+  },
+  "outputs": {
+    "qc-summary.json": {
+      "bytes": 547,
+      "sha256": "d13900072c9f5ef759b952c0ae3c68d788635ef004ffbf08c62a6dae0a44b737"
+    },
+    "read-metrics.csv": {
+      "bytes": 1426,
+      "sha256": "7991ccd8b5d3fcfb6753cba4a9cf3ba3a0d9668dacf8bd29fc97dd0c410e7bb8"
+    },
+    "cycle-quality.csv": {
+      "bytes": 18117,
+      "sha256": "d6357618a874c2a8f8a85bbab10fa8e070f851544332730394204379b5022a0e"
+    },
+    "run-log.txt": {
+      "bytes": 81,
+      "sha256": "6afeb92aa3647a05d96a760d9a22417326e2d351b8936b078263d4082fa66db5"
+    }
+  },
+  "metrics": {
+    "schema_version": "2.0",
+    "input_state": "raw public FASTQ subset",
+    "phred_encoding": "Phred+33",
+    "records": 24,
+    "unique_record_ids": 24,
+    "bases": 11304,
+    "read_length_min": 471,
+    "read_length_median": 471.0,
+    "read_length_max": 471,
+    "gc_percent": 28.848195329087048,
+    "n_percent": 0.0,
+    "mean_phred": 37.2997169143666,
+    "q20_threshold": 20,
+    "q20_percent": 99.27459306440198,
+    "q30_threshold": 30,
+    "q30_percent": 96.78874734607218,
+    "fastq_integrity": "passed",
+    "transformation_performed": false
+  },
+  "registry_run_id": null,
+  "path_sanitization": {
+    "local_interpreter_path_retained": false,
+    "local_repository_absolute_path_retained": false,
+    "command_paths_are_repository_relative": true
+  }
+}

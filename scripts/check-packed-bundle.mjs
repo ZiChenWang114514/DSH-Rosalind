@@ -62,13 +62,51 @@ const required = [
   "package/README.md",
   "package/README.zh-CN.md",
   "package/THIRD_PARTY_NOTICES.md",
+  "package/schema/catalog.schema.json",
 ];
 const missing = required.filter((entry) => !entryMap.has(entry));
 if (EXPECTED_TOOL_COUNT !== 140) missing.push(`140-tool contract arithmetic (found ${EXPECTED_TOOL_COUNT})`);
 const skillCount = entryNames.filter((entry) => entry.startsWith("package/skills/") && entry.endsWith("/SKILL.md")).length;
 const showcaseCount = entryNames.filter((entry) => entry.startsWith("package/showcases/") && entry.endsWith("showcase.json")).length;
 if (skillCount !== 55) missing.push(`55 project Skill documents (found ${skillCount})`);
-if (showcaseCount !== 23) missing.push(`23 showcase manifests (found ${showcaseCount})`);
+if (showcaseCount !== 100) missing.push(`100 showcase manifests (found ${showcaseCount})`);
+const packedCatalogText = entryMap.get("package/showcases/catalog.json")?.toString("utf8");
+if (!packedCatalogText) {
+  missing.push("showcase catalogue");
+} else {
+  const packedCatalog = JSON.parse(packedCatalogText);
+  const catalogueIds = [];
+  for (const plugin of packedCatalog.plugins ?? []) {
+    for (const summary of plugin.showcases ?? []) {
+      catalogueIds.push(summary.id);
+      const caseRoot = `package/${summary.case_path}`;
+      const manifestPath = `${caseRoot}/showcase.json`;
+      const manifestText = entryMap.get(manifestPath)?.toString("utf8");
+      if (!manifestText) {
+        missing.push(manifestPath);
+        continue;
+      }
+      const manifest = JSON.parse(manifestText);
+      const referenced = new Set(["README.md", manifest.prompt]);
+      for (const group of [manifest.inputs, manifest.outputs, manifest.previews, manifest.dependencies?.artifacts]) {
+        for (const item of group ?? []) referenced.add(item.repository_path ?? item.path);
+      }
+      for (const record of manifest.provenance ?? []) {
+        for (const group of [record.inputs, record.outputs, record.previews]) {
+          for (const item of group ?? []) referenced.add(typeof item === "string" ? item : item.repository_path ?? item.path);
+        }
+      }
+      for (const relative of referenced) {
+        if (!relative) continue;
+        const packedPath = relative.startsWith("showcases/") ? `package/${relative}` : `${caseRoot}/${relative}`;
+        if (!entryMap.has(packedPath)) missing.push(`${summary.id} reference ${packedPath}`);
+      }
+    }
+  }
+  if (catalogueIds.length !== 100 || new Set(catalogueIds).size !== 100) {
+    missing.push(`100 unique catalogue IDs (found ${catalogueIds.length}/${new Set(catalogueIds).size} unique)`);
+  }
+}
 const forbidden = entryNames.filter((entry) => /^package\/(?:src|tests|node_modules|reference-plugins|assets\/upstream)\//.test(entry));
 for (const workflowId of ["oai_fastq_qc", "oai_bulk_rnaseq_counts_qc", "oai_scrnaseq_fastq_to_count"]) {
   const prefix = `package/workflows/${workflowId}/`;
@@ -111,7 +149,8 @@ if (skillSourceInventoryText) {
       }
       if (!/^codex-plugin:\/\/openai-curated-remote\//.test(item.sourceUri ?? "")) missing.push(`Skill source URI for ${item.sourceName}`);
       if (!/^[a-f0-9]{64}$/.test(item.sourceContentSha256 ?? "")) missing.push(`Skill source digest for ${item.sourceName}`);
-      const bundledDigest = (await import("node:crypto")).createHash("sha256").update(content).digest("hex");
+      const canonicalContent = Buffer.from(content.toString("utf8").replace(/\r\n/g, "\n"), "utf8");
+      const bundledDigest = (await import("node:crypto")).createHash("sha256").update(canonicalContent).digest("hex");
       if (bundledDigest !== item.bundledContentSha256) missing.push(`bundled Skill digest for ${item.sourceName}`);
     }
   }

@@ -8,18 +8,46 @@
   "inputs": [],
   "outputs": [
     {
-      "path": "outputs/source-provenance.json"
+      "path": "outputs/source-provenance.json",
+      "bytes": 505,
+      "sha256": "d5820fa29b3ad39c5dbb0af420a7cc324fd4b1acdc1d3f4c34f75e7331366e3e"
     },
     {
-      "path": "outputs/metadata-summary.json"
+      "path": "outputs/metadata-summary.json",
+      "bytes": 401,
+      "sha256": "3006b7d90793fb4c8182e11575bdf3286068edf636d1f43bdb36d32fb5bd4c43"
     },
     {
-      "path": "outputs/expression-summary.json"
+      "path": "outputs/expression-summary.json",
+      "bytes": 415,
+      "sha256": "de7829626c2a978e95e8acd515d8756111172afc290f76b470936f5212732bb6"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 954,
+      "sha256": "0eebb78091cfe8499dced3456e8de3687bebf9855e31e1afa6d08dad09e2766d"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5867,
+      "sha256": "f659503dbed600509baddb5030a4aae4874b28eea0a1744a90c0622e0fd353b9"
+    },
+    {
+      "path": "outputs/analysis-operation-availability.json",
+      "bytes": 1468,
+      "sha256": "44aa9a94aec66df38776395d8f6a4de002e72bb736a6cef6e1afc30bcce3c919"
+    },
+    {
+      "path": "outputs/operation-provenance.json",
+      "bytes": 613,
+      "sha256": "997222d9ddf54cf2d0321ad7c65c38d9cc8dfa47ce3bfdfa066462186537bfd4"
     }
   ],
   "previews": [
     {
-      "path": "previews/spatial-expression.svg"
+      "path": "previews/spatial-expression.svg",
+      "bytes": 1300,
+      "sha256": "ccd162068e9dc791b3c4f145936b728e0f80eebe50b6cc19955791992fa29e90"
     }
   ],
   "sources": [
@@ -29,7 +57,8 @@
   ],
   "observations": [
     "The indexed H5AD exposes 684 observations, 18,078 genes, matrix X, and spatial coordinates.",
-    "Slc17a7 and Gad1 values were read for all indexed observations."
+    "Slc17a7 and Gad1 values were read for all indexed observations.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
   ],
   "interpretation": [
     "The dataset supports reproducible indexed expression queries for the two selected genes."
@@ -37,11 +66,59 @@
   "limitations": [
     "The viewer session did not render a tissue image.",
     "Matrix value scale is unknown.",
-    "No anatomical or diagnostic interpretation is made."
+    "No anatomical or diagnostic interpretation is made.",
+    "The guarded analysis run operation was not callable, so no legitimate same-session task existed for get or cancel.",
+    "The Rosalind operation opened only the task chooser and did not execute a scientific job."
   ],
   "environment": {
-    "viewer_status": "awaiting_viewer",
-    "source_status": "metadata_loaded",
+    "viewer_session_recorded": true,
+    "source_authorization_observed": true,
     "viewer_rendered": false
-  }
+  },
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Slide Viewer and local Python",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "licensed H5AD index inspection and complete 684-observation Slc17a7/Gad1 descriptive statistics, with a callable-analysis operation comparison and separately preserved Rosalind task-chooser evidence",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1",
+        "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/source-provenance.json",
+        "outputs/metadata-summary.json",
+        "outputs/expression-summary.json",
+        "outputs/analysis-operation-availability.json",
+        "outputs/operation-provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/spatial-expression.svg"
+      ],
+      "note": "The public source and retained computation support the expression summary. The operation-availability record explains why no get or cancel call was legitimate without publishing internal session or source handles. The Rosalind observation remains separate."
+    }
+  ],
+  "reproduction": [
+    "Verify the H5AD identity and 684 by 18,078 matrix description against outputs/source-provenance.json and outputs/metadata-summary.json.",
+    "Recalculate the Slc17a7 and Gad1 nonzero counts, means, and maxima over all indexed observations and compare them with outputs/expression-summary.json.",
+    "Read outputs/analysis-operation-availability.json before discussing analysis-task status; do not call get or cancel without an authentic same-session analysis task.",
+    "Invoke mcp__rosalind__rosalind_open with the retained case-specific task_context and compare its response with outputs/rosalind-open-observation.json."
+  ]
 }

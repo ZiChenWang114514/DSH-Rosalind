@@ -1,0 +1,124 @@
+{
+  "id": "rosalind-cross-tool-export",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "scientific-computing",
+  "case_type": "export",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 standard library",
+      "retained evidence from the GB1, PD-L1 assay, Boltz-2, and workflow-definition cases",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "deterministic RO-Crate 1.1 directory and fixed-timestamp ZIP built from 16 existing case-specific evidence artifacts",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 10945
+    },
+    {
+      "path": "inputs/ro-crate-specification.md",
+      "bytes": 809
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/ro-crate/README.md",
+      "bytes": 815
+    },
+    {
+      "path": "outputs/ro-crate/artifact-inventory.csv",
+      "bytes": 2274
+    },
+    {
+      "path": "outputs/ro-crate/ro-crate-metadata.json",
+      "bytes": 9815
+    },
+    {
+      "path": "outputs/ro-crate/validation.json",
+      "bytes": 385
+    },
+    {
+      "path": "outputs/rosalind-evidence-ro-crate.zip",
+      "bytes": 17274
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 755
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6362
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2332
+    }
+  ],
+  "sources": [
+    "https://www.researchobject.org/ro-crate/1.1/",
+    "https://github.com/ResearchObject/ro-crate"
+  ],
+  "observations": [
+    "The RO-Crate inventory contains 16 selected artifacts from four source cases.",
+    "Validation reports zero missing files and zero content-size mismatches across 18 file entities.",
+    "The deterministic ZIP contains 20 members in lexicographic order with fixed timestamps.",
+    "A genuine Rosalind launcher call returned ready=true but did not copy files, build the RO-Crate, create the ZIP, or validate the export."
+  ],
+  "interpretation": [
+    "The export makes heterogeneous source observations, computations, predictions, plans, and provenance easier to inspect and transfer.",
+    "Evidence classifications preserve the recorded scientific status of every included artifact."
+  ],
+  "limitations": [
+    "Packaging does not increase the scientific strength of source evidence.",
+    "Large Boltz structure coordinates and the complete ProteinGym archive are represented through provenance rather than copied.",
+    "External source URLs can change after the recorded access date.",
+    "RO-Crate structural validation does not establish biological correctness."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.researchobject.org/ro-crate/1.1/"
+      ],
+      "inputs": [
+        "inputs/ro-crate-specification.md"
+      ],
+      "outputs": [
+        "outputs/ro-crate/ro-crate-metadata.json",
+        "outputs/ro-crate/artifact-inventory.csv",
+        "outputs/ro-crate/validation.json",
+        "outputs/rosalind-evidence-ro-crate.zip",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The builder copies only existing selected artifacts, records their source paths and evidence classes, validates file presence and declared size, and writes a fixed-order archive. The Rosalind observation records chooser readiness only."
+    }
+  ],
+  "reproduction": [
+    "Verify the four source case directories and run python build_case.py.",
+    "Inspect the inventory, JSON-LD metadata, validation report, and package guide.",
+    "Extract the ZIP into an empty directory and compare its member list with the RO-Crate directory."
+  ],
+  "environment": {
+    "format": "RO-Crate 1.1",
+    "archive_order": "lexicographic",
+    "archive_timestamp": "1980-01-01T00:00:00"
+  }
+}

@@ -60,7 +60,7 @@ describe("ScienceSidebarBrowser", () => {
     fireEvent.click(screen.getByRole("tab", { name: "Science" }));
     expect(screen.getAllByRole("listitem")).toHaveLength(7);
     expect(screen.getAllByText("v0.1.5 · Declared")).toHaveLength(2);
-    expect(screen.getByLabelText("Life Sciences Literature details")).toHaveTextContent("Tools0Skills3Showcases3");
+    expect(screen.getByLabelText("Life Sciences Literature details")).toHaveTextContent("Tools0Skills3Showcases6");
     expect(screen.getByText("DSH Settings → Rosalind")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "New research task" }));
     expect(input.startSession).toHaveBeenCalledTimes(1);

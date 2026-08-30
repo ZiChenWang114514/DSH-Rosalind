@@ -1,0 +1,128 @@
+{
+  "id": "sequence-motif-search",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "sequence-viewer.sequence_open_from_chat",
+    "sequence-viewer.sequence_control_viewer",
+    "sequence-viewer.sequence_query_viewer",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3 standard-library regular expressions",
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json",
+      "Historical completed Sequence Viewer calls recovered from source task archived-sequence-viewer-task"
+    ],
+    "device": "local",
+    "implementation": "verified local exact-coordinate G....GKS scan, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 630,
+      "sha256": "238bb36252949c9e96cffe20d3d531959e0ad2f039e8da9374175add5358ca23"
+    },
+    {
+      "path": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+      "bytes": 786,
+      "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/motif-hits.csv",
+      "bytes": 262,
+      "sha256": "6c31395ed269f15d060089e7bf9aa6a133b2beaf0aa702c32bcf800c5880e6b1"
+    },
+    {
+      "path": "outputs/motif-search.json",
+      "bytes": 1920,
+      "sha256": "4647db10059ad1b2a64da20ce9f4fd4af07a28da107c678091be3194bd9444de"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 989,
+      "sha256": "cab480d8f50ee502a25b05d019a4bd2c308a668f7840acddc9df79842478b1f7"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 626,
+      "sha256": "658f2473eeaa3aea22a3680a916f77df30cced784d70461e285f940274962c9e"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2303,
+      "sha256": "b25e1ea7360752b91a54c452a517c4641193e247ad6df5829f4529739f0a9185"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "observations": [
+    "The case-sensitive G....GKS query finds one GAGGVGKS hit at residues 10-17 in each retained RAS record.",
+    "All three hits also occupy alignment columns 10-17.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "The short segment is exactly conserved in the three retained reviewed human RAS sequences."
+  ],
+  "limitations": [
+    "Four wildcard positions permit chance matches, and a match alone does not establish function or structure.",
+    "rosalind_open did not execute a scientific job and did not produce the motif hits.",
+    "The 2026-08-30 retry was not query-confirmed; historical completed calls and current retry outcomes are recorded separately."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "UniProtKB P01116, P01111, and P01112 official FASTA endpoints"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "build_case.py"
+      ],
+      "outputs": [
+        "outputs/motif-hits.csv",
+        "outputs/motif-search.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local regex scan produces the scientific result; the separate Rosalind observation preserves the genuine task-chooser response and states that no scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run python showcases/biological-sequence-viewer/cases/sequence-motif-search/build_case.py.",
+    "Confirm the CSV has exactly three data rows and that every coordinate interval is 10-17.",
+    "Record any later Viewer job as a separate execution rather than changing this local result.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_status": "rehearsed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

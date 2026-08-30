@@ -1,0 +1,8 @@
+{
+  "schema": "public-expression-source/v1",
+  "geo_accession": "GSE52778",
+  "entry_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778",
+  "processed_result_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE52nnn/GSE52778/suppl/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz",
+  "retrieved_at_utc": "2026-08-29T18:20:00Z",
+  "comparison": "Dex versus Untreated processed gene-level Cuffdiff table supplied by the study authors"
+}

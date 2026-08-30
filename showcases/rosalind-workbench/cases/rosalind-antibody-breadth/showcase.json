@@ -1,0 +1,106 @@
+{
+  "id": "rosalind-antibody-breadth",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "protein-and-antibody-design",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "UniProt public source sufficiency review",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "case-specific review of whether the retained UniProt source supports conservation claims plus a genuine Rosalind task-chooser observation; no sequence or antibody analysis was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 575
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 1213
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 962
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 971
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5644
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1093
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
+  "observations": [
+    "The retained UniProt source does not name a target accession or sequence version.",
+    "No variant set, alignment, residue mapping, antibody record, or breadth measurement is retained, so no conserved target residue can be identified reproducibly.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed."
+  ],
+  "interpretation": [
+    "The case demonstrates that residue-level conservation and antibody-breadth claims require explicit targets, versions, comparison methods, and supporting measurements."
+  ],
+  "limitations": [
+    "No target protein, pathogen, antibody, or variant set is identified.",
+    "No sequence analysis or experimental breadth assessment was performed.",
+    "Rosalind launcher readiness does not establish a scientific run or an antibody result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained source supports an evidence-sufficiency review only; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Read README.md, prompt.md, and inputs/public-source.md.",
+    "Confirm that the retained source lacks the identifiers and artifacts required for a residue-conservation claim.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat launcher readiness as scientific execution.",
+    "Use outputs/session-bundle.md to inspect every retained artifact and the preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_launcher_observed": true,
+    "scientific_job_executed_by_rosalind": false
+  }
+}

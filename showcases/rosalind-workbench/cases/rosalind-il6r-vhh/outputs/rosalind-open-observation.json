@@ -1,0 +1,17 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-il6r-vhh",
+  "started_at_utc": "2026-08-29T18:23:14.117Z",
+  "observed_at_utc": "2026-08-29T18:23:14.139Z",
+  "observed_at_local": "2026-08-30T02:23:14.139+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Open the Rosalind task chooser for the rosalind-il6r-vhh teaching case about public UniProt P08887 extracellular-domain provenance; do not create or alter sequences or start any scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "launcher_schema": "life-sciences.launcher/v1",
+  "launcher_view": "launcher",
+  "limitation": "The call opened only the task chooser; it did not retrieve or alter the P08887 sequence, generate a VHH, predict a complex, rank candidates, or execute any scientific job."
+}

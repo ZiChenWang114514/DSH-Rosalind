@@ -1,0 +1,233 @@
+{
+  "showcase_id": "structure-heme-contacts",
+  "source": {
+    "pdb_id": "1MBN",
+    "download_url": "https://files.rcsb.org/download/1MBN.pdb",
+    "coordinate_file": "inputs/1MBN.pdb",
+    "experiment": "X-ray diffraction",
+    "reported_resolution_angstrom": 2.0
+  },
+  "selection": {
+    "model": 1,
+    "heme": {
+      "record": "HETATM",
+      "component_id": "HEM",
+      "author_chain": "A",
+      "author_residue_number": 155
+    },
+    "protein_partner": {
+      "record": "ATOM",
+      "author_chain": "A"
+    },
+    "atom_filter": "non-hydrogen atoms with positive occupancy; blank or A alternate location",
+    "contact_cutoff_angstrom": 4.0
+  },
+  "contact_shell": {
+    "residue_count": 15,
+    "residues": [
+      {
+        "author_chain": "A",
+        "author_residue_number": 93,
+        "insertion_code": null,
+        "residue_name": "HIS",
+        "closest_distance_angstrom": 2.191,
+        "protein_atom": "NE2",
+        "protein_atom_serial": 740,
+        "heme_atom": "FE",
+        "heme_atom_serial": 1261
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 97,
+        "insertion_code": null,
+        "residue_name": "HIS",
+        "closest_distance_angstrom": 2.759,
+        "protein_atom": "NE2",
+        "protein_atom_serial": 771,
+        "heme_atom": "O1A",
+        "heme_atom_serial": 1231
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 43,
+        "insertion_code": null,
+        "residue_name": "PHE",
+        "closest_distance_angstrom": 2.802,
+        "protein_atom": "CE2",
+        "protein_atom_serial": 348,
+        "heme_atom": "CHD",
+        "heme_atom_serial": 1222
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 92,
+        "insertion_code": null,
+        "residue_name": "SER",
+        "closest_distance_angstrom": 3.043,
+        "protein_atom": "OG",
+        "protein_atom_serial": 730,
+        "heme_atom": "O2A",
+        "heme_atom_serial": 1232
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 45,
+        "insertion_code": null,
+        "residue_name": "ARG",
+        "closest_distance_angstrom": 3.048,
+        "protein_atom": "NH2",
+        "protein_atom_serial": 368,
+        "heme_atom": "O2D",
+        "heme_atom_serial": 1256
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 103,
+        "insertion_code": null,
+        "residue_name": "TYR",
+        "closest_distance_angstrom": 3.33,
+        "protein_atom": "CD1",
+        "protein_atom_serial": 819,
+        "heme_atom": "CBC",
+        "heme_atom_serial": 1246
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 89,
+        "insertion_code": null,
+        "residue_name": "LEU",
+        "closest_distance_angstrom": 3.397,
+        "protein_atom": "CD1",
+        "protein_atom_serial": 709,
+        "heme_atom": "CHB",
+        "heme_atom_serial": 1220
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 99,
+        "insertion_code": null,
+        "residue_name": "ILE",
+        "closest_distance_angstrom": 3.536,
+        "protein_atom": "CG1",
+        "protein_atom_serial": 786,
+        "heme_atom": "CAC",
+        "heme_atom_serial": 1245
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 138,
+        "insertion_code": null,
+        "residue_name": "PHE",
+        "closest_distance_angstrom": 3.544,
+        "protein_atom": "CZ",
+        "protein_atom_serial": 1094,
+        "heme_atom": "CAB",
+        "heme_atom_serial": 1238
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 68,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 3.736,
+        "protein_atom": "O",
+        "protein_atom_serial": 548,
+        "heme_atom": "CMB",
+        "heme_atom_serial": 1237
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 39,
+        "insertion_code": null,
+        "residue_name": "THR",
+        "closest_distance_angstrom": 3.813,
+        "protein_atom": "O",
+        "protein_atom_serial": 309,
+        "heme_atom": "CAC",
+        "heme_atom_serial": 1245
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 71,
+        "insertion_code": null,
+        "residue_name": "ALA",
+        "closest_distance_angstrom": 3.828,
+        "protein_atom": "CB",
+        "protein_atom_serial": 571,
+        "heme_atom": "CMB",
+        "heme_atom_serial": 1237
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 107,
+        "insertion_code": null,
+        "residue_name": "ILE",
+        "closest_distance_angstrom": 3.872,
+        "protein_atom": "CG2",
+        "protein_atom_serial": 859,
+        "heme_atom": "CBB",
+        "heme_atom_serial": 1239
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 64,
+        "insertion_code": null,
+        "residue_name": "HIS",
+        "closest_distance_angstrom": 3.903,
+        "protein_atom": "CE1",
+        "protein_atom_serial": 525,
+        "heme_atom": "CHA",
+        "heme_atom_serial": 1219
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 42,
+        "insertion_code": null,
+        "residue_name": "LYS",
+        "closest_distance_angstrom": 3.91,
+        "protein_atom": "O",
+        "protein_atom_serial": 333,
+        "heme_atom": "CMD",
+        "heme_atom_serial": 1251
+      }
+    ]
+  },
+  "iron_geometry": {
+    "fe_atom_serial": 1261,
+    "fe_to_heme_nitrogen_distances_angstrom": {
+      "NA": 2.007,
+      "NB": 1.967,
+      "NC": 2.054,
+      "ND": 2.078
+    },
+    "mean_fe_n_distance_angstrom": 2.026,
+    "fe_offset_from_n4_diagonal_plane_angstrom": 0.241,
+    "plane_definition": "centroid of NA/NB/NC/ND with normal cross(NA\u2192NC, NB\u2192ND)",
+    "non_heme_atoms_within_3_angstrom_of_fe": [
+      {
+        "record": "HETATM",
+        "author_chain": "A",
+        "author_residue_number": 154,
+        "residue_name": "OH",
+        "atom": "O",
+        "atom_serial": 1218,
+        "fe_distance_angstrom": 2.147
+      },
+      {
+        "record": "ATOM",
+        "author_chain": "A",
+        "author_residue_number": 93,
+        "residue_name": "HIS",
+        "atom": "NE2",
+        "atom_serial": 740,
+        "fe_distance_angstrom": 2.191
+      }
+    ]
+  },
+  "interpretation": "The contact list and iron distances describe the deposited coordinate geometry; they do not measure binding energy or redox state.",
+  "limitations": [
+    "The 4.0 \u00c5 contact shell is cutoff-dependent and does not assign chemical bond order.",
+    "The diagonal N4 plane is an explicit geometric construction, not a refinement-derived porphyrin distortion analysis.",
+    "Only model 1 and author chain A are analyzed; crystal packing and dynamics are not sampled."
+  ]
+}

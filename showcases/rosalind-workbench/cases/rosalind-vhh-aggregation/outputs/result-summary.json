@@ -1,0 +1,42 @@
+{
+  "showcase_id": "rosalind-vhh-aggregation",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "Exact public RCSB VHH polymer sequences were retained and transformed into sequence-risk proxy tables."
+  },
+  "method": "exact RCSB polymer sequences; analysis ends at terminal VTVSS; local sequence-only proxies",
+  "observations": [
+    {
+      "label": "nb8 anti-TssK",
+      "predicted_pI": "8.76",
+      "net_charge_pH7_4": "2.25",
+      "max_hydrophobic_9mer": 7,
+      "max_abs_charge_9mer": 3,
+      "cdr3_like_segment": "KAFFRRDYVGYDY"
+    },
+    {
+      "label": "SARS VHH-72",
+      "predicted_pI": "4.69",
+      "net_charge_pH7_4": "-2.74",
+      "max_hydrophobic_9mer": 7,
+      "max_abs_charge_9mer": 4,
+      "cdr3_like_segment": "AAAGLGTVVSEWDYDYDY"
+    },
+    {
+      "label": "EGFR VHH 7D12",
+      "predicted_pI": "7.60",
+      "net_charge_pH7_4": "0.26",
+      "max_hydrophobic_9mer": 8,
+      "max_abs_charge_9mer": 3,
+      "cdr3_like_segment": "AAAAGSAWYGTLYEYDY"
+    }
+  ],
+  "interpretation": "Sequences with stronger local hydrophobic or charge patches can be prioritized for structural inspection and experimental aggregation assays; these proxies do not measure exposure or aggregation.",
+  "limitations": [
+    "No solvent accessibility, three-dimensional patch, formulation, concentration, thermal stress, or aggregation experiment is included.",
+    "The CDR3-like segment is defined only by a conserved C...WGQG sequence pattern and is not an IMGT-numbered CDR assignment.",
+    "Predicted pI and net charge use simplified residue pKa values.",
+    "The three VHHs bind different antigens and are not controlled variants of one scaffold."
+  ]
+}

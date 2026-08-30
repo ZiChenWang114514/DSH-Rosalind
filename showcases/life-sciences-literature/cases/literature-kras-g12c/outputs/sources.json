@@ -1,0 +1,104 @@
+{
+  "schema": "literature.public-api-evidence/v1",
+  "case_id": "literature-kras-g12c",
+  "retrieved_at_utc": "2026-08-29T18:12:32.824696Z",
+  "api_calls": [
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esearch",
+      "params": {
+        "db": "pubmed",
+        "term": "KRAS G12C[Title/Abstract] AND (covalent inhibitor[Title/Abstract] OR covalent inhibition[Title/Abstract])",
+        "retmax": 8,
+        "sort": "relevance"
+      },
+      "retrieved_at_utc": "2026-08-29T18:10:28.580157Z",
+      "returned_pmids": ["37258666", "34953682", "31820981", "39661665", "26739882", "39215000", "35167329", "36099883"]
+    },
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esearch",
+      "params": {
+        "db": "pubmed",
+        "term": "K-Ras(G12C) inhibitors allosterically control GTP affinity[Title]",
+        "retmax": 5
+      },
+      "retrieved_at_utc": "2026-08-29T18:12:21.939553Z",
+      "returned_pmids": ["31219673", "24256730"]
+    },
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esummary",
+      "params": {
+        "db": "pubmed",
+        "id": "24256730,26739882,31820981,39215000"
+      },
+      "retrieved_at_utc": "2026-08-29T18:12:23.735175Z"
+    },
+    {
+      "service": "PMC Article Dataset API",
+      "endpoint": "identifier lookup",
+      "identifiers": ["24256730", "26739882", "31820981", "39215000"],
+      "retrieved_between_utc": ["2026-08-29T18:12:26.454409Z", "2026-08-29T18:12:32.824696Z"]
+    }
+  ],
+  "records": [
+    {
+      "pmid": "24256730",
+      "doi": "10.1038/nature12796",
+      "date": "2013-11-28",
+      "journal": "Nature",
+      "title": "K-Ras(G12C) inhibitors allosterically control GTP affinity and effector interactions.",
+      "project_label": "switch-II-pocket structural starting point",
+      "pmcid": "PMC4274051",
+      "pmc_record_available": true,
+      "pmc_open_access": false,
+      "pmc_manuscript": true,
+      "license_code": "TDM",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/24256730/"
+    },
+    {
+      "pmid": "26739882",
+      "doi": "10.1158/2159-8290.CD-15-1105",
+      "date": "2016-03",
+      "journal": "Cancer Discovery",
+      "title": "Selective Inhibition of Oncogenic KRAS Output with Small Molecules Targeting the Inactive State.",
+      "project_label": "inactive-state mutant-selective covalent pharmacology",
+      "pmcid": null,
+      "pmc_record_available": false,
+      "pmc_open_access": false,
+      "pmc_manuscript": false,
+      "license_code": null,
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/26739882/"
+    },
+    {
+      "pmid": "31820981",
+      "doi": "10.1021/acs.jmedchem.9b01180",
+      "date": "2020-01-09",
+      "journal": "Journal of Medicinal Chemistry",
+      "title": "Discovery of a Covalent Inhibitor of KRAS(G12C) (AMG 510) for the Treatment of Solid Tumors.",
+      "project_label": "clinical-candidate discovery",
+      "pmcid": null,
+      "pmc_record_available": false,
+      "pmc_open_access": false,
+      "pmc_manuscript": false,
+      "license_code": null,
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/31820981/"
+    },
+    {
+      "pmid": "39215000",
+      "doi": "10.1038/s41467-024-51828-2",
+      "date": "2024-08-30",
+      "journal": "Nature Communications",
+      "title": "RAS-ON inhibition overcomes clinical resistance to KRAS G12C-OFF covalent blockade.",
+      "project_label": "resistance and nucleotide-state comparison",
+      "pmcid": "PMC11364849",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "pmc_manuscript": false,
+      "license_code": "CC BY-NC-ND",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/39215000/"
+    }
+  ],
+  "method_note": "Titles, identifiers, dates, journals, DOI values, and PMC status fields are source observations. The project_label values are deterministic teaching classifications derived from the retained titles and PubMed abstracts; they are not article-level quality ratings."
+}

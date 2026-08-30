@@ -1,0 +1,127 @@
+{
+  "id": "rosalind-single-cell-tme",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind-workbench.public-evidence",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "CZ CELLxGENE Discover API via cellxgene-skill and local Python standard library"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus deterministic preparation checks over official treatment-naive TNBC single-cell collection metadata",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 3862,
+      "sha256": "7cd22809d1042426f4655dc5cbc81172a1b5da9e02f60f70ab0afbb065e4fc88"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 936,
+      "sha256": "0033aca607d636809ea403d15682c46f37072b7930e7a2dd93c561b1005da0a2"
+    },
+    {
+      "path": "inputs/cellxgene-collection.json",
+      "bytes": 3291,
+      "sha256": "a24b1b3a5ed346fdae13b34910122ffcbbae606b430713575ddea3ca3b93ca31"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/tme-metadata-summary.json",
+      "bytes": 2785,
+      "sha256": "6be7560b14a3feadeae110291dad30c64dabaa9b8f969e5f7487dc2720bc3d40"
+    },
+    {
+      "path": "outputs/cell-type-inventory.csv",
+      "bytes": 209,
+      "sha256": "0d54b92b8d23f450e47aa9b504833cc0c20e92e7fc59ad1b16a464a7672eaa65"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1130,
+      "sha256": "6f098484e6297a7cbe76c0abc9e12a777e3c8bd0ebb960035261e779f6baa0c3"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 923,
+      "sha256": "d3b901f3c4cd5ad5b4412901835e2b2deaef651652bb5c2d7c3211795d2ddc90"
+    },
+    {
+      "path": "bundle.md",
+      "bytes": 6656,
+      "sha256": "4b721eb501660dcd77eed9b3f975de26fbb17e1eeefacd6789bef76035ded4c2"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2996,
+      "sha256": "c5925b3e3e2c5308f031c06dec29cd434c47a7ff6be44b342fc2e45704f6be4d"
+    }
+  ],
+  "sources": [
+    "https://cellxgene.cziscience.com/collections/ceef2841-5333-46ac-92ef-ccbe0c20fe55"
+  ],
+  "observations": [
+    "The retained de-identified metadata describes 427,823 primary cells and reports an aggregate study-participant count of 101.",
+    "The record names 10x 3-prime v2 and v3 assays, 32,354 features, raw.X, and X_umap.",
+    "Seven broad ontology-backed cell-type labels are retained in the inventory.",
+    "A genuine Rosalind Workbench open call returned the exact task-chooser-ready message."
+  ],
+  "interpretation": [
+    "The cohort and annotation inventory supports a reproducible plan for cell-state exploration while leaving cell-level biological claims to a future matrix analysis."
+  ],
+  "limitations": [
+    "The H5AD asset, expression matrix, and cell-level annotations were not downloaded or analysed.",
+    "Broad labels do not establish cell proportions, states, or interactions.",
+    "The retained aggregate participant count cannot support participant-aware modelling without separately governed grouping data.",
+    "rosalind_open only opened the task chooser and did not run a single-cell analysis."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://cellxgene.cziscience.com/collections/ceef2841-5333-46ac-92ef-ccbe0c20fe55"
+      ],
+      "inputs": [
+        "inputs/cellxgene-collection.json"
+      ],
+      "outputs": [
+        "outputs/tme-metadata-summary.json",
+        "outputs/cell-type-inventory.csv",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The official collection response and local script support the preparation summary; the separate 923-byte Rosalind observation supports launcher readiness only."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-single-cell-tme/build_case.py from the repository root.",
+    "Require the retained collection and dataset versions, 427,823 cells, an aggregate participant count of 101, and all four preparation checks.",
+    "Treat the Rosalind launcher receipt separately from the CELLxGENE metadata evidence.",
+    "Do not associate this metadata-only single-cell case with the pathology and Visium comparison task."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_open": "executed"
+  }
+}

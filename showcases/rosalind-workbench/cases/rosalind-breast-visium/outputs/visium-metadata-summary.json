@@ -1,0 +1,71 @@
+{
+  "schema": "rosalind.visium-metadata-qc/v1",
+  "case_id": "rosalind-breast-visium",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "The de-identified official CELLxGENE collection response was retained and transformed into aggregate Visium QC outputs."
+  },
+  "collection_id": "bfd55632-15e2-4dde-a1b9-02ade511fc4d",
+  "collection_version_id": "7c719419-e45e-41cf-8517-d1bfb9981f30",
+  "collection_name": "Spatial Transcriptomics Reveal Pitfalls and Opportunities for the Detection of Rare High-Plasticity Breast Cancer Subtypes",
+  "doi": "10.1016/j.labinv.2023.100258",
+  "assay": {
+    "label": "Visium Spatial Gene Expression V1",
+    "ontology_term_id": "EFO:0022857"
+  },
+  "dataset_count": 15,
+  "total_spots": 74880,
+  "feature_count_uniform": true,
+  "feature_count": 35477,
+  "all_have_spatial_embedding": true,
+  "full_resolution_images_present": 0,
+  "study_participant_summary": {
+    "participant_count": 11,
+    "dataset_count": 15,
+    "participants_with_multiple_datasets": 3
+  },
+  "groups": {
+    "normal": {
+      "datasets": 4,
+      "spots": 19968,
+      "mean_genes_per_spot_mean": 456.342748,
+      "mean_genes_per_spot_median": 462.976062,
+      "mean_genes_per_spot_range": [
+        226.16226,
+        673.256611
+      ],
+      "cell_type_label_presence_by_dataset": {
+        "B cell": 4,
+        "endothelial cell": 4,
+        "epithelial cell": 4,
+        "fibroblast": 4,
+        "myeloid cell": 4,
+        "perivascular cell": 4,
+        "unknown": 4
+      }
+    },
+    "triple-negative breast carcinoma": {
+      "datasets": 11,
+      "spots": 54912,
+      "mean_genes_per_spot_mean": 2040.472392,
+      "mean_genes_per_spot_median": 1775.067107,
+      "mean_genes_per_spot_range": [
+        855.216947,
+        4132.877404
+      ],
+      "cell_type_label_presence_by_dataset": {
+        "B cell": 7,
+        "T cell": 6,
+        "endothelial cell": 6,
+        "epithelial cell": 10,
+        "fibroblast": 9,
+        "malignant cell": 11,
+        "myeloid cell": 10,
+        "perivascular cell": 5,
+        "unknown": 11
+      }
+    }
+  },
+  "interpretation_scope": "The retained metadata supports study-level QC planning and sample comparison. It does not contain spot coordinates, expression values, image pixels, or region annotations."
+}

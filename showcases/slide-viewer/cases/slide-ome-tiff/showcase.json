@@ -1,0 +1,108 @@
+{
+  "id": "slide-ome-tiff",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "interface",
+  "difficulty": "intermediate",
+  "evidence_level": "interface-observation",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "OME HTTPS",
+      "Python standard-library OME-XML parsing",
+      "tiffinfo 4.7.1",
+      "slide-viewer.slide_open_ome_tiff_series",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "official OME-TIFF integrity check, deterministic C/Z/T topology comparison, recorded source-authorization state, and a separately retained Rosalind task-chooser invocation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 713,
+      "sha256": "a7b37557075460ad090f7d521a8491ff1e38aef05d1d799d7009a9ec5bf51769"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 2351,
+      "sha256": "33867504362730c2278893d05aeac6202bb38804a9f56de8c2d1e834aee63544"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 801,
+      "sha256": "a7a87ec852f79f58a4c3165db2d76b4f835d86d8b8f59d635fc4541b8470e0b2"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 4949,
+      "sha256": "db2a88d7950cd7ac64f99340674afd755c01a43c7b2edd56efcc88db486b9d41"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2148,
+      "sha256": "5551bf6f4302167663a15ec116c523f000fdf3890a34bdb295ff3f0523f51d93"
+    }
+  ],
+  "sources": [
+    "https://downloads.openmicroscopy.org/images/OME-TIFF/2016-06/bioformats-artificial/multi-channel-z-series.ome.tif",
+    "https://downloads.openmicroscopy.org/images/OME-TIFF/2016-06/bioformats-artificial/readme.txt",
+    "https://ome-model.readthedocs.io/en/stable/developers/sample-files.html"
+  ],
+  "observations": [
+    "The exact official file matched its published byte count and retained local SHA-256.",
+    "OME-XML C/Z/T topology and the independent TIFF directory count both equal fifteen planes.",
+    "The source was authorized, while viewer state remained awaiting-viewer with no state revision.",
+    "Rosalind Workbench opened its task chooser for the case-specific context; no scientific job was selected or executed."
+  ],
+  "interpretation": [
+    "The source is appropriate for reproducible plane-topology teaching, while current evidence does not support a visible scene or plane-change claim."
+  ],
+  "limitations": [
+    "The synthetic source contains no biological channel identities.",
+    "No mounted render, layer state, channel adjustment, or Z navigation was observed.",
+    "The Rosalind launcher observation is interface provenance only and supplies no scientific result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://downloads.openmicroscopy.org/images/OME-TIFF/2016-06/bioformats-artificial/multi-channel-z-series.ome.tif",
+        "https://downloads.openmicroscopy.org/images/OME-TIFF/2016-06/bioformats-artificial/readme.txt"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The scientific receipt preserves source, topology, TIFF, and viewer evidence; the separate Rosalind observation preserves only the task-chooser invocation."
+    }
+  ],
+  "reproduction": [
+    "Acquire and hash the single exact official sample.",
+    "Compare embedded OME-XML plane topology with the independent TIFF directory count.",
+    "Call rosalind_open with the retained case context and record the chooser response separately.",
+    "Open the explicit member and continue only from a returned mounted state revision."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0",
+    "device": "local"
+  }
+}

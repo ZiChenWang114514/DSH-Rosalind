@@ -1,0 +1,4 @@
+sequence_id,label,pdb_id,raw_polymer_length,analyzed_vhh_length,excluded_c_terminal_residues,predicted_pI,net_charge_pH7_4,hydrophobic_fraction,max_hydrophobic_residues_in_9mer,top_hydrophobic_9mer_start,top_hydrophobic_9mer,max_abs_charge_in_9mer,top_charge_9mer_start,top_charge_9mer,cdr3_like_segment,cdr3_like_length,cdr3_like_hydrophobic_fraction
+5M2W_VHH,nb8 anti-TssK,5M2W,125,119,6,8.76,2.25,0.403,7,28,ISGIVVMAW,3,37,YRQAPGKQR,KAFFRRDYVGYDY,13,0.538
+6WAQ_VHH,SARS VHH-72,6WAQ,127,125,2,4.69,-2.74,0.392,7,91,TAVYYCAAA,4,105,VSEWDYDYD,AAAGLGTVVSEWDYDYDY,18,0.556
+4KRL_VHH,EGFR VHH 7D12,4KRL,133,124,9,7.60,0.26,0.355,8,92,AIYYCAAAA,3,64,VKGRFTISR,AAAAGSAWYGTLYEYDY,17,0.647

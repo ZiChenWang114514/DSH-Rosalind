@@ -1,0 +1,3 @@
+# ROI geometry and calibrated measurement
+
+Using the pinned CC0 CMU-1 source metadata, inspect a deterministic ROI example in base-level slide pixels and verify its area and perimeter in pixels and calibrated physical units. Keep local calculations separate from Slide Viewer actions that were not executed, and do not infer tissue morphology or source-image export permission. Inspect `outputs/rosalind-open-observation.json` as the exact record of the genuine case-specific `mcp__rosalind__rosalind_open` call; it opened only the task chooser and did not perform any ROI, measurement, image-export, or scientific operation.

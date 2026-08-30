@@ -3,30 +3,56 @@
   "plugin_id": "ngs-analysis-workbench",
   "plugin_version": "0.2.16",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
   "prompt": "prompt.md",
   "inputs": [],
   "outputs": [
     {
-      "path": "outputs/workflow-evidence.json"
+      "path": "outputs/workflow-evidence.json",
+      "bytes": 1264
     },
     {
-      "path": "outputs/analysis-plan.md"
+      "path": "outputs/analysis-plan.md",
+      "bytes": 617
     },
     {
-      "path": "outputs/readiness-review.md"
+      "path": "outputs/readiness-review.md",
+      "bytes": 584
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 711
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 753
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5882
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 2482
     }
   ],
   "previews": [
     {
-      "path": "previews/ngs-bulk-rnaseq.svg"
+      "path": "previews/ngs-bulk-rnaseq.svg",
+      "bytes": 1035
     }
   ],
-  "sources": [],
+  "sources": [
+    "https://nf-co.re/",
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
   "observations": [
     "Workflow oai_bulk_rnaseq_counts_qc has one active bundled version.",
     "No workflow run is registered.",
-    "Neither inspected compute target was runnable at observation time."
+    "Neither inspected compute target was runnable at observation time.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
   ],
   "interpretation": [
     "The case is useful as a reproducible design and readiness demonstration; scientific results remain unavailable."
@@ -34,10 +60,61 @@
   "limitations": [
     "No input data were fetched.",
     "No workflow was executed.",
-    "No QC or biological conclusion can be drawn."
+    "No QC, differential-expression, or biological conclusion can be drawn.",
+    "Rosalind launcher readiness does not demonstrate RNA quantification, contrast testing, or scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
   ],
   "environment": {
-    "runtime_snapshot": "runtime-166d443587f54d58bcd4121cbf1584a7",
+    "runtime_snapshot": "sanitized-runtime-snapshot",
     "execution_performed": false
-  }
+  },
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_workflows",
+    "ngs-analysis-workbench.check_nextflow_readiness",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_workflows",
+      "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://nf-co.re/",
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/workflow-evidence.json",
+        "outputs/analysis-plan.md",
+        "outputs/readiness-review.md",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/ngs-bulk-rnaseq.svg"
+      ],
+      "note": "Workbench supplied the workflow and runtime observations; the scientific plan is model-authored; Rosalind supplied only the retained task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Inspect every retained input, output, preview, and cited public source.",
+    "Review outputs/workflow-evidence.json, outputs/analysis-plan.md, and outputs/readiness-review.md without inferring unavailable expression results.",
+    "Call mcp__rosalind__rosalind_open with the task_context retained in outputs/rosalind-open-observation.json and compare the exact response.",
+    "For ngs-bulk-rnaseq, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ]
 }

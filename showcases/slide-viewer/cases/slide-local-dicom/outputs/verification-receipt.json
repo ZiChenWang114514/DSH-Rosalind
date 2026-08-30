@@ -1,0 +1,45 @@
+{
+  "showcase_id": "slide-local-dicom",
+  "check_date": "2026-08-30",
+  "source": {
+    "dataset": "erikgabr/wsi-testdata",
+    "dataset_revision": "8fd723261c7afb81f74e619e9ee0c855f87b2ffc",
+    "series": "CMU-1-JP2K-33005",
+    "license": "CC0-1.0",
+    "description": "Conversion of CMU-1-JP2K-33005.svs, DICOM WSI, TILED_FULL, JPEG 2000",
+    "upstream_status": "The current OpenSlide index marks the referenced older ZIP conversion deprecated because its Photometric Interpretation is incorrect."
+  },
+  "acquisition": {
+    "method": "six explicit HTTPS member downloads; no directory discovery",
+    "member_count": 6,
+    "total_bytes": 136926512,
+    "verified_members": 6,
+    "members": [
+      {"name": "DCM_0.dcm", "bytes": 121877050, "sha256": "db096bd0ddbd1d61962c03a8c0de9a1f305dc2f8523a7f48b94f22ff4b641d0a"},
+      {"name": "DCM_1.dcm", "bytes": 2259838, "sha256": "7c6e2e114255cfbea9451aaad1ab88b19fbad4b5302538198e536d01b0cc15a2"},
+      {"name": "DCM_2.dcm", "bytes": 9947106, "sha256": "4c0b00f5d3c147ed6b570751bd41a8b9ca57687aeefb4c7d08dc54a4a8789bdc"},
+      {"name": "DCM_3.dcm", "bytes": 628916, "sha256": "178f190f7fcfe8627f357876d0b253d191068175f6980f077151f35a4726a655"},
+      {"name": "DCM_4.dcm", "bytes": 548012, "sha256": "9020583673ad0b77e2b45091c83ec45cba4625a23e2c5ecdb0db769031de70a3"},
+      {"name": "DCM_5.dcm", "bytes": 1665590, "sha256": "1f49b277fb9cf1e989a03bdf11b325e241c91025612259b49ec54d1ff1f98212"}
+    ]
+  },
+  "slide_viewer": {
+    "operation": "mcp__slide_viewer__slide_open_dicom_series",
+    "ordered_member_count": 6,
+    "result": "rejected",
+    "message": "DICOM source slice thickness must be positive when present.",
+    "viewer_session_id": null,
+    "viewer_state": "not-created",
+    "render_evidence": false,
+    "authorization_renewal": "not applicable because no source session was created"
+  },
+  "calculation": {
+    "algorithm": "sum the six published and locally verified member byte counts",
+    "result_bytes": 136926512
+  },
+  "interpretation": "The fixed source is useful for integrity and parser-rejection testing. It does not demonstrate a mounted DICOM pyramid.",
+  "limitations": [
+    "The exact designed source is an older conversion now marked deprecated upstream.",
+    "A failed source-open request provides no viewer state, rendered frame, navigation result, or tissue observation."
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "sequence-edit-copy",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "verified local single-residue P01116 G12C copy transformation, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 478,
+      "sha256": "ed1ab706dbb8c5379fa5667fd51d96b32feb794aa93b841eb305c407a99d5fb4"
+    },
+    {
+      "path": "inputs/P01116-KRAS-SV1.fasta",
+      "bytes": 263,
+      "sha256": "01e8df1eed3ec9d4f006bf790298e3c7f23c47b530e1c835782df76261dfbcd9"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/before-after.csv",
+      "bytes": 48,
+      "sha256": "95a2de15ec21babf43e701079899cdc4448b1d6899bdc8a6efa5e40bfafd2f4e"
+    },
+    {
+      "path": "outputs/P01116-G12C-copy.fasta",
+      "bytes": 273,
+      "sha256": "15fe19ee9829a93551b092a2466ce8121ccf7b25e2abd072e8a98a21e544c260"
+    },
+    {
+      "path": "outputs/edit-checks.json",
+      "bytes": 1435,
+      "sha256": "c2dab4a86bb4cf3b0e680e69134bed02bc77cd6281c3ecff6405aa2b53d1c3df"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 864,
+      "sha256": "619b0d7aea364378bc05a38bc2950c5c2c09cb71f8cd5fdb04f4664a4e704e3f"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 619,
+      "sha256": "ed23df990f616d2313c8d89678ca63481ec02e54df62f82ecc5ad8a47697480a"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2050,
+      "sha256": "da6c1a3a0de7b8b50a3310b5011b3aaf9f1929fb07d8d89f4926b8d1995d7df3"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+  ],
+  "observations": [
+    "The reviewed P01116 sequence version 1 protein is 189 residues long and has glycine at residue 12.",
+    "The derived copy is also 189 residues and differs only by G12C.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "The retained checks demonstrate a one-residue copy transformation while preserving the standalone source FASTA."
+  ],
+  "limitations": [
+    "The protein copy specifies no nucleotide codon, construct, biochemical effect, or clinical interpretation.",
+    "rosalind_open did not execute a scientific job and did not create or export the G12C copy.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "UniProtKB P01116 official FASTA endpoint"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/P01116-KRAS-SV1.fasta",
+        "build_case.py"
+      ],
+      "outputs": [
+        "outputs/before-after.csv",
+        "outputs/P01116-G12C-copy.fasta",
+        "outputs/edit-checks.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local script produces and verifies the copy; the separate Rosalind observation preserves the genuine task-chooser response and states that no scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run python showcases/biological-sequence-viewer/cases/sequence-edit-copy/build_case.py.",
+    "Confirm outputs/edit-checks.json reports unchanged_during_edit true, difference_count 1, and length_preserved true.",
+    "Treat any later Viewer edit or export as a separate execution.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_status": "rehearsed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

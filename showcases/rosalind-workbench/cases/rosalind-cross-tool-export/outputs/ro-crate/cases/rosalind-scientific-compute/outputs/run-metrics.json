@@ -1,0 +1,11 @@
+{
+  "command": "python build_case.py --archive <ProteinGym_v1.3 archive>",
+  "python": "3.14.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "wall_seconds": 0.03334090000134893,
+  "variant_count": 500,
+  "embedding_rows": 500,
+  "embedding_dimensions": 80,
+  "exit_status": 0,
+  "note": "Wall time describes this local run and is hardware dependent."
+}

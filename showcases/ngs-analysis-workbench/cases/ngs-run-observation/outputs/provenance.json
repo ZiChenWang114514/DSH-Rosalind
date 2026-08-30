@@ -1,0 +1,17 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "ngs-run-observation",
+  "workbench_observations": [
+    "outputs/run-history-receipt.json records genuine list_ngs_runs and list_ngs_run_lineages responses."
+  ],
+  "local_computations": [
+    "outputs/local-run-timeline.jsonl records a case-local Python process timeline.",
+    "outputs/observed-metrics.json compares the local terminal event with retained local QC metrics."
+  ],
+  "rosalind_observation": "outputs/rosalind-open-observation.json",
+  "scientific_job_executed_by_rosalind": false,
+  "limitations": [
+    "Workbench history was empty, so no durable run identity, parent-child relation, or engine observation exists.",
+    "The local timeline remains a reference computation and is not converted into Workbench history."
+  ]
+}

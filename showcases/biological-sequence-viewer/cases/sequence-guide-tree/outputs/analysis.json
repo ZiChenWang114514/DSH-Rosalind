@@ -1,0 +1,48 @@
+{
+  "showcase_id": "sequence-guide-tree",
+  "source_alignment": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+  "source_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "row_order": [
+    "P01116",
+    "P01111",
+    "P01112"
+  ],
+  "alignment_columns": 191,
+  "distance_method": "uncorrected p-distance",
+  "column_policy": "exclude only columns where both compared rows contain gaps; count residue-gap as different",
+  "pairs": [
+    {
+      "row_a": "P01116",
+      "row_b": "P01111",
+      "compared_columns": 190,
+      "different_columns": 25,
+      "p_distance": 0.13157894736842105
+    },
+    {
+      "row_a": "P01116",
+      "row_b": "P01112",
+      "compared_columns": 190,
+      "different_columns": 26,
+      "p_distance": 0.1368421052631579
+    },
+    {
+      "row_a": "P01111",
+      "row_b": "P01112",
+      "compared_columns": 190,
+      "different_columns": 30,
+      "p_distance": 0.15789473684210525
+    }
+  ],
+  "tree": {
+    "algorithm": "neighbor joining for three taxa",
+    "newick": "('P01116':0.027632,('P01111':0.076316,'P01112':0.081579):0.027632);",
+    "display_root": "midpoint of the P01116 limb; chosen only to draw the unrooted three-leaf result",
+    "support_values": "not computed"
+  },
+  "execution": {
+    "status": "verified local computation",
+    "tool": "Python 3 standard library",
+    "viewer_operations": "rehearsed; no viewer session was opened for this case"
+  },
+  "warning": "This three-sequence guide tree is exploratory and is not a publication-grade phylogeny."
+}

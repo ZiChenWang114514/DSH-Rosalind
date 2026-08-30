@@ -1,0 +1,17 @@
+{
+  "schema": "gpt-science.ngs-operation-receipt/v1",
+  "case_id": "ngs-run-summary",
+  "operation": "ngs-analysis-workbench.update_ngs_run_analysis_summary",
+  "started_at_utc": "2026-08-29T18:59:18.377Z",
+  "finished_at_utc": "2026-08-29T18:59:23.209Z",
+  "arguments": {
+    "registry_run_id": "verification-temp-no-run-20260830",
+    "summary_path": "showcases/ngs-analysis-workbench/cases/ngs-run-summary/outputs/analysis-summary.md"
+  },
+  "response_error": "run does not exist: verification-temp-no-run-20260830",
+  "operation_succeeded": false,
+  "summary_saved": false,
+  "existing_run_modified": false,
+  "scientific_context": "The submitted file is an evidence-linked review of a two-record local FASTQ parser fixture, not a workflow result.",
+  "limitation": "No registered temporary run existed, so Workbench rejected the submission and no run history was changed."
+}

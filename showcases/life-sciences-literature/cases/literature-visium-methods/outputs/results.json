@@ -1,0 +1,46 @@
+{
+  "schema": "literature.deterministic-summary/v1",
+  "case_id": "literature-visium-methods",
+  "source_retrieved_at_utc": "2026-08-29T18:11:49.756270Z",
+  "selection_rule": "Use the five exact method names in the recorded PubMed title query, then classify each title into a complementary workflow role.",
+  "record_count": 5,
+  "pmc_record_count": 5,
+  "pmc_open_access_count": 3,
+  "license_class_counts": {
+    "CC BY": 3,
+    "TDM": 2
+  },
+  "workflow_roles": [
+    {
+      "pmid": "34083791",
+      "method": "Spatial transcriptomics at subspot resolution with BayesSpace",
+      "role": "region-aware clustering and subspot resolution",
+      "pmc_status": "PMC manuscript or TDM record"
+    },
+    {
+      "pmid": "35102346",
+      "method": "Squidpy: a scalable framework for spatial omics analysis",
+      "role": "spatial graph and neighborhood analysis framework",
+      "pmc_status": "open access"
+    },
+    {
+      "pmid": "35482478",
+      "method": "SpatialExperiment: infrastructure for spatially-resolved transcriptomics data in R using Bioconductor",
+      "role": "data container and interoperability infrastructure",
+      "pmc_status": "open access"
+    },
+    {
+      "pmid": "35624112",
+      "method": "SpotClean adjusts for spot swapping in spatial transcriptomics data",
+      "role": "spot-swapping correction",
+      "pmc_status": "open access"
+    },
+    {
+      "pmid": "35927477",
+      "method": "Sprod for de-noising spatially resolved transcriptomics data based on position and image information",
+      "role": "position- and image-aware denoising",
+      "pmc_status": "PMC manuscript or TDM record"
+    }
+  ],
+  "interpretation": "The selected papers form a complementary methods set spanning data infrastructure, artifact correction, denoising, spatial analysis, and region-aware inference. No single record is treated as a complete Visium workflow."
+}

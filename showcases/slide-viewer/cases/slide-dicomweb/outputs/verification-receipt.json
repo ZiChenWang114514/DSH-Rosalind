@@ -1,0 +1,62 @@
+{
+  "showcase_id": "slide-dicomweb",
+  "check_date": "2026-08-30",
+  "public_manifest": {
+    "idc_data_version": "v24",
+    "collection_id": "hcmi_cmdc",
+    "modality": "SM",
+    "series_description": "FFPE HE T",
+    "license": "CC BY 4.0",
+    "declared_instance_count": 3,
+    "declared_series_size_mb": 3.831
+  },
+  "selection": {
+    "study_instance_uid": "2.25.326831351899246997718579660054873448065",
+    "series_instance_uid": "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.4.0",
+    "sop_instance_uids": [
+      "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0",
+      "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.17.0",
+      "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.24.0"
+    ]
+  },
+  "direct_https_checks": {
+    "qido": {"http_status": 200, "instances": 3, "bytes": 2319, "sha256": "fc86c2d71f4af611d1856256d5c514f6e567285a724bf84ca189f3d82adceed0"},
+    "metadata": [
+      {"sop_instance_uid": "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.10.0", "frames": 12, "bytes": 14707, "sha256": "2b2f3a05d44361045cfbcd8a006255c54937b4b66f412d4d034c12a7f15f7feb", "etag": null, "matrix": [853, 693], "tile": [256, 256], "photometric_interpretation": "RGB", "transfer_syntax_uid": "1.2.840.10008.1.2.4.50"},
+      {"sop_instance_uid": "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.17.0", "frames": 1, "bytes": 14704, "sha256": "40508485dac058051430769ee5c5e255c03d12892f998c67aa2fdd6ad7705ee3", "etag": null, "matrix": [853, 693], "tile": [853, 693], "photometric_interpretation": "RGB", "transfer_syntax_uid": "1.2.840.10008.1.2.1"},
+      {"sop_instance_uid": "1.3.6.1.4.1.5962.99.1.3052275118.437477262.1772578833838.24.0", "frames": 1, "bytes": 14384, "sha256": "e882d82bbc97ac9965e3357b44ada89372390e17ead12e21357cbffa7dc9566e", "etag": null, "matrix": [853, 693], "tile": [853, 693], "photometric_interpretation": "RGB", "transfer_syntax_uid": "1.2.840.10008.1.2.1"}
+    ],
+    "frames": {
+      "http_200": 14,
+      "pinned": 14,
+      "total_payload_bytes": 3791810,
+      "etags_present": 0,
+      "representations": [
+        {"count": 12, "media_type": "image/jpeg", "transfer_syntax_uid": "1.2.840.10008.1.2.4.50"},
+        {"count": 2, "media_type": "application/octet-stream", "transfer_syntax_uid": "1.2.840.10008.1.2.1"}
+      ],
+      "complete_pin_file": "dicomweb-representation-manifest.json"
+    }
+  },
+  "slide_viewer_checks": [
+    {"operation": "mcp__slide_viewer__slide_query_dicomweb", "result": "rejected", "message": "The public scientific server did not honor the required bounded object request."},
+    {"operation": "mcp__slide_viewer__slide_inspect_dicomweb_instance", "result": "rejected", "message": "The public scientific object changed after its version was pinned."},
+    {"operation": "mcp__slide_viewer__slide_open_dicomweb_wsi", "result": "rejected", "message": "Local DICOM WSI currently opens VOLUME instances only; this adapter does not yet register LABEL, OVERVIEW, or THUMBNAIL instances as pyramid levels."},
+    {"operation": "mcp__slide_viewer__slide_read_dicomweb_object", "result": "not called", "reason": "The selected objects are SM image instances; the operation is for supported ANN, SR, SEG, or PMAP objects."}
+  ],
+  "viewer_session_id": null,
+  "render_evidence": false,
+  "calculation": {
+    "algorithm": "count selected metadata resources and every declared frame, then sum decoded multipart payload sizes",
+    "metadata_resources": 3,
+    "frame_resources": 14,
+    "total_resources": 17,
+    "frame_payload_bytes": 3791810
+  },
+  "interpretation": "The public responses can be pinned deterministically, but the current three-object selection cannot be opened as a viewer pyramid by this adapter.",
+  "limitations": [
+    "A caller-created SHA manifest establishes delivery identity for this check, not publisher authenticity.",
+    "HTTP 200 and complete frame pins do not establish a mounted or rendered image.",
+    "The live public service may change after the recorded check."
+  ]
+}

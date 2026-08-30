@@ -1,0 +1,19 @@
+{
+  "schema": "gpt-science.source-verification/v1",
+  "showcase_id": "rosalind-egfr-vhh",
+  "question": "Which public EGFR structural features support a compact VHH design exercise?",
+  "source": "https://www.rcsb.org/structure/4KRL",
+  "checked_at_utc": "2026-08-29T18:23:14.117Z",
+  "verification_kind": "PDB 4KRL case-specific record summary",
+  "observations": [
+    "RCSB PDB identifies 4KRL as an X-ray structure of nanobody/VHH 7D12 in complex with domain III of the human EGFR extracellular region.",
+    "The record reports 2.85 angstrom resolution and a heterodimeric biological assembly containing one VHH chain and one EGFR chain.",
+    "The retained source is an existing experimental complex; this case contains no new VHH sequence, design calculation, docking result, or candidate ranking."
+  ],
+  "interpretation": "PDB 4KRL supports a source-grounded lesson on an observed EGFR–VHH binding pose and the distinction between experimental structural evidence and future design work.",
+  "limitations": [
+    "The case does not recompute contacts or validate residue-level interface claims.",
+    "The public structure alone does not establish the performance of any new VHH candidate.",
+    "Rosalind launcher readiness is documented separately and does not establish a scientific run."
+  ]
+}

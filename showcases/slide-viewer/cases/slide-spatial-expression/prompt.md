@@ -1,3 +1,3 @@
 # Prompt
 
-Open the licensed public mouse-brain spatial H5AD, verify its indexed matrix and coordinates, and summarize Slc17a7 and Gad1 values without inferring morphology that was not rendered.
+Open the licensed public mouse-brain spatial H5AD, verify its indexed matrix and coordinates, and summarize Slc17a7 and Gad1 values without inferring morphology that was not rendered. Inspect `outputs/analysis-operation-availability.json`, `outputs/operation-provenance.json`, and `outputs/teaching-bundle.md`; explain that the run operation was not callable, so no legitimate analysis task existed for get or cancel. Do not fabricate or borrow a workflow identifier. Inspect `outputs/rosalind-open-observation.json` separately and state that its task-chooser response confirms only Workbench readiness.

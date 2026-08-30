@@ -1,0 +1,62 @@
+{
+  "schema": "slide-viewer.scientific-layer-cancellation-evidence/v1",
+  "case_id": "slide-scientific-layers",
+  "session_alias": "temporary-session-a",
+  "temporary_import": {
+    "operation": "slide_import_scientific_layer",
+    "started_at_utc": "2026-08-29T18:59:21.616Z",
+    "completed_at_utc": "2026-08-29T18:59:24.654Z",
+    "arguments": {
+      "kind": "geojson",
+      "format": "geojson",
+      "entityKind": "annotation",
+      "coordinateUnits": "pixel",
+      "path": "showcases/slide-viewer/cases/slide-segmentation-overlay/outputs/source-aligned-annotations.geojson",
+      "mapping": {
+        "id": {"kind": "property", "name": "observation_id"},
+        "label": "feature_type"
+      },
+      "idempotencyKey": "gpt-science-temp-layer-cancel-20260830-v2"
+    },
+    "response": {
+      "jobAlias": "temporary-geojson-import",
+      "status": "running",
+      "progress": {"phase": "authorizing", "bytesRead": 0, "totalBytes": 0, "entities": 0},
+      "source": null,
+      "error": null
+    }
+  },
+  "cancellation": {
+    "operation": "slide_cancel_scientific_layer_import",
+    "started_at_utc": "2026-08-29T18:59:29.895Z",
+    "completed_at_utc": "2026-08-29T18:59:31.761Z",
+    "arguments": {
+      "sessionAlias": "temporary-session-a",
+      "jobAlias": "temporary-geojson-import"
+    },
+    "response": {
+      "status": "error",
+      "code": "UNAVAILABLE",
+      "message": "The scientific layer source, private workspace write authority, or supported index runtime is unavailable."
+    },
+    "outcome": "cancellation-not-confirmed"
+  },
+  "follow_up": {
+    "operation": "slide_get_scientific_layer_import",
+    "started_at_utc": "2026-08-29T18:59:36.145Z",
+    "completed_at_utc": "2026-08-29T18:59:36.176Z",
+    "response": {
+      "status": "error",
+      "code": "UNAVAILABLE",
+      "message": "This scientific layer's read authorization was revoked. A fresh guarded renewal must verify both sources before cached data can be read."
+    }
+  },
+  "interpretation": "The operation was genuinely requested only for the temporary three-feature demonstration GeoJSON. The plugin did not return a settled cancellation receipt, so no completed cancellation or published layer is claimed.",
+  "authorization_limitations": [
+    "The temporary import had not published a source descriptor when cancellation was requested.",
+    "The follow-up reported revoked read authorization; cached data could not be inspected.",
+    "Standalone coordinate geometry does not prove alignment with a tissue image.",
+    "No source-image capture consent or export permission was present."
+  ],
+  "path_recording": "The GeoJSON path is retained relative to the authorized workspace."
+}

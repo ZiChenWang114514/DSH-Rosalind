@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Adenylate-kinase molecular storyboard</title>
+  <desc id="desc">Four case-local scenes based on RCSB 4AKE and 1AKE, with local C-alpha fit, exact JSON restoration, and mounted-viewer reversible object history.</desc>
+  <rect width="1200" height="675" fill="#07141b"/>
+  <text x="60" y="68" fill="#effcf8" font-family="Segoe UI,Arial" font-size="34" font-weight="700">Adenylate kinase · four-scene storyboard</text>
+  <text x="60" y="105" fill="#8eb8b2" font-family="Segoe UI,Arial" font-size="18">Pinned RCSB coordinates · case-local scenes · mounted object history verified</text>
+  <g font-family="Segoe UI,Arial">
+    <g transform="translate(55 145)">
+      <rect width="255" height="270" rx="18" fill="#102832" stroke="#25505a"/>
+      <text x="22" y="38" fill="#d8f3ef" font-size="19" font-weight="700">01 · OPEN</text>
+      <path d="M48 162 C56 80,145 62,196 111 C236 150,204 222,134 226 C74 229,42 204,48 162Z" fill="none" stroke="#22b8a7" stroke-width="22" stroke-linecap="round"/>
+      <text x="22" y="247" fill="#8eb8b2" font-size="15">4AKE · identity</text>
+    </g>
+    <g transform="translate(330 145)">
+      <rect width="255" height="270" rx="18" fill="#102832" stroke="#25505a"/>
+      <text x="22" y="38" fill="#f7ddfa" font-size="19" font-weight="700">02 · AP5-BOUND</text>
+      <path d="M58 169 C65 101,130 81,185 113 C228 139,217 199,164 218 C109 238,55 216,58 169Z" fill="none" stroke="#d96adf" stroke-width="22" stroke-linecap="round"/>
+      <circle cx="139" cy="166" r="10" fill="#f6b73c"/>
+      <text x="22" y="247" fill="#8eb8b2" font-size="15">1AKE · AP5 highlighted</text>
+    </g>
+    <g transform="translate(605 145)">
+      <rect width="255" height="270" rx="18" fill="#102832" stroke="#25505a"/>
+      <text x="22" y="38" fill="#eaf3f5" font-size="19" font-weight="700">03 · SIDE-BY-SIDE</text>
+      <path d="M31 164 C35 112,88 98,116 130 C139 157,117 205,73 208 C40 210,28 190,31 164Z" fill="none" stroke="#22b8a7" stroke-width="15"/>
+      <path d="M142 168 C146 122,190 109,221 133 C245 153,233 197,199 208 C164 220,140 198,142 168Z" fill="none" stroke="#d96adf" stroke-width="15"/>
+      <text x="22" y="247" fill="#8eb8b2" font-size="15">+70 Å visual translation</text>
+    </g>
+    <g transform="translate(880 145)">
+      <rect width="255" height="270" rx="18" fill="#102832" stroke="#25505a"/>
+      <text x="22" y="38" fill="#eaf3f5" font-size="19" font-weight="700">04 · LOCAL FIT</text>
+      <path d="M48 162 C56 80,145 62,196 111 C236 150,204 222,134 226 C74 229,42 204,48 162Z" fill="none" stroke="#22b8a7" stroke-width="18" opacity=".82"/>
+      <path d="M63 164 C70 100,136 80,188 112 C228 139,217 199,164 217 C110 235,61 212,63 164Z" fill="none" stroke="#d96adf" stroke-width="18" opacity=".78"/>
+      <text x="22" y="247" fill="#8eb8b2" font-size="15">214 Cα · Kabsch overlay</text>
+    </g>
+  </g>
+  <g transform="translate(60 455)" font-family="Segoe UI,Arial">
+    <rect width="1075" height="150" rx="20" fill="#0d222b" stroke="#244854"/>
+    <text x="28" y="40" fill="#8eb8b2" font-size="16">LOCAL Cα RMSD</text><text x="28" y="86" fill="#ffffff" font-size="34" font-weight="700">7.131 Å</text>
+    <line x1="230" y1="24" x2="230" y2="125" stroke="#244854"/>
+    <text x="270" y="40" fill="#8eb8b2" font-size="16">CORE→LID CENTROID</text><text x="270" y="86" fill="#ffffff" font-size="27">30.806 → 20.978 Å</text>
+    <line x1="650" y1="24" x2="650" y2="125" stroke="#244854"/>
+    <text x="690" y="40" fill="#8eb8b2" font-size="16">LOCAL RESTORE CHECKS</text><text x="690" y="86" fill="#7ff0cf" font-size="27" font-weight="700">2 / 2 exact</text>
+    <text x="690" y="116" fill="#6f9795" font-size="14">Viewer undo · redo · visibility receipts verified</text>
+  </g>
+</svg>

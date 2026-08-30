@@ -1,0 +1,104 @@
+{
+  "id": "rosalind-variant-pathway",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind-workbench.public-evidence",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "public ClinVar, Ensembl, and Reactome records",
+      "local deterministic identifier-path validation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "allele-specific rs7903146 C>T identifier path assembled from retained public records; genuine Rosalind launcher observation recorded separately",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 1572
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 2556
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 738
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6303
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2404
+    }
+  ],
+  "sources": [
+    "https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/",
+    "https://rest.ensembl.org/variation/homo_sapiens/rs7903146",
+    "https://reactome.org/content/detail/R-HSA-201923",
+    "https://reactome.org/content/detail/R-HSA-201722"
+  ],
+  "observations": [
+    "ClinVar Variation 7413 identifies the selected rs7903146 C>T allele as an intronic TCF7L2 record; the distinct C>G record is excluded.",
+    "The local calculation retains four nodes and three source-backed links from the selected allele to TCF7L2 and Reactome pathway R-HSA-201722.",
+    "A genuine Rosalind launcher call returned ready=true but performed no variant retrieval, classification, or pathway calculation."
+  ],
+  "interpretation": [
+    "The identifier path supports a cautious connection from the selected allele to curated TCF7L2 pathway records; it does not establish a variant mechanism or clinical causality."
+  ],
+  "limitations": [
+    "Public records may change after the recorded access date.",
+    "No tissue-specific regulation, expression, chromatin, perturbation, phenotype, or clinical evidence is analyzed.",
+    "Rosalind launcher readiness is independent of the public evidence and local identifier-path calculation."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/",
+        "https://rest.ensembl.org/variation/homo_sapiens/rs7903146",
+        "https://reactome.org/content/detail/R-HSA-201923",
+        "https://reactome.org/content/detail/R-HSA-201722"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The source note and receipt preserve the allele-specific identifiers and three sourced links. The Rosalind observation records only chooser readiness and did not produce the scientific path."
+    }
+  ],
+  "reproduction": [
+    "Read the case guide and public evidence note, keeping the C>T and C>G alleles separate.",
+    "Verify the four nodes, three sourced links, and exclusion check in outputs/verification-receipt.json.",
+    "Inspect the Rosalind launcher observation separately from the scientific evidence and preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local Windows workstation"
+  }
+}

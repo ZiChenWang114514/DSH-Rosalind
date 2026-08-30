@@ -1,0 +1,106 @@
+{
+  "id": "rosalind-egfr-vhh",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "protein-and-antibody-design",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "RCSB PDB public record inspection",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "case-specific review of the published PDB 4KRL EGFR-7D12 complex plus a genuine Rosalind task-chooser observation; no design or coordinate analysis was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 490
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 1309
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 945
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 896
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5317
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1052
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/4KRL",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
+  "observations": [
+    "RCSB PDB 4KRL records a 2.85 angstrom X-ray structure of nanobody/VHH 7D12 bound to domain III of the human EGFR extracellular region.",
+    "The retained package contains no newly generated VHH sequence, docking pose, optimization, or ranking.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed."
+  ],
+  "interpretation": [
+    "The existing 4KRL experimental complex supports an evidence-led lesson about an observed EGFR-VHH pose and the requirements for any later design study."
+  ],
+  "limitations": [
+    "No residue-contact computation or coordinate validation was performed.",
+    "No sequence was created, altered, optimized, or ranked.",
+    "Rosalind launcher readiness does not establish a scientific run or a new EGFR-VHH result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/4KRL",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The PDB record supports the structural source summary; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Read README.md, prompt.md, and inputs/public-source.md.",
+    "Compare the current RCSB PDB 4KRL record with outputs/verification-receipt.json.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat launcher readiness as scientific execution.",
+    "Use outputs/session-bundle.md to inspect every retained artifact and the preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_launcher_observed": true,
+    "scientific_job_executed_by_rosalind": false
+  }
+}

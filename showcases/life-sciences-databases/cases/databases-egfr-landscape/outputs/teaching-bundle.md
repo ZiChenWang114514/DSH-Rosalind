@@ -1,0 +1,93 @@
+# Codex showcase lesson: EGFR structure and pharmacology landscape
+
+## Session prompt
+
+Use $showcase-teacher to import and teach the ready showcase `databases-egfr-landscape` (EGFR structure and pharmacology landscape). Inspect its README, manifest, prompt, inputs, outputs, previews, and provenance records. Clearly distinguish source observations, computed results, scientific interpretation, and limitations, and show the preview when useful.
+
+## Catalogue record
+
+- Showcase ID: `databases-egfr-landscape`
+- Plugin: `life-sciences-databases` (Life Sciences Databases v0.1.5)
+- Status: `ready`
+- Domain: `public-data-integration`
+- Case type: `analysis`
+- Difficulty: `intermediate`
+- Evidence level: `multi-tool-result`
+- Covered operations: `rosalind.rosalind_open`
+- Rosalind tasks: none recorded
+- Actual tools: `Life Sciences Databases public API evidence and identifier-preserving JSON aggregation`, `Rosalind Workbench mcp__rosalind__rosalind_open`
+- Summary: Connect EGFR structure, pathway, ligand, and pharmacology records.
+- Recorded next step: Open the case README to present the EGFR protein-to-drug knowledge map.
+- Plugin guide: `showcases/life-sciences-databases/README.md`
+
+## Repository files to inspect
+
+- case guide: `showcases/life-sciences-databases/cases/databases-egfr-landscape/README.md`
+- case manifest: `showcases/life-sciences-databases/cases/databases-egfr-landscape/showcase.json`
+- teaching prompt: `showcases/life-sciences-databases/cases/databases-egfr-landscape/prompt.md`
+- output: `showcases/life-sciences-databases/cases/databases-egfr-landscape/outputs/results.json`
+- output: `showcases/life-sciences-databases/cases/databases-egfr-landscape/outputs/sources.json`
+- output: `showcases/life-sciences-databases/cases/databases-egfr-landscape/outputs/provenance.json`
+- output: `showcases/life-sciences-databases/cases/databases-egfr-landscape/outputs/query-verification.json`
+- output: `showcases/life-sciences-databases/cases/databases-egfr-landscape/outputs/rosalind-open-observation.json`
+- output: `showcases/life-sciences-databases/cases/databases-egfr-landscape/outputs/teaching-bundle.md`
+- preview: `showcases/life-sciences-databases/cases/databases-egfr-landscape/previews/egfr-landscape.svg`
+
+## Public sources
+
+- https://www.uniprot.org/uniprotkb/P00533/entry
+- https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203
+- https://www.rcsb.org/structure/1M17
+- https://reactome.org/content/detail/R-HSA-177929
+
+## Retained case guide
+
+# EGFR structure and pharmacology landscape
+
+This ready showcase connects a reviewed human protein, a curated drug target, three named inhibitors, a ligand-bound kinase structure, and an EGFR signaling pathway.
+
+![EGFR knowledge landscape](../previews/egfr-landscape.svg)
+
+## Scientific question
+
+How can public life-science databases be connected into a compact, identifier-preserving map of EGFR biology, structure, and pharmacology?
+
+## Source observations
+
+- UniProt P00533 is the reviewed human EGFR entry; the retrieved record was entry version 300.
+- ChEMBL target CHEMBL203 is the human epidermal growth factor receptor. All ten returned records in the requested mechanism slice had inhibitor action; eight reported maximum phase 4.
+- ChEMBL identifies gefitinib (CHEMBL939), erlotinib (CHEMBL553), and osimertinib (CHEMBL3353410) as phase-4 compounds.
+- RCSB PDB 1M17 is a 2.60 Å X-ray structure of the EGFR tyrosine kinase domain with erlotinib.
+- Reactome R-HSA-177929 is *Signaling by EGFR*.
+
+## Reproduce
+
+1. Run the prompt in `prompt.md` with Life Sciences Databases 0.1.5.
+2. Retrieve UniProt P00533 and ChEMBL target CHEMBL203.
+3. Request a ten-record ChEMBL mechanism slice and the three selected compound records.
+4. Retrieve RCSB core metadata for 1M17 and verify the official structure record.
+5. Query Reactome by P00533; if the API is unavailable, record that outcome and verify the official pathway page separately.
+
+## Interpretation
+
+The stable identifiers form a useful navigation map: P00533 names the protein, CHEMBL203 connects pharmacology, 1M17 supplies a structure-level example, and R-HSA-177929 supplies pathway context. This map helps GPT present related records together, while the chosen compounds remain examples rather than a complete EGFR drug inventory.
+
+## Rosalind Workbench observation
+
+The genuine `mcp__rosalind__rosalind_open` call at `2026-08-29T18:14:05.222Z` returned `Rosalind Workbench is ready. Choose a research task in the app.` with `ready=true`. The exact arguments and both timestamps are retained in `outputs/rosalind-open-observation.json`.
+
+This operation opened the task chooser only. It did not retrieve EGFR records or compare inhibitors; `outputs/results.json`, `outputs/sources.json`, and `outputs/provenance.json` carry the scientific evidence and accession history.
+
+## Limitations
+
+- The compound set is illustrative and not a complete EGFR inhibitor inventory.
+- A Reactome API request failed; the pathway identifier was checked against the official record page.
+- Record linkage does not compare efficacy, safety, or clinical use.
+
+## Retained execution prompt
+
+Use Life Sciences Databases to connect the reviewed human EGFR protein record, the ChEMBL target and three named inhibitors, one ligand-bound EGFR kinase structure, and a Reactome signaling pathway. Preserve identifier relationships and distinguish database observations from mechanistic interpretation. Inspect `outputs/provenance.json` for the exact accessions and query slice. Cite `outputs/rosalind-open-observation.json` as the record of a genuine `mcp__rosalind__rosalind_open` call, and state that the chooser response did not retrieve or compare EGFR records.
+
+## Teaching note
+
+Use this bundle to locate the evidence. Read the listed repository artifacts before presenting scientific claims, and keep observations, calculations, interpretation, and limitations distinct.

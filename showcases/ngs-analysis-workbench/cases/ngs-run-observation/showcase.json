@@ -1,0 +1,134 @@
+{
+  "id": "ngs-run-observation",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_ngs_runs",
+    "ngs-analysis-workbench.list_ngs_run_lineages",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_ngs_runs",
+      "mcp__ngs_analysis_workbench__list_ngs_run_lineages",
+      "Python 3.14 local JSONL state timeline",
+      "Python 3.14 QC output inspection",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 323,
+      "sha256": "2bb7f1c50b7d9201ef8d8ef54c26556681be19713dbdfc3f2bede78fa5d4710d"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/local-run-timeline.jsonl",
+      "bytes": 424,
+      "sha256": "c2d6bad9117bc886cc2dcc5725064312f2e5dd26aa5749969554ff6e8e175454"
+    },
+    {
+      "path": "outputs/observed-metrics.json",
+      "bytes": 709,
+      "sha256": "f300640d8bf5ba123ce5221fef77b85f07259f496147768f35772312c17b0c4a"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 761,
+      "sha256": "12e7a767e2a5669dc59f31b86fe4f6100d687d0c1a71480a6b1fe08e8564984b"
+    },
+    {
+      "path": "outputs/run-history-receipt.json",
+      "bytes": 1171
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 808
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 7378,
+      "sha256": "5bca06ed60c7e52b5dfded8f6c61d38443039d8e140fba5c6cc2eaabd2798ff3"
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 2427
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2206,
+      "sha256": "40cffce48b7ba148b50fab1504180bfc1d065a95e1629b5f7efc73c6c4041de8"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "The retained event order is prepared, running, completed.",
+    "The terminal event has exit code 0 and matches 24 records, 11,304 bases, and Q30 96.788747% in the QC summary.",
+    "No Workbench registry run ID exists for these local events.",
+    "list_ngs_runs and list_ngs_run_lineages both returned ok true with empty run lists.",
+    "rosalind.rosalind_open returned ready true with view launcher for this case-specific context.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The successful empty-history queries establish the absence of a durable Workbench run, while the local state timeline separately supports only the local reference computation."
+  ],
+  "limitations": [
+    "The history operations returned no run identities, so get_ngs_run and observe_ngs_run could not be applied to this verification.",
+    "Timeline duration is not a performance benchmark.",
+    "Process completion does not establish run-wide data quality or downstream suitability.",
+    "rosalind_open only opened the task chooser and does not establish Rosalind scientific execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/local-run-timeline.jsonl",
+        "outputs/observed-metrics.json",
+        "outputs/run-history-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Workbench supplied the empty durable-history responses; local Python supplied the timeline and metric comparison; Rosalind supplied only the retained task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Run build_cases.py to recreate the timeline.",
+    "Read JSONL events in order and verify the terminal event.",
+    "Compare terminal metrics with the execution case's summary and CSV tables.",
+    "Call list_ngs_runs and list_ngs_run_lineages with limit 20 and compare their exact responses with outputs/run-history-receipt.json.",
+    "For ngs-run-observation, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local Windows amd64"
+  }
+}

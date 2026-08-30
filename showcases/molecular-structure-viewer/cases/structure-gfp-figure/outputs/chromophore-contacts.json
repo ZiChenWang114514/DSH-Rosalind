@@ -1,0 +1,256 @@
+{
+  "schema": "structure-gfp-figure.chromophore-contacts/v1",
+  "case_id": "structure-gfp-figure",
+  "source": {
+    "path": "inputs/1EMA.pdb",
+    "bytes": 190188,
+    "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088",
+    "accession": "1EMA",
+    "url": "https://files.rcsb.org/download/1EMA.pdb",
+    "method": "X-ray diffraction",
+    "reported_resolution_angstrom": 1.9,
+    "matches_render_source_digest": true
+  },
+  "selection": {
+    "model": 1,
+    "chromophore": {
+      "component_id": "CRO",
+      "author_chain": "A",
+      "author_residue_number": 66,
+      "heavy_atom_count": 22
+    },
+    "protein_partner": {
+      "record": "ATOM",
+      "author_chain": "A"
+    },
+    "atom_filter": "non-hydrogen atoms with positive occupancy; blank or A alternate location",
+    "contact_cutoff_angstrom": 4.0
+  },
+  "result": {
+    "protein_residue_count": 18,
+    "protein_chromophore_atom_pair_count": 107,
+    "residues": [
+      {
+        "author_chain": "A",
+        "author_residue_number": 64,
+        "insertion_code": null,
+        "residue_name": "PHE",
+        "closest_distance_angstrom": 1.332,
+        "protein_atom": "C",
+        "protein_atom_serial": 457,
+        "chromophore_atom": "N1",
+        "chromophore_atom_serial": 466,
+        "atom_pairs_within_cutoff": 18
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 68,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 1.332,
+        "protein_atom": "N",
+        "protein_atom_serial": 488,
+        "chromophore_atom": "C3",
+        "chromophore_atom_serial": 478,
+        "atom_pairs_within_cutoff": 17
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 203,
+        "insertion_code": null,
+        "residue_name": "THR",
+        "closest_distance_angstrom": 2.666,
+        "protein_atom": "OG1",
+        "protein_atom_serial": 1574,
+        "chromophore_atom": "OH",
+        "chromophore_atom_serial": 487,
+        "atom_pairs_within_cutoff": 7
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 96,
+        "insertion_code": null,
+        "residue_name": "ARG",
+        "closest_distance_angstrom": 2.73,
+        "protein_atom": "NH2",
+        "protein_atom_serial": 738,
+        "chromophore_atom": "O2",
+        "chromophore_atom_serial": 475,
+        "atom_pairs_within_cutoff": 6
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 61,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 2.778,
+        "protein_atom": "O",
+        "protein_atom_serial": 437,
+        "chromophore_atom": "N1",
+        "chromophore_atom_serial": 466,
+        "atom_pairs_within_cutoff": 7
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 62,
+        "insertion_code": null,
+        "residue_name": "THR",
+        "closest_distance_angstrom": 2.795,
+        "protein_atom": "O",
+        "protein_atom_serial": 444,
+        "chromophore_atom": "C2",
+        "chromophore_atom_serial": 474,
+        "atom_pairs_within_cutoff": 19
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 222,
+        "insertion_code": null,
+        "residue_name": "GLU",
+        "closest_distance_angstrom": 2.813,
+        "protein_atom": "OE1",
+        "protein_atom_serial": 1723,
+        "chromophore_atom": "OG1",
+        "chromophore_atom_serial": 470,
+        "atom_pairs_within_cutoff": 8
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 148,
+        "insertion_code": null,
+        "residue_name": "HIS",
+        "closest_distance_angstrom": 2.85,
+        "protein_atom": "ND1",
+        "protein_atom_serial": 1150,
+        "chromophore_atom": "OH",
+        "chromophore_atom_serial": 487,
+        "atom_pairs_within_cutoff": 4
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 94,
+        "insertion_code": null,
+        "residue_name": "GLN",
+        "closest_distance_angstrom": 3.028,
+        "protein_atom": "NE2",
+        "protein_atom_serial": 718,
+        "chromophore_atom": "O2",
+        "chromophore_atom_serial": 475,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 69,
+        "insertion_code": null,
+        "residue_name": "GLN",
+        "closest_distance_angstrom": 3.334,
+        "protein_atom": "CD",
+        "protein_atom_serial": 501,
+        "chromophore_atom": "O2",
+        "chromophore_atom_serial": 475,
+        "atom_pairs_within_cutoff": 6
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 63,
+        "insertion_code": null,
+        "residue_name": "THR",
+        "closest_distance_angstrom": 3.335,
+        "protein_atom": "C",
+        "protein_atom_serial": 450,
+        "chromophore_atom": "N1",
+        "chromophore_atom_serial": 466,
+        "atom_pairs_within_cutoff": 3
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 145,
+        "insertion_code": null,
+        "residue_name": "TYR",
+        "closest_distance_angstrom": 3.596,
+        "protein_atom": "CE2",
+        "protein_atom_serial": 1127,
+        "chromophore_atom": "OH",
+        "chromophore_atom_serial": 487,
+        "atom_pairs_within_cutoff": 1
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 220,
+        "insertion_code": null,
+        "residue_name": "LEU",
+        "closest_distance_angstrom": 3.723,
+        "protein_atom": "CD2",
+        "protein_atom_serial": 1707,
+        "chromophore_atom": "CG1",
+        "chromophore_atom_serial": 469,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 165,
+        "insertion_code": null,
+        "residue_name": "PHE",
+        "closest_distance_angstrom": 3.743,
+        "protein_atom": "CE2",
+        "protein_atom_serial": 1274,
+        "chromophore_atom": "CD2",
+        "chromophore_atom_serial": 483,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 150,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 3.792,
+        "protein_atom": "CG2",
+        "protein_atom_serial": 1168,
+        "chromophore_atom": "CD2",
+        "chromophore_atom_serial": 483,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 121,
+        "insertion_code": null,
+        "residue_name": "ASN",
+        "closest_distance_angstrom": 3.829,
+        "protein_atom": "ND2",
+        "protein_atom_serial": 940,
+        "chromophore_atom": "O3",
+        "chromophore_atom_serial": 479,
+        "atom_pairs_within_cutoff": 1
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 167,
+        "insertion_code": null,
+        "residue_name": "ILE",
+        "closest_distance_angstrom": 3.926,
+        "protein_atom": "CD1",
+        "protein_atom_serial": 1292,
+        "chromophore_atom": "CE2",
+        "chromophore_atom_serial": 485,
+        "atom_pairs_within_cutoff": 1
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 112,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 3.972,
+        "protein_atom": "CG1",
+        "protein_atom_serial": 868,
+        "chromophore_atom": "O3",
+        "chromophore_atom_serial": 479,
+        "atom_pairs_within_cutoff": 1
+      }
+    ]
+  },
+  "interpretation": "The rows report deposited closest-heavy-atom distances, not bond energies or affinities.",
+  "limitations": [
+    "PHE A:64 and VAL A:68 are covalently linked to CRO and must not be described as ordinary noncovalent contacts.",
+    "The result uses one deposited coordinate model and does not represent coordinate uncertainty or dynamics."
+  ]
+}

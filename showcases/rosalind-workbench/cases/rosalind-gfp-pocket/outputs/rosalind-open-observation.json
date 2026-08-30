@@ -1,0 +1,17 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-gfp-pocket",
+  "started_at_utc": "2026-08-29T18:23:14.185Z",
+  "observed_at_utc": "2026-08-29T18:23:14.204Z",
+  "observed_at_local": "2026-08-30T02:23:14.204+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Open the Rosalind task chooser for the rosalind-gfp-pocket teaching case about public PDB 1EMA provenance and chromophore-environment evidence; do not alter sequences or start any scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "launcher_schema": "life-sciences.launcher/v1",
+  "launcher_view": "launcher",
+  "limitation": "The call opened only the task chooser; it did not retrieve coordinates, calculate a pocket, alter a sequence, predict fluorescence, or execute any scientific job."
+}

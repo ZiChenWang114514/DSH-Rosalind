@@ -1,0 +1,15 @@
+field,before,after,expectation,result
+session_id,fixture-session-spatial-01,fixture-session-spatial-01,unchanged,pass
+source.source_id,fixture-source-hne-01,fixture-source-hne-01,unchanged,pass
+source.source_revision,sha256:9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd,sha256:9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd,unchanged,pass
+source.bytes,94259482,94259482,unchanged,pass
+source.lease_label,fixture-source-lease-01,fixture-source-lease-02,changed,pass
+source.expires_at,2026-08-30T01:00:00Z,2026-08-30T02:00:00Z,later,pass
+layer.layer_id,fixture-layer-spots-01,fixture-layer-spots-01,unchanged,pass
+layer.layer_source_revision,sha256:e529e286575eab027726d8e78a53e71b0fdf858723578a0da34b5a0acd4e1ed7,sha256:e529e286575eab027726d8e78a53e71b0fdf858723578a0da34b5a0acd4e1ed7,unchanged,pass
+layer.entity_kind,visium_capture_spot,visium_capture_spot,unchanged,pass
+layer.entity_count,684,684,unchanged,pass
+layer.lease_label,fixture-layer-lease-01,fixture-layer-lease-02,changed,pass
+layer.expires_at,2026-08-30T01:00:00Z,2026-08-30T02:00:00Z,later,pass
+credentials_included,false,false,must_be_false,pass
+viewer_execution,false,false,must_be_false,pass

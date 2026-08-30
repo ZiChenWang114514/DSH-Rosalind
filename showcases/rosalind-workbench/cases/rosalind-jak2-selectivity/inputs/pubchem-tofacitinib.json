@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 9926791,
+        "MolecularFormula": "C16H20N6O",
+        "MolecularWeight": "312.37",
+        "SMILES": "C[C@@H]1CCN(C[C@@H]1N(C)C2=NC=NC3=C2C=CN3)C(=O)CC#N",
+        "ConnectivitySMILES": "CC1CCN(CC1N(C)C2=NC=NC3=C2C=CN3)C(=O)CC#N",
+        "InChIKey": "UJLAWZDWDVHWOW-YPMHNXCESA-N",
+        "XLogP": 1.5,
+        "TPSA": 88.9,
+        "HBondDonorCount": 1,
+        "HBondAcceptorCount": 5,
+        "RotatableBondCount": 3,
+        "Title": "Tofacitinib"
+      }
+    ]
+  }
+}

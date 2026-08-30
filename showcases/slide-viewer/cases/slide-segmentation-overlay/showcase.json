@@ -7,16 +7,89 @@
   "prompt": "prompt.md",
   "inputs": [],
   "outputs": [
-    {"path": "outputs/source-aligned-annotations.geojson", "bytes": 5592, "sha256": "a1e18c90aaa5736ae63da5f2cc2b2c817a025f2699879fc05770dd962885c3a0"},
-    {"path": "outputs/overlay-provenance.json"}
+    {
+      "path": "outputs/source-aligned-annotations.geojson",
+      "bytes": 5592,
+      "sha256": "a1e18c90aaa5736ae63da5f2cc2b2c817a025f2699879fc05770dd962885c3a0"
+    },
+    {
+      "path": "outputs/overlay-provenance.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 899,
+      "sha256": "cd16444d77042942bb5058aeed8e20d1876dce1cade3f26f63a947072ae1b052"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 4331,
+      "sha256": "69dc4ac9fd1a19ad9703daca91da16f07d273369dbdb8a780dfad6690c6221e2"
+    }
   ],
-  "previews": [{"path": "previews/segmentation-overlay.svg"}],
+  "previews": [
+    {
+      "path": "previews/segmentation-overlay.svg"
+    }
+  ],
   "sources": [
     "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
     "https://doi.org/10.6084/m9.figshare.13604177.v1"
   ],
-  "observations": ["Three demonstration polygons were derived from exact obsm/spatial coordinates."],
-  "interpretation": ["The GeoJSON is a reproducible annotation artifact, not a biological segmentation result."],
-  "limitations": ["The overlay was not imported or rendered in the pending viewer session."],
-  "environment": {"viewer_status": "awaiting_viewer", "viewer_rendered": false}
+  "observations": [
+    "Three demonstration polygons were derived from exact obsm/spatial coordinates.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The GeoJSON is a reproducible annotation artifact, not a biological segmentation result."
+  ],
+  "limitations": [
+    "The overlay was not imported or rendered in the pending viewer session.",
+    "The Rosalind operation opened only the task chooser and did not execute an overlay operation or scientific job."
+  ],
+  "environment": {
+    "viewer_session_recorded": true,
+    "viewer_rendered": false
+  },
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Slide Viewer and local Python",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "three 16-segment demonstration polygons constructed from exact H5AD spatial coordinates, with retained source association, coordinate frame, observation identities, and separate Rosalind task-chooser evidence",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/source-aligned-annotations.geojson",
+        "outputs/overlay-provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/segmentation-overlay.svg"
+      ],
+      "note": "The licensed coordinates and retained artifacts support the demonstration geometry. outputs/rosalind-open-observation.json separately records the genuine task-chooser invocation and its limitation."
+    }
+  ],
+  "reproduction": [
+    "Verify the three source observation coordinates and 55-pixel construction radius against outputs/overlay-provenance.json.",
+    "Parse outputs/source-aligned-annotations.geojson and confirm three Polygon features with sixteen-segment circular geometry and retained observation identifiers.",
+    "Confirm that the viewer receipt remains pending and does not claim tissue rendering, biological segmentation, or a visible imported overlay.",
+    "Invoke mcp__rosalind__rosalind_open with the retained case-specific task_context and compare its response with outputs/rosalind-open-observation.json."
+  ]
 }

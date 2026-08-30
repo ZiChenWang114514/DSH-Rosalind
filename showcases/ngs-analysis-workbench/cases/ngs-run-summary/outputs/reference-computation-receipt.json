@@ -1,0 +1,12 @@
+{
+  "schema": "gpt-science.reference-computation/v1",
+  "case_id": "ngs-run-summary",
+  "command": "python scripts/reference_fastq_stats.py inputs/public-fixture.fastq.txt outputs/reference-fastq-stats.json",
+  "exit_code": 0,
+  "input": "inputs/public-fixture.fastq.txt",
+  "output": "outputs/reference-fastq-stats.json",
+  "workbench_run_registered": false,
+  "workbench_summary_submitted": false,
+  "interpretation": "The local computation supplies bounded evidence for the retained model-authored summary; it is not a Workbench engine run.",
+  "limitation": "Two public reads can test parsing and evidence-linked writing but cannot establish library QC or biological findings."
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">1GFL CCP4 map sampling</title><desc id="desc">Atom-sampled public map values for GFP residues 65 through 67.</desc>
+  <defs><radialGradient id="g"><stop offset="0" stop-color="#67e8f9" stop-opacity=".9"/><stop offset="1" stop-color="#0e7490" stop-opacity=".08"/></radialGradient></defs>
+  <rect width="1200" height="675" rx="28" fill="#071522"/>
+  <text x="64" y="70" fill="#fff" font-family="Segoe UI,Arial" font-size="34" font-weight="700">GFP residues 65–67 · public CCP4 map</text>
+  <text x="64" y="106" fill="#94a3b8" font-family="Segoe UI,Arial" font-size="18">RCSB 1GFL coordinates + PDBe 1gfl.ccp4 · trilinear atom sampling</text>
+  <g transform="translate(78 145)"><rect width="530" height="380" rx="22" fill="#0f2334"/><g fill="url(#g)"><circle cx="112" cy="135" r="105"/><circle cx="270" cy="210" r="145"/><circle cx="410" cy="118" r="92"/></g><path d="M90 250 C150 160 205 285 270 205 S390 105 450 210" fill="none" stroke="#f8fafc" stroke-width="13" stroke-linecap="round" opacity=".86"/><g fill="#fbbf24" stroke="#fff" stroke-width="3"><circle cx="145" cy="213" r="15"/><circle cx="273" cy="205" r="15"/><circle cx="394" cy="143" r="15"/></g><g fill="#fff" font-family="Segoe UI,Arial" font-size="16" font-weight="700"><text x="105" y="290">Ser65</text><text x="240" y="285">Tyr66</text><text x="372" y="95">Gly67</text></g></g>
+  <g font-family="Segoe UI,Arial">
+    <rect x="645" y="145" width="485" height="86" rx="16" fill="#172033"/><text x="670" y="178" fill="#99f6e4" font-size="14">SER65 · MEAN / HEADER RMS</text><text x="670" y="216" fill="#fff" font-size="29" font-weight="700">2.951909</text>
+    <rect x="645" y="247" width="485" height="86" rx="16" fill="#172033"/><text x="670" y="280" fill="#99f6e4" font-size="14">TYR66 · MEAN / HEADER RMS</text><text x="670" y="318" fill="#fff" font-size="29" font-weight="700">3.002100</text>
+    <rect x="645" y="349" width="485" height="86" rx="16" fill="#172033"/><text x="670" y="382" fill="#99f6e4" font-size="14">GLY67 · MEAN / HEADER RMS</text><text x="670" y="420" fill="#fff" font-size="29" font-weight="700">3.054613</text>
+    <rect x="645" y="451" width="485" height="74" rx="16" fill="#111827" stroke="#475569"/><text x="670" y="482" fill="#cbd5e1" font-size="14">GRID</text><text x="670" y="510" fill="#fff" font-size="20">96 × 96 × 128 · 1,179,648 voxels</text>
+    <text x="64" y="604" fill="#94a3b8" font-size="15">All 21 selected atoms ≥ 1 header RMS · local descriptive statistic · no Viewer density_fit or render claimed</text>
+  </g>
+</svg>

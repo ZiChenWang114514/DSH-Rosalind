@@ -2,8 +2,8 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
-export const SOURCE_COMMIT = "f81e668c69edbfe7863cc936f2d535b61d8df76b";
-export const SOURCE_REPOSITORY = "ZiChenWang114514/rosalind-science-showcases";
+export const SOURCE_COMMIT = "f8c2ea83ac3b3b9258b160b80039dc3db37d76c4";
+export const SOURCE_REPOSITORY = "reviewed-science-showcase-snapshot";
 
 const PLUGIN_CATEGORIES = Object.freeze({
   "life-sciences-literature": "literature",
@@ -98,6 +98,16 @@ const MIME_TYPES = Object.freeze({
   ".json": "application/json",
   ".geojson": "application/geo+json",
   ".csv": "text/csv",
+  ".tsv": "text/tab-separated-values",
+  ".txt": "text/plain",
+  ".py": "text/x-python",
+  ".nf": "text/x-nextflow",
+  ".sh": "text/x-shellscript",
+  ".fastq": "text/x-fastq",
+  ".diff": "text/x-diff",
+  ".psf": "text/plain",
+  ".jsonl": "application/x-ndjson",
+  ".gff3": "text/x-gff3",
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".pdb": "chemical/x-pdb",
@@ -275,6 +285,11 @@ export async function buildCatalogue(repositoryRoot) {
       await addEntries(manifest.previews, "preview");
       await addEntries(manifest.outputs, "output");
       await addEntries(manifest.dependencies?.artifacts, "input");
+      for (const record of manifest.provenance ?? []) {
+        await addEntries((record.inputs ?? []).map((entry) => typeof entry === "string" ? { path: entry } : entry), "provenance");
+        await addEntries((record.outputs ?? []).map((entry) => typeof entry === "string" ? { path: entry } : entry), "provenance");
+        await addEntries((record.previews ?? []).map((entry) => typeof entry === "string" ? { path: entry } : entry), "provenance");
+      }
 
       const readmePath = `${caseRelativePath}/README.md`;
       const promptPath = `${caseRelativePath}/${manifest.prompt}`;
@@ -317,6 +332,18 @@ export async function buildCatalogue(repositoryRoot) {
         pluginId: manifest.plugin_id,
         pluginVersion: manifest.plugin_version,
         categoryId,
+        domain: manifest.domain,
+        caseType: manifest.case_type,
+        difficulty: manifest.difficulty,
+        evidenceLevel: manifest.evidence_level,
+        capabilities: unique(manifest.capabilities ?? []),
+        rosalindTasks: unique(manifest.rosalind_tasks ?? []),
+        execution: {
+          actualTools: unique(manifest.execution?.actual_tools ?? []),
+          device: manifest.execution?.device ?? "not recorded",
+          implementation: manifest.execution?.implementation ?? "not recorded",
+          status: manifest.execution?.status ?? "not recorded",
+        },
         title: summary.title,
         summary: summary.summary,
         question,
@@ -333,13 +360,14 @@ export async function buildCatalogue(repositoryRoot) {
         limitations,
         claims,
         requiredMcpServers: unique(manifest.dependencies?.required_mcp_servers ?? [requiredService(categoryId)]),
-        requiredOperations: unique(manifest.dependencies?.required_operations ?? REQUIRED_OPERATIONS[manifest.id] ?? []),
+        requiredOperations: unique(manifest.dependencies?.required_operations ?? REQUIRED_OPERATIONS[manifest.id] ?? manifest.capabilities ?? []),
         requiredSkills: unique(manifest.dependencies?.required_skills ?? requiredSkills(manifest, categoryId)),
         fixtures: artifacts.filter((item) => item.role === "input").map((item) => item.id),
         expectedArtifacts: artifacts.filter((item) => ["output", "preview", "provenance"].includes(item.role)).map((item) => item.id),
         scientificAssertions: claims.filter((claim) => claim.kind !== "interpretation"),
         visualAssertions: preview ? [{ id: `${manifest.id}:preview`, artifactId: preview.id, requirement: "The preview opens at its native aspect ratio in light and dark Workbench themes." }] : [],
-        provenance: { sourceCommit: SOURCE_COMMIT, sources, runDate: manifest.run_date },
+        provenance: { sourceCommit: SOURCE_COMMIT, sources, runDate: manifest.run_date, records: manifest.provenance ?? [] },
+        reproductionSteps: unique(manifest.reproduction ?? []),
         recipe: recipeFor(manifest, categoryId, artifacts),
         modes: ["lesson", "replay", "reproduce"],
         searchText: unique([summary.title, summary.summary, question, categoryId, plugin.name, ...(manifest.sources ?? [])]).join(" ").toLowerCase(),
@@ -410,7 +438,7 @@ export function validateFileBuffer(relativePath, buffer) {
   else if (mediaType === "image/svg+xml" && (!/<svg\b/.test(text) || !/<\/svg>/.test(text))) throw new Error(`${relativePath}: malformed SVG`);
   else if (mediaType === "image/png" && !buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) throw new Error(`${relativePath}: invalid PNG signature`);
   else if (mediaType === "chemical/x-pdb" && !/^((ATOM  )|(HETATM))/m.test(text)) throw new Error(`${relativePath}: no PDB atom records`);
-  else if (mediaType === "chemical/x-mmcif" && (!/^data_/m.test(text) || !/_atom_site\./.test(text))) throw new Error(`${relativePath}: missing mmCIF atom table`);
+  else if (mediaType === "chemical/x-mmcif" && (!/^data_/m.test(text) || !/_(?:atom_site|refln)\./.test(text))) throw new Error(`${relativePath}: missing mmCIF atom or reflection table`);
   else if (mediaType === "text/x-fasta") parseFasta(text);
   else if (mediaType === "text/x-genbank" && (!/^LOCUS\s/m.test(text) || !/^ORIGIN\s*$/m.test(text) || !/^\/\/$/m.test(text))) throw new Error(`${relativePath}: malformed GenBank record`);
   else if (mediaType === "text/x-newick") {
@@ -475,10 +503,10 @@ export async function validateShowcases(repositoryRoot) {
   const parsedByType = {};
 
   if (catalog.plugins.length !== 7) errors.push(`Expected 7 plugins, found ${catalog.plugins.length}`);
-  if (definitions.length !== 23) errors.push(`Expected 23 showcases, found ${definitions.length}`);
-  if (definitions.some((item) => item.status !== "ready")) errors.push("All 23 release showcases must be ready");
+  if (definitions.length !== 100) errors.push(`Expected 100 showcases, found ${definitions.length}`);
+  if (definitions.some((item) => item.status !== "ready")) errors.push("All 100 release showcases must be ready");
   if (new Set(definitions.map((item) => item.id)).size !== definitions.length) errors.push("Showcase IDs must be unique");
-  if (files.length !== 151) errors.push(`Expected 151 committed catalogue/case files, found ${files.length}`);
+  if (files.length !== 1224) errors.push(`Expected 1224 committed catalogue/case files, found ${files.length}`);
 
   for (const absolutePath of files) {
     const relativePath = toPosix(path.relative(repositoryRoot, absolutePath));

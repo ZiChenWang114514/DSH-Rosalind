@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Pathology lifecycle rehearsal</title>
+  <desc id="desc">Nine deterministic state-transition checks for cancellation and recovery; no pathology job was started.</desc>
+  <rect width="1200" height="675" fill="#081921"/>
+  <text x="64" y="80" fill="#d5f4f0" font-family="Segoe UI,Arial" font-size="40" font-weight="700">Pathology lifecycle rehearsal</text>
+  <text x="64" y="124" fill="#8fb9b5" font-family="Segoe UI,Arial" font-size="22">OpenSlide CMU-1 source plan · local state checks only</text>
+  <g font-family="Segoe UI,Arial" text-anchor="middle">
+    <rect x="64" y="185" width="220" height="116" rx="16" fill="#143b44" stroke="#4fd1c5"/><text x="174" y="232" fill="#ecfeff" font-size="23">RUNNING</text><text x="174" y="268" fill="#9ad9d2" font-size="18">job identity required</text>
+    <rect x="365" y="185" width="220" height="116" rx="16" fill="#3d3420" stroke="#f3c969"/><text x="475" y="232" fill="#fff8df" font-size="23">CANCEL REQUEST</text><text x="475" y="268" fill="#efd58d" font-size="18">acceptance only</text>
+    <rect x="666" y="185" width="220" height="116" rx="16" fill="#26364b" stroke="#79b8ff"/><text x="776" y="232" fill="#edf6ff" font-size="23">INTERRUPTED</text><text x="776" y="268" fill="#a9cdf4" font-size="18">durable input check</text>
+    <rect x="967" y="185" width="169" height="116" rx="16" fill="#193d32" stroke="#6ee7b7"/><text x="1051" y="232" fill="#ecfdf5" font-size="23">TERMINAL</text><text x="1051" y="268" fill="#a7f3d0" font-size="18">actual result</text>
+    <path d="M284 243 H365 M585 243 H666 M886 243 H967" stroke="#78939a" stroke-width="4"/>
+  </g>
+  <g font-family="Segoe UI,Arial">
+    <rect x="64" y="365" width="325" height="170" rx="18" fill="#102c34"/><text x="94" y="416" fill="#d5f4f0" font-size="42" font-weight="700">9 / 9</text><text x="94" y="456" fill="#9bc5c1" font-size="20">transition checks passed</text><text x="94" y="492" fill="#9bc5c1" font-size="20">5 allowed · 4 rejected</text>
+    <rect x="437" y="365" width="325" height="170" rx="18" fill="#102c34"/><text x="467" y="416" fill="#d5f4f0" font-size="30" font-weight="700">3 current operations</text><text x="467" y="456" fill="#9bc5c1" font-size="20">get · cancel · resume</text><text x="467" y="492" fill="#f8cf7a" font-size="20">all rehearsed</text>
+    <rect x="810" y="365" width="326" height="170" rx="18" fill="#3c2025"/><text x="840" y="416" fill="#ffe4e6" font-size="30" font-weight="700">0 remote jobs</text><text x="840" y="456" fill="#f5b9c0" font-size="20">no viewer · no model output</text><text x="840" y="492" fill="#f5b9c0" font-size="20">start operation unavailable</text>
+  </g>
+  <text x="64" y="592" fill="#f8cf7a" font-family="Segoe UI,Arial" font-size="18">Rosalind launcher observed: ready=true · scientific_job_executed=false</text>
+  <text x="64" y="625" fill="#8fb9b5" font-family="Segoe UI,Arial" font-size="19">Cancellation settles only after workers drain; recovery needs fresh authorization and unchanged saved inputs.</text>
+</svg>

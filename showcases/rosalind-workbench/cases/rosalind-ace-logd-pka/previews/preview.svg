@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">ACE inhibitor ionization and lipophilicity comparison</title>
+<desc id="desc">Data table comparing public and locally computed descriptors for captopril, enalapril, and lisinopril.</desc>
+<style>.title{font:700 38px Segoe UI,Arial;fill:#f8fafc}.sub{font:19px Segoe UI,Arial;fill:#9fb4c8}.head{font:600 17px Segoe UI,Arial;fill:#67e8f9}.name{font:600 20px Segoe UI,Arial;fill:#eef6ff}.num{font:18px Consolas,monospace;fill:#d7e3ef}.pka{font:16px Consolas,monospace;fill:#d7e3ef}.foot{font:16px Segoe UI,Arial;fill:#fbbf24}</style>
+<rect width="1200" height="675" fill="#071726"/><rect x="50" y="45" width="1100" height="585" rx="26" fill="#0b2237" stroke="#164e63"/>
+<text x="78" y="105" class="title">ACE inhibitors: public evidence + local descriptors</text>
+<text x="80" y="145" class="sub">CID-exact records · RDKit 2026.03.5 · no experimental LogD calculation</text>
+<line x1="80" y1="210" x2="1120" y2="210" stroke="#155e75"/>
+<text x="82" y="255" class="head">Compound</text><text x="365" y="255" class="head">MW</text><text x="545" y="255" class="head">PubChem XLogP</text><text x="700" y="255" class="head">RDKit LogP</text><text x="850" y="255" class="head">TPSA</text><text x="970" y="255" class="head">pKa annotations</text>
+<line x1="80" y1="276" x2="1120" y2="276" stroke="#155e75"/><text x="82" y="338" class="name">Captopril</text><text x="365" y="338" class="num">217.29</text><text x="545" y="338" class="num">0.3</text><text x="700" y="338" class="num">0.63</text><text x="850" y="338" class="num">57.61</text><text x="970" y="338" class="pka">3.7; 9.8</text><text x="82" y="420" class="name">Enalapril</text><text x="365" y="420" class="num">376.45</text><text x="545" y="420" class="num">-0.1</text><text x="700" y="420" class="num">1.60</text><text x="850" y="420" class="num">95.94</text><text x="970" y="420" class="pka">3.0; 5.4</text><text x="82" y="502" class="name">Lisinopril</text><text x="365" y="502" class="num">405.50</text><text x="545" y="502" class="num">-2.9</text><text x="700" y="502" class="num">1.24</text><text x="850" y="502" class="num">132.96</text><text x="970" y="502" class="pka">2.5; 4.0; 6.7; 10.1</text>
+<text x="80" y="608" class="foot">Computed descriptors organize hypotheses; they do not establish clinical absorption or measured plasma distribution.</text>
+</svg>

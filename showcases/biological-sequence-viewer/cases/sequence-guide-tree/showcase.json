@@ -1,0 +1,136 @@
+{
+  "id": "sequence-guide-tree",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "sequence-viewer.sequence_open_from_chat",
+    "sequence-viewer.sequence_run_analysis",
+    "sequence-viewer.sequence_query_viewer",
+    "sequence-viewer.sequence_export_artifact",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json",
+      "Historical completed Sequence Viewer calls recovered from source task archived-sequence-viewer-task"
+    ],
+    "device": "local",
+    "implementation": "deterministic local RAS p-distance and exact three-taxon NJ calculation, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 680,
+      "sha256": "067a84c53c2497c0af6da2dca467cae47b506d2dffef1aa243f106c81f1d511d"
+    },
+    {
+      "path": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+      "bytes": 786,
+      "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/pairwise-distances.csv",
+      "bytes": 180,
+      "sha256": "04f81f1a31ade7de73c72af47e18cabb9420dec38daa29a97ee33beb5b5bb229"
+    },
+    {
+      "path": "outputs/analysis.json",
+      "bytes": 1542,
+      "sha256": "7eb170a02872c73884ea580781d1928b451eb441327d2533f264fe4d694ae690"
+    },
+    {
+      "path": "outputs/RAS-exploratory-NJ.nwk",
+      "bytes": 68,
+      "sha256": "2f7aa2bb6a6776863c450b3e6ccbc3bf458843d97a38359f7fac5c0ee58efdb2"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1044,
+      "sha256": "29d3ce7fc300f979b33a3f14e65c4ae7947db27192c9c585e02184acb1566feb"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 626,
+      "sha256": "04048a7557bc1a111a6333ae8f8ab747690d1249a8623e1eaa797487f548b690"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 3190,
+      "sha256": "da5ad0d5d4a4496f7b5920daf69897347107f6a6dc5fee2b6c484dd94938e98d"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "observations": [
+    "The retained alignment contains three reviewed 189-aa RAS records at sequence version 1 and has 191 columns.",
+    "All three pairwise calculations compare 190 columns after excluding only double-gap columns.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "KRAS and NRAS are the closest pair under the documented uncorrected p-distance rule."
+  ],
+  "limitations": [
+    "The three-leaf guide tree has no substitution model, outgroup, or support assessment.",
+    "The display root is arbitrary; the historical Viewer build-tree call was exploratory rather than publication-grade.",
+    "rosalind_open did not execute a scientific job and did not produce the tree.",
+    "The 2026-08-30 retry was not query-confirmed; historical completed calls and current retry outcomes are recorded separately."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "UniProtKB P01116, P01111, and P01112 official FASTA endpoints"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "build_case.py"
+      ],
+      "outputs": [
+        "outputs/pairwise-distances.csv",
+        "outputs/analysis.json",
+        "outputs/RAS-exploratory-NJ.nwk",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local script produces the scientific result; the separate Rosalind observation preserves the genuine task-chooser response and states that no scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run python showcases/biological-sequence-viewer/cases/sequence-guide-tree/build_case.py.",
+    "Confirm the three CSV distances and Newick string match outputs/analysis.json.",
+    "Treat any later Viewer alignment or session restoration as a new run and record it separately.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_status": "historical completed calls retained; 2026-08-30 retry unconfirmed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

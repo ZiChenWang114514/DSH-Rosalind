@@ -1,0 +1,49 @@
+{
+  "schema": "sequence-viewer.operation-evidence/v1",
+  "case_id": "sequence-annotation-track",
+  "plugin_version": "0.1.43",
+  "reviewed_on": "2026-08-30",
+  "successful_operations": [],
+  "failed_operations": [
+    {
+      "operation": "sequence-viewer.sequence_open_from_chat",
+      "status": "session-created-render-unconfirmed",
+      "operation_succeeded": false,
+      "outcome": "The regional FASTA session was created, but viewer readiness was false.",
+      "confirmation": "The track request was not acknowledged."
+    },
+    {
+      "operation": "sequence-viewer.sequence_load_track",
+      "status": "timeout",
+      "operation_succeeded": false,
+      "outcome": "The single permitted GFF3 load attempt timed out without acknowledgement.",
+      "confirmation": "The call was not retried and no track query was made."
+    }
+  ],
+  "unexecuted_operations": [
+    {
+      "operation": "sequence-viewer.sequence_control_viewer",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_save_session",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    }
+  ],
+  "privacy": {
+    "session_ids_retained": false,
+    "private_paths_retained": false,
+    "internal_resource_uris_retained": false
+  },
+  "conclusion": "No Sequence Viewer capability is claimed for this case because no operation received both a successful call result and a confirming follow-up query."
+}

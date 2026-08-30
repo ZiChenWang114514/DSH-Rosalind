@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "databases-egfr-landscape",
+  "observed_at_utc": "2026-08-29T18:14:05.222Z",
+  "observed_at_local": "2026-08-30T02:14:05.222+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review an EGFR protein, inhibitor, structure, and pathway public database teaching case"
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the task chooser only; it did not query EGFR records or compare inhibitors."
+}

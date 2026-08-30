@@ -1,0 +1,30 @@
+{
+  "plan_version": "1.0.0",
+  "source": {
+    "name": "OpenSlide CMU-1",
+    "url": "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs",
+    "license": "CC0-1.0",
+    "bytes": 132565343,
+    "sha256": "9a1923cd9bcb260ba4d99d64f8d6e32550648c332ba48817f920662f3a513420",
+    "downloaded": false
+  },
+  "planned_operation": {
+    "kind": null,
+    "selection_rule": "Select a bounded research operation only after current capabilities advertise an exact kind.",
+    "clinical_use": false,
+    "model_provisioning": false
+  },
+  "current_contract": {
+    "available": [
+      "slide-viewer.slide_get_pathology",
+      "slide-viewer.slide_cancel_pathology",
+      "slide-viewer.slide_resume_pathology"
+    ],
+    "start_operation_available": false
+  },
+  "execution": {
+    "viewer_opened": false,
+    "pathology_job_started": false,
+    "remote_workflow_called": false
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "schema": "sequence-viewer.operation-evidence/v1",
+  "case_id": "sequence-guide-tree",
+  "plugin_version": "0.1.43",
+  "reviewed_on": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "sequence-viewer.sequence_open_from_chat",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "path": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "presentation": "full"
+      },
+      "duration_ms": 7,
+      "response_summary": "The sequence viewer session opened; later completed controls and queries confirmed the mounted alignment.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_run_analysis",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "analysis": "distance-matrix",
+        "rowIds": [
+          "P01116",
+          "P01111",
+          "P01112"
+        ]
+      },
+      "duration_ms": 28,
+      "response_summary": "The completed uncorrected p-distance matrix matches outputs/analysis.json.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_run_analysis",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "analysis": "build-tree",
+        "algorithm": "neighbor-joining",
+        "rowIds": [
+          "P01116",
+          "P01111",
+          "P01112"
+        ]
+      },
+      "duration_ms": 42,
+      "response_summary": "The completed exploratory neighbor-joining tree matches the retained Newick result.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "jobs",
+        "limit": 20
+      },
+      "duration_ms": 152,
+      "response_summary": "The jobs query confirmed the completed distance and tree analyses.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "columns",
+        "start": 10,
+        "end": 17
+      },
+      "duration_ms": 122,
+      "response_summary": "The returned columns support the retained GAGGVGKS interval.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "columns",
+        "start": 30,
+        "end": 38
+      },
+      "duration_ms": 134,
+      "response_summary": "The returned columns support the retained Switch I interval.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "columns",
+        "start": 60,
+        "end": 76
+      },
+      "duration_ms": 170,
+      "response_summary": "The returned columns support the retained Switch II interval.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "columns",
+        "start": 116,
+        "end": 119
+      },
+      "duration_ms": 182,
+      "response_summary": "The returned columns support the retained NKXD interval.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "columns",
+        "start": 170,
+        "end": 191
+      },
+      "duration_ms": 227,
+      "response_summary": "The returned columns support the retained C-terminal divergence summary.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_export_artifact",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "format": "svg",
+        "scope": "visible",
+        "name": "ras-alignment"
+      },
+      "duration_ms": 42,
+      "response_summary": "A private SVG artifact was created.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_export_artifact",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "format": "newick",
+        "scope": "all",
+        "name": "RAS-P01116-P01111-P01112-NJ"
+      },
+      "duration_ms": 17,
+      "response_summary": "A private Newick artifact was created.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_export_artifact",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "format": "svg",
+        "scope": "visible",
+        "name": "ras-alignment",
+        "destination": {
+          "kind": "workspace",
+          "base": "opened-source",
+          "relativePath": "../previews/ras-alignment.svg"
+        }
+      },
+      "duration_ms": 39,
+      "response_summary": "The source-relative workspace SVG export completed.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "completed",
+      "operation_succeeded": true,
+      "arguments": {
+        "target": "artifacts"
+      },
+      "duration_ms": 230,
+      "response_summary": "The artifact query confirmed the generated artifacts.",
+      "completed_at_utc": "2026-08-29T11:56:15.000Z",
+      "source_task_id": "archived-sequence-viewer-task",
+      "source_turn_id": "archived-sequence-viewer-turn"
+    }
+  ],
+  "failed_operations": [
+    {
+      "operation": "sequence-viewer.sequence_open_from_chat",
+      "status": "session-created-render-unconfirmed",
+      "operation_succeeded": false,
+      "outcome": "The shared RAS diagnostic session was created, but viewer readiness was false.",
+      "confirmation": "The row query and distance request timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "timeout",
+      "operation_succeeded": false,
+      "outcome": "The shared RAS row query was not acknowledged.",
+      "confirmation": "No row page was returned."
+    },
+    {
+      "operation": "sequence-viewer.sequence_run_analysis",
+      "status": "timeout",
+      "operation_succeeded": false,
+      "outcome": "The shared RAS distance request was not acknowledged.",
+      "confirmation": "No viewer tree job was available to continue."
+    }
+  ],
+  "unexecuted_operations": [
+    {
+      "operation": "sequence-viewer.sequence_align",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_restore_session",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_run_analysis:build-tree",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    }
+  ],
+  "privacy": {
+    "session_ids_retained": false,
+    "private_paths_retained": false,
+    "internal_resource_uris_retained": false
+  },
+  "conclusion": "Historical completed calls support the listed capabilities. The 2026-08-30 retry remained unconfirmed and is recorded separately under failed_operations; it does not invalidate the historical results.",
+  "historical_source": {
+    "task_id": "archived-sequence-viewer-task",
+    "turn_id": "archived-sequence-viewer-turn",
+    "turn_started_at_utc": "2026-08-29T11:43:29.000Z",
+    "turn_completed_at_utc": "2026-08-29T11:56:15.000Z",
+    "retrieval_method": "Codex read_thread with includeOutputs=true; completed MCP tool-call records were matched to retained case outputs.",
+    "privacy_note": "Session identifiers and absolute local paths are not retained in this public receipt."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "records": 500,
+  "total_bases": 235490,
+  "minimum_read_length": 469,
+  "maximum_read_length": 471,
+  "mean_read_length": 470.98,
+  "GC_percent": 28.846235508938808,
+  "Q30_percent": 95.39768143020935
+}

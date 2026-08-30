@@ -1,0 +1,163 @@
+{
+  "id": "structure-trajectory-movie",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "render",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.12.13",
+      "MDAnalysis 2.10.0",
+      "NumPy 2.5.2",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Figshare source identity verification, full PSF/DCD compatibility inspection, five-frame DCD extraction and reload, sampled structural metrics, and unexecuted viewer movie and export rehearsals",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/adk4AKE.psf",
+      "bytes": 789917,
+      "sha256": "1aa947d58fb41b6805dc1e7be4dbe65c6a8f4690f0bd7fc2ae03e7bd437085f4"
+    },
+    {
+      "path": "inputs/adk-equilibrium-5frames.dcd",
+      "bytes": 201216,
+      "sha256": "939670315365df826d6cab001cc01eded45659c6e8d8851db4d9ffe9e24c89d8"
+    },
+    {
+      "path": "inputs/adk-frame0.pdb",
+      "bytes": 351212,
+      "sha256": "f692e1e6e3ac1820fdab6d15728ae81f0fd256b29d02f5c0ffc2cf846d8dad69"
+    },
+    {
+      "path": "inputs/dataset-metadata.json",
+      "bytes": 1698,
+      "sha256": "acee4bcc8f6c374bd8cfa2a91507272768b34fafa96f066cbdb2c60ed39b542d"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 1148,
+      "sha256": "0acab380f2aa988dea6b5c3e4910a26364d2c46ac87f9bc3ec07af62fe7a8ec0"
+    },
+    {
+      "path": "scripts/build_subset_and_inspect.py",
+      "bytes": 8751,
+      "sha256": "fb71f6d11fa26b47362f71b53debe640583d7a40a21bdeabdb7c66b61e852bb7"
+    },
+    {
+      "path": "scripts/requirements.txt",
+      "bytes": 19,
+      "sha256": "c964713567c29bba840857c4bf6b9ca9c3ca29617d8aafd9d6d6895c5a242387"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/trajectory-inspection.json",
+      "bytes": 4267,
+      "sha256": "11cabacef7b72dfc05df85330e32cc0f70283979a58af43329ca3bfc77f78a33"
+    },
+    {
+      "path": "outputs/sampled-frame-metrics.csv",
+      "bytes": 419,
+      "sha256": "e555778267e6ffc1561e7f634420ab2de43a2b52f664fbc9b0b3e9ed7a3a467c"
+    },
+    {
+      "path": "outputs/viewer-operation-plan.json",
+      "bytes": 6195,
+      "sha256": "e6fa9d89c96be0feeebb5fc350a7a179dcdc5bcd15a3c96aef6f912b11d2313a"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 2150,
+      "sha256": "aed2c81e5f9cf5816c73c1145225c7176f1dafe372304ad8d3f1eaeb50afeb0c"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 658
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 4118,
+      "sha256": "f02d1c790181c521eb76714321d495b0a75326e0b5708f3f9a89d2969e231655"
+    }
+  ],
+  "sources": [
+    "https://doi.org/10.6084/m9.figshare.5108170.v1",
+    "https://api.figshare.com/v2/articles/5108170",
+    "https://ndownloader.figshare.com/files/8672230",
+    "https://ndownloader.figshare.com/files/8672074",
+    "https://github.com/MDAnalysis/MDAnalysisData/blob/master/MDAnalysisData/adk_equilibrium.py"
+  ],
+  "observations": [
+    "The full PSF and DCD matched the SHA-256 values published by the MDAnalysisData accessor.",
+    "MDAnalysis loaded 4187 trajectory frames with the 3341-atom PSF.",
+    "The retained five-frame DCD reloaded with the same topology and zero maximum coordinate difference at stored precision.",
+    "The sampled all-C-alpha RMSD to frame zero ranged from 0.000000 to 7.271138 A."
+  ],
+  "interpretation": [
+    "The sampled radius-of-gyration and CORE-to-LID distances are consistent with wider conformations than frame zero among the selected frames."
+  ],
+  "limitations": [
+    "The compact DCD preserves selected coordinates and order; original frame indices and times are retained separately.",
+    "The derived frame-zero PDB uses chain X and writer defaults for metadata absent from the PSF; the PSF remains the topology identity.",
+    "The source trajectory is solvent-stripped and pre-aligned on the CORE domain.",
+    "Five selected frames do not characterize kinetics or equilibrium populations.",
+    "Structure Viewer loading, playback, movie rendering, cancellation, and export remain unexecuted.",
+    "rosalind_open did not submit the adenylate-kinase trajectory, render or export a movie, or execute a Rosalind scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://doi.org/10.6084/m9.figshare.5108170.v1",
+        "https://ndownloader.figshare.com/files/8672230",
+        "https://ndownloader.figshare.com/files/8672074"
+      ],
+      "inputs": [
+        "inputs/adk4AKE.psf",
+        "inputs/adk-equilibrium-5frames.dcd",
+        "inputs/adk-frame0.pdb",
+        "inputs/dataset-metadata.json",
+        "scripts/build_subset_and_inspect.py"
+      ],
+      "outputs": [
+        "outputs/trajectory-inspection.json",
+        "outputs/sampled-frame-metrics.csv",
+        "outputs/viewer-operation-plan.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local run verified the full source pair and retained a compatible subset; viewer movie and export steps remain a rehearsal, and the genuine Rosalind task-chooser observation states that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Install scripts/requirements.txt with Python 3.12.",
+    "Download the exact Figshare DCD and rerun scripts/build_subset_and_inspect.py with the retained PSF.",
+    "Compare the regenerated compact DCD and metrics with the retained artifacts.",
+    "Use outputs/viewer-operation-plan.json in one mounted Structure Viewer session and retain returned job and artifact receipts before adding viewer-execution claims."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public Figshare dataset under CC BY 4.0",
+    "local_execution": "completed",
+    "viewer_execution": "not executed",
+    "python": "3.12.13",
+    "MDAnalysis": "2.10.0",
+    "numpy": "2.5.2"
+  }
+}

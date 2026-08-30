@@ -1,0 +1,77 @@
+{
+  "id": "structure-motif-search",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 with NumPy 2.5.1",
+      "Molecular Structure Viewer 0.1.80 session attempt",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Deposited 3PTB catalytic-triad distance calculation plus an exact retained public motif request and an explicit unacknowledged-viewer receipt",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/3PTB.pdb", "bytes": 183384, "sha256": "288f7954d4d013fa8eab3808e1037e2958e2dcd12c9eca65a3f1014404a9f9a2"},
+    {"path": "inputs/acquisition.md", "bytes": 532}
+  ],
+  "outputs": [
+    {"path": "outputs/triad-geometry.json", "bytes": 3035},
+    {"path": "outputs/viewer-attempt.json", "bytes": 778},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 636}
+  ],
+  "previews": [
+    {"path": "previews/preview.svg", "bytes": 2867}
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/3PTB",
+    "https://files.rcsb.org/download/3PTB.pdb",
+    "https://search.rcsb.org/"
+  ],
+  "observations": [
+    "His57 ND1 to Asp102 OD2 is 2.669607 angstrom and His57 NE2 to Ser195 OG is 2.959605 angstrom in the retained coordinates.",
+    "The exact public motif request records author numbering, deposited operator 1, SIDE_CHAIN pairing, KRUSKAL pruning, tolerances, cutoff, and paging.",
+    "The viewer did not acknowledge two state calls, so no public motif search result is retained or claimed."
+  ],
+  "interpretation": [
+    "The local distances describe the deposited catalytic-triad geometry; a future motif match would be a geometric observation only."
+  ],
+  "limitations": [
+    "No public hit count, match identity, query hash, RMSD, or normalized score was obtained in this run.",
+    "Geometric similarity does not establish catalytic function, protonation, or evolutionary relationship.",
+    "Archive search results can change as RCSB holdings and mappings change."
+  ],
+  "provenance": [
+    {
+      "sources": ["https://files.rcsb.org/download/3PTB.pdb", "https://search.rcsb.org/"],
+      "inputs": ["inputs/3PTB.pdb", "inputs/acquisition.md"],
+      "outputs": ["outputs/triad-geometry.json", "outputs/viewer-attempt.json", "outputs/rosalind-open-observation.json", "scripts/compute_triad_geometry.py"],
+      "previews": ["previews/preview.svg"],
+      "note": "Local coordinate geometry, public motif execution status, and Rosalind launcher availability are retained in separate inspectable records; no Rosalind scientific job was executed."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/compute_triad_geometry.py.",
+    "Inspect the exact request and execute it only in an acknowledged mounted viewer session.",
+    "Retain the complete result page and query hash before reporting public matches."
+  ],
+  "environment": {
+    "python": "3.14.0",
+    "numpy": "2.5.1",
+    "viewer": "0.1.80 presentation-issued, command acknowledgement unavailable",
+    "cost": "free",
+    "data": "public"
+  }
+}

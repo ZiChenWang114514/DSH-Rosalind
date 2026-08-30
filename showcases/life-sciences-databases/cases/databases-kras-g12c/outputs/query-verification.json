@@ -1,0 +1,11 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-kras-g12c",
+  "verified_at_utc": "2026-08-29T19:57:15.154333Z",
+  "calls": [
+    {"skill":"uniprot-skill","request":{"base_url":"https://rest.uniprot.org","path":"uniprotkb/P01116","params":{"format":"json"}},"source_url":"https://rest.uniprot.org/uniprotkb/P01116?format=json","retrieved_at_utc":"2026-08-29T19:57:11.086254Z","ok":true,"summary":{"accession":"P01116","entry_id":"RASK_HUMAN","reviewed":true,"entry_version":269}},
+    {"skill":"clinvar-variation-skill","request":{"action":"search","terms":"KRAS G12C","max_items":10},"source_url":"https://clinicaltables.nlm.nih.gov/api/variants/v4/search","retrieved_at_utc":"2026-08-29T19:57:12.387260Z","ok":true,"summary":{"records_total":12,"records_returned":10,"truncated":true,"g12c_variation_id":"12578","g12c_hgvs":"NM_004985.5(KRAS):c.34G>T (p.Gly12Cys)"}},
+    {"skill":"chembl-skill","request":{"base_url":"https://www.ebi.ac.uk/chembl/api/data","path":"molecule/search.json","params":{"q":"sotorasib","limit":10},"record_path":"molecules","max_items":10},"source_url":"https://www.ebi.ac.uk/chembl/api/data/molecule/search.json","retrieved_at_utc":"2026-08-29T19:57:14.089179Z","ok":true,"summary":{"record_count":3,"sotorasib_first_approval":2021}},
+    {"skill":"rcsb-pdb-skill","request":{"base_url":"https://data.rcsb.org/rest/v1","path":"core/entry/6OIM"},"source_url":"https://data.rcsb.org/rest/v1/core/entry/6OIM","retrieved_at_utc":"2026-08-29T19:57:15.154333Z","ok":true,"summary":{"pdb_id":"6OIM","pdb_doi":"10.2210/pdb6oim/pdb"}}
+  ]
+}

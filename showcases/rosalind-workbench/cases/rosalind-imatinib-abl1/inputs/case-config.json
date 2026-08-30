@@ -1,0 +1,31 @@
+{
+  "showcase_id": "rosalind-imatinib-abl1",
+  "title": "Experimental ABL1 poses: imatinib and nilotinib",
+  "question": "Which ABL1 pocket contacts are shared or changed between the experimental imatinib and nilotinib complexes?",
+  "retrieved_on": "2026-08-30",
+  "contact_cutoff_angstrom": 4.0,
+  "structures": [
+    {
+      "pdb_id": "1IEP",
+      "file": "inputs/1IEP.pdb",
+      "label": "ABL1-imatinib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "STI",
+      "ligand_chain": "A"
+    },
+    {
+      "pdb_id": "3CS9",
+      "file": "inputs/3CS9.pdb",
+      "label": "ABL1-nilotinib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "NIL",
+      "ligand_chain": "A"
+    }
+  ],
+  "compounds": [
+    {"name": "Imatinib", "slug": "imatinib", "pubchem_cid": 5291, "role": "1IEP ligand"},
+    {"name": "Nilotinib", "slug": "nilotinib", "pubchem_cid": 644241, "role": "3CS9 comparator ligand"}
+  ]
+}

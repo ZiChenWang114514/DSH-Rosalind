@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Spatial transcriptomics methods</title>
+  <desc id="desc">Five public methods records mapped to complementary spatial transcriptomics workflow roles.</desc>
+  <rect width="1200" height="675" rx="28" fill="#081a2b"/>
+  <text x="65" y="76" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="38" font-weight="700">Spatial transcriptomics methods</text>
+  <text x="65" y="114" fill="#9adbe8" font-family="Segoe UI,Arial" font-size="19">Five PubMed records · PMC checked 29 Aug 2026</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="65" y="165" width="330" height="120" rx="18" fill="#12394a" stroke="#4dd7c8"/><text x="90" y="205" fill="#7eeadf" font-size="21" font-weight="700">SpatialExperiment</text><text x="90" y="238" fill="#e5f5f7" font-size="17">data infrastructure</text><text x="90" y="264" fill="#9cbec5" font-size="15">PMID 35482478 · CC BY</text>
+    <rect x="435" y="165" width="330" height="120" rx="18" fill="#12394a" stroke="#4dd7c8"/><text x="460" y="205" fill="#7eeadf" font-size="21" font-weight="700">SpotClean</text><text x="460" y="238" fill="#e5f5f7" font-size="17">spot-swapping correction</text><text x="460" y="264" fill="#9cbec5" font-size="15">PMID 35624112 · CC BY</text>
+    <rect x="805" y="165" width="330" height="120" rx="18" fill="#12394a" stroke="#4dd7c8"/><text x="830" y="205" fill="#7eeadf" font-size="21" font-weight="700">Sprod</text><text x="830" y="238" fill="#e5f5f7" font-size="17">position/image denoising</text><text x="830" y="264" fill="#9cbec5" font-size="15">PMID 35927477 · TDM</text>
+    <rect x="250" y="335" width="330" height="120" rx="18" fill="#172f4d" stroke="#7aa7ff"/><text x="275" y="375" fill="#aac6ff" font-size="21" font-weight="700">Squidpy</text><text x="275" y="408" fill="#e7eefc" font-size="17">spatial graph analysis</text><text x="275" y="434" fill="#a9b9d2" font-size="15">PMID 35102346 · CC BY</text>
+    <rect x="620" y="335" width="330" height="120" rx="18" fill="#172f4d" stroke="#7aa7ff"/><text x="645" y="375" fill="#aac6ff" font-size="21" font-weight="700">BayesSpace</text><text x="645" y="408" fill="#e7eefc" font-size="17">region-aware inference</text><text x="645" y="434" fill="#a9b9d2" font-size="15">PMID 34083791 · TDM</text>
+  </g>
+  <rect x="65" y="520" width="1070" height="92" rx="18" fill="#10283b"/>
+  <text x="95" y="560" fill="#e6f7fa" font-family="Segoe UI,Arial" font-size="20">Complementary roles, not a single prescribed Visium pipeline</text>
+  <text x="95" y="588" fill="#91b5bf" font-family="Segoe UI,Arial" font-size="16">3 PMC open-access records · 2 PMC manuscript/TDM records</text>
+</svg>

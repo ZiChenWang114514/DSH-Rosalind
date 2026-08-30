@@ -1,0 +1,75 @@
+{
+  "showcase_id": "rosalind-jak2-selectivity",
+  "retrieved_on": "2026-08-30",
+  "coordinate_format": "legacy PDB text from the current RCSB entry revision",
+  "structures": [
+    {
+      "pdb_id": "3EYG",
+      "label": "JAK1-tofacitinib",
+      "coordinate_url": "https://files.rcsb.org/download/3EYG.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/3EYG",
+      "entry_url": "https://www.rcsb.org/structure/3EYG",
+      "title": "Crystal structures of JAK1 and JAK2 inhibitor complexes",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 1.9,
+      "initial_release_date": "2009-02-03T00:00:00.000+00:00",
+      "revision_date": "2024-10-30T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 3,
+      "pdb_doi": "10.2210/pdb3eyg/pdb",
+      "primary_citation_doi": "10.1016/j.jmb.2009.01.041"
+    },
+    {
+      "pdb_id": "3FUP",
+      "label": "JAK2-tofacitinib",
+      "coordinate_url": "https://files.rcsb.org/download/3FUP.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/3FUP",
+      "entry_url": "https://www.rcsb.org/structure/3FUP",
+      "title": "Crystal structures of JAK1 and JAK2 inhibitor complexes",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.4,
+      "initial_release_date": "2009-02-10T00:00:00.000+00:00",
+      "revision_date": "2024-11-27T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 6,
+      "pdb_doi": "10.2210/pdb3fup/pdb",
+      "primary_citation_doi": "10.1016/j.jmb.2009.01.041"
+    },
+    {
+      "pdb_id": "3KRR",
+      "label": "JAK2-NVP-BSK805",
+      "coordinate_url": "https://files.rcsb.org/download/3KRR.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/3KRR",
+      "entry_url": "https://www.rcsb.org/structure/3KRR",
+      "title": "Crystal Structure of JAK2 complexed with a potent quinoxaline ATP site inhibitor",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 1.8,
+      "initial_release_date": "2010-07-21T00:00:00.000+00:00",
+      "revision_date": "2024-10-09T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 2,
+      "pdb_doi": "10.2210/pdb3krr/pdb",
+      "primary_citation_doi": "10.1158/1535-7163.MCT-10-0053"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Tofacitinib",
+      "role": "same-ligand JAK1/JAK2 comparator",
+      "pubchem_cid": 9926791,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/9926791/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/9926791",
+      "title": "Tofacitinib",
+      "inchi_key": "UJLAWZDWDVHWOW-YPMHNXCESA-N"
+    },
+    {
+      "name": "NVP-BSK805",
+      "role": "3KRR JAK2-selective inhibitor",
+      "pubchem_cid": 46398810,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/46398810/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/46398810",
+      "title": "4-(2,6-difluoro-4-(3-(1-(piperidin-4-yl)-1H-pyrazol-4-yl)quinoxalin-5-yl)benzyl)morpholine",
+      "inchi_key": "IBPVXAOOVUAOKJ-UHFFFAOYSA-N"
+    }
+  ]
+}

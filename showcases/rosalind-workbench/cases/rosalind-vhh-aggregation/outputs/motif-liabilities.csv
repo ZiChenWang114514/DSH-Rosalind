@@ -1,0 +1,14 @@
+sequence_id,label,category,motif,position_1_based
+5M2W_VHH,nb8 anti-TssK,deamidation,NS,83
+5M2W_VHH,nb8 anti-TssK,deamidation,NT,76
+5M2W_VHH,nb8 anti-TssK,isomerization,DS,61
+5M2W_VHH,nb8 anti-TssK,isomerization,DT,89
+6WAQ_VHH,SARS VHH-72,deamidation,NS,84
+6WAQ_VHH,SARS VHH-72,deamidation,NT,77
+6WAQ_VHH,SARS VHH-72,isomerization,DS,62
+6WAQ_VHH,SARS VHH-72,isomerization,DT,90
+4KRL_VHH,EGFR VHH 7D12,deamidation,NS,84
+4KRL_VHH,EGFR VHH 7D12,deamidation,NT,77
+4KRL_VHH,EGFR VHH 7D12,isomerization,DS,56
+4KRL_VHH,EGFR VHH 7D12,isomerization,DS,62
+4KRL_VHH,EGFR VHH 7D12,isomerization,DT,90

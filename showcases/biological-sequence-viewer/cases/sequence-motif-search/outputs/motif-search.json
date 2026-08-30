@@ -1,0 +1,61 @@
+{
+  "showcase_id": "sequence-motif-search",
+  "source_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "records_searched": [
+    "P01116",
+    "P01111",
+    "P01112"
+  ],
+  "coordinate_system": "1-based inclusive residue and alignment coordinates",
+  "query": {
+    "regular_expression": "G....GKS",
+    "length": 8,
+    "fixed_positions": {
+      "1": "G",
+      "6": "G",
+      "7": "K",
+      "8": "S"
+    },
+    "scope": "ungapped protein sequence, case-sensitive"
+  },
+  "hit_count": 3,
+  "hits": [
+    {
+      "accession": "P01116",
+      "query": "G....GKS",
+      "matched_sequence": "GAGGVGKS",
+      "residue_start_1based": 10,
+      "residue_end_1based_inclusive": 17,
+      "alignment_column_start_1based": 10,
+      "alignment_column_end_1based_inclusive": 17
+    },
+    {
+      "accession": "P01111",
+      "query": "G....GKS",
+      "matched_sequence": "GAGGVGKS",
+      "residue_start_1based": 10,
+      "residue_end_1based_inclusive": 17,
+      "alignment_column_start_1based": 10,
+      "alignment_column_end_1based_inclusive": 17
+    },
+    {
+      "accession": "P01112",
+      "query": "G....GKS",
+      "matched_sequence": "GAGGVGKS",
+      "residue_start_1based": 10,
+      "residue_end_1based_inclusive": 17,
+      "alignment_column_start_1based": 10,
+      "alignment_column_end_1based_inclusive": 17
+    }
+  ],
+  "execution": {
+    "status": "verified local computation",
+    "tool": "Python 3 standard-library regular expressions",
+    "viewer_operations": "rehearsed; no viewer search or analysis job was run"
+  },
+  "false_positive_cautions": [
+    "Four of eight positions are unconstrained, so an unrelated protein can match by chance.",
+    "A sequence match alone does not establish nucleotide binding, GTPase activity, or structural context.",
+    "This case searched only three curated human RAS records and is not a proteome-wide specificity test."
+  ]
+}

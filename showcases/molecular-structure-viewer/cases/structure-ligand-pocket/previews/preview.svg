@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">STI contact shell in ABL kinase</title><desc id="desc">Protein residues within four angstroms of STI A 201 in RCSB 1IEP.</desc>
+<rect width="1200" height="675" fill="#071726"/><text x="70" y="75" fill="#5eead4" font-family="Segoe UI,Arial" font-size="27">RCSB 1IEP · STI A:201 · protein chain A</text>
+<text x="70" y="155" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="48" font-weight="700">Bound-ligand contact shell</text>
+<circle cx="300" cy="355" r="120" fill="#0f766e" stroke="#5eead4" stroke-width="5"/><text x="300" y="370" text-anchor="middle" fill="#ecfeff" font-family="Consolas,monospace" font-size="38">STI</text>
+<text x="520" y="300" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="32">21 residues within 4.0 Å</text>
+<text x="520" y="355" fill="#cbd5e1" font-family="Segoe UI,Arial" font-size="25">115 protein–ligand atom pairs</text>
+<rect x="70" y="495" width="1060" height="110" rx="16" fill="#0f2d36"/><text x="95" y="540" fill="#ccfbf1" font-family="Consolas,monospace" font-size="18">ILE 360 (2.668 Å) · THR 315 (2.883 Å) · MET 318 (2.899 Å)</text><text x="95" y="575" fill="#ccfbf1" font-family="Consolas,monospace" font-size="18">ASP 381 (2.901 Å) · GLU 286 (2.996 Å) · HIS 361 (3.162 Å)</text>
+<text x="70" y="635" fill="#94a3b8" font-family="Segoe UI,Arial" font-size="19">Closest-heavy-atom geometry only; no affinity, potency, or clinical inference.</text>
+</svg>

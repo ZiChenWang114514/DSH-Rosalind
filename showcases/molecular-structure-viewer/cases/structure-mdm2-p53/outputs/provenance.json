@@ -2,5 +2,6 @@
   "source":{"provider":"RCSB Protein Data Bank","accession":"1YCR","url":"https://files.rcsb.org/download/1YCR.pdb","revision":{"major":1,"minor":5,"date":"2024-02-14"}},
   "contract":{"plugin":"Molecular Structure Viewer","version":"0.1.80","file":"examples/starter-examples.json","qualification_status":"pending-clean-host-qualification"},
   "local_checks":{"date":"2026-08-29","file_length_and_digest":true,"atom_and_chain_counts":true,"four_angstrom_contact_count":true},
-  "interactive_run":{"status":"render-pending","buried_area_executed":false}
+  "interactive_run":{"status":"render-pending","buried_area_executed":false},
+  "rosalind_open_observation":{"path":"outputs/rosalind-open-observation.json","bytes":615,"scientific_job_executed":false,"note":"Genuine case-specific task-chooser call; no structure file was submitted and no Rosalind scientific job ran."}
 }

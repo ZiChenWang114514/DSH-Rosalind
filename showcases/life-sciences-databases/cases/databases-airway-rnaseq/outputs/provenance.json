@@ -1,0 +1,16 @@
+{
+  "case_id": "databases-airway-rnaseq",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "queries": [
+    {"skill": "biostudies-arrayexpress-skill", "path": "studies/E-GEOD-52778", "raw": "inputs/biostudies-E-GEOD-52778.json"}
+  ],
+  "computation": "scripts/build_case.py",
+  "scientific_output": "outputs/results.json",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "observed_at_utc": "2026-08-29T18:14:05.307Z",
+    "scientific_job_executed": false,
+    "note": "The call opened only the task chooser; the retained BioStudies record supports the design summary."
+  }
+}

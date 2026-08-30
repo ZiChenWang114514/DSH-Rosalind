@@ -1,0 +1,52 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-run-cancellation",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__list_workflows",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.696Z",
+      "arguments": {
+        "include_archived": true
+      },
+      "response": {
+        "ok": true,
+        "count": 14,
+        "bundled_workflows_present": true,
+        "temporary_evidence_workflow_archived": true
+      }
+    }
+  ],
+  "failed_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__cancel_ngs_run",
+      "operation_succeeded": false,
+      "started_at_utc": "2026-08-29T19:53:45.816Z",
+      "observed_at_utc": "2026-08-29T19:53:45.857Z",
+      "arguments": {
+        "registry_run_id": "gpt-science-no-run-evidence-20260830"
+      },
+      "response": {
+        "ok": false,
+        "errors": [
+          "registry run does not exist: gpt-science-no-run-evidence-20260830"
+        ]
+      }
+    }
+  ],
+  "not_executed_operations": [
+    {
+      "operation": "registered run lifecycle",
+      "status": "not_executed",
+      "reason": "The successful run-history query returned zero runs; no genuine registry run was available for observation, summary submission, or cancellation."
+    }
+  ],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

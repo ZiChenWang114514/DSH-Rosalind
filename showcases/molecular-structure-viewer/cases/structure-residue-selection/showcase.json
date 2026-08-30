@@ -1,0 +1,54 @@
+{
+  "id": "structure-residue-selection",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": ["RCSB PDB coordinate snapshot", "Python 3.14 standard library", "Rosalind Workbench mcp__rosalind__rosalind_open"],
+    "device": "local",
+    "implementation": "deterministic closest-heavy-atom Euclidean distance over exact author-numbered residue selections",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/public-source.md", "bytes": 496},
+    {"path": "inputs/1LYZ.pdb", "bytes": 145962},
+    {"path": "scripts/analyze.py", "bytes": 5809}
+  ],
+  "outputs": [
+    {"path": "outputs/residue-distance.json", "bytes": 1421},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 626}
+  ],
+  "previews": [{"path": "previews/preview.svg", "bytes": 1767}],
+  "sources": ["https://www.rcsb.org/structure/1LYZ", "https://files.rcsb.org/download/1LYZ.pdb"],
+  "observations": [
+    "The retained 1LYZ header reports an X-ray model at 2.00 Å resolution.",
+    "GLU A:35 and ASP A:52 contain 9 and 8 admitted heavy atoms, respectively.",
+    "The closest pair is GLU OE1 serial 276 to ASP OD2 serial 405 at 5.951 Å.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation."
+  ],
+  "interpretation": ["The result is an exact coordinate separation for the stated selections and does not imply a bond or interaction energy."],
+  "limitations": ["Only deposited model 1 is analyzed.", "Hydrogens, coordinate uncertainty, and dynamics are not represented.", "rosalind_open did not submit 1LYZ, measure a distance, or execute a Rosalind scientific job."],
+  "provenance": [{
+    "sources": ["https://files.rcsb.org/download/1LYZ.pdb"],
+    "inputs": ["inputs/public-source.md", "inputs/1LYZ.pdb", "scripts/analyze.py"],
+    "outputs": ["outputs/residue-distance.json", "outputs/rosalind-open-observation.json"],
+    "previews": ["previews/preview.svg"],
+    "note": "The local script regenerates the typed scientific result and preview; the separate genuine Rosalind task-chooser observation states that no Rosalind scientific job ran."
+  }],
+  "reproduction": [
+    "Run scripts/analyze.py with Python 3.14 or a compatible standard-library Python.",
+    "Confirm the JSON reports 72 tested atom pairs and a 5.951 Å minimum.",
+    "Review the stated model, author-numbering, occupancy, and alternate-location filters before comparing another structure."
+  ],
+  "environment": {"cost": "free", "data": "public", "device": "local"}
+}

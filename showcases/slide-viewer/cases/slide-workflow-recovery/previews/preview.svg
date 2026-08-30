@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Workflow recovery manifest comparison</title>
+  <desc id="desc">Twelve passing fixture checks accompany two admitted temporary workflow attempts that failed during normalization.</desc>
+  <rect width="1200" height="675" fill="#101724"/>
+  <text x="66" y="82" fill="#eef4ff" font-family="Segoe UI,Arial" font-size="40" font-weight="700">Workflow recovery rehearsal</text>
+  <text x="66" y="127" fill="#aabbd7" font-family="Segoe UI,Arial" font-size="22">public H&amp;E H5AD · exact before/after manifests</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="66" y="188" width="405" height="220" rx="18" fill="#202b3d" stroke="#6d8bb8"/><text x="96" y="238" fill="#dfeaff" font-size="27" font-weight="700">BEFORE</text><text x="96" y="284" fill="#b9c9e3" font-size="20">source: fixture-source-hne-v1</text><text x="96" y="324" fill="#b9c9e3" font-size="20">attempt B: 1 · interrupted</text><text x="96" y="364" fill="#f5c875" font-size="20">authorization: expired fixture</text>
+    <path d="M492 298 H706" stroke="#7dd3fc" stroke-width="5"/><path d="M690 286 L710 298 L690 310" fill="none" stroke="#7dd3fc" stroke-width="5"/>
+    <rect x="729" y="188" width="405" height="220" rx="18" fill="#1d3836" stroke="#5ed1c5"/><text x="759" y="238" fill="#e4fffb" font-size="27" font-weight="700">AFTER REHEARSAL</text><text x="759" y="284" fill="#b9e1dc" font-size="20">source: fixture-source-hne-v2</text><text x="759" y="324" fill="#b9e1dc" font-size="20">attempt B: 2 · resumed</text><text x="759" y="364" fill="#93e5d9" font-size="20">same content revision</text>
+    <rect x="66" y="460" width="321" height="126" rx="16" fill="#202b3d"/><text x="96" y="511" fill="#eef4ff" font-size="34" font-weight="700">12 / 12</text><text x="96" y="551" fill="#aabbd7" font-size="19">manifest checks passed</text>
+    <rect x="439" y="460" width="321" height="126" rx="16" fill="#202b3d"/><text x="469" y="511" fill="#eef4ff" font-size="28" font-weight="700">Job A stays cancelled</text><text x="469" y="551" fill="#aabbd7" font-size="19">resume_attempted = false</text>
+    <rect x="812" y="460" width="322" height="126" rx="16" fill="#41232b"/><text x="842" y="511" fill="#ffe7eb" font-size="28" font-weight="700">2 failed attempts</text><text x="842" y="551" fill="#efb7c1" font-size="19">3 operations executed</text>
+  </g>
+  <text x="66" y="616" fill="#79d9cc" font-family="Segoe UI,Arial" font-size="18">Rosalind launcher observed: ready=true · scientific_job_executed=false</text>
+  <text x="66" y="646" fill="#aabbd7" font-family="Segoe UI,Arial" font-size="18">No paths or credentials retained · matrix X value scale remains unknown</text>
+</svg>

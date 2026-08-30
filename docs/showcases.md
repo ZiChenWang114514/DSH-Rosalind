@@ -1,32 +1,18 @@
 # Showcase catalogue
 
-This release contains 23 lesson-and-replay-ready projects copied from `rosalind-science-showcases` commit `f81e668c69edbfe7863cc936f2d535b61d8df76b`. Every row exposes lesson, replay, and reproduce. Reproduce runs the registered local operations, prepares an authorized public request, or reports the exact missing renderer, service, credential, input, or compute resource without changing providers. A completed replay does not imply that a fresh run completed.
+This release contains 100 lesson-and-replay-ready projects from the reviewed showcase snapshot at commit `f8c2ea83ac3b3b9258b160b80039dc3db37d76c4`. Every project exposes lesson, replay, and reproduce records. Reproduce runs a registered local operation, prepares an authorized public request, or reports the missing renderer, service, credential, input, or compute resource. A completed replay does not imply that a fresh run completed.
 
-| Area | Showcase ID | Project | Fresh-run path |
-|---|---|---|---|
-| Literature | `literature-trem2-landscape` | TREM2 microglia publication landscape | NCBI Entrez, PMC, bioRxiv/medRxiv |
-| Literature | `literature-pmc-availability` | PMC open-access availability | NCBI Entrez, PMC, bioRxiv/medRxiv |
-| Literature | `literature-preprint-publication-link` | Preprint to publication linkage | NCBI Entrez, PMC, bioRxiv/medRxiv |
-| Databases | `databases-il6r-asthma` | IL6R and asthma evidence map | Open Targets, Ensembl, ClinVar, GWAS, GTEx and related public sources |
-| Databases | `databases-variant-interpretation` | Multi-source variant interpretation | Open Targets, Ensembl, ClinVar, GWAS, GTEx and related public sources |
-| Databases | `databases-egfr-landscape` | EGFR structure and pharmacology landscape | UniProt, ChEMBL, RCSB PDB, Reactome and related public sources |
-| Sequence | `sequence-lambda-annotation` | Lambda genome annotation and cI translation | Deterministic local sequence adapter |
-| Sequence | `sequence-ras-alignment` | Human RAS protein alignment | Deterministic local sequence adapter |
-| Sequence | `sequence-fastq-qc` | Public-read FASTQ quality exploration | Deterministic local sequence adapter |
-| NGS | `ngs-fastq-qc` | FASTQ QC workflow readiness | Local container or configured SSH/HPC |
-| NGS | `ngs-bulk-rnaseq` | Bulk RNA-seq workflow design | Local container or configured SSH/HPC |
-| NGS | `ngs-single-cell` | Single-cell RNA-seq workflow design | Local container or configured SSH/HPC |
-| Structures | `structure-mdm2-p53` | MDM2-p53 interface analysis | Local structure adapter, optional RCSB retrieval |
-| Structures | `structure-adenylate-kinase` | Adenylate kinase conformational comparison | Local structure adapter, optional RCSB retrieval |
-| Structures | `structure-gfp-figure` | Provenance-bearing GFP figure | Local structure adapter, optional RCSB retrieval |
-| Pathology & spatial | `slide-tissue-architecture` | CMU-1 whole-slide source and pyramid | Local slide checks, authorized public dataset |
-| Pathology & spatial | `slide-spatial-expression` | Mouse-brain spatial expression | Local spatial checks, authorized public dataset |
-| Pathology & spatial | `slide-segmentation-overlay` | Source-aligned spatial annotation overlay | Local spatial checks, authorized public dataset |
-| Pathology & spatial | `slide-research-export` | Source-preserving spatial research export | Local spatial checks, authorized public dataset |
-| Workbench | `rosalind-molecular-design` | PD-L1 nanobody design showcase | Local replay; optional Boltz, Biohub ESM, Modal, or Runpod |
-| Workbench | `rosalind-structure-analysis` | Rosalind structure-analysis launcher | Local Workbench adapter |
-| Workbench | `rosalind-genomics` | Rosalind genomics launcher | Local Workbench adapter |
-| Workbench | `rosalind-scientific-compute` | Rosalind scientific-compute launcher | Local Workbench adapter |
+| Area | Projects | Representative scope |
+|---|---:|---|
+| Literature | 6 | Publication discovery, access, evidence landscapes and assay literature |
+| Databases | 7 | Target, variant, pharmacology, structure, pathway and expression records |
+| Sequence | 12 | Annotation, alignment, quality analysis, editing, sessions and export |
+| NGS | 15 | Runtime inspection, workflow readiness, saved definitions and run lifecycle records |
+| Structures | 15 | Contacts, selections, pockets, alignment, density, assembly and trajectories |
+| Pathology & spatial | 15 | DICOM, OME, regions, scientific layers, measurements and research packages |
+| Workbench | 30 | Molecular design, scientific computing, experimental plans and cross-tool studies |
+
+The machine-readable catalogue below is the complete ID index; every entry points to its case directory and preview where available.
 
 ## What a project record contains
 

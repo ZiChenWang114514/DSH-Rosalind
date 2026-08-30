@@ -19,6 +19,10 @@ What topics are visible in a compact, reproducible snapshot of recent literature
 
 Project-authored theme labels identify work on R47H and disease models, brain injury, immunometabolism, glioma, molecular simulation, innate immune memory, and therapeutic targeting. Exact records and labels are retained in `outputs/results.json`; source roles and retrieval evidence are in `outputs/sources.json`.
 
+## Rosalind Workbench observation
+
+`mcp__rosalind__rosalind_open` was invoked with a TREM2-specific task context at `2026-08-29T18:09:34.689Z`. The exact arguments and response are retained in `outputs/rosalind-open-observation.json`. The response only reported that the task chooser was ready; no literature record was submitted and no Rosalind scientific job ran.
+
 ## Reproduce
 
 1. Run the prompt in `prompt.md` with Life Sciences Literature 0.1.5.
@@ -26,6 +30,7 @@ Project-authored theme labels identify work on R47H and disease models, brain in
 3. Retrieve `esummary` metadata for every returned PMID.
 4. Check the selected bioRxiv DOI and its publication-link endpoint.
 5. Keep preprint status separate from PubMed-indexed publication status.
+6. Compare any new Rosalind launcher response with `outputs/rosalind-open-observation.json` without treating the launcher as a scientific result.
 
 ## Interpretation
 

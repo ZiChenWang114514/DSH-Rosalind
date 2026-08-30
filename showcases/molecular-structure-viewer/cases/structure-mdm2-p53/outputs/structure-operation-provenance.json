@@ -1,0 +1,25 @@
+{
+  "schema": "structure-viewer.operation-provenance/v1",
+  "case_id": "structure-mdm2-p53",
+  "public_source": "RCSB PDB 1YCR",
+  "retained_input": "inputs/1YCR.pdb",
+  "session_scope": "one mounted viewer session; nonportable internal identifier omitted",
+  "recorded_utc_interval": {
+    "start": "2026-08-29T18:54:57.850Z",
+    "end": "2026-08-29T18:55:51.464Z"
+  },
+  "successful_operations": [
+    "structure_control_viewer",
+    "structure_pymol_actions",
+    "structure_manage_guides",
+    "structure_derive_object",
+    "structure_pymol_action"
+  ],
+  "evidence": "outputs/structure-operation-evidence.json",
+  "source_immutability": "The retained PDB was read only. Chain renaming occurred only in a derived object, and all style and guide changes were session state.",
+  "scientific_scope": "The receipts document interface-oriented viewing and derived-object operations. They do not document a fresh contacts or buried-area computation.",
+  "unavailable_operations": {
+    "structure_browse_related_data": "available=false because active workspace roots were not bound",
+    "structure_load_background": "not invoked because no authenticated image token was returned"
+  }
+}

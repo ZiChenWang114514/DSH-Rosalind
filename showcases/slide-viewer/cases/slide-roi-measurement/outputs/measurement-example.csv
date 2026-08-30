@@ -1,0 +1,2 @@
+annotation_id,source_file,source_sha256,coordinate_frame,width_px,height_px,area_px2,perimeter_px,microns_per_pixel,width_um,height_um,area_um2,perimeter_um,calibration_status
+cmu1-roi-example-001,CMU-1-JP2K-33005.svs,9a1923cd9bcb260ba4d99d64f8d6e32550648c332ba48817f920662f3a513420,base-level-slide-pixels,2000,1500,3000000,7000,0.499,998,748.5,747003,3493,verified-source-metadata

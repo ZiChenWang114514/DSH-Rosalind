@@ -1,0 +1,95 @@
+{
+  "plan_kind": "rehearsed Structure Viewer scene contract",
+  "plugin_version": "0.1.80",
+  "execution_status": "not executed",
+  "session_rule": "Use one openIntentId, one open_from_chat call, and the returned viewerSessionId for every later operation.",
+  "runtime_inputs": {
+    "primary": "inputs/4AKE.pdb",
+    "secondary": "inputs/1AKE.pdb",
+    "secondary_object_id": "adk_ap5_bound_1ake",
+    "scene_model": "outputs/storyboard-model.json"
+  },
+  "steps": [
+    {
+      "order": 1,
+      "operation": "structure-viewer.structure_open_from_chat",
+      "request": "Resolve inputs/4AKE.pdb to its exact absolute path and open it once with a new UUID openIntentId.",
+      "retain": ["viewerSessionId", "mountState", "renderState", "viewerReady"]
+    },
+    {
+      "order": 2,
+      "operation": "structure-viewer.structure_get_state",
+      "request": "Read the current sceneRevision, primary object ID, load status, and capability manifest.",
+      "precondition": "viewerReady is true and load.status is ready"
+    },
+    {
+      "order": 3,
+      "operation": "structure-viewer.structure_add_structure",
+      "request": {
+        "path": "resolve inputs/1AKE.pdb to its exact absolute path",
+        "objectId": "adk_ap5_bound_1ake",
+        "representation": "cartoon",
+        "color": "#d96adf"
+      },
+      "retain": ["appliedRevision", "returned object ID"]
+    },
+    {
+      "order": 4,
+      "operation": "structure-viewer.structure_list_structures",
+      "request": "Confirm the primary object and adk_ap5_bound_1ake, their visibility, frame counts, source names, and transforms."
+    },
+    {
+      "order": 5,
+      "operation": "structure-viewer.structure_apply_scene",
+      "request": "At the current expectedRevision, apply each scene from outputs/storyboard-model.json. Use canonical cartoon and sticks layers; preserve the exact object matrices. Run dryRun before the first mutation.",
+      "scene_order": ["01-open-state", "02-ap5-bound-state", "03-side-by-side", "04-local-kabsch-overlay"]
+    },
+    {
+      "order": 6,
+      "operation": "structure-viewer.structure_save_scene",
+      "request": "Save each applied scene under its exact retained name and record every appliedRevision."
+    },
+    {
+      "order": 7,
+      "operation": "structure-viewer.structure_list_scenes",
+      "request": "Verify the four named scenes and capture their source revisions."
+    },
+    {
+      "order": 8,
+      "operation": "structure-viewer.structure_load_scene",
+      "request": "Restore each scene in order. After every restore, call get_state and compare objects, visibility, transforms, camera, layers, selection, and focus with outputs/storyboard-model.json."
+    },
+    {
+      "order": 9,
+      "operation": "structure-viewer.structure_save_scene",
+      "request": "Save the current open state once as zz-disposable-restore-test."
+    },
+    {
+      "order": 10,
+      "operation": "structure-viewer.structure_delete_scene",
+      "request": "Delete only zz-disposable-restore-test at the current expectedRevision, then call get_state and verify that the live molecular state did not change."
+    },
+    {
+      "order": 11,
+      "operation": "structure-viewer.structure_remove_structure",
+      "request": "After all restore evidence is retained, remove only adk_ap5_bound_1ake and confirm that the primary 4AKE object remains."
+    }
+  ],
+  "completion_evidence_required": [
+    "mounted and ready viewer state",
+    "returned revisions for every mutation",
+    "scene list and per-scene restore comparisons",
+    "disposable-scene deletion receipt",
+    "secondary-object removal receipt"
+  ],
+  "claims_currently_supported": [
+    "The local scene model and matrices exist.",
+    "Two local state mutations were restored exactly in the retained JSON model."
+  ],
+  "claims_awaiting_viewer_execution": [
+    "Native scenes were saved or restored.",
+    "A disposable native scene was deleted.",
+    "The secondary viewer object was removed.",
+    "Any viewer image or movie was rendered."
+  ]
+}

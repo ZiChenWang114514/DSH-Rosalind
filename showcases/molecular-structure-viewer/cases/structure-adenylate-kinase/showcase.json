@@ -1,14 +1,115 @@
 {
-  "id":"structure-adenylate-kinase","plugin_id":"molecular-structure-viewer","plugin_version":"0.1.80","status":"ready","run_date":"2026-08-29","prompt":"prompt.md",
-  "inputs":[
-    {"path":"inputs/4AKE.pdb","bytes":309339,"sha256":"ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"},
-    {"path":"inputs/1AKE.pdb","bytes":357777,"sha256":"651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"}
+  "id": "structure-adenylate-kinase",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/4AKE.pdb",
+      "bytes": 309339,
+      "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+    },
+    {
+      "path": "inputs/1AKE.pdb",
+      "bytes": 357777,
+      "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"
+    }
   ],
-  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/provenance.json"}],
-  "previews":[{"path":"previews/adenylate-kinase.svg"}],
-  "sources":["https://www.rcsb.org/structure/4AKE","https://www.rcsb.org/structure/1AKE","https://files.rcsb.org/download/4AKE.pdb","https://files.rcsb.org/download/1AKE.pdb"],
-  "observations":["Both pinned RCSB files match the starter contract by size and digest.","Each chain A contains 214 C-alpha atoms in the pinned coordinate files.","AP5 is present in 1AKE and has 64 atoms in chain A."],
-  "interpretation":["The starter-contract alignment describes a substantial domain rearrangement between the open and AP5-bound forms."],
-  "limitations":["The current host's preceding structure-viewer session remained render-pending.","The RMSD and TM-scores are starter-contract expectations, not a fresh current-host measurement.","Structural similarity metrics do not measure catalytic activity."],
-  "environment":{"source_snapshot":"2026-08-29","current_host_viewer_status":"not-run-after-pending-session","alignment_contract":"Mol* TM-align 5.11.0"}
+  "outputs": [
+    {
+      "path": "outputs/results.json"
+    },
+    {
+      "path": "outputs/provenance.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 633
+    },
+    {
+      "path": "outputs/teaching-bundle.md"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/adenylate-kinase.svg"
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/4AKE",
+    "https://www.rcsb.org/structure/1AKE",
+    "https://files.rcsb.org/download/4AKE.pdb",
+    "https://files.rcsb.org/download/1AKE.pdb"
+  ],
+  "observations": [
+    "Both pinned RCSB files match the starter contract by size and digest.",
+    "Each chain A contains 214 C-alpha atoms in the pinned coordinate files.",
+    "AP5 is present in 1AKE and has 64 atoms in chain A.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation."
+  ],
+  "interpretation": [
+    "The starter-contract alignment describes a substantial domain rearrangement between the open and AP5-bound forms."
+  ],
+  "limitations": [
+    "The current host's preceding structure-viewer session remained render-pending.",
+    "The RMSD and TM-scores are starter-contract expectations, not a fresh current-host measurement.",
+    "Structural similarity metrics do not measure catalytic activity.",
+    "rosalind_open did not submit 4AKE or 1AKE and did not execute a Rosalind scientific job."
+  ],
+  "environment": {
+    "source_snapshot": "2026-08-29",
+    "current_host_viewer_status": "not-run-after-pending-session",
+    "alignment_contract": "Mol* TM-align 5.11.0"
+  },
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "RCSB PDB 4AKE and 1AKE coordinate snapshots",
+      "Molecular Structure Viewer 0.1.80 starter-example contract",
+      "local deterministic PDB record and digest checks",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Pinned 4AKE and 1AKE digest, atom, C-alpha, and AP5 checks with a clearly labeled Mol* TM-align starter-contract target; no current-host viewer alignment receipt",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/4AKE",
+        "https://www.rcsb.org/structure/1AKE",
+        "https://files.rcsb.org/download/4AKE.pdb",
+        "https://files.rcsb.org/download/1AKE.pdb"
+      ],
+      "inputs": [
+        "inputs/4AKE.pdb",
+        "inputs/1AKE.pdb"
+      ],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/adenylate-kinase.svg"
+      ],
+      "note": "The retained alignment expectations and coordinate checks remain distinct from the separate genuine Rosalind task-chooser observation, which records that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Verify the retained 4AKE and 1AKE byte counts and SHA-256 digests, then recount chain-A C-alpha atoms and chain-A AP5 atoms from the PDB records.",
+    "Use one clean viewer session to open 4AKE once, add 1AKE, align mobile chain A to reference chain A with TM-align, and retain chain-A AP5 as ap5a_bound.",
+    "Capture aligned count, RMSD, both directional TM-scores, returned object identifiers, and applied-state acknowledgement; if any receipt is absent, keep the starter-contract values explicitly labeled as expectations.",
+    "Compare the scene with previews/adenylate-kinase.svg and keep the Rosalind task-chooser observation separate from any viewer or scientific computation."
+  ]
 }

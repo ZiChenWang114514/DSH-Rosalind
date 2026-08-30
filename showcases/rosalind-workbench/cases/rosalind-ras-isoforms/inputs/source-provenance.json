@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "author": "Codex",
+  "createdAt": "2026-08-29T08:55:37.630Z",
+  "database": "UniProtKB",
+  "requestedIdentifier": "P01116,P01111,P01112",
+  "resolvedIdentifier": "P01116@SV1+P01111@SV1+P01112@SV1",
+  "sources": [
+    {
+      "accession": "P01116",
+      "url": "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+      "sequenceVersion": 1,
+      "responseByteLength": 269,
+      "responseSha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6",
+      "sequenceLength": 189,
+      "sequenceSha256": "1d5a9ab11f64cb886d8ffa08a153c412b2d190fcf70e5690cd4b4c7efcdee53a"
+    },
+    {
+      "accession": "P01111",
+      "url": "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+      "sequenceVersion": 1,
+      "responseByteLength": 269,
+      "responseSha256": "6febe34eb4b4ab9be754221ae9db462b7ee0f1579c9d4fe04374b6a461b436cb",
+      "sequenceLength": 189,
+      "sequenceSha256": "89016168d82568aa2caa97166c99ff0b61c6fb19d5729272a7e3f03ab26ce518"
+    },
+    {
+      "accession": "P01112",
+      "url": "https://rest.uniprot.org/uniprotkb/P01112.fasta",
+      "sequenceVersion": 1,
+      "responseByteLength": 269,
+      "responseSha256": "76d71004d95cf7f61a3de87c49eaa8560372f3ee8804d4f61597884a8af869aa",
+      "sequenceLength": 189,
+      "sequenceSha256": "d9360238882c010c8474ef1eba1d2532cd96e706c7d7f689ea2014f37f8f886c"
+    }
+  ],
+  "derivation": {
+    "engine": "builtin-center-star",
+    "producer": "Biological Sequence & Alignment Viewer 0.1.43 alignment implementation",
+    "inputOrder": [
+      "P01116",
+      "P01111",
+      "P01112"
+    ],
+    "parameters": {
+      "matchScore": 2,
+      "mismatchScore": -1,
+      "gapPenalty": -2
+    },
+    "warning": "Exploratory alignment for interactive inspection; use a validated external workflow for publication-grade inference."
+  },
+  "artifact": {
+    "format": "aligned-fasta",
+    "rowCount": 3,
+    "columnCount": 191,
+    "byteLength": 786,
+    "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+    "fileName": "human-RAS-UniProt-SV1.aln-fasta"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "databases-pdl1",
+  "observed_at_utc": "2026-08-29T18:14:05.263Z",
+  "observed_at_local": "2026-08-30T02:14:05.263+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review a human PD-L1 sequence, structure, and binding-record teaching case"
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the task chooser only; it did not analyze PD-L1 binding."
+}

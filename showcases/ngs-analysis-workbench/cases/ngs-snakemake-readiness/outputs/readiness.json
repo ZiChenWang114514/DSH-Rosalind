@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-08-29T17:38:45Z",
+  "workbench_version": "0.2.16",
+  "capability": "ngs-analysis-workbench.check_snakemake_readiness",
+  "workflow": {
+    "workflow_id": "oai_fastq_qc",
+    "engine": "snakemake",
+    "version_id": "version-8e0c15a605d394be27a4e68246a061ef",
+    "source_digest": "sha256:705bf609376de4193dafbb50a8967b75bc30ffeb5c17e1849a56cafe949db201"
+  },
+  "target": "local",
+  "run_dir_checked": "[temporary run directory]",
+  "readiness_id": "readiness-f9ab8db3cacca2f7598dd971fcf54fd2",
+  "snapshot_id": "sanitized-runtime-snapshot",
+  "status": "blocked",
+  "controller_candidates": [],
+  "requirements": [
+    {"id": "snakemake", "layer": "workflow_controller", "state": "missing"}
+  ],
+  "blockers": [
+    "required executable is not available: snakemake"
+  ],
+  "unknowns": [],
+  "plan_created": false,
+  "workflow_run_created": false
+}

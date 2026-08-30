@@ -1,0 +1,77 @@
+{
+  "id": "structure-assembly-symmetry",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 standard library",
+      "RCSB Data API",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Dated retrieval and deterministic reduction of official RCSB 4V1W entry and biological assembly 1 symmetry metadata",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/4V1W.cif", "bytes": 3116021, "sha256": "df1780420f4c23a2ab4c91790c49690de20be1536c8913374e4406666b4bcba2"},
+    {"path": "inputs/acquisition.md", "bytes": 630}
+  ],
+  "outputs": [
+    {"path": "outputs/assembly-symmetry.json", "bytes": 7868},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 642}
+  ],
+  "previews": [
+    {"path": "previews/preview.svg", "bytes": 3346}
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/4V1W",
+    "https://files.rcsb.org/download/4V1W.cif",
+    "https://data.rcsb.org/rest/v1/core/entry/4V1W",
+    "https://data.rcsb.org/rest/v1/core/assembly/4V1W/1",
+    "https://www.ebi.ac.uk/emdb/EMD-2788"
+  ],
+  "observations": [
+    "RCSB biological assembly 1 is a homomeric A24 assembly with 32,736 polymer atoms and 4,080 modeled polymer residues.",
+    "The returned global symmetry record is octahedral O with six order-2, four order-3, and three order-4 rotation axes.",
+    "The retained cluster has 24 members and an average RMSD of 0.024336751 angstrom."
+  ],
+  "interpretation": [
+    "The RCSB octahedral annotation describes the organization of the 24-subunit ferritin shell in biological assembly 1."
+  ],
+  "limitations": [
+    "The public assembly annotation does not independently establish oligomerization under every solution condition.",
+    "The preview is a metadata schematic and does not claim displayed viewer axes, cage, cluster coloring, or camera state.",
+    "Archive-derived metadata may change after the retrieval date.",
+    "rosalind_open did not submit 4V1W, retrieve assembly metadata, analyze symmetry, or execute a Rosalind scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": ["https://data.rcsb.org/rest/v1/core/entry/4V1W", "https://data.rcsb.org/rest/v1/core/assembly/4V1W/1"],
+      "inputs": ["inputs/4V1W.cif", "inputs/acquisition.md"],
+      "outputs": ["outputs/assembly-symmetry.json", "outputs/rosalind-open-observation.json", "scripts/fetch_assembly_metadata.py"],
+      "previews": ["previews/preview.svg"],
+      "note": "The retained record includes source URLs, coordinate hash, entry facts, assembly counts, every axis endpoint, and all member/operator identities; the separate genuine Rosalind task-chooser observation states that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/fetch_assembly_metadata.py with network access to the official RCSB Data API.",
+    "Compare the regenerated dated JSON with the retained preview and source hash."
+  ],
+  "environment": {
+    "python": "3.14.0",
+    "network": "official RCSB Data API",
+    "cost": "free",
+    "data": "public"
+  }
+}

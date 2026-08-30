@@ -1,0 +1,112 @@
+{
+  "id": "databases-airway-rnaseq",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases biostudies-arrayexpress-skill",
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained E-GEOD-52778 study metadata with deterministic treatment and cell-line counts plus a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 341
+    },
+    {
+      "path": "inputs/biostudies-E-GEOD-52778.json",
+      "bytes": 13890
+    },
+    {
+      "path": "scripts/build_case.py",
+      "bytes": 5999
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1692
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 656
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 621
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6239
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2221
+    }
+  ],
+  "sources": [
+    "https://www.ebi.ac.uk/biostudies/studies/E-GEOD-52778"
+  ],
+  "observations": [
+    "E-GEOD-52778 describes human airway smooth-muscle RNA-seq in response to asthma medications.",
+    "The study record reports 16 samples and 16 sequencing assays.",
+    "Four treatment groups and four cell lines each contribute four samples.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "The retained study-level metadata support treatment-group planning, but they do not support a paired or donor-aware model until the SDRF sample-to-donor mapping has been extracted and verified."
+  ],
+  "limitations": [
+    "Reads were not downloaded and differential expression was not run.",
+    "Sample pairing and donor covariates require SDRF inspection before modeling.",
+    "The combined-treatment group must remain separate from dexamethasone alone."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.ebi.ac.uk/biostudies/studies/E-GEOD-52778"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/biostudies-E-GEOD-52778.json",
+        "scripts/build_case.py"
+      ],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the E-GEOD-52778 BioStudies request recorded in outputs/query-verification.json.",
+    "Run python scripts/build_case.py and compare the treatment and cell-line counts with the retained study record.",
+    "Do not describe the design as paired or donor-aware until the SDRF sample-to-donor mapping has been extracted and verified."
+  ]
+}

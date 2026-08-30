@@ -1,0 +1,19 @@
+{
+  "schema": "gpt-science.source-verification/v1",
+  "showcase_id": "rosalind-petase-mutations",
+  "question": "Where do reported PETase substitutions lie relative to the catalytic region?",
+  "source": "https://www.rcsb.org/structure/5XJH",
+  "checked_at_utc": "2026-08-29T18:23:14.185Z",
+  "verification_kind": "PDB 5XJH case-specific record summary",
+  "observations": [
+    "RCSB PDB identifies 5XJH as a 1.54 angstrom X-ray structure of PETase from Ideonella sakaiensis.",
+    "The entry records one 300-residue PETase chain with no mutation in the deposited construct; its linked primary report describes a Ser-His-Asp catalytic triad.",
+    "The retained case includes no substitution list or coordinate-distance calculation, so no mutation-to-catalytic-region placement is established."
+  ],
+  "interpretation": "PDB 5XJH provides a defensible reference structure for checking published substitution locations once explicit residue identifiers and a distance method are supplied.",
+  "limitations": [
+    "No mutation was proposed or introduced.",
+    "No coordinate analysis, activity estimate, or performance ranking was performed.",
+    "Rosalind launcher readiness is documented separately and does not establish a scientific run."
+  ]
+}

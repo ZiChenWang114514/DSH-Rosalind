@@ -1,0 +1,30 @@
+{
+  "model": "pathology-job-lifecycle-rehearsal",
+  "version": "1.0.0",
+  "source_plan": "OpenSlide CMU-1; not downloaded",
+  "states": ["planned", "admitted", "running", "cancel_requested", "cancelled_settled", "interrupted_recoverable", "resumed_running", "succeeded", "failed"],
+  "transitions": [
+    {"from": "planned", "event": "admit_with_current_capability", "to": "admitted", "requires": ["exact operation kind", "fresh source authorization", "new idempotency key"]},
+    {"from": "admitted", "event": "worker_started", "to": "running", "requires": ["actual jobId"]},
+    {"from": "running", "event": "cancel_accepted", "to": "cancel_requested", "requires": ["slide.cancel_pathology acknowledgement"]},
+    {"from": "cancel_requested", "event": "workers_drained", "to": "cancelled_settled", "requires": ["executionSettled true"]},
+    {"from": "running", "event": "process_interrupted", "to": "interrupted_recoverable", "requires": ["durableId", "unchanged saved inputs"]},
+    {"from": "interrupted_recoverable", "event": "resume_admitted", "to": "resumed_running", "requires": ["fresh authorization", "supported exact kind", "new attempt identity"]},
+    {"from": "running", "event": "terminal_success", "to": "succeeded", "requires": ["terminal successful result"]},
+    {"from": "resumed_running", "event": "terminal_success", "to": "succeeded", "requires": ["terminal successful result"]},
+    {"from": "running", "event": "terminal_failure", "to": "failed", "requires": ["terminal failure result"]},
+    {"from": "resumed_running", "event": "terminal_failure", "to": "failed", "requires": ["terminal failure result"]}
+  ],
+  "invariants": [
+    "A cancellation acknowledgement does not establish worker shutdown.",
+    "A terminally cancelled job is not resumed; a later run needs a new idempotency key.",
+    "Recovery requires fresh source authorization and unchanged saved inputs.",
+    "Predicted components or classes remain research outputs, not diagnoses or validated cell identities."
+  ],
+  "viewer_operations": {
+    "slide-viewer.slide_get_pathology": "rehearsed",
+    "slide-viewer.slide_cancel_pathology": "rehearsed",
+    "slide-viewer.slide_resume_pathology": "rehearsed"
+  },
+  "viewer_execution": false
+}

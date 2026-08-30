@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-variant-pathway",
+  "observed_at_utc": "2026-08-29T18:24:25.563Z",
+  "observed_at_local": "2026-08-30T02:24:25.563+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Open Rosalind Workbench for the rs7903146-to-TCF7L2-to-Wnt pathway teaching case; launcher readiness check only, with no scientific job execution."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the Rosalind task chooser only; it did not retrieve, annotate, classify, or analyze rs7903146 and did not calculate a pathway result."
+}

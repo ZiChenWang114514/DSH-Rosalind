@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 46398810,
+        "MolecularFormula": "C27H28F2N6O",
+        "MolecularWeight": "490.5",
+        "SMILES": "C1CNCCC1N2C=C(C=N2)C3=NC4=C(C=CC=C4N=C3)C5=CC(=C(C(=C5)F)CN6CCOCC6)F",
+        "ConnectivitySMILES": "C1CNCCC1N2C=C(C=N2)C3=NC4=C(C=CC=C4N=C3)C5=CC(=C(C(=C5)F)CN6CCOCC6)F",
+        "InChIKey": "IBPVXAOOVUAOKJ-UHFFFAOYSA-N",
+        "XLogP": 2.5,
+        "TPSA": 68.1,
+        "HBondDonorCount": 1,
+        "HBondAcceptorCount": 8,
+        "RotatableBondCount": 5,
+        "Title": "4-(2,6-difluoro-4-(3-(1-(piperidin-4-yl)-1H-pyrazol-4-yl)quinoxalin-5-yl)benzyl)morpholine"
+      }
+    ]
+  }
+}

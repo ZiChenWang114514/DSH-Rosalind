@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "databases-il6r-asthma",
+  "observed_at_utc": "2026-08-29T18:14:05.178Z",
+  "observed_at_local": "2026-08-30T02:14:05.178+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review an IL6R-asthma public genetics, target-evidence, and tissue-eQTL teaching case"
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the task chooser only; the retained public database records provide the scientific evidence."
+}

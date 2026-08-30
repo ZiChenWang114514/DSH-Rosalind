@@ -17,12 +17,19 @@ The starter contract specifies Mol* TM-align 5.11.0 using chain-A protein C-alph
 
 The expected alignment is consistent with a shared adenylate-kinase fold undergoing a pronounced domain rearrangement between open and ligand-bound forms. AP5 marks the active-site region in the closed structure. This interpretation should be revisited if a clean viewer rerun produces different metrics.
 
+## Rosalind Workbench observation
+
+`mcp__rosalind__rosalind_open` was genuinely invoked with this case's task context at `2026-08-29T18:03:11.286Z`. The exact arguments and response are retained in the 633-byte `outputs/rosalind-open-observation.json`. The call opened only the task chooser; it did not submit 4AKE or 1AKE, align either structure, or execute a Rosalind scientific job.
+
 ## Reproduce in Codex
 
-1. Open `inputs/4AKE.pdb` in Molecular Structure Viewer.
-2. Add `inputs/1AKE.pdb` to the same scene.
-3. Align protein chain A from 1AKE to chain A from 4AKE.
-4. Color 4AKE teal and 1AKE magenta; display AP5 as amber sticks.
-5. Export the alignment result and replace the contract section in `outputs/results.json` with the observed values.
+1. Before using the viewer, verify `inputs/4AKE.pdb` as 309,339 bytes with SHA-256 `ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78`, and `inputs/1AKE.pdb` as 357,777 bytes with SHA-256 `651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9`.
+2. Open `inputs/4AKE.pdb` once in a clean Molecular Structure Viewer session; retain that returned viewer state for every subsequent command.
+3. Add `inputs/1AKE.pdb` to the same scene and retain the returned object identifier. Align protein chain A of that mobile object to chain A of 4AKE using the viewer's TM-align method.
+4. Color 4AKE teal and 1AKE magenta. Select AP5 in chain A of 1AKE, create or retain the derived object as `ap5a_bound`, and display it as amber sticks.
+5. Record the alignment response, including aligned-residue count, RMSD, reference TM-score, mobile TM-score, object identifiers, and applied-state acknowledgement. Only after a successful response may the contract section in `outputs/results.json` be replaced by fresh values.
+6. If the viewer stays pending, times out, or returns no applied-state acknowledgement, preserve the starter-contract values and report `structure_open_from_chat`, `structure_add_structure`, `structure_align_structures`, and `structure_query` as unverified.
 
-The reusable prompt is in `prompt.md`; source and execution status are recorded in `outputs/provenance.json`.
+The exact teaching prompt is in `prompt.md`; source and execution status are recorded in `outputs/provenance.json`.
+
+The separate Rosalind observation records task-chooser availability only and does not verify a Rosalind alignment run.

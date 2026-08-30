@@ -1,0 +1,4 @@
+name,cid,rdkit_mol_wt,rdkit_mol_logp,rdkit_tpsa,hbd,hba,rotatable_bonds,aromatic_ring_count
+Imatinib,5291,493.62,4.59,86.28,2,7,7,4
+Gefitinib,123631,446.91,4.28,68.74,1,7,8,3
+Erlotinib,176870,393.44,3.41,74.73,1,7,10,3

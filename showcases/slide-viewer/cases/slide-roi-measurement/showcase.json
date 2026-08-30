@@ -1,0 +1,119 @@
+{
+  "id": "slide-roi-measurement",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local source verification and deterministic geometry checks",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "pinned CMU-1 metadata and deterministic ROI calculations; viewer authoring and export actions remain rehearsed contracts",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 806,
+      "sha256": "d3a8b2f70adb440c87d3d80f2a651847bec6a57fdca801a211515e7483a9ea9b"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/roi-example.geojson",
+      "bytes": 1040,
+      "sha256": "40f6f5084ae1e5295c65eaec11c978be5e5c8aef22f101410017d5509498d2b1"
+    },
+    {
+      "path": "outputs/measurement-example.csv",
+      "bytes": 383,
+      "sha256": "d65ea3ea91b88a513f01abd2ce87396b8f467bf08ea026e769890e893fc6fe2c"
+    },
+    {
+      "path": "outputs/roi-measurement-receipt.json",
+      "bytes": 1490,
+      "sha256": "a0c3f758b167268ff0e3f8a0ffe5760b138634ddee6a0a28580a648c89e55193"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 872,
+      "sha256": "bc15b78ee16c31259aec2f7d385854582a235d87bfaeb7bef5e07a7a4c39c39e"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5513,
+      "sha256": "623a235d78ded785f5db7729d086392b480161f9301dde1424cc910555c9860b"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1645,
+      "sha256": "1ba983bad2bc9ec7586669a1d06ca0a17a0fa47617bf078086d0b6615fa1c4e2"
+    }
+  ],
+  "sources": [
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs"
+  ],
+  "observations": [
+    "The shared CC0 CMU-1 source matches its published byte count and SHA-256.",
+    "The declared rectangle lies inside the verified 46,000 by 32,893 base-level pixel frame.",
+    "Pixel and calibrated physical measurements are retained in inspectable GeoJSON, CSV, and JSON files.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The artifacts demonstrate source-associated geometry and measurement arithmetic without making a tissue interpretation."
+  ],
+  "limitations": [
+    "The example geometry was not created by a current user gesture.",
+    "The prior source session was awaiting-viewer, so ROI authoring and export actions were not executed.",
+    "No user source-image capture permission was recorded and no source pixels were exported.",
+    "The Rosalind operation opened only the task chooser and did not perform a measurement or execute a scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/roi-example.geojson",
+        "outputs/measurement-example.csv",
+        "outputs/roi-measurement-receipt.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The source pin and coordinate frame support deterministic geometry and calibrated measurements. outputs/rosalind-open-observation.json separately records the genuine task-chooser invocation and its limitation."
+    }
+  ],
+  "reproduction": [
+    "Verify the reused CMU-1 source against the acquisition note.",
+    "Recompute the polygon area and perimeter from roi-example.geojson.",
+    "Apply the retained calibration and compare the CSV and JSON receipt.",
+    "Invoke mcp__rosalind__rosalind_open with the retained case-specific task_context and compare its response with outputs/rosalind-open-observation.json."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC0 source retained in the shared workspace",
+    "device": "local",
+    "viewer_session_recorded": true,
+    "viewer_state": "awaiting-viewer",
+    "viewer_actions_executed": false
+  }
+}

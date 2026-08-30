@@ -1,0 +1,150 @@
+{
+  "id": "rosalind-boltz-repeats",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "scientific-computing",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Boltz-2 in a completed local GPU run",
+      "local Python evidence inspection and compact export",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local GPU compute for the historical run; local workstation for evidence inspection",
+    "implementation": "20-candidate Boltz-2 screen followed by five fixed-seed diffusion samples for each of the top five candidates; no model rerun during this update",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 8682
+    },
+    {
+      "path": "inputs/candidates.csv",
+      "bytes": 3898
+    },
+    {
+      "path": "inputs/source-and-run-provenance.md",
+      "bytes": 1006
+    },
+    {
+      "path": "inputs/PDL1_Q9NZQ7_18-239.fasta",
+      "bytes": 261,
+      "sha256": "f14aae39522e50e300302f4d91d8e48357036e004fee84756ccf20ffb0ebac99"
+    },
+    {
+      "path": "prepare_boltz_inputs.py",
+      "bytes": 2514,
+      "sha256": "5bd350d994e45aa54800c1c68207d274fb4ca7db6255c2dda7ee929caf2bdc72"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/run-evidence.json",
+      "bytes": 2147
+    },
+    {
+      "path": "outputs/run-top5-ensemble.sh",
+      "bytes": 348
+    },
+    {
+      "path": "outputs/score-top5-ensemble.py",
+      "bytes": 5278
+    },
+    {
+      "path": "outputs/top5-confidence-records.json",
+      "bytes": 24303
+    },
+    {
+      "path": "outputs/top5-ensemble-details.json",
+      "bytes": 17119
+    },
+    {
+      "path": "outputs/top5-ensemble-ranking.csv",
+      "bytes": 1758
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 756
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 8069
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1941
+    }
+  ],
+  "sources": [
+    "https://github.com/jwohlwend/boltz",
+    "https://www.rcsb.org/structure/5JDS",
+    "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry"
+  ],
+  "observations": [
+    "The retained prior run screened 20 candidates successfully and completed 25 of 25 five-sample ensemble predictions.",
+    "The fixed-seed ensemble ranks NB13_E104Q first with mean composite score 0.9174960599 and standard deviation 0.0080318136.",
+    "The compact case retains 25 raw confidence payloads, the complete per-model table, a portable command, the scoring method, and the historical observation that 25 paired CIF files were present in the source run.",
+    "A genuine Rosalind launcher call returned ready=true but submitted no sequence and performed no prediction, resampling, or ranking."
+  ],
+  "interpretation": [
+    "Repeated model samples support prioritization by structural confidence and consistency within this defined setup.",
+    "The ranking is a computational hypothesis for experimental testing."
+  ],
+  "limitations": [
+    "Model confidence and contact-derived composite scores are not measured affinity or binding free energy.",
+    "The compact repository snapshot omits historical CIF coordinates; a fresh run recreates them from the retained public sequences.",
+    "A fixed seed does not characterize all model uncertainty.",
+    "Boltz-2 was not rerun during this showcase update.",
+    "The exact Boltz package version used for the historical snapshot was not retained."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://github.com/jwohlwend/boltz",
+        "https://www.rcsb.org/structure/5JDS",
+        "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry"
+      ],
+      "inputs": [
+        "inputs/candidates.csv",
+        "inputs/source-and-run-provenance.md",
+        "inputs/PDL1_Q9NZQ7_18-239.fasta",
+        "prepare_boltz_inputs.py"
+      ],
+      "outputs": [
+        "outputs/run-evidence.json",
+        "outputs/top5-confidence-records.json",
+        "outputs/top5-ensemble-details.json",
+        "outputs/top5-ensemble-ranking.csv",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The builder imports a completed source run's ranking, per-model metrics, and confidence payloads, then checks each paired structure file before generating the preview. Public sequences and portable preparation, execution, and scoring scripts support a fresh run. The Rosalind observation records chooser readiness only."
+    }
+  ],
+  "reproduction": [
+    "Generate the five historical top-candidate YAML files from the retained public target and candidate sequences.",
+    "Run five fixed-seed Boltz samples per candidate with outputs/run-top5-ensemble.sh and record current package versions.",
+    "Score the 25 fresh CIF and confidence pairs with outputs/score-top5-ensemble.py and compare them with the retained ranking.",
+    "Treat the Rosalind launcher observation separately from every Boltz computation."
+  ],
+  "environment": {
+    "prior_compute": "Boltz-2 on local GPU compute",
+    "prior_cost": "no paid API",
+    "current_action": "local evidence inspection only"
+  }
+}

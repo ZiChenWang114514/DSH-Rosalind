@@ -1,0 +1,3 @@
+# Spatial research package
+
+Assemble an inspectable inventory for the licensed mouse-brain spatial source, complete observation export, source-associated demonstration geometry, matrix summaries, and scientific-layer mapping. Verify every repository path, byte count, and SHA-256; record missing workflow results and source-image exports plainly rather than inventing them. Inspect `outputs/rosalind-open-observation.json` as the exact record of the genuine case-specific `mcp__rosalind__rosalind_open` call and explain that its task-chooser response is not evidence of package assembly, viewer export, workflow execution, source-image permission, or a Rosalind scientific job.

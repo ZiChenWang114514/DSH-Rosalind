@@ -1,0 +1,9 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-petase",
+  "verified_at_utc": "2026-08-29T19:57:20.643896Z",
+  "calls": [
+    {"skill":"uniprot-skill","request":{"base_url":"https://rest.uniprot.org","path":"uniprotkb/A0A0K8P6T7","params":{"format":"json"}},"source_url":"https://rest.uniprot.org/uniprotkb/A0A0K8P6T7?format=json","retrieved_at_utc":"2026-08-29T19:57:19.644686Z","ok":true,"summary":{"accession":"A0A0K8P6T7","entry_id":"PETH_PISS1","reviewed":true,"entry_version":54}},
+    {"skill":"rcsb-pdb-skill","request":{"base_url":"https://data.rcsb.org/rest/v1","path":"core/entry/5XJH"},"source_url":"https://data.rcsb.org/rest/v1/core/entry/5XJH","retrieved_at_utc":"2026-08-29T19:57:20.643896Z","ok":true,"summary":{"pdb_id":"5XJH","pdb_doi":"10.2210/pdb5xjh/pdb"}}
+  ]
+}

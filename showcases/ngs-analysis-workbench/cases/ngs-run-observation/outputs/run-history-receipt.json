@@ -1,0 +1,25 @@
+{
+  "schema": "gpt-science.ngs-operation-receipt/v1",
+  "case_id": "ngs-run-observation",
+  "scientific_context": "Query durable Workbench history before interpreting the retained local FASTQ QC timeline.",
+  "operations": [
+    {
+      "operation": "ngs-analysis-workbench.list_ngs_runs",
+      "started_at_utc": "2026-08-29T18:59:28.408Z",
+      "finished_at_utc": "2026-08-29T18:59:28.469Z",
+      "arguments": {"limit": 20},
+      "response": {"ok": true, "runs": []},
+      "operation_succeeded": true
+    },
+    {
+      "operation": "ngs-analysis-workbench.list_ngs_run_lineages",
+      "started_at_utc": "2026-08-29T18:59:28.469Z",
+      "finished_at_utc": "2026-08-29T18:59:28.513Z",
+      "arguments": {"limit": 20},
+      "response": {"ok": true, "runs": []},
+      "operation_succeeded": true
+    }
+  ],
+  "interpretation": "Both history operations completed successfully and returned no registered runs. The retained local JSONL timeline therefore has no Workbench registry identity or lineage.",
+  "limitation": "An empty history is an observed Workbench response, not evidence that the local reference process was registered or that an engine completed."
+}

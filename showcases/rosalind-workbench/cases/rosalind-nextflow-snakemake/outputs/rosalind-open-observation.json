@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-nextflow-snakemake",
+  "observed_at_utc": "2026-08-29T18:24:25.789Z",
+  "observed_at_local": "2026-08-30T02:24:25.789+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Open Rosalind Workbench for the equivalent FASTQ QC workflow-definition teaching case; launcher readiness check only, with no workflow-engine or scientific job execution."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the Rosalind task chooser only; it did not execute Nextflow, Snakemake, or the shared FASTQ QC calculation."
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "slide-local-dicom",
+  "observed_at_utc": "2026-08-29T17:57:18.887Z",
+  "observed_at_local": "2026-08-30T01:57:18.887+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review the verified six-member local DICOM WSI source and parser-admission result before choosing any future Rosalind research task."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "response_envelope": {
+    "schemaVersion": "life-sciences.launcher/v1",
+    "ready": true,
+    "view": "launcher"
+  },
+  "scientific_job_executed": false,
+  "limitation": "This invocation opened the task chooser only; it did not select or execute a scientific job and is not scientific evidence for this case."
+}

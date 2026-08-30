@@ -1,0 +1,139 @@
+{
+  "id": "sequence-session-restore",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "recovery",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "UniProt REST and local Python",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "portable local relative-path KRAS manifest and exact restoration checks, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 8207,
+      "sha256": "64631d70223343b4f426bae4726e1e0fb1f0437013816677de4ce395c060be01"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 415,
+      "sha256": "3114a44a148e6a3dc252396c2f70790eb1aca4312cf7df4c13338801c9b6ded9"
+    },
+    {
+      "path": "inputs/P01116.fasta",
+      "bytes": 269,
+      "sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6"
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 562,
+      "sha256": "a6824f90abeb32fe8b04bf148f3b6a61981e9ece19f97b11b64506d49c5023d8"
+    },
+    {
+      "path": "inputs/portable-session.json",
+      "bytes": 1147,
+      "sha256": "b880d7b1ae4f0bbb83e39ec477283bd8e45ccf71ac9825ededacfe2185a15b1a"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/restored-session.json",
+      "bytes": 1147,
+      "sha256": "b880d7b1ae4f0bbb83e39ec477283bd8e45ccf71ac9825ededacfe2185a15b1a"
+    },
+    {
+      "path": "outputs/restoration-equivalence.json",
+      "bytes": 1537,
+      "sha256": "9ce83497e32d40b59c76e7bdb47bf5989c9e58a5a56f79cb79dce8b50678c626"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 707,
+      "sha256": "d365e0c3a0dff602a7709e71b302bf6a15451e411f7dd322cb9ed7c622d9ff21"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 7701,
+      "sha256": "109ff720f1b8a466c4a79e6713c25774ea783c6aa2edfd93a02c568c1056ba41"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1882,
+      "sha256": "348c70c0e8b3c78028f392b57240098e8791a7dc972e2ecf26459c658afb3cac"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+  ],
+  "observations": [
+    "The portable manifest uses a repository-relative source path and contains no viewer session ID or machine-specific absolute path.",
+    "All 12 named source and view-state fields matched after a local JSON round trip.",
+    "The serialized portable and restored manifests are byte-identical, and the source plus selected motif were revalidated.",
+    "A genuine Rosalind Workbench open call returned the retained task-chooser-ready message.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "The documented KRAS source-linked view state can be restored exactly through the retained portable JSON representation."
+  ],
+  "limitations": [
+    "The portable JSON is Codex-authored and is not a private Sequence Viewer saved-session artifact.",
+    "Sequence Viewer open, save, restore, and query operations are rehearsed.",
+    "rosalind_open only opened the task chooser and did not save or restore a scientific session.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+      ],
+      "inputs": [
+        "inputs/P01116.fasta",
+        "inputs/source-provenance.json",
+        "inputs/portable-session.json"
+      ],
+      "outputs": [
+        "outputs/restored-session.json",
+        "outputs/restoration-equivalence.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Codex authored the portable representation; local Python performed the round trip; outputs/rosalind-open-observation.json records the genuine launcher invocation."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run: python showcases/biological-sequence-viewer/cases/sequence-session-restore/build_case.py",
+    "Require a safe relative source path, valid source digest, exact 10-17 motif, 12 passing field checks, and byte-identical serialized manifests.",
+    "Treat viewer session operations as rehearsed unless repeated in a mounted viewer.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_actions": "rehearsed",
+    "rosalind_open": "executed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-density-map",
+  "attempt_date": "2026-08-30",
+  "plugin_version": "0.1.80",
+  "session_scope": "one viewer opening attempt; nonportable internal identifiers omitted",
+  "open_result": {
+    "session_ready": true,
+    "viewer_ready": false,
+    "mount_state": "presentation-issued",
+    "render_state": "pending",
+    "workspace_publication_available": true
+  },
+  "density_discovery_attempt": "viewer command deadline elapsed before acknowledgement",
+  "viewer_density_discovery_executed": false,
+  "viewer_density_fit_executed": false,
+  "reason": "The retained numerical result was computed directly from the public PDBe CCP4 map. It is not labeled as a Molecular Structure Viewer density_fit result."
+}

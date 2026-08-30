@@ -1,0 +1,75 @@
+{
+  "showcase_id": "sequence-annotation-track",
+  "reference": {
+    "accession_version": "NC_001416.1",
+    "source_length": 48502,
+    "source_sha256": "3c624302adeeb3c00649f549903ab781b9e75bab16069ae655833d536407367f",
+    "extracted_interval": {
+      "start": 37180,
+      "end": 38050,
+      "coordinate_system": "1-based inclusive"
+    },
+    "regional_length": 871,
+    "regional_sequence_sha256": "6b71822a19e6ca619f500720078e49c424a45d4c7f59d764f71ccb1b3f5f6842"
+  },
+  "coordinate_mapping": "local = source - 37180 + 1",
+  "features": [
+    {
+      "feature_id": "cI_CDS",
+      "type": "CDS",
+      "label": "cI",
+      "local_start_1based": 48,
+      "local_end_1based_inclusive": 761,
+      "strand": "-",
+      "source_accession": "NC_001416.1",
+      "source_start_1based": 37227,
+      "source_end_1based_inclusive": 37940
+    },
+    {
+      "feature_id": "OR3",
+      "type": "regulatory_region",
+      "label": "OR3",
+      "local_start_1based": 772,
+      "local_end_1based_inclusive": 788,
+      "strand": "+",
+      "source_accession": "NC_001416.1",
+      "source_start_1based": 37951,
+      "source_end_1based_inclusive": 37967
+    },
+    {
+      "feature_id": "OR2",
+      "type": "regulatory_region",
+      "label": "OR2",
+      "local_start_1based": 795,
+      "local_end_1based_inclusive": 811,
+      "strand": "+",
+      "source_accession": "NC_001416.1",
+      "source_start_1based": 37974,
+      "source_end_1based_inclusive": 37990
+    },
+    {
+      "feature_id": "OR1",
+      "type": "regulatory_region",
+      "label": "OR1",
+      "local_start_1based": 819,
+      "local_end_1based_inclusive": 835,
+      "strand": "+",
+      "source_accession": "NC_001416.1",
+      "source_start_1based": 37998,
+      "source_end_1based_inclusive": 38014
+    }
+  ],
+  "track_format": "GFF3 using regional FASTA coordinates",
+  "execution": {
+    "status": "verified local extraction",
+    "tool": "Python 3 standard library",
+    "viewer_operations": "sequence_load_track was genuinely requested twice in source-compatible sessions; neither load was acknowledged, and the fresh records and tracks queries also timed out",
+    "viewer_observation": "outputs/sequence-load-track-observation.json",
+    "track_loaded": false
+  },
+  "limitations": [
+    "The regional GFF3 contains only cI and OR3/OR2/OR1, not every GenBank feature in the interval.",
+    "The preview is a coordinate-faithful project graphic, not a viewer capture.",
+    "Two Viewer sessions returned no load acknowledgement or mapping diagnostics, so parsing, mapping, display, and retention of the track remain unverified."
+  ]
+}

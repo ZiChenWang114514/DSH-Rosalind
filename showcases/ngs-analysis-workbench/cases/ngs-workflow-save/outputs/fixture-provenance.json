@@ -1,0 +1,11 @@
+{
+  "source": "European Nucleotide Archive",
+  "run_accession": "DRR037765",
+  "source_url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz",
+  "upstream_repository_fixture": "showcases/biological-sequence-viewer/cases/sequence-fastq-qc/inputs/DRR037765-first-500.fastq",
+  "upstream_subset_sha256": "46bd72991d9c9c2bf64751e88e52548d852d5fa021da4815ee6f6517a51b18b9",
+  "subset_rule": "first 24 complete records from the retained 500-record public subset; bytes preserved",
+  "records": 24,
+  "bytes": 23031,
+  "sha256": "1091da980ce003fd7b3981c9ea1fc002a399eb030553adfb395c277046e61ff4"
+}

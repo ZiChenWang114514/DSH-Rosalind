@@ -1,0 +1,31 @@
+{
+  "showcase_id": "rosalind-egfr-t790m",
+  "title": "EGFR T790M covalent inhibitor pose comparison",
+  "question": "Which contacts and Cys797 covalent geometry are observed for rociletinib and osimertinib in experimental EGFR T790M structures?",
+  "retrieved_on": "2026-08-30",
+  "contact_cutoff_angstrom": 4.0,
+  "structures": [
+    {
+      "pdb_id": "5XDK",
+      "file": "inputs/5XDK.pdb",
+      "label": "EGFR-T790M-rociletinib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "8JC",
+      "ligand_chain": "A"
+    },
+    {
+      "pdb_id": "6JX0",
+      "file": "inputs/6JX0.pdb",
+      "label": "EGFR-T790M-osimertinib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "YY3",
+      "ligand_chain": "A"
+    }
+  ],
+  "compounds": [
+    {"name": "Rociletinib", "slug": "rociletinib", "pubchem_cid": 57335384, "role": "5XDK ligand"},
+    {"name": "Osimertinib", "slug": "osimertinib", "pubchem_cid": 71496458, "role": "6JX0 ligand"}
+  ]
+}

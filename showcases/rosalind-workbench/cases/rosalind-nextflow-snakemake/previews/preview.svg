@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Nextflow and Snakemake workflow definitions</title><desc id="desc">Two unexecuted workflow definitions call one verified Python FASTQ quality computation.</desc>
+<rect width="1200" height="675" fill="#071522"/><style>.k{font:600 21px Segoe UI,Arial;fill:#67e8f9}.t{font:700 42px Segoe UI,Arial;fill:#f8fafc}.h{font:700 25px Segoe UI,Arial;fill:#f8fafc}.b{font:20px Segoe UI,Arial;fill:#cbd5e1}.s{font:17px Segoe UI,Arial;fill:#94a3b8}</style>
+<text x="64" y="72" class="k">DRR037765 · FIRST 500 READS</text><text x="64" y="130" class="t">One computation, two workflow definitions</text>
+<rect x="64" y="205" width="285" height="230" rx="22" fill="#0f2538" stroke="#22d3ee"/><text x="105" y="265" class="h">Nextflow DSL2</text><text x="105" y="315" class="b">main.nf retained</text><text x="105" y="355" class="b">engine unavailable</text><text x="105" y="395" class="s">workflow unexecuted</text>
+<rect x="458" y="205" width="285" height="230" rx="22" fill="#0f2538" stroke="#a78bfa"/><text x="500" y="265" class="h">Shared qc_core</text><text x="500" y="315" class="b">500 reads</text><text x="500" y="355" class="b">235,490 bases</text><text x="500" y="395" class="s">direct Python run verified</text>
+<rect x="852" y="205" width="285" height="230" rx="22" fill="#0f2538" stroke="#2dd4bf"/><text x="894" y="265" class="h">Snakemake</text><text x="894" y="315" class="b">Snakefile retained</text><text x="894" y="355" class="b">engine unavailable</text><text x="894" y="395" class="s">workflow unexecuted</text>
+<path d="M349 320 H458 M743 320 H852" stroke="#64748b" stroke-width="4" stroke-dasharray="10 8"/>
+<text x="64" y="520" class="b">GC 28.85% · Q30 95.40% · read length 469–471 bp</text>
+<text x="64" y="600" class="s">The numerical result comes from direct qc_core execution; no workflow-engine run record exists.</text>
+</svg>

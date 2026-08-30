@@ -1,0 +1,31 @@
+{
+  "schema": "structure-viewer.operation-provenance/v1",
+  "case_id": "structure-scene-storyboard",
+  "public_sources": [
+    "RCSB PDB 4AKE",
+    "RCSB PDB 1AKE"
+  ],
+  "retained_inputs": [
+    "inputs/4AKE.pdb",
+    "inputs/1AKE.pdb"
+  ],
+  "session_scope": "one mounted comparison session; nonportable internal identifier omitted",
+  "recorded_utc_interval": {
+    "start": "2026-08-29T18:57:36.933Z",
+    "end": "2026-08-29T18:58:44.570Z"
+  },
+  "successful_operations": [
+    "structure_transform_object",
+    "structure_undo",
+    "structure_redo",
+    "structure_set_object_visibility"
+  ],
+  "evidence": "outputs/structure-operation-evidence.json",
+  "reversibility": "The temporary +4 Å x translation was undone, redone, and undone again. The comparison object ended at identity transform and visible.",
+  "source_immutability": "All changes were viewer session state. The retained 4AKE and 1AKE files were not edited.",
+  "scientific_scope": "The translation tests object-state history and must not be interpreted as a molecular displacement or conformational pathway.",
+  "related_data_authorization_attempt": {
+    "evidence": "outputs/related-data-authorization-blocker.json",
+    "result": "No authenticated directory listing or image token was returned; no related-data or background capability was added."
+  }
+}

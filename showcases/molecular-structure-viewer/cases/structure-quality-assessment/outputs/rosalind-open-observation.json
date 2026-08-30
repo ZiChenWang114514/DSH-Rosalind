@@ -1,0 +1,13 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "structure-quality-assessment",
+  "observed_at_utc": "2026-08-29T18:07:20.174Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect the Rosalind task chooser for the verified 4V1W wwPDB residue-quality assessment showcase."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit 4V1W or its validation report, assess residue quality, or run any Rosalind scientific job."
+}

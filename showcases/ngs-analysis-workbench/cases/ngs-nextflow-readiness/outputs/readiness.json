@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-08-29T17:38:39Z",
+  "workbench_version": "0.2.16",
+  "capability": "ngs-analysis-workbench.check_nextflow_readiness",
+  "workflow": {
+    "workflow_id": "fastq_qc",
+    "engine": "nextflow",
+    "source": "nf-core/demo",
+    "revision": "1.2.0",
+    "version_id": "version-f645b8d9af970b92e847e05b9509d9af"
+  },
+  "target": "local",
+  "profile": "docker",
+  "run_dir_checked": "[temporary run directory]",
+  "readiness_id": "readiness-5e1e56595cbac7e9e9b4723328ea1c8a",
+  "snapshot_id": "sanitized-runtime-snapshot",
+  "status": "blocked",
+  "controller_candidates": [],
+  "requirements": [
+    {"id": "nextflow", "layer": "workflow_controller", "state": "missing"},
+    {"id": "docker-command", "layer": "task_environment", "state": "ready", "version": "29.7.2"},
+    {"id": "docker-daemon", "layer": "task_environment", "state": "unreachable"}
+  ],
+  "blockers": [
+    "required executable is not available: nextflow",
+    "Docker daemon is not reachable"
+  ],
+  "unknowns": [],
+  "plan_created": false,
+  "workflow_run_created": false
+}

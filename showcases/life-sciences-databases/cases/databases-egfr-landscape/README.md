@@ -27,3 +27,15 @@ How can public life-science databases be connected into a compact, identifier-pr
 ## Interpretation
 
 The stable identifiers form a useful navigation map: P00533 names the protein, CHEMBL203 connects pharmacology, 1M17 supplies a structure-level example, and R-HSA-177929 supplies pathway context. This map helps GPT present related records together, while the chosen compounds remain examples rather than a complete EGFR drug inventory.
+
+## Rosalind Workbench observation
+
+The genuine `mcp__rosalind__rosalind_open` call at `2026-08-29T18:14:05.222Z` returned `Rosalind Workbench is ready. Choose a research task in the app.` with `ready=true`. The exact arguments and both timestamps are retained in `outputs/rosalind-open-observation.json`.
+
+This operation opened the task chooser only. It did not retrieve EGFR records or compare inhibitors; `outputs/results.json`, `outputs/sources.json`, and `outputs/provenance.json` carry the scientific evidence and accession history.
+
+## Limitations
+
+- The compound set is illustrative and not a complete EGFR inhibitor inventory.
+- A Reactome API request failed; the pathway identifier was checked against the official record page.
+- Record linkage does not compare efficacy, safety, or clinical use.

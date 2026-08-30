@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Myoglobin heme geometry</title><desc id="desc">Coordinate-derived heme contact shell and iron geometry in RCSB 1MBN.</desc>
+<rect width="1200" height="675" fill="#160b16"/><text x="70" y="75" fill="#fda4af" font-family="Segoe UI,Arial" font-size="27">RCSB 1MBN · HEM A:155 · model 1</text>
+<text x="70" y="155" fill="#fff7ed" font-family="Segoe UI,Arial" font-size="48" font-weight="700">Heme contact environment</text>
+<circle cx="315" cy="340" r="145" fill="#7f1d1d" stroke="#fb7185" stroke-width="4"/><circle cx="315" cy="340" r="45" fill="#f97316"/><text x="315" y="351" text-anchor="middle" fill="#1f1300" font-family="Segoe UI,Arial" font-size="31" font-weight="700">Fe</text>
+<text x="560" y="265" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="31">15 protein residues within 4.0 Å</text>
+<text x="560" y="325" fill="#fecdd3" font-family="Segoe UI,Arial" font-size="27">mean Fe–N = 2.026 Å</text>
+<text x="560" y="375" fill="#fecdd3" font-family="Segoe UI,Arial" font-size="27">Fe offset from N4 plane = 0.241 Å</text>
+<rect x="70" y="495" width="1060" height="110" rx="16" fill="#2a1627"/><text x="95" y="540" fill="#ffe4e6" font-family="Consolas,monospace" font-size="19">HIS 93 (2.191 Å) · HIS 97 (2.759 Å) · PHE 43 (2.802 Å)</text><text x="95" y="575" fill="#ffe4e6" font-family="Consolas,monospace" font-size="19">SER 92 (3.043 Å) · ARG 45 (3.048 Å) · TYR 103 (3.330 Å)</text>
+<text x="70" y="635" fill="#a8a29e" font-family="Segoe UI,Arial" font-size="19">Closest-heavy-atom geometry only; no energetic, affinity, or redox claim.</text>
+</svg>

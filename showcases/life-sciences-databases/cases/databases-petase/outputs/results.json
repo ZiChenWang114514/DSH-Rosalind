@@ -1,0 +1,53 @@
+{
+  "showcase_id": "databases-petase",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "protein": {
+    "uniprot_accession": "A0A0K8P6T7",
+    "entry_id": "PETH_PISS1",
+    "reviewed": true,
+    "organism": "Piscinibacter sakaiensis",
+    "length_aa": 290,
+    "signal_peptide": [
+      1,
+      27
+    ],
+    "mature_chain": [
+      28,
+      290
+    ],
+    "active_sites": [
+      {
+        "residue": "S",
+        "position": 160,
+        "role": "Nucleophile"
+      },
+      {
+        "residue": "D",
+        "position": 206,
+        "role": "Charge relay system"
+      },
+      {
+        "residue": "H",
+        "position": 237,
+        "role": "Charge relay system"
+      }
+    ]
+  },
+  "catalytic_annotation": {
+    "ec_number": "3.1.1.101",
+    "rhea_id": "RHEA:49528",
+    "reaction": "(ethylene terephthalate)(n) + H2O = (ethylene terephthalate)(n-1) + 4-[(2-hydroxyethoxy)carbonyl]benzoate + H(+)"
+  },
+  "structure": {
+    "pdb_id": "5XJH",
+    "title": "Crystal structure of PETase from Ideonella sakaiensis",
+    "method": "X-RAY DIFFRACTION",
+    "resolution_angstrom": 1.54
+  },
+  "interpretation": "The UniProt sequence annotations identify the S160-D206-H237 catalytic triad and the PET hydrolysis reaction; 5XJH supplies a high-resolution structure record for the same enzyme.",
+  "limitations": [
+    "The map joins curated annotations and one structure; it does not calculate kinetics or mutation effects.",
+    "Residue numbering follows the full UniProt sequence, including the 1-27 signal peptide.",
+    "The preview is a project graphic, not an interactive structure-viewer capture."
+  ]
+}

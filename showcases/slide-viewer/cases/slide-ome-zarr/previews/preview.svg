@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">IDR OME-Zarr metadata summary</title>
+  <desc id="desc">Three metadata objects describe an 18 by 6 by 12 by 223 by 198 NGFF image; the viewer open timed out without a session.</desc>
+  <rect width="1200" height="675" fill="#071a1c"/>
+  <text x="70" y="82" fill="#6ee7b7" font-family="Segoe UI,Arial" font-size="25">SLIDE VIEWER · OME-ZARR</text>
+  <text x="70" y="145" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="44" font-weight="700">IDR0101A · NGFF v0.4</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="70" y="205" width="1060" height="125" rx="18" fill="#0d3333" stroke="#34d399"/>
+    <text x="100" y="252" fill="#a7f3d0" font-size="22">Declared axis order</text>
+    <text x="100" y="303" fill="#f8fafc" font-family="Consolas,monospace" font-size="31" font-weight="700">T 18   C 6   Z 12   Y 223   X 198</text>
+    <rect x="70" y="385" width="330" height="135" rx="18" fill="#0f2b2d" stroke="#2dd4bf"/>
+    <text x="100" y="430" fill="#99f6e4" font-size="22">Metadata HTTP 200</text><text x="100" y="485" fill="#fff" font-size="42" font-weight="700">3 / 3</text>
+    <rect x="435" y="385" width="330" height="135" rx="18" fill="#0f2b2d" stroke="#2dd4bf"/>
+    <text x="465" y="430" fill="#99f6e4" font-size="22">Multiscale paths</text><text x="465" y="485" fill="#fff" font-size="42" font-weight="700">0 · 1 · 2</text>
+    <rect x="800" y="385" width="330" height="135" rx="18" fill="#321f22" stroke="#fb7185"/>
+    <text x="830" y="430" fill="#fecdd3" font-size="22">Viewer open</text><text x="830" y="485" fill="#fff1f2" font-size="37" font-weight="700">TIMEOUT</text>
+    <text x="70" y="610" fill="#94a3b8" font-size="21">Metadata verified · no chunks copied · no viewer session · no render claim</text>
+  </g>
+</svg>

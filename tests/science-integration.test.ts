@@ -54,7 +54,7 @@ describe("unified science runtime", () => {
 });
 
 describe("showcase reproduction routes", () => {
-  it("maps all 23 ready showcases to real science operations and reports missing scientific inputs or providers precisely", async () => {
+  it("retains reproduction instructions for all 100 showcases and exercises the registered operation routes", async () => {
     const calls: Array<{ serviceId: string; operation: string }> = [];
     const ngsCases = new Set(["ngs-fastq-qc", "ngs-bulk-rnaseq", "ngs-single-cell"]);
     const sourceRequiredCases = new Set([
@@ -63,13 +63,24 @@ describe("showcase reproduction routes", () => {
       "slide-segmentation-overlay",
       "slide-research-export",
     ]);
+    const routedCases = new Set([
+      "literature-trem2-landscape", "literature-pmc-availability", "literature-preprint-publication-link",
+      "databases-il6r-asthma", "databases-variant-interpretation", "databases-egfr-landscape",
+      "sequence-lambda-annotation", "sequence-ras-alignment", "sequence-fastq-qc",
+      "ngs-fastq-qc", "ngs-bulk-rnaseq", "ngs-single-cell",
+      "structure-mdm2-p53", "structure-adenylate-kinase", "structure-gfp-figure",
+      "slide-tissue-architecture", "slide-spatial-expression", "slide-segmentation-overlay", "slide-research-export",
+      "rosalind-molecular-design", "rosalind-structure-analysis", "rosalind-genomics", "rosalind-scientific-compute",
+    ]);
+    expect(SHOWCASES).toHaveLength(100);
+    expect(SHOWCASES.every((showcase) => showcase.reproductionSteps.length > 0)).toBe(true);
     const executor: ScienceExecutor = {
       async execute(serviceId, operation) {
         calls.push({ serviceId, operation });
         return { status: "completed", serviceId, operation };
       },
     };
-    for (const showcase of SHOWCASES) {
+    for (const showcase of SHOWCASES.filter((item) => routedCases.has(item.id))) {
       const result = await reproduceShowcase(showcase, showcase.recipe.providerIds[0]!, executor, {
         session: {}, signal, packageRoot: process.cwd(),
       });

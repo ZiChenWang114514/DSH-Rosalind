@@ -1,0 +1,15 @@
+{
+  "showcase_id": "slide-dicom-export",
+  "verification_kind": "deterministic local DICOM JSON metadata validation",
+  "metadata_objects": 1,
+  "metadata_checks": 12,
+  "metadata_checks_passed": 12,
+  "patient_or_accession_tags_present": false,
+  "pixel_data_present": false,
+  "dicom_instance_written": false,
+  "upload_prepared": false,
+  "upload_submitted": false,
+  "rosalind_launcher_invoked": true,
+  "rosalind_scientific_task_executed": false,
+  "viewer_operations_executed": false
+}

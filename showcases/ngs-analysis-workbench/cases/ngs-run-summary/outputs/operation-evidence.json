@@ -1,0 +1,55 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-run-summary",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__list_workflow_versions",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.730Z",
+      "arguments": {},
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "count": 2,
+        "versions": [
+          {
+            "version_id": "version-3eea4823aa0dd3d782f036b96a931bc1",
+            "active": false
+          },
+          {
+            "version_id": "version-d427cae49dc240bf248e03d6c3bfbb3a",
+            "active": true
+          }
+        ],
+        "source_roots_removed": true
+      }
+    }
+  ],
+  "failed_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__update_ngs_run_analysis_summary",
+      "operation_succeeded": false,
+      "started_at_utc": "2026-08-29T19:53:52.292Z",
+      "observed_at_utc": "2026-08-29T19:53:53.827Z",
+      "arguments": {
+        "registry_run_id": "gpt-science-no-run-evidence-20260830",
+        "summary_path": "[case-local analysis summary]"
+      },
+      "response_error": "local Workbench daemon exited during startup: 3221225786"
+    }
+  ],
+  "not_executed_operations": [
+    {
+      "operation": "registered run lifecycle",
+      "status": "not_executed",
+      "reason": "The successful run-history query returned zero runs; no genuine registry run was available for observation, summary submission, or cancellation."
+    }
+  ],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

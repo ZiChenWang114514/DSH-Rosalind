@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "literature-visium-methods",
+  "observed_at_utc": "2026-08-29T18:09:34.783Z",
+  "observed_at_local": "2026-08-30T02:09:34.783+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review the Visium QC normalization and region-aware methods literature teaching case; open Rosalind Workbench only and do not execute a scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; no Visium matrix, image, literature record, or scientific computation was submitted to Rosalind."
+}

@@ -1,0 +1,10 @@
+{
+  "fastq": "../../../ngs-workflow-save/inputs/DRR037765-first-24.fastq",
+  "summary": "outputs/qc-summary.json",
+  "read_metrics": "outputs/read-metrics.csv",
+  "cycle_metrics": "outputs/cycle-quality.csv",
+  "quality_thresholds": {
+    "q20": 20,
+    "q30": 30
+  }
+}

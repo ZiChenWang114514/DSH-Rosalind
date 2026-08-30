@@ -45,6 +45,18 @@ export interface ShowcaseDefinition {
   pluginId: string;
   pluginVersion: string;
   categoryId: string;
+  domain: string;
+  caseType: string;
+  difficulty: string;
+  evidenceLevel: string;
+  capabilities: string[];
+  rosalindTasks: string[];
+  execution: {
+    actualTools: string[];
+    device: string;
+    implementation: string;
+    status: string;
+  };
   title: string;
   summary: string;
   question: string;
@@ -67,7 +79,19 @@ export interface ShowcaseDefinition {
   expectedArtifacts: string[];
   scientificAssertions: ScientificClaim[];
   visualAssertions: Array<{ id: string; artifactId: string; requirement: string }>;
-  provenance: { sourceCommit: string; sources: string[]; runDate: string };
+  provenance: {
+    sourceCommit: string;
+    sources: string[];
+    runDate: string;
+    records: Array<{
+      sources?: string[];
+      inputs?: string[];
+      outputs?: string[];
+      previews?: string[];
+      note?: string;
+    }>;
+  };
+  reproductionSteps: string[];
   recipe: ReproductionRecipe;
   modes: ShowcaseMode[];
   searchText: string;

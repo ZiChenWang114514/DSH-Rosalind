@@ -1,0 +1,4 @@
+accession,original_row_index_0based,hvr_window_residues_166_185,basic_K_or_R_count,pre_CAAX_cysteine_count,CAAX_residues_186_189,basicity_group,pre_CAAX_cysteine_group
+P01116,0,YRLKKISKEEKTPGCVKIKK,8,1,CIIM,high-basicity,one-cysteine
+P01111,1,YRMKKLNSSDDGTQGCMGLP,3,1,CVVM,lower-basicity,one-cysteine
+P01112,2,HKLRKLNPPDESGPGCMSCK,4,2,CVLS,lower-basicity,two-cysteines

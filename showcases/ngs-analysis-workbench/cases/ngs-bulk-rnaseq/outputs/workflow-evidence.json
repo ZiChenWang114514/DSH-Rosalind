@@ -8,12 +8,12 @@
       "inspection": "completed"
     },
     {
-      "id": "wsl-ubuntu-24.04-ngs",
-      "title": "Ubuntu 24.04 NGS (D drive)",
+      "id": "sanitized-unreachable-ssh-target",
+      "title": "sanitized SSH target",
       "inspection": "unreachable"
     }
   ],
-  "local_runtime_snapshot": "runtime-166d443587f54d58bcd4121cbf1584a7",
+  "local_runtime_snapshot": "sanitized-runtime-snapshot",
   "local_runtime": {
     "snakemake": "missing",
     "nextflow": "missing",

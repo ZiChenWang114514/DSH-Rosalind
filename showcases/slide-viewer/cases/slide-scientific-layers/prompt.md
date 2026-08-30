@@ -1,0 +1,3 @@
+# Source-associated scientific layer
+
+Map the retained 684-row Visium observation table to a source-associated capture-spot layer, preserve the exact H5AD and matrix revision, and inspect the companion demonstration GeoJSON. Read `outputs/scientific-layer-cancellation-evidence.json`, `outputs/operation-provenance.json`, and `outputs/teaching-bundle.md`; report that the temporary import returned a real task, while cancellation returned `UNAVAILABLE` and the follow-up reported revoked read authorization. Do not claim a published layer, settled cancellation, tissue alignment, or image permission. Preserve `outputs/rosalind-open-observation.json` as task-chooser evidence only.

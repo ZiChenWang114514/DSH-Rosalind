@@ -1,6 +1,7 @@
 {
   "format": "Aperio SVS / tiled TIFF",
-  "inspection_tool": "tiffinfo",
+  "inspection_tool": "tiffinfo 4.7.1",
+  "checked_on": "2026-08-30",
   "main_image": {
     "width": 46000,
     "height": 32893,
@@ -10,23 +11,24 @@
     "bits_per_sample": 8,
     "photometric": "RGB",
     "compression_code": 33005,
-    "objective_magnification": 20,
-    "microns_per_pixel": 0.499
+    "objective_magnification_metadata": 20,
+    "microns_per_pixel_metadata": 0.499
   },
   "pyramid_levels": [
-    {"width": 46000, "height": 32893, "downsample": 1},
-    {"width": 11500, "height": 8223, "downsample": 4},
-    {"width": 2875, "height": 2055, "downsample": 16}
+    {"level": 0, "width": 46000, "height": 32893, "downsample_x": 1, "downsample_y": 1},
+    {"level": 1, "width": 11500, "height": 8223, "downsample_x": 4, "downsample_y": 4.000121610117962},
+    {"level": 2, "width": 2875, "height": 2055, "downsample_x": 16, "downsample_y": 16.00632603406326}
   ],
   "associated_images": [
     {"kind": "thumbnail", "width": 1024, "height": 732},
     {"kind": "label", "width": 387, "height": 463},
     {"kind": "macro", "width": 1280, "height": 431}
   ],
-  "viewer_execution": {
-    "session_status": "awaiting_viewer",
-    "source_authorized": true,
-    "state": "awaiting-viewer",
-    "rendered_region_available": false
+  "calculations": {
+    "level_1_downsample_x": "46000 / 11500",
+    "level_1_downsample_y": "32893 / 8223",
+    "level_2_downsample_x": "46000 / 2875",
+    "level_2_downsample_y": "32893 / 2055",
+    "note": "Dimension ratios are calculated from TIFF directories; objective and microns-per-pixel values are source metadata."
   }
 }

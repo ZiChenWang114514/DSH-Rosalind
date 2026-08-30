@@ -1,0 +1,129 @@
+{
+  "id": "rosalind-vhh-aggregation",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "adme-and-developability",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open",
+    "rosalind-workbench.public-evidence"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "RCSB PDB REST and FASTA",
+      "Python 3.14 standard library"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus exact public VHH polymer sequences and deterministic sequence-only hydrophobic, charge, pI, and motif calculations",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 656
+    },
+    {
+      "path": "inputs/source-records.csv",
+      "bytes": 486
+    },
+    {
+      "path": "inputs/vhh-polymer-sequences.fasta",
+      "bytes": 502
+    },
+    {
+      "path": "scripts/analyze.py",
+      "bytes": 8361
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/vhh-sequence-metrics.csv",
+      "bytes": 682
+    },
+    {
+      "path": "outputs/motif-liabilities.csv",
+      "bytes": 589
+    },
+    {
+      "path": "outputs/result-summary.json",
+      "bytes": 1752
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 521
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6458
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2018
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/5M2W",
+    "https://www.rcsb.org/structure/6WAQ",
+    "https://www.rcsb.org/structure/4KRL"
+  ],
+  "observations": [
+    "The exact RCSB polymer sequences are retained, with analysis ending at each terminal VTVSS motif.",
+    "Predicted net charges at pH 7.4 are +2.25 for nb8, -2.74 for VHH-72, and +0.26 for 7D12.",
+    "The strongest hydrophobic 9-residue windows contain seven, seven, and eight hydrophobic residues, respectively.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "Local hydrophobic and charge windows prioritize structure-aware review and aggregation assays; they do not measure solvent exposure or aggregation."
+  ],
+  "limitations": [
+    "No structure-based solvent accessibility, formulation, concentration, thermal stress, or aggregation experiment is included.",
+    "The CDR3-like segment is a conserved-pattern proxy without IMGT numbering.",
+    "The three VHHs bind different antigens and are not controlled variants of one scaffold.",
+    "The Rosalind operation opened only the task chooser; no Rosalind scientific job was executed."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/5M2W",
+        "https://www.rcsb.org/structure/6WAQ",
+        "https://www.rcsb.org/structure/4KRL"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/source-records.csv",
+        "inputs/vhh-polymer-sequences.fasta",
+        "scripts/analyze.py"
+      ],
+      "outputs": [
+        "outputs/vhh-sequence-metrics.csv",
+        "outputs/motif-liabilities.csv",
+        "outputs/result-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The launcher observation records the exact Rosalind chooser response and does not represent scientific execution. Exact public polymer sequences remain inspectable; only the documented C-terminal post-VTVSS residues are excluded from the local calculation."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-vhh-aggregation/scripts/analyze.py from the repository root.",
+    "Invoke mcp__rosalind__rosalind_open with task_context VHH sequence aggregation-risk teaching case, then compare the response with outputs/rosalind-open-observation.json.",
+    "Inspect the exact polymer sequences, metrics, motif positions, summary, and SVG preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local"
+  }
+}

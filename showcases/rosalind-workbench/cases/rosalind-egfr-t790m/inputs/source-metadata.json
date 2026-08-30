@@ -1,0 +1,59 @@
+{
+  "showcase_id": "rosalind-egfr-t790m",
+  "retrieved_on": "2026-08-30",
+  "coordinate_format": "legacy PDB text from the current RCSB entry revision",
+  "structures": [
+    {
+      "pdb_id": "5XDK",
+      "label": "EGFR-T790M-rociletinib",
+      "coordinate_url": "https://files.rcsb.org/download/5XDK.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/5XDK",
+      "entry_url": "https://www.rcsb.org/structure/5XDK",
+      "title": "Crystal structure of EGFR 696-1022 T790M in complex with CO-1686",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.346,
+      "initial_release_date": "2017-12-13T00:00:00.000+00:00",
+      "revision_date": "2024-10-23T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 2,
+      "pdb_doi": "10.2210/pdb5xdk/pdb",
+      "primary_citation_doi": "10.18632/oncotarget.18588"
+    },
+    {
+      "pdb_id": "6JX0",
+      "label": "EGFR-T790M-osimertinib",
+      "coordinate_url": "https://files.rcsb.org/download/6JX0.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/6JX0",
+      "entry_url": "https://www.rcsb.org/structure/6JX0",
+      "title": "Crystal structure of EGFR 696-1022 T790M in complex with AZD9291 prepared by co-crystallization",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.53,
+      "initial_release_date": "2020-04-22T00:00:00.000+00:00",
+      "revision_date": "2024-10-23T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 3,
+      "pdb_doi": "10.2210/pdb6jx0/pdb",
+      "primary_citation_doi": "10.1021/acs.jmedchem.0c00891"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Rociletinib",
+      "role": "5XDK ligand",
+      "pubchem_cid": 57335384,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/57335384/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/57335384",
+      "title": "Rociletinib",
+      "inchi_key": "HUFOZJXAKZVRNJ-UHFFFAOYSA-N"
+    },
+    {
+      "name": "Osimertinib",
+      "role": "6JX0 ligand",
+      "pubchem_cid": 71496458,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/71496458/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/71496458",
+      "title": "Osimertinib",
+      "inchi_key": "DUYJMQONPNNFPI-UHFFFAOYSA-N"
+    }
+  ]
+}

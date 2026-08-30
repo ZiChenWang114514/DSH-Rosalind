@@ -1,0 +1,43 @@
+{
+  "schema": "sequence-viewer.operation-evidence/v1",
+  "case_id": "sequence-session-restore",
+  "plugin_version": "0.1.43",
+  "reviewed_on": "2026-08-30",
+  "successful_operations": [],
+  "failed_operations": [
+    {
+      "operation": "sequence-viewer.sequence_open_from_chat",
+      "status": "session-created-render-unconfirmed",
+      "operation_succeeded": false,
+      "outcome": "The shared KRAS diagnostic session was created, but viewer readiness was false.",
+      "confirmation": "The records query timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "timeout",
+      "operation_succeeded": false,
+      "outcome": "The shared KRAS records query was not acknowledged.",
+      "confirmation": "No live state was available for a session round trip."
+    }
+  ],
+  "unexecuted_operations": [
+    {
+      "operation": "sequence-viewer.sequence_save_session",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_restore_session",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    }
+  ],
+  "privacy": {
+    "session_ids_retained": false,
+    "private_paths_retained": false,
+    "internal_resource_uris_retained": false
+  },
+  "conclusion": "No Sequence Viewer capability is claimed for this case because no operation received both a successful call result and a confirming follow-up query."
+}

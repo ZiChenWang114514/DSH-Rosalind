@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "public-fixture.fastq",
+  "record_count": 2,
+  "total_bases": 602,
+  "read_length": {"minimum": 301, "maximum": 301, "mean": 301.0},
+  "gc_bases": 218,
+  "gc_percent": 36.213,
+  "q30_bases": 378,
+  "q30_percent": 62.791,
+  "mean_phred": 29.402,
+  "validation": {
+    "complete_records": true,
+    "sequence_quality_lengths_equal": true,
+    "quality_encoding_assumed": "Phred+33"
+  }
+}

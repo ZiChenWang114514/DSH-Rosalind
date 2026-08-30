@@ -1,0 +1,12 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-variant-interpretation",
+  "verified_at_utc": "2026-08-29T19:56:46.688945Z",
+  "calls": [
+    {"skill":"clinvar-variation-skill","request":{"action":"search","terms":"rs7903146","max_items":10},"source_url":"https://clinicaltables.nlm.nih.gov/api/variants/v4/search","retrieved_at_utc":"2026-08-29T19:56:27.025761Z","ok":true,"summary":{"record_count":2,"variation_ids":["1692994","7413"],"alleles":["C>G","C>T"]}},
+    {"skill":"ensembl-skill","request":{"base_url":"https://rest.ensembl.org","path":"variation/homo_sapiens/rs7903146","headers":{"Accept":"application/json","Content-Type":"application/json"}},"source_url":"https://rest.ensembl.org/variation/homo_sapiens/rs7903146","retrieved_at_utc":"2026-08-29T19:56:29.278731Z","ok":true,"summary":{"assembly":"GRCh38","location":"10:112998590-112998590","allele_string":"C/G/T"}},
+    {"skill":"ukb-topmed-phewas-skill","request":{"grch38":"10:112998590-C-T","max_results":10},"source_url":"https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T","retrieved_at_utc":"2026-08-29T19:56:46.688945Z","ok":true,"summary":{"association_count_total":1419,"records_returned":10,"truncated":true,"allele_frequency":0.29}},
+    {"skill":"gnomad-graphql-skill","request":{"variant_id":"10-112998590-C-T","dataset":"gnomad_r4","fields":["variantId","genome.ac","genome.an","genome.af"]},"source_url":"https://gnomad.broadinstitute.org/variant/10-112998590-C-T","retrieved_at_utc":"2026-08-29T19:56:33.741603Z","ok":true,"summary":{"variant_id":"10-112998590-C-T","genome":{"ac":41622,"an":151914,"af":0.27398396461155655}}}
+  ],
+  "query_note": "The UKB-TOPMed request uses the explicit GRCh38 C>T allele. An rsID-only resolution selected C>G and returned no records, so that ambiguous lookup is not used as evidence."
+}

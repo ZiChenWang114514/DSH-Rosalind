@@ -7,7 +7,8 @@
   "designed_candidates": 20,
   "initial_predictions_successful": 20,
   "top5_ensemble_predictions_successful": 25,
-  "retained_structures": 40,
+  "historical_run_structure_files": 40,
+  "public_case_structure_files": 1,
   "top5": [
     {
       "rank": "1",

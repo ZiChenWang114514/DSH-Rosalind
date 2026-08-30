@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "sequence-fastq-qc",
+  "observed_at_utc": "2026-08-29T18:14:15.199Z",
+  "observed_at_local": "2026-08-30T02:14:15.199+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect the Rosalind task chooser for the verified ENA DRR037765 first-500-read FASTQ quality-summary showcase."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not read DRR037765, create the 500-read subset, or calculate FASTQ quality metrics."
+}

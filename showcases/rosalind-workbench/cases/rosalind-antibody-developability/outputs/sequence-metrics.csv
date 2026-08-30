@@ -1,0 +1,5 @@
+sequence_id,antibody,chain_type,variable_length,predicted_pI,net_charge_pH7_4,hydrophobic_fraction,max_hydrophobic_residues_in_9mer,top_hydrophobic_9mer_start,top_hydrophobic_9mer,max_abs_charge_in_9mer,top_charge_9mer_start,top_charge_9mer,oxidation_M_count,oxidation_W_count,n_linked_sequon_count
+1N8Z_H,Herceptin Fab,heavy,120,7.61,0.29,0.408,6,44,GLEWVARIY,2,1,EVQLVESGG,2,4,0
+1N8Z_L,Herceptin Fab,light,107,8.23,1.30,0.346,7,46,LLIYSASFL,3,37,QQKPGKAPK,1,1,0
+5DK3_H,Pembrolizumab Fab,heavy,120,8.20,1.25,0.375,7,29,FTNYYMYWV,3,11,VKKPGASVK,4,3,0
+5DK3_L,Pembrolizumab Fab,light,111,6.84,-0.66,0.369,8,50,LLIYLASYL,3,78,TISSLEPED,0,1,0

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Nanobody binding assay evidence</title>
+  <desc id="desc">A dated evidence map linking one BLI protocol with three PMC-open SPR and ELISA application records.</desc>
+  <rect width="1200" height="675" rx="28" fill="#10152a"/>
+  <text x="65" y="76" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="38" font-weight="700">Nanobody assay evidence</text>
+  <text x="65" y="114" fill="#b8c9f0" font-family="Segoe UI,Arial" font-size="19">Four PubMed records · checked 29 Aug 2026</text>
+  <rect x="65" y="170" width="1070" height="130" rx="22" fill="#1a3150" stroke="#77b7ff"/>
+  <text x="100" y="214" fill="#9acbff" font-family="Segoe UI,Arial" font-size="20">LABEL-FREE KINETICS PROTOCOL</text>
+  <text x="100" y="255" fill="#ffffff" font-family="Segoe UI,Arial" font-size="25" font-weight="700">Biolayer interferometry for nanobody binding</text>
+  <text x="870" y="255" fill="#b8c9df" font-family="Segoe UI,Arial" font-size="17">PMID 39572731</text>
+  <text x="65" y="355" fill="#e9f8f5" font-family="Segoe UI,Arial" font-size="21" font-weight="700">SPR + ELISA application records</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="65" y="385" width="330" height="128" rx="18" fill="#173d3b" stroke="#52d3c2"/><text x="90" y="425" fill="#7eeadf" font-size="20" font-weight="700">ICAM-1 VHH</text><text x="90" y="458" fill="#ecfffb" font-size="17">affinity / specificity</text><text x="90" y="486" fill="#9fc8c2" font-size="15">PMID 36439110 · CC BY</text>
+    <rect x="435" y="385" width="330" height="128" rx="18" fill="#173d3b" stroke="#52d3c2"/><text x="460" y="425" fill="#7eeadf" font-size="20" font-weight="700">Omicron nanobody</text><text x="460" y="458" fill="#ecfffb" font-size="17">multivalent application</text><text x="460" y="486" fill="#9fc8c2" font-size="15">PMID 36700149 · CC BY-NC</text>
+    <rect x="805" y="385" width="330" height="128" rx="18" fill="#173d3b" stroke="#52d3c2"/><text x="830" y="425" fill="#7eeadf" font-size="20" font-weight="700">Fondaparinux VNAR</text><text x="830" y="458" fill="#ecfffb" font-size="17">selectivity application</text><text x="830" y="486" fill="#9fc8c2" font-size="15">PMID 40362285 · CC BY</text>
+  </g>
+  <rect x="65" y="555" width="1070" height="70" rx="16" fill="#24213f"/>
+  <text x="95" y="598" fill="#ddd7ff" font-family="Segoe UI,Arial" font-size="18">Orthogonal strategy: label-free kinetics + plate-based binding/specificity · no cross-paper numerical comparison</text>
+</svg>

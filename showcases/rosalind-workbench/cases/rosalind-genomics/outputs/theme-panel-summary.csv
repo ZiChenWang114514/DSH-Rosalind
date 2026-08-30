@@ -1,0 +1,5 @@
+theme,panel_size,significant_hits,genes
+glucocorticoid-response panel,7,7,CRISPLD2;DUSP1;FKBP5;KLF15;KLF9;PER1;TSC22D3
+extracellular-matrix panel,7,1,SPARCL1
+oxidative-and-metabolic panel,6,6,GLUL;GPX3;MAOA;MT2A;NNMT;STEAP4
+immune-and-complement panel,6,3,C7;SAMHD1;SERPINA3

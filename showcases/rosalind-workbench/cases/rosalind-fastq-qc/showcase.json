@@ -1,0 +1,125 @@
+{
+  "id": "rosalind-fastq-qc",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind-workbench.public-evidence",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "European Nucleotide Archive DRR037765 and local Python standard library"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus deterministic FASTQ metrics from the first 500 complete records of a retained public ENA object",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 4482,
+      "sha256": "6dd652cdd3450a9e2ada987993b526ffbaca4cb007fe23a2c8727f2c3ee15f38"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 624,
+      "sha256": "64bd8623a2f6ef53ec5742b03758d752e50d3b0f093a531b043a81910eb467a0"
+    },
+    {
+      "path": "inputs/DRR037765.fastq.gz",
+      "bytes": 127526,
+      "sha256": "32de13da1d7e3d4492febdf36e2e11ce80bb67f16ea93a0d000e8626c3ebf2eb"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/quality-summary.json",
+      "bytes": 1203,
+      "sha256": "64d7f8d4f92c61c666950e14640ecd72e79918a0c6b559d603d8e9f46bdf2161"
+    },
+    {
+      "path": "outputs/per-cycle-quality.csv",
+      "bytes": 13153,
+      "sha256": "ac4bde40c7854f05819b69bfa4f8bd9a16ee69b65efd06a6dd742f7dbc3161e1"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 878,
+      "sha256": "63dc195bff9fefa4173f50d8d8d0073c019e384b34b2a87185ffa972fe3341d2"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 894,
+      "sha256": "dffa1ec5238635d98ccbf32255beb5890f3446e66f084c45c67d27ff3359fcbc"
+    },
+    {
+      "path": "bundle.md",
+      "bytes": 5521,
+      "sha256": "a77648c2a479df4d619bc74739f18e9eeb1b84454bf4600551f63288f4bffda9"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2461,
+      "sha256": "4beb7081dfa046cd97694cf38bc67ebf673f0d1d0f3e6de55b4f85ed83b3713c"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "The retained source is the 127,526-byte ENA DRR037765 gzip object with the recorded MD5.",
+    "The deterministic 500-read subset contains 235,490 bases, 28.846236 percent GC, and 95.397681 percent Q30.",
+    "All 471 per-cycle summaries are retained in a machine-readable CSV.",
+    "A genuine Rosalind Workbench open call returned the exact task-chooser-ready message."
+  ],
+  "interpretation": [
+    "The subset has high aggregate Q30 while showing a localized per-cycle quality dip that merits full-run review before downstream use."
+  ],
+  "limitations": [
+    "The 500-read prefix does not represent the full-run distribution.",
+    "No adapter, contamination, duplication, or assay-specific review was performed.",
+    "rosalind_open only opened the task chooser and did not run FASTQ QC."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/DRR037765.fastq.gz"
+      ],
+      "outputs": [
+        "outputs/quality-summary.json",
+        "outputs/per-cycle-quality.csv",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained ENA object and local script support the QC metrics; the separate 894-byte Rosalind observation supports launcher readiness only."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-fastq-qc/build_case.py from the repository root.",
+    "Require the recorded compressed MD5, 500 valid records, 235,490 bases, and the canonical subset SHA-256.",
+    "Treat the Rosalind launcher receipt separately from the FASTQ computation."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_open": "executed"
+  }
+}

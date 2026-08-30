@@ -1,0 +1,77 @@
+{
+  "schema": "rosalind.kras-structure-review/v1",
+  "pdb_id": "6OIM",
+  "method": "X-ray diffraction",
+  "resolution_a": 1.65,
+  "chain": "A",
+  "observed_residue_count": 167,
+  "observed_residue_range": [
+    0,
+    169
+  ],
+  "unobserved_within_1_189": [
+    105,
+    106,
+    107,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189
+  ],
+  "cys12_mean_b_factor_a2": 23.833,
+  "cys12_min_distance_to_mov_a": 1.805,
+  "residues_within_4a_of_mov": [
+    "9",
+    "10",
+    "12",
+    "16",
+    "34",
+    "58",
+    "59",
+    "60",
+    "61",
+    "62",
+    "63",
+    "68",
+    "72",
+    "95",
+    "96",
+    "99",
+    "103"
+  ],
+  "region_metrics": {
+    "P-loop (10-17)": {
+      "observed_residues": 8,
+      "mean_b_factor_a2": 19.788
+    },
+    "switch I (30-38)": {
+      "observed_residues": 9,
+      "mean_b_factor_a2": 26.486
+    },
+    "switch II (60-76)": {
+      "observed_residues": 17,
+      "mean_b_factor_a2": 29.3
+    },
+    "alpha5/C-terminal observed segment (150-166)": {
+      "observed_residues": 17,
+      "mean_b_factor_a2": 21.927
+    }
+  },
+  "interpretive_rule": "Higher crystallographic B factors and absent coordinates identify regions that deserve extra caution when a prediction is interpreted; they are not prediction confidence scores."
+}

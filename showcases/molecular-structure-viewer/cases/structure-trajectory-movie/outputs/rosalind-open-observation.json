@@ -1,0 +1,13 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "structure-trajectory-movie",
+  "observed_at_utc": "2026-08-29T18:07:20.217Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect the Rosalind task chooser for the verified adenylate-kinase five-frame trajectory and movie-rehearsal showcase."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit the adenylate-kinase trajectory, render or export a movie, or run any Rosalind scientific job."
+}

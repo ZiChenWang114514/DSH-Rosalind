@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "showcase_id": "sequence-job-cancel",
+  "execution_kind": "actual local subprocess cancellation",
+  "source": {
+    "accession": "P01116",
+    "sequence_version": 1,
+    "response_sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6"
+  },
+  "analysis": {
+    "method": "9-residue sliding-window hydrophobic residue count",
+    "total_windows": 181,
+    "completed_before_cancel": 32
+  },
+  "pre_cancel_state": "outputs/pre-cancel-state.json",
+  "post_cancel_state": "outputs/post-cancel-state.json",
+  "partial_table_sha256_before_cleanup": "993bb91460d1beed9cc7c59e5c6af9c6bcbb65dfbcd79e32010690ba611d5ed3",
+  "checks": {
+    "running_state_observed": true,
+    "child_process_stopped": true,
+    "temporary_workspace_removed": true,
+    "source_digest_unchanged": true,
+    "completed_output_absent": true
+  },
+  "viewer_workflow": {
+    "status": "rehearsed",
+    "capabilities": [
+      "sequence-viewer.sequence_run_analysis",
+      "sequence-viewer.sequence_cancel_job",
+      "sequence-viewer.sequence_query_viewer"
+    ],
+    "note": "No Sequence Viewer job was created or cancelled in this task."
+  }
+}

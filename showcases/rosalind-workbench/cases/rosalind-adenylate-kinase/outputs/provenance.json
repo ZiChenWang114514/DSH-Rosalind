@@ -1,0 +1,20 @@
+{
+  "schema": "showcase.provenance/v1",
+  "case_id": "rosalind-adenylate-kinase",
+  "scientific_evidence": {
+    "sources": ["inputs/4AKE.pdb", "inputs/1AKE.pdb"],
+    "source_records": ["https://www.rcsb.org/structure/4AKE", "https://www.rcsb.org/structure/1AKE"],
+    "computation": "build_case.py",
+    "outputs": ["outputs/conformation-summary.json", "outputs/domain-distance-comparison.csv"],
+    "method": "NumPy Kabsch fit of 214 matched chain-A C-alpha atoms followed by explicit domain-centroid distance calculations."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 914,
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "limitation": "The launcher response did not receive coordinates or produce a structural result."
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "slide-authorization-renewal",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "recovery",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local Python JSON and CSV validation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "exact source-and-layer authorization manifest comparison for a pinned public H5AD and 684 capture-spot entities plus an observed Rosalind task-chooser invocation; all Slide Viewer operations remain rehearsed",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 901,
+      "sha256": "4f239ad4dc0e98eaca2ef2affc6433f7e8a395c6b75212e7432ab28a1b5c5a20"
+    },
+    {
+      "path": "inputs/authorization-before.json",
+      "bytes": 907,
+      "sha256": "d13d1801689b84d4370884429d23975cfc080ca9d28581f7a16cbf5609fc2b25"
+    },
+    {
+      "path": "inputs/authorization-after.json",
+      "bytes": 932,
+      "sha256": "b8d6b5e845d00c2c3ed1f90cbca38bbd8eb36995d073fe76039fec245f948a26"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/authorization-diff.csv",
+      "bytes": 1198,
+      "sha256": "838c5edd4681ba52aa0eef6975d473c94e99fd2b703e78b30831e256f0cfcd48"
+    },
+    {
+      "path": "outputs/authorization-validation.json",
+      "bytes": 1042,
+      "sha256": "b006d4b098d89dfffeb16b95490807582c605d7c1340336bf96c032f94a222be"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 765,
+      "sha256": "18a29ffa2a1030c0ff0bf297f27860b65af1ab560adf736cb01db04ab227d602"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2652,
+      "sha256": "68ca477c17853079a14a4f8be831913f185eb732723dc04eaf11dca1fe90a9c4"
+    }
+  ],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1"
+  ],
+  "observations": [
+    "All fourteen source-and-layer manifest comparisons passed.",
+    "Session, source, revisions, entity kind, entity count, and byte count remain stable while fixture lease labels and expiry times change.",
+    "No credentials or private paths are retained and no Slide Viewer authorization or listing operation was called.",
+    "A genuine Rosalind launcher call returned ready=true and the exact task-chooser message; no scientific job was executed."
+  ],
+  "interpretation": [
+    "The manifests provide an inspectable comparison pattern for content-preserving authorization renewal without representing actual read authority."
+  ],
+  "limitations": [
+    "Lease labels and timestamps are deterministic fixtures, not issued grants.",
+    "No source or scientific layer was imported, renewed, listed, queried, or processed by a Rosalind scientific job.",
+    "Visium observations are capture spots rather than single cells, and matrix X value scale remains unknown."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/authorization-before.json",
+        "inputs/authorization-after.json"
+      ],
+      "outputs": [
+        "outputs/authorization-diff.csv",
+        "outputs/authorization-validation.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Pinned public source and layer identities are compared through credential-free fixtures; all current viewer operations are marked rehearsed."
+    }
+  ],
+  "reproduction": [
+    "Run python validate_case.py from the case directory and inspect outputs/rosalind-open-observation.json.",
+    "Review the fourteen exact comparisons and confirm expiry times increase while scientific identities stay fixed.",
+    "Preserve actual returned expiries and identities separately if a future live renewal is authorized."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0 source identity and self-contained fixtures",
+    "device": "local",
+    "credentials_present": false,
+    "viewer_operations_executed": false,
+    "rosalind_launcher_invoked": true,
+    "rosalind_scientific_job_executed": false
+  }
+}

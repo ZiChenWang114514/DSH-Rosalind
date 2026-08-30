@@ -1,0 +1,43 @@
+{
+  "schema": "literature.deterministic-summary/v1",
+  "case_id": "literature-nanobody-assays",
+  "source_retrieved_at_utc": "2026-08-29T18:12:02.658729Z",
+  "selection_rule": "Retain one BLI kinetics protocol and three PMC-open records returned by the nanobody plus SPR plus ELISA title-or-abstract query.",
+  "record_count": 4,
+  "pmc_open_access_count": 3,
+  "platform_class_counts": {
+    "BLI protocol": 1,
+    "SPR plus ELISA application": 3
+  },
+  "assay_evidence": [
+    {
+      "pmid": "36439110",
+      "title": "Generation of high affinity ICAM-1-specific nanobodies and evaluation of their suitability for allergy treatment.",
+      "assay_role": "SPR and ELISA affinity/specificity application record",
+      "query_evidence": "returned by the nanobody plus surface-plasmon-resonance plus ELISA title-or-abstract query",
+      "pmc_open_access": true
+    },
+    {
+      "pmid": "36700149",
+      "title": "A Multivalent and Thermostable Nanobody Neutralizing SARS-CoV-2 Omicron (B.1.1.529).",
+      "assay_role": "SPR and ELISA application record",
+      "query_evidence": "returned by the nanobody plus surface-plasmon-resonance plus ELISA title-or-abstract query",
+      "pmc_open_access": true
+    },
+    {
+      "pmid": "39572731",
+      "title": "Biolayer interferometry for measuring the kinetics of protein-protein interactions and nanobody binding.",
+      "assay_role": "label-free BLI kinetics protocol",
+      "query_evidence": "returned by the nanobody plus biolayer-interferometry title-or-abstract query",
+      "pmc_open_access": false
+    },
+    {
+      "pmid": "40362285",
+      "title": "A Single-Domain VNAR Nanobody Binds with High-Affinity and Selectivity to the Heparin Pentasaccharide Fondaparinux.",
+      "assay_role": "SPR and ELISA selectivity application record",
+      "query_evidence": "returned by the nanobody plus surface-plasmon-resonance plus ELISA title-or-abstract query",
+      "pmc_open_access": true
+    }
+  ],
+  "interpretation": "The records support an orthogonal assay strategy in which label-free kinetic measurements are complemented by plate-based binding or specificity tests. They do not compare one shared nanobody panel under harmonized conditions."
+}

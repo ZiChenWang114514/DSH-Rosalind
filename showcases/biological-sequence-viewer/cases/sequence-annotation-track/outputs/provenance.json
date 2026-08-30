@@ -1,0 +1,27 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "database": "NCBI RefSeq via Nucleotide EFetch",
+  "accession_version": "NC_001416.1",
+  "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=gbwithparts&retmode=text",
+  "repository_source": "../sequence-lambda-annotation/inputs/NC_001416.1.gb",
+  "source_bytes": 176721,
+  "source_sha256": "3c624302adeeb3c00649f549903ab781b9e75bab16069ae655833d536407367f",
+  "derivation": "extract bases 37180..38050 and remap four source annotations to local 1-based GFF3 coordinates",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "scientific_job_executed": false,
+    "note": "The observed ready response documents only the task chooser; the local extraction produced the FASTA and GFF3."
+  },
+  "viewer_observation": {
+    "path": "outputs/sequence-load-track-observation.json",
+    "open_tool": "mcp__sequence_viewer__sequence_open_from_chat",
+    "operation_tool": "mcp__sequence_viewer__sequence_load_track",
+    "query_tool": "mcp__sequence_viewer__sequence_query_viewer",
+    "status": "unacknowledged after two attempts",
+    "track_loaded": false,
+    "note": "Two exact GFF3 load requests timed out without viewer acknowledgement; the fresh records readiness query and tracks follow-up query also timed out, and no mapping diagnostics were returned."
+  },
+  "viewer_status": "two genuine operations attempted; track load unverified"
+}

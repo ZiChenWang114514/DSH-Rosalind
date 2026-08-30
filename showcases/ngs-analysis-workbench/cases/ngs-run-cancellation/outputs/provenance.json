@@ -1,0 +1,22 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "ngs-run-cancellation",
+  "source_observations": [
+    "inputs/public-source.md identifies the public Nextflow CLI reference and the local demonstration scope.",
+    "outputs/cancel-ngs-run-receipt.json records the genuine rejected cancel_ngs_run call for the reserved temporary identity.",
+    "outputs/rosalind-open-observation.json records a genuine case-specific mcp__rosalind__rosalind_open response."
+  ],
+  "local_computations": [
+    "scripts/run_cancellation_demo.py started and terminated only its own disposable Python child process.",
+    "outputs/cancellation-observation.json records the observed start, termination, and temporary-directory cleanup states."
+  ],
+  "rosalind_observation": "outputs/rosalind-open-observation.json",
+  "scientific_job_executed_by_rosalind": false,
+  "workbench_cancellation_operation": "outputs/cancel-ngs-run-receipt.json",
+  "registered_run_affected": false,
+  "limitations": [
+    "The local child process demonstrates cancellation mechanics only.",
+    "No Nextflow, Snakemake, NGS Workbench engine run, or Rosalind scientific task started.",
+    "The Workbench cancellation request was rejected because the temporary registry identity did not exist."
+  ]
+}

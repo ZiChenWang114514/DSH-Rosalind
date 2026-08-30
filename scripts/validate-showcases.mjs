@@ -8,6 +8,6 @@ if (!report.ok) {
   for (const error of report.errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log(`Showcase validation passed: ${report.pluginCount} plugins, ${report.showcaseCount}/23 ready showcases, ${report.fileCount} parsed files.`);
+  console.log(`Showcase validation passed: ${report.pluginCount} plugins, ${report.showcaseCount}/100 ready showcases, ${report.fileCount} parsed files.`);
   console.log(JSON.stringify({ parsedByType: report.parsedByType, acceptance: report.acceptance }, null, 2));
 }

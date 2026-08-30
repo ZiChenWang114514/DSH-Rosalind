@@ -1,0 +1,8 @@
+{
+  "schema": "public-structure-source/v1",
+  "pdb_id": "6OIM",
+  "entry_url": "https://www.rcsb.org/structure/6OIM",
+  "coordinate_url": "https://files.rcsb.org/download/6OIM.pdb",
+  "retrieved_at_utc": "2026-08-29T18:19:00Z",
+  "selection": "asymmetric-unit chain A and covalent ligand MOV from the deposited PDB coordinates"
+}

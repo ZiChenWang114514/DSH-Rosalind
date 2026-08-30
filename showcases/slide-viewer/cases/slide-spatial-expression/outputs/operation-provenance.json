@@ -1,0 +1,14 @@
+{
+  "schema": "slide-viewer.operation-provenance/v1",
+  "case_id": "slide-spatial-expression",
+  "plugin_version": "0.1.56",
+  "observed_at_utc": "2026-08-29T18:55:11.857Z",
+  "evidence": "outputs/analysis-operation-availability.json",
+  "executed_operations": [],
+  "unavailable_follow_ups": [
+    "slide_get_analysis_from_chat",
+    "slide_cancel_analysis_from_chat"
+  ],
+  "result_scope": "Capability and callable-tool comparison only; no new analysis task was created.",
+  "rosalind_observation_preserved": "outputs/rosalind-open-observation.json remains unchanged and records only task-chooser readiness."
+}

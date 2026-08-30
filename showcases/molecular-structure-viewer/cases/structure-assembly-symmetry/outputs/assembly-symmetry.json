@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-assembly-symmetry",
+  "retrieval_date": "2026-08-30",
+  "source": {
+    "coordinate": {
+      "accession": "4V1W",
+      "path": "inputs/4V1W.cif",
+      "url": "https://files.rcsb.org/download/4V1W.cif",
+      "bytes": 3116021,
+      "sha256": "df1780420f4c23a2ab4c91790c49690de20be1536c8913374e4406666b4bcba2"
+    },
+    "entry_api": "https://data.rcsb.org/rest/v1/core/entry/4V1W",
+    "assembly_api": "https://data.rcsb.org/rest/v1/core/assembly/4V1W/1",
+    "emdb": "https://www.ebi.ac.uk/emdb/EMD-2788"
+  },
+  "entry_observations": {
+    "experimental_method": "EM",
+    "reported_resolution_angstrom": 4.7,
+    "linked_emdb_id": "EMD-2788",
+    "em_reconstruction_method": "SUBMISSION BASED ON EXPERIMENTAL DATA FROM EMDB EMD-2788. (DEPOSITION ID: 12832).",
+    "particle_count": 483,
+    "pixel_size_angstrom": 1.346
+  },
+  "assembly_1": {
+    "assembly_id": "1",
+    "polymer_composition": "homomeric protein",
+    "polymer_entity_instance_count": 24,
+    "polymer_atom_count": 32736,
+    "modeled_polymer_monomer_count": 4080,
+    "unmodeled_polymer_monomer_count": 96,
+    "total_interfaces": 60,
+    "total_assembly_buried_surface_area_square_angstrom": 46710.954908308966
+  },
+  "symmetry_record": {
+    "kind": "Global Symmetry",
+    "type": "Octahedral",
+    "symbol": "O",
+    "oligomeric_state": "Homo 24-mer",
+    "stoichiometry": [
+      "A24"
+    ],
+    "rotation_axis_count": 13,
+    "rotation_axes_by_order": {
+      "2": 6,
+      "3": 4,
+      "4": 3
+    },
+    "cluster_count": 1,
+    "cluster_member_count": 24,
+    "cluster_average_rmsd_angstrom": 0.02433675132060874,
+    "rotation_axes": [
+      {
+        "end": [
+          88.7622792741527,
+          140.61353446293586,
+          36.911509818477995
+        ],
+        "order": 2,
+        "start": [
+          88.76344670623946,
+          36.9120326939269,
+          140.61343724034555
+        ]
+      },
+      {
+        "end": [
+          88.76163715534011,
+          36.91181985015985,
+          36.91172267344984
+        ],
+        "order": 2,
+        "start": [
+          88.76408882505206,
+          140.61374730670292,
+          140.6132243853737
+        ]
+      },
+      {
+        "end": [
+          131.09790982816676,
+          46.42638682224675,
+          46.42577403228533
+        ],
+        "order": 3,
+        "start": [
+          46.427816152225404,
+          131.09918033461602,
+          131.0991730265382
+        ]
+      },
+      {
+        "end": [
+          140.61339930982078,
+          36.91160530724389,
+          88.76167537339755
+        ],
+        "order": 2,
+        "start": [
+          36.912326670571396,
+          140.61396184961887,
+          88.763271685426
+        ]
+      },
+      {
+        "end": [
+          46.42581441814298,
+          46.426911108784644,
+          46.427251481787415
+        ],
+        "order": 3,
+        "start": [
+          131.0999115622492,
+          131.0986560480781,
+          131.09769557703615
+        ]
+      },
+      {
+        "end": [
+          140.61281552252223,
+          88.76235600791804,
+          36.910711480345896
+        ],
+        "order": 2,
+        "start": [
+          36.91291045786995,
+          88.76321114894472,
+          140.61423557847766
+        ]
+      },
+      {
+        "end": [
+          131.0984341164335,
+          131.0984822432669,
+          46.42560022308721
+        ],
+        "order": 3,
+        "start": [
+          46.42729186395867,
+          46.42708491359588,
+          131.09934683573636
+        ]
+      },
+      {
+        "end": [
+          88.76158363908449,
+          88.76263302684936,
+          15.43428792714262
+        ],
+        "order": 4,
+        "start": [
+          88.76414234130768,
+          88.7629341300134,
+          162.09065913168092
+        ]
+      },
+      {
+        "end": [
+          36.9111009345844,
+          88.76299808238537,
+          36.91252100231244
+        ],
+        "order": 2,
+        "start": [
+          140.61462504580777,
+          88.7625690744774,
+          140.6124260565111
+        ]
+      },
+      {
+        "end": [
+          162.09104859121237,
+          88.76232951285877,
+          88.76119408845413
+        ],
+        "order": 4,
+        "start": [
+          15.434677389179797,
+          88.763237644004,
+          88.76375297036942
+        ]
+      },
+      {
+        "end": [
+          46.426338754703494,
+          131.0990065077137,
+          46.4270775926794
+        ],
+        "order": 3,
+        "start": [
+          131.09938722568867,
+          46.42656064914905,
+          131.09786946614415
+        ]
+      },
+      {
+        "end": [
+          88.76331698877094,
+          162.0909691904551,
+          88.76232280062487
+        ],
+        "order": 4,
+        "start": [
+          88.76240899162123,
+          15.434597966407651,
+          88.76262425819868
+        ]
+      },
+      {
+        "end": [
+          140.6140412619124,
+          140.61331989381213,
+          88.76146243317737
+        ],
+        "order": 2,
+        "start": [
+          36.911684718479776,
+          36.91224726305063,
+          88.76348462564619
+        ]
+      }
+    ],
+    "members": [
+      {
+        "asym_id": "A",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "X",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "W",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "V",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "U",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "T",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "S",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "R",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "Q",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "P",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "O",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "N",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "M",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "L",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "K",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "J",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "I",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "H",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "G",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "F",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "E",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "D",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "C",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      },
+      {
+        "asym_id": "B",
+        "pdbx_struct_oper_list_ids": [
+          "1"
+        ]
+      }
+    ]
+  },
+  "interpretation_scope": "The record describes RCSB biological assembly 1 and its archive-derived global symmetry annotation; it does not establish behavior under every solution condition."
+}

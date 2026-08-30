@@ -26,3 +26,15 @@ What complementary evidence do Open Targets, the GWAS Catalog, and GTEx provide 
 ## Interpretation
 
 The three sources answer different questions: Open Targets summarizes target–disease evidence context, the GWAS Catalog exposes mapped association records, and GTEx shows tissue-specific expression associations for a selected IL6R variant. Their agreement makes the hypothesis richer, but it does not by itself prove causality or predict whether increasing or decreasing IL6R activity would benefit asthma.
+
+## Rosalind Workbench observation
+
+The genuine `mcp__rosalind__rosalind_open` call at `2026-08-29T18:14:05.178Z` returned `Rosalind Workbench is ready. Choose a research task in the app.` with `ready=true`. Its case-specific arguments and both timestamps are retained in `outputs/rosalind-open-observation.json`.
+
+This operation opened the task chooser only. It did not run a genetics, target-evidence, or eQTL analysis; `outputs/results.json`, `outputs/sources.json`, and `outputs/provenance.json` carry the scientific evidence and query history.
+
+## Limitations
+
+- Open Targets datasource scores are evidence summaries, not effect sizes.
+- The retained GWAS slice did not expose trait labels and is not described as asthma-specific.
+- The evidence map does not establish causality or therapeutic direction.

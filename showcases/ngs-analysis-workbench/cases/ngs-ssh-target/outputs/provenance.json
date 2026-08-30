@@ -1,0 +1,21 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "ngs-ssh-target",
+  "workbench_observations": [
+    "outputs/configure-ssh-target-receipt.json records a successful ngs-compute.configure_ssh_target call and a bounded post-registration inspection.",
+    "outputs/ssh-target-observation.json records the earlier read-only SSH probe."
+  ],
+  "rosalind_observation": "outputs/rosalind-open-observation.json",
+  "scientific_job_executed_by_rosalind": false,
+  "sanitized_fields": [
+    "credentials",
+    "private addresses",
+    "usernames",
+    "host fingerprints",
+    "host-specific executable paths"
+  ],
+  "limitations": [
+    "The configured temporary workspace did not yet exist at inspection time.",
+    "Nextflow and Snakemake were missing, so no workflow plan or run was attempted on this target."
+  ]
+}

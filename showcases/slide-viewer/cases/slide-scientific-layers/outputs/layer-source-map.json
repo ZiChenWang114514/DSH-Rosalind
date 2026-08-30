@@ -1,0 +1,46 @@
+{
+  "mapping_version": "1.0.0",
+  "source": {
+    "dataset": "Brain Coronal HnE Adata Crop",
+    "h5ad_repository_path": "pathology-slide-viewer-examples/squidpy-mouse-brain-hne.h5ad",
+    "h5ad_sha256": "9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd",
+    "license": "CC BY 4.0",
+    "observations": 684,
+    "genes": 18078
+  },
+  "matrix": {
+    "selection": "X",
+    "format": "CSR",
+    "value_scale": "unknown",
+    "revision": "b93bd2bb146dbf8ec519e04145d9cd2efaca3aeca8aadd191601720123d57159"
+  },
+  "entity_layer": {
+    "kind": "visium_capture_spot",
+    "input_repository_path": "showcases/slide-viewer/cases/slide-research-export/outputs/spatial-observations-expression.csv",
+    "row_count": 684,
+    "identifier_column": "observation_id",
+    "exact_identifier_column": "observation_id_json",
+    "x_column": "x",
+    "y_column": "y",
+    "coordinate_frame": "registered source image pixels, top-left origin",
+    "attribute_columns": [
+      "in_tissue",
+      "total_counts",
+      "n_genes_by_counts",
+      "Slc17a7_X",
+      "Gad1_X"
+    ]
+  },
+  "companion_annotation": {
+    "input_repository_path": "showcases/slide-viewer/cases/slide-segmentation-overlay/outputs/source-aligned-annotations.geojson",
+    "feature_count": 3,
+    "meaning": "demonstration spot-neighborhood polygons",
+    "biological_segmentation": false
+  },
+  "viewer_identity": {
+    "layer_id": null,
+    "import_job_id": null,
+    "source_revision": null,
+    "status": "not imported"
+  }
+}

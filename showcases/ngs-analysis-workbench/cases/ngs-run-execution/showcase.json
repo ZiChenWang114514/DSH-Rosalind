@@ -1,0 +1,169 @@
+{
+  "id": "ngs-run-execution",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "ngs-analysis-workbench.get_runtime_environment",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "Python 3.14 standard library",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 307,
+      "sha256": "9b7376c5702c6cbcc2f09e6b6dcf098c7ae5684e51cd8b82b788dfbec2d7dfa2"
+    },
+    {
+      "path": "inputs/DRR037765-first-24.fastq",
+      "bytes": 23031,
+      "sha256": "1091da980ce003fd7b3981c9ea1fc002a399eb030553adfb395c277046e61ff4"
+    },
+    {
+      "path": "workflow/Snakefile",
+      "bytes": 631,
+      "sha256": "97381e38082a97500d3364534f56cbfca199f45d8355b00d87b4003b9ca5eaf0"
+    },
+    {
+      "path": "workflow/config/config.json",
+      "bytes": 243,
+      "sha256": "588bb1bf04c36f78749c755eb0cdad3041c3121427460edc521003859148e145"
+    },
+    {
+      "path": "workflow/scripts/qc_core.py",
+      "bytes": 6359,
+      "sha256": "76153e551cc73c27d314e5df691d4b259deea49bf9fd0dc98490c0f4f2f50499"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/runtime-snapshot.json",
+      "bytes": 657,
+      "sha256": "39e5b4b2a8d41dbfac07fa24a52a3ecd95040cb1df5b090ad3b6bba4cfa05622"
+    },
+    {
+      "path": "outputs/qc-summary.json",
+      "bytes": 527,
+      "sha256": "36f6c5a751122b0a1aba785e2c23195c2a607a89a821c1958c396e9e3aecef07"
+    },
+    {
+      "path": "outputs/read-metrics.csv",
+      "bytes": 1426,
+      "sha256": "7991ccd8b5d3fcfb6753cba4a9cf3ba3a0d9668dacf8bd29fc97dd0c410e7bb8"
+    },
+    {
+      "path": "outputs/cycle-quality.csv",
+      "bytes": 18117,
+      "sha256": "d6357618a874c2a8f8a85bbab10fa8e070f851544332730394204379b5022a0e"
+    },
+    {
+      "path": "outputs/run-log.txt",
+      "bytes": 76,
+      "sha256": "9fd861e90ecd7a23d4c4633455e15cf9a17923f3715e9e7c3400ed271eab8e3a"
+    },
+    {
+      "path": "outputs/local-run-receipt.json",
+      "bytes": 2267,
+      "sha256": "e360c454ff82e8f673e7ddc9e232c90144693a1f016c0a68195ed8176ff01953"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 757,
+      "sha256": "48a0f36d13210f08ba28fdd8db78b8df44701197be49611cd9274481e0c5bb07"
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 7392,
+      "sha256": "8b7d2ef87fe53462d6cf2106b7f635e2b70e5c0d0327eacdd348391ee6f3c283"
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 1440
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2249,
+      "sha256": "2ce6589c1ec109df49a29dcffc41d196fa563306a22c24185e4c372e6c178fa3"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "Runtime inspection observed missing Snakemake and Nextflow controllers on the local target.",
+    "The Python QC core exited 0 after validating 24 unique records and 11,304 bases.",
+    "The public execution receipt uses only the interpreter name and repository-relative paths.",
+    "The computed GC fraction is 28.8482% and Q30 fraction is 96.7887%.",
+    "rosalind.rosalind_open returned ready true with view launcher for this case-specific context.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The retained subset has internally consistent FASTQ structure and high base-call quality under Phred+33, within the limited 24-record sample."
+  ],
+  "limitations": [
+    "There is no Workbench registry run or engine execution.",
+    "The compact subset cannot represent the entire run.",
+    "Local interpreter and repository absolute paths are deliberately omitted from public artifacts.",
+    "Adapter, contamination, pairing, and assay-specific QC were not performed.",
+    "rosalind_open only opened the task chooser and does not establish Rosalind scientific execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/DRR037765-first-24.fastq",
+        "workflow/Snakefile",
+        "workflow/config/config.json",
+        "workflow/scripts/qc_core.py"
+      ],
+      "outputs": [
+        "outputs/runtime-snapshot.json",
+        "outputs/qc-summary.json",
+        "outputs/read-metrics.csv",
+        "outputs/cycle-quality.csv",
+        "outputs/run-log.txt",
+        "outputs/local-run-receipt.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained source note identifies the public run and subset rule; workflow files and machine-readable outputs support the scientific observations. outputs/rosalind-open-observation.json records the separate case-specific launcher invocation and its explicit limitation."
+    }
+  ],
+  "reproduction": [
+    "Run build_cases.py or the exact Python command in README.md.",
+    "Verify exit code and all output hashes in local-run-receipt.json.",
+    "Inspect the summary, per-read table, and per-cycle table before quoting metrics.",
+    "For ngs-run-execution, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local Windows amd64"
+  }
+}

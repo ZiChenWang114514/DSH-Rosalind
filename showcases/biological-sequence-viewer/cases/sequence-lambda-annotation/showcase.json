@@ -3,7 +3,7 @@
   "plugin_id": "biological-sequence-viewer",
   "plugin_version": "0.1.43",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
   "prompt": "prompt.md",
   "inputs": [
     {
@@ -18,6 +18,19 @@
     },
     {
       "path": "outputs/source-provenance.json"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 878,
+      "sha256": "eabe397fc1c462a13aa12b16036b15cb787e302d4b33a475c9c83fb672a57d3f"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 688,
+      "sha256": "0896f1ab352bd63bde8096941a6f3c950fda5501dd8d4d80606afeb856aece8a"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
     }
   ],
   "previews": [
@@ -30,16 +43,63 @@
   ],
   "observations": [
     "The cI feature is reverse-strand and spans 714 bases.",
-    "The computed 237-residue translation equals the annotated translation."
+    "The computed 237-residue translation equals the annotated translation.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
   ],
   "interpretation": [
     "The cI translation is internally consistent with the versioned GenBank record."
   ],
   "limitations": [
-    "The viewer card did not mount, so no viewer screenshot or interactive query result is claimed."
+    "rosalind_open did not inspect the GenBank record or execute a scientific job.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
   ],
   "environment": {
-    "viewer_status": "session_created_but_card_not_mounted",
-    "viewer_rendered": false
-  }
+    "viewer_rendered": false,
+    "rosalind_launcher_observed": true,
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  },
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "versioned NCBI GenBank extraction and code-11 cI translation, plus a documented unconfirmed Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=gbwithparts&retmode=text"
+      ],
+      "inputs": [
+        "inputs/NC_001416.1.gb"
+      ],
+      "outputs": [
+        "outputs/analysis.json",
+        "outputs/source-provenance.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/lambda-annotation.svg"
+      ],
+      "note": "The local script produced the scientific result; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Inspect every retained input, output, preview, and cited public source.",
+    "Repeat the documented free computation or viewer operations and compare the stated observations and limitations.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat the launcher response as scientific execution.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ]
 }

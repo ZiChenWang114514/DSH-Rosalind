@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Exploratory human RAS guide tree</title><desc id="desc">Pairwise p-distance matrix, three-leaf neighbor-joining diagram, and method cautions.</desc>
+<rect width="1200" height="760" rx="28" fill="#07121f"/><rect x="48" y="44" width="1104" height="672" rx="22" fill="#102238" stroke="#2c4764"/>
+<style>.s{font-family:Segoe UI,Arial,sans-serif}.m{font-family:Consolas,monospace}.w{fill:#f4f8fb}.d{fill:#a8bad0}.g{fill:#54ddb0}.a{fill:#ffc86b}.p{fill:#142d47;stroke:#315372}.l{stroke:#78a7d5;stroke-width:4;fill:none}</style>
+<text x="82" y="102" class="s g" font-size="21" font-weight="700">SEQUENCE VIEWER 0.1.43 · LOCAL REPRODUCTION</text><text x="82" y="154" class="s w" font-size="38" font-weight="700">Human RAS exploratory guide tree</text>
+<text x="82" y="194" class="s d" font-size="18">P01116 / P01111 / P01112 · 191 aligned columns · uncorrected p-distance</text>
+<rect x="78" y="232" width="500" height="326" rx="16" class="p"/><text x="106" y="275" class="s w" font-size="22" font-weight="650">Pairwise distances</text>
+<text x="265" y="326" class="s d" font-size="17">KRAS</text><text x="377" y="326" class="s d" font-size="17">NRAS</text><text x="489" y="326" class="s d" font-size="17">HRAS</text>
+<text x="108" y="372" class="s w" font-size="17">KRAS</text><text x="275" y="372" class="m g" font-size="17">0</text><text x="374" y="372" class="m w" font-size="17">0.131579</text><text x="486" y="372" class="m w" font-size="17">0.136842</text>
+<text x="108" y="418" class="s w" font-size="17">NRAS</text><text x="260" y="418" class="m w" font-size="17">0.131579</text><text x="390" y="418" class="m g" font-size="17">0</text><text x="486" y="418" class="m w" font-size="17">0.157895</text>
+<text x="108" y="464" class="s w" font-size="17">HRAS</text><text x="260" y="464" class="m w" font-size="17">0.136842</text><text x="374" y="464" class="m w" font-size="17">0.157895</text><text x="502" y="464" class="m g" font-size="17">0</text>
+<text x="108" y="520" class="s d" font-size="16">190 columns compared per pair;</text><text x="108" y="543" class="s d" font-size="16">residue–gap columns count as differences.</text>
+<rect x="610" y="232" width="512" height="326" rx="16" class="p"/><text x="638" y="275" class="s w" font-size="22" font-weight="650">Neighbor joining</text>
+<path d="M668 406H760M760 406V326M760 326H856M760 406V475M760 475H824M824 475V433M824 433H916M824 475V517M824 517H916" class="l"/>
+<text x="870" y="332" class="s w" font-size="18">P01116 · KRAS</text><text x="930" y="439" class="s w" font-size="18">P01111 · NRAS</text><text x="930" y="523" class="s w" font-size="18">P01112 · HRAS</text>
+<text x="82" y="616" class="s a" font-size="18" font-weight="650">Exploratory only</text><text x="82" y="650" class="s d" font-size="17">Three proteins, no substitution model, no resampling support; the drawn root is arbitrary.</text>
+<text x="82" y="684" class="s d" font-size="15">Viewer actions were rehearsed. All numbers shown here were recomputed locally from the retained aligned FASTA.</text></svg>

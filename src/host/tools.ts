@@ -71,7 +71,7 @@ export function createRosalindTools(runtime: RosalindRuntime): ToolDefinition[] 
   return [
     defineTool({
       name: "rosalind_catalog_list",
-      description: "List the 23 ready DSH-Rosalind scientific showcases, optionally filtered by query, category, or reproduce availability.",
+      description: "List the 100 ready DSH-Rosalind scientific showcases, optionally filtered by query, category, or reproduce availability.",
       parameters: {
         query: { type: "string", description: "Free-text search" },
         category_id: { type: "string", description: "One of the seven scientific category IDs" },

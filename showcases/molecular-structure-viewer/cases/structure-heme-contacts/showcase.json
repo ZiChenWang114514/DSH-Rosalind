@@ -1,0 +1,54 @@
+{
+  "id": "structure-heme-contacts",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": ["RCSB PDB coordinate snapshot", "Python 3.14 standard library", "Rosalind Workbench mcp__rosalind__rosalind_open"],
+    "device": "local",
+    "implementation": "deterministic 4.0 Å heavy-atom heme shell plus explicit Fe-centered coordinate geometry",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/public-source.md", "bytes": 472},
+    {"path": "inputs/1MBN.pdb", "bytes": 147420},
+    {"path": "scripts/analyze.py", "bytes": 7992}
+  ],
+  "outputs": [
+    {"path": "outputs/heme-geometry.json", "bytes": 6882},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 621}
+  ],
+  "previews": [{"path": "previews/preview.svg", "bytes": 1730}],
+  "sources": ["https://www.rcsb.org/structure/1MBN", "https://files.rcsb.org/download/1MBN.pdb"],
+  "observations": [
+    "Fifteen chain-A protein residues have a heavy atom within 4.0 Å of HEM A:155.",
+    "HIS A:93 NE2 is 2.191 Å from Fe, and OH A:154 O is 2.147 Å from Fe.",
+    "The four Fe-N distances average 2.026 Å and Fe is 0.241 Å from the stated diagonal N4 plane.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation."
+  ],
+  "interpretation": ["The results describe deposited coordinate geometry and do not determine energy, affinity, oxidation state, or function."],
+  "limitations": ["Contact membership is cutoff-dependent.", "The plane construction is explicit but is not a complete porphyrin distortion analysis.", "Only deposited model 1 is analyzed.", "rosalind_open did not submit 1MBN, calculate heme geometry, or execute a Rosalind scientific job."],
+  "provenance": [{
+    "sources": ["https://files.rcsb.org/download/1MBN.pdb"],
+    "inputs": ["inputs/public-source.md", "inputs/1MBN.pdb", "scripts/analyze.py"],
+    "outputs": ["outputs/heme-geometry.json", "outputs/rosalind-open-observation.json"],
+    "previews": ["previews/preview.svg"],
+    "note": "The local script computes the scientific result directly from the retained public coordinates; the separate genuine Rosalind task-chooser observation states that no Rosalind scientific job ran."
+  }],
+  "reproduction": [
+    "Run scripts/analyze.py with Python 3.14 or a compatible standard-library Python.",
+    "Confirm 15 protein contact residues, a 2.026 Å mean Fe-N distance, and a 0.241 Å Fe plane offset.",
+    "Preserve the model, author numbering, atom filter, and distance cutoffs when comparing results."
+  ],
+  "environment": {"cost": "free", "data": "public", "device": "local"}
+}

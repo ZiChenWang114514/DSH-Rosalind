@@ -54,9 +54,9 @@ describe("DSH host contract", () => {
     const first = catalog.get("sequence-ras-alignment");
     first.title = "mutated by caller";
     expect(catalog.get("sequence-ras-alignment").title).not.toBe("mutated by caller");
-    expect(catalog.list()).toHaveLength(23);
-    expect(catalog.list({ categoryId: "structure" })).toHaveLength(3);
-    expect(catalog.list({ query: "nanobody" }).map((item) => item.id)).toEqual(["rosalind-molecular-design"]);
+    expect(catalog.list()).toHaveLength(100);
+    expect(catalog.list({ categoryId: "structure" })).toHaveLength(15);
+    expect(catalog.list({ query: "nanobody" }).map((item) => item.id)).toContain("rosalind-molecular-design");
   });
 
   it("rejects workspace path traversal", () => {

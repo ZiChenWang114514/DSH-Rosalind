@@ -1,0 +1,3 @@
+compound,role,pubchem_cid,molecular_formula_pubchem,molecular_weight_pubchem,xlogp_pubchem,tpsa_pubchem,hbond_donors_pubchem,hbond_acceptors_pubchem,rotatable_bonds_pubchem,molecular_weight_rdkit,clogp_rdkit,tpsa_rdkit,hbond_donors_rdkit,hbond_acceptors_rdkit,rotatable_bonds_rdkit,canonical_smiles_rdkit,inchi_key_pubchem
+Tofacitinib,same-ligand JAK1/JAK2 comparator,9926791,C16H20N6O,312.37,1.5,88.9,1,5,3,312.377,1.545,88.91,1,5,3,CC1CCN(C(=O)CC#N)CC1N(C)c1ncnc2[nH]ccc12,UJLAWZDWDVHWOW-YPMHNXCESA-N
+NVP-BSK805,3KRR JAK2-selective inhibitor,46398810,C27H28F2N6O,490.5,2.5,68.1,1,8,5,490.558,4.195,68.1,1,6,5,Fc1cc(-c2cccc3ncc(-c4cnn(C5CCNCC5)c4)nc23)cc(F)c1CN1CCOCC1,IBPVXAOOVUAOKJ-UHFFFAOYSA-N

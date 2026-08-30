@@ -1,0 +1,18 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "database": "UniProtKB",
+  "accession": "P01116",
+  "sequence_version": 1,
+  "source_url": "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+  "repository_source_alignment": "../sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
+  "source_alignment_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "derivation": "remove alignment gaps from the P01116 row, preserve the 189-aa source FASTA, and replace residue 12 G with C only in a new copy",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "scientific_job_executed": false,
+    "note": "The observed ready response documents only the task chooser; the local script created and verified the copy."
+  },
+  "viewer_status": "rehearsed"
+}

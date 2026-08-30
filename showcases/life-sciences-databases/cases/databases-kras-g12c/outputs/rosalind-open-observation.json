@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "databases-kras-g12c",
+  "observed_at_utc": "2026-08-29T18:14:05.242Z",
+  "observed_at_local": "2026-08-30T02:14:05.242+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review a KRAS G12C protein, variant, structure, and compound public evidence teaching case"
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the task chooser only; the retained UniProt, ClinVar, ChEMBL, and RCSB records provide the scientific evidence."
+}

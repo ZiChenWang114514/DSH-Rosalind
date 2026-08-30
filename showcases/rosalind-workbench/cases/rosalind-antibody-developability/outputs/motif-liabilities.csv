@@ -1,0 +1,13 @@
+sequence_id,antibody,chain_type,liability_proxy,motif,position_1_based
+1N8Z_H,Herceptin Fab,heavy,deamidation_NG,NG,55
+1N8Z_H,Herceptin Fab,heavy,deamidation_NS,NS,84
+1N8Z_H,Herceptin Fab,heavy,deamidation_NT,NT,77
+1N8Z_H,Herceptin Fab,heavy,isomerization_DG,DG,102
+1N8Z_H,Herceptin Fab,heavy,isomerization_DS,DS,62
+1N8Z_H,Herceptin Fab,heavy,isomerization_DT,DT,31
+1N8Z_H,Herceptin Fab,heavy,isomerization_DT,DT,73
+1N8Z_H,Herceptin Fab,heavy,isomerization_DT,DT,90
+1N8Z_L,Herceptin Fab,light,deamidation_NT,NT,30
+5DK3_H,Pembrolizumab Fab,heavy,deamidation_NG,NG,55
+5DK3_H,Pembrolizumab Fab,heavy,isomerization_DS,DS,73
+5DK3_H,Pembrolizumab Fab,heavy,isomerization_DT,DT,90

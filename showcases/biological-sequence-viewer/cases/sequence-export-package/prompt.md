@@ -1,0 +1,3 @@
+# Deterministic KRAS sequence export package
+
+Package the exact public UniProtKB `P01116` `SV=1` FASTA together with a deterministic sequence summary, residue-composition CSV, Codex-authored source provenance, and a data-rich SVG preview. Use stable ZIP metadata, include a member manifest, verify every member after writing, and retain the final package digest. Invoke `mcp__rosalind__rosalind_open` once, preserve its exact task-chooser response with UTC and local timestamps in `outputs/rosalind-open-observation.json`, and state that it does not prove a Rosalind scientific run. Treat Sequence Viewer open, analysis, export, and query actions as rehearsed unless a mounted viewer produces the artifacts.

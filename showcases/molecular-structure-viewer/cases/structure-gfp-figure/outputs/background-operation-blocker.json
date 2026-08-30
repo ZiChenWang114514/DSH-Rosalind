@@ -1,0 +1,76 @@
+{
+  "schema": "structure-viewer.operation-blocker/v1",
+  "case_id": "structure-gfp-figure",
+  "attempted_for": "workspace PNG/JPEG background authorization",
+  "project_backed_source": {
+    "provider": "RCSB Protein Data Bank",
+    "accession": "4AKE",
+    "repository_path": "showcases/molecular-structure-viewer/cases/structure-scene-storyboard/inputs/4AKE.pdb",
+    "bytes": 309339,
+    "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+  },
+  "viewer_open_receipt": {
+    "operation": "structure_open_from_chat",
+    "startedAtUtc": "2026-08-29T19:21:58.460Z",
+    "completedAtUtc": "2026-08-29T19:21:59.979Z",
+    "arguments": {
+      "source": "project_backed_source",
+      "presentation": "default",
+      "reopen": false,
+      "internal_identifiers_omitted": true
+    },
+    "response": {
+      "sessionReady": true,
+      "viewerCommandRevision": 0,
+      "viewerReady": false,
+      "workspacePublicationAvailable": true,
+      "mountState": "presentation-issued",
+      "renderState": "pending"
+    }
+  },
+  "state_checks": [
+    {
+      "operation": "structure_get_state",
+      "startedAtUtc": "2026-08-29T19:22:04.682Z",
+      "completedAtUtc": "2026-08-29T19:22:34.699Z",
+      "response_message": "The viewer command deadline elapsed before the action was acknowledged."
+    },
+    {
+      "operation": "structure_get_state",
+      "startedAtUtc": "2026-08-29T19:34:13.748Z",
+      "completedAtUtc": "2026-08-29T19:34:13.777Z",
+      "response_message": "The viewer session is no longer active. Reopen the viewer and try again."
+    }
+  ],
+  "operation_receipt": {
+    "operation": "structure_browse_related_data",
+    "startedAtUtc": "2026-08-29T19:34:07.277Z",
+    "completedAtUtc": "2026-08-29T19:34:07.403Z",
+    "arguments": {
+      "fresh_caller_and_command_ids": true,
+      "internal_identifiers_omitted": true
+    },
+    "response": {
+      "available": false,
+      "message": "Source-relative workspace access is unavailable because trusted file metadata was not bound to this viewer session."
+    },
+    "related_data_listing_verified": false,
+    "capability_added": false
+  },
+  "dependent_operation": {
+    "operation": "structure_load_background",
+    "invoked": false,
+    "reason": "The related-data request returned no authenticated PNG/JPEG file token. The installed contract accepts only a token returned by structure_browse_related_data with the same caller and command pair; paths, URLs, raw bytes, render identifiers, and fabricated tokens are rejected.",
+    "background_state_verified": false,
+    "capability_added": false
+  },
+  "coverage_after_attempt": {
+    "covered": 39,
+    "expected": 41,
+    "missing_operations": [
+      "structure-viewer.structure_browse_related_data",
+      "structure-viewer.structure_load_background"
+    ]
+  },
+  "sanitization": "Session, intent, caller, command, resource, presentation, and absolute-path identifiers were removed because they are nonportable and carry no scientific meaning."
+}

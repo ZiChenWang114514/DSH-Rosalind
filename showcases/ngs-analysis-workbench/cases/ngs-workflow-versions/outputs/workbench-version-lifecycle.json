@@ -1,0 +1,31 @@
+{
+  "workflow_id": "showcase_fastq_qc_lifecycle_20260830",
+  "actions_performed": [
+    "update_workflow",
+    "list_workflow_versions",
+    "activate_workflow_version"
+  ],
+  "version_count": 2,
+  "versions": [
+    {
+      "label": "v1",
+      "version_id": "version-172b18afc3346b8b037416f67893a9f5",
+      "source_sha256": "sha256:4fb0dec6401816294637a3100800dcebef20c9a8376f3b9e4fa86849864cb2ea",
+      "created_at_ms": 1788025652867
+    },
+    {
+      "label": "v2",
+      "version_id": "version-d88ed31c58ebee8c5667ddee257b846f",
+      "source_sha256": "sha256:e45290e57e1babf0336acb0fd9a6657f3df69188f501cdbab2d62c806924f0cb",
+      "created_at_ms": 1788025657268
+    }
+  ],
+  "activation_check": {
+    "v1_activated": true,
+    "v2_reactivated": true,
+    "final_active_version_id": "version-d88ed31c58ebee8c5667ddee257b846f"
+  },
+  "scientific_change": "Version 2 adds configurable Q20/Q30 thresholds, Phred+33 range validation, N-base and mean-quality metrics, per-read threshold fractions, per-cycle threshold fractions, and bounded local timeline events.",
+  "diff_path": "outputs/workflow-version.diff",
+  "workflow_execution_started": false
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Protein-DNA hydrogen-bond geometry screen</title><desc id="desc">Heavy-atom donor and acceptor geometry candidates in RCSB 1LMB.</desc>
+<rect width="1200" height="675" fill="#07142b"/><text x="70" y="75" fill="#93c5fd" font-family="Segoe UI,Arial" font-size="27">RCSB 1LMB · protein chains 3, 4 · DNA chains 1, 2</text>
+<text x="70" y="155" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="46" font-weight="700">Protein–DNA geometry screen</text>
+<text x="70" y="220" fill="#bfdbfe" font-family="Segoe UI,Arial" font-size="26">36 candidates · 2.2–3.5 Å · antecedent–donor–acceptor ≥ 90°</text>
+<rect x="65" y="270" width="1070" height="285" rx="18" fill="#0f2747"/><text x="90" y="330" fill="#dbeafe" font-family="Consolas,monospace" font-size="19">LYS 4:3/NZ → DG 1:11/O6  2.574 Å  148.6°</text><text x="90" y="385" fill="#dbeafe" font-family="Consolas,monospace" font-size="19">SER 3:45/OG → DG 2:36/O6  2.596 Å  106.8°</text><text x="90" y="440" fill="#dbeafe" font-family="Consolas,monospace" font-size="19">LYS 4:19/NZ → DA 2:24/OP1  2.640 Å  96.4°</text><text x="90" y="495" fill="#dbeafe" font-family="Consolas,monospace" font-size="19">TYR 4:22/OH → DT 2:23/OP1  2.675 Å  123.5°</text>
+<text x="70" y="620" fill="#94a3b8" font-family="Segoe UI,Arial" font-size="20">Hydrogens are unresolved; candidates are geometric hypotheses, not bond-strength measurements.</text>
+</svg>

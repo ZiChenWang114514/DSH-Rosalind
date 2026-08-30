@@ -1,0 +1,136 @@
+{
+  "plan_kind": "rehearsed Structure Viewer trajectory, movie, and export contract",
+  "plugin_version": "0.1.80",
+  "execution_status": "not executed",
+  "session_rule": "Open one supported coordinate file once and reuse the returned viewerSessionId for loading, inspection, validation, rendering, cancellation, and export.",
+  "runtime_inputs": {
+    "mount_structure": "inputs/adk-frame0.pdb",
+    "topology": "inputs/adk4AKE.psf",
+    "trajectory": "inputs/adk-equilibrium-5frames.dcd",
+    "expected_atoms": 3341,
+    "expected_frames": 5,
+    "source_frame_mapping": [0, 1046, 2093, 3140, 4186]
+  },
+  "steps": [
+    {
+      "order": 1,
+      "operation": "structure-viewer.structure_open_from_chat",
+      "request": "Resolve inputs/adk-frame0.pdb to its exact absolute path and open it once with a new UUID openIntentId.",
+      "retain": ["viewerSessionId", "mountState", "renderState", "viewerReady"]
+    },
+    {
+      "order": 2,
+      "operation": "structure-viewer.structure_get_state",
+      "request": "Confirm viewerReady, ready load status, current sceneRevision, and trajectory/publication capabilities."
+    },
+    {
+      "order": 3,
+      "operation": "structure-viewer.structure_load_data",
+      "request": {
+        "kind": "trajectory",
+        "topologyPath": "resolve inputs/adk4AKE.psf to its exact absolute path",
+        "topologyFormat": "psf",
+        "coordinatePath": "resolve inputs/adk-equilibrium-5frames.dcd to its exact absolute path",
+        "coordinateFormat": "dcd"
+      },
+      "retain": ["returned object ID", "atom count", "frame count", "appliedRevision"]
+    },
+    {
+      "order": 4,
+      "operation": "structure-viewer.structure_get_state",
+      "request": "Verify 3341 atoms, five frames, paused playback, and the exact trajectory object ID."
+    },
+    {
+      "order": 5,
+      "operation": "structure-viewer.structure_set_trajectory_state",
+      "request_sequence": [
+        {"frame": 0, "playing": false, "alignment": "backbone", "periodic_images": false},
+        {"frame": 2, "playing": false, "alignment": "backbone", "periodic_images": false},
+        {"frame": 4, "playing": false, "alignment": "backbone", "periodic_images": false},
+        {"frame": 0, "playing": false, "alignment": "backbone", "periodic_images": false}
+      ],
+      "retain": "State receipt after each mutation; compare frame identity and object counts with outputs/trajectory-inspection.json."
+    },
+    {
+      "order": 6,
+      "operation": "structure-viewer.structure_analyze",
+      "request": "Run trajectory_series across all five retained frames for a CORE-to-LID centroid distance using the documented residue selections, stride 1, backbone alignment, and no periodic-image correction.",
+      "qualification": "Compare returned values with local metrics; preserve the viewer method rather than forcing equality between implementations."
+    },
+    {
+      "order": 7,
+      "operation": "structure-viewer.structure_validate_render",
+      "request": {
+        "format": "mp4",
+        "width": 1280,
+        "height": 720,
+        "fps": 24,
+        "timeline": [
+          {"kind": "hold", "duration_seconds": 0.5, "frame": 0},
+          {"kind": "trajectory_animation", "frames": [0, 1, 2, 3, 4], "mode": "once", "duration_seconds": 3.0},
+          {"kind": "rock", "duration_seconds": 1.0, "amplitude_degrees": 8},
+          {"kind": "hold", "duration_seconds": 0.5, "frame": 4}
+        ]
+      },
+      "retain": ["resolved targets", "duration", "frame estimate", "pixel estimate", "source revision"]
+    },
+    {
+      "order": 8,
+      "operation": "structure-viewer.structure_render_movie",
+      "preconditions": [
+        "render validation succeeded",
+        "source-relative workspace publication is advertised",
+        "the output and sidecar do not already exist"
+      ],
+      "request": {
+        "outputPath": "outputs/movie/adk-5frame-storyboard.mp4",
+        "destination": {
+          "kind": "workspace",
+          "base": "opened-source",
+          "relativePath": "outputs/movie/adk-5frame-storyboard.mp4",
+          "collisionPolicy": "exact"
+        },
+        "waitForCompletion": false
+      },
+      "retain": ["job ID", "initial status"]
+    },
+    {
+      "order": 9,
+      "operation": "structure-viewer.structure_get_render_status",
+      "request": "Poll the returned job ID until completed, failed, or cancelled; claim a movie only after completed plus artifact and sidecar paths are returned."
+    },
+    {
+      "order": 10,
+      "operation": "structure-viewer.structure_render_movie",
+      "request": "After the final movie is complete, start one bounded duplicate with a different exact path only for cancellation testing and waitForCompletion false."
+    },
+    {
+      "order": 11,
+      "operation": "structure-viewer.structure_cancel_render",
+      "precondition": "The duplicate job returned queued or running.",
+      "request": "Cancel only the returned duplicate job ID, then retain the cancellation status and confirm that no completed artifact is claimed."
+    },
+    {
+      "order": 12,
+      "operation": "structure-viewer.structure_export",
+      "request_sequence": [
+        {"format": "scene-json", "relativePath": "outputs/exports/adk-5frame-scene.json", "collisionPolicy": "exact"},
+        {"format": "results-csv", "relativePath": "outputs/exports/adk-trajectory-series.csv", "collisionPolicy": "exact"}
+      ],
+      "precondition": "Source-relative publication is advertised and the requested paths are absent.",
+      "retain": ["export receipts", "artifact paths", "identifier policy", "spreadsheet safety metadata when returned"]
+    }
+  ],
+  "claims_currently_supported": [
+    "The public PSF and full DCD matched the MDAnalysisData file identities.",
+    "MDAnalysis loaded 4187 frames with 3341 atoms.",
+    "The retained five-frame DCD reloads with the same PSF and coordinates."
+  ],
+  "claims_awaiting_viewer_execution": [
+    "The trajectory loaded in Structure Viewer.",
+    "Viewer playback or trajectory_series completed.",
+    "An MP4 or render sidecar exists.",
+    "A render job was cancelled.",
+    "A scene or results CSV was exported by the viewer."
+  ]
+}

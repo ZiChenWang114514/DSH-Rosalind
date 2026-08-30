@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Adenylate-kinase five-frame trajectory inspection</title>
+  <desc id="desc">Executed local PSF and DCD compatibility evidence with sampled C-alpha RMSD values and a pending Structure Viewer movie rehearsal.</desc>
+  <rect width="1200" height="675" fill="#07141b"/>
+  <text x="60" y="66" fill="#effcf8" font-family="Segoe UI,Arial" font-size="34" font-weight="700">AdK equilibrium · five-frame inspection</text>
+  <text x="60" y="104" fill="#8eb8b2" font-family="Segoe UI,Arial" font-size="18">Figshare 5108170 v1 · CC BY 4.0 · local MDAnalysis execution</text>
+  <g transform="translate(60 145)" font-family="Segoe UI,Arial">
+    <rect width="760" height="400" rx="20" fill="#0d222b" stroke="#244854"/>
+    <text x="28" y="42" fill="#d8f3ef" font-size="20" font-weight="700">Cα RMSD to source frame 0</text>
+    <text x="28" y="68" fill="#6f9795" font-size="14">Kabsch fit over 214 Cα atoms · Å</text>
+    <line x1="85" y1="330" x2="710" y2="330" stroke="#41646b"/>
+    <line x1="85" y1="110" x2="85" y2="330" stroke="#41646b"/>
+    <g fill="#6f9795" font-size="13">
+      <text x="63" y="335">0</text><text x="58" y="280">2</text><text x="58" y="225">4</text><text x="58" y="170">6</text><text x="58" y="115">8</text>
+      <text x="85" y="358" text-anchor="middle">0</text><text x="241" y="358" text-anchor="middle">1046</text><text x="398" y="358" text-anchor="middle">2093</text><text x="554" y="358" text-anchor="middle">3140</text><text x="710" y="358" text-anchor="middle">4186</text>
+      <text x="398" y="386" text-anchor="middle">source frame</text>
+    </g>
+    <polyline points="85,330 241,175 398,163 554,130 710,162" fill="none" stroke="#45d3bc" stroke-width="5" stroke-linejoin="round"/>
+    <g fill="#07141b" stroke="#7ff0cf" stroke-width="4">
+      <circle cx="85" cy="330" r="8"/><circle cx="241" cy="175" r="8"/><circle cx="398" cy="163" r="8"/><circle cx="554" cy="130" r="8"/><circle cx="710" cy="162" r="8"/>
+    </g>
+    <g fill="#d8f3ef" font-size="14" font-weight="700">
+      <text x="85" y="312" text-anchor="middle">0.000</text><text x="241" y="157" text-anchor="middle">5.628</text><text x="398" y="145" text-anchor="middle">6.072</text><text x="554" y="112" text-anchor="middle">7.271</text><text x="710" y="144" text-anchor="middle">6.091</text>
+    </g>
+  </g>
+  <g transform="translate(850 145)" font-family="Segoe UI,Arial">
+    <rect width="290" height="400" rx="20" fill="#102832" stroke="#25505a"/>
+    <text x="25" y="42" fill="#d8f3ef" font-size="20" font-weight="700">Compatibility</text>
+    <text x="25" y="88" fill="#8eb8b2" font-size="15">PSF atoms</text><text x="265" y="88" text-anchor="end" fill="#ffffff" font-size="22">3,341</text>
+    <text x="25" y="132" fill="#8eb8b2" font-size="15">Full DCD frames</text><text x="265" y="132" text-anchor="end" fill="#ffffff" font-size="22">4,187</text>
+    <text x="25" y="176" fill="#8eb8b2" font-size="15">Retained frames</text><text x="265" y="176" text-anchor="end" fill="#ffffff" font-size="22">5</text>
+    <text x="25" y="220" fill="#8eb8b2" font-size="15">Reload coordinate error</text><text x="265" y="220" text-anchor="end" fill="#7ff0cf" font-size="22">0.0 Å</text>
+    <line x1="25" y1="255" x2="265" y2="255" stroke="#25505a"/>
+    <text x="25" y="295" fill="#f4c56a" font-size="16" font-weight="700">VIEWER REHEARSAL</text>
+    <text x="25" y="328" fill="#9db9bd" font-size="14">Load · playback · movie</text>
+    <text x="25" y="352" fill="#9db9bd" font-size="14">cancel · export</text>
+    <text x="25" y="382" fill="#6f9795" font-size="13">Returned receipts still required</text>
+  </g>
+  <text x="60" y="606" fill="#8eb8b2" font-family="Segoe UI,Arial" font-size="16">Sampled CORE→LID centroid: 21.525 → 31.140 Å maximum among retained frames</text>
+  <text x="60" y="637" fill="#6f9795" font-family="Segoe UI,Arial" font-size="14">Five selected frames support inspection; they do not estimate kinetics or equilibrium populations.</text>
+</svg>

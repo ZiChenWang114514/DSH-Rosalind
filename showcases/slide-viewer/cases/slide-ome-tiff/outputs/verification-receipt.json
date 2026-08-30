@@ -1,0 +1,68 @@
+{
+  "showcase_id": "slide-ome-tiff",
+  "check_date": "2026-08-30",
+  "source": {
+    "url": "https://downloads.openmicroscopy.org/images/OME-TIFF/2016-06/bioformats-artificial/multi-channel-z-series.ome.tif",
+    "license": "CC BY 4.0",
+    "http_status": 200,
+    "content_type": "image/tiff",
+    "content_length": 1128003,
+    "etag": "\"57d7f23d-113643\"",
+    "last_modified": "Tue, 13 Sep 2016 12:34:05 GMT"
+  },
+  "local_integrity": {
+    "bytes": 1128003,
+    "sha256": "f8cebdb6036060e433576bd0303f6f632fac6f2a71f2e7ceec08a13f34f69cba"
+  },
+  "ome_xml": {
+    "namespace": "http://www.openmicroscopy.org/Schemas/OME/2016-06",
+    "creator": "OME Bio-Formats 5.2.2",
+    "image_id": "Image:0",
+    "dimension_order": "XYZCT",
+    "pixel_type": "int8",
+    "size_x": 439,
+    "size_y": 167,
+    "size_z": 5,
+    "size_c": 3,
+    "size_t": 1,
+    "channel_count": 3,
+    "tiff_data_entries": 15,
+    "channel_names_present": false
+  },
+  "tiff_check": {
+    "tool": "tiffinfo 4.7.1",
+    "ifd_count": 15,
+    "plane_width": 439,
+    "plane_height": 167,
+    "bits_per_sample": 8,
+    "sample_format": "signed integer",
+    "compression": "none",
+    "photometric_interpretation": "min-is-black"
+  },
+  "slide_viewer": {
+    "open_operation": "mcp__slide_viewer__slide_open_ome_tiff_series",
+    "source_authorized": true,
+    "viewer_session_recorded": true,
+    "source_authorization_observed": true,
+    "source_revision_recorded": true,
+    "viewer_state": "awaiting-viewer",
+    "state_revision": null,
+    "viewer_ready": false,
+    "state_query": "timeout",
+    "layers_query": "timeout",
+    "microscopy_scenes_query": "timeout",
+    "wait_for_render": "not called because no state revision was reported",
+    "render_evidence": false
+  },
+  "calculation": {
+    "algorithm": "SizeC × SizeZ × SizeT from the embedded OME-XML",
+    "expected_planes": 15,
+    "observed_tiff_data_entries": 15,
+    "observed_ifds": 15
+  },
+  "interpretation": "The official synthetic sample has a fully consistent 3-channel by 5-Z-plane topology. The live check proves source authorization only; it does not prove scene display or channel navigation.",
+  "limitations": [
+    "The source is synthetic and has no biological channel names.",
+    "No mounted state, synchronized render, channel change, Z change, or visible-layer change was recorded."
+  ]
+}

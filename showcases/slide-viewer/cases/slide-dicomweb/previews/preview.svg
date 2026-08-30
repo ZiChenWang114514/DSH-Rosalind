@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">IDC DICOMweb response summary</title>
+  <desc id="desc">Three metadata resources and fourteen frames were pinned; the three-object viewer open was rejected because associated images are not pyramid levels.</desc>
+  <rect width="1200" height="675" fill="#071823"/>
+  <text x="70" y="82" fill="#5eead4" font-family="Segoe UI,Arial" font-size="25">SLIDE VIEWER · DICOMWEB</text>
+  <text x="70" y="145" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="44" font-weight="700">IDC H&amp;E selected responses</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="70" y="205" width="300" height="145" rx="18" fill="#0f2f35" stroke="#2dd4bf"/>
+    <text x="100" y="252" fill="#99f6e4" font-size="22">Metadata pins</text><text x="100" y="315" fill="#f8fafc" font-size="48" font-weight="700">3</text>
+    <rect x="450" y="205" width="300" height="145" rx="18" fill="#0f2f35" stroke="#2dd4bf"/>
+    <text x="480" y="252" fill="#99f6e4" font-size="22">Frame pins</text><text x="480" y="315" fill="#f8fafc" font-size="48" font-weight="700">14</text>
+    <rect x="830" y="205" width="300" height="145" rx="18" fill="#0f2f35" stroke="#2dd4bf"/>
+    <text x="860" y="252" fill="#99f6e4" font-size="22">Frame payload</text><text x="860" y="312" fill="#f8fafc" font-size="38" font-weight="700">3.79 MB</text>
+    <rect x="70" y="405" width="1060" height="125" rx="18" fill="#301c28" stroke="#fb7185"/>
+    <text x="100" y="452" fill="#fecdd3" font-size="22">Viewer admission</text>
+    <text x="100" y="492" fill="#fff1f2" font-size="23" font-weight="700">VOLUME profile accepted;</text>
+    <text x="100" y="516" fill="#fff1f2" font-size="22" font-weight="700">LABEL / OVERVIEW / THUMBNAIL were not registered as pyramid levels</text>
+    <text x="70" y="610" fill="#94a3b8" font-size="21">17 / 17 HTTP resources pinned · no viewer session · no rendered frame</text>
+  </g>
+</svg>

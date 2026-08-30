@@ -21,6 +21,10 @@ How can Codex verify a preprint-to-publication relationship while preserving the
 - The published title differs from the preprint title.
 - `outputs/results.json` retains the two records and the computed comparison; `outputs/sources.json` assigns a source to every factual field.
 
+## Rosalind Workbench observation
+
+`mcp__rosalind__rosalind_open` was invoked with a preprint-linkage task context at `2026-08-29T18:09:34.737Z`. The exact arguments and response are retained in `outputs/rosalind-open-observation.json`. The response only reported that the task chooser was ready; neither DOI was submitted and no Rosalind scientific job ran.
+
 ## Reproduce
 
 1. Run the prompt in `prompt.md` with Life Sciences Literature 0.1.5.
@@ -28,6 +32,7 @@ How can Codex verify a preprint-to-publication relationship while preserving the
 3. Query the publication-link endpoint for the same DOI.
 4. Search PubMed by the linked journal DOI and verify PMID `33608522`.
 5. Compare dates and titles only after preserving the two record identities.
+6. Compare any new Rosalind launcher response with `outputs/rosalind-open-observation.json` without treating the launcher as publication-link evidence.
 
 ## Interpretation
 

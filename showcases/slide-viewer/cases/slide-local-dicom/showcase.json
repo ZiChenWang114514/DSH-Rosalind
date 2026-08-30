@@ -1,0 +1,102 @@
+{
+  "id": "slide-local-dicom",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "interface",
+  "difficulty": "advanced",
+  "evidence_level": "interface-observation",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Hugging Face HTTPS",
+      "PowerShell SHA-256",
+      "slide-viewer.slide_open_dicom_series",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "six-member CMU-1 acquisition, exact local integrity verification, recorded DICOM parser admission check, and a separately retained Rosalind task-chooser invocation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 1208
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 2374
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 826
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5029,
+      "sha256": "6aaa939d377c2d6c3d39ed1e54b16a89f70f9eeb73cb0900be0f42fc0dc43243"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1918
+    }
+  ],
+  "sources": [
+    "https://huggingface.co/datasets/erikgabr/wsi-testdata/resolve/main/dicom/CMU-1-JP2K-33005/metadata.json",
+    "https://huggingface.co/api/datasets/erikgabr/wsi-testdata/tree/main/dicom/CMU-1-JP2K-33005?recursive=false&expand=false",
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
+  ],
+  "observations": [
+    "All six explicit public members matched their published byte counts and SHA-256 values.",
+    "The exact open request was rejected because a present slice-thickness value was not positive; no viewer session was created.",
+    "Rosalind Workbench opened its task chooser for the case-specific context; no scientific job was selected or executed."
+  ],
+  "interpretation": [
+    "The case demonstrates deterministic source identity and parser rejection behavior, not a displayed DICOM WSI."
+  ],
+  "limitations": [
+    "The designed source is the older conversion now marked deprecated upstream for incorrect Photometric Interpretation.",
+    "No state, rendering, navigation, layer, or morphology evidence exists.",
+    "The Rosalind launcher observation is interface provenance only and supplies no scientific result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://huggingface.co/datasets/erikgabr/wsi-testdata/resolve/main/dicom/CMU-1-JP2K-33005/metadata.json",
+        "https://huggingface.co/api/datasets/erikgabr/wsi-testdata/tree/main/dicom/CMU-1-JP2K-33005?recursive=false&expand=false"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Separate receipts preserve the public inventory, integrity and parser evidence, plus the exact Rosalind task-chooser response without treating it as scientific execution."
+    }
+  ],
+  "reproduction": [
+    "Acquire only the six named members and verify every size and digest.",
+    "Call slide_open_dicom_series with the explicit ordered paths and record the returned admission result.",
+    "Call rosalind_open with the retained case context and record the chooser response separately.",
+    "Do not report source renewal or rendering unless a future accepted source returns a session and synchronized state."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC0-1.0",
+    "device": "local"
+  }
+}

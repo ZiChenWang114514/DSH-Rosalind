@@ -1,0 +1,4 @@
+name,pka_annotation,source_note,pH_conditioned_lipophilicity,interpretation
+Captopril,3.7; 9.8,PubChem Experimental Properties > Dissociation Constants; Merck Index citation,not reported as LogD,At pH 7.4 the carboxyl group is expected to be mostly ionized while the thiol is mostly neutral.
+Enalapril,3.0; 5.4,PubChem Experimental Properties > Dissociation Constants; AHFS citation,not reported as LogD,At pH 7.4 the carboxyl group is expected to be mostly ionized and the amine mostly unprotonated under the cited macro-pKa assignment.
+Lisinopril,2.5; 4.0; 6.7; 10.1,PubChem Other Experimental Properties; Merck Index citation,-1.01 labelled LogP at pH 7 in PubChem,"The retained source does not assign each macro-pKa to a specific site, so no unique microspecies abundance is calculated."

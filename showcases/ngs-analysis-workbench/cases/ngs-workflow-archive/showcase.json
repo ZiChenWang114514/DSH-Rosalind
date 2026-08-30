@@ -1,0 +1,116 @@
+{
+  "id": "ngs-workflow-archive",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "recovery",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.archive_workflow",
+    "ngs-analysis-workbench.list_workflows",
+    "ngs-analysis-workbench.restore_workflow",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__archive_workflow",
+      "mcp__ngs_analysis_workbench__list_workflows",
+      "mcp__ngs_analysis_workbench__restore_workflow",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 400,
+      "sha256": "735b11ed3f2b912bee98a644a5f8546301bd3d3ab9f4f19db812561888328709"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/workbench-archive-restore.json",
+      "bytes": 963,
+      "sha256": "58bbbe53c3c956d525b86c24767f66f2b3ccb7e62378cc5ba970f81418851d55"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 763,
+      "sha256": "ff0407a346adbcd703f4f2d0c269b275714cc761b5c10a59e388772799abe97c"
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5810,
+      "sha256": "c3a92181b0a266b8f868e2be25b4beb53a8f7e83ccab7ce37aea30d4b022057f"
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 1759
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2180,
+      "sha256": "cf8a3f417acd2964d1086140ba619a2aed4e9048d74b85813df0988e9c7da590"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "The exact case-owned workflow changed from archived false to true and back to false.",
+    "The active version remained version-d88ed31c58ebee8c5667ddee257b846f throughout the archive and restore sequence.",
+    "No other workflow was selected for mutation.",
+    "rosalind.rosalind_open returned ready true with view launcher for this case-specific context.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "Archiving changed workflow discovery state while retaining the immutable version identity."
+  ],
+  "limitations": [
+    "This sequence does not establish behavior for deletion or concurrent clients.",
+    "The case did not execute the workflow.",
+    "Only the newly created showcase object was eligible for the archive action.",
+    "rosalind_open only opened the task chooser and does not establish Rosalind scientific execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/workbench-archive-restore.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained source note identifies the public run and subset rule; workflow files and machine-readable outputs support the scientific observations. outputs/rosalind-open-observation.json records the separate case-specific launcher invocation and its explicit limitation."
+    }
+  ],
+  "reproduction": [
+    "Verify ownership of the exact disposable workflow ID.",
+    "Archive, list with archived entries, restore, and list again.",
+    "Compare state and version identity with the retained receipt.",
+    "For ngs-workflow-archive, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local Windows amd64"
+  }
+}

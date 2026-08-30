@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Disposable run cancellation</title><desc id="desc">A case-owned local Python child reached running, was terminated, and left no temporary directory; no workflow engine ran.</desc>
+<rect width="1200" height="675" fill="#07131f"/><circle cx="1060" cy="72" r="215" fill="#fb7185" opacity=".14"/>
+<text x="72" y="86" fill="#fda4af" font-family="Segoe UI,Arial" font-size="24" font-weight="700">SAFE LOCAL CANCELLATION OBSERVATION</text>
+<text x="72" y="145" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="42" font-weight="700">Disposable process: terminated</text>
+<g font-family="Segoe UI,Arial"><rect x="72" y="190" width="1056" height="190" rx="22" fill="#102235" stroke="#34d399"/><text x="104" y="235" fill="#a7f3d0" font-size="22" font-weight="700">OBSERVED TIMELINE</text><text x="104" y="292" fill="#f8fafc" font-size="30">running  →  cancellation requested  →  terminated</text><text x="104" y="342" fill="#cbd5e1" font-size="24">Child still running: false · Temporary directory removed: true</text>
+<rect x="72" y="420" width="1056" height="128" rx="22" fill="#0b1d2c" stroke="#334155"/><text x="104" y="462" fill="#cbd5e1" font-size="22">Nextflow / Snakemake / Workbench engine: not executed</text><text x="104" y="502" fill="#cbd5e1" font-size="22">Registered run: none · Scientific result: none</text>
+<text x="72" y="610" fill="#94a3b8" font-family="Segoe UI,Arial" font-size="19">Local process mechanics only; a real run requires durable Workbench lifecycle evidence.</text></g></svg>

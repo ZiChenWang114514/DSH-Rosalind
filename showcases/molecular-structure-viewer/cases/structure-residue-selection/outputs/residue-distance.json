@@ -1,0 +1,44 @@
+{
+  "showcase_id": "structure-residue-selection",
+  "source": {
+    "pdb_id": "1LYZ",
+    "download_url": "https://files.rcsb.org/download/1LYZ.pdb",
+    "coordinate_file": "inputs/1LYZ.pdb",
+    "experiment": "X-ray diffraction",
+    "reported_resolution_angstrom": 2.0
+  },
+  "selection": {
+    "model": 1,
+    "left": {
+      "record": "ATOM",
+      "author_chain": "A",
+      "author_residue_number": 35,
+      "residue_name": "GLU"
+    },
+    "right": {
+      "record": "ATOM",
+      "author_chain": "A",
+      "author_residue_number": 52,
+      "residue_name": "ASP"
+    },
+    "atom_filter": "non-hydrogen atoms with positive occupancy; blank or A alternate location",
+    "left_atom_count": 9,
+    "right_atom_count": 8
+  },
+  "calculation": {
+    "method": "minimum Euclidean distance over all selected heavy-atom pairs",
+    "pair_count": 72,
+    "closest_distance_angstrom": 5.951,
+    "closest_pair": {
+      "left_atom": "OE1",
+      "left_serial": 276,
+      "right_atom": "OD2",
+      "right_serial": 405
+    }
+  },
+  "interpretation": "The number is a coordinate-derived separation between two exact residue selections, not evidence of a bond or interaction energy.",
+  "limitations": [
+    "The calculation uses the deposited model-1 coordinates and does not model coordinate uncertainty or dynamics.",
+    "Hydrogen atoms are absent from this deposited model and are excluded from the selection."
+  ]
+}

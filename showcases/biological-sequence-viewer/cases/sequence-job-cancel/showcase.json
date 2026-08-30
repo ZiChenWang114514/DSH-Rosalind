@@ -1,0 +1,140 @@
+{
+  "id": "sequence-job-cancel",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "recovery",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "UniProt REST and local Python subprocess",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "temporary local KRAS-window subprocess cancellation with pre- and post-state checks, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 9059,
+      "sha256": "684e6c157dbff16de7584b92923033db8933da8e3955e3a3eaca22d4477b1a4e"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 432,
+      "sha256": "315adbe1c901755ce2c76b3d60549d671a6eca7d172397bc513650e172e3fbec"
+    },
+    {
+      "path": "inputs/P01116.fasta",
+      "bytes": 269,
+      "sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6"
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 549,
+      "sha256": "38cabe1a70de52c6b1e8c467e1ce618b49a6aabe956c8290dee79c1a06cdc891"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/pre-cancel-state.json",
+      "bytes": 275,
+      "sha256": "f6451a19480bd228534e212e5330f6c8e380fa19ba002d48122881513c805a33"
+    },
+    {
+      "path": "outputs/post-cancel-state.json",
+      "bytes": 361,
+      "sha256": "a4aa981895a4903bebc81f9f8fd52d303bca6ee75d9efe07de25825d7dd22066"
+    },
+    {
+      "path": "outputs/cancellation-receipt.json",
+      "bytes": 1161,
+      "sha256": "659f5fffbd7fc1315648220d99d8def7acef8662ade81bcc71338999c61ecc4b"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 700,
+      "sha256": "86a9b99059ab885ef77a49bf6ec3ff3bc9569ca248c33e76c759821b3ee9c196"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 7373,
+      "sha256": "e7b933d9ebf2f96ce03fa0cf1d56888958f523df5b4d8f5e5940ed93c74dbe6e"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1962,
+      "sha256": "232fa60a5f19d4b9d5fe866c283d215b1995a23b94ead85d7d8a98fdf53bc14b"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+  ],
+  "observations": [
+    "The disposable child reached a running state after 32 of 181 sequence windows.",
+    "The parent terminated the child, removed its temporary workspace, and retained no completed analysis table.",
+    "The P01116 FASTA digest was unchanged after cancellation.",
+    "A genuine Rosalind Workbench open call returned the retained task-chooser-ready message.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "A small local sequence calculation can be cancelled while preserving source identity and preventing partial output from being presented as complete."
+  ],
+  "limitations": [
+    "The hydrophobic-count calculation is a teaching example and has no predictive interpretation.",
+    "Sequence Viewer run, cancel, and query operations are rehearsed in this case.",
+    "The receipt omits operating-system process identifiers, temporary paths, and timing.",
+    "rosalind_open only opened the task chooser and did not cancel or execute a scientific job.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+      ],
+      "inputs": [
+        "inputs/P01116.fasta",
+        "inputs/source-provenance.json"
+      ],
+      "outputs": [
+        "outputs/pre-cancel-state.json",
+        "outputs/post-cancel-state.json",
+        "outputs/cancellation-receipt.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Local Python authored the cancellation state files; outputs/rosalind-open-observation.json records the separate genuine launcher invocation."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run: python showcases/biological-sequence-viewer/cases/sequence-job-cancel/build_case.py",
+    "Require the running state, 32 completed windows, stopped child, removed temporary workspace, unchanged source digest, and absent final output.",
+    "Treat viewer job operations as rehearsed unless repeated with an exact running viewer job ID.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_actions": "rehearsed",
+    "rosalind_open": "executed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 57335384,
+        "MolecularFormula": "C27H28F3N7O3",
+        "MolecularWeight": "555.6",
+        "SMILES": "CC(=O)N1CCN(CC1)C2=CC(=C(C=C2)NC3=NC=C(C(=N3)NC4=CC(=CC=C4)NC(=O)C=C)C(F)(F)F)OC",
+        "ConnectivitySMILES": "CC(=O)N1CCN(CC1)C2=CC(=C(C=C2)NC3=NC=C(C(=N3)NC4=CC(=CC=C4)NC(=O)C=C)C(F)(F)F)OC",
+        "InChIKey": "HUFOZJXAKZVRNJ-UHFFFAOYSA-N",
+        "XLogP": 4,
+        "TPSA": 112,
+        "HBondDonorCount": 3,
+        "HBondAcceptorCount": 11,
+        "RotatableBondCount": 8,
+        "Title": "Rociletinib"
+      }
+    ]
+  }
+}

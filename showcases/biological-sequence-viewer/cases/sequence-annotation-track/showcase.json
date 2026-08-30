@@ -1,0 +1,137 @@
+{
+  "id": "sequence-annotation-track",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "verified local NC_001416.1 regional FASTA and GFF3 extraction, one timed-out Viewer track attempt, and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 574,
+      "sha256": "28f8bcbdeb5ec1e9c644d77a7f9b471cae9f47be26cfaeb100fb6cbfbe0da619"
+    },
+    {
+      "path": "inputs/NC_001416.1-region-37180-38050.fasta",
+      "bytes": 984,
+      "sha256": "93af294333e30628955114170e46d08d14d23b3f61e037fa6ef9c544d426fc49"
+    },
+    {
+      "path": "inputs/NC_001416.1-region-37180-38050.gff3",
+      "bytes": 676,
+      "sha256": "242c77823f65983c4940c82f6260089c2a65b7fb97cf19e777ded52f6e369865"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/annotation-summary.csv",
+      "bytes": 367,
+      "sha256": "41297b61bd82174d4c4adde3e9254c8512f92b0c823c1c7f04e3122522ae91ca"
+    },
+    {
+      "path": "outputs/annotation-track.json",
+      "bytes": 2617,
+      "sha256": "8eb41d2c07e1e0785d75fb3a943140eccca52648da17949c62bd67f0245c61cd"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1524,
+      "sha256": "45ca4403c4ded763fe21306a21e7120b4af630e6aa185a0890a66be368a3a2f6"
+    },
+    {
+      "path": "outputs/sequence-load-track-observation.json",
+      "bytes": 8450,
+      "sha256": "1a60d321ff5da4252cb9d10bc7e18cc5c722fc73dfc314671920258d30e010a6"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 646,
+      "sha256": "5feac5f5e90dc53545232e8ef71de56dfe6bdb45367705baa35a58743b23f488"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2481,
+      "sha256": "008a9672d16046cf60b9d3d3b7a279a25cbb013f60a6e36cbbc14541f9919e6a"
+    }
+  ],
+  "sources": [
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=gbwithparts&retmode=text"
+  ],
+  "observations": [
+    "NC_001416.1 records cI at complement(37227..37940) and OR3, OR2, and OR1 downstream on the forward strand.",
+    "The extracted source interval 37180..38050 is 871 bases and maps to local coordinates 1..871.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "Two genuine sequence_load_track requests timed out without viewer acknowledgement; the fresh records readiness query and tracks follow-up query also timed out.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "The regional GFF3 preserves both local display coordinates and the exact source accession and positions for four selected annotations."
+  ],
+  "limitations": [
+    "The track contains four selected features and is not a complete GenBank conversion.",
+    "The Viewer did not acknowledge either load request or the fresh readiness and tracks queries, so parsing, mapping, display, and retention of the GFF3 remain unverified.",
+    "rosalind_open did not execute a scientific job and did not receive the regional FASTA or GFF3.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "NCBI RefSeq NC_001416.1 EFetch record retained by sequence-lambda-annotation"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/NC_001416.1-region-37180-38050.fasta",
+        "inputs/NC_001416.1-region-37180-38050.gff3",
+        "build_case.py"
+      ],
+      "outputs": [
+        "outputs/annotation-summary.csv",
+        "outputs/annotation-track.json",
+        "outputs/provenance.json",
+        "outputs/sequence-load-track-observation.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local extraction produces the scientific artifacts; separate observations preserve the genuine Rosalind task-chooser response and both unacknowledged Viewer track-load attempts without treating them as completed scientific operations."
+    }
+  ],
+  "reproduction": [
+    "Ensure sequence-lambda-annotation/inputs/NC_001416.1.gb retains the recorded SHA-256.",
+    "From the repository root run python showcases/biological-sequence-viewer/cases/sequence-annotation-track/build_case.py.",
+    "Compare the GFF3 with outputs/annotation-summary.csv and inspect both attempts in outputs/sequence-load-track-observation.json before making any Viewer claim.",
+    "Treat sequence_load_track as uncovered until a later acknowledged response returns mapping diagnostics and queryable track state.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_status": "two live load attempts unacknowledged",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

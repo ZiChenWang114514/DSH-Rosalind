@@ -1,0 +1,25 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "literature-trem2-landscape",
+  "verified_at_utc": "2026-08-29T19:57:28.996915Z",
+  "calls": [
+    {
+      "skill": "ncbi-entrez-skill",
+      "request": {"endpoint":"esearch","params":{"db":"pubmed","term":"TREM2[Title/Abstract] AND microglia[Title/Abstract]","retmode":"json","retmax":10,"sort":"date"},"max_items":10},
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "retrieved_at_utc": "2026-08-29T19:54:51.203930Z",
+      "ok": true,
+      "summary": {"record_count":10,"pmids":["42653368","42632547","42632171","42630359","42629379","42629128","42620051","42617550","42615638","42602355"]},
+      "comparison": "The living date-sorted result differs from the retained 2026-08-29T12:04:10Z snapshot; the older ten-record set remains a dated observation and is not presented as the current top ten."
+    },
+    {
+      "skill": "biorxiv-skill",
+      "request": {"base_url":"https://api.biorxiv.org","path":"pubs/biorxiv/10.1101/2025.03.28.646038/na/json","record_path":"collection","max_items":10},
+      "source_url": "https://api.biorxiv.org/pubs/biorxiv/10.1101/2025.03.28.646038/na/json",
+      "retrieved_at_utc": "2026-08-29T19:57:28.996915Z",
+      "ok": true,
+      "summary": {"record_count":0,"linked_publication_found":false},
+      "limitation": "A successful empty response records that this endpoint returned no publication link at the stated time."
+    }
+  ]
+}

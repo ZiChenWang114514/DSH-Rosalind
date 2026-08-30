@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">GB1 four-site variant embedding</title><desc id="desc">A verified 500-variant ProteinGym subset encoded as 80-dimensional categorical vectors, with mutation-depth counts.</desc>
+<rect width="1200" height="675" fill="#071522"/><circle cx="1100" cy="60" r="220" fill="#0e7490" opacity=".22"/>
+<style>.label{font:600 22px Segoe UI,Arial;fill:#67e8f9}.title{font:700 44px Segoe UI,Arial;fill:#f8fafc}.body{font:24px Segoe UI,Arial;fill:#cbd5e1}.metric{font:700 36px Segoe UI,Arial;fill:#f8fafc}.small{font:18px Segoe UI,Arial;fill:#cbd5e1}</style>
+<text x="70" y="82" class="label">PROTEINGYM · SPG1_STRSG_WU_2016</text><text x="70" y="145" class="title">GB1 variant embedding</text>
+<rect x="70" y="205" width="360" height="330" rx="22" fill="#0f2538" stroke="#164e63"/>
+<text x="105" y="260" class="body">Retained public variants</text><text x="105" y="310" class="metric">500</text>
+<text x="105" y="370" class="body">Categorical dimensions</text><text x="105" y="420" class="metric">80</text>
+<text x="105" y="480" class="body">DMS score range</text><text x="105" y="520" class="metric">0.000 – 6.201</text>
+<text x="520" y="240" class="body">Mutation depth in the selected rows</text><rect x="530" y="505.0" width="64" height="0.0" rx="8" fill="#38bdf8"/><text x="562" y="535" text-anchor="middle" class="small">0</text><text x="562" y="485.0" text-anchor="middle" class="small">0</text><rect x="635" y="504.0" width="64" height="1.0" rx="8" fill="#2dd4bf"/><text x="667" y="535" text-anchor="middle" class="small">1</text><text x="667" y="484.0" text-anchor="middle" class="small">2</text><rect x="740" y="483.7" width="64" height="21.3" rx="8" fill="#a78bfa"/><text x="772" y="535" text-anchor="middle" class="small">2</text><text x="772" y="463.7" text-anchor="middle" class="small">44</text><rect x="845" y="285.0" width="64" height="220.0" rx="8" fill="#fbbf24"/><text x="877" y="535" text-anchor="middle" class="small">3</text><text x="877" y="265.0" text-anchor="middle" class="small">454</text><rect x="950" y="505.0" width="64" height="0.0" rx="8" fill="#fb7185"/><text x="982" y="535" text-anchor="middle" class="small">4</text><text x="982" y="485.0" text-anchor="middle" class="small">0</text>
+<text x="70" y="610" class="small">Local deterministic encoding · no ESM model run · wall time 0.033 s on this machine</text>
+</svg>

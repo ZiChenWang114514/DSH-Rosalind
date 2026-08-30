@@ -1,0 +1,6 @@
+Workbench get_runtime_environment(local): succeeded; snapshot sanitized-runtime-snapshot
+Initial SSH runtime refresh: failed while the WSL distribution was stopped
+Repaired local SSH target: BatchMode probe and Workbench runtime inspection succeeded; only sanitized runtime facts retained
+Workflow controllers found: 0 on Windows local; 2 on the repaired Linux SSH target
+Docker server: Linux 29.7.2, reachable; public hello-world container completed with exit code 0
+Workflow execution performed: native Nextflow and Snakemake minimal FASTQ workflows completed; no Workbench-registered run was created

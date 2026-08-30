@@ -1,0 +1,18 @@
+{
+  "case_id": "databases-variant-interpretation",
+  "retrieval_date": "2026-08-29",
+  "queries": [
+    {"source": "ClinVar", "query": "rs7903146", "selected_allele": "C>T", "selected_variation_id": "7413", "retained_output": "outputs/results.json"},
+    {"source": "Ensembl REST", "path": "variation/homo_sapiens/rs7903146", "retained_output": "outputs/results.json"},
+    {"source": "UKB-TOPMed PheWAS", "variant": "10:112998590-C-T", "retained_output": "outputs/results.json"},
+    {"source": "gnomAD GraphQL", "variant": "10-112998590-C-T", "dataset": "gnomad_r4", "status": "success", "retrieved_at_utc": "2026-08-29T19:56:33.741603Z", "retained_output": "outputs/query-verification.json", "used_as_evidence": true}
+  ],
+  "source_index": "outputs/sources.json",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "observed_at_utc": "2026-08-29T18:14:05.201Z",
+    "scientific_job_executed": false,
+    "note": "The call opened only the task chooser and did not classify the variant."
+  }
+}

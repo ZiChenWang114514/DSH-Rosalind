@@ -1,0 +1,6 @@
+##gff-version 3
+##sequence-region NC_001416.1_region_37180_38050 1 871
+NC_001416.1_region_37180_38050	NCBI_GenBank	CDS	48	761	.	-	0	ID=cI_CDS;Name=cI;source_accession=NC_001416.1;source_location=complement(37227..37940)
+NC_001416.1_region_37180_38050	NCBI_GenBank	regulatory_region	772	788	.	+	.	ID=OR3;Name=OR3;source_accession=NC_001416.1;source_location=37951..37967
+NC_001416.1_region_37180_38050	NCBI_GenBank	regulatory_region	795	811	.	+	.	ID=OR2;Name=OR2;source_accession=NC_001416.1;source_location=37974..37990
+NC_001416.1_region_37180_38050	NCBI_GenBank	regulatory_region	819	835	.	+	.	ID=OR1;Name=OR1;source_accession=NC_001416.1;source_location=37998..38014

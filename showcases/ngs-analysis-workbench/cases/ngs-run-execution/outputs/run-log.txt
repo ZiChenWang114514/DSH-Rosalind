@@ -1,0 +1,5 @@
+python=3.14.0
+records=24
+bases=11304
+q30_percent=96.788747
+status=completed

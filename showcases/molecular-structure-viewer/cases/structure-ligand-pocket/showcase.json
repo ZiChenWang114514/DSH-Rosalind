@@ -1,0 +1,53 @@
+{
+  "id": "structure-ligand-pocket",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": ["RCSB PDB coordinate snapshot", "Python 3.14 standard library", "Rosalind Workbench mcp__rosalind__rosalind_open"],
+    "device": "local",
+    "implementation": "deterministic 4.0 Å closest-heavy-atom shell around one exact bound-ligand copy",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/public-source.md", "bytes": 544},
+    {"path": "inputs/1IEP.pdb", "bytes": 434565},
+    {"path": "scripts/analyze.py", "bytes": 6244}
+  ],
+  "outputs": [
+    {"path": "outputs/ligand-contact-shell.json", "bytes": 9080},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 638}
+  ],
+  "previews": [{"path": "previews/preview.svg", "bytes": 1570}],
+  "sources": ["https://www.rcsb.org/structure/1IEP", "https://files.rcsb.org/download/1IEP.pdb"],
+  "observations": [
+    "STI A:201 contains 37 admitted heavy atoms and is paired only with protein chain A.",
+    "Twenty-one protein residues and 115 protein-ligand atom pairs fall within 4.0 Å.",
+    "The closest residue-level pair is ILE A:360 O to STI N51 at 2.668 Å."
+  ],
+  "interpretation": ["The contact shell is a cutoff-defined coordinate neighborhood and does not measure affinity, potency, selectivity, or clinical effect."],
+  "limitations": ["Only one crystallographic complex copy is selected.", "Hydrogens, protonation, solvent mediation, uncertainty, and dynamics are excluded.", "Contact membership is cutoff-dependent."],
+  "provenance": [{
+    "sources": ["https://files.rcsb.org/download/1IEP.pdb"],
+    "inputs": ["inputs/public-source.md", "inputs/1IEP.pdb", "scripts/analyze.py"],
+    "outputs": ["outputs/ligand-contact-shell.json", "outputs/rosalind-open-observation.json"],
+    "previews": ["previews/preview.svg"],
+    "note": "The local script computes residue-level minimum distances and all in-cutoff atom pairs from one exact public complex copy; the separate Rosalind observation records launcher availability without a scientific job."
+  }],
+  "reproduction": [
+    "Run scripts/analyze.py with Python 3.14 or a compatible standard-library Python.",
+    "Confirm 21 contact residues and 115 atom pairs within 4.0 Å.",
+    "Preserve STI A:201, protein chain A, the atom filter, model 1, and the cutoff before comparing another result."
+  ],
+  "environment": {"cost": "free", "data": "public", "device": "local"}
+}

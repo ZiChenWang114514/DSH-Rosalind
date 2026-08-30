@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">DICOM WSI metadata preparation</title>
+  <desc id="desc">Twelve local checks validate a compact metadata-only DICOM WSI fixture; no object was written or uploaded.</desc>
+  <rect width="1200" height="675" fill="#111827"/>
+  <text x="66" y="82" fill="#f3f6ff" font-family="Segoe UI,Arial" font-size="40" font-weight="700">DICOM WSI metadata preparation</text>
+  <text x="66" y="126" fill="#b5c0d6" font-family="Segoe UI,Arial" font-size="22">DICOM JSON Model · metadata-only local fixture</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="66" y="184" width="328" height="230" rx="18" fill="#202c43" stroke="#7ea6e0"/><text x="98" y="235" fill="#edf4ff" font-size="27" font-weight="700">WSI identity</text><text x="98" y="281" fill="#bfd1ea" font-size="20">SOP Class: VL WSI</text><text x="98" y="322" fill="#bfd1ea" font-size="20">Modality: SM</text><text x="98" y="363" fill="#bfd1ea" font-size="20">4 unique fixture UIDs</text>
+    <rect x="436" y="184" width="328" height="230" rx="18" fill="#1d393a" stroke="#5ed1c5"/><text x="468" y="235" fill="#ecfffd" font-size="27" font-weight="700">Pyramid plane</text><text x="468" y="281" fill="#b9e2de" font-size="20">512 × 512 RGB tiles</text><text x="468" y="322" fill="#b9e2de" font-size="20">2048 × 2048 matrix</text><text x="468" y="363" fill="#b9e2de" font-size="20">16 frames = 4 × 4</text>
+    <rect x="806" y="184" width="328" height="230" rx="18" fill="#41242a" stroke="#ef8f9f"/><text x="838" y="235" fill="#fff0f2" font-size="27" font-weight="700">Excluded</text><text x="838" y="281" fill="#f0bdc5" font-size="20">patient and accession tags</text><text x="838" y="322" fill="#f0bdc5" font-size="20">pixel data · bulk URI</text><text x="838" y="363" fill="#f0bdc5" font-size="20">write · prepare · submit</text>
+    <rect x="66" y="468" width="328" height="118" rx="16" fill="#202c43"/><text x="98" y="516" fill="#f3f6ff" font-size="34" font-weight="700">12 / 12</text><text x="98" y="555" fill="#b5c0d6" font-size="19">metadata checks passed</text>
+    <rect x="436" y="468" width="328" height="118" rx="16" fill="#202c43"/><text x="468" y="516" fill="#f3f6ff" font-size="28" font-weight="700">2 planned UIDs</text><text x="468" y="555" fill="#b5c0d6" font-size="19">no DICOM instance written</text>
+    <rect x="806" y="468" width="328" height="118" rx="16" fill="#41242a"/><text x="838" y="516" fill="#fff0f2" font-size="28" font-weight="700">0 network calls</text><text x="838" y="555" fill="#f0bdc5" font-size="19">7 operations rehearsed</text>
+  </g>
+  <text x="66" y="615" fill="#7dd3fc" font-family="Segoe UI,Arial" font-size="18">Rosalind launcher observed: ready=true · scientific_job_executed=false</text>
+  <text x="66" y="646" fill="#b5c0d6" font-family="Segoe UI,Arial" font-size="18">Upload requires a later explicit request naming exact files and an exact public HTTPS DICOMweb destination.</text>
+</svg>

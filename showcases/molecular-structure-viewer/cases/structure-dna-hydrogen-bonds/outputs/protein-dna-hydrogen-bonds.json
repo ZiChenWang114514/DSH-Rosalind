@@ -1,0 +1,904 @@
+{
+  "showcase_id": "structure-dna-hydrogen-bonds",
+  "source": {
+    "pdb_id": "1LMB",
+    "download_url": "https://files.rcsb.org/download/1LMB.pdb",
+    "coordinate_file": "inputs/1LMB.pdb",
+    "experiment": "X-ray diffraction",
+    "reported_resolution_angstrom": 1.8
+  },
+  "selection": {
+    "model": 1,
+    "protein_chains": [
+      "3",
+      "4"
+    ],
+    "dna_chains": [
+      "1",
+      "2"
+    ],
+    "atom_filter": "non-hydrogen atoms with positive occupancy; blank or A alternate location",
+    "scope": "cross-interface protein-DNA pairs only"
+  },
+  "geometry_screen": {
+    "distance_range_angstrom_inclusive": [
+      2.2,
+      3.5
+    ],
+    "minimum_antecedent_donor_acceptor_angle_degrees": 90.0,
+    "hydrogen_handling": "No hydrogens are present; the donor direction is approximated with a named covalent heavy-atom antecedent and the largest available antecedent-donor-acceptor angle.",
+    "candidate_count": 36,
+    "candidates": [
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 3,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1509
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 11,
+          "residue_name": "DG",
+          "atom": "O6",
+          "serial": 217
+        },
+        "donor_acceptor_distance_angstrom": 2.574,
+        "antecedent_donor_acceptor_angle_degrees": 148.6,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1508
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 45,
+          "residue_name": "SER",
+          "atom": "OG",
+          "serial": 1130
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 36,
+          "residue_name": "DG",
+          "atom": "O6",
+          "serial": 727
+        },
+        "donor_acceptor_distance_angstrom": 2.596,
+        "antecedent_donor_acceptor_angle_degrees": 106.8,
+        "antecedent": {
+          "atom": "CB",
+          "serial": 1129
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 19,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1645
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 24,
+          "residue_name": "DA",
+          "atom": "OP1",
+          "serial": 470
+        },
+        "donor_acceptor_distance_angstrom": 2.64,
+        "antecedent_donor_acceptor_angle_degrees": 96.4,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1644
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 22,
+          "residue_name": "TYR",
+          "atom": "OH",
+          "serial": 1670
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 23,
+          "residue_name": "DT",
+          "atom": "OP1",
+          "serial": 450
+        },
+        "donor_acceptor_distance_angstrom": 2.675,
+        "antecedent_donor_acceptor_angle_degrees": 123.5,
+        "antecedent": {
+          "atom": "CZ",
+          "serial": 1669
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 22,
+          "residue_name": "TYR",
+          "atom": "OH",
+          "serial": 959
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 3,
+          "residue_name": "DT",
+          "atom": "OP1",
+          "serial": 41
+        },
+        "donor_acceptor_distance_angstrom": 2.688,
+        "antecedent_donor_acceptor_angle_degrees": 120.2,
+        "antecedent": {
+          "atom": "CZ",
+          "serial": 958
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 33,
+          "residue_name": "GLN",
+          "atom": "N",
+          "serial": 1750
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 23,
+          "residue_name": "DT",
+          "atom": "OP2",
+          "serial": 451
+        },
+        "donor_acceptor_distance_angstrom": 2.735,
+        "antecedent_donor_acceptor_angle_degrees": 117.6,
+        "antecedent": {
+          "atom": "CA",
+          "serial": 1751
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 33,
+          "residue_name": "GLN",
+          "atom": "N",
+          "serial": 1039
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 3,
+          "residue_name": "DT",
+          "atom": "OP2",
+          "serial": 42
+        },
+        "donor_acceptor_distance_angstrom": 2.779,
+        "antecedent_donor_acceptor_angle_degrees": 121.9,
+        "antecedent": {
+          "atom": "CA",
+          "serial": 1040
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 4,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1518
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 13,
+          "residue_name": "DG",
+          "atom": "O6",
+          "serial": 258
+        },
+        "donor_acceptor_distance_angstrom": 2.799,
+        "antecedent_donor_acceptor_angle_degrees": 120.0,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1517
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 56,
+          "residue_name": "ALA",
+          "atom": "N",
+          "serial": 1198
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 33,
+          "residue_name": "DA",
+          "atom": "OP2",
+          "serial": 650
+        },
+        "donor_acceptor_distance_angstrom": 2.803,
+        "antecedent_donor_acceptor_angle_degrees": 133.4,
+        "antecedent": {
+          "atom": "CA",
+          "serial": 1199
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 33,
+          "residue_name": "GLN",
+          "atom": "NE2",
+          "serial": 1758
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 24,
+          "residue_name": "DA",
+          "atom": "OP2",
+          "serial": 471
+        },
+        "donor_acceptor_distance_angstrom": 2.845,
+        "antecedent_donor_acceptor_angle_degrees": 128.6,
+        "antecedent": {
+          "atom": "CD",
+          "serial": 1756
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 52,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1177
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 4,
+          "residue_name": "DA",
+          "atom": "OP2",
+          "serial": 62
+        },
+        "donor_acceptor_distance_angstrom": 2.882,
+        "antecedent_donor_acceptor_angle_degrees": 125.2,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1175
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 4,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1518
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 14,
+          "residue_name": "DG",
+          "atom": "O6",
+          "serial": 280
+        },
+        "donor_acceptor_distance_angstrom": 2.901,
+        "antecedent_donor_acceptor_angle_degrees": 98.0,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1517
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 44,
+          "residue_name": "GLN",
+          "atom": "NE2",
+          "serial": 1835
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 24,
+          "residue_name": "DA",
+          "atom": "N7",
+          "serial": 482
+        },
+        "donor_acceptor_distance_angstrom": 2.905,
+        "antecedent_donor_acceptor_angle_degrees": 126.1,
+        "antecedent": {
+          "atom": "CD",
+          "serial": 1833
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 55,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1908
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 14,
+          "residue_name": "DG",
+          "atom": "N7",
+          "serial": 277
+        },
+        "donor_acceptor_distance_angstrom": 2.908,
+        "antecedent_donor_acceptor_angle_degrees": 122.3,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1906
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 43,
+          "residue_name": "GLY",
+          "atom": "N",
+          "serial": 1112
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 35,
+          "residue_name": "DT",
+          "atom": "OP2",
+          "serial": 693
+        },
+        "donor_acceptor_distance_angstrom": 2.936,
+        "antecedent_donor_acceptor_angle_degrees": 115.0,
+        "antecedent": {
+          "atom": "CA",
+          "serial": 1113
+        }
+      },
+      {
+        "donor_side": "DNA",
+        "donor": {
+          "chain": "2",
+          "residue_number": 24,
+          "residue_name": "DA",
+          "atom": "N6",
+          "serial": 485
+        },
+        "acceptor_side": "protein",
+        "acceptor": {
+          "chain": "4",
+          "residue_number": 44,
+          "residue_name": "GLN",
+          "atom": "OE1",
+          "serial": 1834
+        },
+        "donor_acceptor_distance_angstrom": 2.941,
+        "antecedent_donor_acceptor_angle_degrees": 135.7,
+        "antecedent": {
+          "atom": "C6",
+          "serial": 484
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 19,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 934
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 4,
+          "residue_name": "DA",
+          "atom": "OP1",
+          "serial": 61
+        },
+        "donor_acceptor_distance_angstrom": 2.945,
+        "antecedent_donor_acceptor_angle_degrees": 117.0,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 933
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 43,
+          "residue_name": "GLY",
+          "atom": "N",
+          "serial": 1823
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 15,
+          "residue_name": "DT",
+          "atom": "OP2",
+          "serial": 288
+        },
+        "donor_acceptor_distance_angstrom": 2.977,
+        "antecedent_donor_acceptor_angle_degrees": 116.5,
+        "antecedent": {
+          "atom": "CA",
+          "serial": 1824
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 33,
+          "residue_name": "GLN",
+          "atom": "NE2",
+          "serial": 1047
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 4,
+          "residue_name": "DA",
+          "atom": "OP2",
+          "serial": 62
+        },
+        "donor_acceptor_distance_angstrom": 2.987,
+        "antecedent_donor_acceptor_angle_degrees": 124.3,
+        "antecedent": {
+          "atom": "CD",
+          "serial": 1045
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 45,
+          "residue_name": "SER",
+          "atom": "OG",
+          "serial": 1130
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 37,
+          "residue_name": "DG",
+          "atom": "O6",
+          "serial": 749
+        },
+        "donor_acceptor_distance_angstrom": 2.989,
+        "antecedent_donor_acceptor_angle_degrees": 173.3,
+        "antecedent": {
+          "atom": "CB",
+          "serial": 1129
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 3,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1509
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 30,
+          "residue_name": "DG",
+          "atom": "O6",
+          "serial": 604
+        },
+        "donor_acceptor_distance_angstrom": 2.989,
+        "antecedent_donor_acceptor_angle_degrees": 94.4,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1508
+        }
+      },
+      {
+        "donor_side": "DNA",
+        "donor": {
+          "chain": "1",
+          "residue_number": 5,
+          "residue_name": "DC",
+          "atom": "N4",
+          "serial": 97
+        },
+        "acceptor_side": "protein",
+        "acceptor": {
+          "chain": "3",
+          "residue_number": 45,
+          "residue_name": "SER",
+          "atom": "OG",
+          "serial": 1130
+        },
+        "donor_acceptor_distance_angstrom": 3.041,
+        "antecedent_donor_acceptor_angle_degrees": 160.0,
+        "antecedent": {
+          "atom": "C4",
+          "serial": 96
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 55,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1197
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 34,
+          "residue_name": "DG",
+          "atom": "N7",
+          "serial": 682
+        },
+        "donor_acceptor_distance_angstrom": 3.058,
+        "antecedent_donor_acceptor_angle_degrees": 125.0,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1195
+        }
+      },
+      {
+        "donor_side": "DNA",
+        "donor": {
+          "chain": "1",
+          "residue_number": 4,
+          "residue_name": "DA",
+          "atom": "N6",
+          "serial": 76
+        },
+        "acceptor_side": "protein",
+        "acceptor": {
+          "chain": "3",
+          "residue_number": 44,
+          "residue_name": "GLN",
+          "atom": "OE1",
+          "serial": 1123
+        },
+        "donor_acceptor_distance_angstrom": 3.124,
+        "antecedent_donor_acceptor_angle_degrees": 129.8,
+        "antecedent": {
+          "atom": "C6",
+          "serial": 75
+        }
+      },
+      {
+        "donor_side": "DNA",
+        "donor": {
+          "chain": "1",
+          "residue_number": 12,
+          "residue_name": "DC",
+          "atom": "N4",
+          "serial": 239
+        },
+        "acceptor_side": "protein",
+        "acceptor": {
+          "chain": "4",
+          "residue_number": 3,
+          "residue_name": "LYS",
+          "atom": "O",
+          "serial": 1504
+        },
+        "donor_acceptor_distance_angstrom": 3.146,
+        "antecedent_donor_acceptor_angle_degrees": 104.8,
+        "antecedent": {
+          "atom": "C4",
+          "serial": 238
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 61,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1243
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 34,
+          "residue_name": "DG",
+          "atom": "OP1",
+          "serial": 670
+        },
+        "donor_acceptor_distance_angstrom": 3.156,
+        "antecedent_donor_acceptor_angle_degrees": 116.6,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1241
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 52,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1888
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 24,
+          "residue_name": "DA",
+          "atom": "OP2",
+          "serial": 471
+        },
+        "donor_acceptor_distance_angstrom": 3.16,
+        "antecedent_donor_acceptor_angle_degrees": 115.5,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1886
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 45,
+          "residue_name": "SER",
+          "atom": "OG",
+          "serial": 1841
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 16,
+          "residue_name": "DG",
+          "atom": "N7",
+          "serial": 319
+        },
+        "donor_acceptor_distance_angstrom": 3.178,
+        "antecedent_donor_acceptor_angle_degrees": 115.8,
+        "antecedent": {
+          "atom": "CB",
+          "serial": 1840
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 58,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1929
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 13,
+          "residue_name": "DG",
+          "atom": "OP1",
+          "serial": 243
+        },
+        "donor_acceptor_distance_angstrom": 3.187,
+        "antecedent_donor_acceptor_angle_degrees": 124.0,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1927
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 26,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1706
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 23,
+          "residue_name": "DT",
+          "atom": "OP1",
+          "serial": 450
+        },
+        "donor_acceptor_distance_angstrom": 3.304,
+        "antecedent_donor_acceptor_angle_degrees": 90.4,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1705
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 44,
+          "residue_name": "GLN",
+          "atom": "NE2",
+          "serial": 1124
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 4,
+          "residue_name": "DA",
+          "atom": "N7",
+          "serial": 73
+        },
+        "donor_acceptor_distance_angstrom": 3.32,
+        "antecedent_donor_acceptor_angle_degrees": 110.8,
+        "antecedent": {
+          "atom": "CD",
+          "serial": 1122
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 4,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1518
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 13,
+          "residue_name": "DG",
+          "atom": "N7",
+          "serial": 255
+        },
+        "donor_acceptor_distance_angstrom": 3.333,
+        "antecedent_donor_acceptor_angle_degrees": 147.3,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1517
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 22,
+          "residue_name": "TYR",
+          "atom": "OH",
+          "serial": 959
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 3,
+          "residue_name": "DT",
+          "atom": "OP2",
+          "serial": 42
+        },
+        "donor_acceptor_distance_angstrom": 3.367,
+        "antecedent_donor_acceptor_angle_degrees": 152.1,
+        "antecedent": {
+          "atom": "CZ",
+          "serial": 958
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 4,
+          "residue_name": "LYS",
+          "atom": "NZ",
+          "serial": 1518
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 14,
+          "residue_name": "DG",
+          "atom": "N7",
+          "serial": 277
+        },
+        "donor_acceptor_distance_angstrom": 3.419,
+        "antecedent_donor_acceptor_angle_degrees": 147.4,
+        "antecedent": {
+          "atom": "CE",
+          "serial": 1517
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "4",
+          "residue_number": 61,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1954
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "1",
+          "residue_number": 14,
+          "residue_name": "DG",
+          "atom": "OP2",
+          "serial": 266
+        },
+        "donor_acceptor_distance_angstrom": 3.475,
+        "antecedent_donor_acceptor_angle_degrees": 110.7,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1952
+        }
+      },
+      {
+        "donor_side": "protein",
+        "donor": {
+          "chain": "3",
+          "residue_number": 61,
+          "residue_name": "ASN",
+          "atom": "ND2",
+          "serial": 1243
+        },
+        "acceptor_side": "DNA",
+        "acceptor": {
+          "chain": "2",
+          "residue_number": 34,
+          "residue_name": "DG",
+          "atom": "OP2",
+          "serial": 671
+        },
+        "donor_acceptor_distance_angstrom": 3.499,
+        "antecedent_donor_acceptor_angle_degrees": 134.2,
+        "antecedent": {
+          "atom": "CG",
+          "serial": 1241
+        }
+      }
+    ]
+  },
+  "interpretation": "Each row satisfies an explicit heavy-atom donor/acceptor geometry screen in the deposited model; the rows are plausible hydrogen-bond geometries, not measured bond strengths.",
+  "limitations": [
+    "Hydrogen positions, protonation states, tautomer states, and water-mediated bridges are not resolved by this screen.",
+    "The 90\u00b0 antecedent-donor-acceptor rule is a transparent heuristic and is not equivalent to a hydrogen-resolved donor-H-acceptor angle.",
+    "Only deposited model 1 is evaluated; coordinate uncertainty, dynamics, and crystal packing are not sampled."
+  ]
+}

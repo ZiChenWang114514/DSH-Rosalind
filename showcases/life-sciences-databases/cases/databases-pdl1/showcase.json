@@ -1,0 +1,119 @@
+{
+  "id": "databases-pdl1",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases uniprot-skill and rcsb-pdb-skill",
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained human PD-L1 topology and inhibitor-bound structure responses with deterministic extraction and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 371
+    },
+    {
+      "path": "inputs/uniprot-Q9NZQ7.json",
+      "bytes": 83597
+    },
+    {
+      "path": "inputs/rcsb-5J89.json",
+      "bytes": 11715
+    },
+    {
+      "path": "scripts/build_case.py",
+      "bytes": 4542
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1275
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 732
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 579
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5848
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1816
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry",
+    "https://www.rcsb.org/structure/5J89"
+  ],
+  "observations": [
+    "UniProt Q9NZQ7 is the reviewed 290-residue human PD-L1 record encoded by CD274.",
+    "UniProt annotates the signal peptide, extracellular domain, transmembrane helix, and cytoplasmic domain.",
+    "RCSB 5J89 is a 2.20 Å X-ray structure of human PD-L1 with a low-molecular-mass inhibitor.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "The record pair connects canonical PD-L1 topology to a structure-level small-molecule binding observation."
+  ],
+  "limitations": [
+    "The structure does not measure cellular checkpoint inhibition.",
+    "Canonical topology does not represent every proteoform or glycoform.",
+    "No affinity, clinical response, or nanobody ranking is inferred."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry",
+        "https://www.rcsb.org/structure/5J89"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/uniprot-Q9NZQ7.json",
+        "inputs/rcsb-5J89.json",
+        "scripts/build_case.py"
+      ],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the Q9NZQ7 UniProt and 5J89 RCSB requests recorded in outputs/query-verification.json.",
+    "Run python scripts/build_case.py and verify the topology intervals against the retained UniProt record.",
+    "Inspect the preview without inferring affinity, cellular activity, or clinical response from the single structure."
+  ]
+}

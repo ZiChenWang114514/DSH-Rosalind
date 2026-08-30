@@ -3,65 +3,119 @@
   "plugin_id": "rosalind-workbench",
   "plugin_version": "0.2.2-research-preview",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "predict-kras-g12c"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "public PDB 6OIM coordinate retrieval and deterministic residue-level structure-quality analysis plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+    "status": "verified"
+  },
   "prompt": "prompt.md",
-  "inputs": [],
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 7203
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 369
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 330
+    },
+    {
+      "path": "inputs/6OIM.pdb",
+      "bytes": 173016
+    }
+  ],
   "outputs": [
     {
-      "path": "outputs/launcher-observation.json"
+      "path": "outputs/residue-quality-metrics.csv",
+      "bytes": 5048
+    },
+    {
+      "path": "outputs/structure-summary.json",
+      "bytes": 1394
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 721
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5694
     }
   ],
   "previews": [
     {
-      "path": "previews/rosalind-structure-analysis.svg"
+      "path": "previews/preview.svg",
+      "bytes": 1668
     }
   ],
   "sources": [
-    "https://www.rcsb.org/structure/1YCR",
-    "https://files.rcsb.org/download/1YCR.pdb"
+    "https://www.rcsb.org/structure/6OIM",
+    "https://files.rcsb.org/download/6OIM.pdb"
   ],
-  "dependencies": {
-    "required_mcp_servers": ["rosalind", "structure"],
-    "required_operations": ["rosalind.open", "structure.open_from_chat", "structure.get_state"],
-    "required_skills": ["rosalind-structure-structure-viewer"],
-    "artifacts": [
-      {
-        "id": "structure-mdm2-p53:inputs/1YCR.pdb",
-        "repository_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/inputs/1YCR.pdb",
-        "role": "input",
-        "source": "Shared pinned input from structure-mdm2-p53."
-      },
-      {
-        "id": "structure-mdm2-p53:outputs/results.json",
-        "repository_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/results.json",
-        "role": "output",
-        "source": "Shared coordinate-analysis result from structure-mdm2-p53."
-      },
-      {
-        "id": "structure-mdm2-p53:outputs/provenance.json",
-        "repository_path": "showcases/molecular-structure-viewer/cases/structure-mdm2-p53/outputs/provenance.json",
-        "role": "provenance",
-        "source": "Shared RCSB and method record from structure-mdm2-p53."
-      }
-    ],
-    "provenance": {
-      "reused_cases": ["structure-mdm2-p53"]
-    }
-  },
   "observations": [
-    "The Rosalind launcher was ready and exposed the named scientific area.",
-    "The replay fixture is the pinned RCSB 1YCR structure and its retained interface result."
+    "Public PDB 6OIM is a 1.65 Å X-ray structure of KRAS G12C covalently bound to MOV (AMG 510).",
+    "Chain A contains 167 observed residue records; residues 105-107 and 170-189 are absent within the reviewed 1-189 span.",
+    "Cys12 is 1.805 Å from the nearest MOV atom, and switch II has a mean crystallographic B factor of 29.300 Å²."
   ],
   "interpretation": [
-    "The structure-analysis route opens 1YCR with the local Structure service after launching the Workbench area."
+    "Absent coordinates and relatively elevated crystallographic B factors identify regions that deserve added caution when a prediction is interpreted.",
+    "Crystallographic B factors are experimental-model properties, not prediction confidence scores."
   ],
   "limitations": [
-    "The retained launcher observation did not expose individual task choices.",
-    "The retained 1YCR result is a coordinate contact analysis and does not establish binding affinity."
+    "6OIM is one ligand-bound crystallographic state and does not represent every KRAS G12C conformation.",
+    "The analysis does not generate or validate a prediction and has no clinical interpretation.",
+    "The Rosalind call verified launcher readiness only and executed no scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/6OIM",
+        "https://files.rcsb.org/download/6OIM.pdb"
+      ],
+      "inputs": [
+        "build_case.py",
+        "inputs/public-source.md",
+        "inputs/source-provenance.json",
+        "inputs/6OIM.pdb"
+      ],
+      "outputs": [
+        "outputs/residue-quality-metrics.csv",
+        "outputs/structure-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The builder computes the scientific outputs from retained public coordinates. outputs/rosalind-open-observation.json records the genuine mcp__rosalind__rosalind_open call separately and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Run python build_case.py to retrieve PDB 6OIM and regenerate the metrics and preview.",
+    "Confirm 167 chain-A residue records, resolution 1.65 Å, and the retained regional B-factor values.",
+    "Inspect outputs/rosalind-open-observation.json separately as launcher-readiness evidence."
   ],
   "environment": {
-    "launcher_ready": true,
-    "scientific_job_executed": false,
-    "reproduction_fixture": "structure-mdm2-p53:inputs/1YCR.pdb"
+    "cost": "free",
+    "data": "public PDB 6OIM",
+    "scientific_job_executed_by_rosalind": false
   }
 }

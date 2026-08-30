@@ -1,0 +1,20 @@
+{
+  "showcase_id": "rosalind-genomics",
+  "question": "Which genes and pathways change in a small public dexamethasone airway RNA-seq study?",
+  "source": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778",
+  "verification_kind": "source-and-tool-contract teaching receipt",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "observations": [
+    "The public source and acquisition method are explicitly identified.",
+    "Every operation is named with the installed public MCP contract identifier.",
+    "The retained files separate source observations, computations, interpretation, and limitations."
+  ],
+  "interpretation": "This case demonstrates a reproducible use of the named scientific operation set; it does not substitute interface checks for experimental validation.",
+  "limitations": [
+    "Remote records may change after the dated catalogue release.",
+    "Any numerical result that is not retained in this receipt must be recomputed before it is quoted.",
+    "The teaching package does not provide clinical, diagnostic, or experimental confirmation."
+  ]
+}

@@ -1,0 +1,13 @@
+check_id,check,observed,result
+D01,DICOM JSON top-level array,1 object,pass
+D02,VL Whole Slide Microscopy SOP Class UID,1.2.840.10008.5.1.4.1.1.77.1.6,pass
+D03,modality,SM,pass
+D04,UID syntax and uniqueness,4 input UIDs unique,pass
+D05,tile matrix geometry,512x512 tiles in 2048x2048 matrix,pass
+D06,frame coverage,16 frames equals 4x4 tiles,pass
+D07,samples and photometric interpretation,3 samples RGB,pass
+D08,patient and accession tags,absent,pass
+D09,pixel data and bulk-data URI,absent,pass
+D10,planned output UIDs,2 fresh fixture UIDs,pass
+D11,DICOM object write,false,pass
+D12,DICOMweb upload preparation and submission,false and false,pass

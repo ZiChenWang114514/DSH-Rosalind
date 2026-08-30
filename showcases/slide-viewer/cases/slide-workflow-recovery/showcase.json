@@ -1,0 +1,161 @@
+{
+  "id": "slide-workflow-recovery",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "recovery",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "slide-viewer.slide_import_workflow_source",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local Python JSON and CSV validation",
+      "Slide Viewer guarded workflow source, run, and list operations",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "exact recovery-fixture comparison plus a read-only temporary source import, two admitted region-QC tasks, process-local task listing, repeated isolated-worker failure evidence, and an unchanged Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 1069,
+      "sha256": "4d511814a92a22c9626195cd8052482ee5d72688609b486b03e5d354a2bf8b22"
+    },
+    {
+      "path": "inputs/recovery-before.json",
+      "bytes": 1172,
+      "sha256": "118e3f775e22a5151de9e85d448f45d0b8135d959ef35a7cf5d5a66f24cf6693"
+    },
+    {
+      "path": "inputs/recovery-after.json",
+      "bytes": 1292,
+      "sha256": "7b1b896485aad380f7578ac1104301c6defee7b5eb01bdf2f0e2bde2ce5c569c"
+    },
+    {
+      "path": "inputs/temporary-region-counts.tsv",
+      "bytes": 120,
+      "sha256": "47519d9fc4255699468f00cd8baf536b4955450b189e43ce7d720c17f7a37bbd"
+    },
+    {
+      "path": "inputs/temporary-region-annotations.tsv",
+      "bytes": 121,
+      "sha256": "ef8dca977ddb83c03a66dd556489ac59c0a2eaa6615090094a639f7b2ba26a14"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/recovery-state-machine.json",
+      "bytes": 879,
+      "sha256": "8070b82b3073f32e8e1d193a1147efc19991895e39bb3a7e2174b794059261cb"
+    },
+    {
+      "path": "outputs/manifest-diff.csv",
+      "bytes": 1132,
+      "sha256": "7f9c2cd974ccd61d5828dd9dbe5bbe60b5e8af9991f86451838149b835822434"
+    },
+    {
+      "path": "outputs/local-validation.json",
+      "bytes": 467,
+      "sha256": "8bc3c1ccc021a01c38c0c96d976c526a46f1974d694f83230ac803c5289dd46c"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 748,
+      "sha256": "4fae214003df383ea6d1a072f3191f4d688cdc096f244784b38e6f25916f59f7"
+    },
+    {
+      "path": "outputs/workflow-operation-evidence.json",
+      "bytes": 6505,
+      "sha256": "325da3acecdd26b9f2eb16b8bbceb03a4a841852241b247fb92ecb5e9bba8cf2"
+    },
+    {
+      "path": "outputs/operation-provenance.json",
+      "bytes": 883,
+      "sha256": "dc6a6cdd861d9441783e1d0314290bd2a9aded1400ad6a7347d1bb23e25b96d5"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 8665,
+      "sha256": "b10f81b611ea0d281cb00bb341453e61e1a9c22bb7579a2a5d22a11de0c0a9d8"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2796,
+      "sha256": "422626557d56847baf78b06182bd11c4b237c7dfcccccb63c9d47df968ed81d6"
+    }
+  ],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1"
+  ],
+  "observations": [
+    "All twelve before-and-after manifest comparisons passed.",
+    "Job A remains terminally cancelled and was not resumed; job B retains its durable ID and source revision while its source alias and attempt identity change.",
+    "A temporary processed table was imported as a read-only workflow source, two region-QC tasks were admitted, and the process-local task list was read.",
+    "Both region-QC tasks failed at the normalization phase with the same isolated-worker ABORTED response; no artifact descriptor was produced.",
+    "A genuine Rosalind launcher call returned ready=true and the exact task-chooser message; no scientific job was executed."
+  ],
+  "interpretation": [
+    "The comparison demonstrates the distinct records required for cancellation and recoverable interruption while preserving the public source identity."
+  ],
+  "limitations": [
+    "Job, source, authorization, and attempt identities are deterministic fixtures rather than plugin results.",
+    "No workflow completed, so no normalized result or artifact page was available for guarded or live reading.",
+    "Opaque viewer, source, task, and durable handles were sanitized from public evidence because they have no scientific meaning.",
+    "Matrix X value scale remains unknown."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/recovery-before.json",
+        "inputs/recovery-after.json",
+        "inputs/temporary-region-counts.tsv",
+        "inputs/temporary-region-annotations.tsv"
+      ],
+      "outputs": [
+        "outputs/recovery-state-machine.json",
+        "outputs/manifest-diff.csv",
+        "outputs/local-validation.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/workflow-operation-evidence.json",
+        "outputs/operation-provenance.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Self-contained recovery fixtures remain distinct from the fresh temporary workflow receipts. Public evidence retains timestamps, portable request digests, operation states, and exact errors while sanitizing internal authorization handles."
+    }
+  ],
+  "reproduction": [
+    "Run python validate_case.py from the case directory and inspect outputs/rosalind-open-observation.json.",
+    "Inspect all twelve manifest-diff rows and the separate job A and job B sequences.",
+    "Inspect the operation evidence, provenance record, and teaching bundle before presenting the temporary execution.",
+    "Record any future completed workflow with its authentic artifact descriptor in a separately sanitized receipt."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0 source identity and self-contained fixtures",
+    "device": "local",
+    "credentials_present": false,
+    "viewer_operations_executed": true,
+    "rosalind_launcher_invoked": true,
+    "rosalind_scientific_job_executed": false
+  }
+}

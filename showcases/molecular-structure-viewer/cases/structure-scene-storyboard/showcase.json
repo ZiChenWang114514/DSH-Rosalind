@@ -1,0 +1,167 @@
+{
+  "id": "structure-scene-storyboard",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "render",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "structure-viewer.structure_get_state",
+    "structure-viewer.structure_add_structure",
+    "structure-viewer.structure_transform_object",
+    "structure-viewer.structure_set_object_visibility",
+    "structure-viewer.structure_undo",
+    "structure-viewer.structure_redo",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.12.13",
+      "NumPy 2.5.2",
+      "mcp__structure_viewer__structure_transform_object",
+      "mcp__structure_viewer__structure_set_object_visibility",
+      "mcp__structure_viewer__structure_undo",
+      "mcp__structure_viewer__structure_redo",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Pinned RCSB coordinates, deterministic C-alpha Kabsch and domain analysis, exact local JSON restoration, and mounted-viewer object transform, visibility, undo, and redo receipts",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/4AKE.pdb",
+      "bytes": 309339,
+      "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+    },
+    {
+      "path": "inputs/1AKE.pdb",
+      "bytes": 357777,
+      "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 870,
+      "sha256": "a6c8d3287b35d95c3ee99c02559c3bce27cab09ee26ea8a97d97adfac364d42d"
+    },
+    {
+      "path": "scripts/build_storyboard_evidence.py",
+      "bytes": 10859,
+      "sha256": "12b1065561a7500b972a91b29d70e19e1a5fbbe8c6476454df0f58cf37041366"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/storyboard-model.json",
+      "bytes": 9956,
+      "sha256": "646ada5acf948cbdf143ce6b0de2f8521cc4ebc94b760549b0a2c1e24565b25b"
+    },
+    {
+      "path": "outputs/reversibility-comparison.json",
+      "bytes": 1087,
+      "sha256": "156b492ea0de8720def0b6eb8be28dd9bbc727a393405136aa6894c7b75d3f81"
+    },
+    {
+      "path": "outputs/viewer-operation-plan.json",
+      "bytes": 4035,
+      "sha256": "212a1826325101e0491b2686c4bceb8a920c0bef33144d3cfc03322c97205368"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1748,
+      "sha256": "f35fe860c1f1775c99ae0521c4d9029abba02f428d6d15c52ca5e8cb538c8c28"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 631
+    },
+    {
+      "path": "outputs/structure-operation-evidence.json"
+    },
+    {
+      "path": "outputs/structure-operation-provenance.json"
+    },
+    {
+      "path": "outputs/related-data-authorization-blocker.json"
+    },
+    {
+      "path": "outputs/teaching-bundle.md"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 3906,
+      "sha256": "7d1be1b604229b1cc6e2b37c06ce6723287df8262f9b84246239eecb95542967"
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/4AKE",
+    "https://www.rcsb.org/structure/1AKE",
+    "https://files.rcsb.org/download/4AKE.pdb",
+    "https://files.rcsb.org/download/1AKE.pdb"
+  ],
+  "observations": [
+    "The retained RCSB files match the starter-contract byte lengths and SHA-256 digests.",
+    "The local script matched 214 chain-A C-alpha atoms and retained the AP5-bound comparison object.",
+    "Two local mutations restored every compared scene field exactly.",
+    "A mounted 4AKE/1AKE viewer session translated the 1AKE comparison object by 4 Å, successfully undid, redid, and undid that transform, then hid and restored only the 1AKE object."
+  ],
+  "interpretation": [
+    "The local all-correspondence fit and domain-centroid distances are consistent with a more closed AP5-bound domain arrangement."
+  ],
+  "limitations": [
+    "The local 7.130700 A Kabsch RMSD is distinct from a Structure Viewer TM-align result.",
+    "The 70 A translation is visual layout.",
+    "Native scene save, load, deletion, object removal, and rendering remain outside the new mounted-viewer receipts.",
+    "The fresh project-backed related-data attempt returned no directory listing or authenticated image token, so browse-related-data and background-load capabilities remain unclaimed.",
+    "Two coordinate models do not establish kinetics, populations, or catalytic rates.",
+    "rosalind_open did not submit 4AKE or 1AKE, create or restore molecular scenes, or execute a Rosalind scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://files.rcsb.org/download/4AKE.pdb",
+        "https://files.rcsb.org/download/1AKE.pdb"
+      ],
+      "inputs": [
+        "inputs/4AKE.pdb",
+        "inputs/1AKE.pdb",
+        "scripts/build_storyboard_evidence.py"
+      ],
+      "outputs": [
+        "outputs/storyboard-model.json",
+        "outputs/reversibility-comparison.json",
+        "outputs/viewer-operation-plan.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/structure-operation-evidence.json",
+        "outputs/structure-operation-provenance.json",
+        "outputs/related-data-authorization-blocker.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local script generated coordinate metrics and exact JSON restore evidence. Separate mounted-viewer receipts verify reversible object transform and visibility operations; the related-data record preserves the failed authorization attempt, and the genuine Rosalind task-chooser observation states that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Run scripts/build_storyboard_evidence.py with the two retained PDB files.",
+    "Compare regenerated JSON with the retained local evidence.",
+    "Inspect outputs/structure-operation-evidence.json for the executed transform, visibility, undo, and redo sequence; use outputs/viewer-operation-plan.json only for the remaining unexecuted scene operations."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public RCSB coordinates",
+    "local_execution": "completed",
+    "viewer_execution": "object transform, visibility, undo, and redo executed; remaining scene-plan operations not executed",
+    "python": "3.12.13",
+    "numpy": "2.5.2"
+  }
+}

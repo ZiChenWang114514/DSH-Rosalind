@@ -1,0 +1,19 @@
+{
+  "schema": "gpt-science.source-verification/v1",
+  "showcase_id": "rosalind-gfp-pocket",
+  "question": "Which residues form the local environment of the mature GFP chromophore?",
+  "source": "https://www.rcsb.org/structure/1EMA",
+  "checked_at_utc": "2026-08-29T18:23:14.204Z",
+  "verification_kind": "PDB 1EMA case-specific record summary",
+  "observations": [
+    "RCSB PDB identifies 1EMA as a 1.90 angstrom X-ray structure of an Aequorea victoria green fluorescent protein variant.",
+    "The linked primary report describes an 11-stranded beta barrel with a coaxial helix, chromophore formation from residues 65-67, and Thr203 adjacent to the chromophore.",
+    "The retained case includes no coordinate-derived contact list or distance cutoff, so a complete chromophore-pocket residue set is not established."
+  ],
+  "interpretation": "PDB 1EMA provides clear structural context for teaching how a future pocket query should define the chromophore, atom-selection rule, chain mapping, and distance criterion.",
+  "limitations": [
+    "No coordinate query or pocket calculation was performed.",
+    "No sequence alteration or fluorescence prediction was produced.",
+    "Rosalind launcher readiness is documented separately and does not establish a scientific run."
+  ]
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">CMU-1 DICOM member verification</title>
+  <desc id="desc">Six public DICOM members passed byte and SHA checks; the current viewer parser rejected zero slice thickness and no render occurred.</desc>
+  <rect width="1200" height="675" fill="#081725"/>
+  <text x="70" y="82" fill="#67e8f9" font-family="Segoe UI,Arial" font-size="25">SLIDE VIEWER · LOCAL DICOM</text>
+  <text x="70" y="145" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="44" font-weight="700">CMU-1: six explicit members</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="70" y="205" width="310" height="150" rx="18" fill="#0f2b3d" stroke="#22d3ee"/>
+    <text x="100" y="255" fill="#cbd5e1" font-size="22">Integrity checks</text>
+    <text x="100" y="315" fill="#f8fafc" font-size="46" font-weight="700">6 / 6</text>
+    <rect x="445" y="205" width="310" height="150" rx="18" fill="#0f2b3d" stroke="#22d3ee"/>
+    <text x="475" y="255" fill="#cbd5e1" font-size="22">Verified bytes</text>
+    <text x="475" y="315" fill="#f8fafc" font-size="39" font-weight="700">136,926,512</text>
+    <rect x="820" y="205" width="310" height="150" rx="18" fill="#321b25" stroke="#fb7185"/>
+    <text x="850" y="255" fill="#fecdd3" font-size="22">Open result</text>
+    <text x="850" y="315" fill="#fff1f2" font-size="36" font-weight="700">REJECTED</text>
+    <rect x="70" y="415" width="1060" height="125" rx="18" fill="#0f172a" stroke="#475569"/>
+    <text x="100" y="460" fill="#e2e8f0" font-size="22">Parser evidence</text>
+    <text x="100" y="505" fill="#fda4af" font-family="Consolas,monospace" font-size="20">slice thickness must be positive when present</text>
+    <text x="70" y="610" fill="#94a3b8" font-size="21">No viewer session · no rendered frame · no morphology claim</text>
+  </g>
+</svg>

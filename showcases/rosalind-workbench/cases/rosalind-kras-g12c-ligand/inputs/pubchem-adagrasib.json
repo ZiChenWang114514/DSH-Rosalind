@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 138611145,
+        "MolecularFormula": "C32H35ClFN7O2",
+        "MolecularWeight": "604.1",
+        "SMILES": "CN1CCC[C@H]1COC2=NC3=C(CCN(C3)C4=CC=CC5=C4C(=CC=C5)Cl)C(=N2)N6CCN([C@H](C6)CC#N)C(=O)C(=C)F",
+        "ConnectivitySMILES": "CN1CCCC1COC2=NC3=C(CCN(C3)C4=CC=CC5=C4C(=CC=C5)Cl)C(=N2)N6CCN(C(C6)CC#N)C(=O)C(=C)F",
+        "InChIKey": "PEMUGDMSUDYLHU-ZEQRLZLVSA-N",
+        "XLogP": 5,
+        "TPSA": 88.8,
+        "HBondDonorCount": 0,
+        "HBondAcceptorCount": 9,
+        "RotatableBondCount": 7,
+        "Title": "Adagrasib"
+      }
+    ]
+  }
+}

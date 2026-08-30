@@ -1,0 +1,17 @@
+{
+  "case_id": "databases-pdl1",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "queries": [
+    {"skill": "uniprot-skill", "path": "uniprotkb/Q9NZQ7?format=json", "raw": "inputs/uniprot-Q9NZQ7.json"},
+    {"skill": "rcsb-pdb-skill", "path": "core/entry/5j89", "raw": "inputs/rcsb-5J89.json"}
+  ],
+  "computation": "scripts/build_case.py",
+  "scientific_output": "outputs/results.json",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "observed_at_utc": "2026-08-29T18:14:05.263Z",
+    "scientific_job_executed": false,
+    "note": "The call opened only the task chooser; the retained UniProt and RCSB records support the scientific summary."
+  }
+}

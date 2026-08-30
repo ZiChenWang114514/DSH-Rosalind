@@ -1,0 +1,23 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "literature-kras-g12c",
+  "verified_at_utc": "2026-08-29T19:57:47.306858Z",
+  "calls": [
+    {
+      "skill": "ncbi-entrez-skill",
+      "request": {"endpoint":"esearch","params":{"db":"pubmed","term":"KRAS G12C[Title/Abstract] AND (covalent inhibitor[Title/Abstract] OR covalent inhibition[Title/Abstract])","retmode":"json","retmax":8,"sort":"relevance"},"max_items":8},
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "retrieved_at_utc": "2026-08-29T19:55:52.088283Z",
+      "ok": true,
+      "summary": {"record_count":8,"pmids":["37258666","34953682","31820981","39661665","39215000","26739882","36099883","35167329"]}
+    },
+    {
+      "skill": "ncbi-entrez-skill",
+      "request": {"endpoint":"esearch","params":{"db":"pubmed","term":"K-Ras(G12C) inhibitors allosterically control GTP affinity[Title]","retmode":"json","retmax":5},"max_items":5},
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "retrieved_at_utc": "2026-08-29T19:57:47.306858Z",
+      "ok": true,
+      "summary": {"record_count":2,"pmids":["31219673","24256730"]}
+    }
+  ]
+}

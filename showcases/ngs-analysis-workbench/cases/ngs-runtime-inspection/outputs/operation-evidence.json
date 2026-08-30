@@ -1,0 +1,77 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-runtime-inspection",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.655Z",
+      "arguments": {
+        "target_id": "local"
+      },
+      "response": {
+        "ok": true,
+        "host": {
+          "os": "windows",
+          "arch": "amd64"
+        },
+        "commands": {
+          "nextflow": "missing",
+          "snakemake": "missing",
+          "java": "ready",
+          "docker": "ready"
+        },
+        "docker_daemon_reachable": false,
+        "controller_candidates": 0
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T20:26:16.206Z",
+      "arguments": {
+        "target_id": "[sanitized local SSH target]"
+      },
+      "response": {
+        "ok": true,
+        "host": {"os": "linux", "arch": "amd64"},
+        "commands": {
+          "nextflow": "ready",
+          "snakemake": "ready",
+          "java": "ready",
+          "docker": "ready",
+          "micromamba": "ready"
+        },
+        "docker_daemon_reachable": true,
+        "docker_server_version": "29.7.2",
+        "controller_candidates": 2
+      }
+    },
+    {
+      "operation": "native_wsl_docker_run",
+      "operation_succeeded": true,
+      "started_at_utc": "2026-08-29T20:27:06.536Z",
+      "observed_at_utc": "2026-08-29T20:27:08.227Z",
+      "arguments": {
+        "image": "hello-world:latest",
+        "remove_after_exit": true
+      },
+      "response": {
+        "exit_code": 0,
+        "client_contacted_daemon": true,
+        "image_architecture": "amd64",
+        "container_completed": true
+      }
+    }
+  ],
+  "failed_operations": [],
+  "not_executed_operations": [],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

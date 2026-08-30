@@ -1,0 +1,3 @@
+{"input": "inputs\\DRR037765-first-24.fastq", "observed_at": "2026-08-29T17:46:53.807Z", "state": "prepared", "workflow_engine": "not_invoked"}
+{"observed_at": "2026-08-29T17:46:53.808Z", "scientific_core": "python_fastq_qc", "state": "running"}
+{"bases": 11304, "exit_code": 0, "observed_at": "2026-08-29T17:46:53.828Z", "q30_percent": 96.788747, "records": 24, "state": "completed", "summary": "outputs\\qc-summary.json"}

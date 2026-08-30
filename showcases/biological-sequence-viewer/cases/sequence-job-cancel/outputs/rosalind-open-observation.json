@@ -1,0 +1,16 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "sequence-job-cancel",
+  "observed_at_utc": "2026-08-29T17:59:09.785Z",
+  "observed_at_local": "2026-08-30T01:59:09+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "case_id": "sequence-job-cancel",
+    "task_context": "Document disposable local sequence-job cancellation; open only the Rosalind task chooser.",
+    "execute_scientific_task": false
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "rosalind_open only opened the task chooser; the local subprocess receipt is the cancellation evidence."
+}

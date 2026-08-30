@@ -6,19 +6,76 @@
   "run_date": "2026-08-29",
   "prompt": "prompt.md",
   "inputs": [],
-  "outputs": [{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],
-  "previews": [{"path":"previews/trem2-landscape.svg"}],
-  "sources": ["https://pubmed.ncbi.nlm.nih.gov/","https://www.biorxiv.org/content/10.1101/2025.03.28.646038v1"],
+  "outputs": [
+    {"path": "outputs/results.json"},
+    {"path": "outputs/sources.json"},
+    {"path": "outputs/query-verification.json"},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 708}
+  ],
+  "previews": [
+    {"path": "previews/trem2-landscape.svg"}
+  ],
+  "sources": [
+    "https://pubmed.ncbi.nlm.nih.gov/",
+    "https://www.biorxiv.org/content/10.1101/2025.03.28.646038v1"
+  ],
   "observations": [
     "The dated PubMed query returned ten identifiers.",
     "Six titles were reviews or perspectives and four were primary or model-focused research reports.",
-    "The bioRxiv publication-link endpoint returned no linked publication for the selected preprint on the retrieval date."
+    "The bioRxiv publication-link endpoint returned no linked publication for the selected preprint on the retrieval date.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation."
   ],
-  "interpretation": ["The snapshot shows current TREM2 work spanning variants, immunometabolism, injury, glioma, simulation, and therapeutic targeting."],
+  "interpretation": [
+    "The snapshot shows current TREM2 work spanning variants, immunometabolism, injury, glioma, simulation, and therapeutic targeting."
+  ],
   "limitations": [
     "This is a ten-record date-sorted snapshot, not a systematic review.",
     "Theme labels were assigned from titles and limited metadata.",
-    "An empty publication-link response means no link was returned by that endpoint on the retrieval date."
+    "An empty publication-link response means no link was returned by that endpoint on the retrieval date.",
+    "The Rosalind call opened only the task chooser and did not execute a scientific job."
   ],
-  "environment": {"pubmed_query":"TREM2[Title/Abstract] AND microglia[Title/Abstract]","retrieval_date":"2026-08-29"}
+  "environment": {
+    "pubmed_query": "TREM2[Title/Abstract] AND microglia[Title/Abstract]",
+    "retrieval_date": "2026-08-29"
+  },
+  "domain": "evidence-synthesis",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "public literature APIs and local Python",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "dated public literature API evidence, deterministic local classification, and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/",
+        "https://www.biorxiv.org/content/10.1101/2025.03.28.646038v1"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/sources.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": ["previews/trem2-landscape.svg"],
+      "note": "The literature APIs and local classification produced the scientific snapshot; the separate Rosalind observation preserves the genuine task-chooser response and states that no scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Repeat the recorded PubMed ESearch and bioRxiv publication-link requests, then compare their compact responses with outputs/query-verification.json.",
+    "Treat outputs/results.json as the 2026-08-29T12:04:10Z snapshot; do not substitute the later date-sorted PMID list without rebuilding the title classifications.",
+    "Inspect the preview and theme counts against the retained snapshot.",
+    "Compare any new Rosalind launcher response with outputs/rosalind-open-observation.json without treating it as a scientific result."
+  ]
 }

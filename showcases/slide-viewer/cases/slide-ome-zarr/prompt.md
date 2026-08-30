@@ -1,0 +1,3 @@
+# Inspect the public IDR OME-Zarr root
+
+Read only `.zgroup`, `.zattrs`, and `0/.zarray` from the exact anonymous HTTPS root. Retain their HTTP validators, byte counts, and SHA-256 values. Interpret the level-0 shape only with the axis order declared in NGFF metadata. Invoke `mcp__rosalind__rosalind_open` with a task context specific to this NGFF review and cite `outputs/rosalind-open-observation.json`; its chooser response does not prove scientific task execution. Attempt `mcp__slide_viewer__slide_open_ome_zarr` using the current advertised schema, and preserve validation errors or timeouts exactly. Do not describe a mounted scene, selected C/Z/T plane, registration, or visible layer without returned viewer evidence.

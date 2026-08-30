@@ -1,0 +1,50 @@
+{
+  "observed_at": "2026-08-29T17:40:11Z",
+  "public_target_label": "authorized SSH compute target",
+  "authentication_mode": "OpenSSH BatchMode",
+  "connect_timeout_seconds": 15,
+  "connection_succeeded": true,
+  "identifying_connection_fields_retained": false,
+  "workbench_registration": {
+    "registered": true,
+    "registered_target_count": 3,
+    "note": "The authorized SSH compute target was registered after the initial read-only probe; raw target and connection identifiers are not retained."
+  },
+  "platform": {
+    "os": "Ubuntu 24.04.4 LTS",
+    "arch": "x86_64",
+    "logical_cpus": 64,
+    "memory_kib": 329801736,
+    "memory_gib": 314.5
+  },
+  "storage_checks": {
+    "home_writable": true,
+    "temporary_directory_writable": true,
+    "data2_exists": true
+  },
+  "accelerators": {
+    "count": 4,
+    "model": "NVIDIA GeForce RTX 4090",
+    "memory_per_device_mib": 49140
+  },
+  "runtime_summary": {
+    "python3": "3.12.3",
+    "java": "21.0.12",
+    "docker_cli": "29.3.0",
+    "docker_server": "29.3.0 linux x86_64",
+    "git": "2.43.0",
+    "nextflow_on_path": false,
+    "snakemake_on_path": false,
+    "snakemake_python_module_runnable": false,
+    "fastqc_on_path": false,
+    "multiqc_on_path": false,
+    "samtools_on_path": false,
+    "slurm_commands_on_path": false
+  },
+  "interpretation": "The alias is reachable for bounded shell inspection and has substantial compute hardware, but it is not registered with Workbench and neither workflow controller was found on the noninteractive PATH.",
+  "limitations": [
+    "PATH inspection does not exclude software in an unactivated environment.",
+    "No scheduler worker, shared filesystem, container image, workflow, or NGS dataset was tested.",
+    "Reachability does not establish workflow readiness."
+  ]
+}

@@ -1,0 +1,64 @@
+# Deterministic KRAS sequence export package
+
+![Deterministic export package summary](previews/preview.svg)
+
+## Scientific question
+
+Can an exact public sequence, deterministic analyses, source provenance, and a data-rich preview be assembled into one reproducible package whose members can be verified independently?
+
+## Source observations
+
+- The retained source is reviewed human KRAS `P01116`, sequence version 1, from the official UniProtKB FASTA endpoint.
+- The exact FASTA response is 269 bytes and contains one 189-residue protein sequence.
+- `inputs/source-provenance.json` records the endpoint, retrieval date, accession, sequence version, byte length, and response and sequence digests.
+
+## Computed results
+
+`build_case.py` validates the FASTA, calculates amino-acid composition, and verifies five KRAS coordinate-pinned sequence regions. Inspectable results are retained as `outputs/sequence-summary.json` and `outputs/residue-composition.csv`.
+
+## Package contents
+
+`outputs/P01116-sequence-export.zip` uses stored ZIP members, fixed `1980-01-01 00:00:00` member timestamps, fixed file permissions, and a fixed member order. It contains:
+
+1. `exact-source/P01116.fasta`
+2. `analysis/sequence-summary.json`
+3. `analysis/residue-composition.csv`
+4. `provenance/source-provenance.json`
+5. `preview/preview.svg`
+6. `MANIFEST.json`
+
+`outputs/export-manifest.json` records every member's byte count and SHA-256 digest plus the final package byte count and digest. The member `MANIFEST.json` covers the five scientific payload files; self-reference is intentionally excluded.
+
+## Viewer workflow status
+
+The export package was created by local Python and is not presented as a viewer-published artifact. No successful Viewer operation produced or confirmed this P01116 package, so opening, analysis, export, and query are not listed as case capabilities.
+
+## Observed Rosalind Workbench invocation
+
+`mcp__rosalind__rosalind_open` was actually invoked for this case at `2026-08-29T17:59:09.829Z` (`2026-08-30T01:59:09+08:00`). It returned the exact message `Rosalind Workbench is ready. Choose a research task in the app.` and the launcher state had `ready=true`. The required record is retained in `outputs/rosalind-open-observation.json`. The invocation only opens the task chooser and does not prove scientific task execution; local Python remains the producer of every package member.
+
+## Interpretation
+
+The ZIP is a compact, independently inspectable teaching package whose source, calculations, provenance, and preview remain connected through exact digests. It is suitable for reproduction exercises, not experimental or clinical inference.
+
+## Limitations
+
+- The calculations are descriptive sequence checks and composition counts.
+- ZIP determinism is established for the retained script and standard-library stored-member settings.
+- No viewer session, private artifact store, or source-relative viewer publication was used.
+- The Rosalind launcher did not produce or export any package member.
+
+## Exact reproduction
+
+From the repository root:
+
+```powershell
+python showcases/biological-sequence-viewer/cases/sequence-export-package/build_case.py
+python scripts/showcase_session.py bundle sequence-export-package
+```
+
+Run the build twice and compare the package SHA-256 in `outputs/export-manifest.json`. The build also reopens the ZIP, verifies its ordered member names, checks every extracted byte string against the retained files, and refreshes all manifest byte counts and digests.
+
+## Viewer operation review (2026-08-30)
+
+No Sequence Viewer operation is recorded as successful. Server sessions were created for the relevant local public files, but subsequent queries or controls were not acknowledged. `outputs/viewer-operation-evidence.json` separates failed calls from actions that were not attempted after the prerequisite confirmation failed. It omits session identifiers, private paths, and internal resource URIs.

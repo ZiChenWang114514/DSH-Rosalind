@@ -3,35 +3,130 @@
   "plugin_id": "molecular-structure-viewer",
   "plugin_version": "0.1.80",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
   "prompt": "prompt.md",
   "inputs": [
+    {
+      "path": "inputs/public-source.md"
+    },
     {
       "path": "inputs/1EMA.pdb",
       "bytes": 190188,
       "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088"
+    },
+    {
+      "path": "scripts/verify_figure.py"
     }
   ],
   "outputs": [
-    {"path": "previews/gfp.png"},
-    {"path": "previews/gfp.png.render.json"}
+    {
+      "path": "previews/gfp.png"
+    },
+    {
+      "path": "previews/gfp.png.render.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 619
+    },
+    {
+      "path": "outputs/background-operation-blocker.json"
+    },
+    {
+      "path": "outputs/source-provenance.json"
+    },
+    {
+      "path": "outputs/chromophore-contacts.json"
+    },
+    {
+      "path": "outputs/structure-operation-evidence.json"
+    },
+    {
+      "path": "outputs/teaching-bundle.md"
+    }
   ],
-  "previews": [{"path": "previews/gfp.png"}],
-  "sources": ["https://files.rcsb.org/download/1EMA.pdb"],
+  "previews": [
+    {
+      "path": "previews/gfp.png"
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1EMA",
+    "https://files.rcsb.org/download/1EMA.pdb",
+    "RCSB PDB 1EMA, supplied to the viewer by the plugin's bundled example"
+  ],
   "observations": [
     "The mounted viewer identified 1EMA as an X-ray structure at 1.9 angstrom resolution.",
     "The displayed model contained 225 protein residues, 1866 atoms, and CRO at chain A author residue 66.",
-    "The viewer returned 18 polymer residues within 4.0 angstrom of CRO using closest heavy-atom Euclidean distance.",
-    "A 1600 by 1200 PNG and render provenance file were generated and visually inspected."
+    "A deterministic calculation from the retained 1EMA PDB returned 18 polymer residues within 4.0 angstrom of CRO using closest heavy-atom Euclidean distance.",
+    "The retained 1EMA PDB digest exactly matches the source digest recorded in the viewer render sidecar.",
+    "A 1600 by 1200 PNG and render provenance file were generated and visually inspected; no CRO text label is visible.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation."
   ],
-  "interpretation": ["The chromophore occupies the protected interior of the GFP beta barrel."],
+  "interpretation": [
+    "The chromophore occupies the protected interior of the GFP beta barrel."
+  ],
   "limitations": [
     "The 4 angstrom contact display is a coordinate-distance analysis, not an energetic interaction model.",
     "CRO is polymer-linked; the shortest contact records include covalent geometry.",
-    "The current render keeps all source-visible small components, including solvent markers."
+    "The current render keeps all source-visible small components, including solvent markers.",
+    "No successful standalone viewer receipts are retained for open_from_chat, analyze, apply_scene, or validate_render.",
+    "rosalind_open did not submit 1EMA, render the figure, or execute a Rosalind scientific job.",
+    "A fresh project-backed 4AKE viewer open remained presentation-issued and render-pending, then became inactive. The related-data request returned available=false because trusted file metadata was not bound; no listing or authenticated image token existed, so structure_load_background was not invoked or claimed."
   ],
   "environment": {
-    "viewer_status": "completed",
-    "render_status": "completed"
-  }
+    "viewer_execution": "mounted viewer and completed render; nonportable internal identifiers omitted"
+  },
+  "domain": "structure-and-sequence",
+  "case_type": "render",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "structure-viewer.structure_render_image",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Molecular Structure Viewer PNG and render provenance sidecar",
+      "RCSB PDB 1EMA coordinate snapshot and Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "viewer-generated 1600 by 1200 PNG verified against its render sidecar and a deterministic 4.0 angstrom CRO contact shell computed from the retained byte-identical RCSB 1EMA input",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/1EMA",
+        "https://files.rcsb.org/download/1EMA.pdb",
+        "RCSB PDB 1EMA, supplied by the plugin's pinned bundled example"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/1EMA.pdb",
+        "scripts/verify_figure.py"
+      ],
+      "outputs": [
+        "previews/gfp.png",
+        "previews/gfp.png.render.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/background-operation-blocker.json",
+        "outputs/source-provenance.json",
+        "outputs/chromophore-contacts.json",
+        "outputs/structure-operation-evidence.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/gfp.png"
+      ],
+      "note": "The official RCSB 1EMA coordinate file is retained and matches the render source digest. The verifier reproduces the contact shell and confirms the PNG and sidecar identities; the background record preserves the unavailable related-data request and uninvoked background load, and the Rosalind observation states that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/verify_figure.py to verify the retained 1EMA, PNG, and sidecar identities and regenerate the 4.0 angstrom CRO contact shell.",
+    "Inspect previews/gfp.png and confirm that the protein cartoon, CRO sticks, and dark background are visible while a CRO text label is absent.",
+    "Use outputs/structure-operation-evidence.json to separate the completed image render from unverified viewer open, analysis, scene-application, and render-validation operations."
+  ]
 }

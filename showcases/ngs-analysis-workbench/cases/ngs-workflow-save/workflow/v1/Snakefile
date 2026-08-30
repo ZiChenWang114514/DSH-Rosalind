@@ -1,0 +1,20 @@
+configfile: "config/config.json"
+
+
+rule all:
+    input:
+        config["summary"],
+        config["read_metrics"],
+        config["cycle_metrics"]
+
+
+rule fastq_qc:
+    input:
+        fastq=config["fastq"]
+    output:
+        summary=config["summary"],
+        reads=config["read_metrics"],
+        cycles=config["cycle_metrics"]
+    shell:
+        "python scripts/qc_core.py --input {input.fastq} --summary {output.summary} "
+        "--reads {output.reads} --cycles {output.cycles}"

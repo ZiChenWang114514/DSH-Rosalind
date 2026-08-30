@@ -1,0 +1,168 @@
+{
+  "id": "rosalind-jak2-selectivity",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "small-molecule-design-and-docking",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "design-jak2-binders"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Python 3.14 coordinate and sequence analysis",
+      "RDKit descriptor calculation",
+      "Matplotlib preview rendering"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; three retained experimental PDB poses were compared locally with homology-mapped contacts and fixed-CID PubChem descriptors, and no Rosalind design or docking service was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/case-config.json",
+      "bytes": 1288
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 1124
+    },
+    {
+      "path": "inputs/source-metadata.json",
+      "bytes": 3431
+    },
+    {
+      "path": "inputs/3EYG.pdb",
+      "bytes": 252234
+    },
+    {
+      "path": "inputs/3FUP.pdb",
+      "bytes": 458622
+    },
+    {
+      "path": "inputs/3KRR.pdb",
+      "bytes": 252072
+    },
+    {
+      "path": "inputs/pubchem-tofacitinib.json",
+      "bytes": 543
+    },
+    {
+      "path": "inputs/pubchem-nvp-bsk805.json",
+      "bytes": 668
+    },
+    {
+      "path": "scripts/fetch_public_inputs.py",
+      "bytes": 3949
+    },
+    {
+      "path": "scripts/analyze_case.py",
+      "bytes": 16410
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/contacts.csv",
+      "bytes": 4197
+    },
+    {
+      "path": "outputs/contact-overlap.csv",
+      "bytes": 1666
+    },
+    {
+      "path": "outputs/descriptors.csv",
+      "bytes": 698
+    },
+    {
+      "path": "outputs/analysis-summary.json",
+      "bytes": 22734
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 641
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 124952
+    },
+    {
+      "path": "previews/preview.png",
+      "bytes": 96844
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/3EYG",
+    "https://www.rcsb.org/structure/3FUP",
+    "https://www.rcsb.org/structure/3KRR",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/9926791",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/46398810"
+  ],
+  "observations": [
+    "The genuine mcp__rosalind__rosalind_open call returned the exact message 'Rosalind Workbench is ready. Choose a research task in the app.' and ready=true; it opened only the task chooser.",
+    "The same-ligand JAK1 and JAK2 structures share 18 homology-mapped contact positions at the 4.0-angstrom cutoff, with a mapped-contact Jaccard value of 0.8571.",
+    "The JAK2-tofacitinib and JAK2-NVP-BSK805 poses share 17 exact contact residue labels, with a Jaccard value of 0.6800.",
+    "The 3KRR primary study reports greater than 20-fold biochemical selectivity for NVP-BSK805 toward JAK2 within the JAK family."
+  ],
+  "interpretation": [
+    "The ATP-site contact environment is strongly conserved across the same-ligand JAK1/JAK2 pair, while NVP-BSK805 adds compound-specific JAK2 contacts; geometry alone does not establish selectivity."
+  ],
+  "limitations": [
+    "The Rosalind launcher observation does not show that binder design, docking, or another scientific job was executed.",
+    "No JAK2 binder design, docking, free-energy calculation, biochemical assay, or cellular experiment was performed.",
+    "Homologous positions were assigned by deterministic sequence alignment without structural superposition.",
+    "The published selectivity value is cited source evidence and was not reproduced by the local computation."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "RCSB PDB 3EYG revision 1.3",
+        "RCSB PDB 3FUP revision 1.6",
+        "RCSB PDB 3KRR revision 1.2",
+        "PubChem CID 9926791",
+        "PubChem CID 46398810"
+      ],
+      "inputs": [
+        "inputs/3EYG.pdb",
+        "inputs/3FUP.pdb",
+        "inputs/3KRR.pdb",
+        "inputs/pubchem-tofacitinib.json",
+        "inputs/pubchem-nvp-bsk805.json",
+        "inputs/source-metadata.json"
+      ],
+      "outputs": [
+        "outputs/contacts.csv",
+        "outputs/contact-overlap.csv",
+        "outputs/descriptors.csv",
+        "outputs/analysis-summary.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg",
+        "previews/preview.png"
+      ],
+      "note": "Retained scripts compute coordinate contacts, sequence-aligned overlap, descriptors, and previews from public records; the separate Rosalind observation records chooser readiness and no scientific job."
+    }
+  ],
+  "reproduction": [
+    "Call mcp__rosalind__rosalind_open with task_context 'Document the JAK2 selectivity showcase; open the task chooser only and do not start a scientific job.' and record the exact response separately as outputs/rosalind-open-observation.json.",
+    "From the case directory, run python scripts/analyze_case.py to reproduce the retained analysis.",
+    "Optionally run python scripts/fetch_public_inputs.py first to refresh current RCSB entry revisions.",
+    "Read source-metadata.json and the three output tables before interpreting selectivity."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public RCSB PDB and PubChem records",
+    "device": "local",
+    "network_required_for_refresh_only": true
+  }
+}

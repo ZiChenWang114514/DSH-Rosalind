@@ -1,0 +1,37 @@
+{
+  "showcase_id": "sequence-edit-copy",
+  "source": {
+    "accession": "P01116",
+    "sequence_version": 1,
+    "length": 189,
+    "sequence_sha256": "1d5a9ab11f64cb886d8ffa08a153c412b2d190fcf70e5690cd4b4c7efcdee53a",
+    "file_sha256_before_build": "123e7c252e1081477f337dd7b3146d6e476c5687b71a873bd48945e8ef7d0c59",
+    "file_sha256_after_build": "123e7c252e1081477f337dd7b3146d6e476c5687b71a873bd48945e8ef7d0c59",
+    "unchanged_during_edit": true
+  },
+  "copy": {
+    "record_id": "P01116_G12C_COPY",
+    "length": 189,
+    "sequence_sha256": "4ffc1b515d70e97e7a9e0436e6857e4c07bb4e3a0922ad8f22f541398aa5e5a6",
+    "file_sha256": "6a8ba859ce87976ff34e9055e4f12fffb55014cbdc8f351c6924208915dceeb3"
+  },
+  "edit": {
+    "type": "replace one protein residue in a derived copy",
+    "coordinate_system": "1-based protein residue",
+    "start": 12,
+    "end": 12,
+    "before": "G",
+    "after": "C",
+    "difference_count": 1,
+    "length_preserved": true
+  },
+  "execution": {
+    "status": "verified local copy transformation",
+    "tool": "Python 3 standard library",
+    "viewer_operations": "sequence.edit_copy and sequence.export_artifact were rehearsed; no live viewer copy was modified or exported"
+  },
+  "limitations": [
+    "This protein-sequence copy does not specify a nucleotide codon or expression construct.",
+    "The edit record does not by itself establish biochemical, clinical, or structural consequences."
+  ]
+}

@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Mouse-brain spatial expression summary</title>
+<desc id="desc">Summary of Slc17a7 and Gad1 values across 684 Visium capture spots, with unknown matrix scale and no morphology claim.</desc>
 <rect width="1200" height="675" fill="#08131f"/><circle cx="1090" cy="80" r="230" fill="#f48fb1" opacity=".12"/>
 <rect x="54" y="50" width="1092" height="575" rx="28" fill="#102235" stroke="#29435a"/>
 <text x="92" y="112" fill="#f48fb1" font-family="Segoe UI,Arial" font-size="24" font-weight="700">SLIDE VIEWER</text>

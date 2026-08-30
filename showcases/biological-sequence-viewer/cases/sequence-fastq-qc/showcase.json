@@ -3,19 +3,28 @@
   "plugin_id": "biological-sequence-viewer",
   "plugin_version": "0.1.43",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
   "prompt": "prompt.md",
-  "inputs": [
-    {
-      "path": "inputs/DRR037765.first500.fastq"
-    }
-  ],
+  "inputs": [],
   "outputs": [
     {
       "path": "outputs/quality-summary.json"
     },
     {
       "path": "outputs/source-provenance.json"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 920,
+      "sha256": "7f2cb5fe309c05a282b6f5dc586c3c6ebb4d2b221440ccf166a484def6c2c201"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 675,
+      "sha256": "82fab3c048b1e6fe7f7bde02bbbf071bf3c671982adbf2a194744fe0ec580759"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
     }
   ],
   "previews": [
@@ -28,7 +37,9 @@
   ],
   "observations": [
     "The subset contains 500 reads and 235490 bases.",
-    "The computed Q30 fraction is 95.397681 percent."
+    "The computed Q30 fraction is 95.397681 percent.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
   ],
   "interpretation": [
     "The subset has high base-call quality under the Phred+33 interpretation."
@@ -36,10 +47,53 @@
   "limitations": [
     "The first 500 records may not represent the entire run.",
     "No adapter, contamination, or run-wide distribution analysis was performed.",
-    "The viewer card did not mount."
+    "rosalind_open did not read the FASTQ data, create the subset, or calculate quality metrics.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
   ],
   "environment": {
-    "viewer_status": "session_created_but_card_not_mounted",
-    "viewer_rendered": false
-  }
+    "viewer_rendered": false,
+    "rosalind_launcher_observed": true,
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  },
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "pinned ENA first-500-read extraction and deterministic Phred+33 metrics, plus an unconfirmed Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/quality-summary.json",
+        "outputs/source-provenance.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/fastq-qc.svg"
+      ],
+      "note": "The local script produced the scientific result; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Inspect every retained input, output, preview, and cited public source.",
+    "Repeat the documented free computation or viewer operations and compare the stated observations and limitations.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat the launcher response as scientific execution.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ]
 }

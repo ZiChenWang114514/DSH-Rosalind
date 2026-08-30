@@ -1,0 +1,29 @@
+structure,pdb_id,ligand,protein_chain,protein_residue,protein_resname,protein_resseq,nearest_protein_atom,nearest_ligand_residue,nearest_ligand_atom,min_distance_angstrom,distance_class
+MDM2-p53-peptide,1YCR,p53 peptide,A,TYR100,TYR,100,OH,ASN29,O,2.681,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,LEU54,LEU,54,O,TRP23,NE1,2.831,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,GLN72,GLN,72,OE1,PHE19,N,3.017,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,MET62,MET,62,CE,SER20,OG,3.094,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,LYS94,LYS,94,CE,GLU17,OE1,3.107,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,LYS51,LYS,51,CG,GLU28,O,3.163,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,HIS96,HIS,96,NE2,LEU25,O,3.169,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,MET50,MET,50,CB,GLU28,O,3.249,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,THR26,THR,26,OG1,ASN29,OD1,3.27,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,VAL93,VAL,93,CG2,LEU22,CB,3.329,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,TYR104,TYR,104,OH,ASN29,OXT,3.391,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,GLU25,GLU,25,OE1,ASN29,ND2,3.436,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,HIS73,HIS,73,CD2,GLU17,OE1,3.437,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,ILE61,ILE,61,CG2,PHE19,CZ,3.47,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,GLY58,GLY,58,CA,TRP23,NE1,3.491,close
+MDM2-p53-peptide,1YCR,p53 peptide,A,VAL75,VAL,75,CG2,PHE19,CE1,3.846,near
+MDM2-p53-peptide,1YCR,p53 peptide,A,LEU57,LEU,57,CG,TRP23,CZ2,3.997,near
+MDM2-Nutlin-3a,4HG7,NUT,A,GLN72,GLN,72,O,NUT201,C4,3.205,close
+MDM2-Nutlin-3a,4HG7,NUT,A,HIS96,HIS,96,CD2,NUT201,C14,3.388,close
+MDM2-Nutlin-3a,4HG7,NUT,A,MET62,MET,62,CG,NUT201,N3,3.445,close
+MDM2-Nutlin-3a,4HG7,NUT,A,HIS73,HIS,73,N,NUT201,O,3.512,near
+MDM2-Nutlin-3a,4HG7,NUT,A,ILE61,ILE,61,CD1,NUT201,CL1,3.55,near
+MDM2-Nutlin-3a,4HG7,NUT,A,VAL93,VAL,93,CG2,NUT201,C3,3.554,near
+MDM2-Nutlin-3a,4HG7,NUT,A,GLY58,GLY,58,CA,NUT201,C27,3.622,near
+MDM2-Nutlin-3a,4HG7,NUT,A,LEU54,LEU,54,CD1,NUT201,CL,3.686,near
+MDM2-Nutlin-3a,4HG7,NUT,A,TYR100,TYR,100,CE1,NUT201,CL,3.708,near
+MDM2-Nutlin-3a,4HG7,NUT,A,VAL75,VAL,75,CG2,NUT201,C7,3.721,near
+MDM2-Nutlin-3a,4HG7,NUT,A,ILE99,ILE,99,CD1,NUT201,C14,3.859,near

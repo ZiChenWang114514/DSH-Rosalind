@@ -1,0 +1,96 @@
+{
+  "schema": "rosalind.single-cell-tme-metadata/v1",
+  "case_id": "rosalind-single-cell-tme",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "The de-identified official CELLxGENE collection response was retained and transformed into aggregate preparation checks."
+  },
+  "collection_id": "ceef2841-5333-46ac-92ef-ccbe0c20fe55",
+  "collection_version_id": "cb6e09da-7718-42fc-97ac-c439524999ae",
+  "collection_name": "Single-cell atlas of untreated human triple negative breast cancer",
+  "dataset_id": "6f9de485-58cd-4342-bfc4-b3d3dd223aa8",
+  "dataset_version_id": "e94bd3cc-6271-424a-baac-12f8eb320a0e",
+  "dataset_title": "Single-cell RNA-seq data from untreated tissue samples of treatment-naive triple-negative breast cancer patients",
+  "organism": [
+    {
+      "label": "Homo sapiens",
+      "ontology_term_id": "NCBITaxon:9606"
+    }
+  ],
+  "disease": [
+    {
+      "label": "triple-negative breast carcinoma",
+      "ontology_term_id": "MONDO:0005494"
+    }
+  ],
+  "tissue": [
+    {
+      "label": "breast",
+      "ontology_term_id": "UBERON:0000310",
+      "tissue_type": "tissue"
+    }
+  ],
+  "assays": [
+    {
+      "label": "10x 3' v2",
+      "ontology_term_id": "EFO:0009899"
+    },
+    {
+      "label": "10x 3' v3",
+      "ontology_term_id": "EFO:0009922"
+    }
+  ],
+  "cells": 427823,
+  "primary_cells": 427823,
+  "features": 32354,
+  "mean_genes_per_cell": 2120.624429,
+  "study_participant_count": 101,
+  "broad_cell_type_count": 7,
+  "broad_cell_types": [
+    {
+      "label": "T cell",
+      "ontology_term_id": "CL:0000084"
+    },
+    {
+      "label": "abnormal cell",
+      "ontology_term_id": "CL:0001061"
+    },
+    {
+      "label": "endothelial cell",
+      "ontology_term_id": "CL:0000115"
+    },
+    {
+      "label": "fibroblast",
+      "ontology_term_id": "CL:0000057"
+    },
+    {
+      "label": "lymphocyte of B lineage",
+      "ontology_term_id": "CL:0000945"
+    },
+    {
+      "label": "myeloid leukocyte",
+      "ontology_term_id": "CL:0000766"
+    },
+    {
+      "label": "perivascular cell",
+      "ontology_term_id": "CL:4033054"
+    }
+  ],
+  "embedding_inventory": [
+    "X_umap"
+  ],
+  "raw_data_location": "raw.X",
+  "asset": {
+    "filetype": "H5AD",
+    "bytes": 4522982499,
+    "url": "https://datasets.cellxgene.cziscience.com/e94bd3cc-6271-424a-baac-12f8eb320a0e.h5ad"
+  },
+  "preparation_checks": {
+    "human_breast_tissue": true,
+    "tnbc_disease_annotation": true,
+    "raw_counts_declared": true,
+    "umap_available": true
+  },
+  "interpretation_scope": "The metadata establishes cohort scale, assay versions, broad annotations, and matrix availability for planning. No H5AD expression matrix or cell-level annotation was downloaded or reanalysed."
+}

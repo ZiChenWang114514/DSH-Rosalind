@@ -1,0 +1,3 @@
+# Validate a workflow recovery rehearsal
+
+Compare the self-contained before/after manifests for cancellation job A and recoverable job B. Then inspect `outputs/workflow-operation-evidence.json`, `outputs/operation-provenance.json`, and `outputs/teaching-bundle.md` for the separate temporary execution. Report the successful read-only source import, both admitted region-QC tasks, the process-local list result, and the repeated isolated-worker failure exactly. Explain that workflow artifact reads were not attempted because no completed task supplied an authentic artifact descriptor. Treat opaque task and source aliases as transport details, and preserve `outputs/rosalind-open-observation.json` as an independent task-chooser observation.

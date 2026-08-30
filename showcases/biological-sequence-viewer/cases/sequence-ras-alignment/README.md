@@ -22,6 +22,10 @@ How strongly is the shared RAS GTPase core conserved, and where do the three hum
 - The neighbor-joining result is stored in `outputs/RAS-P01116-P01111-P01112-NJ.nwk`; the matrix and analysis settings are in `outputs/analysis.json`.
 - Columns 170–191 contain the clearest substitutions and short gaps, consistent with greater divergence in the C-terminal targeting region.
 
+## Rosalind Workbench observation
+
+`mcp__rosalind__rosalind_open` was genuinely invoked with this case's task context at `2026-08-29T18:14:15.178Z`. It returned `Rosalind Workbench is ready. Choose a research task in the app.` with `ready=true`. The arguments, UTC and local timestamps, response, and `scientific_job_executed=false` are retained in `outputs/rosalind-open-observation.json` and cited by `outputs/provenance.json`. The call opened only the task chooser; it did not generate the alignment, coordinate mappings, distance matrix, or tree.
+
 ## Reproduce
 
 1. Open `inputs/human-RAS-UniProt-SV1.aln-fasta` in Biological Sequence & Alignment Viewer.
@@ -30,6 +34,12 @@ How strongly is the shared RAS GTPase core conserved, and where do the three hum
 4. Run `distance-matrix` for all three rows.
 5. Run `build-tree` with neighbor joining for the same row order.
 
+The retained viewer-derived results belong to the recorded prior session. No new viewer action was performed for this update.
+
 ## Interpretation
 
 The shared GTPase core is highly conserved, whereas the C-terminal region carries more paralogue-specific sequence variation. The built-in three-sequence tree is an exploratory teaching aid and does not replace a phylogenetic analysis with an explicit substitution model and support assessment.
+
+## Viewer operation review (2026-08-30)
+
+Historical completed calls recovered from source task `archived-sequence-viewer-task` support the capabilities listed in `showcase.json`. Exact non-sensitive arguments, response summaries, durations, source turn, and the retained scientific outputs are recorded in `outputs/viewer-operation-evidence.json`. The present retry did not receive viewer acknowledgement; it is recorded separately and does not alter the historical results.

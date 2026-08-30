@@ -20,6 +20,18 @@
   ],
   "interactive_viewer_run": {
     "status": "not-executed-after-pending-host-session",
-    "next_step": "Run the prompt in a clean Molecular Structure Viewer session and replace contract metrics with exported analysis results."
+    "next_step": "In one clean session, open 4AKE once, add 1AKE, align mobile chain A to reference chain A with TM-align, retain AP5 as ap5a_bound, and capture the successful response with aligned count, RMSD, both TM-scores, object identifiers, and applied-state acknowledgement before replacing any contract metric.",
+    "unverified_operations": [
+      "structure_open_from_chat",
+      "structure_add_structure",
+      "structure_align_structures",
+      "structure_query"
+    ]
+  },
+  "rosalind_open_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 633,
+    "scientific_job_executed": false,
+    "note": "Genuine case-specific task-chooser call; neither coordinate file was submitted and no Rosalind scientific job ran."
   }
 }

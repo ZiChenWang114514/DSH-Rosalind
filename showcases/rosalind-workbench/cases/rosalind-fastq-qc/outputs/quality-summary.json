@@ -1,0 +1,31 @@
+{
+  "schema": "rosalind.fastq-quality-summary/v1",
+  "case_id": "rosalind-fastq-qc",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "The retained public ENA FASTQ object was verified and transformed into deterministic 500-read QC outputs."
+  },
+  "source": {
+    "run": "DRR037765",
+    "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz",
+    "compressed_bytes": 127526,
+    "compressed_md5": "81735432a6f578b332aae58cdbd95231"
+  },
+  "subset_rule": "first 500 complete records; first header token retained; plus line normalized to +; LF line endings",
+  "records": 500,
+  "bases": 235490,
+  "read_length_min": 469,
+  "read_length_max": 471,
+  "read_length_mean": 470.98,
+  "read_length_distribution": {
+    "469": 1,
+    "470": 8,
+    "471": 491
+  },
+  "gc_percent": 28.846235508939,
+  "q30_percent": 95.397681430209,
+  "canonical_subset_bytes": 480372,
+  "canonical_subset_sha256": "46bd72991d9c9c2bf64751e88e52548d852d5fa021da4815ee6f6517a51b18b9",
+  "qualification": "Metrics describe only the deterministic 500-read subset and do not establish run-wide or assay-specific suitability."
+}

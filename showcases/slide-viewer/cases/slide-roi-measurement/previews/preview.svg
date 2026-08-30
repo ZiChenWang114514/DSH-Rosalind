@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">CMU-1 ROI geometry and calibrated measurement</title>
+  <desc id="desc">A deterministic rectangular region in base-level slide pixels with verified pixel and micrometer measurements.</desc>
+  <rect width="1200" height="675" fill="#f4efe6"/>
+  <text x="70" y="86" fill="#243746" font-family="Segoe UI,Arial" font-size="40" font-weight="700">CMU-1 ROI measurement</text>
+  <text x="70" y="128" fill="#657783" font-family="Segoe UI,Arial" font-size="22">source-associated geometry · 0.499 µm/pixel calibration</text>
+  <rect x="70" y="180" width="680" height="360" rx="18" fill="#d9c7ba" stroke="#8a5c4d" stroke-width="3"/>
+  <path d="M230 270 H610 V455 H230 Z" fill="#ef8a62" fill-opacity=".25" stroke="#b9472d" stroke-width="7"/>
+  <circle cx="230" cy="270" r="8" fill="#b9472d"/><circle cx="610" cy="270" r="8" fill="#b9472d"/><circle cx="610" cy="455" r="8" fill="#b9472d"/><circle cx="230" cy="455" r="8" fill="#b9472d"/>
+  <g font-family="Segoe UI,Arial" fill="#243746">
+    <text x="810" y="230" font-size="24" font-weight="700">Declared rectangle</text>
+    <text x="810" y="282" font-size="23">2,000 × 1,500 px</text>
+    <text x="810" y="332" font-size="23">3,000,000 px²</text>
+    <text x="810" y="382" font-size="23">747,003 µm²</text>
+    <text x="810" y="432" font-size="23">3,493 µm perimeter</text>
+  </g>
+  <text x="70" y="615" fill="#6b4f47" font-family="Segoe UI,Arial" font-size="21">No mounted tissue view · no morphology claim · no source-pixel export</text>
+</svg>

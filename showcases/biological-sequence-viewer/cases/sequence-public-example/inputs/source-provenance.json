@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "author": "Codex",
+  "database": "UniProtKB/Swiss-Prot",
+  "official_endpoint": "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+  "retrieved_on": "2026-08-30",
+  "requested_accession": "P01116",
+  "resolved_accession": "P01116",
+  "sequence_version": 1,
+  "record_name": "RASK_HUMAN",
+  "organism": "Homo sapiens",
+  "response_bytes": 269,
+  "response_sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6",
+  "sequence_length": 189,
+  "sequence_sha256": "1d5a9ab11f64cb886d8ffa08a153c412b2d190fcf70e5690cd4b4c7efcdee53a",
+  "note": "Codex-authored provenance for an official public response; no viewer receipt is claimed."
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "literature-pmc-availability",
+  "verified_at_utc": "2026-08-29T19:55:46.558894Z",
+  "calls": [{
+    "skill": "ncbi-pmc-skill",
+    "request": {"params":{"id":"PMC3257301"},"max_items":10},
+    "source_url": "https://pmc-oa-opendata.s3.amazonaws.com/metadata/PMC3257301.1.json",
+    "retrieved_at_utc": "2026-08-29T19:55:46.558894Z",
+    "ok": true,
+    "summary": {"pmcid":"PMC3257301","pmid":22253597,"doi":"10.1371/journal.ppat.1002485","is_pmc_openaccess":true,"license_code":"CC BY","is_manuscript":false,"is_retracted":false,"pdf_available":true,"xml_available":true,"text_available":true,"media_url_count":22}
+  }]
+}

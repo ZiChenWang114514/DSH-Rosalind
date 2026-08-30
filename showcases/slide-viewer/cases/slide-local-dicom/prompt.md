@@ -1,0 +1,3 @@
+# Verify an explicit local CMU-1 DICOM series
+
+Acquire only the six named CC0 DICOM members, verify every published byte count and SHA-256, and call `mcp__slide_viewer__slide_open_dicom_series` with the ordered explicit paths. Preserve the exact parser result. Invoke `mcp__rosalind__rosalind_open` with a task context specific to this local DICOM review and cite `outputs/rosalind-open-observation.json`; treat its chooser response only as proof that Rosalind Workbench opened, never as a scientific task run. If no viewer session is returned, do not request renewal, state, render, navigation, or image interpretation.

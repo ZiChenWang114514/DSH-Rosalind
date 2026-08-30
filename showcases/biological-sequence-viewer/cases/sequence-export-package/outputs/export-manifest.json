@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "showcase_id": "sequence-export-package",
+  "package": {
+    "path": "outputs/P01116-sequence-export.zip",
+    "format": "ZIP",
+    "compression": "stored",
+    "bytes": 7294,
+    "sha256": "b94a7a1505390e39e48d938b7ceea3d7ef113e99f98e32c4a9fae9b076e6b477",
+    "member_count": 6,
+    "member_order": [
+      "exact-source/P01116.fasta",
+      "analysis/sequence-summary.json",
+      "analysis/residue-composition.csv",
+      "provenance/source-provenance.json",
+      "preview/preview.svg",
+      "MANIFEST.json"
+    ]
+  },
+  "members": [
+    {
+      "path": "exact-source/P01116.fasta",
+      "bytes": 269,
+      "sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6"
+    },
+    {
+      "path": "analysis/sequence-summary.json",
+      "bytes": 1133,
+      "sha256": "73b85e7a671e28001fffa887e5bf13f7a33d0e6b8645b57392c22dfc0976dbe6"
+    },
+    {
+      "path": "analysis/residue-composition.csv",
+      "bytes": 292,
+      "sha256": "a34bfb7e4465c3277b38c5d329ac630f7993aeb80c5779aee2474d140028dec9"
+    },
+    {
+      "path": "provenance/source-provenance.json",
+      "bytes": 562,
+      "sha256": "ac1d647dc497ca2291f471fc0a2c848daeb0b08af6c9b3fd2ab86e5a1f74b9f2"
+    },
+    {
+      "path": "preview/preview.svg",
+      "bytes": 2723,
+      "sha256": "e2c6d5fb1c26b6badf5893c3ba0e0bdb64dd0c4a719c46734763ddfe3bd4bc87"
+    },
+    {
+      "path": "MANIFEST.json",
+      "bytes": 1533,
+      "sha256": "407695e2aa4a2f545bb63cdf91609d35ed7572de7235954de78e2fc389591576"
+    }
+  ],
+  "post_write_verification": {
+    "ordered_names_match": true,
+    "all_member_bytes_match": true
+  },
+  "viewer_workflow_status": "rehearsed",
+  "publisher": "Codex local Python"
+}

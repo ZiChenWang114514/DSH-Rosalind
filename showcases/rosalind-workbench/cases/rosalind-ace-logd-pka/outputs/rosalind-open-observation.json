@@ -1,0 +1,13 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-ace-logd-pka",
+  "observed_at_utc": "2026-08-29T17:56:31.299Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "ACE inhibitor ionization and lipophilicity teaching case"
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the task chooser only and does not show that an ACE-property scientific job executed."
+}

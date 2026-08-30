@@ -1,0 +1,13 @@
+{
+  "showcase_id": "slide-workflow-recovery",
+  "verification_kind": "deterministic before-and-after workflow manifest validation",
+  "manifest_checks": 12,
+  "manifest_checks_passed": 12,
+  "source_content_unchanged": true,
+  "terminal_cancel_job_resumed": false,
+  "recoverable_job_attempt_incremented": true,
+  "credentials_present": false,
+  "rosalind_launcher_invoked": true,
+  "rosalind_scientific_task_executed": false,
+  "viewer_operations_executed": false
+}

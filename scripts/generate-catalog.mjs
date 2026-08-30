@@ -11,7 +11,7 @@ const previewDataUrls = Object.fromEntries(
     .filter((definition) => definition.preview?.resourceUri)
     .map((definition) => [definition.id, definition.preview.resourceUri]),
 );
-const generatedAt = "2026-08-29";
+const generatedAt = "2026-08-30";
 const serialized = JSON.stringify(definitions, null, 2)
   .replaceAll(" ", "\\u2028")
   .replaceAll(" ", "\\u2029");

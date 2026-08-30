@@ -1,0 +1,11 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-egfr-landscape",
+  "verified_at_utc": "2026-08-29T19:56:53.601526Z",
+  "calls": [
+    {"skill":"uniprot-skill","request":{"base_url":"https://rest.uniprot.org","path":"uniprotkb/P00533","params":{"format":"json"}},"source_url":"https://rest.uniprot.org/uniprotkb/P00533?format=json","retrieved_at_utc":"2026-08-29T19:56:49.504883Z","ok":true,"summary":{"accession":"P00533","entry_id":"EGFR_HUMAN","reviewed":true,"entry_version":300}},
+    {"skill":"chembl-skill","request":{"base_url":"https://www.ebi.ac.uk/chembl/api/data","path":"target/CHEMBL203.json"},"source_url":"https://www.ebi.ac.uk/chembl/api/data/target/CHEMBL203.json","retrieved_at_utc":"2026-08-29T19:56:51.288827Z","ok":true,"summary":{"target_chembl_id":"CHEMBL203","name":"Epidermal growth factor receptor","organism":"Homo sapiens"}},
+    {"skill":"rcsb-pdb-skill","request":{"base_url":"https://data.rcsb.org/rest/v1","path":"core/entry/1M17"},"source_url":"https://data.rcsb.org/rest/v1/core/entry/1M17","retrieved_at_utc":"2026-08-29T19:56:52.289251Z","ok":true,"summary":{"pdb_id":"1M17","pdb_doi":"10.2210/pdb1m17/pdb"}},
+    {"skill":"reactome-skill","request":{"base_url":"https://reactome.org/ContentService","path":"data/query/R-HSA-177929","headers":{"Accept":"application/json"}},"source_url":"https://reactome.org/ContentService/data/query/R-HSA-177929","retrieved_at_utc":"2026-08-29T19:56:53.601526Z","ok":true,"summary":{"stable_id":"R-HSA-177929","stable_id_version":"R-HSA-177929.6","name":"Signaling by EGFR"}}
+  ]
+}

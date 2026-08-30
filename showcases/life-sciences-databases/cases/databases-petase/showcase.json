@@ -1,0 +1,122 @@
+{
+  "id": "databases-petase",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases uniprot-skill and rcsb-pdb-skill",
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained IsPETase sequence, catalytic, and structure responses with deterministic residue checks and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 390
+    },
+    {
+      "path": "inputs/uniprot-A0A0K8P6T7.json",
+      "bytes": 57159
+    },
+    {
+      "path": "inputs/rcsb-5XJH.json",
+      "bytes": 13040
+    },
+    {
+      "path": "scripts/build_case.py",
+      "bytes": 4733
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1615
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 737
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 592
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5850
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1802
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/uniprotkb/A0A0K8P6T7/entry",
+    "https://www.rcsb.org/structure/5XJH",
+    "https://www.rhea-db.org/rhea/49528"
+  ],
+  "observations": [
+    "UniProt A0A0K8P6T7 is the reviewed 290-residue PET hydrolase record.",
+    "The retained sequence and features identify S160, D206, and H237 as active-site residues.",
+    "The PET reaction links EC 3.1.1.101 to RHEA:49528.",
+    "RCSB 5XJH is a 1.54 Å X-ray structure of PETase.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "The sequence annotations and crystal-structure record form a reproducible catalytic map for IsPETase."
+  ],
+  "limitations": [
+    "The case does not calculate kinetics, stability, or mutation effects.",
+    "Residue positions use full-length UniProt numbering.",
+    "The preview is a project graphic, not a viewer capture."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/A0A0K8P6T7/entry",
+        "https://www.rcsb.org/structure/5XJH",
+        "https://www.rhea-db.org/rhea/49528"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/uniprot-A0A0K8P6T7.json",
+        "inputs/rcsb-5XJH.json",
+        "scripts/build_case.py"
+      ],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the A0A0K8P6T7 UniProt and 5XJH RCSB requests recorded in outputs/query-verification.json.",
+    "Run python scripts/build_case.py and verify S160, D206, and H237 against the full UniProt numbering.",
+    "Inspect the preview without inferring enzyme kinetics or mutation effects from annotations and one structure."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "structure-clash-screen",
+  "observed_at_utc": "2026-08-29T18:04:25.940Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Verify Rosalind Workbench availability for showcase structure-clash-screen; do not execute a scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This observation confirms only that the Rosalind Workbench launcher was ready; no research task was selected and no scientific job was executed."
+}

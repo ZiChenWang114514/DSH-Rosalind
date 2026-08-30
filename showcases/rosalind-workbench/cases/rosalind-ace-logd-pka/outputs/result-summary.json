@@ -1,0 +1,21 @@
+{
+  "showcase_id": "rosalind-ace-logd-pka",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "CID-exact PubChem records were retained and transformed into the descriptor and ionization evidence tables."
+  },
+  "method": "PubChem PUG records plus local RDKit 2026.03.5 descriptors",
+  "compound_count": 3,
+  "observations": [
+    "Lisinopril has the highest PubChem TPSA (133.0 A^2) and the lowest PubChem XLogP (-2.9) in this three-compound set.",
+    "Captopril has the smallest molecular weight and TPSA in the set.",
+    "The retained PubChem annotations report multiple pKa values for all three compounds, supporting a multi-state ionization discussion."
+  ],
+  "interpretation": "The descriptor spread is consistent with different ionization and polarity profiles, but it does not quantify plasma LogD or clinical absorption.",
+  "limitations": [
+    "PubChem XLogP and RDKit MolLogP are computed descriptors and are not clinical ADME measurements.",
+    "The PubChem pages do not provide a uniform experimental LogD at pH 7.4 for all three compounds.",
+    "Macro-pKa values alone do not uniquely assign microspecies when several ionizable sites are present."
+  ]
+}

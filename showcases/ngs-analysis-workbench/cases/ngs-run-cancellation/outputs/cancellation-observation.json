@@ -1,0 +1,25 @@
+{
+  "schema": "gpt-science.cancellation-observation/v1",
+  "case_id": "ngs-run-cancellation",
+  "process_kind": "disposable local Python child",
+  "timeline": [
+    {
+      "state": "running",
+      "observed_at_utc": "2026-08-29T18:20:47.862333Z"
+    },
+    {
+      "state": "terminated",
+      "observed_at_utc": "2026-08-29T18:20:47.898Z"
+    }
+  ],
+  "cancellation_requested": true,
+  "cancellation_requested_at_utc": "2026-08-29T18:20:47.895Z",
+  "terminal_state": "terminated",
+  "child_return_code": 1,
+  "child_running_after_cancellation": false,
+  "temporary_directory_removed": true,
+  "workflow_engine_executed": false,
+  "workbench_run_registered": false,
+  "scientific_result_available": false,
+  "limitation": "This observes local child-process cancellation only; no Nextflow, Snakemake, or NGS Analysis Workbench engine run executed."
+}

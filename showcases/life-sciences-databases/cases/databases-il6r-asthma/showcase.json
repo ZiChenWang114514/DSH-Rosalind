@@ -1,9 +1,103 @@
 {
-  "id":"databases-il6r-asthma","plugin_id":"life-sciences-databases","plugin_version":"0.1.5","status":"ready","run_date":"2026-08-29","prompt":"prompt.md","inputs":[],
-  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],"previews":[{"path":"previews/il6r-asthma.svg"}],
-  "sources":["https://platform.opentargets.org/target/ENSG00000160712","https://www.ebi.ac.uk/gwas/","https://gtexportal.org/home/gene/ENSG00000160712"],
-  "observations":["Open Targets returned one asthma row with GWAS credible-set and Europe PMC datasource scores.","The GWAS Catalog query returned ten IL6R-mapped association records.","GTEx returned 15 eQTL rows for rs2228145, including seven IL6R rows across seven tissues."],
-  "interpretation":["The combined sources connect disease-level evidence, cataloged genetic associations, and tissue-specific expression context for IL6R."],
-  "limitations":["Open Targets datasource scores are evidence context, not causal effect sizes.","The compact GWAS response did not expose trait labels, so its slice is not described as asthma-specific.","The evidence map does not establish therapeutic direction."],
-  "environment":{"retrieval_date":"2026-08-29","target":"ENSG00000160712","variant":"rs2228145"}
+  "id": "databases-il6r-asthma",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases public API evidence and local JSON aggregation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained Open Targets, GWAS Catalog, and GTEx observations plus a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1029
+    },
+    {
+      "path": "outputs/sources.json",
+      "bytes": 932
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 858
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 633
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5659
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/il6r-asthma.svg",
+      "bytes": 2941
+    }
+  ],
+  "sources": [
+    "https://platform.opentargets.org/target/ENSG00000160712",
+    "https://www.ebi.ac.uk/gwas/",
+    "https://gtexportal.org/home/gene/ENSG00000160712"
+  ],
+  "observations": [
+    "Open Targets returned an asthma row with GWAS credible-set and Europe PMC datasource scores.",
+    "The GWAS Catalog query returned ten IL6R-mapped association records in the requested slice.",
+    "GTEx returned 15 eQTL rows for rs2228145, including seven IL6R rows across seven tissues.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "The combined sources connect disease-level evidence, cataloged genetic associations, and tissue-specific expression context for IL6R."
+  ],
+  "limitations": [
+    "Open Targets datasource scores are evidence context, not causal effect sizes.",
+    "The retained GWAS slice did not expose trait labels and is not described as asthma-specific.",
+    "The evidence map does not establish therapeutic direction."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://platform.opentargets.org/target/ENSG00000160712",
+        "https://www.ebi.ac.uk/gwas/",
+        "https://gtexportal.org/home/gene/ENSG00000160712"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/sources.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/il6r-asthma.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the IL6R Open Targets, GWAS Catalog, and rs2228145 GTEx requests recorded in outputs/query-verification.json.",
+    "Compare source-specific counts without interpreting datasource breadth or eQTL effects as a causal estimate.",
+    "Inspect the preview against outputs/results.json and retain the stated evidence-type limitations."
+  ]
 }

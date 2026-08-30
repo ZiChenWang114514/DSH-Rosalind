@@ -1,0 +1,21 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "ngs-run-summary",
+  "source_observations": [
+    "inputs/source-and-fixture.md identifies the public FASTQ source and the two-record fixture scope.",
+    "outputs/update-analysis-summary-receipt.json records the genuine rejected update_ngs_run_analysis_summary call.",
+    "outputs/rosalind-open-observation.json records a genuine case-specific mcp__rosalind__rosalind_open response."
+  ],
+  "local_computations": [
+    "scripts/reference_fastq_stats.py produced outputs/reference-fastq-stats.json from inputs/public-fixture.fastq.txt.",
+    "outputs/analysis-summary.md is a model-authored review of that retained local result."
+  ],
+  "rosalind_observation": "outputs/rosalind-open-observation.json",
+  "scientific_job_executed_by_rosalind": false,
+  "workbench_summary_operation": "outputs/update-analysis-summary-receipt.json",
+  "workbench_summary_saved": false,
+  "limitations": [
+    "The two-record fixture is a technical parser example, not a representative sequencing library.",
+    "No registered Workbench run existed, so Workbench rejected the summary and did not modify run history."
+  ]
+}

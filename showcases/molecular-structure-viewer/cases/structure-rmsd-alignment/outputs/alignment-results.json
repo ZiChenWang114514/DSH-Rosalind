@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-rmsd-alignment",
+  "run_date": "2026-08-30",
+  "sources": [
+    {
+      "accession": "4AKE",
+      "path": "inputs/4AKE.pdb",
+      "url": "https://files.rcsb.org/download/4AKE.pdb",
+      "bytes": 309339,
+      "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+    },
+    {
+      "accession": "1AKE",
+      "path": "inputs/1AKE.pdb",
+      "url": "https://files.rcsb.org/download/1AKE.pdb",
+      "bytes": 357777,
+      "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"
+    }
+  ],
+  "method": {
+    "reference": "4AKE chain A",
+    "mobile": "1AKE chain A",
+    "atom_selection": "ATOM records named CA; blank/A alternate location; occupancy > 0",
+    "correspondence": "same author residue number, insertion code, and residue name",
+    "superposition": "unweighted Kabsch least-squares rigid fit over all paired C-alpha atoms",
+    "domain_definition": "CORE 1-29,68-117,161-214; NMP 30-67; LID 118-160"
+  },
+  "result": {
+    "reference_ca_count": 214,
+    "mobile_ca_count": 214,
+    "paired_ca_count": 214,
+    "pre_alignment_rmsd_angstrom": 75.046576,
+    "post_alignment_rmsd_angstrom": 7.1307,
+    "rotation_matrix_row_vector_convention": [
+      [
+        -0.1446873233,
+        -0.022293022,
+        0.9892262631
+      ],
+      [
+        -0.983794841,
+        0.1102328675,
+        -0.1414087188
+      ],
+      [
+        -0.1058928199,
+        -0.9936557433,
+        -0.0378810585
+      ]
+    ],
+    "translation_angstrom_row_vector_convention": [
+      48.5231558691,
+      11.6263190229,
+      -29.6794720595
+    ],
+    "domains": {
+      "CORE": {
+        "auth_residue_ranges": [
+          "1-29",
+          "68-117",
+          "161-214"
+        ],
+        "paired_ca_count": 133,
+        "rmsd_after_global_alignment_angstrom": 3.726713,
+        "rmsd_after_independent_domain_alignment_angstrom": 1.550812,
+        "mean_global_deviation_angstrom": 3.441621,
+        "max_global_deviation_angstrom": 6.629227
+      },
+      "NMP": {
+        "auth_residue_ranges": [
+          "30-67"
+        ],
+        "paired_ca_count": 38,
+        "rmsd_after_global_alignment_angstrom": 9.738001,
+        "rmsd_after_independent_domain_alignment_angstrom": 1.596268,
+        "mean_global_deviation_angstrom": 8.813007,
+        "max_global_deviation_angstrom": 16.15347
+      },
+      "LID": {
+        "auth_residue_ranges": [
+          "118-160"
+        ],
+        "paired_ca_count": 43,
+        "rmsd_after_global_alignment_angstrom": 11.238005,
+        "rmsd_after_independent_domain_alignment_angstrom": 0.601789,
+        "mean_global_deviation_angstrom": 10.406871,
+        "max_global_deviation_angstrom": 18.33617
+      }
+    },
+    "largest_ca_deviations": [
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 149,
+        "insertion_code": null,
+        "residue": "THR",
+        "ca_deviation_angstrom": 18.33617
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 150,
+        "insertion_code": null,
+        "residue": "GLY",
+        "ca_deviation_angstrom": 17.557092
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 148,
+        "insertion_code": null,
+        "residue": "VAL",
+        "ca_deviation_angstrom": 17.032293
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 151,
+        "insertion_code": null,
+        "residue": "GLU",
+        "ca_deviation_angstrom": 16.895884
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 128,
+        "insertion_code": null,
+        "residue": "PRO",
+        "ca_deviation_angstrom": 16.440419
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 55,
+        "insertion_code": null,
+        "residue": "ALA",
+        "ca_deviation_angstrom": 16.15347
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 129,
+        "insertion_code": null,
+        "residue": "SER",
+        "ca_deviation_angstrom": 15.955309
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 54,
+        "insertion_code": null,
+        "residue": "ASP",
+        "ca_deviation_angstrom": 15.278843
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 147,
+        "insertion_code": null,
+        "residue": "ASP",
+        "ca_deviation_angstrom": 15.157548
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 152,
+        "insertion_code": null,
+        "residue": "GLU",
+        "ca_deviation_angstrom": 14.892973
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 56,
+        "insertion_code": null,
+        "residue": "GLY",
+        "ca_deviation_angstrom": 14.655349
+      },
+      {
+        "auth_chain": "A",
+        "auth_seq_id": 146,
+        "insertion_code": null,
+        "residue": "ASP",
+        "ca_deviation_angstrom": 14.513902
+      }
+    ]
+  },
+  "interpretation_scope": "Coordinate comparison only; RMSD is not an energy, kinetic rate, or conformational population."
+}

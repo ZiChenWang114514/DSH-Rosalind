@@ -1,0 +1,146 @@
+{
+  "id": "sequence-export-package",
+  "plugin_id": "biological-sequence-viewer",
+  "plugin_version": "0.1.43",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "export",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "UniProt REST and local Python",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json"
+    ],
+    "device": "local",
+    "implementation": "deterministic local P01116 source-analysis-provenance-preview ZIP verification, plus an unconfirmed shared Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 9878,
+      "sha256": "132db68867dada6253aa64d0f712b2b7747a08329b129c077a176751bef5e781"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 479,
+      "sha256": "31e773ca9b1ac1da4a846e55017cfcbb1ffa210cd36d539cb431ede9c759da4d"
+    },
+    {
+      "path": "inputs/P01116.fasta",
+      "bytes": 269,
+      "sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6"
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 562,
+      "sha256": "ac1d647dc497ca2291f471fc0a2c848daeb0b08af6c9b3fd2ab86e5a1f74b9f2"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/sequence-summary.json",
+      "bytes": 1133,
+      "sha256": "73b85e7a671e28001fffa887e5bf13f7a33d0e6b8645b57392c22dfc0976dbe6"
+    },
+    {
+      "path": "outputs/residue-composition.csv",
+      "bytes": 292,
+      "sha256": "a34bfb7e4465c3277b38c5d329ac630f7993aeb80c5779aee2474d140028dec9"
+    },
+    {
+      "path": "outputs/export-manifest.json",
+      "bytes": 1713,
+      "sha256": "3778aa6571f46724a5a54610d8731859f7c466cbbc8714e51b248e19189483b3"
+    },
+    {
+      "path": "outputs/P01116-sequence-export.zip",
+      "bytes": 7294,
+      "sha256": "b94a7a1505390e39e48d938b7ceea3d7ef113e99f98e32c4a9fae9b076e6b477"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 705,
+      "sha256": "e97d23cf824f829e2ca7fdf3534ea12083a0cf09f402474274e3670a666453ea"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 7925,
+      "sha256": "0bca1fc2a22228240a4ccedcfd850157b43801a0f1fccca75524fcf296a6ab31"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2723,
+      "sha256": "e2c6d5fb1c26b6badf5893c3ba0e0bdb64dd0c4a719c46734763ddfe3bd4bc87"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+  ],
+  "observations": [
+    "The package contains the exact 269-byte P01116 SV=1 FASTA, deterministic JSON and CSV analyses, Codex-authored provenance, the data-rich SVG preview, and an embedded member manifest.",
+    "All six ZIP members have fixed timestamps, permissions, order, byte counts, and SHA-256 digests.",
+    "The build reopens the ZIP and verifies every member byte string after writing.",
+    "A genuine Rosalind Workbench open call returned the retained task-chooser-ready message.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
+  ],
+  "interpretation": [
+    "Exact member metadata connects the public source, calculations, provenance, and visual summary in one independently inspectable package."
+  ],
+  "limitations": [
+    "The sequence calculations are descriptive and do not establish experimental function.",
+    "Sequence Viewer open, analysis, export, and query operations are rehearsed.",
+    "The ZIP was produced by local Python and is not a viewer-published artifact.",
+    "rosalind_open only opened the task chooser and did not produce a scientific result or package member.",
+    "No Sequence Viewer capability is claimed because the server-created sessions never produced a query-confirmed mounted viewer."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta"
+      ],
+      "inputs": [
+        "inputs/P01116.fasta",
+        "inputs/source-provenance.json"
+      ],
+      "outputs": [
+        "outputs/sequence-summary.json",
+        "outputs/residue-composition.csv",
+        "outputs/export-manifest.json",
+        "outputs/P01116-sequence-export.zip",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Local Python assembled and verified the ZIP; Codex published it; outputs/rosalind-open-observation.json records the genuine launcher invocation."
+    }
+  ],
+  "reproduction": [
+    "From the repository root run: python showcases/biological-sequence-viewer/cases/sequence-export-package/build_case.py",
+    "Run the command twice and compare the package SHA-256 in outputs/export-manifest.json.",
+    "Require exact ordered member names and byte-for-byte post-write verification; treat viewer operations as rehearsed.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "viewer_actions": "rehearsed",
+    "rosalind_open": "executed",
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  }
+}

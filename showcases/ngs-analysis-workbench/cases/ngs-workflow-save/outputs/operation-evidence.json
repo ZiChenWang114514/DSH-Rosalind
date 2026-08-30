@@ -1,0 +1,53 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-workflow-save",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__list_workflows",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.696Z",
+      "arguments": {
+        "include_archived": true
+      },
+      "response": {
+        "ok": true,
+        "count": 14,
+        "bundled_workflows_present": true,
+        "temporary_evidence_workflow_archived": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__save_workflow",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:50:49.170Z",
+      "arguments": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "engine": "snakemake",
+        "source": {
+          "kind": "local",
+          "root": "[case-local workflow root]",
+          "entrypoint": "Snakefile"
+        }
+      },
+      "response": {
+        "workflow_id": "gpt_science_operation_evidence_20260830",
+        "engine": "snakemake",
+        "saved": true,
+        "archived": false,
+        "version_id": "version-3eea4823aa0dd3d782f036b96a931bc1",
+        "source_sha256": "sha256:4fb0dec6401816294637a3100800dcebef20c9a8376f3b9e4fa86849864cb2ea",
+        "source_root_removed": true
+      }
+    }
+  ],
+  "failed_operations": [],
+  "not_executed_operations": [],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

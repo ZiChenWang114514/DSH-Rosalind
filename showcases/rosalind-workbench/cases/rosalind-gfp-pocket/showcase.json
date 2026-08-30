@@ -1,0 +1,106 @@
+{
+  "id": "rosalind-gfp-pocket",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "RCSB PDB public record inspection",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "case-specific review of the public PDB 1EMA GFP structure plus a genuine Rosalind task-chooser observation; no coordinate, sequence, or fluorescence analysis was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 647
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 1280
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 957
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 923
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5427
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1043
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1EMA",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
+  "observations": [
+    "RCSB PDB 1EMA records a 1.90 angstrom X-ray structure of an Aequorea victoria GFP variant and its linked report places the chromophore on the central helix.",
+    "No coordinate-derived contact list or distance cutoff is retained, so a complete chromophore-pocket residue set is not established.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed."
+  ],
+  "interpretation": [
+    "PDB 1EMA supplies public structural context for planning a transparent, explicitly parameterized chromophore-pocket query."
+  ],
+  "limitations": [
+    "No coordinate query or complete pocket residue list is retained.",
+    "No sequence change, structural optimization, or fluorescence prediction was produced.",
+    "Rosalind launcher readiness does not establish a scientific run or a GFP pocket result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/1EMA",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The PDB record supports the structural source summary; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Read README.md, prompt.md, and inputs/public-source.md.",
+    "Compare the current RCSB PDB 1EMA record with outputs/verification-receipt.json.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat launcher readiness as scientific execution.",
+    "Use outputs/session-bundle.md to inspect every retained artifact and the preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_launcher_observed": true,
+    "scientific_job_executed_by_rosalind": false
+  }
+}

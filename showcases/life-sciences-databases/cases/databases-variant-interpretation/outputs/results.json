@@ -25,7 +25,9 @@
   "gnomad":{
     "requested_variant":"10-112998590-C-T",
     "dataset":"gnomad_r4",
-    "status":"service_error",
-    "used_as_evidence":false
+    "status":"success",
+    "genome":{"ac":41622,"an":151914,"af":0.27398396461155655},
+    "used_as_evidence":true,
+    "retrieved_at":"2026-08-29T19:56:33.741603Z"
   }
 }

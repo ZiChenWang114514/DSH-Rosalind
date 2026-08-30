@@ -1,0 +1,2214 @@
+{
+  "schema": "structure-viewer.operation-evidence/v1",
+  "case_id": "structure-scene-storyboard",
+  "sources": [
+    "RCSB PDB 4AKE retained at inputs/4AKE.pdb",
+    "RCSB PDB 1AKE retained at inputs/1AKE.pdb"
+  ],
+  "session_scope": "one mounted comparison session; nonportable internal identifiers omitted",
+  "sanitization": "sessionId and viewer-file resourceUri values were removed because they carry no scientific meaning; operation parameters, timestamps, revisions, matrices, messages, and scientific results are unchanged.",
+  "observation_scope": "Exact tool receipts from a recoverable 4AKE/1AKE comparison session. The 1AKE object was translated 4 A, undone, redone, and undone again; its final transform returned to identity before visibility testing.",
+  "scientific_links": {
+    "structure_transform_object": "Temporarily separated the AP5-bound 1AKE comparison object by 4 A along x for visual diagnostic purposes.",
+    "structure_undo": "Restored the 1AKE object to its identity transform.",
+    "structure_redo": "Reapplied the 4 A diagnostic translation from scene history.",
+    "structure_set_object_visibility": "Hid and then restored only the AP5-bound comparison object without removing either coordinate model."
+  },
+  "successful_operation_receipts": [
+    {
+      "operation": "structure_get_state",
+      "startedAtUtc": "2026-08-29T18:57:36.933Z",
+      "completedAtUtc": "2026-08-29T18:57:41.327Z",
+      "arguments": {},
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Read canonical molecular scene state."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Read canonical molecular scene state.",
+          "state": {
+            "scene": {
+              "activeObjectId": "primary",
+              "assemblySymmetry": [],
+              "analyses": [],
+              "annotations": [],
+              "background": "#FFFFFF",
+              "camera": {
+                "clippingRadius": 45.80377729988594,
+                "fovDegrees": 45,
+                "mode": "perspective",
+                "nearClip": 1,
+                "orientation": "current",
+                "position": [
+                  -4.148834,
+                  1.503898,
+                  119.232156
+                ],
+                "target": [
+                  -4.148834,
+                  1.503898,
+                  -0.458882
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              "capabilities": {
+                "analyses": [
+                  "distance",
+                  "angle",
+                  "dihedral",
+                  "contacts",
+                  "clashes",
+                  "hydrogen_bonds",
+                  "rmsd",
+                  "centroid",
+                  "principal_axes",
+                  "best_fit_plane",
+                  "sasa",
+                  "buried_area",
+                  "density_fit",
+                  "map_correlation",
+                  "trajectory_series"
+                ],
+                "guides": [
+                  "label",
+                  "orientation",
+                  "plane"
+                ],
+                "budgets": {
+                  "analysisAtoms": 20000,
+                  "pairComparisons": 5000000,
+                  "queryPageRows": 500,
+                  "sasaAtoms": 2000,
+                  "sasaNeighborCandidateChecks": 250000,
+                  "sasaOcclusionChecks": 20000000,
+                  "sasaSamples": 960,
+                  "trajectorySampleFrames": 2000
+                },
+                "coordinateFormats": [
+                  "pdb",
+                  "cif",
+                  "mmcif",
+                  "mol",
+                  "sdf",
+                  "mol2",
+                  "pqr",
+                  "pdbqt",
+                  "gro",
+                  "xyz"
+                ],
+                "densityFormats": [
+                  "ccp4",
+                  "map",
+                  "mrc",
+                  "dsn6",
+                  "cube",
+                  "dx",
+                  "dscif"
+                ],
+                "exports": [
+                  "scene-json",
+                  "selection-pdb",
+                  "selection-mmcif",
+                  "selection-bcif",
+                  "models-mmcif",
+                  "models-bcif",
+                  "geometry-glb",
+                  "geometry-stl",
+                  "geometry-obj",
+                  "geometry-usdz",
+                  "results-csv",
+                  "png",
+                  "mp4"
+                ],
+                "movieTimeline": true,
+                "performanceTiers": [
+                  {
+                    "atomCount": 100000,
+                    "name": "small",
+                    "quality": "high"
+                  },
+                  {
+                    "atomCount": 1000000,
+                    "name": "medium",
+                    "quality": "medium"
+                  },
+                  {
+                    "atomCount": 10000000,
+                    "name": "large",
+                    "quality": "low"
+                  }
+                ],
+                "queryLanguageVersion": 1,
+                "sceneStateVersion": 2,
+                "trajectoryFormats": [
+                  "xtc",
+                  "dcd",
+                  "trr",
+                  "nctraj",
+                  "lammpstrj",
+                  "multi-model-pdb"
+                ]
+              },
+              "dirtyDerivedObjectIds": [],
+              "focus": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "geometryRevision": 0,
+              "layers": [
+                {
+                  "color": {
+                    "kind": "chain"
+                  },
+                  "id": "primary-display",
+                  "labels": false,
+                  "name": "Primary structure",
+                  "opacity": 1,
+                  "representation": "cartoon",
+                  "target": {
+                    "kind": "all"
+                  },
+                  "visible": true
+                }
+              ],
+              "lighting": "studio",
+              "measurements": [],
+              "sceneGuides": [],
+              "namedSelections": {},
+              "objects": [
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: DIMERIC",
+                        "id": "1"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 1,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "4AKE.pdb",
+                  "frameCount": 1,
+                  "id": "primary",
+                  "label": "4AKE.pdb",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": true,
+                  "visible": true
+                }
+              ],
+              "operationLog": [
+                {
+                  "at": 1788029861148,
+                  "description": "Publish initial automatic Mol* camera",
+                  "id": "op-1",
+                  "origin": "system",
+                  "revision": 1,
+                  "type": "sync_initial_camera"
+                }
+              ],
+              "pendingOperation": null,
+              "qualityAssessment": [],
+              "redoAvailable": false,
+              "revision": 1,
+              "savedScenes": [],
+              "sceneName": null,
+              "selection": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "storyboard": [],
+              "syncError": null,
+              "syncStatus": "synced",
+              "trajectory": null,
+              "undoAvailable": false,
+              "version": 2,
+              "volumes": []
+            },
+            "sceneRevision": 1
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_add_structure",
+      "startedAtUtc": "2026-08-29T18:57:48.078Z",
+      "completedAtUtc": "2026-08-29T18:57:50.148Z",
+      "arguments": {
+        "objectId": "ap5a-bound-copy",
+        "path": "inputs/1AKE.pdb",
+        "representation": "cartoon",
+        "color": "#C026D3"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Loaded 1AKE.pdb as structure object ap5a-bound-copy."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Loaded 1AKE.pdb as structure object ap5a-bound-copy.",
+          "state": {
+            "object": {
+              "construction": {
+                "assemblyId": "1",
+                "dynamicBonds": false,
+                "kind": "assembly",
+                "modelIndex": 0
+              },
+              "constructionOptions": {
+                "assemblies": [
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "1"
+                  },
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "2"
+                  }
+                ],
+                "assembliesTruncated": false,
+                "assemblyCount": 2,
+                "modelCount": 1,
+                "models": [
+                  {
+                    "index": 0,
+                    "modelNumber": 1
+                  }
+                ],
+                "modelsTruncated": false,
+                "operatorCount": 1,
+                "operators": [
+                  {
+                    "assemblyId": "1",
+                    "instanceId": "ASM-1",
+                    "modelNumber": 1,
+                    "name": "ASM_1",
+                    "operatorIds": [
+                      "1"
+                    ],
+                    "unitCount": 3
+                  }
+                ],
+                "operatorsTruncated": false
+              },
+              "fileName": "1AKE.pdb",
+              "frameCount": 1,
+              "id": "ap5a-bound-copy",
+              "label": "ap5a-bound-copy",
+              "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "primary": false,
+              "visible": true
+            },
+            "appliedRevision": 2
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_transform_object",
+      "startedAtUtc": "2026-08-29T18:58:01.470Z",
+      "completedAtUtc": "2026-08-29T18:58:02.780Z",
+      "arguments": {
+        "objectId": "ap5a-bound-copy",
+        "mode": "relative",
+        "transform": {
+          "kind": "components",
+          "translation": [
+            4,
+            0,
+            0
+          ]
+        }
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Applied a relative transform to ap5a-bound-copy."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Applied a relative transform to ap5a-bound-copy.",
+          "state": {
+            "object": {
+              "construction": {
+                "assemblyId": "1",
+                "dynamicBonds": false,
+                "kind": "assembly",
+                "modelIndex": 0
+              },
+              "constructionOptions": {
+                "assemblies": [
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "1"
+                  },
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "2"
+                  }
+                ],
+                "assembliesTruncated": false,
+                "assemblyCount": 2,
+                "modelCount": 1,
+                "models": [
+                  {
+                    "index": 0,
+                    "modelNumber": 1
+                  }
+                ],
+                "modelsTruncated": false,
+                "operatorCount": 1,
+                "operators": [
+                  {
+                    "assemblyId": "1",
+                    "instanceId": "ASM-1",
+                    "modelNumber": 1,
+                    "name": "ASM_1",
+                    "operatorIds": [
+                      "1"
+                    ],
+                    "unitCount": 3
+                  }
+                ],
+                "operatorsTruncated": false
+              },
+              "fileName": "1AKE.pdb",
+              "frameCount": 1,
+              "id": "ap5a-bound-copy",
+              "label": "ap5a-bound-copy",
+              "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4,
+                0,
+                0,
+                1
+              ],
+              "primary": false,
+              "visible": true
+            },
+            "appliedRevision": 4
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_undo",
+      "startedAtUtc": "2026-08-29T18:58:11.440Z",
+      "completedAtUtc": "2026-08-29T18:58:11.867Z",
+      "arguments": {
+        "expectedRevision": 4
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Undid the last scene change at revision 5."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Undid the last scene change at revision 5.",
+          "state": {
+            "appliedRevision": 5,
+            "scene": {
+              "activeObjectId": "primary",
+              "assemblySymmetry": [],
+              "analyses": [],
+              "annotations": [],
+              "background": "#FFFFFF",
+              "camera": {
+                "clippingRadius": 66.39134976765905,
+                "fovDegrees": 45,
+                "mode": "perspective",
+                "nearClip": 1,
+                "orientation": "current",
+                "position": [
+                  7.141871,
+                  15.255776,
+                  180.753449
+                ],
+                "target": [
+                  7.141871,
+                  15.255776,
+                  7.264491
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              "capabilities": {
+                "analyses": [
+                  "distance",
+                  "angle",
+                  "dihedral",
+                  "contacts",
+                  "clashes",
+                  "hydrogen_bonds",
+                  "rmsd",
+                  "centroid",
+                  "principal_axes",
+                  "best_fit_plane",
+                  "sasa",
+                  "buried_area",
+                  "density_fit",
+                  "map_correlation",
+                  "trajectory_series"
+                ],
+                "guides": [
+                  "label",
+                  "orientation",
+                  "plane"
+                ],
+                "budgets": {
+                  "analysisAtoms": 20000,
+                  "pairComparisons": 5000000,
+                  "queryPageRows": 500,
+                  "sasaAtoms": 2000,
+                  "sasaNeighborCandidateChecks": 250000,
+                  "sasaOcclusionChecks": 20000000,
+                  "sasaSamples": 960,
+                  "trajectorySampleFrames": 2000
+                },
+                "coordinateFormats": [
+                  "pdb",
+                  "cif",
+                  "mmcif",
+                  "mol",
+                  "sdf",
+                  "mol2",
+                  "pqr",
+                  "pdbqt",
+                  "gro",
+                  "xyz"
+                ],
+                "densityFormats": [
+                  "ccp4",
+                  "map",
+                  "mrc",
+                  "dsn6",
+                  "cube",
+                  "dx",
+                  "dscif"
+                ],
+                "exports": [
+                  "scene-json",
+                  "selection-pdb",
+                  "selection-mmcif",
+                  "selection-bcif",
+                  "models-mmcif",
+                  "models-bcif",
+                  "geometry-glb",
+                  "geometry-stl",
+                  "geometry-obj",
+                  "geometry-usdz",
+                  "results-csv",
+                  "png",
+                  "mp4"
+                ],
+                "movieTimeline": true,
+                "performanceTiers": [
+                  {
+                    "atomCount": 100000,
+                    "name": "small",
+                    "quality": "high"
+                  },
+                  {
+                    "atomCount": 1000000,
+                    "name": "medium",
+                    "quality": "medium"
+                  },
+                  {
+                    "atomCount": 10000000,
+                    "name": "large",
+                    "quality": "low"
+                  }
+                ],
+                "queryLanguageVersion": 1,
+                "sceneStateVersion": 2,
+                "trajectoryFormats": [
+                  "xtc",
+                  "dcd",
+                  "trr",
+                  "nctraj",
+                  "lammpstrj",
+                  "multi-model-pdb"
+                ]
+              },
+              "dirtyDerivedObjectIds": [],
+              "focus": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "geometryRevision": 3,
+              "layers": [
+                {
+                  "color": {
+                    "kind": "chain"
+                  },
+                  "id": "primary-display",
+                  "labels": false,
+                  "name": "Primary structure",
+                  "opacity": 1,
+                  "representation": "cartoon",
+                  "target": {
+                    "kind": "all"
+                  },
+                  "visible": true
+                }
+              ],
+              "lighting": "studio",
+              "measurements": [],
+              "sceneGuides": [],
+              "namedSelections": {},
+              "objects": [
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: DIMERIC",
+                        "id": "1"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 1,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "4AKE.pdb",
+                  "frameCount": 1,
+                  "id": "primary",
+                  "label": "4AKE.pdb",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": true,
+                  "visible": true
+                },
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                        "id": "1"
+                      },
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                        "id": "2"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 2,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "1AKE.pdb",
+                  "frameCount": 1,
+                  "id": "ap5a-bound-copy",
+                  "label": "ap5a-bound-copy",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": false,
+                  "visible": true
+                }
+              ],
+              "operationLog": [
+                {
+                  "at": 1788029861148,
+                  "description": "Publish initial automatic Mol* camera",
+                  "id": "op-1",
+                  "origin": "system",
+                  "revision": 1,
+                  "type": "sync_initial_camera"
+                },
+                {
+                  "at": 1788029869717,
+                  "description": "Synchronize structure object inventory",
+                  "id": "op-2",
+                  "origin": "model",
+                  "revision": 2,
+                  "type": "sync_objects"
+                },
+                {
+                  "at": 1788029872071,
+                  "description": "Synchronize native Mol* camera",
+                  "id": "op-3",
+                  "origin": "ui",
+                  "revision": 3,
+                  "type": "sync_native_camera"
+                },
+                {
+                  "at": 1788029882542,
+                  "description": "Synchronize structure object inventory",
+                  "id": "op-4",
+                  "origin": "model",
+                  "revision": 4,
+                  "type": "sync_objects"
+                },
+                {
+                  "at": 1788029891529,
+                  "description": "Undo scene operation",
+                  "id": "op-5",
+                  "origin": "ui",
+                  "revision": 5,
+                  "type": "undo"
+                }
+              ],
+              "pendingOperation": null,
+              "qualityAssessment": [],
+              "redoAvailable": true,
+              "revision": 5,
+              "savedScenes": [],
+              "sceneName": null,
+              "selection": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "storyboard": [],
+              "syncError": null,
+              "syncStatus": "synced",
+              "trajectory": null,
+              "undoAvailable": true,
+              "version": 2,
+              "volumes": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_undo",
+      "startedAtUtc": "2026-08-29T18:58:20.199Z",
+      "completedAtUtc": "2026-08-29T18:58:34.629Z",
+      "arguments": {
+        "expectedRevision": 6
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Undid the last scene change at revision 7."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Undid the last scene change at revision 7.",
+          "state": {
+            "appliedRevision": 7,
+            "scene": {
+              "activeObjectId": "primary",
+              "assemblySymmetry": [],
+              "analyses": [],
+              "annotations": [],
+              "background": "#FFFFFF",
+              "camera": {
+                "clippingRadius": 66.39134976765905,
+                "fovDegrees": 45,
+                "mode": "perspective",
+                "nearClip": 1,
+                "orientation": "current",
+                "position": [
+                  7.141871,
+                  15.255776,
+                  180.753449
+                ],
+                "target": [
+                  7.141871,
+                  15.255776,
+                  7.264491
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              "capabilities": {
+                "analyses": [
+                  "distance",
+                  "angle",
+                  "dihedral",
+                  "contacts",
+                  "clashes",
+                  "hydrogen_bonds",
+                  "rmsd",
+                  "centroid",
+                  "principal_axes",
+                  "best_fit_plane",
+                  "sasa",
+                  "buried_area",
+                  "density_fit",
+                  "map_correlation",
+                  "trajectory_series"
+                ],
+                "guides": [
+                  "label",
+                  "orientation",
+                  "plane"
+                ],
+                "budgets": {
+                  "analysisAtoms": 20000,
+                  "pairComparisons": 5000000,
+                  "queryPageRows": 500,
+                  "sasaAtoms": 2000,
+                  "sasaNeighborCandidateChecks": 250000,
+                  "sasaOcclusionChecks": 20000000,
+                  "sasaSamples": 960,
+                  "trajectorySampleFrames": 2000
+                },
+                "coordinateFormats": [
+                  "pdb",
+                  "cif",
+                  "mmcif",
+                  "mol",
+                  "sdf",
+                  "mol2",
+                  "pqr",
+                  "pdbqt",
+                  "gro",
+                  "xyz"
+                ],
+                "densityFormats": [
+                  "ccp4",
+                  "map",
+                  "mrc",
+                  "dsn6",
+                  "cube",
+                  "dx",
+                  "dscif"
+                ],
+                "exports": [
+                  "scene-json",
+                  "selection-pdb",
+                  "selection-mmcif",
+                  "selection-bcif",
+                  "models-mmcif",
+                  "models-bcif",
+                  "geometry-glb",
+                  "geometry-stl",
+                  "geometry-obj",
+                  "geometry-usdz",
+                  "results-csv",
+                  "png",
+                  "mp4"
+                ],
+                "movieTimeline": true,
+                "performanceTiers": [
+                  {
+                    "atomCount": 100000,
+                    "name": "small",
+                    "quality": "high"
+                  },
+                  {
+                    "atomCount": 1000000,
+                    "name": "medium",
+                    "quality": "medium"
+                  },
+                  {
+                    "atomCount": 10000000,
+                    "name": "large",
+                    "quality": "low"
+                  }
+                ],
+                "queryLanguageVersion": 1,
+                "sceneStateVersion": 2,
+                "trajectoryFormats": [
+                  "xtc",
+                  "dcd",
+                  "trr",
+                  "nctraj",
+                  "lammpstrj",
+                  "multi-model-pdb"
+                ]
+              },
+              "dirtyDerivedObjectIds": [],
+              "focus": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "geometryRevision": 5,
+              "layers": [
+                {
+                  "color": {
+                    "kind": "chain"
+                  },
+                  "id": "primary-display",
+                  "labels": false,
+                  "name": "Primary structure",
+                  "opacity": 1,
+                  "representation": "cartoon",
+                  "target": {
+                    "kind": "all"
+                  },
+                  "visible": true
+                }
+              ],
+              "lighting": "studio",
+              "measurements": [],
+              "sceneGuides": [],
+              "namedSelections": {},
+              "objects": [
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: DIMERIC",
+                        "id": "1"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 1,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "4AKE.pdb",
+                  "frameCount": 1,
+                  "id": "primary",
+                  "label": "4AKE.pdb",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": true,
+                  "visible": true
+                },
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                        "id": "1"
+                      },
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                        "id": "2"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 2,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "1AKE.pdb",
+                  "frameCount": 1,
+                  "id": "ap5a-bound-copy",
+                  "label": "ap5a-bound-copy",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": false,
+                  "visible": true
+                }
+              ],
+              "operationLog": [
+                {
+                  "at": 1788029861148,
+                  "description": "Publish initial automatic Mol* camera",
+                  "id": "op-1",
+                  "origin": "system",
+                  "revision": 1,
+                  "type": "sync_initial_camera"
+                },
+                {
+                  "at": 1788029869717,
+                  "description": "Synchronize structure object inventory",
+                  "id": "op-2",
+                  "origin": "model",
+                  "revision": 2,
+                  "type": "sync_objects"
+                },
+                {
+                  "at": 1788029872071,
+                  "description": "Synchronize native Mol* camera",
+                  "id": "op-3",
+                  "origin": "ui",
+                  "revision": 3,
+                  "type": "sync_native_camera"
+                },
+                {
+                  "at": 1788029882542,
+                  "description": "Synchronize structure object inventory",
+                  "id": "op-4",
+                  "origin": "model",
+                  "revision": 4,
+                  "type": "sync_objects"
+                },
+                {
+                  "at": 1788029891529,
+                  "description": "Undo scene operation",
+                  "id": "op-5",
+                  "origin": "ui",
+                  "revision": 5,
+                  "type": "undo"
+                },
+                {
+                  "at": 1788029899932,
+                  "description": "Redo scene operation",
+                  "id": "op-6",
+                  "origin": "ui",
+                  "revision": 6,
+                  "type": "redo"
+                },
+                {
+                  "at": 1788029908480,
+                  "description": "Undo scene operation",
+                  "id": "op-7",
+                  "origin": "ui",
+                  "revision": 7,
+                  "type": "undo"
+                }
+              ],
+              "pendingOperation": null,
+              "qualityAssessment": [],
+              "redoAvailable": true,
+              "revision": 7,
+              "savedScenes": [],
+              "sceneName": null,
+              "selection": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "storyboard": [],
+              "syncError": null,
+              "syncStatus": "synced",
+              "trajectory": null,
+              "undoAvailable": true,
+              "version": 2,
+              "volumes": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_redo",
+      "startedAtUtc": "2026-08-29T18:58:11.867Z",
+      "completedAtUtc": "2026-08-29T18:58:20.199Z",
+      "arguments": {
+        "expectedRevision": 5
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Redid the scene change at revision 6."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Redid the scene change at revision 6.",
+          "state": {
+            "appliedRevision": 6,
+            "scene": {
+              "activeObjectId": "primary",
+              "assemblySymmetry": [],
+              "analyses": [],
+              "annotations": [],
+              "background": "#FFFFFF",
+              "camera": {
+                "clippingRadius": 66.39134976765905,
+                "fovDegrees": 45,
+                "mode": "perspective",
+                "nearClip": 1,
+                "orientation": "current",
+                "position": [
+                  7.141871,
+                  15.255776,
+                  180.753449
+                ],
+                "target": [
+                  7.141871,
+                  15.255776,
+                  7.264491
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              "capabilities": {
+                "analyses": [
+                  "distance",
+                  "angle",
+                  "dihedral",
+                  "contacts",
+                  "clashes",
+                  "hydrogen_bonds",
+                  "rmsd",
+                  "centroid",
+                  "principal_axes",
+                  "best_fit_plane",
+                  "sasa",
+                  "buried_area",
+                  "density_fit",
+                  "map_correlation",
+                  "trajectory_series"
+                ],
+                "guides": [
+                  "label",
+                  "orientation",
+                  "plane"
+                ],
+                "budgets": {
+                  "analysisAtoms": 20000,
+                  "pairComparisons": 5000000,
+                  "queryPageRows": 500,
+                  "sasaAtoms": 2000,
+                  "sasaNeighborCandidateChecks": 250000,
+                  "sasaOcclusionChecks": 20000000,
+                  "sasaSamples": 960,
+                  "trajectorySampleFrames": 2000
+                },
+                "coordinateFormats": [
+                  "pdb",
+                  "cif",
+                  "mmcif",
+                  "mol",
+                  "sdf",
+                  "mol2",
+                  "pqr",
+                  "pdbqt",
+                  "gro",
+                  "xyz"
+                ],
+                "densityFormats": [
+                  "ccp4",
+                  "map",
+                  "mrc",
+                  "dsn6",
+                  "cube",
+                  "dx",
+                  "dscif"
+                ],
+                "exports": [
+                  "scene-json",
+                  "selection-pdb",
+                  "selection-mmcif",
+                  "selection-bcif",
+                  "models-mmcif",
+                  "models-bcif",
+                  "geometry-glb",
+                  "geometry-stl",
+                  "geometry-obj",
+                  "geometry-usdz",
+                  "results-csv",
+                  "png",
+                  "mp4"
+                ],
+                "movieTimeline": true,
+                "performanceTiers": [
+                  {
+                    "atomCount": 100000,
+                    "name": "small",
+                    "quality": "high"
+                  },
+                  {
+                    "atomCount": 1000000,
+                    "name": "medium",
+                    "quality": "medium"
+                  },
+                  {
+                    "atomCount": 10000000,
+                    "name": "large",
+                    "quality": "low"
+                  }
+                ],
+                "queryLanguageVersion": 1,
+                "sceneStateVersion": 2,
+                "trajectoryFormats": [
+                  "xtc",
+                  "dcd",
+                  "trr",
+                  "nctraj",
+                  "lammpstrj",
+                  "multi-model-pdb"
+                ]
+              },
+              "dirtyDerivedObjectIds": [],
+              "focus": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "geometryRevision": 4,
+              "layers": [
+                {
+                  "color": {
+                    "kind": "chain"
+                  },
+                  "id": "primary-display",
+                  "labels": false,
+                  "name": "Primary structure",
+                  "opacity": 1,
+                  "representation": "cartoon",
+                  "target": {
+                    "kind": "all"
+                  },
+                  "visible": true
+                }
+              ],
+              "lighting": "studio",
+              "measurements": [],
+              "sceneGuides": [],
+              "namedSelections": {},
+              "objects": [
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: DIMERIC",
+                        "id": "1"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 1,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "4AKE.pdb",
+                  "frameCount": 1,
+                  "id": "primary",
+                  "label": "4AKE.pdb",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": true,
+                  "visible": true
+                },
+                {
+                  "construction": {
+                    "dynamicBonds": false,
+                    "modelIndex": 0,
+                    "assemblyId": "1",
+                    "kind": "assembly"
+                  },
+                  "constructionOptions": {
+                    "assemblies": [
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                        "id": "1"
+                      },
+                      {
+                        "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                        "id": "2"
+                      }
+                    ],
+                    "assembliesTruncated": false,
+                    "assemblyCount": 2,
+                    "modelCount": 1,
+                    "models": [
+                      {
+                        "index": 0,
+                        "modelNumber": 1
+                      }
+                    ],
+                    "modelsTruncated": false,
+                    "operatorCount": 1,
+                    "operators": [
+                      {
+                        "assemblyId": "1",
+                        "instanceId": "ASM-1",
+                        "modelNumber": 1,
+                        "name": "ASM_1",
+                        "operatorIds": [
+                          "1"
+                        ],
+                        "unitCount": 3
+                      }
+                    ],
+                    "operatorsTruncated": false
+                  },
+                  "derived": false,
+                  "fileName": "1AKE.pdb",
+                  "frameCount": 1,
+                  "id": "ap5a-bound-copy",
+                  "label": "ap5a-bound-copy",
+                  "matrix": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    4,
+                    0,
+                    0,
+                    1
+                  ],
+                  "operationCount": 0,
+                  "primary": false,
+                  "visible": true
+                }
+              ],
+              "operationLog": [
+                {
+                  "at": 1788029861148,
+                  "description": "Publish initial automatic Mol* camera",
+                  "id": "op-1",
+                  "origin": "system",
+                  "revision": 1,
+                  "type": "sync_initial_camera"
+                },
+                {
+                  "at": 1788029869717,
+                  "description": "Synchronize structure object inventory",
+                  "id": "op-2",
+                  "origin": "model",
+                  "revision": 2,
+                  "type": "sync_objects"
+                },
+                {
+                  "at": 1788029872071,
+                  "description": "Synchronize native Mol* camera",
+                  "id": "op-3",
+                  "origin": "ui",
+                  "revision": 3,
+                  "type": "sync_native_camera"
+                },
+                {
+                  "at": 1788029882542,
+                  "description": "Synchronize structure object inventory",
+                  "id": "op-4",
+                  "origin": "model",
+                  "revision": 4,
+                  "type": "sync_objects"
+                },
+                {
+                  "at": 1788029891529,
+                  "description": "Undo scene operation",
+                  "id": "op-5",
+                  "origin": "ui",
+                  "revision": 5,
+                  "type": "undo"
+                },
+                {
+                  "at": 1788029899932,
+                  "description": "Redo scene operation",
+                  "id": "op-6",
+                  "origin": "ui",
+                  "revision": 6,
+                  "type": "redo"
+                }
+              ],
+              "pendingOperation": null,
+              "qualityAssessment": [],
+              "redoAvailable": false,
+              "revision": 6,
+              "savedScenes": [],
+              "sceneName": null,
+              "selection": {
+                "atomCount": 0,
+                "atomIds": [],
+                "atomIdsTruncated": false,
+                "expression": null,
+                "summary": null
+              },
+              "storyboard": [],
+              "syncError": null,
+              "syncStatus": "synced",
+              "trajectory": null,
+              "undoAvailable": true,
+              "version": 2,
+              "volumes": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_set_object_visibility",
+      "startedAtUtc": "2026-08-29T18:58:40.977Z",
+      "completedAtUtc": "2026-08-29T18:58:44.229Z",
+      "arguments": {
+        "objectId": "ap5a-bound-copy",
+        "visible": false
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Hid structure object ap5a-bound-copy."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Hid structure object ap5a-bound-copy.",
+          "state": {
+            "object": {
+              "construction": {
+                "assemblyId": "1",
+                "dynamicBonds": false,
+                "kind": "assembly",
+                "modelIndex": 0
+              },
+              "constructionOptions": {
+                "assemblies": [
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "1"
+                  },
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "2"
+                  }
+                ],
+                "assembliesTruncated": false,
+                "assemblyCount": 2,
+                "modelCount": 1,
+                "models": [
+                  {
+                    "index": 0,
+                    "modelNumber": 1
+                  }
+                ],
+                "modelsTruncated": false,
+                "operatorCount": 1,
+                "operators": [
+                  {
+                    "assemblyId": "1",
+                    "instanceId": "ASM-1",
+                    "modelNumber": 1,
+                    "name": "ASM_1",
+                    "operatorIds": [
+                      "1"
+                    ],
+                    "unitCount": 3
+                  }
+                ],
+                "operatorsTruncated": false
+              },
+              "fileName": "1AKE.pdb",
+              "frameCount": 1,
+              "id": "ap5a-bound-copy",
+              "label": "ap5a-bound-copy",
+              "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "primary": false,
+              "visible": false
+            },
+            "appliedRevision": 8
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_set_object_visibility",
+      "startedAtUtc": "2026-08-29T18:58:44.229Z",
+      "completedAtUtc": "2026-08-29T18:58:44.570Z",
+      "arguments": {
+        "objectId": "ap5a-bound-copy",
+        "visible": true
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Showed structure object ap5a-bound-copy."
+          }
+        ],
+        "structuredContent": {
+          "applied": true,
+          "message": "Showed structure object ap5a-bound-copy.",
+          "state": {
+            "object": {
+              "construction": {
+                "assemblyId": "1",
+                "dynamicBonds": false,
+                "kind": "assembly",
+                "modelIndex": 0
+              },
+              "constructionOptions": {
+                "assemblies": [
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "1"
+                  },
+                  {
+                    "details": "AUTHOR DETERMINED BIOLOGICAL UNIT: MONOMERIC",
+                    "id": "2"
+                  }
+                ],
+                "assembliesTruncated": false,
+                "assemblyCount": 2,
+                "modelCount": 1,
+                "models": [
+                  {
+                    "index": 0,
+                    "modelNumber": 1
+                  }
+                ],
+                "modelsTruncated": false,
+                "operatorCount": 1,
+                "operators": [
+                  {
+                    "assemblyId": "1",
+                    "instanceId": "ASM-1",
+                    "modelNumber": 1,
+                    "name": "ASM_1",
+                    "operatorIds": [
+                      "1"
+                    ],
+                    "unitCount": 3
+                  }
+                ],
+                "operatorsTruncated": false
+              },
+              "fileName": "1AKE.pdb",
+              "frameCount": 1,
+              "id": "ap5a-bound-copy",
+              "label": "ap5a-bound-copy",
+              "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "primary": false,
+              "visible": true
+            },
+            "appliedRevision": 9
+          }
+        }
+      }
+    }
+  ],
+  "revision_conflict_receipts": [
+    {
+      "operation": "structure_undo",
+      "startedAtUtc": "2026-08-29T18:58:02.780Z",
+      "completedAtUtc": "2026-08-29T18:58:02.857Z",
+      "arguments": {
+        "expectedRevision": 3
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Scene revision conflict: expected 3, current revision is 4. Read structure.get_state and retry against the current scene."
+          }
+        ],
+        "structuredContent": {
+          "applied": false,
+          "message": "Scene revision conflict: expected 3, current revision is 4. Read structure.get_state and retry against the current scene.",
+          "state": {
+            "availableObjectIds": [
+              "primary",
+              "ap5a-bound-copy"
+            ],
+            "capabilities": {
+              "analyses": [
+                "distance",
+                "angle",
+                "dihedral",
+                "contacts",
+                "clashes",
+                "hydrogen_bonds",
+                "rmsd",
+                "centroid",
+                "principal_axes",
+                "best_fit_plane",
+                "sasa",
+                "buried_area",
+                "density_fit",
+                "map_correlation",
+                "trajectory_series"
+              ],
+              "guides": [
+                "label",
+                "orientation",
+                "plane"
+              ],
+              "budgets": {
+                "analysisAtoms": 20000,
+                "pairComparisons": 5000000,
+                "queryPageRows": 500,
+                "sasaAtoms": 2000,
+                "sasaNeighborCandidateChecks": 250000,
+                "sasaOcclusionChecks": 20000000,
+                "sasaSamples": 960,
+                "trajectorySampleFrames": 2000
+              },
+              "coordinateFormats": [
+                "pdb",
+                "cif",
+                "mmcif",
+                "mol",
+                "sdf",
+                "mol2",
+                "pqr",
+                "pdbqt",
+                "gro",
+                "xyz"
+              ],
+              "densityFormats": [
+                "ccp4",
+                "map",
+                "mrc",
+                "dsn6",
+                "cube",
+                "dx",
+                "dscif"
+              ],
+              "exports": [
+                "scene-json",
+                "selection-pdb",
+                "selection-mmcif",
+                "selection-bcif",
+                "models-mmcif",
+                "models-bcif",
+                "geometry-glb",
+                "geometry-stl",
+                "geometry-obj",
+                "geometry-usdz",
+                "results-csv",
+                "png",
+                "mp4"
+              ],
+              "movieTimeline": true,
+              "performanceTiers": [
+                {
+                  "atomCount": 100000,
+                  "name": "small",
+                  "quality": "high"
+                },
+                {
+                  "atomCount": 1000000,
+                  "name": "medium",
+                  "quality": "medium"
+                },
+                {
+                  "atomCount": 10000000,
+                  "name": "large",
+                  "quality": "low"
+                }
+              ],
+              "queryLanguageVersion": 1,
+              "sceneStateVersion": 2,
+              "trajectoryFormats": [
+                "xtc",
+                "dcd",
+                "trr",
+                "nctraj",
+                "lammpstrj",
+                "multi-model-pdb"
+              ]
+            },
+            "retry": "Call structure.get_state, correct the typed target, and retry against its sceneRevision.",
+            "sceneRevision": 4
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_redo",
+      "startedAtUtc": "2026-08-29T18:58:02.857Z",
+      "completedAtUtc": "2026-08-29T18:58:02.959Z",
+      "arguments": {
+        "expectedRevision": 4
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "There is no scene operation to redo."
+          }
+        ],
+        "structuredContent": {
+          "applied": false,
+          "message": "There is no scene operation to redo.",
+          "state": {
+            "availableObjectIds": [
+              "primary",
+              "ap5a-bound-copy"
+            ],
+            "capabilities": {
+              "analyses": [
+                "distance",
+                "angle",
+                "dihedral",
+                "contacts",
+                "clashes",
+                "hydrogen_bonds",
+                "rmsd",
+                "centroid",
+                "principal_axes",
+                "best_fit_plane",
+                "sasa",
+                "buried_area",
+                "density_fit",
+                "map_correlation",
+                "trajectory_series"
+              ],
+              "guides": [
+                "label",
+                "orientation",
+                "plane"
+              ],
+              "budgets": {
+                "analysisAtoms": 20000,
+                "pairComparisons": 5000000,
+                "queryPageRows": 500,
+                "sasaAtoms": 2000,
+                "sasaNeighborCandidateChecks": 250000,
+                "sasaOcclusionChecks": 20000000,
+                "sasaSamples": 960,
+                "trajectorySampleFrames": 2000
+              },
+              "coordinateFormats": [
+                "pdb",
+                "cif",
+                "mmcif",
+                "mol",
+                "sdf",
+                "mol2",
+                "pqr",
+                "pdbqt",
+                "gro",
+                "xyz"
+              ],
+              "densityFormats": [
+                "ccp4",
+                "map",
+                "mrc",
+                "dsn6",
+                "cube",
+                "dx",
+                "dscif"
+              ],
+              "exports": [
+                "scene-json",
+                "selection-pdb",
+                "selection-mmcif",
+                "selection-bcif",
+                "models-mmcif",
+                "models-bcif",
+                "geometry-glb",
+                "geometry-stl",
+                "geometry-obj",
+                "geometry-usdz",
+                "results-csv",
+                "png",
+                "mp4"
+              ],
+              "movieTimeline": true,
+              "performanceTiers": [
+                {
+                  "atomCount": 100000,
+                  "name": "small",
+                  "quality": "high"
+                },
+                {
+                  "atomCount": 1000000,
+                  "name": "medium",
+                  "quality": "medium"
+                },
+                {
+                  "atomCount": 10000000,
+                  "name": "large",
+                  "quality": "low"
+                }
+              ],
+              "queryLanguageVersion": 1,
+              "sceneStateVersion": 2,
+              "trajectoryFormats": [
+                "xtc",
+                "dcd",
+                "trr",
+                "nctraj",
+                "lammpstrj",
+                "multi-model-pdb"
+              ]
+            },
+            "retry": "Call structure.get_state, correct the typed target, and retry against its sceneRevision.",
+            "sceneRevision": 4
+          }
+        }
+      }
+    },
+    {
+      "operation": "structure_undo",
+      "startedAtUtc": "2026-08-29T18:58:02.959Z",
+      "completedAtUtc": "2026-08-29T18:58:03.126Z",
+      "arguments": {
+        "expectedRevision": 5
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Scene revision conflict: expected 5, current revision is 4. Read structure.get_state and retry against the current scene."
+          }
+        ],
+        "structuredContent": {
+          "applied": false,
+          "message": "Scene revision conflict: expected 5, current revision is 4. Read structure.get_state and retry against the current scene.",
+          "state": {
+            "availableObjectIds": [
+              "primary",
+              "ap5a-bound-copy"
+            ],
+            "capabilities": {
+              "analyses": [
+                "distance",
+                "angle",
+                "dihedral",
+                "contacts",
+                "clashes",
+                "hydrogen_bonds",
+                "rmsd",
+                "centroid",
+                "principal_axes",
+                "best_fit_plane",
+                "sasa",
+                "buried_area",
+                "density_fit",
+                "map_correlation",
+                "trajectory_series"
+              ],
+              "guides": [
+                "label",
+                "orientation",
+                "plane"
+              ],
+              "budgets": {
+                "analysisAtoms": 20000,
+                "pairComparisons": 5000000,
+                "queryPageRows": 500,
+                "sasaAtoms": 2000,
+                "sasaNeighborCandidateChecks": 250000,
+                "sasaOcclusionChecks": 20000000,
+                "sasaSamples": 960,
+                "trajectorySampleFrames": 2000
+              },
+              "coordinateFormats": [
+                "pdb",
+                "cif",
+                "mmcif",
+                "mol",
+                "sdf",
+                "mol2",
+                "pqr",
+                "pdbqt",
+                "gro",
+                "xyz"
+              ],
+              "densityFormats": [
+                "ccp4",
+                "map",
+                "mrc",
+                "dsn6",
+                "cube",
+                "dx",
+                "dscif"
+              ],
+              "exports": [
+                "scene-json",
+                "selection-pdb",
+                "selection-mmcif",
+                "selection-bcif",
+                "models-mmcif",
+                "models-bcif",
+                "geometry-glb",
+                "geometry-stl",
+                "geometry-obj",
+                "geometry-usdz",
+                "results-csv",
+                "png",
+                "mp4"
+              ],
+              "movieTimeline": true,
+              "performanceTiers": [
+                {
+                  "atomCount": 100000,
+                  "name": "small",
+                  "quality": "high"
+                },
+                {
+                  "atomCount": 1000000,
+                  "name": "medium",
+                  "quality": "medium"
+                },
+                {
+                  "atomCount": 10000000,
+                  "name": "large",
+                  "quality": "low"
+                }
+              ],
+              "queryLanguageVersion": 1,
+              "sceneStateVersion": 2,
+              "trajectoryFormats": [
+                "xtc",
+                "dcd",
+                "trr",
+                "nctraj",
+                "lammpstrj",
+                "multi-model-pdb"
+              ]
+            },
+            "retry": "Call structure.get_state, correct the typed target, and retry against its sceneRevision.",
+            "sceneRevision": 4
+          }
+        }
+      }
+    }
+  ],
+  "final_state_summary": "The successful final undo restored the 1AKE transform to identity; subsequent visibility calls ended with the object visible."
+}

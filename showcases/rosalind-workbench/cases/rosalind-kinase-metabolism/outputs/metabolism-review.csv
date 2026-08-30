@@ -1,0 +1,4 @@
+name,dailyMed_observation,local_structure_prompts,evidence_url
+Imatinib,CYP3A4 is the major enzyme responsible for metabolism of imatinib.,tertiary_amine_dealkylation_prompt; benzylic_sp3_prompt,https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7b7cc194-29e4-4484-a364-a1ac7d7d6cf5
+Gefitinib,"Gefitinib undergoes extensive hepatic metabolism in humans, predominantly by CYP3A4.",tertiary_amine_dealkylation_prompt; aryl_alkyl_ether_prompt,https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1a3c0ce7-06a1-4e04-9106-14ddb2a866a5&version=4
+Erlotinib,Erlotinib is metabolized primarily by CYP3A4 and to a lesser extent by CYP1A2 and CYP1A1 in vitro.,aryl_alkyl_ether_prompt; terminal_alkyne_prompt,https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4cff04f5-3693-4d87-a9f8-a2b195e3d26e

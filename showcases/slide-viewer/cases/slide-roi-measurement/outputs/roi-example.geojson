@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "name": "cmu1-deterministic-roi-example",
+  "coordinate_system": {
+    "frame": "CMU-1 base-level slide pixels",
+    "origin": "top-left",
+    "units": "pixels"
+  },
+  "source_association": {
+    "file": "CMU-1-JP2K-33005.svs",
+    "sha256": "9a1923cd9bcb260ba4d99d64f8d6e32550648c332ba48817f920662f3a513420",
+    "base_width": 46000,
+    "base_height": 32893,
+    "microns_per_pixel": 0.499
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "cmu1-roi-example-001",
+      "properties": {
+        "label": "deterministic measurement example",
+        "construction": "declared rectangle",
+        "authorship": "generated for schema inspection; not created by a viewer gesture",
+        "morphology_interpretation": "none"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [12000, 8000],
+            [14000, 8000],
+            [14000, 9500],
+            [12000, 9500],
+            [12000, 8000]
+          ]
+        ]
+      }
+    }
+  ]
+}

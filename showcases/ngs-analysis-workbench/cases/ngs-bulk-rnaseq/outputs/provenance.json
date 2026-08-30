@@ -1,0 +1,15 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "ngs-bulk-rnaseq",
+  "source_observations": [
+    "outputs/workflow-evidence.json records the dated Workbench catalogue, target, runtime, and empty-run observations.",
+    "outputs/rosalind-open-observation.json records a genuine case-specific mcp__rosalind__rosalind_open response."
+  ],
+  "local_computations": [],
+  "rosalind_observation": "outputs/rosalind-open-observation.json",
+  "scientific_job_executed_by_rosalind": false,
+  "limitations": [
+    "No bulk RNA-seq input or sample metadata was fetched or inspected.",
+    "No quantification, differential-expression model, Workbench workflow, or Rosalind scientific task executed."
+  ]
+}

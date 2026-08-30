@@ -1,0 +1,40 @@
+{
+  "showcase_id": "rosalind-jak2-selectivity",
+  "title": "JAK pocket comparison with experimental inhibitor poses",
+  "question": "What do same-ligand JAK1/JAK2 structures and a JAK2-selective inhibitor structure reveal about pocket similarity and compound-specific contacts?",
+  "retrieved_on": "2026-08-30",
+  "contact_cutoff_angstrom": 4.0,
+  "structures": [
+    {
+      "pdb_id": "3EYG",
+      "file": "inputs/3EYG.pdb",
+      "label": "JAK1-tofacitinib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "MI1",
+      "ligand_chain": "A"
+    },
+    {
+      "pdb_id": "3FUP",
+      "file": "inputs/3FUP.pdb",
+      "label": "JAK2-tofacitinib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "MI1",
+      "ligand_chain": "A"
+    },
+    {
+      "pdb_id": "3KRR",
+      "file": "inputs/3KRR.pdb",
+      "label": "JAK2-NVP-BSK805",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "DQX",
+      "ligand_chain": "A"
+    }
+  ],
+  "compounds": [
+    {"name": "Tofacitinib", "slug": "tofacitinib", "pubchem_cid": 9926791, "role": "same-ligand JAK1/JAK2 comparator"},
+    {"name": "NVP-BSK805", "slug": "nvp-bsk805", "pubchem_cid": 46398810, "role": "3KRR JAK2-selective inhibitor"}
+  ]
+}

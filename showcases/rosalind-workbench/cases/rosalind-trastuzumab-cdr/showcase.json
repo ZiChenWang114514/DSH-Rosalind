@@ -1,0 +1,126 @@
+{
+  "id": "rosalind-trastuzumab-cdr",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "protein-and-antibody-design",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "improve-trastuzumab-cdrs"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "public PDB 1N8Z CDR-to-HER2 contact mapping and conservative non-contact exploration plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 7883
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 288
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 370
+    },
+    {
+      "path": "inputs/1N8Z.pdb",
+      "bytes": 703809
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/cdr-contact-metrics.csv",
+      "bytes": 1905
+    },
+    {
+      "path": "outputs/conservative-exploration-set.csv",
+      "bytes": 1280
+    },
+    {
+      "path": "outputs/interface-summary.json",
+      "bytes": 1247
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 732
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5830
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2474
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1N8Z",
+    "https://files.rcsb.org/download/1N8Z.pdb"
+  ],
+  "observations": [
+    "Public PDB 1N8Z is a 2.52 Å X-ray structure containing antibody light chain A, heavy chain B, and HER2 chain C.",
+    "The six explicit operational CDR ranges contain 56 residues, of which 17 lie within 4.5 Å of HER2.",
+    "Twelve conservative proposals were selected only from positions at least 8 Å from HER2 in this structure."
+  ],
+  "interpretation": [
+    "Direct-contact residues receive the strongest preservation preference when the HER2 epitope hypothesis is maintained.",
+    "Distant conservative substitutions are exploration hypotheses that still require structural, developability, and binding evaluation."
+  ],
+  "limitations": [
+    "The CDR ranges are an explicit operational definition, not a universal numbering convention.",
+    "One crystal structure does not establish that a mutation preserves folding, affinity, specificity, or developability.",
+    "No candidate was modeled or tested experimentally, and the Rosalind call executed no scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/1N8Z",
+        "https://files.rcsb.org/download/1N8Z.pdb"
+      ],
+      "inputs": [
+        "build_case.py",
+        "inputs/public-source.md",
+        "inputs/source-provenance.json",
+        "inputs/1N8Z.pdb"
+      ],
+      "outputs": [
+        "outputs/cdr-contact-metrics.csv",
+        "outputs/conservative-exploration-set.csv",
+        "outputs/interface-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The builder computes the scientific outputs from retained public coordinates. outputs/rosalind-open-observation.json records the genuine mcp__rosalind__rosalind_open call separately and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Run python build_case.py to retrieve PDB 1N8Z and regenerate the contact tables and preview.",
+    "Confirm 56 analyzed CDR residues and 17 residues within 4.5 Å of HER2.",
+    "Inspect outputs/rosalind-open-observation.json separately as launcher-readiness evidence."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public PDB 1N8Z",
+    "scientific_job_executed_by_rosalind": false
+  }
+}

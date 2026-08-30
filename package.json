@@ -23,6 +23,7 @@
     "skills/**",
     "workflows/**",
     "showcases/**",
+    "schema/**",
     "assets/brand-mark.svg",
     "assets/readme-hero.svg",
     "docs/**",

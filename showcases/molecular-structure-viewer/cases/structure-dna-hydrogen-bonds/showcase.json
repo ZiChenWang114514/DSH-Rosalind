@@ -1,0 +1,53 @@
+{
+  "id": "structure-dna-hydrogen-bonds",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": ["RCSB PDB coordinate snapshot", "Python 3.14 standard library", "Rosalind Workbench mcp__rosalind__rosalind_open"],
+    "device": "local",
+    "implementation": "deterministic cross-interface donor/acceptor distance and heavy-atom direction screen",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/public-source.md", "bytes": 538},
+    {"path": "inputs/1LMB.pdb", "bytes": 225261},
+    {"path": "scripts/analyze.py", "bytes": 9281}
+  ],
+  "outputs": [
+    {"path": "outputs/protein-dna-hydrogen-bonds.json", "bytes": 23557},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 648}
+  ],
+  "previews": [{"path": "previews/preview.svg", "bytes": 1569}],
+  "sources": ["https://www.rcsb.org/structure/1LMB", "https://files.rcsb.org/download/1LMB.pdb"],
+  "observations": [
+    "DNA chains 1 and 2 and protein chains 3 and 4 are present in deposited model 1.",
+    "Thirty-six cross-interface pairs satisfy the stated 2.2–3.5 Å distance and 90° angle screen.",
+    "The shortest retained candidate is LYS 4:3 NZ to DG 1:11 O6 at 2.574 Å with a 148.6° antecedent angle."
+  ],
+  "interpretation": ["Rows are heavy-atom geometry candidates and do not quantify hydrogen-bond strength or interface energetics."],
+  "limitations": ["Hydrogen positions and protonation states are unresolved.", "The angle rule is a transparent heuristic.", "Water-mediated contacts, uncertainty, and dynamics are excluded."],
+  "provenance": [{
+    "sources": ["https://files.rcsb.org/download/1LMB.pdb"],
+    "inputs": ["inputs/public-source.md", "inputs/1LMB.pdb", "scripts/analyze.py"],
+    "outputs": ["outputs/protein-dna-hydrogen-bonds.json", "outputs/rosalind-open-observation.json"],
+    "previews": ["previews/preview.svg"],
+    "note": "The local script applies explicit donor, acceptor, distance, and antecedent-angle rules to the retained public coordinates; the separate Rosalind observation records launcher availability without a scientific job."
+  }],
+  "reproduction": [
+    "Run scripts/analyze.py with Python 3.14 or a compatible standard-library Python.",
+    "Confirm the output contains 36 candidates and preserves exact atom identities, distances, and angles.",
+    "Do not compare counts without matching the donor/acceptor tables, hydrogen assumption, cutoffs, and model selection."
+  ],
+  "environment": {"cost": "free", "data": "public", "device": "local"}
+}

@@ -1,0 +1,108 @@
+{
+  "id": "rosalind-il6r-vhh",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "protein-and-antibody-design",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "UniProt REST public record inspection",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "case-specific review of the reviewed human UniProt P08887 receptor record plus a genuine Rosalind task-chooser observation; no sequence or antibody computation was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 612
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 1306
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 954
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 928
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5454
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1055
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/uniprotkb/P08887/entry",
+    "https://rest.uniprot.org/uniprotkb/P08887.json",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
+  "observations": [
+    "UniProt P08887 is the reviewed human interleukin-6 receptor subunit alpha record and annotates residues 20-365 as extracellular.",
+    "The retained package contains no VHH sequence, epitope model, complex prediction, affinity estimate, or ranking.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed."
+  ],
+  "interpretation": [
+    "The reviewed P08887 record supports a reproducible lesson on target identity and extracellular-domain scope before any separately authorized antibody research."
+  ],
+  "limitations": [
+    "The full P08887 sequence is not retained as an input artifact.",
+    "No sequence was created, altered, optimized, or ranked.",
+    "Rosalind launcher readiness does not establish a scientific run or an IL-6R-VHH result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/P08887/entry",
+        "https://rest.uniprot.org/uniprotkb/P08887.json",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The UniProt record supports the receptor summary; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Read README.md, prompt.md, and inputs/public-source.md.",
+    "Compare the current UniProt P08887 record with outputs/verification-receipt.json.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat launcher readiness as scientific execution.",
+    "Use outputs/session-bundle.md to inspect every retained artifact and the preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_launcher_observed": true,
+    "scientific_job_executed_by_rosalind": false
+  }
+}

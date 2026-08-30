@@ -1,0 +1,129 @@
+{
+  "id": "slide-scientific-layers",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "slide-viewer.slide_import_scientific_layer",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local JSON, GeoJSON, CSV, and source-pin verification",
+      "Slide Viewer temporary scientific-layer import, cancellation request, and status follow-up",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "licensed spatial source mapping plus a genuine temporary GeoJSON import, unsuccessful cancellation request, revoked-authorization follow-up, and unchanged Rosalind task-chooser evidence",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 904,
+      "sha256": "0fa69cf5cf3387142e56f230bbd5cd962c64688d3eb33d921ad958be50ba4156"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/layer-source-map.json",
+      "bytes": 1502,
+      "sha256": "bf55d5489b0ee2a6d52b4fab4ea4bc3f2b821a32f22dbcce978f5aed1fc49d81"
+    },
+    {
+      "path": "outputs/scientific-layer-receipt.json",
+      "bytes": 1948,
+      "sha256": "91d28c31ca5ea28c2845106d4fa985769646558bb7776e25df24e27e49033d0b"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 875,
+      "sha256": "12e77ee9684a430715ca9c82a3553299e27b236b36f28e6c4a3f29b09d471b22"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6945,
+      "sha256": "3a3b29629aabe70ae9a5935a7046ac2f955b1a8eeb2636c8513dceb668ea093c"
+    },
+    {
+      "path": "outputs/scientific-layer-cancellation-evidence.json",
+      "bytes": 2696,
+      "sha256": "9b5386471fb95bdfa716b229e342c06425fb306823d43bc511a9670938759727"
+    },
+    {
+      "path": "outputs/operation-provenance.json",
+      "bytes": 690,
+      "sha256": "173395745b193eed43589e0915e81736426dc3c55b6f91d9972ce74f14350a6e"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2339,
+      "sha256": "aa72ab70782a763c4210cb3eb234eb88eb8aa16d14697b457e009c539b6d9396"
+    }
+  ],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1"
+  ],
+  "observations": [
+    "The verified H5AD, 684-row observation table, and three-feature GeoJSON share the same source association.",
+    "The source map preserves capture-spot identifiers, coordinates, matrix selector, and matrix revision.",
+    "A temporary three-feature GeoJSON import returned a real authorizing task, while cancellation returned UNAVAILABLE and the follow-up reported revoked read authorization.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The retained mapping can be inspected and used to rehearse a source-associated layer import without asserting a live viewer result."
+  ],
+  "limitations": [
+    "Visium observations are capture spots, not single cells.",
+    "Matrix value scale is unknown and the companion polygons are demonstration annotations.",
+    "No mounted tissue frame, published layer, settled cancellation, layer listing, or entity query was observed.",
+    "The Rosalind operation opened only the task chooser and did not import a layer or execute a scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/layer-source-map.json",
+        "outputs/scientific-layer-receipt.json",
+        "outputs/scientific-layer-cancellation-evidence.json",
+        "outputs/operation-provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The case reuses licensed H5AD, CSV, and GeoJSON evidence in place. The temporary cancellation receipt retains exact status text but sanitizes transport-only task and session handles. The Rosalind observation remains independent."
+    }
+  ],
+  "reproduction": [
+    "Verify the reused H5AD, CSV, and GeoJSON against the acquisition note and receipt.",
+    "Inspect the entity mapping and companion annotation semantics.",
+    "Record any later viewer import result separately with portable aliases and scientifically relevant source metadata.",
+    "Invoke mcp__rosalind__rosalind_open with the retained case-specific task_context and compare its response with outputs/rosalind-open-observation.json."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0 source and retained repository artifacts",
+    "device": "local",
+    "viewer_session_recorded": true,
+    "viewer_state": "pending render in retained evidence",
+    "viewer_actions_executed": true
+  }
+}

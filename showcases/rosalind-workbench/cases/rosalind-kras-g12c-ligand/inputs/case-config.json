@@ -1,0 +1,31 @@
+{
+  "showcase_id": "rosalind-kras-g12c-ligand",
+  "title": "KRAS G12C switch-II pocket: sotorasib and adagrasib",
+  "question": "Which switch-II pocket contacts recur in experimental KRAS G12C complexes of sotorasib and adagrasib?",
+  "retrieved_on": "2026-08-30",
+  "contact_cutoff_angstrom": 4.0,
+  "structures": [
+    {
+      "pdb_id": "6OIM",
+      "file": "inputs/6OIM.pdb",
+      "label": "KRAS-G12C-sotorasib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "MOV",
+      "ligand_chain": "A"
+    },
+    {
+      "pdb_id": "6USZ",
+      "file": "inputs/6USZ.pdb",
+      "label": "KRAS-G12C-adagrasib",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "QH4",
+      "ligand_chain": "A"
+    }
+  ],
+  "compounds": [
+    {"name": "Sotorasib", "slug": "sotorasib", "pubchem_cid": 137278711, "role": "6OIM ligand"},
+    {"name": "Adagrasib", "slug": "adagrasib", "pubchem_cid": 138611145, "role": "6USZ ligand"}
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "accession": "P01116",
+  "sequence_version": 1,
+  "header": ">sp|P01116|RASK_HUMAN GTPase KRas OS=Homo sapiens OX=9606 GN=KRAS PE=1 SV=1",
+  "molecule": "protein",
+  "sequence_length": 189,
+  "canonical_residue_types_observed": 19,
+  "response_sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6",
+  "sequence_sha256": "1d5a9ab11f64cb886d8ffa08a153c412b2d190fcf70e5690cd4b4c7efcdee53a",
+  "motif_checks": [
+    {
+      "name": "P-loop",
+      "start_1based": 10,
+      "end_1based": 17,
+      "sequence": "GAGGVGKS",
+      "matches_expected": true
+    },
+    {
+      "name": "Switch I",
+      "start_1based": 30,
+      "end_1based": 38,
+      "sequence": "DEYDPTIED",
+      "matches_expected": true
+    },
+    {
+      "name": "Switch II",
+      "start_1based": 60,
+      "end_1based": 76,
+      "sequence": "GQEEYSAMRDQYMRTGE",
+      "matches_expected": true
+    },
+    {
+      "name": "NKXD",
+      "start_1based": 116,
+      "end_1based": 119,
+      "sequence": "NKCD",
+      "matches_expected": true
+    },
+    {
+      "name": "CAAX",
+      "start_1based": 186,
+      "end_1based": 189,
+      "sequence": "CIIM",
+      "matches_expected": true
+    }
+  ],
+  "viewer_workflow": {
+    "status": "rehearsed",
+    "capabilities": [
+      "sequence-viewer.sequence_acquire_public_example",
+      "sequence-viewer.sequence_open_from_chat",
+      "sequence-viewer.sequence_query_viewer"
+    ],
+    "reason": "No mounted Sequence Viewer session was used in this task."
+  },
+  "calculation": {
+    "status": "executed",
+    "engine": "Python standard library",
+    "coordinate_system": "1-based inclusive"
+  }
+}

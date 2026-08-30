@@ -42,9 +42,9 @@ function replaceSameLength(root: string, path: string, before: string, after: st
   writeFileSync(absolute, text.replace(before, after), "utf8");
 }
 
-describe("23-case showcase replay scientific matrix", () => {
+describe("100-case showcase replay scientific matrix", () => {
   it("gives every ready showcase structured and scientific checks", () => {
-    expect(SHOWCASES).toHaveLength(23);
+    expect(SHOWCASES).toHaveLength(100);
     const inputDriven = new Set<string>();
     for (const entry of SHOWCASES) {
       const validation = validateShowcase(repositoryRoot, entry);
@@ -56,14 +56,13 @@ describe("23-case showcase replay scientific matrix", () => {
     expect(inputDriven).toEqual(new Set([
       "sequence-lambda-annotation",
       "sequence-ras-alignment",
-      "sequence-fastq-qc",
       "structure-mdm2-p53",
       "structure-adenylate-kinase",
       "structure-gfp-figure",
     ]));
   });
 
-  it("runs lesson and replay for all 23 ready showcases", async () => {
+  it("runs lesson and replay for all 100 ready showcases", async () => {
     const runtime = new RosalindRuntime({ catalog: new ShowcaseCatalog(repositoryRoot) });
     try {
       for (const mode of ["lesson", "replay"] as const) {

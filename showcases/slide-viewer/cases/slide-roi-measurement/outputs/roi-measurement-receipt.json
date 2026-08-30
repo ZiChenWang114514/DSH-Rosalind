@@ -1,0 +1,44 @@
+{
+  "showcase_id": "slide-roi-measurement",
+  "verification_kind": "deterministic source-associated ROI measurement",
+  "source": {
+    "file": "pathology-slide-viewer-examples/CMU-1-JP2K-33005.svs",
+    "bytes": 132565343,
+    "sha256": "9a1923cd9bcb260ba4d99d64f8d6e32550648c332ba48817f920662f3a513420",
+    "license": "CC0-1.0",
+    "local_pin_verified": true
+  },
+  "coordinate_frame": {
+    "name": "base-level slide pixels",
+    "width": 46000,
+    "height": 32893,
+    "microns_per_pixel": 0.499,
+    "calibration_source": "slide-tissue-architecture/outputs/pyramid-metadata.json"
+  },
+  "geometry_check": {
+    "annotation_id": "cmu1-roi-example-001",
+    "geometry_type": "Polygon",
+    "ring_closed": true,
+    "vertices_in_source_bounds": true,
+    "width_px": 2000,
+    "height_px": 1500,
+    "area_px2": 3000000,
+    "perimeter_px": 7000
+  },
+  "physical_measurement_check": {
+    "width_um": 998.0,
+    "height_um": 748.5,
+    "area_um2": 747003.0,
+    "perimeter_um": 3493.0
+  },
+  "viewer_actions": {
+    "source_authorization": "recorded in prior CMU-1 evidence",
+    "mounted_render": "not observed",
+    "roi_draw": "rehearsed contract only",
+    "annotation_edit": "rehearsed contract only",
+    "undo_redo": "rehearsed contract only",
+    "measurement_export": "rehearsed contract only",
+    "source_image_export": "not performed; no user capture permission recorded"
+  },
+  "scientific_scope": "Geometry and measurement arithmetic only; no morphology or diagnosis."
+}

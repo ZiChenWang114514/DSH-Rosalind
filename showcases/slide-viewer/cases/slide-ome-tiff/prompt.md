@@ -1,0 +1,3 @@
+# Inspect the official multichannel Z-series OME-TIFF
+
+Download the single official CC BY 4.0 sample, verify its published byte count, compute SHA-256, parse the embedded OME-XML, and compare `SizeC × SizeZ × SizeT` with the explicit TIFF data mapping. Invoke `mcp__rosalind__rosalind_open` with a task context specific to this topology review and cite `outputs/rosalind-open-observation.json`; its chooser response does not prove scientific task execution. Open the exact member with `mcp__slide_viewer__slide_open_ome_tiff_series`. Record source authorization separately from viewer readiness, and report channel or Z changes only after an acknowledged mounted state and synchronized render.

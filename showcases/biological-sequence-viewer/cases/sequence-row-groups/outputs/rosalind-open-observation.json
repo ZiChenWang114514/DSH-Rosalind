@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "sequence-row-groups",
+  "observed_at_utc": "2026-08-29T17:56:31.809Z",
+  "observed_at_local": "2026-08-30T01:56:31.809+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect the Rosalind task chooser for the sequence-derived human RAS row-grouping showcase."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit the RAS alignment or create row groups."
+}

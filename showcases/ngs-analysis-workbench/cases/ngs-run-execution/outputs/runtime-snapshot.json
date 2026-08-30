@@ -1,0 +1,23 @@
+{
+  "action": "get_runtime_environment",
+  "performed": true,
+  "snapshot_id": "sanitized-runtime-snapshot",
+  "target_id": "local",
+  "observed_at": "2026-08-29T17:47:10.548084Z",
+  "expires_at": "2026-08-29T17:52:10.548084Z",
+  "host": {
+    "os": "windows",
+    "arch": "amd64"
+  },
+  "controllers": {
+    "nextflow": "missing",
+    "snakemake": "missing"
+  },
+  "controller_candidates": [],
+  "docker": {
+    "client_state": "ready",
+    "client_version": "29.7.2",
+    "daemon_reachable": false
+  },
+  "decision": "Do not claim a Snakemake or Nextflow run. Execute only the transparent Python QC core and label the Workbench lifecycle as rehearsed."
+}

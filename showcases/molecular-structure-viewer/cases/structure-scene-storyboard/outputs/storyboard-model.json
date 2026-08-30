@@ -1,0 +1,443 @@
+{
+  "schema": "case-local-molecular-storyboard-v1",
+  "generated_by": "scripts/build_storyboard_evidence.py",
+  "viewer_execution": {
+    "status": "not-executed",
+    "reason": "No mounted Structure Viewer session was available to this task."
+  },
+  "objects": [
+    {
+      "object_id": "adk_open_4ake",
+      "source": "inputs/4AKE.pdb",
+      "role": "open apo conformation"
+    },
+    {
+      "object_id": "adk_ap5_bound_1ake",
+      "source": "inputs/1AKE.pdb",
+      "role": "AP5-bound conformation"
+    }
+  ],
+  "local_coordinate_observations": {
+    "open_total_atom_records": 3459,
+    "closed_total_atom_records": 3816,
+    "open_primary_conformer_atom_records": 3459,
+    "closed_primary_conformer_atom_records": 3804,
+    "matched_chain_a_ca_atoms": 214,
+    "ap5_chain_a_total_atom_records": 64,
+    "ap5_chain_a_primary_conformer_atom_records": 57
+  },
+  "local_alignment": {
+    "method": "ordinary least-squares Kabsch superposition over matched chain-A C-alpha atoms",
+    "mobile": "1AKE chain A",
+    "reference": "4AKE chain A",
+    "matched_atoms": 214,
+    "rmsd_angstrom": 7.1307,
+    "maximum_ca_residual_angstrom": 18.33617,
+    "mobile_to_reference_matrix_row_major": [
+      [
+        -0.144687323,
+        -0.983794841,
+        -0.10589282,
+        48.523155869
+      ],
+      [
+        -0.022293022,
+        0.110232867,
+        -0.993655743,
+        11.626319023
+      ],
+      [
+        0.989226263,
+        -0.141408719,
+        -0.037881059,
+        -29.67947206
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "scope_note": "This all-correspondence Kabsch value is a local coordinate calculation; it is not the Structure Viewer TM-align result."
+  },
+  "domain_centroid_distances_angstrom": {
+    "definition": {
+      "CORE": "chain A residues 1-29, 60-121, and 160-214",
+      "NMP": "chain A residues 30-59",
+      "LID": "chain A residues 122-159"
+    },
+    "open_4ake": {
+      "core_to_nmp": 22.287398,
+      "core_to_lid": 30.806052
+    },
+    "ap5_bound_1ake_after_global_fit": {
+      "core_to_nmp": 18.185715,
+      "core_to_lid": 20.978079
+    }
+  },
+  "scenes": {
+    "01-open-state": {
+      "objects": {
+        "adk_open_4ake": {
+          "visible": true,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "adk_ap5_bound_1ake": {
+          "visible": false,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "camera_preset": "front-chain-a",
+      "layers": [
+        {
+          "object_id": "adk_open_4ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#22b8a7"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#d96adf"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and resn AP5",
+          "representation": "sticks",
+          "color": "element"
+        }
+      ],
+      "selection": null,
+      "focus": null
+    },
+    "02-ap5-bound-state": {
+      "objects": {
+        "adk_open_4ake": {
+          "visible": false,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "adk_ap5_bound_1ake": {
+          "visible": true,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "camera_preset": "front-chain-a",
+      "layers": [
+        {
+          "object_id": "adk_open_4ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#22b8a7"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#d96adf"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and resn AP5",
+          "representation": "sticks",
+          "color": "element"
+        }
+      ],
+      "selection": null,
+      "focus": null
+    },
+    "03-side-by-side": {
+      "objects": {
+        "adk_open_4ake": {
+          "visible": true,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "adk_ap5_bound_1ake": {
+          "visible": true,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              70.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "camera_preset": "front-both-chain-a",
+      "layers": [
+        {
+          "object_id": "adk_open_4ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#22b8a7"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#d96adf"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and resn AP5",
+          "representation": "sticks",
+          "color": "element"
+        }
+      ],
+      "selection": null,
+      "focus": null
+    },
+    "04-local-kabsch-overlay": {
+      "objects": {
+        "adk_open_4ake": {
+          "visible": true,
+          "transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "adk_ap5_bound_1ake": {
+          "visible": true,
+          "transform": [
+            [
+              -0.144687323,
+              -0.983794841,
+              -0.10589282,
+              48.523155869
+            ],
+            [
+              -0.022293022,
+              0.110232867,
+              -0.993655743,
+              11.626319023
+            ],
+            [
+              0.989226263,
+              -0.141408719,
+              -0.037881059,
+              -29.67947206
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "camera_preset": "left-both-chain-a",
+      "layers": [
+        {
+          "object_id": "adk_open_4ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#22b8a7"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and polymer.protein",
+          "representation": "cartoon",
+          "color": "#d96adf"
+        },
+        {
+          "object_id": "adk_ap5_bound_1ake",
+          "selection": "chain A and resn AP5",
+          "representation": "sticks",
+          "color": "element"
+        }
+      ],
+      "selection": null,
+      "focus": null
+    }
+  },
+  "storyboard": [
+    {
+      "order": 1,
+      "scene": "01-open-state",
+      "scientific_purpose": "Establish the apo open conformation."
+    },
+    {
+      "order": 2,
+      "scene": "02-ap5-bound-state",
+      "scientific_purpose": "Show the ligand-bound conformation and AP5 context."
+    },
+    {
+      "order": 3,
+      "scene": "03-side-by-side",
+      "scientific_purpose": "Compare silhouettes; the 70 A translation is visual layout only."
+    },
+    {
+      "order": 4,
+      "scene": "04-local-kabsch-overlay",
+      "scientific_purpose": "Inspect residual domain motion after a documented local C-alpha fit."
+    }
+  ]
+}

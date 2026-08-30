@@ -1,0 +1,108 @@
+{
+  "id": "rosalind-petase-mutations",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "map-petase-mutations"
+  ],
+  "execution": {
+    "actual_tools": [
+      "RCSB PDB public record inspection",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "case-specific review of the public PDB 5XJH PETase structure plus a genuine Rosalind task-chooser observation; no coordinate, mutation, or activity analysis was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 644
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 1251
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 966
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 975
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 5832
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1034
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/5XJH",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
+  "observations": [
+    "RCSB PDB 5XJH records a 1.54 angstrom X-ray structure of a 300-residue PETase chain with no mutation in the deposited construct.",
+    "No substitution list or coordinate-distance calculation is retained, so no mutation-to-catalytic-region placement is established.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed."
+  ],
+  "interpretation": [
+    "PDB 5XJH supplies a public reference for a later, explicitly parameterized review of already reported substitutions."
+  ],
+  "limitations": [
+    "No substitution list or coordinate analysis is retained.",
+    "No mutation, sequence change, activity calculation, or ranking was produced.",
+    "Rosalind launcher readiness does not establish a scientific run or a PETase result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/5XJH",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The PDB record supports the structural source summary; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Read README.md, prompt.md, and inputs/public-source.md.",
+    "Compare the current RCSB PDB 5XJH record with outputs/verification-receipt.json.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat launcher readiness as scientific execution.",
+    "Use outputs/session-bundle.md to inspect every retained artifact and the preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_launcher_observed": true,
+    "scientific_job_executed_by_rosalind": false
+  }
+}

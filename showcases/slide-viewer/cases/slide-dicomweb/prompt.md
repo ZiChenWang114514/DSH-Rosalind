@@ -1,0 +1,3 @@
+# Verify one IDC DICOMweb WSI selection
+
+Use the exact study, series, and three SOP Instance UIDs in the retained IDC source note. Repeat the bounded QIDO and metadata checks, acquire all fourteen explicitly represented frames, rebuild their payload SHA manifest, and compare it with the retained manifest. Invoke `mcp__rosalind__rosalind_open` with a task context specific to the IDC DICOMweb review and cite `outputs/rosalind-open-observation.json`; its chooser response confirms only that Rosalind Workbench opened. Invoke only applicable Slide Viewer operations and record all rejections exactly. Do not claim a Rosalind scientific job, viewer session, pyramid, or rendered tissue without direct execution evidence.

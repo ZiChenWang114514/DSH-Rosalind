@@ -1,0 +1,130 @@
+{
+  "id": "rosalind-breast-visium",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind-workbench.public-evidence",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "compare-pathology-visium"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "CZ CELLxGENE Discover API via cellxgene-skill and local Python standard library"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus deterministic QC of 15 official breast-cancer Visium metadata records",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 5256,
+      "sha256": "801242728f8ba50d94d91e3cfae80e16874754e23eb2a55c41ca669d195b11ff"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 915,
+      "sha256": "6f7bd2a8684be19ae4ceea1bafb1fb29548e5f3d34ce424e1ce9c87db3f6a4ee"
+    },
+    {
+      "path": "inputs/cellxgene-collection.json",
+      "bytes": 36814,
+      "sha256": "68968d92b2ab78c0c799176a86ac38e6dd73bee1ecf18c04bc65163a6f4a54c9"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/visium-metadata-summary.json",
+      "bytes": 2358,
+      "sha256": "b1a927a52e24eaed9362b3c3b178c7ebced996ccdee8d426a62e22be8854e852"
+    },
+    {
+      "path": "outputs/dataset-qc-table.csv",
+      "bytes": 3833,
+      "sha256": "501e050667434c510ffed22a2ac02ddf44cb741c7801fef29bdde164c237974f"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1106,
+      "sha256": "d11261f51e821d664c9d6f74a172366d271e00cd4f98219951839648d0ef8b9f"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 898,
+      "sha256": "faa9b0a0c7433e41edb2e27af33ae2028d4934e36467f49867edbb744669a293"
+    },
+    {
+      "path": "bundle.md",
+      "bytes": 6988,
+      "sha256": "fb0bd2506fffcf65e796344c856b4ce113735e09734bb037a616f40f20e04a1f"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 3188,
+      "sha256": "6d726b46aeb8a778a8d963eaff706a56445625745794ce3950e6f692725e436c"
+    }
+  ],
+  "sources": [
+    "https://cellxgene.cziscience.com/collections/bfd55632-15e2-4dde-a1b9-02ade511fc4d",
+    "https://doi.org/10.1016/j.labinv.2023.100258"
+  ],
+  "observations": [
+    "The retained official collection response contains 15 Visium Spatial Gene Expression V1 datasets and 74,880 capture spots.",
+    "Eleven datasets are labelled triple-negative breast carcinoma and four are labelled normal.",
+    "All records contain a spatial embedding and none reports a full-resolution image asset.",
+    "The retained public-metadata extract omits study participant pseudonyms and preserves only aggregate participant counts.",
+    "A genuine Rosalind Workbench open call returned the exact task-chooser-ready message."
+  ],
+  "interpretation": [
+    "The metadata is sufficient for study-level QC planning and shows substantial between-dataset variation in the reported mean genes per spot."
+  ],
+  "limitations": [
+    "No expression matrix, spot coordinate, image pixel, or pathology region was analysed.",
+    "Metadata summaries do not establish biological differences between disease groups.",
+    "The de-identified extract cannot reconstruct which datasets came from the same participant; participant-aware modelling requires a fresh authorized source retrieval.",
+    "rosalind_open only opened the task chooser and did not run a spatial analysis."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://cellxgene.cziscience.com/collections/bfd55632-15e2-4dde-a1b9-02ade511fc4d"
+      ],
+      "inputs": [
+        "inputs/cellxgene-collection.json"
+      ],
+      "outputs": [
+        "outputs/visium-metadata-summary.json",
+        "outputs/dataset-qc-table.csv",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The official collection response and local script support the metadata QC; the separate 898-byte Rosalind observation supports launcher readiness only."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-breast-visium/build_case.py from the repository root.",
+    "Require collection bfd55632-15e2-4dde-a1b9-02ade511fc4d, 15 Visium datasets, and 74,880 total spots.",
+    "Treat the Rosalind launcher receipt separately from the CELLxGENE metadata analysis."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_open": "executed"
+  }
+}

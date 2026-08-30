@@ -1,0 +1,158 @@
+{
+  "id": "ngs-nextflow-readiness",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_workflows",
+    "ngs-analysis-workbench.get_runtime_environment",
+    "ngs-analysis-workbench.check_nextflow_readiness",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_workflows",
+      "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+      "Python 3.14",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/source-and-fixture.md",
+      "bytes": 677
+    },
+    {
+      "path": "inputs/public-fixture.fastq",
+      "bytes": 1330
+    },
+    {
+      "path": "inputs/samplesheet.csv",
+      "bytes": 66
+    },
+    {
+      "path": "inputs/params.json",
+      "bytes": 92
+    },
+    {
+      "path": "workflow/main.nf",
+      "bytes": 392
+    },
+    {
+      "path": "scripts/reference_fastq_stats.py",
+      "bytes": 2409
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/readiness.json",
+      "bytes": 1065
+    },
+    {
+      "path": "outputs/reference-fastq-stats.json",
+      "bytes": 430
+    },
+    {
+      "path": "outputs/native-check.txt",
+      "bytes": 705
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 767
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 5419
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 8055
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1940
+    }
+  ],
+  "sources": [
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract",
+    "https://github.com/nf-core/demo/tree/1.2.0",
+    "https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_R1.fastq.gz"
+  ],
+  "observations": [
+    "The catalogued fastq_qc binding resolves to nf-core/demo revision 1.2.0.",
+    "The earlier Windows-local readiness result was blocked because Nextflow was missing and the Docker server was unreachable.",
+    "After repair, the Linux SSH runtime exposed Nextflow 26.04.6 and a reachable Docker 29.7.2 server with an active controller candidate.",
+    "The retained native Nextflow workflow completed one FASTQ_STATS task with exit code 0 and reproduced the two-record reference statistics.",
+    "The refreshed Workbench readiness call failed when the Windows-hosted plugin converted the remote POSIX run directory to a backslash-prefixed path.",
+    "rosalind_open returned the ready launcher view for this case-specific task context; no scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The retained fixture and native definition now support a verified native Nextflow execution lesson; the Workbench readiness and planning path remains unavailable because of Windows path handling."
+  ],
+  "limitations": [
+    "The minimal native Nextflow workflow executed; the nf-core workflow, FastQC, MultiQC, trimming, Workbench plan, and registered run did not execute.",
+    "The two-record public prefix is too small for library-quality or biological conclusions.",
+    "The minimal statistics workflow does not substitute for the catalogued nf-core workflow.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract",
+        "https://github.com/nf-core/demo/tree/1.2.0",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_R1.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/source-and-fixture.md",
+        "inputs/public-fixture.fastq",
+        "inputs/samplesheet.csv",
+        "inputs/params.json",
+        "workflow/main.nf",
+        "scripts/reference_fastq_stats.py"
+      ],
+      "outputs": [
+        "outputs/readiness.json",
+        "outputs/reference-fastq-stats.json",
+        "outputs/native-check.txt",
+        "outputs/rosalind-open-observation.json",
+        "outputs/operation-evidence.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Workbench supplied the blocked readiness response; local Python produced the fixture statistics; Rosalind supplied only the retained launcher response."
+    }
+  ],
+  "reproduction": [
+    "Refresh the local runtime and call ngs-analysis-workbench.check_nextflow_readiness for fastq_qc with the Docker profile and a new absolute run directory.",
+    "If Nextflow exists, run nextflow run workflow/main.nf -stub-run; otherwise retain the observed absence without claiming a dry run.",
+    "Run python scripts/reference_fastq_stats.py inputs/public-fixture.fastq and compare the output with outputs/reference-fastq-stats.json.",
+    "Call mcp__rosalind__rosalind_open with the case-specific task_context and compare its response with outputs/rosalind-open-observation.json.",
+    "For ngs-nextflow-readiness, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "readiness_id": "readiness-5e1e56595cbac7e9e9b4723328ea1c8a",
+    "observed_at": "2026-08-29T17:38:39Z",
+    "workflow_execution_performed": true,
+    "workbench_registered_run_created": false,
+    "reference_computation_performed": true
+  }
+}

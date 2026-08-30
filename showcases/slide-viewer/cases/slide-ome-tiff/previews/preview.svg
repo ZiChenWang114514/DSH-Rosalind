@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">OME-TIFF multichannel Z-series summary</title>
+  <desc id="desc">The official sample contains three channels, five Z planes, one time point, and fifteen TIFF directories; the viewer remained awaiting mount.</desc>
+  <rect width="1200" height="675" fill="#101527"/>
+  <text x="70" y="82" fill="#c4b5fd" font-family="Segoe UI,Arial" font-size="25">SLIDE VIEWER · OME-TIFF</text>
+  <text x="70" y="145" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="44" font-weight="700">Multichannel Z-series topology</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="70" y="205" width="240" height="145" rx="18" fill="#24203f" stroke="#a78bfa"/>
+    <text x="100" y="255" fill="#ddd6fe" font-size="22">Channels</text><text x="100" y="315" fill="#fff" font-size="48" font-weight="700">3</text>
+    <rect x="350" y="205" width="240" height="145" rx="18" fill="#24203f" stroke="#a78bfa"/>
+    <text x="380" y="255" fill="#ddd6fe" font-size="22">Z planes</text><text x="380" y="315" fill="#fff" font-size="48" font-weight="700">5</text>
+    <rect x="630" y="205" width="240" height="145" rx="18" fill="#24203f" stroke="#a78bfa"/>
+    <text x="660" y="255" fill="#ddd6fe" font-size="22">Time points</text><text x="660" y="315" fill="#fff" font-size="48" font-weight="700">1</text>
+    <rect x="910" y="205" width="220" height="145" rx="18" fill="#24203f" stroke="#a78bfa"/>
+    <text x="940" y="255" fill="#ddd6fe" font-size="22">IFDs</text><text x="940" y="315" fill="#fff" font-size="48" font-weight="700">15</text>
+    <rect x="70" y="415" width="1060" height="125" rx="18" fill="#1e293b" stroke="#64748b"/>
+    <text x="100" y="462" fill="#e2e8f0" font-size="23">File topology: 3 × 5 × 1 = 15 · 439 × 167 · signed 8-bit</text>
+    <text x="100" y="505" fill="#fbbf24" font-size="23">Viewer state: awaiting-viewer · stateRevision: null</text>
+    <text x="70" y="610" fill="#94a3b8" font-size="21">Source authorized · no mounted scene · no channel or Z-plane change claimed</text>
+  </g>
+</svg>

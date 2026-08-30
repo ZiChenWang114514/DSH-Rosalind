@@ -1,0 +1,10 @@
+{
+  "job_id": "local-p01116-window-scan",
+  "status": "running",
+  "analysis": "9-residue sliding-window hydrophobic residue count",
+  "window_size": 9,
+  "completed_windows": 32,
+  "total_windows": 181,
+  "temporary_partial_present": true,
+  "final_output_present": false
+}

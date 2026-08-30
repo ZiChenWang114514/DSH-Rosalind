@@ -1,0 +1,56 @@
+{
+  "schema": "sequence-viewer.operation-evidence/v1",
+  "case_id": "sequence-row-groups",
+  "plugin_version": "0.1.43",
+  "reviewed_on": "2026-08-30",
+  "successful_operations": [],
+  "failed_operations": [
+    {
+      "operation": "sequence-viewer.sequence_open_from_chat",
+      "status": "session-created-render-unconfirmed",
+      "operation_succeeded": false,
+      "outcome": "The shared RAS diagnostic session was created, but viewer readiness was false.",
+      "confirmation": "Mode and row-query requests timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_control_viewer",
+      "status": "timeout",
+      "operation_succeeded": false,
+      "outcome": "The shared Alignment-mode request was not acknowledged.",
+      "confirmation": "No row visibility state could be confirmed."
+    },
+    {
+      "operation": "sequence-viewer.sequence_query_viewer",
+      "status": "timeout",
+      "operation_succeeded": false,
+      "outcome": "The shared row query was not acknowledged.",
+      "confirmation": "No row order was returned."
+    }
+  ],
+  "unexecuted_operations": [
+    {
+      "operation": "sequence-viewer.sequence_edit_copy:assign-alignment-row-group",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_control_viewer:set_alignment_row_visibility",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    },
+    {
+      "operation": "sequence-viewer.sequence_control_viewer:show_all_alignment_rows",
+      "status": "not-executed",
+      "operation_succeeded": false,
+      "reason": "A mounted, query-confirmed viewer was unavailable after the prerequisite diagnostic timed out."
+    }
+  ],
+  "privacy": {
+    "session_ids_retained": false,
+    "private_paths_retained": false,
+    "internal_resource_uris_retained": false
+  },
+  "conclusion": "No Sequence Viewer capability is claimed for this case because no operation received both a successful call result and a confirming follow-up query."
+}

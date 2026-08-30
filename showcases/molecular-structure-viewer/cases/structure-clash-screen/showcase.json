@@ -1,0 +1,53 @@
+{
+  "id": "structure-clash-screen",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": ["RCSB PDB coordinate snapshot", "Python 3.14 standard library", "Rosalind Workbench mcp__rosalind__rosalind_open"],
+    "device": "local",
+    "implementation": "deterministic heavy-atom van der Waals overlap diagnostic with explicit covalent graph exclusions",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/public-source.md", "bytes": 471},
+    {"path": "inputs/1CRN.pdb", "bytes": 49491},
+    {"path": "scripts/analyze.py", "bytes": 7489}
+  ],
+  "outputs": [
+    {"path": "outputs/clash-screen.json", "bytes": 1816},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 636}
+  ],
+  "previews": [{"path": "previews/preview.svg", "bytes": 1074}],
+  "sources": ["https://www.rcsb.org/structure/1CRN", "https://files.rcsb.org/download/1CRN.pdb"],
+  "observations": [
+    "The method admits 327 heavy atoms and tests 51,964 nonbonded pairs after graph exclusions.",
+    "No tested pair exceeds 0.4 Å overlap under the recorded van der Waals radii.",
+    "The calculation covers the retained asymmetric-unit coordinates and does not generate symmetry mates."
+  ],
+  "interpretation": ["The zero count is conditional on the deposited coordinates and explicit method and is not a general structure-validation score."],
+  "limitations": ["Hydrogens are absent, so this is not an all-atom clashscore.", "Bonding is inferred with simple coordinate rules.", "Symmetry contacts, uncertainty, and dynamics are excluded."],
+  "provenance": [{
+    "sources": ["https://files.rcsb.org/download/1CRN.pdb"],
+    "inputs": ["inputs/public-source.md", "inputs/1CRN.pdb", "scripts/analyze.py"],
+    "outputs": ["outputs/clash-screen.json", "outputs/rosalind-open-observation.json"],
+    "previews": ["previews/preview.svg"],
+    "note": "The local script applies recorded radii, bond inference, graph exclusions, and overlap threshold to the public coordinate snapshot; the separate Rosalind observation records launcher availability without a scientific job."
+  }],
+  "reproduction": [
+    "Run scripts/analyze.py with Python 3.14 or a compatible standard-library Python.",
+    "Confirm 327 admitted atoms, 51,964 tested pairs, and zero overlaps above 0.4 Å.",
+    "Match the radii, covalent exclusions, alternate-location policy, model, and symmetry scope before comparing another tool."
+  ],
+  "environment": {"cost": "free", "data": "public", "device": "local"}
+}

@@ -1,0 +1,3 @@
+# Portable KRAS session-manifest restoration
+
+Construct a viewer-independent portable JSON manifest for public KRAS `P01116` using only a relative source path and deterministic view state. Restore it locally, verify the source digest and selected 10–17 `GAGGVGKS` motif, compare every retained state field, and record serialized equivalence. Invoke `mcp__rosalind__rosalind_open` once, retain its exact task-chooser response with UTC and local timestamps in `outputs/rosalind-open-observation.json`, and state that this does not prove a Rosalind scientific run. Treat Sequence Viewer open, save-session, restore-session, and query operations as rehearsed unless a mounted viewer supplies live session results.

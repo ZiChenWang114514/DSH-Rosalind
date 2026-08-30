@@ -22,6 +22,9 @@ export const LITERATURE_SHOWCASES = {
     "literature-trem2-landscape",
     "literature-pmc-availability",
     "literature-preprint-publication-link",
+    "literature-kras-g12c",
+    "literature-visium-methods",
+    "literature-nanobody-assays",
   ],
 } as const;
 

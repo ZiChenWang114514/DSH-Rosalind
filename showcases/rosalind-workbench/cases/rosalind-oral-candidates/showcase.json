@@ -1,0 +1,124 @@
+{
+  "id": "rosalind-oral-candidates",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "adme-and-developability",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open",
+    "rosalind-workbench.public-evidence"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "PubChem PUG REST",
+      "Python 3.14",
+      "RDKit 2026.03.5"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus five CID-exact oral reference drugs with deterministic local molecular descriptors and explicit threshold counts",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 844
+    },
+    {
+      "path": "inputs/compounds.csv",
+      "bytes": 950
+    },
+    {
+      "path": "scripts/analyze.py",
+      "bytes": 5592
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/property-comparison.csv",
+      "bytes": 468
+    },
+    {
+      "path": "outputs/result-summary.json",
+      "bytes": 1580
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 534
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6272
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2768
+    }
+  ],
+  "sources": [
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5291",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/123631",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/176870",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/71496458",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5329102"
+  ],
+  "observations": [
+    "Exact PubChem structures and source properties are retained for five orally administered kinase-inhibitor reference drugs.",
+    "All five have zero Lipinski and zero Veber-style threshold exceedances under the retained definitions.",
+    "Local RDKit descriptors span molecular weights 393.44-499.62, MolLogP 3.33-4.59, TPSA 68.74-87.55 A^2, and QED 0.311-0.626.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The broad descriptor range among five oral reference drugs illustrates that simple thresholds are filters and do not supply a clinical ranking or exposure model."
+  ],
+  "limitations": [
+    "The comparison omits salt form, solid state, formulation, dissolution, permeability, transporters, metabolism, dose, and exposure.",
+    "QED and all listed descriptors are computed molecule-level quantities.",
+    "Threshold exceedances do not rank efficacy, safety, developability, or probability of oral success.",
+    "The Rosalind operation opened only the task chooser; no Rosalind scientific job or laboratory experiment was executed."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://pubchem.ncbi.nlm.nih.gov/compound/5291",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/123631",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/176870",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/71496458",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/5329102"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/compounds.csv",
+        "scripts/analyze.py"
+      ],
+      "outputs": [
+        "outputs/property-comparison.csv",
+        "outputs/result-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The launcher observation records the exact Rosalind chooser response and does not represent scientific execution. CID-exact public records feed a deterministic local descriptor script with explicit Lipinski and Veber-style thresholds."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-oral-candidates/scripts/analyze.py from the repository root.",
+    "Invoke mcp__rosalind__rosalind_open with task_context five oral-drug property-profile teaching case, then compare the response with outputs/rosalind-open-observation.json.",
+    "Inspect the exact input records, comparison table, threshold definitions, summary, and SVG preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local"
+  }
+}

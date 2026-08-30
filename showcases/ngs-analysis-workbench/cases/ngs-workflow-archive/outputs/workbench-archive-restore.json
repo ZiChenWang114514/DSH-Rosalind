@@ -1,0 +1,24 @@
+{
+  "workflow_id": "showcase_fastq_qc_lifecycle_20260830",
+  "object_scope": "showcase-created user-catalog workflow",
+  "pre_existing_user_workflow": false,
+  "actions_performed": [
+    "archive_workflow",
+    "list_workflows(include_archived=true)",
+    "restore_workflow",
+    "list_workflows(include_archived=true)"
+  ],
+  "archive_observation": {
+    "archived": true,
+    "current_version_id": "version-d88ed31c58ebee8c5667ddee257b846f",
+    "source_sha256": "sha256:e45290e57e1babf0336acb0fd9a6657f3df69188f501cdbab2d62c806924f0cb"
+  },
+  "restore_observation": {
+    "archived": false,
+    "current_version_id": "version-d88ed31c58ebee8c5667ddee257b846f",
+    "source_sha256": "sha256:e45290e57e1babf0336acb0fd9a6657f3df69188f501cdbab2d62c806924f0cb"
+  },
+  "versions_preserved": true,
+  "workflow_execution_started": false,
+  "note": "Only the showcase-created workflow was archived. It was restored immediately after the archived state was observed."
+}

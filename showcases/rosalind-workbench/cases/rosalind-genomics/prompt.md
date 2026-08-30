@@ -1,3 +1,7 @@
-# Prompt
+# Dexamethasone airway RNA-seq
 
-Open the genomics area, then load the retained three-row human RAS alignment with the Sequence service and run alignment metrics. Keep the original launcher observation separate from the retained alignment result.
+Which genes and pathways change in a small public dexamethasone airway RNA-seq study?
+
+Analyze the authors' public GSE52778 Dex-versus-untreated processed table. Recompute direction directly from the named FPKM columns, retain the 25 leading significant genes, and summarize overlap with the four declared panels without presenting those counts as formal pathway enrichment.
+
+Read `outputs/rosalind-open-observation.json` as a genuine launcher observation from `mcp__rosalind__rosalind_open`; do not claim it executed the RNA-seq analysis.

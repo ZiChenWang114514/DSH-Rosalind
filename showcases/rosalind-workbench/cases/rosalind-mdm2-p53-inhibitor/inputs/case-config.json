@@ -1,0 +1,30 @@
+{
+  "showcase_id": "rosalind-mdm2-p53-inhibitor",
+  "title": "MDM2 pocket occupancy by p53 and Nutlin-3a",
+  "question": "Which MDM2 residues contact the p53 transactivation peptide and the experimental Nutlin-3a pose, and how much do those contact sets overlap?",
+  "retrieved_on": "2026-08-30",
+  "contact_cutoff_angstrom": 4.0,
+  "structures": [
+    {
+      "pdb_id": "1YCR",
+      "file": "inputs/1YCR.pdb",
+      "label": "MDM2-p53-peptide",
+      "protein_chain": "A",
+      "ligand_mode": "polymer_chain",
+      "ligand_chain": "B",
+      "ligand_resname": "p53 peptide"
+    },
+    {
+      "pdb_id": "4HG7",
+      "file": "inputs/4HG7.pdb",
+      "label": "MDM2-Nutlin-3a",
+      "protein_chain": "A",
+      "ligand_mode": "hetero",
+      "ligand_resname": "NUT",
+      "ligand_chain": "A"
+    }
+  ],
+  "compounds": [
+    {"name": "Nutlin-3a", "slug": "nutlin-3a", "pubchem_cid": 11433190, "role": "4HG7 ligand"}
+  ]
+}

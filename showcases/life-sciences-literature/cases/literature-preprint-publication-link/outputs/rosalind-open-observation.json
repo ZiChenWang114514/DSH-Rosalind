@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "literature-preprint-publication-link",
+  "observed_at_utc": "2026-08-29T18:09:34.737Z",
+  "observed_at_local": "2026-08-30T02:09:34.737+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review the medRxiv-to-publication linkage teaching case; open Rosalind Workbench only and do not execute a scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; neither the medRxiv DOI nor the linked publication record was submitted to Rosalind."
+}

@@ -1,0 +1,54 @@
+{
+  "showcase_id": "slide-tissue-architecture",
+  "check_date": "2026-08-30",
+  "open": {
+    "operation": "mcp__slide_viewer__slide_open_from_chat",
+    "source_authorized": true,
+    "viewer_session_recorded": true,
+    "viewer_ready": false,
+    "viewer_state": "awaiting-viewer",
+    "viewer_command_revision": 0,
+    "presentation": "inline"
+  },
+  "state": {
+    "operation": "mcp__slide_viewer__slide_get_viewer_state",
+    "command_sequence": 1,
+    "observed_at": null,
+    "status": "awaiting-viewer",
+    "state_revision": null,
+    "snapshot": null,
+    "source_authorization_observed": true,
+    "viewer_resource_revision_recorded": true,
+    "file_sha256": "9a1923cd9bcb260ba4d99d64f8d6e32550648c332ba48817f920662f3a513420",
+    "revision_note": "The internal viewer resource revision is intentionally not published; the scientifically relevant whole-file SHA-256 remains retained separately."
+  },
+  "capabilities": {
+    "operation": "mcp__slide_viewer__slide_get_capabilities",
+    "mounted_viewer_reported": false,
+    "fit_view_supported": false,
+    "set_viewport_supported": false,
+    "set_layer_visibility_supported": false,
+    "query_viewer_supported": false,
+    "reason": "The mounted viewer had not reported support for viewer actions."
+  },
+  "queries": [
+    {"operation": "mcp__slide_viewer__slide_query_viewer", "query": "state", "result": "timeout"},
+    {"operation": "mcp__slide_viewer__slide_query_viewer", "query": "layers", "result": "timeout"},
+    {"operation": "mcp__slide_viewer__slide_query_viewer", "query": "microscopy_scenes", "result": "timeout"}
+  ],
+  "render": {
+    "operation": "mcp__slide_viewer__slide_wait_for_render",
+    "result": "not called",
+    "reason": "The state response contained no stateRevision.",
+    "render_evidence": false
+  },
+  "viewer_actions": {
+    "fit": "not called",
+    "pan": "not called",
+    "zoom": "not called",
+    "layer_visibility": "not called",
+    "display_option": "not called",
+    "reason": "Viewer actions require an active mounted viewer and current state revision."
+  },
+  "scientific_interpretation": "No tissue region was rendered or supplied as current model image context, so the receipt supports no morphology statement."
+}

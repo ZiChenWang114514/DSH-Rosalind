@@ -1,0 +1,40 @@
+{
+  "showcase_id": "databases-pdl1",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "protein": {
+    "uniprot_accession": "Q9NZQ7",
+    "entry_id": "PD1L1_HUMAN",
+    "recommended_name": "Programmed cell death 1 ligand 1",
+    "gene": "CD274",
+    "reviewed": true,
+    "length_aa": 290,
+    "signal_peptide": [
+      1,
+      18
+    ],
+    "extracellular_domain": [
+      19,
+      238
+    ],
+    "transmembrane_helix": [
+      239,
+      259
+    ],
+    "cytoplasmic_domain": [
+      260,
+      290
+    ]
+  },
+  "structure": {
+    "pdb_id": "5J89",
+    "title": "Structure of human Programmed cell death 1 ligand 1 (PD-L1) with low molecular mass inhibitor",
+    "method": "X-RAY DIFFRACTION",
+    "resolution_angstrom": 2.2
+  },
+  "interpretation": "The UniProt topology record identifies the full-length membrane protein, while 5J89 provides a structure-level observation of a low-molecular-mass inhibitor bound to PD-L1.",
+  "limitations": [
+    "The retained RCSB entry is one inhibitor-bound crystal structure and does not measure cellular checkpoint inhibition.",
+    "UniProt topology annotations describe the canonical sequence and do not represent every proteoform or glycoform.",
+    "No affinity value, clinical response, or nanobody ranking is inferred."
+  ]
+}

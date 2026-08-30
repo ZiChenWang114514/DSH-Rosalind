@@ -1,0 +1,83 @@
+{
+  "showcase_id": "sequence-row-groups",
+  "source_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "original_row_order": [
+    "P01116",
+    "P01111",
+    "P01112"
+  ],
+  "row_order_after_group_assignment": [
+    "P01116",
+    "P01111",
+    "P01112"
+  ],
+  "order_preserved": true,
+  "metrics": [
+    {
+      "accession": "P01116",
+      "original_row_index_0based": 0,
+      "hvr_window_residues_166_185": "YRLKKISKEEKTPGCVKIKK",
+      "basic_K_or_R_count": 8,
+      "pre_CAAX_cysteine_count": 1,
+      "CAAX_residues_186_189": "CIIM",
+      "basicity_group": "high-basicity",
+      "pre_CAAX_cysteine_group": "one-cysteine"
+    },
+    {
+      "accession": "P01111",
+      "original_row_index_0based": 1,
+      "hvr_window_residues_166_185": "YRMKKLNSSDDGTQGCMGLP",
+      "basic_K_or_R_count": 3,
+      "pre_CAAX_cysteine_count": 1,
+      "CAAX_residues_186_189": "CVVM",
+      "basicity_group": "lower-basicity",
+      "pre_CAAX_cysteine_group": "one-cysteine"
+    },
+    {
+      "accession": "P01112",
+      "original_row_index_0based": 2,
+      "hvr_window_residues_166_185": "HKLRKLNPPDESGPGCMSCK",
+      "basic_K_or_R_count": 4,
+      "pre_CAAX_cysteine_count": 2,
+      "CAAX_residues_186_189": "CVLS",
+      "basicity_group": "lower-basicity",
+      "pre_CAAX_cysteine_group": "two-cysteines"
+    }
+  ],
+  "grouping_plans": {
+    "hvr-basicity": {
+      "rule": "count K or R in ungapped residues 166..185; high-basicity if count >= 6",
+      "groups": {
+        "high-basicity": [
+          "P01116"
+        ],
+        "lower-basicity": [
+          "P01111",
+          "P01112"
+        ]
+      }
+    },
+    "pre-caax-cysteines": {
+      "rule": "count cysteine from residue 166 through the residue immediately before the terminal CAAX motif",
+      "groups": {
+        "one-cysteine": [
+          "P01116",
+          "P01111"
+        ],
+        "two-cysteines": [
+          "P01112"
+        ]
+      }
+    }
+  },
+  "execution": {
+    "status": "verified local computation",
+    "tool": "Python 3 standard library",
+    "viewer_operation": "sequence.edit_copy row-group operations were rehearsed; no live copy was changed"
+  },
+  "interpretation": "The two plans expose contrasting hypervariable-region composition without relabeling the rows as evolutionary or clinical classes.",
+  "limitations": [
+    "The thresholds are transparent teaching rules for three sequences, not learned biological classifiers.",
+    "Counts do not establish post-translational modification or membrane localization."
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "slide-pathology-workflow",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local Python JSON and CSV validation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "OpenSlide CMU-1 source plan, deterministic pathology lifecycle validation, and an observed Rosalind task-chooser invocation; all Slide Viewer operations remain rehearsed",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 1006,
+      "sha256": "006b5dc9d7b2ec9d0d4688a253711e4643cb72efa6f12416426d049c025dff22"
+    },
+    {
+      "path": "inputs/pathology-plan.json",
+      "bytes": 907,
+      "sha256": "b74fc81c17b8465c5a00061a7eb2bda4b70edae0f3591897c8f5aba483af77cf"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/pathology-state-machine.json",
+      "bytes": 2237,
+      "sha256": "93f8f9ead89c57c389b03f1d5e742dfff2d8e913a8c70ed7b480ffd889f52a87"
+    },
+    {
+      "path": "outputs/state-transition-checks.csv",
+      "bytes": 957,
+      "sha256": "5aa5c5a926d887da2532cafab172c4501a30bef176b10eb7782d448de53a625b"
+    },
+    {
+      "path": "outputs/local-validation.json",
+      "bytes": 417,
+      "sha256": "197e4f121c33328f4bf04ba81830e15e09adc24dfbd550f05840f2494809a3f9"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 743,
+      "sha256": "062e7dd26ed495c9bdf69d54bdd0dd49c76421e90cc40b9cfc51f45005e9c893"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 3150,
+      "sha256": "7546d7594a7a282b4015b8c6a0fae5da6e59a58083c4320049942f51ff51a354"
+    }
+  ],
+  "sources": [
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs",
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
+  ],
+  "observations": [
+    "The OpenSlide CMU-1 public identity is retained by URL, published byte count, SHA-256, and license without downloading the slide.",
+    "Nine local transition cases passed: five permitted lifecycle transitions and four rejected shortcuts.",
+    "The current callable contract exposes pathology get, cancel, and resume operations but no pathology start operation; all three remain rehearsed.",
+    "A genuine Rosalind launcher call returned ready=true and the exact task-chooser message; no scientific job was executed."
+  ],
+  "interpretation": [
+    "The validated state machine separates cancellation acceptance, worker shutdown, recoverable interruption, and terminal results."
+  ],
+  "limitations": [
+    "No viewer, pathology job, remote workflow, tissue image, model output, or Rosalind scientific job was created.",
+    "The planned pathology operation kind remains unset until a future current contract advertises one.",
+    "The retained state checks provide no clinical or diagnostic evidence."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs",
+        "https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/pathology-plan.json"
+      ],
+      "outputs": [
+        "outputs/pathology-state-machine.json",
+        "outputs/state-transition-checks.csv",
+        "outputs/local-validation.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "A public source plan feeds deterministic lifecycle checks; the case records the current absent start operation and no Slide Viewer execution."
+    }
+  ],
+  "reproduction": [
+    "Run python validate_case.py from the case directory and inspect outputs/rosalind-open-observation.json.",
+    "Compare the nine CSV cases with the allowed transitions in pathology-state-machine.json.",
+    "Keep any later live pathology execution in a separate record with actual source, job, attempt, artifact, and terminal-status evidence."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public source plan; no slide downloaded",
+    "device": "local",
+    "viewer_operations_executed": false,
+    "rosalind_launcher_invoked": true,
+    "rosalind_scientific_job_executed": false,
+    "remote_workflow_executed": false
+  }
+}

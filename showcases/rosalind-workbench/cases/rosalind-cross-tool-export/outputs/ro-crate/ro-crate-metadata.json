@@ -1,0 +1,333 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "Rosalind scientific evidence teaching package",
+      "description": "A compact package of public-source observations, local computations, an experimental plan, a retained Boltz-2 prediction summary, and unexecuted workflow definitions.",
+      "datePublished": "2026-08-30",
+      "hasPart": [
+        {
+          "@id": "cases/rosalind-scientific-compute/"
+        },
+        {
+          "@id": "cases/rosalind-pdl1-assay-plan/"
+        },
+        {
+          "@id": "cases/rosalind-boltz-repeats/"
+        },
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/"
+        },
+        {
+          "@id": "artifact-inventory.csv"
+        },
+        {
+          "@id": "README.md"
+        }
+      ]
+    },
+    {
+      "@id": "cases/rosalind-scientific-compute/inputs/source-provenance.json",
+      "@type": "File",
+      "name": "source-provenance.json",
+      "encodingFormat": "application/json",
+      "contentSize": "564",
+      "additionalType": "source-observation",
+      "isPartOf": {
+        "@id": "cases/rosalind-scientific-compute/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-scientific-compute/outputs/embedding-summary.json",
+      "@type": "File",
+      "name": "embedding-summary.json",
+      "encodingFormat": "application/json",
+      "contentSize": "743",
+      "additionalType": "computed-result",
+      "isPartOf": {
+        "@id": "cases/rosalind-scientific-compute/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-scientific-compute/outputs/run-metrics.json",
+      "@type": "File",
+      "name": "run-metrics.json",
+      "encodingFormat": "application/json",
+      "contentSize": "354",
+      "additionalType": "provenance",
+      "isPartOf": {
+        "@id": "cases/rosalind-scientific-compute/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-scientific-compute/",
+      "@type": "Dataset",
+      "name": "rosalind-scientific-compute",
+      "hasPart": [
+        {
+          "@id": "cases/rosalind-scientific-compute/inputs/source-provenance.json"
+        },
+        {
+          "@id": "cases/rosalind-scientific-compute/outputs/embedding-summary.json"
+        },
+        {
+          "@id": "cases/rosalind-scientific-compute/outputs/run-metrics.json"
+        }
+      ]
+    },
+    {
+      "@id": "cases/rosalind-pdl1-assay-plan/inputs/KN035-public-evidence.md",
+      "@type": "File",
+      "name": "KN035-public-evidence.md",
+      "encodingFormat": "text/markdown",
+      "contentSize": "1609",
+      "additionalType": "source-observation",
+      "isPartOf": {
+        "@id": "cases/rosalind-pdl1-assay-plan/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-pdl1-assay-plan/outputs/assay-plan.json",
+      "@type": "File",
+      "name": "assay-plan.json",
+      "encodingFormat": "application/json",
+      "contentSize": "3136",
+      "additionalType": "experimental-plan",
+      "isPartOf": {
+        "@id": "cases/rosalind-pdl1-assay-plan/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-pdl1-assay-plan/outputs/competitive-elisa-plate-map.csv",
+      "@type": "File",
+      "name": "competitive-elisa-plate-map.csv",
+      "encodingFormat": "application/vnd.ms-excel",
+      "contentSize": "6724",
+      "additionalType": "experimental-plan",
+      "isPartOf": {
+        "@id": "cases/rosalind-pdl1-assay-plan/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-pdl1-assay-plan/",
+      "@type": "Dataset",
+      "name": "rosalind-pdl1-assay-plan",
+      "hasPart": [
+        {
+          "@id": "cases/rosalind-pdl1-assay-plan/inputs/KN035-public-evidence.md"
+        },
+        {
+          "@id": "cases/rosalind-pdl1-assay-plan/outputs/assay-plan.json"
+        },
+        {
+          "@id": "cases/rosalind-pdl1-assay-plan/outputs/competitive-elisa-plate-map.csv"
+        }
+      ]
+    },
+    {
+      "@id": "cases/rosalind-boltz-repeats/inputs/source-and-run-provenance.md",
+      "@type": "File",
+      "name": "source-and-run-provenance.md",
+      "encodingFormat": "text/markdown",
+      "contentSize": "1006",
+      "additionalType": "provenance",
+      "isPartOf": {
+        "@id": "cases/rosalind-boltz-repeats/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-boltz-repeats/outputs/run-evidence.json",
+      "@type": "File",
+      "name": "run-evidence.json",
+      "encodingFormat": "application/json",
+      "contentSize": "2147",
+      "additionalType": "computed-result",
+      "isPartOf": {
+        "@id": "cases/rosalind-boltz-repeats/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-boltz-repeats/outputs/top5-ensemble-ranking.csv",
+      "@type": "File",
+      "name": "top5-ensemble-ranking.csv",
+      "encodingFormat": "application/vnd.ms-excel",
+      "contentSize": "1758",
+      "additionalType": "computed-result",
+      "isPartOf": {
+        "@id": "cases/rosalind-boltz-repeats/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-boltz-repeats/outputs/top5-confidence-records.json",
+      "@type": "File",
+      "name": "top5-confidence-records.json",
+      "encodingFormat": "application/json",
+      "contentSize": "24303",
+      "additionalType": "computed-result",
+      "isPartOf": {
+        "@id": "cases/rosalind-boltz-repeats/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-boltz-repeats/",
+      "@type": "Dataset",
+      "name": "rosalind-boltz-repeats",
+      "hasPart": [
+        {
+          "@id": "cases/rosalind-boltz-repeats/inputs/source-and-run-provenance.md"
+        },
+        {
+          "@id": "cases/rosalind-boltz-repeats/outputs/run-evidence.json"
+        },
+        {
+          "@id": "cases/rosalind-boltz-repeats/outputs/top5-ensemble-ranking.csv"
+        },
+        {
+          "@id": "cases/rosalind-boltz-repeats/outputs/top5-confidence-records.json"
+        }
+      ]
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/inputs/source-provenance.json",
+      "@type": "File",
+      "name": "source-provenance.json",
+      "encodingFormat": "application/json",
+      "contentSize": "361",
+      "additionalType": "source-observation",
+      "isPartOf": {
+        "@id": "cases/rosalind-nextflow-snakemake/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/outputs/reference-qc.json",
+      "@type": "File",
+      "name": "reference-qc.json",
+      "encodingFormat": "application/json",
+      "contentSize": "208",
+      "additionalType": "computed-result",
+      "isPartOf": {
+        "@id": "cases/rosalind-nextflow-snakemake/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/outputs/readiness.json",
+      "@type": "File",
+      "name": "readiness.json",
+      "encodingFormat": "application/json",
+      "contentSize": "499",
+      "additionalType": "provenance",
+      "isPartOf": {
+        "@id": "cases/rosalind-nextflow-snakemake/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/outputs/workflow-contract.json",
+      "@type": "File",
+      "name": "workflow-contract.json",
+      "encodingFormat": "application/json",
+      "contentSize": "722",
+      "additionalType": "workflow-plan",
+      "isPartOf": {
+        "@id": "cases/rosalind-nextflow-snakemake/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/workflows/nextflow/main.nf",
+      "@type": "File",
+      "name": "main.nf",
+      "encodingFormat": "application/octet-stream",
+      "contentSize": "333",
+      "additionalType": "workflow-plan",
+      "isPartOf": {
+        "@id": "cases/rosalind-nextflow-snakemake/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/workflows/snakemake/Snakefile",
+      "@type": "File",
+      "name": "Snakefile",
+      "encodingFormat": "application/octet-stream",
+      "contentSize": "232",
+      "additionalType": "workflow-plan",
+      "isPartOf": {
+        "@id": "cases/rosalind-nextflow-snakemake/"
+      }
+    },
+    {
+      "@id": "cases/rosalind-nextflow-snakemake/",
+      "@type": "Dataset",
+      "name": "rosalind-nextflow-snakemake",
+      "hasPart": [
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/inputs/source-provenance.json"
+        },
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/outputs/reference-qc.json"
+        },
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/outputs/readiness.json"
+        },
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/outputs/workflow-contract.json"
+        },
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/workflows/nextflow/main.nf"
+        },
+        {
+          "@id": "cases/rosalind-nextflow-snakemake/workflows/snakemake/Snakefile"
+        }
+      ]
+    },
+    {
+      "@id": "artifact-inventory.csv",
+      "@type": "File",
+      "name": "Artifact inventory",
+      "encodingFormat": "text/csv",
+      "contentSize": "2274",
+      "additionalType": "provenance",
+      "isPartOf": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "README.md",
+      "@type": "File",
+      "name": "Human-readable package guide",
+      "encodingFormat": "text/markdown",
+      "contentSize": "815",
+      "additionalType": "provenance",
+      "isPartOf": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "#export-action",
+      "@type": "CreateAction",
+      "name": "Deterministic local RO-Crate export",
+      "endTime": "2026-08-30",
+      "instrument": {
+        "@id": "#python-standard-library"
+      },
+      "result": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "#python-standard-library",
+      "@type": "SoftwareApplication",
+      "name": "Python standard library"
+    }
+  ]
+}

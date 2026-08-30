@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-motif-search",
+  "attempt_date": "2026-08-30",
+  "plugin_version": "0.1.80",
+  "session_scope": "one viewer opening attempt; nonportable internal identifiers omitted",
+  "open_result": {
+    "session_ready": true,
+    "viewer_ready": false,
+    "mount_state": "presentation-issued",
+    "render_state": "pending",
+    "workspace_publication_available": true
+  },
+  "state_attempts": [
+    "viewer command deadline elapsed before acknowledgement",
+    "viewer command deadline elapsed before acknowledgement"
+  ],
+  "public_motif_search_executed": false,
+  "reason": "The public motif operation requires an acknowledged mounted viewer state. No hit list, query hash, RMSD, or normalized score is claimed from this attempt."
+}

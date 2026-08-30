@@ -1,0 +1,157 @@
+{
+  "schema": "slide-viewer.workflow-operation-evidence/v1",
+  "case_id": "slide-workflow-recovery",
+  "recorded_at_utc": "2026-08-29T19:01:43.843Z",
+  "viewer_session": {
+    "session_alias": "temporary-session-a",
+    "opened_at_utc": "2026-08-29T18:55:06.207Z",
+    "viewer_state": "awaiting-viewer",
+    "source_authorized": true,
+    "rendered_frame_observed": false
+  },
+  "operations": [
+    {
+      "operation": "slide_import_workflow_source",
+      "started_at_utc": "2026-08-29T18:57:08.779Z",
+      "completed_at_utc": "2026-08-29T18:57:08.893Z",
+      "arguments": {
+        "sessionAlias": "temporary-session-a",
+        "path": "showcases/slide-viewer/cases/slide-workflow-recovery/inputs/temporary-region-counts.tsv",
+        "requestAlias": "workflow-source-import-1"
+      },
+      "response": {
+        "sessionAlias": "temporary-session-a",
+        "sourceAlias": "temporary-counts-source",
+        "sourceRevisionObserved": true,
+        "name": "temporary-region-counts.tsv",
+        "format": "tsv",
+        "requestCorrelation": {
+          "requestAlias": "workflow-source-import-1",
+          "pathSha256": "2d99d3dc990ebb09f665e3236518717672f5c51dafc92228fa20fe929dcad5ff"
+        }
+      },
+      "outcome": "issued-read-only-source"
+    },
+    {
+      "operation": "slide_run_workflow",
+      "started_at_utc": "2026-08-29T18:57:55.244Z",
+      "completed_at_utc": "2026-08-29T18:57:57.752Z",
+      "arguments": {
+        "sessionAlias": "temporary-session-a",
+        "sourceAlias": "temporary-counts-source",
+        "sourceRevisionObserved": true,
+        "idempotencyKey": "gpt-science-slide-region-qc-20260830-185735",
+        "retentionHours": 24,
+        "sourceOptions": {
+          "valueScale": {
+            "value": "counts",
+            "description": "The temporary TSV contains explicit nonnegative integer teaching counts."
+          }
+        },
+        "auxiliarySources": [
+          {
+            "role": "annotations",
+            "path": "showcases/slide-viewer/cases/slide-workflow-recovery/inputs/temporary-region-annotations.tsv"
+          }
+        ],
+        "request": {
+          "kind": "region-qc-normalization",
+          "countsRole": "primary",
+          "annotationsRole": "annotations",
+          "format": "geomx-target-tsv",
+          "valueScale": "counts",
+          "negativeControlTargetIds": ["NegControl"],
+          "normalizationTargetIds": ["Slc17a7", "Gad1", "Snap25"],
+          "observationIds": null,
+          "normalizedTargetIds": ["Slc17a7", "Gad1", "Snap25"],
+          "missingValues": ["NA"],
+          "annotationColumns": {
+            "id": "AOI",
+            "area": "area_um2",
+            "nuclei": "nuclei",
+            "librarySize": "library_size"
+          },
+          "annotationUnits": {"area": "um2", "librarySize": "counts"},
+          "qc": {"minimumArea": 100000, "minimumNuclei": 400, "minimumLibrarySize": 250},
+          "normalization": {"method": "upper-quartile", "positiveOnly": true},
+          "loq": {"standardDeviations": 2, "minimum": 1}
+        }
+      },
+      "response": {
+        "kind": "scientific-workflow-job",
+        "jobAlias": "region-qc-attempt-1",
+        "durableRecordObserved": true,
+        "requestKind": "region-qc-normalization",
+        "status": "running",
+        "attempt": 1,
+        "recovery": "new",
+        "requestSha256": "ae972c71e3122d86bdad2f87f1bfdbc0d0caee5d94ea602cc5842d287ab42a50"
+      },
+      "terminal_follow_up": {
+        "observed_at_utc": "2026-08-29T18:58:05.634Z",
+        "status": "failed",
+        "progress": {"phase": "normalization", "completed": 0, "total": 4},
+        "error": {
+          "code": "ABORTED",
+          "message": "The isolated workflow exited without a complete typed result."
+        }
+      },
+      "outcome": "admitted-then-failed"
+    },
+    {
+      "operation": "slide_run_workflow",
+      "started_at_utc": "2026-08-29T19:00:00.383Z",
+      "completed_at_utc": "2026-08-29T19:00:15.160Z",
+      "arguments_difference": {
+        "idempotencyKey": "gpt-science-slide-region-qc-20260830-185950"
+      },
+      "response": {
+        "jobAlias": "region-qc-attempt-2",
+        "durableRecordObserved": true,
+        "status_on_return": "running",
+        "status_after_15_seconds": "failed",
+        "progress": {"phase": "normalization", "completed": 0, "total": 4},
+        "error": {
+          "code": "ABORTED",
+          "message": "The isolated workflow exited without a complete typed result."
+        }
+      },
+      "outcome": "independent-reproduction-of-isolated-worker-failure"
+    },
+    {
+      "operation": "slide_list_workflows",
+      "started_at_utc": "2026-08-29T18:58:05.544Z",
+      "completed_at_utc": "2026-08-29T18:58:05.634Z",
+      "arguments": {
+        "sessionAlias": "temporary-session-a",
+        "sourceAlias": "temporary-counts-source",
+        "sourceRevisionObserved": true
+      },
+      "response": {
+        "job_count": 1,
+        "jobAlias": "region-qc-attempt-1",
+        "durableRecordObserved": true,
+        "status": "failed",
+        "error": {
+          "code": "ABORTED",
+          "message": "The isolated workflow exited without a complete typed result."
+        }
+      },
+      "outcome": "process-local-list-read"
+    }
+  ],
+  "artifact_read_status": {
+    "slide_read_workflow_artifact": "not_called",
+    "slide_read_live_workflow_artifact": "not_called",
+    "reason": "Both admitted region workflows failed before a typed summary or artifact descriptor was committed. No authentic artifactId was issued, so an artifact identifier was not invented.",
+    "authorization_note": "A durable task ID does not authorize artifact access and cannot be substituted for an artifact ID."
+  },
+  "scientific_interpretation": "The temporary tables test operation admission and task lifecycle only. They are synthetic regional measurements and provide no tissue, cell, disease, or biological inference.",
+  "authorization_limitations": [
+    "The imported source is read-only and belongs only to the recorded viewer session.",
+    "The writable private task area permitted task admission but does not grant export or publication permission.",
+    "No source-image capture consent was present and no source pixels were exported.",
+    "No workflow completion, normalized result, or artifact page is claimed."
+  ],
+  "path_recording": "Paths are retained relative to the authorized workspace; private host prefixes and viewer resource URIs are deliberately omitted."
+}

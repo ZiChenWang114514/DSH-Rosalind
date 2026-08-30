@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">KRAS G12C experimental-reference review</title><desc id="desc">6OIM structure metrics used to identify regions requiring caution in prediction interpretation.</desc>
+<rect width="1200" height="675" fill="#071522"/><circle cx="1080" cy="70" r="220" fill="#22d3ee" opacity=".14"/>
+<style>.k{font:600 22px Segoe UI,Arial;fill:#67e8f9}.t{font:700 43px Segoe UI,Arial;fill:#f8fafc}.b{font:24px Segoe UI,Arial;fill:#cbd5e1}.m{font:700 35px Segoe UI,Arial;fill:#f8fafc}.s{font:18px Segoe UI,Arial;fill:#94a3b8}</style>
+<text x="70" y="85" class="k">PUBLIC PDB 6OIM · 1.65 Å X-RAY STRUCTURE</text><text x="70" y="150" class="t">KRAS G12C structure-quality review</text>
+<rect x="70" y="215" width="320" height="280" rx="20" fill="#0f2538" stroke="#155e75"/><text x="105" y="270" class="b">Observed residues</text><text x="105" y="320" class="m">167</text><text x="105" y="385" class="b">Absent in 1–189</text><text x="105" y="435" class="m">23</text>
+<rect x="440" y="215" width="690" height="280" rx="20" fill="#0f2538" stroke="#155e75"/><text x="480" y="275" class="b">Mean crystallographic B factor</text><text x="480" y="340" class="b">Switch I (30–38)</text><text x="900" y="340" class="m">26.5 Å²</text><text x="480" y="415" class="b">Switch II (60–76)</text><text x="900" y="415" class="m">29.3 Å²</text>
+<text x="70" y="580" class="b">Cys12–MOV nearest atom distance: 1.80 Å</text><text x="70" y="625" class="s">Experimental B factors guide caution; they are not predicted confidence values.</text>
+</svg>

@@ -1,0 +1,92 @@
+{
+  "schema": "rosalind.ras-alignment-summary/v1",
+  "case_id": "rosalind-ras-isoforms",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "Three reviewed UniProtKB sequence records were retained and transformed into the isoform comparison."
+  },
+  "input": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+  "input_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "method": "direct comparison of the retained 191-column aligned FASTA; double-gap columns excluded and residue-gap columns counted as differences",
+  "record_order": [
+    "P01116",
+    "P01111",
+    "P01112"
+  ],
+  "aligned_columns": 191,
+  "ungapped_lengths": {
+    "P01116": 189,
+    "P01111": 189,
+    "P01112": 189
+  },
+  "invariant_columns": 154,
+  "variable_columns": 37,
+  "pairwise": {
+    "P01116_vs_P01111": {
+      "comparable_columns": 190,
+      "differences": 25,
+      "identity_percent": 86.842105,
+      "p_distance": 0.131578947368
+    },
+    "P01116_vs_P01112": {
+      "comparable_columns": 190,
+      "differences": 26,
+      "identity_percent": 86.315789,
+      "p_distance": 0.136842105263
+    },
+    "P01111_vs_P01112": {
+      "comparable_columns": 190,
+      "differences": 30,
+      "identity_percent": 84.210526,
+      "p_distance": 0.157894736842
+    }
+  },
+  "motifs": [
+    {
+      "name": "P-loop",
+      "kras_positions": "10-17",
+      "alignment_columns": "10-17",
+      "sequences": {
+        "P01116": "GAGGVGKS",
+        "P01111": "GAGGVGKS",
+        "P01112": "GAGGVGKS"
+      },
+      "fully_conserved": true
+    },
+    {
+      "name": "switch-I context",
+      "kras_positions": "30-38",
+      "alignment_columns": "30-38",
+      "sequences": {
+        "P01116": "DEYDPTIED",
+        "P01111": "DEYDPTIED",
+        "P01112": "DEYDPTIED"
+      },
+      "fully_conserved": true
+    },
+    {
+      "name": "switch-II context",
+      "kras_positions": "60-76",
+      "alignment_columns": "60-76",
+      "sequences": {
+        "P01116": "GQEEYSAMRDQYMRTGE",
+        "P01111": "GQEEYSAMRDQYMRTGE",
+        "P01112": "GQEEYSAMRDQYMRTGE"
+      },
+      "fully_conserved": true
+    },
+    {
+      "name": "NKXD motif",
+      "kras_positions": "116-119",
+      "alignment_columns": "116-119",
+      "sequences": {
+        "P01116": "NKCD",
+        "P01111": "NKCD",
+        "P01112": "NKCD"
+      },
+      "fully_conserved": true
+    }
+  ],
+  "qualification": "The retained center-star alignment is an exploratory teaching alignment, not a publication-grade phylogenetic analysis."
+}

@@ -1,0 +1,135 @@
+{
+  "id": "rosalind-adenylate-kinase",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind-workbench.public-evidence",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "RCSB PDB 4AKE and 1AKE with local Python NumPy Kabsch analysis"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus digest-verified local coordinate comparison of open and AP5-bound adenylate kinase",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 6842,
+      "sha256": "2d11157f301513e5bd6a9607704d4caabfdd8d14fe17f1b83edf2b113407dd2a"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 611,
+      "sha256": "43057c699ad6475655d3e90e9ef67498073ef404c911b60dd2e983f4e50c269e"
+    },
+    {
+      "path": "inputs/4AKE.pdb",
+      "bytes": 309339,
+      "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+    },
+    {
+      "path": "inputs/1AKE.pdb",
+      "bytes": 357777,
+      "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/conformation-summary.json",
+      "bytes": 3953,
+      "sha256": "92596be0b10de18a042c4e9a1e8418e62c28ea5bb824c7aed2d4da64b5310cf7"
+    },
+    {
+      "path": "outputs/domain-distance-comparison.csv",
+      "bytes": 130,
+      "sha256": "e1c31924e76841d5a359e8d6bfdb74e49187904371a564759b81d95f6a94f2e0"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 933,
+      "sha256": "7e83c2036900dd56ecbf37c43a2dc3efb762e9ce6fc0be621e865662c6215919"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 914,
+      "sha256": "7035f227dac949ca85bf5a8049c9a181d577b90199d1a228a8b27eef3e37bafb"
+    },
+    {
+      "path": "bundle.md",
+      "bytes": 6413,
+      "sha256": "3fa0df1af1b295e8971fb690b39a796d49168854a721a13b40ac9de4eea05e97"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2555,
+      "sha256": "baf42c1fb52012efd8e3170e7f9481489d5b3507eb1dc9803f4fdf59b3852514"
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/4AKE",
+    "https://www.rcsb.org/structure/1AKE",
+    "https://files.rcsb.org/download/4AKE.pdb",
+    "https://files.rcsb.org/download/1AKE.pdb"
+  ],
+  "observations": [
+    "Both retained chain-A structures provide 214 matched C-alpha atoms and 1AKE contains AP5.",
+    "The local all-correspondence Kabsch RMSD is 7.130700 angstrom.",
+    "CORE-to-NMP and CORE-to-LID centroid distances are shorter in AP5-bound 1AKE than in open 4AKE.",
+    "A genuine Rosalind Workbench open call returned the exact task-chooser-ready message."
+  ],
+  "interpretation": [
+    "The coordinate comparison illustrates a pronounced NMP and LID domain closure around the ligand-bound state."
+  ],
+  "limitations": [
+    "The local Kabsch result is distinct from TM-align and does not measure affinity or dynamics.",
+    "Domain residue sets are explicit teaching definitions.",
+    "rosalind_open only opened the task chooser and did not run a structural analysis."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://files.rcsb.org/download/4AKE.pdb",
+        "https://files.rcsb.org/download/1AKE.pdb"
+      ],
+      "inputs": [
+        "inputs/4AKE.pdb",
+        "inputs/1AKE.pdb"
+      ],
+      "outputs": [
+        "outputs/conformation-summary.json",
+        "outputs/domain-distance-comparison.csv",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Pinned public coordinates and local NumPy support the structural measurements; the separate 914-byte Rosalind observation supports launcher readiness only."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-adenylate-kinase/build_case.py from the repository root.",
+    "Require both recorded source digests, 214 matched C-alpha atoms, AP5 presence, and stable output files.",
+    "Treat the Rosalind launcher receipt separately from the coordinate analysis."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_open": "executed"
+  }
+}

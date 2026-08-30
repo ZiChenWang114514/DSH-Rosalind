@@ -1,0 +1,4 @@
+accession,query,matched_sequence,residue_start_1based,residue_end_1based_inclusive,alignment_column_start_1based,alignment_column_end_1based_inclusive
+P01116,G....GKS,GAGGVGKS,10,17,10,17
+P01111,G....GKS,GAGGVGKS,10,17,10,17
+P01112,G....GKS,GAGGVGKS,10,17,10,17

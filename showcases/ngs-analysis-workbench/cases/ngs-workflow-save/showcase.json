@@ -1,0 +1,157 @@
+{
+  "id": "ngs-workflow-save",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_workflows",
+    "ngs-analysis-workbench.save_workflow",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_workflows",
+      "mcp__ngs_analysis_workbench__save_workflow",
+      "Python 3.14 standard library",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 504,
+      "sha256": "b3a97d6b97fead25f7d0784d947a5340fc66decaccc04a70066cbecc03f6a879"
+    },
+    {
+      "path": "inputs/DRR037765-first-24.fastq",
+      "bytes": 23031,
+      "sha256": "1091da980ce003fd7b3981c9ea1fc002a399eb030553adfb395c277046e61ff4"
+    },
+    {
+      "path": "build_cases.py",
+      "bytes": 7023,
+      "sha256": "92c6ff63d63808cff0b1857ae6fd2dfad746ec94c1a39efe30f3334dbd6f64a5"
+    },
+    {
+      "path": "finalize_cases.py",
+      "bytes": 31992,
+      "sha256": "43a1ee14ac31306e496ab3e3dab65a64a5dc2d4a4c32e0e11b3196defc58e2c8"
+    },
+    {
+      "path": "workflow/v1/Snakefile",
+      "bytes": 484,
+      "sha256": "3261e8d1ed5c5540aca8af1ac233c3f6b789b51cf55b64241d5f7626d1bd1ff1"
+    },
+    {
+      "path": "workflow/v1/config/config.json",
+      "bytes": 189,
+      "sha256": "b52791b955ce356a028587e5ff86e4735675603d886544c853e1e440630d1c10"
+    },
+    {
+      "path": "workflow/v1/scripts/qc_core.py",
+      "bytes": 3312,
+      "sha256": "a45ffb4814fd0cec6fe77976cab841830ef2049d59cf43a8598513f3e6f0f3b5"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/fixture-provenance.json",
+      "bytes": 617,
+      "sha256": "2d2f76b7c898937703261ea09a7bdd6e345350e1522ec2240089421dc26c9e46"
+    },
+    {
+      "path": "outputs/workbench-save.json",
+      "bytes": 732,
+      "sha256": "0d224c223bc585264f8f7880eb8432c6b3372e12f595d228203dba09a19ef707"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 757,
+      "sha256": "90e764a541ccafb4261e41ac451c07f90faf75b913f072c17feb1f9954dfffec"
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 6909,
+      "sha256": "64039917c042c2386f3f00d17fddba0e879bfb594ee2c8e532ce3b0aed8f480d"
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 1812
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2212,
+      "sha256": "88e1651778791a53a1b2501386724a2219e66897e20ee667b547620862904fa1"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "The 24-record fixture is 23,031 bytes and has SHA-256 1091da980ce003fd7b3981c9ea1fc002a399eb030553adfb395c277046e61ff4.",
+    "Workbench saved the new workflow as version-172b18afc3346b8b037416f67893a9f5 with a source digest.",
+    "No workflow execution was requested by the save action.",
+    "rosalind.rosalind_open returned ready true with view launcher for this case-specific context.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The workflow definition and public reads are separated, so saving the definition does not copy the FASTQ into the Workbench catalogue."
+  ],
+  "limitations": [
+    "The fixture is too small for run-wide QC conclusions.",
+    "Catalogue registration does not establish runtime readiness.",
+    "No adapter, contamination, or assay-specific analysis was performed.",
+    "rosalind_open only opened the task chooser and does not establish Rosalind scientific execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/DRR037765-first-24.fastq",
+        "build_cases.py",
+        "finalize_cases.py",
+        "workflow/v1/Snakefile",
+        "workflow/v1/config/config.json",
+        "workflow/v1/scripts/qc_core.py"
+      ],
+      "outputs": [
+        "outputs/fixture-provenance.json",
+        "outputs/workbench-save.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained source note identifies the public run and subset rule; workflow files and machine-readable outputs support the scientific observations. outputs/rosalind-open-observation.json records the separate case-specific launcher invocation and its explicit limitation."
+    }
+  ],
+  "reproduction": [
+    "Run build_cases.py from the repository root.",
+    "Inspect the three version 1 workflow files and fixture provenance.",
+    "For a fresh disposable identifier, call save_workflow with the documented local root and compare the receipt.",
+    "For ngs-workflow-save, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local Windows amd64"
+  }
+}

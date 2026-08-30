@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Safe local sequence-job cancellation</title><desc id="desc">Running and cancelled state records for a disposable KRAS window calculation</desc>
+<style>.title{font:700 42px Segoe UI,Arial;fill:#f8fafc}.sub{font:21px Segoe UI,Arial;fill:#bae6fd}.head{font:700 24px Segoe UI,Arial;fill:#f8fafc}.text{font:19px Segoe UI,Arial;fill:#cbd5e1}.mono{font:700 20px Consolas,monospace;fill:#f8fafc}</style>
+<rect width="1200" height="675" fill="#071726"/><text x="70" y="80" class="sub">P01116 · LOCAL PYTHON SUBPROCESS · VIEWER ACTION REHEARSED</text><text x="70" y="145" class="title">Cancellation preserves source identity</text>
+<rect x="70" y="205" width="430" height="330" rx="22" fill="#15324a" stroke="#38bdf8"/><text x="105" y="260" class="head">Pre-cancel</text><text x="105" y="315" class="mono">status: running</text><text x="105" y="360" class="text">32 / 181 windows computed</text><text x="105" y="405" class="text">partial table present: true</text><text x="105" y="450" class="text">final output present: false</text>
+<path d="M520 365 H660" stroke="#f59e0b" stroke-width="12"/><path d="M650 335 L700 365 L650 395 Z" fill="#f59e0b"/><text x="540" y="330" class="text">terminate()</text>
+<rect x="700" y="205" width="430" height="330" rx="22" fill="#15324a" stroke="#34d399"/><text x="735" y="260" class="head">Post-cancel</text><text x="735" y="315" class="mono">status: cancelled</text><text x="735" y="360" class="text">process stopped: true</text><text x="735" y="405" class="text">temporary workspace removed: true</text><text x="735" y="450" class="text">source unchanged: true</text><text x="735" y="495" class="text">final output present: false</text>
+<text x="70" y="605" class="text">Actual: local cancellation + Rosalind task chooser; Sequence Viewer run/cancel/query are rehearsed.</text>
+</svg>

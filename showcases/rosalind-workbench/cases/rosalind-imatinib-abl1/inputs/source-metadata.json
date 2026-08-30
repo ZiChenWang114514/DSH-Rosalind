@@ -1,0 +1,59 @@
+{
+  "showcase_id": "rosalind-imatinib-abl1",
+  "retrieved_on": "2026-08-30",
+  "coordinate_format": "legacy PDB text from the current RCSB entry revision",
+  "structures": [
+    {
+      "pdb_id": "1IEP",
+      "label": "ABL1-imatinib",
+      "coordinate_url": "https://files.rcsb.org/download/1IEP.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/1IEP",
+      "entry_url": "https://www.rcsb.org/structure/1IEP",
+      "title": "CRYSTAL STRUCTURE OF THE C-ABL KINASE DOMAIN IN COMPLEX WITH STI-571.",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.1,
+      "initial_release_date": "2001-04-18T00:00:00.000+00:00",
+      "revision_date": "2023-08-09T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 3,
+      "pdb_doi": "10.2210/pdb1iep/pdb",
+      "primary_citation_doi": null
+    },
+    {
+      "pdb_id": "3CS9",
+      "label": "ABL1-nilotinib",
+      "coordinate_url": "https://files.rcsb.org/download/3CS9.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/3CS9",
+      "entry_url": "https://www.rcsb.org/structure/3CS9",
+      "title": "Human ABL kinase in complex with nilotinib",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.21,
+      "initial_release_date": "2008-04-22T00:00:00.000+00:00",
+      "revision_date": "2024-04-03T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 3,
+      "pdb_doi": "10.2210/pdb3cs9/pdb",
+      "primary_citation_doi": "10.1016/j.ccr.2005.01.007"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Imatinib",
+      "role": "1IEP ligand",
+      "pubchem_cid": 5291,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5291/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5291",
+      "title": "Imatinib",
+      "inchi_key": "KTUFNOKKBVMGRW-UHFFFAOYSA-N"
+    },
+    {
+      "name": "Nilotinib",
+      "role": "3CS9 comparator ligand",
+      "pubchem_cid": 644241,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/644241/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/644241",
+      "title": "Nilotinib",
+      "inchi_key": "HHZIURLSWUIHRB-UHFFFAOYSA-N"
+    }
+  ]
+}

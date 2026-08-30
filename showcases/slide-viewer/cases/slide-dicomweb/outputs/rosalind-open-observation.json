@@ -1,0 +1,19 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "slide-dicomweb",
+  "observed_at_utc": "2026-08-29T17:57:18.913Z",
+  "observed_at_local": "2026-08-30T01:57:18.913+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review the pinned IDC DICOMweb metadata and frame responses before choosing any future Rosalind research task."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "response_envelope": {
+    "schemaVersion": "life-sciences.launcher/v1",
+    "ready": true,
+    "view": "launcher"
+  },
+  "scientific_job_executed": false,
+  "limitation": "This invocation opened the task chooser only; it did not select or execute a scientific job and is not scientific evidence for this case."
+}

@@ -1,0 +1,11 @@
+{
+  "source_name": "ProteinGym v1.3 substitution benchmark",
+  "source_url": "https://marks.hms.harvard.edu/proteingym/ProteinGym_v1.3/DMS_ProteinGym_substitutions.zip",
+  "archive_member": "DMS_ProteinGym_substitutions/SPG1_STRSG_Wu_2016.csv",
+  "archive_bytes": 43021128,
+  "member_uncompressed_bytes": 72860422,
+  "retrieved": "2026-08-30",
+  "selection_rule": "retain the first 500 data rows in archive order",
+  "transformation": "extract the four assayed residues and encode each as a 20-state one-hot vector",
+  "software": "Python standard library only"
+}

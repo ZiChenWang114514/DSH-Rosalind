@@ -1,0 +1,30 @@
+{
+  "showcase_id": "rosalind-antibody-developability",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "Exact public RCSB Fab-chain sequences were retained and transformed into sequence-metric and motif-liability tables."
+  },
+  "method": "exact RCSB chain sequences; local deterministic sequence calculations",
+  "antibody_summary": {
+    "Herceptin Fab": {
+      "variable_residues": 227,
+      "motif_flags": 9,
+      "largest_hydrophobic_9mer_count": 7,
+      "largest_abs_charge_9mer": 3
+    },
+    "Pembrolizumab Fab": {
+      "variable_residues": 231,
+      "motif_flags": 3,
+      "largest_hydrophobic_9mer_count": 8,
+      "largest_abs_charge_9mer": 3
+    }
+  },
+  "interpretation": "The tables identify sequence regions for targeted experimental follow-up. Fewer motif flags do not establish superior developability.",
+  "limitations": [
+    "The analysis does not include solvent exposure, formulation, concentration, glycosylation state, expression host, or conformational dynamics.",
+    "Predicted pI and charge-window values use simple residue pKa assumptions.",
+    "Motif presence is a screening flag and does not demonstrate chemical degradation.",
+    "No laboratory developability, stability, viscosity, aggregation, or pharmacokinetic measurement was performed."
+  ]
+}

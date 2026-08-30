@@ -1,0 +1,20 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "scientific_evidence": {
+    "source": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+    "source_provenance": "inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+    "computed_result": "outputs/analysis.json",
+    "tree": "outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+    "method": "Verified center-star alignment, exact KRAS reference-coordinate mapping, uncorrected p-distance, and exploratory neighbor joining."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "note": "The response documents only the task chooser and did not produce the RAS alignment, matrix, or tree."
+  },
+  "viewer_status": "The retained viewer-derived results belong to the recorded prior session; no new viewer action was performed for this update."
+}

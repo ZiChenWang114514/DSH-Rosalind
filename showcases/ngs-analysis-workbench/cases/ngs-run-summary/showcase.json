@@ -1,0 +1,144 @@
+{
+  "id": "ngs-run-summary",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.list_workflow_versions",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__list_workflow_versions",
+      "Python 3.14 standard library",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/source-and-fixture.md",
+      "bytes": 826
+    },
+    {
+      "path": "inputs/public-fixture.fastq.txt",
+      "bytes": 1330
+    },
+    {
+      "path": "scripts/reference_fastq_stats.py",
+      "bytes": 2301
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/reference-fastq-stats.json",
+      "bytes": 450
+    },
+    {
+      "path": "outputs/reference-computation-receipt.json",
+      "bytes": 684
+    },
+    {
+      "path": "outputs/analysis-summary.md",
+      "bytes": 2873
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1170
+    },
+    {
+      "path": "outputs/update-analysis-summary-receipt.json",
+      "bytes": 880
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 753
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 7821
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 1962
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1930
+    }
+  ],
+  "sources": [
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract",
+    "https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_R1.fastq.gz"
+  ],
+  "observations": [
+    "The local Python reference computation parsed two complete 301-base public FASTQ records and retained exact structural statistics.",
+    "The model-authored review links each quantitative statement to retained evidence and keeps unsupported library-quality and biological conclusions visible.",
+    "update_ngs_run_analysis_summary was called for a reserved temporary identity and Workbench returned that the run did not exist; no summary was saved.",
+    "A case-specific mcp__rosalind__rosalind_open call returned the ready task chooser; no Rosalind scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The case demonstrates evidence-linked result writing and the exact rejected submission response while preserving the absent Workbench lifecycle."
+  ],
+  "limitations": [
+    "The two-record public prefix is too small for representative library QC or biological conclusions.",
+    "No FastQC, MultiQC, workflow engine, immutable plan, registered run, or successful Workbench summary submission occurred.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/5f09ab078a7459db38c1ec86712a98d369cf7863/illumina/amplicon/sample1_R1.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/source-and-fixture.md",
+        "inputs/public-fixture.fastq.txt",
+        "scripts/reference_fastq_stats.py"
+      ],
+      "outputs": [
+        "outputs/reference-fastq-stats.json",
+        "outputs/reference-computation-receipt.json",
+        "outputs/analysis-summary.md",
+        "outputs/provenance.json",
+        "outputs/update-analysis-summary-receipt.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Local Python produced the bounded FASTQ metrics; the review is model-authored; Workbench supplied the exact rejected summary response; Rosalind supplied only the retained task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/reference_fastq_stats.py inputs/public-fixture.fastq.txt outputs/reference-fastq-stats.json.",
+    "Compare the metrics and evidence paths with outputs/analysis-summary.md and outputs/provenance.json.",
+    "Call update_ngs_run_analysis_summary only for the reserved temporary identity or an owned registered run and compare the response with outputs/update-analysis-summary-receipt.json.",
+    "Call mcp__rosalind__rosalind_open with the task_context retained in outputs/rosalind-open-observation.json and compare the exact response.",
+    "For ngs-run-summary, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "workflow_execution_performed": false,
+    "reference_computation_performed": true,
+    "workbench_run_registered": false,
+    "workbench_summary_operation_called": true,
+    "workbench_summary_submitted": false
+  }
+}

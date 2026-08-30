@@ -1,0 +1,11 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-il6r-asthma",
+  "verified_at_utc": "2026-08-29T19:56:25.705606Z",
+  "calls": [
+    {"skill":"opentargets-skill","request":{"target_id":"ENSG00000160712","disease_id":"MONDO_0004979","associated_diseases_page":{"index":0,"size":5}},"source_url":"https://api.platform.opentargets.org/api/v4/graphql","retrieved_at_utc":"2026-08-29T19:56:18.039049Z","ok":true,"summary":{"target_symbol":"IL6R","associated_disease_count":1042,"disease_name":"asthma"}},
+    {"skill":"gwas-catalog-skill","request":{"base_url":"https://www.ebi.ac.uk/gwas/rest/api/v2","path":"associations","params":{"mapped_gene":"IL6R","size":10},"record_path":"_embedded.associations","max_items":10},"source_url":"https://www.ebi.ac.uk/gwas/rest/api/v2/associations?mapped_gene=IL6R&size=10","retrieved_at_utc":"2026-08-29T19:56:22.870393Z","ok":true,"summary":{"record_count":10,"trait_labels_exposed":false}},
+    {"skill":"gtex-eqtl-skill","request":{"rsid":"rs2228145","max_results":20},"source_url":"https://gtexportal.org/api/v2/association/singleTissueEqtl","retrieved_at_utc":"2026-08-29T19:56:25.705606Z","ok":true,"summary":{"query_variant":"1:154454494-A-C","eqtl_count":15,"il6r_eqtl_count":7}}
+  ],
+  "limitation": "Open Targets datasource scores, GWAS association rows, and GTEx eQTL effects describe different evidence types and are not combined into a causal effect estimate."
+}

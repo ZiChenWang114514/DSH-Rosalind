@@ -1,0 +1,4 @@
+sequence_id,label,pdb_id,source_url,source_header,analysis_end_motif
+5M2W_VHH,nb8 anti-TssK,5M2W,https://www.rcsb.org/structure/5M2W,"5M2W_1|Chains A, B|Llama nanobody nb8 against TssK from T6SS|Lama glama (9844)",VTVSS
+6WAQ_VHH,SARS VHH-72,6WAQ,https://www.rcsb.org/structure/6WAQ,"6WAQ_1|Chains A, C|nanobody SARS VHH-72|Lama glama (9844)",VTVSS
+4KRL_VHH,EGFR VHH 7D12,4KRL,https://www.rcsb.org/structure/4KRL,"4KRL_1|Chain A[auth B]|Nanobody/VHH domain 7D12|Lama glama (9844)",VTVSS

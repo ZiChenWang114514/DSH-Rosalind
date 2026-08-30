@@ -1,11 +1,122 @@
 {
-  "id":"structure-mdm2-p53","plugin_id":"molecular-structure-viewer","plugin_version":"0.1.80","status":"ready","run_date":"2026-08-29","prompt":"prompt.md",
-  "inputs":[{"path":"inputs/1YCR.pdb","bytes":94041,"sha256":"d8f23749da9ec22da2e17bb31c33803e3db6123233cd0404bdc005111196e7a3"}],
-  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/provenance.json"}],"previews":[{"path":"previews/mdm2-p53.svg"}],
-  "sources":["https://www.rcsb.org/structure/1YCR","https://files.rcsb.org/download/1YCR.pdb"],
-  "observations":["The pinned 1YCR file matched the plugin contract at 94,041 bytes, 818 atoms, and the declared SHA-256 digest.","Chains A and B contained 705 and 113 atoms."],
-  "computed_results":["A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å."],
-  "interpretation":["The three p53 residues Phe19, Trp23, and Leu26 sit within the contact-bearing peptide segment shown in the interface workflow."],
-  "limitations":["The current viewer remained render-pending and did not acknowledge analysis commands.","The 735.864963 Å² interface area is retained as the shipped starter-contract target, not a fresh current-host measurement.","Geometric contacts and buried surface area are not binding energies or affinity measurements."],
-  "environment":{"source_snapshot":"2026-07-03","current_host_viewer_status":"render-pending","contact_check":"project-owned coordinate parser"}
+  "id": "structure-mdm2-p53",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/1YCR.pdb",
+      "bytes": 94041,
+      "sha256": "d8f23749da9ec22da2e17bb31c33803e3db6123233cd0404bdc005111196e7a3"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/results.json"
+    },
+    {
+      "path": "outputs/provenance.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 615
+    },
+    {
+      "path": "outputs/structure-operation-evidence.json"
+    },
+    {
+      "path": "outputs/structure-operation-provenance.json"
+    },
+    {
+      "path": "outputs/teaching-bundle.md"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/mdm2-p53.svg"
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1YCR",
+    "https://files.rcsb.org/download/1YCR.pdb"
+  ],
+  "observations": [
+    "The pinned 1YCR file matched the plugin contract at 94,041 bytes, 818 atoms, and the declared SHA-256 digest.",
+    "Chains A and B contained 705 and 113 atoms.",
+    "A direct coordinate check found 105 cross-chain atom contacts and 34 residue pairs at or below 4 Å.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "A mounted Structure Viewer session authenticated 24 PyMOL-style actions, created a 113-atom best-fit plane for chain B, created an immutable-source copy with chain B renamed to P, and added chain-B sticks while retaining the full-complex cartoon."
+  ],
+  "interpretation": [
+    "The three p53 residues Phe19, Trp23, and Leu26 sit within the contact-bearing peptide segment shown in the interface workflow."
+  ],
+  "limitations": [
+    "The current mounted viewer acknowledged the recorded display, guide, derived-object, and PyMOL-style operations; contacts and buried area were not recomputed in that session.",
+    "The 735.864963 Å² interface area is retained as the shipped starter-contract target, not a fresh current-host measurement.",
+    "Geometric contacts and buried surface area are not binding energies or affinity measurements.",
+    "rosalind_open did not submit 1YCR or execute a Rosalind scientific job."
+  ],
+  "environment": {
+    "source_snapshot": "2026-07-03",
+    "current_host_viewer_status": "mounted and acknowledged for the recorded interface-display operations",
+    "contact_check": "project-owned coordinate parser"
+  },
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "structure-viewer.structure_control_viewer",
+    "structure-viewer.structure_derive_object",
+    "structure-viewer.structure_manage_guides",
+    "structure-viewer.structure_pymol_action",
+    "structure-viewer.structure_pymol_actions",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Molecular Structure Viewer and local analysis",
+      "mcp__structure_viewer__structure_control_viewer",
+      "mcp__structure_viewer__structure_derive_object",
+      "mcp__structure_viewer__structure_manage_guides",
+      "mcp__structure_viewer__structure_pymol_action",
+      "mcp__structure_viewer__structure_pymol_actions",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "public data, free reproducible computation, and exact mounted-viewer operation receipts",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/1YCR",
+        "https://files.rcsb.org/download/1YCR.pdb"
+      ],
+      "inputs": [
+        "inputs/1YCR.pdb"
+      ],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/structure-operation-evidence.json",
+        "outputs/structure-operation-provenance.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/mdm2-p53.svg"
+      ],
+      "note": "The retained contact result comes from the pinned structure and local analysis. Exact viewer receipts separately document five successful mounted-viewer operations, while the Rosalind observation preserves the task-chooser response and states that no Rosalind scientific job ran."
+    }
+  ],
+  "reproduction": [
+    "Verify the retained 1YCR byte count and SHA-256 digest, then recompute the 4.0 angstrom cross-chain contact count from chains A and B.",
+    "Inspect outputs/structure-operation-evidence.json and retain only the acknowledged control_viewer, pymol_actions, manage_guides, derive_object, and pymol_action results as mounted-viewer observations.",
+    "Keep the 735.864963 square-angstrom one-sided interface area and 1471.729925 square-angstrom total SASA loss labeled as starter-contract targets until a fresh buried-area receipt exists.",
+    "Compare the reported hotspots with previews/mdm2-p53.svg, and state that related-data discovery was unavailable, load_background was not called, and the Rosalind record opened only the task chooser."
+  ]
 }

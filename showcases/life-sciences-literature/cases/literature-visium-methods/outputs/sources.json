@@ -1,0 +1,107 @@
+{
+  "schema": "literature.public-api-evidence/v1",
+  "case_id": "literature-visium-methods",
+  "retrieved_at_utc": "2026-08-29T18:11:49.756270Z",
+  "api_calls": [
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esearch",
+      "params": {
+        "db": "pubmed",
+        "term": "SpatialExperiment[Title] OR Squidpy[Title] OR BayesSpace[Title] OR SpotClean[Title] OR Sprod[Title]",
+        "retmax": 10,
+        "sort": "relevance"
+      },
+      "retrieved_at_utc": "2026-08-29T18:11:08.296622Z",
+      "returned_pmids": ["34083791", "35102346", "35624112", "35927477", "35482478"]
+    },
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esummary",
+      "params": {
+        "db": "pubmed",
+        "id": "34083791,35102346,35624112,35927477,35482478"
+      },
+      "retrieved_at_utc": "2026-08-29T18:11:21.419222Z"
+    },
+    {
+      "service": "PMC Article Dataset API",
+      "endpoint": "identifier lookup",
+      "identifiers": ["34083791", "35102346", "35624112", "35927477", "35482478"],
+      "retrieved_between_utc": ["2026-08-29T18:11:38.933026Z", "2026-08-29T18:11:49.756270Z"]
+    }
+  ],
+  "records": [
+    {
+      "pmid": "34083791",
+      "pmcid": "PMC8763026",
+      "doi": "10.1038/s41587-021-00935-2",
+      "date": "2021-11",
+      "journal": "Nature Biotechnology",
+      "title": "Spatial transcriptomics at subspot resolution with BayesSpace.",
+      "method_role": "region-aware clustering and subspot resolution",
+      "pmc_record_available": true,
+      "pmc_open_access": false,
+      "pmc_manuscript": true,
+      "license_code": "TDM",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/34083791/"
+    },
+    {
+      "pmid": "35102346",
+      "pmcid": "PMC8828470",
+      "doi": "10.1038/s41592-021-01358-2",
+      "date": "2022-02",
+      "journal": "Nature Methods",
+      "title": "Squidpy: a scalable framework for spatial omics analysis.",
+      "method_role": "spatial graph and neighborhood analysis framework",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "pmc_manuscript": false,
+      "license_code": "CC BY",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/35102346/"
+    },
+    {
+      "pmid": "35624112",
+      "pmcid": "PMC9142522",
+      "doi": "10.1038/s41467-022-30587-y",
+      "date": "2022-05-27",
+      "journal": "Nature Communications",
+      "title": "SpotClean adjusts for spot swapping in spatial transcriptomics data.",
+      "method_role": "spot-swapping correction",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "pmc_manuscript": false,
+      "license_code": "CC BY",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/35624112/"
+    },
+    {
+      "pmid": "35927477",
+      "pmcid": "PMC10229080",
+      "doi": "10.1038/s41592-022-01560-w",
+      "date": "2022-08",
+      "journal": "Nature Methods",
+      "title": "Sprod for de-noising spatially resolved transcriptomics data based on position and image information.",
+      "method_role": "position- and image-aware denoising",
+      "pmc_record_available": true,
+      "pmc_open_access": false,
+      "pmc_manuscript": true,
+      "license_code": "TDM",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/35927477/"
+    },
+    {
+      "pmid": "35482478",
+      "pmcid": "PMC9154247",
+      "doi": "10.1093/bioinformatics/btac299",
+      "date": "2022-05-26",
+      "journal": "Bioinformatics",
+      "title": "SpatialExperiment: infrastructure for spatially-resolved transcriptomics data in R using Bioconductor.",
+      "method_role": "data container and interoperability infrastructure",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "pmc_manuscript": false,
+      "license_code": "CC BY",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/35482478/"
+    }
+  ],
+  "method_note": "Titles, identifiers, dates, journals, DOI values, and PMC status fields are source observations. The method_role values are deterministic teaching classifications derived from titles and PubMed abstracts; they do not imply that one paper covers every stage of a Visium workflow."
+}

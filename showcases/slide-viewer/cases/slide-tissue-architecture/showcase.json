@@ -3,23 +3,111 @@
   "plugin_id": "slide-viewer",
   "plugin_version": "0.1.56",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "OpenSlide public index",
+      "PowerShell SHA-256",
+      "tiffinfo 4.7.1",
+      "Slide Viewer state operations",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "pinned CMU-1 integrity verification, TIFF pyramid calculation, fresh viewer receipts, and a separately retained Rosalind task-chooser invocation",
+    "status": "verified"
+  },
   "prompt": "prompt.md",
   "inputs": [],
   "outputs": [
-    {"path": "outputs/source-provenance.json"},
-    {"path": "outputs/pyramid-metadata.json"}
+    {
+      "path": "outputs/source-provenance.json",
+      "bytes": 739,
+      "sha256": "a0315b1b8deff372c8d2a2eddbefe04b46953d41582a887dfe4e17678e58c4ef"
+    },
+    {
+      "path": "outputs/pyramid-metadata.json",
+      "bytes": 1262,
+      "sha256": "735fc48a6439b657832b26e7b62dee5660e1b8c06d01c9c3786e9711c6c8c797"
+    },
+    {
+      "path": "outputs/viewer-state-receipt.json",
+      "bytes": 2227,
+      "sha256": "38b50e9dddecb673719fba666b31b10b5d02beea9244a8225e74b757945de528"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 825,
+      "sha256": "fd9ed1726acd89270ab7c1e42e96d9ccd70e8dfb878b0fcbccf96afdf8580625"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5904,
+      "sha256": "91c9bd8066923978a607774187ede123ffbd32d56677ca27f5810aa48a390525"
+    }
   ],
-  "previews": [{"path": "previews/tissue-architecture.svg"}],
-  "sources": ["https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs"],
+  "previews": [
+    {
+      "path": "previews/tissue-architecture.svg",
+      "bytes": 1951,
+      "sha256": "4cd619302f2d080ccbda06cef38d33333c8608103ab493d2b4e2b6585595aa3b"
+    }
+  ],
+  "sources": [
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs",
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
+  ],
   "observations": [
-    "The pinned CC0 source matched its expected byte length and SHA-256.",
-    "The TIFF contains a 46,000 by 32,893 tiled main image and two reduced whole-slide levels."
+    "The local public specimen matched its published byte count and SHA-256.",
+    "Current TIFF inspection confirmed the main image, two reduced whole-slide levels, and three associated images.",
+    "The fresh source authorization remained awaiting-viewer with no state revision, snapshot, acknowledged query, or render.",
+    "Rosalind Workbench opened its task chooser for the case-specific context; no scientific job was selected or executed."
   ],
-  "interpretation": ["The source and pyramid metadata support reproducible whole-slide navigation testing."],
+  "interpretation": [
+    "Verified source identity and pyramid geometry support future navigation testing, while the current session supports no visible-state or tissue claim."
+  ],
   "limitations": [
-    "The Slide Viewer session remained awaiting-viewer.",
-    "No rendered region was available, so no morphology interpretation is made."
+    "Objective magnification and microns-per-pixel are source metadata; they were not independently calibrated.",
+    "Fit, pan, zoom, layer visibility, and display-option changes were rehearsed but not executed.",
+    "No rendered region or current image-bearing model context was available for morphology interpretation.",
+    "The Rosalind launcher observation is interface provenance only and supplies no scientific result."
   ],
-  "environment": {"viewer_status": "awaiting_viewer", "viewer_rendered": false}
+  "provenance": [
+    {
+      "sources": [
+        "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1-JP2K-33005.svs",
+        "https://openslide.cs.cmu.edu/download/openslide-testdata/index.json"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/source-provenance.json",
+        "outputs/pyramid-metadata.json",
+        "outputs/viewer-state-receipt.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/tissue-architecture.svg"
+      ],
+      "note": "Separate receipts preserve publisher identity, TIFF calculations, viewer state, and the exact Rosalind task-chooser response without treating the launcher as a scientific run."
+    }
+  ],
+  "reproduction": [
+    "Verify the exact public file before any viewer call.",
+    "Inspect TIFF directories and recalculate each pyramid ratio.",
+    "Call rosalind_open with the retained case context and record the chooser response separately.",
+    "Open once, then read current state and capabilities before any query or UI action.",
+    "Wait for render and apply navigation or layer changes only when a non-null current state revision exists."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC0-1.0",
+    "device": "local"
+  }
 }

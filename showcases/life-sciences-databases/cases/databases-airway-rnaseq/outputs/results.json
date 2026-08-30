@@ -1,0 +1,47 @@
+{
+  "showcase_id": "databases-airway-rnaseq",
+  "retrieved_at_utc": "2026-08-29T18:15:55Z",
+  "study": {
+    "accession": "E-GEOD-52778",
+    "title": "Human Airway Smooth Muscle Transcriptome Changes in Response to Asthma Medications",
+    "study_type": "RNA-seq of coding RNA",
+    "organism": "Homo sapiens",
+    "sample_count": 16,
+    "assay_count": 16,
+    "technology": "Sequencing assay"
+  },
+  "treatment_groups": {
+    "albuterol": 4,
+    "albuterol and dexamethasone": 4,
+    "dexamethasone": 4,
+    "untreated": 4
+  },
+  "cell_lines": {
+    "N052611": 4,
+    "N061011": 4,
+    "N080611": 4,
+    "N61311": 4
+  },
+  "design_checks": {
+    "four_treatment_groups": true,
+    "four_samples_per_group": true,
+    "four_cell_lines": true,
+    "one_sample_per_cell_line_treatment_combination": true
+  },
+  "metadata_files": [
+    {
+      "path": "E-GEOD-52778.idf.txt",
+      "bytes": 5045
+    },
+    {
+      "path": "E-GEOD-52778.sdrf.txt",
+      "bytes": 18168
+    }
+  ],
+  "interpretation": "The retained study-level metadata describe four airway smooth-muscle cell lines and four treatment conditions. They support treatment-group planning, but they do not support a paired or donor-aware model until the SDRF sample-to-donor mapping has been extracted and verified.",
+  "limitations": [
+    "The case inspects study and sample metadata only; reads were not downloaded and differential expression was not run.",
+    "The study description mentions four donors, but the retained compact record does not establish the sample-to-donor assignments required for donor-aware modeling.",
+    "The combined albuterol-dexamethasone group should not be merged with dexamethasone alone."
+  ]
+}

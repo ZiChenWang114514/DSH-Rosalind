@@ -1,0 +1,45 @@
+{
+  "case_id": "structure-scene-storyboard",
+  "run_date": "2026-08-30",
+  "public_sources": [
+    {
+      "accession": "4AKE",
+      "url": "https://files.rcsb.org/download/4AKE.pdb",
+      "role": "open apo structure",
+      "bytes": 309339,
+      "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+    },
+    {
+      "accession": "1AKE",
+      "url": "https://files.rcsb.org/download/1AKE.pdb",
+      "role": "AP5-bound structure",
+      "bytes": 357777,
+      "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"
+    }
+  ],
+  "executed_local_work": {
+    "tool": "scripts/build_storyboard_evidence.py",
+    "runtime": "Python 3.12.13 with NumPy 2.5.2",
+    "outputs": [
+      "outputs/storyboard-model.json",
+      "outputs/reversibility-comparison.json"
+    ]
+  },
+  "viewer_work": {
+    "status": "not executed",
+    "contract": "outputs/viewer-operation-plan.json",
+    "reason": "This task did not have a mounted Structure Viewer session."
+  },
+  "evidence_separation": {
+    "source_observations": "PDB record counts, matched residues, and AP5 atom records",
+    "computed_results": "Kabsch matrix, RMSD, domain-centroid distances, and JSON state comparisons",
+    "interpretation": "Differences are consistent with a more closed ligand-bound domain arrangement",
+    "unverified_operations": "native viewer scene persistence, deletion, removal, and rendering"
+  },
+  "rosalind_open_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 631,
+    "scientific_job_executed": false,
+    "note": "Genuine case-specific task-chooser call; neither coordinate file was submitted, no molecular scene was created or restored, and no Rosalind scientific job ran."
+  }
+}

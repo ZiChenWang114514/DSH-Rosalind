@@ -1,0 +1,23 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "literature-nanobody-assays",
+  "verified_at_utc": "2026-08-29T19:55:56.642508Z",
+  "calls": [
+    {
+      "skill": "ncbi-entrez-skill",
+      "request": {"endpoint":"esearch","params":{"db":"pubmed","term":"nanobody[Title/Abstract] AND surface plasmon resonance[Title/Abstract] AND ELISA[Title/Abstract]","retmode":"json","retmax":10,"sort":"relevance"},"max_items":10},
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "retrieved_at_utc": "2026-08-29T19:55:55.327730Z",
+      "ok": true,
+      "summary": {"record_count":10,"pmids":["36700149","38176255","26078175","37085457","37980554","40362285","21478264","36439110","38882000","32270531"]}
+    },
+    {
+      "skill": "ncbi-entrez-skill",
+      "request": {"endpoint":"esearch","params":{"db":"pubmed","term":"nanobody[Title/Abstract] AND biolayer interferometry[Title/Abstract]","retmode":"json","retmax":10,"sort":"relevance"},"max_items":10},
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "retrieved_at_utc": "2026-08-29T19:55:56.642508Z",
+      "ok": true,
+      "summary": {"record_count":10,"pmids":["41105446","39572731","39431011","40507880","38548653","41956563","40328713","41966431","40179630","37869063"]}
+    }
+  ]
+}

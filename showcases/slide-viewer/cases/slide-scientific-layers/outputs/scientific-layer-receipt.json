@@ -1,0 +1,50 @@
+{
+  "showcase_id": "slide-scientific-layers",
+  "verification_kind": "source-associated scientific-layer mapping rehearsal",
+  "retained_evidence": {
+    "h5ad": {
+      "repository_path": "pathology-slide-viewer-examples/squidpy-mouse-brain-hne.h5ad",
+      "bytes": 94259482,
+      "sha256": "9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd",
+      "local_pin_verified": true
+    },
+    "entity_table": {
+      "repository_path": "showcases/slide-viewer/cases/slide-research-export/outputs/spatial-observations-expression.csv",
+      "bytes": 81802,
+      "sha256": "e529e286575eab027726d8e78a53e71b0fdf858723578a0da34b5a0acd4e1ed7",
+      "rows": 684,
+      "unique_observation_ids": 684
+    },
+    "companion_geojson": {
+      "repository_path": "showcases/slide-viewer/cases/slide-segmentation-overlay/outputs/source-aligned-annotations.geojson",
+      "bytes": 5592,
+      "sha256": "a1e18c90aaa5736ae63da5f2cc2b2c817a025f2699879fc05770dd962885c3a0",
+      "features": 3
+    }
+  },
+  "structural_checks": {
+    "source_hash_association_matches": true,
+    "matrix_revision_association_matches": true,
+    "coordinate_frame_declared": true,
+    "visium_entities_described_as_capture_spots": true,
+    "geojson_described_as_demonstration_annotation": true
+  },
+  "viewer_actions": {
+    "slide_import_scientific_layer": "rehearsed contract only",
+    "slide_get_scientific_layer_import": "rehearsed contract only",
+    "slide_list_scientific_layers": "rehearsed contract only",
+    "slide_get_scientific_entity": "rehearsed contract only",
+    "slide_renew_scientific_layer_authorization": "rehearsed contract only"
+  },
+  "viewer_result": {
+    "imported": false,
+    "visible": false,
+    "layer_id": null,
+    "entity_query_result": null
+  },
+  "scientific_limits": [
+    "Matrix value scale is unknown.",
+    "Capture spots are not single cells.",
+    "No mounted tissue frame or live scientific layer was observed."
+  ]
+}

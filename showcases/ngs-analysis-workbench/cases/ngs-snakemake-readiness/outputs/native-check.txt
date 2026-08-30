@@ -1,0 +1,12 @@
+Earlier Windows-local Workbench readiness check: completed with status blocked
+Repaired Linux runtime: Snakemake 9.26.0; Docker server 29.7.2 reachable
+Native command: snakemake --snakefile workflow/Snakefile --configfile config/config.json --cores 1
+Native command executed: yes
+Native command exit code: 0
+Native rule result: fastq_stats and all completed 2 of 2 steps
+Later Workbench readiness check: failed before evaluation because the remote POSIX run directory was converted to a backslash-prefixed path
+Reference command executed: python scripts/reference_fastq_stats.py inputs/public-fixture.fastq
+Reference command exit code: 0
+Reference result: outputs/reference-fastq-stats.json
+Workflow plan created: no
+Workbench-registered workflow run created: no

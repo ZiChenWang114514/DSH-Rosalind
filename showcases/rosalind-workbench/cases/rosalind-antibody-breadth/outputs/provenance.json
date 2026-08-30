@@ -1,0 +1,22 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "rosalind-antibody-breadth",
+  "source_checked": "2026-08-30",
+  "scientific_evidence": {
+    "source": "inputs/public-source.md",
+    "retained_summary": "outputs/verification-receipt.json",
+    "method": "Case-specific source-sufficiency review; no sequence comparison or antibody assessment was performed."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "note": "The response records only the task chooser and supplied no conservation or antibody result."
+  },
+  "limitations": [
+    "No accession, sequence version, variant set, alignment, or breadth measurement is retained.",
+    "The current artifacts support an evidence-sufficiency lesson only."
+  ]
+}

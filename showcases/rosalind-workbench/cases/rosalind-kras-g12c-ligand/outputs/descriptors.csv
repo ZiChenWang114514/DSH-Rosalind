@@ -1,0 +1,3 @@
+compound,role,pubchem_cid,molecular_formula_pubchem,molecular_weight_pubchem,xlogp_pubchem,tpsa_pubchem,hbond_donors_pubchem,hbond_acceptors_pubchem,rotatable_bonds_pubchem,molecular_weight_rdkit,clogp_rdkit,tpsa_rdkit,hbond_donors_rdkit,hbond_acceptors_rdkit,rotatable_bonds_rdkit,canonical_smiles_rdkit,inchi_key_pubchem
+Sotorasib,6OIM ligand,137278711,C30H30F2N6O3,560.6,4,102,1,7,5,560.605,4.481,104.45,1,7,5,C=CC(=O)N1CCN(c2nc(=O)n(-c3c(C)ccnc3C(C)C)c3nc(-c4c(O)cccc4F)c(F)cc23)C(C)C1,NXQKSXLFSAEQCZ-SFHVURJKSA-N
+Adagrasib,6USZ ligand,138611145,C32H35ClFN7O2,604.1,5,88.8,0,9,7,604.13,4.733,88.83,0,8,7,C=C(F)C(=O)N1CCN(c2nc(OCC3CCCN3C)nc3c2CCN(c2cccc4cccc(Cl)c24)C3)CC1CC#N,PEMUGDMSUDYLHU-ZEQRLZLVSA-N

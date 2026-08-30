@@ -1,0 +1,9 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-pdl1",
+  "verified_at_utc": "2026-08-29T19:57:18.043026Z",
+  "calls": [
+    {"skill":"uniprot-skill","request":{"base_url":"https://rest.uniprot.org","path":"uniprotkb/Q9NZQ7","params":{"format":"json"}},"source_url":"https://rest.uniprot.org/uniprotkb/Q9NZQ7?format=json","retrieved_at_utc":"2026-08-29T19:57:16.956405Z","ok":true,"summary":{"accession":"Q9NZQ7","entry_id":"PD1L1_HUMAN","reviewed":true,"entry_version":206}},
+    {"skill":"rcsb-pdb-skill","request":{"base_url":"https://data.rcsb.org/rest/v1","path":"core/entry/5J89"},"source_url":"https://data.rcsb.org/rest/v1/core/entry/5J89","retrieved_at_utc":"2026-08-29T19:57:18.043026Z","ok":true,"summary":{"pdb_id":"5J89","pdb_doi":"10.2210/pdb5j89/pdb"}}
+  ]
+}

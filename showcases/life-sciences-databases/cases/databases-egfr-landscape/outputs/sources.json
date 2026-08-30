@@ -9,6 +9,6 @@
     {"name":"RCSB PDB 1M17","url":"https://www.rcsb.org/structure/1M17","supports":"EGFR–erlotinib structure identity, method, and 2.60 Å resolution."},
     {"name":"Reactome Signaling by EGFR","url":"https://reactome.org/content/detail/R-HSA-177929","supports":"Pathway identity and ligand-induced EGFR dimerization context."}
   ],
-  "checked_sources":[{"name":"Reactome ContentService","request":"data/pathways/low/entity/P00533","status":"service_error","supports_claim":false}],
+  "checked_sources":[{"name":"Reactome ContentService","request":"data/query/R-HSA-177929","status":"success","supports_claim":true,"retrieved_at":"2026-08-29T19:56:53.601526Z"}],
   "method_note":"The selected compounds are examples, not a comprehensive EGFR inhibitor inventory."
 }

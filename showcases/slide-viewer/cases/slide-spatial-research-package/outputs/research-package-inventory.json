@@ -1,0 +1,85 @@
+{
+  "package_id": "slide-spatial-research-package",
+  "inventory_version": "1.0.0",
+  "generated_on": "2026-08-30",
+  "source_association": {
+    "dataset": "Brain Coronal HnE Adata Crop",
+    "license": "CC BY 4.0",
+    "h5ad_sha256": "9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd",
+    "matrix_selection": "X",
+    "matrix_revision": "b93bd2bb146dbf8ec519e04145d9cd2efaca3aeca8aadd191601720123d57159",
+    "observations": 684,
+    "genes": 18078
+  },
+  "artifacts": [
+    {
+      "role": "licensed spatial source",
+      "repository_path": "pathology-slide-viewer-examples/squidpy-mouse-brain-hne.h5ad",
+      "bytes": 94259482,
+      "sha256": "9c9b277bde9f34a022df7f3e35b35ce7ecc80f006d6640b0786f4ace6f6eb5dd",
+      "storage": "shared workspace source; referenced in place"
+    },
+    {
+      "role": "source provenance",
+      "repository_path": "showcases/slide-viewer/cases/slide-spatial-expression/outputs/source-provenance.json",
+      "bytes": 515,
+      "sha256": "5d3bb8c29e54236946f875bc8d842beeb3a3f5d4c57adca0023c4b3cb32fde24"
+    },
+    {
+      "role": "matrix and coordinate metadata",
+      "repository_path": "showcases/slide-viewer/cases/slide-spatial-expression/outputs/metadata-summary.json",
+      "bytes": 419,
+      "sha256": "660f1b9e5fa865227a345d0d253b309cee115171ce9456ed21f6c7984045cfd1"
+    },
+    {
+      "role": "complete indexed gene summary",
+      "repository_path": "showcases/slide-viewer/cases/slide-spatial-expression/outputs/expression-summary.json",
+      "bytes": 434,
+      "sha256": "3a55f20a214dd2dd63025aec7662fd1315b75fd671189a9f13d14f5870f8e22f"
+    },
+    {
+      "role": "complete spatial observation table",
+      "repository_path": "showcases/slide-viewer/cases/slide-research-export/outputs/spatial-observations-expression.csv",
+      "bytes": 81802,
+      "sha256": "e529e286575eab027726d8e78a53e71b0fdf858723578a0da34b5a0acd4e1ed7",
+      "rows": 684
+    },
+    {
+      "role": "spatial table provenance",
+      "repository_path": "showcases/slide-viewer/cases/slide-research-export/outputs/export-provenance.json",
+      "bytes": 1208,
+      "sha256": "e13d31db885735dbd50184eaf86465d63f7d88108c949ffc42f119cb3e80cd75"
+    },
+    {
+      "role": "demonstration annotation geometry",
+      "repository_path": "showcases/slide-viewer/cases/slide-segmentation-overlay/outputs/source-aligned-annotations.geojson",
+      "bytes": 5592,
+      "sha256": "a1e18c90aaa5736ae63da5f2cc2b2c817a025f2699879fc05770dd962885c3a0",
+      "features": 3
+    },
+    {
+      "role": "annotation geometry provenance",
+      "repository_path": "showcases/slide-viewer/cases/slide-segmentation-overlay/outputs/overlay-provenance.json",
+      "bytes": 865,
+      "sha256": "f571da202cef6b8bbba1099d933e776d53d4ff0507bf268a1a58c0f1d52a5138"
+    },
+    {
+      "role": "scientific-layer source map",
+      "repository_path": "showcases/slide-viewer/cases/slide-scientific-layers/outputs/layer-source-map.json",
+      "bytes": 1502,
+      "sha256": "bf55d5489b0ee2a6d52b4fab4ea4bc3f2b821a32f22dbcce978f5aed1fc49d81"
+    },
+    {
+      "role": "scientific-layer action-status receipt",
+      "repository_path": "showcases/slide-viewer/cases/slide-scientific-layers/outputs/scientific-layer-receipt.json",
+      "bytes": 1948,
+      "sha256": "91d28c31ca5ea28c2845106d4fa985769646558bb7776e25df24e27e49033d0b"
+    }
+  ],
+  "omissions": {
+    "workflow_receipt": "not present; no supported workflow was run",
+    "portable_project": "not produced",
+    "annotation_bundle": "not produced",
+    "source_image_export": "not performed; no current user source-image capture permission was recorded"
+  }
+}

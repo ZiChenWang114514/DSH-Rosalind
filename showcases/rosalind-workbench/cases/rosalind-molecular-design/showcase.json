@@ -5,7 +5,38 @@
   "status": "ready",
   "run_date": "2026-08-29",
   "prompt": "prompt.md",
-  "inputs": [],
+  "inputs": [
+    {
+      "path": "inputs/PDL1_Q9NZQ7_18-239.fasta",
+      "bytes": 261,
+      "sha256": "f14aae39522e50e300302f4d91d8e48357036e004fee84756ccf20ffb0ebac99"
+    },
+    {
+      "path": "inputs/public-inputs.md",
+      "bytes": 714,
+      "sha256": "80cc1bfb7cd94288d838260ad537563fb3d61b86dcb7d75ef1ccfdc450ce4f8d"
+    },
+    {
+      "path": "prepare_boltz_inputs.py",
+      "bytes": 2515,
+      "sha256": "809dd41dc91e795842eb3bcc30b74b1e4018909f7480c2ea0cb2ad24be5d8f46"
+    },
+    {
+      "path": "run_boltz.sh",
+      "bytes": 418,
+      "sha256": "ffe87f850592337f25f485063353ca14b370d7ee2b6571e2fb0a6622d6ec18cc"
+    },
+    {
+      "path": "score_initial.py",
+      "bytes": 4185,
+      "sha256": "cf222393511ee18d60c0cd522caf0a4ad1363aa9f7e7cab5594d907721ddb060"
+    },
+    {
+      "path": "score_ensemble.py",
+      "bytes": 5278,
+      "sha256": "9fb8835621abc8d2754034fb6f12ccdc80bfb4571b58faeb0c4595d5990ace93"
+    }
+  ],
   "outputs": [
     {
       "path": "outputs/candidates.csv",
@@ -24,18 +55,27 @@
     },
     {
       "path": "outputs/result-summary.json",
-      "bytes": 3842,
-      "sha256": "763d8f1e8d4b28295c49ceacb5c02caea2b5d0b9c38485251903ebcde2f1d78c"
+      "bytes": 3889,
+      "sha256": "e7ce1ced824239b715e8f28adca86953bf6bdb5a28177512fd59991a27ebeb3b"
     },
     {
       "path": "outputs/NB13_E104Q_best_model.cif",
       "bytes": 242752,
       "sha256": "ad6aeec20ca2df8f049db68ea5cfee70fa3d38b9488b013c8997efc882821fc5"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 797
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 7448
     }
   ],
   "previews": [
     {
-      "path": "previews/pdl1-nanobody.svg"
+      "path": "previews/pdl1-nanobody.svg",
+      "bytes": 1077
     }
   ],
   "sources": [
@@ -43,7 +83,7 @@
     "https://www.rcsb.org/structure/5JDS"
   ],
   "observations": [
-    "Twenty initial and twenty-five top-five ensemble predictions completed successfully.",
+    "The retained historical evidence records twenty successful initial predictions and twenty-five successful top-five ensemble predictions.",
     "NB13_E104Q ranked first and had no severe-clash ensemble model."
   ],
   "interpretation": [
@@ -51,11 +91,67 @@
   ],
   "limitations": [
     "No wet-lab affinity, specificity, expression, stability, or functional validation was performed.",
-    "Model confidence and ranking scores are not experimental binding measurements."
+    "Model confidence and ranking scores are not experimental binding measurements.",
+    "The exact Boltz package version used for the historical result snapshot was not retained; fresh predictions may differ after software, model, MSA, hardware, or stochastic changes."
   ],
   "environment": {
     "rosalind_launcher_ready": true,
     "prediction_engine": "Boltz-2",
     "gpu_count": 4
-  }
+  },
+  "domain": "protein-and-antibody-design",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "design-pdl1-nanobodies"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Boltz-2 in a completed local GPU run",
+      "Python and Gemmi scoring scripts retained with the public case",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local GPU compute for the retained scientific results; local workstation for launcher observation and evidence inspection",
+    "implementation": "retained public-target KN035 design and Boltz-2 ensemble results plus a separately recorded Rosalind launcher observation; no Rosalind scientific job executed",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/Q9NZQ7/entry",
+        "https://www.rcsb.org/structure/5JDS"
+      ],
+      "inputs": [
+        "inputs/PDL1_Q9NZQ7_18-239.fasta",
+        "inputs/public-inputs.md",
+        "prepare_boltz_inputs.py",
+        "run_boltz.sh",
+        "score_initial.py",
+        "score_ensemble.py"
+      ],
+      "outputs": [
+        "outputs/candidates.csv",
+        "outputs/top5_ensemble_ranking.csv",
+        "outputs/design_metadata.json",
+        "outputs/result-summary.json",
+        "outputs/NB13_E104Q_best_model.cif",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/pdl1-nanobody.svg"
+      ],
+      "note": "The scientific outputs come from a separately completed Boltz-2 GPU run. Public sequences and portable preparation, execution, and scoring scripts support a fresh rerun. outputs/rosalind-open-observation.json records only the genuine mcp__rosalind__rosalind_open launcher call and explicitly states that it executed no scientific job."
+    }
+  ],
+  "reproduction": [
+    "Verify the retained PD-L1 sequence against UniProt Q9NZQ7 residues 18-239 and the KN035 parent against PDB 5JDS.",
+    "Generate all 20 YAML inputs, run the fixed-seed initial screen, rank it, resample the fresh top five, and score the ensemble using the commands in README.md.",
+    "Record current package versions and compare the fresh result with the retained snapshot while allowing for software, MSA, hardware, and stochastic drift.",
+    "Treat the Rosalind launcher observation separately from every Boltz computation."
+  ]
 }

@@ -1,0 +1,8 @@
+{
+  "schema": "public-structure-source/v1",
+  "pdb_id": "1N8Z",
+  "entry_url": "https://www.rcsb.org/structure/1N8Z",
+  "coordinate_url": "https://files.rcsb.org/download/1N8Z.pdb",
+  "retrieved_at_utc": "2026-08-29T18:20:00Z",
+  "selection": "PDB asymmetric-unit antibody chains A/B and HER2 chain C; explicit operational CDR ranges recorded in the analysis summary"
+}

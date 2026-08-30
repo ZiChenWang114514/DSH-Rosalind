@@ -30,7 +30,7 @@ describe("Research project workspace", () => {
     expect(screen.getByRole("heading", { name: "A new scientific investigation" })).toBeInTheDocument();
     expect(screen.getAllByRole("button")).toHaveLength(8);
     expect(screen.queryByText("Human RAS protein alignment")).not.toBeInTheDocument();
-    expect(screen.getByText("151 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
+    expect(screen.getByText("1224 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
   });
 
   it("shows the project workspace in a blank session without a showcase wall", () => {

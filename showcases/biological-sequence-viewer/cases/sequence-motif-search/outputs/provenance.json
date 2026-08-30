@@ -1,0 +1,19 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "source_case": "sequence-ras-alignment",
+  "source_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "public_records": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "query_origin": "a deliberately compact query spanning the conserved RAS P-loop segment; it is not presented as a complete family classifier",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "scientific_job_executed": false,
+    "note": "The observed ready response documents only the task chooser; the local regex scan produced the scientific result."
+  },
+  "viewer_status": "Historical completed alignment controls and column queries are recorded in outputs/viewer-operation-evidence.json; the 2026-08-30 retry was unconfirmed."
+}

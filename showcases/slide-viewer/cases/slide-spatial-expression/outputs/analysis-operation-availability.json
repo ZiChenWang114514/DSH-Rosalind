@@ -1,0 +1,28 @@
+{
+  "schema": "slide-viewer.analysis-operation-availability/v1",
+  "case_id": "slide-spatial-expression",
+  "observed_at_utc": "2026-08-29T18:55:11.857Z",
+  "session_alias": "temporary-session-a",
+  "capability_observation": {
+    "run_analysis": {"supported": true, "modelTool": "slide.run_analysis_from_chat"},
+    "get_analysis": {"supported": true, "modelTool": "slide.get_analysis_from_chat"},
+    "cancel_analysis": {"supported": true, "modelTool": "slide.cancel_analysis_from_chat"}
+  },
+  "callable_model_operations": {
+    "slide_run_analysis_from_chat": false,
+    "slide_get_analysis_from_chat": true,
+    "slide_cancel_analysis_from_chat": true
+  },
+  "execution": {
+    "slide_get_analysis_from_chat": "not_called",
+    "slide_cancel_analysis_from_chat": "not_called",
+    "reason": "The required guarded run operation was not callable in this task. No legitimate analysis job ID existed, and an ID was not fabricated or borrowed from a workflow task."
+  },
+  "scientific_context": "The indexed H5AD and Slc17a7/Gad1 summaries remain valid source-backed observations, but no new exploratory analysis task was started.",
+  "authorization_limitations": [
+    "Capability discovery does not create a task or renew source authorization.",
+    "Get and cancel require a genuine same-session analysis task ID.",
+    "A workflow task ID cannot be substituted for an analysis task ID.",
+    "No image capture or source-image export permission was granted."
+  ]
+}

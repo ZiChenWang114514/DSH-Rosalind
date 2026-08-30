@@ -1,0 +1,17 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "ngs-fastq-qc",
+  "started_at_utc": "2026-08-29T19:50:05.799Z",
+  "observed_at_utc": "2026-08-29T19:50:06.097Z",
+  "observed_at_local": "2026-08-29T19:50:06.097Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Review the ngs-fastq-qc operation-evidence showcase without starting an NGS workflow."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "launcher_schema": "life-sciences.launcher/v1",
+  "launcher_view": "launcher",
+  "limitation": "The successful call opened only the task chooser; it did not execute an NGS workflow or scientific analysis."
+}

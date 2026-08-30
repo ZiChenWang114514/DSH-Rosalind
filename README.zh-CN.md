@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/readme-hero.svg" alt="DSH-Rosalind 可复现科学工作台" width="100%" />
 
-  <p><strong>在 DSH Web 中浏览、讲解、回放并复现 23 个生命科学研究案例。</strong></p>
+  <p><strong>在 DSH Web 中浏览、讲解、回放并复现 100 个生命科学研究案例。</strong></p>
   <p><a href="README.md">English</a> · <a href="docs/showcases.md">案例目录</a> · <a href="docs/verification.md">验证记录</a> · <a href="docs/release-notes-v0.3.0.md">v0.3.0 更新</a></p>
 </div>
 
@@ -15,7 +15,7 @@ DSH-Rosalind 是面向 [DeepSeek Harness](https://github.com/deepseek-ai/deepsee
 - **Replay**：打开随版本发布且已经检查的文件和预览。
 - **Reproduce**：检查数据、软件、凭据与计算资源，生成步骤清楚的运行计划。
 
-本版本包含七个科学类别、23 个已完成教学与回放检查的案例，以及案例清单引用的 151 个文件。Reproduce 会先生成新的计划，并只在输入与确认齐备时调用现有适配器；本地分析会在适配器已支持时产生新结果，依赖原始来源、远程服务或付费计算的流程则会说明具体条件，或保持等待确认。案例内容固定到 `rosalind-science-showcases` 提交 `f81e668c69edbfe7863cc936f2d535b61d8df76b`。
+本版本包含七个科学类别、100 个已完成教学与回放检查的案例，以及 1,224 个经过验证的目录与案例文件。Reproduce 会先生成新的计划，并只在输入与确认齐备时调用现有适配器；本地分析会在适配器已支持时产生新结果，依赖原始来源、远程服务或付费计算的流程则会说明具体条件，或保持等待确认。案例内容固定到经过审阅的提交 `f8c2ea83ac3b3b9258b160b80039dc3db37d76c4`。
 
 ## DSH Web 实际界面
 
@@ -57,17 +57,17 @@ npm run pack:bundle
 dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.0.tgz
 ```
 
-## 23 个案例
+## 100 个案例
 
 | 类别 | 数量 | 内容 |
 |---|---:|---|
-| 文献 | 3 | TREM2、PMC 开放获取、预印本与正式发表关联 |
-| 数据库 | 3 | IL6R 与哮喘、变异解释、EGFR 知识图谱 |
-| 序列 | 3 | Lambda 注释、RAS 比对、FASTQ 质量分析 |
-| NGS | 3 | FASTQ、bulk RNA-seq、single-cell RNA-seq 工作流准备 |
-| 分子结构 | 3 | MDM2–p53、腺苷酸激酶、GFP 图像与接触分析 |
-| 病理与空间组学 | 4 | 全切片、空间表达、分割叠加、研究导出 |
-| Workbench | 4 | PD-L1 纳米抗体设计及三个科学分析启动案例 |
+| 文献 | 6 | TREM2、KRAS G12C、纳米抗体实验文献与开放获取记录 |
+| 数据库 | 7 | IL6R、PD-L1、PETase、气道 RNA-seq 与变异解释 |
+| 序列 | 12 | Lambda 注释、RAS 比对、序列编辑、会话恢复与导出 |
+| NGS | 15 | 工作流准备、版本、执行、观察、摘要与取消记录 |
+| 分子结构 | 15 | 接触、比对、密度图、组装体、质量评估与轨迹 |
+| 病理与空间组学 | 15 | DICOM、OME、测量、科学图层与研究包 |
+| Workbench | 30 | 分子设计、科学计算、实验规划与跨工具研究 |
 
 完整 ID、历史结果和运行要求见[案例目录](docs/showcases.md)。
 

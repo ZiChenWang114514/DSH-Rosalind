@@ -1,0 +1,12 @@
+rule all:
+    input:
+        "outputs/snakemake/qc.json"
+
+
+rule fastq_qc:
+    input:
+        "inputs/DRR037765-first-500.fastq"
+    output:
+        "outputs/snakemake/qc.json"
+    shell:
+        "python qc_core.py {input} {output}"

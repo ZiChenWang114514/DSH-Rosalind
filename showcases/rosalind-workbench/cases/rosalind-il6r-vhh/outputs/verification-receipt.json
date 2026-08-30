@@ -1,0 +1,19 @@
+{
+  "schema": "gpt-science.source-verification/v1",
+  "showcase_id": "rosalind-il6r-vhh",
+  "question": "How can an IL-6R extracellular-domain sequence guide a reproducible VHH design lesson?",
+  "source": "https://www.uniprot.org/uniprotkb/P08887/entry",
+  "checked_at_utc": "2026-08-29T18:23:14.139Z",
+  "verification_kind": "UniProt P08887 case-specific record summary",
+  "observations": [
+    "UniProt identifies P08887 as the reviewed human interleukin-6 receptor subunit alpha entry, also named IL6R and CD126.",
+    "The record annotates residues 20-365 as extracellular, residues 366-386 as transmembrane, and residues 387-468 as cytoplasmic.",
+    "The extracellular annotation provides receptor context only; this case contains no VHH sequence, binding pose, affinity estimate, or ranking."
+  ],
+  "interpretation": "The reviewed receptor entry can anchor a reproducible discussion of target identity and extracellular-domain scope before any separately authorized antibody research.",
+  "limitations": [
+    "The case does not retrieve or retain the full P08887 sequence as an input artifact.",
+    "No structural epitope, antibody interaction, or candidate performance is established.",
+    "Rosalind launcher readiness is documented separately and does not establish a scientific run."
+  ]
+}

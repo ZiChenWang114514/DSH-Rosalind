@@ -1,0 +1,47 @@
+{
+  "showcase_id": "structure-clash-screen",
+  "source": {
+    "pdb_id": "1CRN",
+    "download_url": "https://files.rcsb.org/download/1CRN.pdb",
+    "coordinate_file": "inputs/1CRN.pdb",
+    "experiment": "X-ray diffraction",
+    "reported_resolution_angstrom": 1.5
+  },
+  "selection": {
+    "model": 1,
+    "scope": "all deposited ATOM/HETATM heavy atoms admitted by the element table",
+    "atom_count": 327,
+    "atom_filter": "positive occupancy; blank or A alternate location"
+  },
+  "method": {
+    "distance": "Euclidean distance between heavy-atom coordinates",
+    "vdw_radii_angstrom": {
+      "C": 1.7,
+      "N": 1.55,
+      "O": 1.52,
+      "S": 1.8,
+      "P": 1.8
+    },
+    "covalent_radii_angstrom": {
+      "C": 0.76,
+      "N": 0.71,
+      "O": 0.66,
+      "S": 1.05,
+      "P": 1.07
+    },
+    "bond_inference": "within-residue covalent-radius sum + 0.45 \u00c5; peptide C-N \u2264 1.8 \u00c5; CYS SG-SG \u2264 2.3 \u00c5",
+    "excluded_pairs": "atoms separated by one, two, or three inferred covalent bonds; incompatible alternate locations",
+    "reported_when_overlap_greater_than_angstrom": 0.4,
+    "tested_nonbonded_pairs": 51964
+  },
+  "result": {
+    "clash_count": 0,
+    "clashes": []
+  },
+  "interpretation": "Reported rows are nonbonded heavy-atom overlap diagnostics under the stated radii and exclusions; they identify coordinates worth inspecting, not automatically erroneous residues.",
+  "limitations": [
+    "This is not an all-atom MolProbity clashscore: hydrogens are absent and no hydrogen addition or optimization is performed.",
+    "Bonding is inferred from deposited geometry and explicit simple rules; unusual chemistry may need a topology-aware analysis.",
+    "The asymmetric-unit coordinate set is screened without generating crystallographic symmetry mates."
+  ]
+}

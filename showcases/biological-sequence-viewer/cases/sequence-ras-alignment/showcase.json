@@ -3,26 +3,56 @@
   "plugin_id": "biological-sequence-viewer",
   "plugin_version": "0.1.43",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
   "prompt": "prompt.md",
   "inputs": [
-    {"path": "inputs/human-RAS-UniProt-SV1.aln-fasta", "bytes": 786, "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"},
-    {"path": "inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json", "bytes": 2089, "sha256": "770de4ae974506be7a4a24cc31bae27c0e3a787686ecd1f79f4015665b827526"}
+    {
+      "path": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+      "bytes": 786,
+      "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"
+    },
+    {
+      "path": "inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+      "bytes": 2089,
+      "sha256": "770de4ae974506be7a4a24cc31bae27c0e3a787686ecd1f79f4015665b827526"
+    }
   ],
   "outputs": [
-    {"path": "outputs/RAS-P01116-P01111-P01112-NJ.nwk"},
-    {"path": "outputs/analysis.json"}
+    {
+      "path": "outputs/RAS-P01116-P01111-P01112-NJ.nwk"
+    },
+    {
+      "path": "outputs/analysis.json"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1014,
+      "sha256": "8d7739f13c23eb5311fc24b8c6780ba28b85c8dbc92373aba55a20bf7c676e98"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 720,
+      "sha256": "4bd755fda25adcf2a0949e06232da0305295dab439ef2d7437fc618736e25888"
+    },
+    {
+      "path": "outputs/viewer-operation-evidence.json"
+    }
   ],
-  "previews": [{"path": "previews/ras-alignment.svg"}],
+  "previews": [
+    {
+      "path": "previews/ras-alignment.svg"
+    }
+  ],
   "sources": [
     "https://rest.uniprot.org/uniprotkb/P01116.fasta",
     "https://rest.uniprot.org/uniprotkb/P01111.fasta",
     "https://rest.uniprot.org/uniprotkb/P01112.fasta"
   ],
   "observations": [
-    "The mounted viewer reported three protein rows, 191 alignment columns, mean identity 0.9284467713787081, and normalized conservation 0.6453400570165564.",
     "KRAS positions 10-17, 30-38, 60-76, and 116-119 were identical across all three rows.",
-    "Alignment columns 170-191 contained substantially more substitutions and short gaps."
+    "Alignment columns 170-191 contained substantially more substitutions and short gaps.",
+    "Rosalind Workbench returned its ready task chooser for the recorded case-specific invocation.",
+    "The 2026-08-30 Viewer review retained no successful Sequence Viewer operation; failed and unexecuted actions are mapped in outputs/viewer-operation-evidence.json."
   ],
   "interpretation": [
     "The shared GTPase core is highly conserved across the three human RAS paralogues.",
@@ -31,11 +61,64 @@
   "limitations": [
     "The distance matrix uses uncorrected p-distance.",
     "The three-leaf neighbor-joining tree is exploratory and has no substitution model or support assessment.",
-    "The SVG preview is a project-owned summary drawn from exact model-visible viewer results because source-relative viewer publication was unavailable."
+    "The SVG preview is a project-owned summary drawn from exact model-visible viewer results because source-relative viewer publication was unavailable.",
+    "rosalind_open did not align sequences, map coordinates, calculate distances, or build the tree.",
+    "The 2026-08-30 retry was not query-confirmed; historical completed calls and current retry outcomes are recorded separately."
   ],
   "environment": {
-    "viewer_status": "completed",
-    "distance_analysis": "completed",
-    "guide_tree": "completed"
-  }
+    "rosalind_launcher_observed": true,
+    "viewer_operation_evidence": "outputs/viewer-operation-evidence.json"
+  },
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "sequence-viewer.sequence_open_from_chat",
+    "sequence-viewer.sequence_control_viewer",
+    "sequence-viewer.sequence_run_analysis",
+    "sequence-viewer.sequence_query_viewer",
+    "sequence-viewer.sequence_export_artifact",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Biological Sequence & Alignment Viewer 0.1.43 diagnostic attempts recorded in outputs/viewer-operation-evidence.json",
+      "Historical completed Sequence Viewer calls recovered from source task archived-sequence-viewer-task"
+    ],
+    "device": "local",
+    "implementation": "verified RAS alignment, p-distance, and exploratory tree calculations retained from local evidence, plus an unconfirmed Viewer diagnostic and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "provenance": [
+    {
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+      ],
+      "inputs": [
+        "inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json"
+      ],
+      "outputs": [
+        "outputs/RAS-P01116-P01111-P01112-NJ.nwk",
+        "outputs/analysis.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/ras-alignment.svg"
+      ],
+      "note": "The retained viewer and local evidence support the scientific result; the separate Rosalind observation records only the genuine task-chooser response."
+    }
+  ],
+  "reproduction": [
+    "Inspect every retained input, output, preview, and cited public source.",
+    "Repeat the documented free computation or viewer operations and compare the stated observations and limitations.",
+    "Verify outputs/rosalind-open-observation.json separately and do not treat the launcher response as scientific execution.",
+    "Inspect outputs/viewer-operation-evidence.json and do not promote failed or unexecuted Viewer actions to capabilities."
+  ]
 }

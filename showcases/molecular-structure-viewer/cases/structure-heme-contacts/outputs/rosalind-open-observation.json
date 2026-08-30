@@ -1,0 +1,13 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "structure-heme-contacts",
+  "observed_at_utc": "2026-08-29T18:03:11.355Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Inspect the Rosalind task chooser for the verified 1MBN heme contact and iron-geometry showcase."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit 1MBN, calculate heme contacts or iron geometry, or run any Rosalind scientific job."
+}

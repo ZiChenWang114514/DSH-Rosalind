@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-imatinib-abl1",
+  "observed_at_utc": "2026-08-29T17:56:33.507Z",
+  "observed_at_local": "2026-08-30T01:56:33.507+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Document the Imatinib-ABL1 experimental-pose showcase; open the task chooser only and do not start a scientific job."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call only opened the Rosalind task chooser; it did not execute or validate a scientific job."
+}

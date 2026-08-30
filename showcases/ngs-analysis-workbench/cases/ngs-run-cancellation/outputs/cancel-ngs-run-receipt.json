@@ -1,0 +1,20 @@
+{
+  "schema": "gpt-science.ngs-operation-receipt/v1",
+  "case_id": "ngs-run-cancellation",
+  "operation": "ngs-analysis-workbench.cancel_ngs_run",
+  "started_at_utc": "2026-08-29T18:59:36.811Z",
+  "finished_at_utc": "2026-08-29T18:59:36.872Z",
+  "arguments": {
+    "registry_run_id": "verification-temp-no-run-20260830"
+  },
+  "response": {
+    "ok": false,
+    "errors": [
+      "registry run does not exist: verification-temp-no-run-20260830"
+    ]
+  },
+  "operation_succeeded": false,
+  "existing_run_affected": false,
+  "scientific_workflow_affected": false,
+  "limitation": "The requested temporary registry identity was never created because plan_snakemake failed, so no registered run could be cancelled."
+}

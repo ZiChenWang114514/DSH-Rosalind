@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Mouse-brain scientific-layer source map</title>
+  <desc id="desc">A verified H5AD source associated with 684 Visium capture spots and three companion demonstration polygons; a temporary import was admitted and its cancellation was unavailable.</desc>
+  <rect width="1200" height="675" fill="#071a1d"/>
+  <text x="70" y="88" fill="#a7f3d0" font-family="Segoe UI,Arial" font-size="40" font-weight="700">Scientific-layer source map</text>
+  <text x="70" y="132" fill="#9fb8b8" font-family="Segoe UI,Arial" font-size="22">licensed H5AD · complete table · source-associated GeoJSON</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="70" y="205" width="280" height="235" rx="18" fill="#123b40" stroke="#2dd4bf"/>
+    <rect x="460" y="205" width="280" height="235" rx="18" fill="#123b40" stroke="#2dd4bf"/>
+    <rect x="850" y="205" width="280" height="235" rx="18" fill="#123b40" stroke="#2dd4bf"/>
+    <text x="142" y="275" fill="#e6fffb" font-size="25" font-weight="700">H5AD</text><text x="115" y="325" fill="#b9d9d7" font-size="22">684 observations</text><text x="116" y="365" fill="#b9d9d7" font-size="22">18,078 genes</text>
+    <text x="525" y="275" fill="#e6fffb" font-size="25" font-weight="700">Spot table</text><text x="515" y="325" fill="#b9d9d7" font-size="22">684 unique IDs</text><text x="505" y="365" fill="#b9d9d7" font-size="22">x/y + 2 genes</text>
+    <text x="905" y="275" fill="#e6fffb" font-size="25" font-weight="700">GeoJSON</text><text x="915" y="325" fill="#b9d9d7" font-size="22">3 polygons</text><text x="885" y="365" fill="#b9d9d7" font-size="22">demo annotation</text>
+    <path d="M350 322 H460 M740 322 H850" stroke="#5eead4" stroke-width="5" marker-end="url(#arrow)"/>
+  </g>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#5eead4"/></marker></defs>
+  <text x="70" y="560" fill="#fcd34d" font-family="Segoe UI,Arial" font-size="22">Temporary import admitted · cancellation returned UNAVAILABLE</text>
+  <text x="70" y="607" fill="#9fb8b8" font-family="Segoe UI,Arial" font-size="20">No published layer · Visium spots, not single cells · matrix scale unknown</text>
+</svg>

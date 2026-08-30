@@ -1,0 +1,117 @@
+{
+  "verification_kind": "executed local topology-and-trajectory inspection",
+  "software": {
+    "MDAnalysis": "2.10.0",
+    "numpy": "2.5.2"
+  },
+  "public_source_identity": {
+    "topology": {
+      "bytes": 789917,
+      "sha256": "1aa947d58fb41b6805dc1e7be4dbe65c6a8f4690f0bd7fc2ae03e7bd437085f4"
+    },
+    "full_trajectory": {
+      "bytes": 168200440,
+      "sha256": "598fcbcfcc425f6eafbe9997238320fcacc6a4613ecce061e1521732bab734bf"
+    },
+    "matches_mdanalysisdata_accession_checksums": true
+  },
+  "topology_trajectory_compatibility": {
+    "load_succeeded": true,
+    "topology_format": "PSF",
+    "trajectory_format": "DCD",
+    "atom_count": 3341,
+    "protein_atom_count": 3341,
+    "residue_count": 214,
+    "chain_a_ca_count": 214,
+    "full_frame_count": 4187,
+    "dt_ps": 240.000005,
+    "coordinates_finite_for_sampled_frames": true
+  },
+  "retained_subset": {
+    "path": "inputs/adk-equilibrium-5frames.dcd",
+    "selected_source_frames": [
+      0,
+      1046,
+      2093,
+      3140,
+      4186
+    ],
+    "frame_count": 5,
+    "atom_count": 3341,
+    "bytes": 201216,
+    "sha256": "939670315365df826d6cab001cc01eded45659c6e8d8851db4d9ffe9e24c89d8",
+    "reload_succeeded": true,
+    "maximum_absolute_coordinate_roundtrip_error_angstrom": 0.0,
+    "time_axis_note": "The compact DCD stores five frames in source order. Original source frame indices and times are retained in sampled-frame-metrics.csv; playback frame spacing is presentational."
+  },
+  "mount_structure": {
+    "path": "inputs/adk-frame0.pdb",
+    "role": "supported coordinate file for opening a viewer before loading the PSF plus DCD pair",
+    "atom_records": 3341,
+    "bytes": 351212,
+    "sha256": "f692e1e6e3ac1820fdab6d15728ae81f0fd256b29d02f5c0ffc2cf846d8dad69",
+    "metadata_limitations": [
+      "The source PSF lacks PDB chain IDs, so MDAnalysis writes chain X in the derived PDB.",
+      "Occupancy, temperature factor, element, alternate-location, and insertion-code fields use writer defaults when the PSF does not supply them.",
+      "Use the retained PSF, rather than the derived PDB, as the topology identity for trajectory work."
+    ]
+  },
+  "sampled_frame_metrics": [
+    {
+      "source_frame": 0,
+      "time_ps": 0.0,
+      "ca_kabsch_rmsd_to_frame0_angstrom": 0.0,
+      "protein_radius_of_gyration_angstrom": 17.220364,
+      "core_to_nmp_centroid_angstrom": 20.074762,
+      "core_to_lid_centroid_angstrom": 21.524607
+    },
+    {
+      "source_frame": 1046,
+      "time_ps": 251040.005125,
+      "ca_kabsch_rmsd_to_frame0_angstrom": 5.628002,
+      "protein_radius_of_gyration_angstrom": 19.29063,
+      "core_to_nmp_centroid_angstrom": 22.042356,
+      "core_to_lid_centroid_angstrom": 29.202
+    },
+    {
+      "source_frame": 2093,
+      "time_ps": 502320.010256,
+      "ca_kabsch_rmsd_to_frame0_angstrom": 6.071739,
+      "protein_radius_of_gyration_angstrom": 19.297189,
+      "core_to_nmp_centroid_angstrom": 22.146194,
+      "core_to_lid_centroid_angstrom": 29.253603
+    },
+    {
+      "source_frame": 3140,
+      "time_ps": 753600.015386,
+      "ca_kabsch_rmsd_to_frame0_angstrom": 7.271138,
+      "protein_radius_of_gyration_angstrom": 19.689374,
+      "core_to_nmp_centroid_angstrom": 22.852583,
+      "core_to_lid_centroid_angstrom": 31.139719
+    },
+    {
+      "source_frame": 4186,
+      "time_ps": 1004640.020511,
+      "ca_kabsch_rmsd_to_frame0_angstrom": 6.090877,
+      "protein_radius_of_gyration_angstrom": 19.43134,
+      "core_to_nmp_centroid_angstrom": 22.546188,
+      "core_to_lid_centroid_angstrom": 29.216476
+    }
+  ],
+  "scientific_scope": {
+    "rmsd": "ordinary least-squares Kabsch RMSD over 214 protein C-alpha atoms relative to source frame 0",
+    "radius_of_gyration": "mass-weighted protein radius of gyration",
+    "domain_centroids": {
+      "CORE": "C-alpha atoms of residues 1-29, 60-121, and 160-214",
+      "NMP": "C-alpha atoms of residues 30-59",
+      "LID": "C-alpha atoms of residues 122-159"
+    }
+  },
+  "viewer_execution": {
+    "trajectory_load": "not executed",
+    "playback": "not executed",
+    "movie_render": "not executed",
+    "export": "not executed",
+    "qualification": "The retained viewer requests are rehearsed contracts awaiting a mounted Structure Viewer session."
+  }
+}

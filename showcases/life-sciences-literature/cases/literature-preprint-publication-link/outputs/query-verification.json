@@ -1,0 +1,23 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "literature-preprint-publication-link",
+  "verified_at_utc": "2026-08-29T19:55:49.245129Z",
+  "calls": [
+    {
+      "skill": "biorxiv-skill",
+      "request": {"base_url":"https://api.biorxiv.org","path":"details/medrxiv/10.1101/2020.09.09.20191205/na/json","record_path":"collection","max_items":10},
+      "source_url": "https://api.biorxiv.org/details/medrxiv/10.1101/2020.09.09.20191205/na/json",
+      "retrieved_at_utc": "2026-08-29T19:55:47.791507Z",
+      "ok": true,
+      "summary": {"record_count":2,"versions":[{"version":"1","date":"2020-09-10"},{"version":"2","date":"2020-09-11"}],"license":"cc_no"}
+    },
+    {
+      "skill": "biorxiv-skill",
+      "request": {"base_url":"https://api.biorxiv.org","path":"pubs/medrxiv/10.1101/2020.09.09.20191205/na/json","record_path":"collection","max_items":10},
+      "source_url": "https://api.biorxiv.org/pubs/medrxiv/10.1101/2020.09.09.20191205/na/json",
+      "retrieved_at_utc": "2026-08-29T19:55:49.245129Z",
+      "ok": true,
+      "summary": {"record_count":1,"published_doi":"10.1038/s41467-021-21444-5","published_journal":"Nature Communications","published_date":"2021-02-19"}
+    }
+  ]
+}

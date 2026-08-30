@@ -1,0 +1,9 @@
+{
+  "source": "European Nucleotide Archive",
+  "run": "DRR037765",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz",
+  "subset_rule": "first 500 complete records from the public ENA FASTQ, retained with this case",
+  "retained_input": "inputs/DRR037765-first-500.fastq",
+  "copied_on": "2026-08-30",
+  "input_bytes": 480372
+}

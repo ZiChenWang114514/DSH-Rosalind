@@ -1,0 +1,19 @@
+{
+  "action": "save_workflow",
+  "performed": true,
+  "workbench_version": "0.2.16",
+  "workflow_id": "showcase_fastq_qc_lifecycle_20260830",
+  "name": "Showcase FASTQ QC lifecycle 2026-08-30",
+  "engine": "snakemake",
+  "catalog": "user",
+  "archived": false,
+  "source_request": {
+    "kind": "local",
+    "root": "showcases/ngs-analysis-workbench/cases/ngs-workflow-save/workflow/v1",
+    "entrypoint": "Snakefile"
+  },
+  "saved_version_id": "version-172b18afc3346b8b037416f67893a9f5",
+  "saved_source_sha256": "sha256:4fb0dec6401816294637a3100800dcebef20c9a8376f3b9e4fa86849864cb2ea",
+  "execution_started": false,
+  "note": "The saved object was created specifically for this showcase. No pre-existing workflow was changed."
+}

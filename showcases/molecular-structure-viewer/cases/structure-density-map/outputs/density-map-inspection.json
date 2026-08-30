@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "showcase_id": "structure-density-map",
+  "run_date": "2026-08-30",
+  "sources": [
+    {
+      "path": "inputs/1GFL.pdb",
+      "url": "https://files.rcsb.org/download/1GFL.pdb",
+      "bytes": 360126,
+      "sha256": "60eb370ad1a2c7c63382399d8655e0448fc29acc2a436e1a6112a5d599390d6f"
+    },
+    {
+      "path": "inputs/1GFL-sf.cif",
+      "url": "https://files.rcsb.org/download/1GFL-sf.cif",
+      "bytes": 1539665,
+      "sha256": "a7796fb33f9fd9f96561af7d9d1c1c92508322aedab8e4d4ebd5e4556cfbe9bb"
+    },
+    {
+      "path": "inputs/1gfl.ccp4",
+      "url": "https://www.ebi.ac.uk/pdbe/coordinates/files/1gfl.ccp4",
+      "bytes": 4720256,
+      "sha256": "03b3c72115869c7511178fb719620577a5e7f7ccd544a8151b971c72c7434f69"
+    }
+  ],
+  "map_header": {
+    "dimensions_columns_rows_sections": [
+      96,
+      96,
+      128
+    ],
+    "mode": 2,
+    "start_columns_rows_sections": [
+      0,
+      0,
+      0
+    ],
+    "sampling_grid_xyz": [
+      96,
+      96,
+      128
+    ],
+    "cell_lengths_angstrom": [
+      89.225998,
+      89.225998,
+      119.771004
+    ],
+    "cell_angles_degrees": [
+      90.0,
+      90.0,
+      90.0
+    ],
+    "axis_mapping_columns_rows_sections": [
+      1,
+      2,
+      3
+    ],
+    "header_min_max_mean": [
+      -0.742035866,
+      2.442574501,
+      -0.0
+    ],
+    "space_group_number": 92,
+    "symmetry_bytes": 640,
+    "origin_angstrom": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "map_signature": "MAP ",
+    "machine_stamp_hex": "44410000",
+    "header_rms": 0.288208067,
+    "label_count": 1
+  },
+  "computed_array_statistics": {
+    "voxel_count": 1179648,
+    "minimum": -0.742035866,
+    "maximum": 2.442574501,
+    "mean": 3.9e-11,
+    "rms_about_zero": 0.288208078
+  },
+  "sampling_method": {
+    "selection": "1GFL author chain A residues 65-67, ATOM records, blank/A alternate location",
+    "coordinate_mapping": "orthogonal unit-cell fractional coordinates with periodic wrapping",
+    "interpolation": "trilinear interpolation on the CCP4 X/Y/Z grid",
+    "normalization": "sampled value divided by the CCP4 header RMS; no contour optimization"
+  },
+  "residue_summary": [
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 65,
+      "residue": "SER",
+      "atom_count": 5,
+      "mean_map_value": 0.850764011,
+      "min_map_value": 0.702046111,
+      "max_map_value": 1.012092501,
+      "mean_map_value_over_header_rms": 2.951909,
+      "atoms_at_or_above_one_header_rms": 5
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom_count": 12,
+      "mean_map_value": 0.865229488,
+      "min_map_value": 0.681130369,
+      "max_map_value": 1.209298101,
+      "mean_map_value_over_header_rms": 3.0021,
+      "atoms_at_or_above_one_header_rms": 12
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 67,
+      "residue": "GLY",
+      "atom_count": 4,
+      "mean_map_value": 0.88036406,
+      "min_map_value": 0.671773194,
+      "max_map_value": 1.037600089,
+      "mean_map_value_over_header_rms": 3.054613,
+      "atoms_at_or_above_one_header_rms": 4
+    }
+  ],
+  "atom_samples": [
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 65,
+      "residue": "SER",
+      "atom": "N",
+      "map_value": 0.702046111,
+      "map_value_over_header_rms": 2.4359
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 65,
+      "residue": "SER",
+      "atom": "CA",
+      "map_value": 0.963830348,
+      "map_value_over_header_rms": 3.344217
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 65,
+      "residue": "SER",
+      "atom": "C",
+      "map_value": 0.861199261,
+      "map_value_over_header_rms": 2.988116
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 65,
+      "residue": "SER",
+      "atom": "CB",
+      "map_value": 0.714651832,
+      "map_value_over_header_rms": 2.479639
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 65,
+      "residue": "SER",
+      "atom": "OG",
+      "map_value": 1.012092501,
+      "map_value_over_header_rms": 3.511673
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "N",
+      "map_value": 0.866640699,
+      "map_value_over_header_rms": 3.006997
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CA",
+      "map_value": 0.85616478,
+      "map_value_over_header_rms": 2.970648
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "C",
+      "map_value": 0.927416496,
+      "map_value_over_header_rms": 3.217871
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "O",
+      "map_value": 1.209298101,
+      "map_value_over_header_rms": 4.19592
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CB",
+      "map_value": 0.804970385,
+      "map_value_over_header_rms": 2.793018
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CG",
+      "map_value": 0.81618163,
+      "map_value_over_header_rms": 2.831918
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CD1",
+      "map_value": 0.744156927,
+      "map_value_over_header_rms": 2.582013
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CD2",
+      "map_value": 0.702361482,
+      "map_value_over_header_rms": 2.436995
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CE1",
+      "map_value": 0.837110444,
+      "map_value_over_header_rms": 2.904535
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CE2",
+      "map_value": 0.681130369,
+      "map_value_over_header_rms": 2.363329
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "CZ",
+      "map_value": 0.990876765,
+      "map_value_over_header_rms": 3.43806
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 66,
+      "residue": "TYR",
+      "atom": "OH",
+      "map_value": 0.946445776,
+      "map_value_over_header_rms": 3.283898
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 67,
+      "residue": "GLY",
+      "atom": "N",
+      "map_value": 1.037600089,
+      "map_value_over_header_rms": 3.600177
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 67,
+      "residue": "GLY",
+      "atom": "CA",
+      "map_value": 0.671773194,
+      "map_value_over_header_rms": 2.330862
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 67,
+      "residue": "GLY",
+      "atom": "C",
+      "map_value": 1.00868273,
+      "map_value_over_header_rms": 3.499842
+    },
+    {
+      "auth_chain": "A",
+      "auth_seq_id": 67,
+      "residue": "GLY",
+      "atom": "O",
+      "map_value": 0.803400227,
+      "map_value_over_header_rms": 2.78757
+    }
+  ],
+  "interpretation_scope": "Atom-sampled map support is a local descriptive statistic, not a crystallographic refinement score or proof of a chemical mechanism."
+}

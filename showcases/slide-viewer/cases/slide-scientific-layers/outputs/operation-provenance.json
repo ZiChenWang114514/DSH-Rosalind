@@ -1,0 +1,14 @@
+{
+  "schema": "slide-viewer.operation-provenance/v1",
+  "case_id": "slide-scientific-layers",
+  "plugin_version": "0.1.56",
+  "observed_at_utc": "2026-08-29T18:59:21.616Z/2026-08-29T18:59:36.176Z",
+  "evidence": "outputs/scientific-layer-cancellation-evidence.json",
+  "executed_operations": [
+    "slide_import_scientific_layer",
+    "slide_cancel_scientific_layer_import",
+    "slide_get_scientific_layer_import"
+  ],
+  "result_scope": "Temporary import and unsuccessful cancellation verification for the existing three-feature demonstration GeoJSON.",
+  "rosalind_observation_preserved": "outputs/rosalind-open-observation.json remains unchanged and records no scientific-layer work."
+}

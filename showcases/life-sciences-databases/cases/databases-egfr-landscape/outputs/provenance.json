@@ -1,0 +1,18 @@
+{
+  "case_id": "databases-egfr-landscape",
+  "retrieval_date": "2026-08-29",
+  "queries": [
+    {"source": "UniProt", "accession": "P00533", "retained_output": "outputs/results.json"},
+    {"source": "ChEMBL", "target": "CHEMBL203", "mechanism_slice": "limit=10", "compounds": ["CHEMBL939", "CHEMBL553", "CHEMBL3353410"], "retained_output": "outputs/results.json"},
+    {"source": "RCSB PDB", "accession": "1M17", "retained_output": "outputs/results.json"},
+    {"source": "Reactome", "accession": "R-HSA-177929", "status": "success", "retrieved_at_utc": "2026-08-29T19:56:53.601526Z", "retained_output": "outputs/query-verification.json"}
+  ],
+  "source_index": "outputs/sources.json",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "observed_at_utc": "2026-08-29T18:14:05.222Z",
+    "scientific_job_executed": false,
+    "note": "The call opened only the task chooser and did not retrieve EGFR records."
+  }
+}

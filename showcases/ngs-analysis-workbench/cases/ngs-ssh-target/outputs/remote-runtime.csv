@@ -1,0 +1,18 @@
+component,state,version_or_value,scope
+operating_system,observed,Ubuntu 24.04.4 LTS,remote host
+architecture,observed,x86_64,remote host
+logical_cpus,observed,64,remote host
+memory_gib,observed,314.5,remote host
+gpu_count,observed,4,remote host
+gpu_model,observed,NVIDIA GeForce RTX 4090,remote host
+python3,present,3.12.3,noninteractive PATH
+java,present,21.0.12,noninteractive PATH
+docker_cli,present,29.3.0,noninteractive PATH
+docker_server,reachable,29.3.0 linux x86_64,daemon query
+nextflow,missing,,noninteractive PATH
+snakemake,missing,,noninteractive PATH
+fastqc,missing,,noninteractive PATH
+multiqc,missing_or_unrunnable,,PATH and python module
+samtools,missing,,noninteractive PATH
+sbatch,missing,,noninteractive PATH
+squeue,missing,,noninteractive PATH

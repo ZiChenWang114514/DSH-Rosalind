@@ -1,0 +1,3 @@
+# Public density-map inspection
+
+Inspect the retained public RCSB 1GFL coordinates, structure factors, and PDBe CCP4 map. Verify the CCP4 header, sample author chain A residues 65–67 by periodic unit-cell mapping and trilinear interpolation, report values relative to the header RMS, and describe this calculation as atom-sampled map support rather than a crystallographic refinement score. Invoke `mcp__rosalind__rosalind_open` with this case's task context, cite the 637-byte `outputs/rosalind-open-observation.json`, and state that the task-chooser response does not show that a Rosalind scientific job ran.

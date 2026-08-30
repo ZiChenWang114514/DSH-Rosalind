@@ -1,0 +1,100 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-fastq-qc",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__list_workflows",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.696Z",
+      "arguments": {
+        "include_archived": true
+      },
+      "response": {
+        "ok": true,
+        "count": 14,
+        "bundled_workflows_present": true,
+        "temporary_evidence_workflow_archived": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:26.655Z",
+      "arguments": {
+        "target_id": "local"
+      },
+      "response": {
+        "ok": true,
+        "host": {
+          "os": "windows",
+          "arch": "amd64"
+        },
+        "commands": {
+          "nextflow": "missing",
+          "snakemake": "missing",
+          "java": "ready",
+          "docker": "ready"
+        },
+        "docker_daemon_reachable": false,
+        "controller_candidates": 0
+      }
+    },
+    {
+      "operation": "mcp__ngs_analysis_workbench__check_nextflow_readiness",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:51:48.732Z",
+      "arguments": {
+        "workflow_id": "fastq_qc",
+        "target_id": "local",
+        "run_dir": "[temporary run directory]",
+        "profile": "docker"
+      },
+      "response": {
+        "tool_call_succeeded": true,
+        "readiness_status": "blocked",
+        "workflow_id": "fastq_qc",
+        "target": "local",
+        "host": {
+          "os": "windows",
+          "arch": "amd64"
+        },
+        "blockers": [
+          "required executable is not available: nextflow",
+          "Docker daemon is not reachable"
+        ],
+        "run_created": false
+      }
+    }
+  ],
+  "failed_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__plan_nextflow",
+      "operation_succeeded": false,
+      "started_at_utc": "2026-08-29T19:51:48.733Z",
+      "observed_at_utc": "2026-08-29T19:52:00.000Z",
+      "arguments": {
+        "workflow_id": "fastq_qc",
+        "target_id": "local",
+        "run_dir": "[temporary run directory]",
+        "profile": "docker"
+      },
+      "response_error": "module 'os' has no attribute 'fchmod'",
+      "plan_created": false
+    }
+  ],
+  "not_executed_operations": [
+    {
+      "operation": "mcp__ngs_analysis_workbench__execute_plan",
+      "status": "not_executed",
+      "reason": "Readiness was blocked and no immutable plan was created; therefore no approval request or run was possible."
+    }
+  ],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "accession": "P01116",
+  "sequence_version": 1,
+  "molecule": "protein",
+  "sequence_length": 189,
+  "response_sha256": "be58c42a464baafed08805898078839b0b47b559cec93fdb3cd7f8d95ab95ea6",
+  "sequence_sha256": "1d5a9ab11f64cb886d8ffa08a153c412b2d190fcf70e5690cd4b4c7efcdee53a",
+  "canonical_residue_types_observed": 19,
+  "coordinate_system": "1-based inclusive",
+  "motif_checks": [
+    {
+      "name": "P-loop",
+      "start_1based": 10,
+      "end_1based": 17,
+      "sequence": "GAGGVGKS"
+    },
+    {
+      "name": "Switch I",
+      "start_1based": 30,
+      "end_1based": 38,
+      "sequence": "DEYDPTIED"
+    },
+    {
+      "name": "Switch II",
+      "start_1based": 60,
+      "end_1based": 76,
+      "sequence": "GQEEYSAMRDQYMRTGE"
+    },
+    {
+      "name": "NKXD",
+      "start_1based": 116,
+      "end_1based": 119,
+      "sequence": "NKCD"
+    },
+    {
+      "name": "CAAX",
+      "start_1based": 186,
+      "end_1based": 189,
+      "sequence": "CIIM"
+    }
+  ],
+  "calculation": {
+    "status": "executed",
+    "engine": "Python standard library"
+  },
+  "viewer_workflow_status": "rehearsed"
+}

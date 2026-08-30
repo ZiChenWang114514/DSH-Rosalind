@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">4V1W wwPDB validation summary</title><desc id="desc">Selected global geometry and map-model fit metrics from the retained 2026 report.</desc>
+  <rect width="1200" height="675" rx="28" fill="#0b1220"/>
+  <text x="64" y="70" fill="#fff" font-family="Segoe UI,Arial" font-size="34" font-weight="700">4V1W · wwPDB EM validation</text>
+  <text x="64" y="106" fill="#94a3b8" font-family="Segoe UI,Arial" font-size="18">Report generated 2026-03-09 · 56 pages · reported resolution 4.70 Å</text>
+  <g font-family="Segoe UI,Arial"><rect x="64" y="150" width="250" height="118" rx="18" fill="#172033"/><text x="90" y="184" fill="#cbd5e1" font-size="15">CLASHSCORE</text><text x="90" y="235" fill="#fff" font-size="42" font-weight="700">8</text>
+    <rect x="333" y="150" width="250" height="118" rx="18" fill="#172033"/><text x="359" y="184" fill="#cbd5e1" font-size="15">CLOSE CONTACTS</text><text x="359" y="235" fill="#fff" font-size="42" font-weight="700">517</text>
+    <rect x="602" y="150" width="250" height="118" rx="18" fill="#172033"/><text x="628" y="184" fill="#cbd5e1" font-size="15">RAMA OUTLIERS</text><text x="628" y="235" fill="#fbbf24" font-size="42" font-weight="700">24</text>
+    <rect x="871" y="150" width="265" height="118" rx="18" fill="#172033"/><text x="897" y="184" fill="#cbd5e1" font-size="15">SIDECHAIN OUTLIERS</text><text x="897" y="235" fill="#fbbf24" font-size="42" font-weight="700">265</text>
+    <rect x="64" y="292" width="519" height="118" rx="18" fill="#172033"/><text x="90" y="326" fill="#cbd5e1" font-size="15">GEOMETRY |Z| &gt; 5</text><text x="90" y="374" fill="#fff" font-size="30" font-weight="700">48 bond lengths · 298 bond angles</text>
+    <rect x="602" y="292" width="534" height="118" rx="18" fill="#172033"/><text x="628" y="326" fill="#cbd5e1" font-size="15">REPEATED BACKBONE OBSERVATION</text><text x="628" y="374" fill="#f9a8d4" font-size="30" font-weight="700">Gly156 · chains A–X</text>
+    <rect x="64" y="434" width="340" height="104" rx="18" fill="#111827" stroke="#5eead4"/><text x="90" y="468" fill="#99f6e4" font-size="15">WHOLE-MODEL Q-SCORE</text><text x="90" y="514" fill="#fff" font-size="32" font-weight="700">0.296</text>
+    <rect x="430" y="434" width="340" height="104" rx="18" fill="#111827" stroke="#5eead4"/><text x="456" y="468" fill="#99f6e4" font-size="15">ATOM INCLUSION</text><text x="456" y="514" fill="#fff" font-size="32" font-weight="700">0.535</text>
+    <rect x="796" y="434" width="340" height="104" rx="18" fill="#111827" stroke="#5eead4"/><text x="822" y="468" fill="#99f6e4" font-size="15">MAP CONTOUR</text><text x="822" y="514" fill="#fff" font-size="32" font-weight="700">0.16</text>
+    <text x="64" y="604" fill="#94a3b8" font-size="15">Public validation observations identify review targets; they do not automatically label residues as incorrect.</text></g>
+</svg>

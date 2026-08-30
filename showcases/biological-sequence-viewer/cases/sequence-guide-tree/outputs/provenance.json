@@ -1,0 +1,20 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "source_case": "sequence-ras-alignment",
+  "source_artifact": "../sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
+  "source_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "public_records": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "derivation": "deterministic local p-distance calculation followed by the exact three-taxon NJ limb solution",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "scientific_job_executed": false,
+    "note": "The observed ready response documents only the task chooser; the local script produced the scientific result."
+  },
+  "viewer_status": "Historical completed distance, tree, query, and export calls are recorded in outputs/viewer-operation-evidence.json; the 2026-08-30 retry was unconfirmed."
+}

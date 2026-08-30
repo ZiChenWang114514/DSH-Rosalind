@@ -1,0 +1,42 @@
+{
+  "schema": "literature.deterministic-summary/v1",
+  "case_id": "literature-kras-g12c",
+  "source_retrieved_at_utc": "2026-08-29T18:12:32.824696Z",
+  "selection_rule": "Retain the seminal switch-II-pocket report, an inactive-state covalent study, the AMG 510 discovery report, and a recent resistance study returned by the recorded PubMed searches.",
+  "record_count": 4,
+  "earliest_record": "24256730",
+  "latest_record": "39215000",
+  "pmc_record_count": 2,
+  "pmc_open_access_count": 1,
+  "access_class_counts": {
+    "PMC open access": 1,
+    "not reported as PMC open access": 3
+  },
+  "timeline": [
+    {
+      "date": "2013-11-28",
+      "pmid": "24256730",
+      "title": "K-Ras(G12C) inhibitors allosterically control GTP affinity and effector interactions.",
+      "project_label": "switch-II-pocket structural starting point"
+    },
+    {
+      "date": "2016-03",
+      "pmid": "26739882",
+      "title": "Selective Inhibition of Oncogenic KRAS Output with Small Molecules Targeting the Inactive State.",
+      "project_label": "inactive-state mutant-selective covalent pharmacology"
+    },
+    {
+      "date": "2020-01-09",
+      "pmid": "31820981",
+      "title": "Discovery of a Covalent Inhibitor of KRAS(G12C) (AMG 510) for the Treatment of Solid Tumors.",
+      "project_label": "clinical-candidate discovery"
+    },
+    {
+      "date": "2024-08-30",
+      "pmid": "39215000",
+      "title": "RAS-ON inhibition overcomes clinical resistance to KRAS G12C-OFF covalent blockade.",
+      "project_label": "resistance and nucleotide-state comparison"
+    }
+  ],
+  "interpretation": "The four-record trail links a structural starting point to inactive-state covalent pharmacology, candidate discovery, and later resistance research. It is a curated teaching trail rather than a systematic review."
+}

@@ -1,0 +1,19 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "scientific_evidence": {
+    "source": "inputs/NC_001416.1.gb",
+    "source_provenance": "outputs/source-provenance.json",
+    "computed_result": "outputs/analysis.json",
+    "method": "Independent local extraction, reverse complementation, and translation with genetic code 11."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "note": "The response documents only the task chooser and did not produce the lambda annotation or translation result."
+  },
+  "viewer_status": "A prior viewer session was created but its card did not mount; no new viewer action was performed for this update."
+}

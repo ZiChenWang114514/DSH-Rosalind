@@ -1,0 +1,22 @@
+{
+  "showcase_id": "rosalind-kinase-metabolism",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "CID-exact PubChem structures and official DailyMed metabolism statements were retained and joined to local SMARTS results."
+  },
+  "method": "exact PubChem structures + official DailyMed statements + local RDKit SMARTS queries",
+  "compound_count": 3,
+  "observations": [
+    "CYP3A4 is the major enzyme responsible for metabolism of imatinib.",
+    "Gefitinib undergoes extensive hepatic metabolism in humans, predominantly by CYP3A4.",
+    "Erlotinib is metabolized primarily by CYP3A4 and to a lesser extent by CYP1A2 and CYP1A1 in vitro."
+  ],
+  "interpretation": "The labels establish enzyme-related evidence. SMARTS matches identify structural regions for review and do not predict enzyme specificity or clearance.",
+  "limitations": [
+    "SMARTS hits are uncalibrated prompts and may be false positives or miss relevant metabolic sites.",
+    "No metabolite ranking, intrinsic clearance, microsomal stability, transporter effect, or clinical exposure was calculated.",
+    "PubChem and RDKit lipophilicity values are computed descriptors.",
+    "Label statements are product-specific evidence and can be revised after the retrieval date."
+  ]
+}

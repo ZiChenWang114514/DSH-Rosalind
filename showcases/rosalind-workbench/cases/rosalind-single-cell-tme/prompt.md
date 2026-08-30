@@ -1,0 +1,3 @@
+# Triple-negative breast-cancer single-cell preparation
+
+Use the retained de-identified CELLxGENE metadata extract for collection `ceef2841-5333-46ac-92ef-ccbe0c20fe55`. Verify organism, tissue, disease ontology, assay versions, cells, features, aggregate participant count, broad cell-type inventory, raw-count location, UMAP availability, and asset size. Do not infer cell proportions or tumour–immune biology without the matrix, and do not associate this case with pathology or Visium analysis. Invoke `mcp__rosalind__rosalind_open` only to open the task chooser; cite `outputs/rosalind-open-observation.json` and state that no H5AD or cells were submitted to Rosalind.

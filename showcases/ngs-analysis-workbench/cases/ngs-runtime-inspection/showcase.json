@@ -1,0 +1,129 @@
+{
+  "id": "ngs-runtime-inspection",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.get_runtime_environment",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "OpenSSH for Windows",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller with sanitized SSH observations",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/runtime-inspection-method.md",
+      "bytes": 505
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/runtime-environment.json",
+      "bytes": 2480
+    },
+    {
+      "path": "outputs/runtime-comparison.csv",
+      "bytes": 372
+    },
+    {
+      "path": "outputs/runtime-probe.txt",
+      "bytes": 603
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 767
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 2335
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 6464
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2336
+    }
+  ],
+  "sources": [
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract",
+    "https://www.nextflow.io/docs/latest/",
+    "https://snakemake.readthedocs.io/"
+  ],
+  "observations": [
+    "The local Workbench snapshot found Java, Docker CLI, Conda, and Mamba but no Nextflow or Snakemake controller.",
+    "The local Docker client could not reach its server and no compatible controller candidate was returned.",
+    "After repair, the Linux SSH target exposed Python, Java, Nextflow 26.04.6, Snakemake 9.26.0, Micromamba 2.9.0, and a reachable Docker 29.7.2 server.",
+    "The refreshed Workbench runtime inspection returned two active host-path controller candidates.",
+    "A public hello-world container completed with exit code 0.",
+    "rosalind_open returned the ready launcher view for this case-specific task context; no scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The Windows controller still lacks workflow controllers and a reachable Docker server; the repaired Linux SSH target supplies both controllers and a reachable Docker daemon."
+  ],
+  "limitations": [
+    "Runtime snapshot identities expire and must be refreshed before planning.",
+    "Unactivated remote environments were not exhaustively searched.",
+    "Only the public hello-world image and minimal native FASTQ workflows were run; no scientific container image or complete task-software stack was resolved by Workbench.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract",
+        "https://www.nextflow.io/docs/latest/",
+        "https://snakemake.readthedocs.io/"
+      ],
+      "inputs": [
+        "inputs/runtime-inspection-method.md"
+      ],
+      "outputs": [
+        "outputs/runtime-environment.json",
+        "outputs/runtime-comparison.csv",
+        "outputs/runtime-probe.txt",
+        "outputs/rosalind-open-observation.json",
+        "outputs/operation-evidence.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The local snapshot is server-authored; remote values come from a bounded, sanitized SSH probe."
+    }
+  ],
+  "reproduction": [
+    "Call ngs-analysis-workbench.get_runtime_environment for local and each registered SSH target.",
+    "When authorized, repeat the neutral-label SSH probe described in inputs/runtime-inspection-method.md without retaining environment-specific identifiers.",
+    "Keep command presence, Docker server reachability, controller selection, and workflow readiness as separate observations.",
+    "Call mcp__rosalind__rosalind_open with the case-specific task_context and compare its response with outputs/rosalind-open-observation.json.",
+    "Compare the new values with the dated JSON and CSV outputs.",
+    "For ngs-runtime-inspection, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "local_snapshot_id": "sanitized-runtime-snapshot",
+    "observed_at": "2026-08-29T17:36:25Z",
+    "workflow_execution_performed": true,
+    "workbench_registered_run_created": false
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "id": "ngs-compute-inventory",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "interface",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-compute.list_compute_targets",
+    "ngs-compute.inspect_compute_target",
+    "ngs-analysis-workbench.get_runtime_environment",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_compute__list_compute_targets",
+      "mcp__ngs_compute__inspect_compute_target",
+      "mcp__ngs_analysis_workbench__get_runtime_environment",
+      "OpenSSH for Windows",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller with sanitized SSH observations",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/inventory-method.md",
+      "bytes": 781
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/compute-target-inventory.json",
+      "bytes": 1555
+    },
+    {
+      "path": "outputs/target-status.csv",
+      "bytes": 258
+    },
+    {
+      "path": "outputs/inspection-notes.txt",
+      "bytes": 631
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 765
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 2471
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 6560
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2559
+    }
+  ],
+  "sources": [
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract",
+    "https://www.openssh.com/"
+  ],
+  "observations": [
+    "Workbench listed three registered contexts using neutral public labels.",
+    "The local runtime snapshot succeeded and the registered WSL SSH target inspection failed as unreachable.",
+    "The authorized SSH compute target accepted a bounded BatchMode probe, was registered successfully, and was reached by Workbench inspection.",
+    "rosalind_open returned the ready launcher view for this case-specific task context; no scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The local controller and authorized SSH compute target have bounded runtime observations, while missing workflow controllers prevent planning on the authorized target."
+  ],
+  "limitations": [
+    "Registration and reachability do not establish workflow or scientific readiness.",
+    "One nonsecret target reference was configured; no workspace, plan, workflow, or NGS dataset was created or executed.",
+    "The registered WSL target runtime remains unknown because inspection did not complete.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract",
+        "https://www.openssh.com/"
+      ],
+      "inputs": [
+        "inputs/inventory-method.md"
+      ],
+      "outputs": [
+        "outputs/compute-target-inventory.json",
+        "outputs/target-status.csv",
+        "outputs/inspection-notes.txt",
+        "outputs/rosalind-open-observation.json",
+        "outputs/operation-evidence.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained inventory removes identifying SSH fields and preserves only observed registration, reachability, and runtime states."
+    }
+  ],
+  "reproduction": [
+    "Call ngs-compute.list_compute_targets and ngs-analysis-workbench.get_runtime_environment for local.",
+    "Attempt ngs-compute.inspect_compute_target for registered SSH targets and retain the returned status.",
+    "Repeat the bounded authorized-target BatchMode probe described in inputs/inventory-method.md without retaining aliases or identifying connection fields.",
+    "Call mcp__rosalind__rosalind_open with the case-specific task_context and compare its response with outputs/rosalind-open-observation.json.",
+    "Compare the new structured records with the dated JSON and CSV outputs.",
+    "For ngs-compute-inventory, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "observed_at": "2026-08-29T19:06:06.529Z",
+    "cost": "free",
+    "workflow_execution_performed": false
+  }
+}

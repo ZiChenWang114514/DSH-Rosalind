@@ -1,0 +1,4 @@
+public_label,source,registered,reachability,runtime_observation
+local controller,workbench,true,local,observed
+previously registered SSH context,workbench,true,unreachable,unavailable
+authorized SSH compute target,workbench,true,reachable,bounded inspection

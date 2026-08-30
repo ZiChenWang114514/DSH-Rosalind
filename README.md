@@ -8,7 +8,7 @@
     <a href="LICENSE-DOCS"><img alt="Documentation licence: CC BY 4.0" src="https://img.shields.io/badge/docs-CC%20BY%204.0-b17b55" /></a>
   </p>
 
-  <p><strong>Twenty-three reproducible life-science projects, designed for DSH Web.</strong></p>
+  <p><strong>One hundred reproducible life-science projects, designed for DSH Web.</strong></p>
   <p><a href="README.zh-CN.md">简体中文</a> · <a href="docs/showcases.md">Showcase catalogue</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/verification.md">Verification</a> · <a href="docs/release-notes-v0.3.0.md">v0.3.0 notes</a></p>
 </div>
 
@@ -20,7 +20,7 @@ DSH-Rosalind is a native extension for [DeepSeek Harness](https://github.com/dee
 - **Replay** opens the versioned artifacts and previews that were already checked for this release.
 - **Reproduce** prepares a new execution plan, reports provider readiness, and runs only the steps that are available and approved.
 
-The release contains **23 lesson-and-replay-ready projects in seven scientific areas** and the **151 files referenced by their manifests**. Reproduce creates a new plan and uses the available adapter only after the required inputs and approval are present. Local analyses can produce a new result where the adapter supports them; source-dependent, remote, or paid workflows may instead report the precise requirement or remain awaiting confirmation. The snapshot is pinned to `rosalind-science-showcases` commit [`f81e668c69edbfe7863cc936f2d535b61d8df76b`](https://github.com/ZiChenWang114514/rosalind-science-showcases/tree/f81e668c69edbfe7863cc936f2d535b61d8df76b).
+The release contains **100 lesson-and-replay-ready projects in seven scientific areas** and **1,224 validated catalogue and case files**. Reproduce creates a new plan and uses the available adapter only after the required inputs and approval are present. Local analyses can produce a new result where the adapter supports them; source-dependent, remote, or paid workflows may instead report the precise requirement or remain awaiting confirmation. The reviewed snapshot is pinned to commit `f8c2ea83ac3b3b9258b160b80039dc3db37d76c4`.
 
 ## Inside DSH Web
 
@@ -72,13 +72,13 @@ dsh plugin --profile web add .\zichenwang114514-dsh-rosalind-0.3.0.tgz
 
 | Area | Projects | Examples |
 |---|---:|---|
-| Literature | 3 | TREM2 landscape, PMC availability, preprint-to-publication linkage |
-| Databases | 3 | IL6R–asthma evidence, rs7903146 interpretation, EGFR knowledge map |
-| Sequence | 3 | Lambda annotation, human RAS alignment, FASTQ quality |
-| NGS | 3 | FASTQ readiness, bulk RNA-seq, single-cell RNA-seq |
-| Molecular structure | 3 | MDM2–p53 contacts, adenylate kinase alignment, GFP figure |
-| Pathology & spatial | 4 | Whole-slide pyramid, spatial expression, GeoJSON overlay, research export |
-| Workbench | 4 | PD-L1 nanobody design and three guided scientific launchers |
+| Literature | 6 | TREM2 landscape, KRAS G12C evidence, nanobody assays |
+| Databases | 7 | IL6R–asthma evidence, PD-L1 records, airway RNA-seq sources |
+| Sequence | 12 | Lambda annotation, human RAS alignment, sequence editing and export |
+| NGS | 15 | Workflow readiness, execution records, observation and cancellation |
+| Molecular structure | 15 | Contacts, alignment, density maps, assemblies and trajectories |
+| Pathology & spatial | 15 | DICOM, OME, annotations, measurements and research packages |
+| Workbench | 30 | Molecular design, scientific computing and cross-tool studies |
 
 See the [complete catalogue](docs/showcases.md) for all IDs, data sources, retained results, and fresh-run requirements.
 

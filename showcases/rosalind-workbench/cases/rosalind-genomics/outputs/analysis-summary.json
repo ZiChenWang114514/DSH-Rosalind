@@ -1,0 +1,24 @@
+{
+  "schema": "rosalind.airway-dex-analysis/v1",
+  "geo_accession": "GSE52778",
+  "source_rows": 23273,
+  "tested_ok_gene_rows": 13513,
+  "significant_q_le_0_05": 316,
+  "higher_in_dexamethasone": 217,
+  "lower_in_dexamethasone": 99,
+  "top_25_selection": "ascending q-value, then descending absolute recomputed log2(Dex/Untreated), then gene symbol",
+  "leading_genes": [
+    "SPARCL1",
+    "KLF15",
+    "FKBP5",
+    "SAMHD1",
+    "GPX3",
+    "C7",
+    "SERPINA3",
+    "MAOA",
+    "DUSP1",
+    "CCDC69"
+  ],
+  "theme_method": "descriptive overlap with four predeclared small panels; no pathway-enrichment p-values were calculated",
+  "direction_note": "The source names value_1 as Dex and value_2 as Untreated. Direction was recomputed directly as log2(value_1/value_2) because the source Cuffdiff fold-change column uses sample_2/sample_1."
+}

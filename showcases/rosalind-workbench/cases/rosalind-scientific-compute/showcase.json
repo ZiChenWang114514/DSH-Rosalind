@@ -3,47 +3,120 @@
   "plugin_id": "rosalind-workbench",
   "plugin_version": "0.2.2-research-preview",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
+  "domain": "scientific-computing",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "embed-gb1-sequences"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "ProteinGym v1.3 first-500-row extraction and deterministic four-site 80-dimensional one-hot encoding plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+    "status": "verified"
+  },
   "prompt": "prompt.md",
   "inputs": [
     {
-      "path": "inputs/runtime-discovery-request.json"
+      "path": "build_case.py",
+      "bytes": 8190
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 564
+    },
+    {
+      "path": "inputs/gb1-variants-first-500.csv",
+      "bytes": 247983
     }
   ],
   "outputs": [
     {
-      "path": "outputs/launcher-observation.json"
+      "path": "outputs/embedding-summary.json",
+      "bytes": 743
+    },
+    {
+      "path": "outputs/gb1-four-site-one-hot.csv",
+      "bytes": 99296
+    },
+    {
+      "path": "outputs/run-metrics.json",
+      "bytes": 354
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 714
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6144
     }
   ],
   "previews": [
     {
-      "path": "previews/rosalind-scientific-compute.svg"
+      "path": "previews/preview.svg",
+      "bytes": 2493
     }
   ],
-  "sources": [],
-  "dependencies": {
-    "required_mcp_servers": ["rosalind", "ngs"],
-    "required_operations": ["rosalind.open", "list_workflows", "get_runtime_environment", "list_compute_targets"],
-    "required_skills": ["rosalind-ngs-ngs-analysis-workbench"],
-    "provenance": {
-      "reused_cases": [],
-      "input_note": "This launcher route queries local NGS workflow and compute capability metadata. It does not accept a biological data file."
-    }
-  },
+  "sources": [
+    "https://marks.hms.harvard.edu/proteingym/ProteinGym_v1.3/DMS_ProteinGym_substitutions.zip",
+    "https://github.com/OATML-Markslab/ProteinGym"
+  ],
   "observations": [
-    "The Rosalind launcher was ready and exposed the named scientific area.",
-    "The retained request records the exact local workflow, runtime, and compute-target discovery calls."
+    "The retained ProteinGym subset contains 500 variants with 448-residue full-protein sequences.",
+    "The deterministic encoding contains 500 rows and 80 categorical dimensions for positions 265, 266, 267, and 280.",
+    "The selected rows contain 2 single, 44 double, and 454 triple mutants; their recorded DMS scores range from 0.0 to 6.2011354501."
   ],
   "interpretation": [
-    "The scientific-compute route discovers local NGS workflow and compute capability metadata after opening the Workbench area."
+    "The one-hot representation preserves the identity of each assayed residue and is suitable for transparent teaching or simple downstream models.",
+    "The source DMS scores describe the SPG1_STRSG_Wu_2016 binding assay, while the embedding and summaries are local computations."
   ],
   "limitations": [
-    "The retained launcher observation did not expose individual task choices.",
-    "The route discovers host capability only; it does not submit a workflow or claim a biological result."
+    "The first 500 archive rows are deterministic but are not a balanced or random sample of the complete landscape.",
+    "The categorical encoding omits evolutionary, structural, and protein-language-model context.",
+    "No ESM model or sequence viewer was executed.",
+    "The Rosalind call verified launcher readiness only and executed no scientific job.",
+    "Wall time is hardware and runtime dependent."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://marks.hms.harvard.edu/proteingym/ProteinGym_v1.3/DMS_ProteinGym_substitutions.zip"
+      ],
+      "inputs": [
+        "inputs/source-provenance.json",
+        "inputs/gb1-variants-first-500.csv"
+      ],
+      "outputs": [
+        "outputs/embedding-summary.json",
+        "outputs/gb1-four-site-one-hot.csv",
+        "outputs/run-metrics.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The builder records the archive member and selection rule before generating the encoding, summaries, timing record, and data-driven preview. outputs/rosalind-open-observation.json records the genuine mcp__rosalind__rosalind_open call separately and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Download the ProteinGym v1.3 substitution archive from the retained source URL.",
+    "Run python build_case.py --archive <archive-path>.",
+    "Verify 500 rows in both CSV files and compare the summary and preview.",
+    "Inspect outputs/rosalind-open-observation.json separately as launcher-readiness evidence."
   ],
   "environment": {
-    "launcher_ready": true,
-    "scientific_job_executed": false,
-    "reproduction_fixture": "inputs/runtime-discovery-request.json"
+    "cost": "free",
+    "data": "public ProteinGym v1.3",
+    "model_execution": "none"
   }
 }

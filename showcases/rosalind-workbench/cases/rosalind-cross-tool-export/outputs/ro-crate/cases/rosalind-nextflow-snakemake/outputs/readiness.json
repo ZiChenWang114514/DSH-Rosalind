@@ -1,0 +1,19 @@
+{
+  "inspection_date": "2026-08-30",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.0",
+  "engines": {
+    "nextflow": {
+      "available": false,
+      "executable_name": null
+    },
+    "snakemake": {
+      "available": false,
+      "executable_name": null
+    }
+  },
+  "nextflow_executed": false,
+  "snakemake_executed": false,
+  "direct_qc_core_executed": true,
+  "reason": "Neither workflow-engine command was available on PATH; the shared Python computation was run directly."
+}

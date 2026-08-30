@@ -1,9 +1,105 @@
 {
-  "id":"databases-variant-interpretation","plugin_id":"life-sciences-databases","plugin_version":"0.1.5","status":"ready","run_date":"2026-08-29","prompt":"prompt.md","inputs":[],
-  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],"previews":[{"path":"previews/variant-rs7903146.svg"}],
-  "sources":["https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/","https://rest.ensembl.org/variation/homo_sapiens/rs7903146","https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T"],
-  "observations":["ClinVar returned distinct C>T and C>G records for rs7903146; the selected C>T allele is Variation ID 7413.","Ensembl returned rs7903146 cross-references including VCV000007413.","UKB-TOPMed reported allele frequency 0.29 and 1,419 available association rows for 10:112998590-C-T.","The gnomAD GraphQL request failed and was not used as evidence."],
-  "interpretation":["The case demonstrates allele-resolved identity checking before combining clinical, annotation, and cohort records."],
-  "limitations":["The compact ClinVar search does not provide a complete clinical-significance review.","The first UKB-TOPMed slice is not significance-ranked.","No gnomAD frequency was reported because the live request failed."],
-  "environment":{"retrieval_date":"2026-08-29","variant":"10:112998590-C-T"}
+  "id": "databases-variant-interpretation",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases public API evidence and allele-resolved JSON aggregation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained ClinVar, Ensembl, and UKB-TOPMed allele-specific observations plus a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1108
+    },
+    {
+      "path": "outputs/sources.json",
+      "bytes": 1210
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1075
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 616
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5970
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/variant-rs7903146.svg",
+      "bytes": 2854
+    }
+  ],
+  "sources": [
+    "https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/",
+    "https://rest.ensembl.org/variation/homo_sapiens/rs7903146",
+    "https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T"
+  ],
+  "observations": [
+    "ClinVar returned distinct C>T and C>G records for rs7903146; the selected C>T allele is Variation ID 7413.",
+    "Ensembl returned rs7903146 cross-references including VCV000007413.",
+    "UKB-TOPMed reported allele frequency 0.29 and 1,419 available association rows for 10:112998590-C-T.",
+    "The verified gnomAD r4 query returned genome AC 41622, AN 151914, and AF 0.2739839646 for the C>T allele.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "The case demonstrates allele-resolved identity checking before combining clinical, annotation, and cohort records."
+  ],
+  "limitations": [
+    "The compact ClinVar search is not a complete clinical-significance review.",
+    "The first UKB-TOPMed slice is not significance-ranked.",
+    "Population frequency is not a clinical classification, and the explicit C>T allele must be preserved across services.",
+    "An rsID-only UKB-TOPMed lookup selected C>G; only the explicit GRCh38 C>T result is used as evidence."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/",
+        "https://rest.ensembl.org/variation/homo_sapiens/rs7903146",
+        "https://pheweb.org/UKB-TOPMed/variant/10:112998590-C-T"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/sources.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/variant-rs7903146.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the ClinVar, Ensembl, explicit GRCh38 C>T UKB-TOPMed, and gnomAD r4 requests in outputs/query-verification.json.",
+    "Keep the C>T and C>G ClinVar records separate and avoid rsID-only allele resolution for UKB-TOPMed.",
+    "Compare outputs/results.json and the preview with the allele-resolved query summaries."
+  ]
 }

@@ -1,0 +1,31 @@
+{
+  "showcase_id": "slide-authorization-renewal",
+  "verification_kind": "deterministic source-and-layer authorization manifest comparison",
+  "stable_identities": [
+    "session_id",
+    "source.source_id",
+    "source.source_revision",
+    "source.bytes",
+    "scientific_layer.layer_id",
+    "scientific_layer.layer_source_revision",
+    "scientific_layer.entity_kind",
+    "scientific_layer.entity_count"
+  ],
+  "changed_fixture_fields": [
+    "source.lease_label",
+    "source.expires_at",
+    "scientific_layer.lease_label",
+    "scientific_layer.expires_at"
+  ],
+  "diff_checks": 14,
+  "diff_checks_passed": 14,
+  "credentials_present": false,
+  "viewer_operations": {
+    "slide-viewer.slide_renew_source_authorization": "rehearsed",
+    "slide-viewer.slide_renew_scientific_layer_authorization": "rehearsed",
+    "slide-viewer.slide_list_workflow_sources": "rehearsed",
+    "slide-viewer.slide_get_scientific_layer_import": "rehearsed",
+    "slide-viewer.slide_list_scientific_layers": "rehearsed"
+  },
+  "viewer_execution": false
+}

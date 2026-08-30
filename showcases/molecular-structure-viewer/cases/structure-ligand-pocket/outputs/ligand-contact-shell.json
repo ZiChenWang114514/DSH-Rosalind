@@ -1,0 +1,291 @@
+{
+  "showcase_id": "structure-ligand-pocket",
+  "source": {
+    "pdb_id": "1IEP",
+    "download_url": "https://files.rcsb.org/download/1IEP.pdb",
+    "coordinate_file": "inputs/1IEP.pdb",
+    "experiment": "X-ray diffraction",
+    "reported_resolution_angstrom": 2.1
+  },
+  "selection": {
+    "model": 1,
+    "ligand": {
+      "record": "HETATM",
+      "component_id": "STI",
+      "author_chain": "A",
+      "author_residue_number": 201,
+      "heavy_atom_count": 37
+    },
+    "protein_partner": {
+      "record": "ATOM",
+      "author_chain": "A"
+    },
+    "atom_filter": "non-hydrogen atoms with positive occupancy; blank or A alternate location",
+    "contact_cutoff_angstrom": 4.0,
+    "excluded_copy": "The independent STI B:202 / protein chain B copy is not included."
+  },
+  "contact_shell": {
+    "residue_count": 21,
+    "atom_pair_count_within_cutoff": 115,
+    "residues": [
+      {
+        "author_chain": "A",
+        "author_residue_number": 360,
+        "insertion_code": null,
+        "residue_name": "ILE",
+        "closest_distance_angstrom": 2.668,
+        "protein_atom": "O",
+        "protein_atom_serial": 1105,
+        "ligand_atom": "N51",
+        "ligand_atom_serial": 4496,
+        "atom_pairs_within_cutoff": 6
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 315,
+        "insertion_code": null,
+        "residue_name": "THR",
+        "closest_distance_angstrom": 2.883,
+        "protein_atom": "OG1",
+        "protein_atom_serial": 737,
+        "ligand_atom": "N13",
+        "ligand_atom_serial": 4477,
+        "atom_pairs_within_cutoff": 11
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 318,
+        "insertion_code": null,
+        "residue_name": "MET",
+        "closest_distance_angstrom": 2.899,
+        "protein_atom": "N",
+        "protein_atom_serial": 759,
+        "ligand_atom": "N3",
+        "ligand_atom_serial": 4469,
+        "atom_pairs_within_cutoff": 9
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 381,
+        "insertion_code": null,
+        "residue_name": "ASP",
+        "closest_distance_angstrom": 2.901,
+        "protein_atom": "N",
+        "protein_atom_serial": 1264,
+        "ligand_atom": "O29",
+        "ligand_atom_serial": 4500,
+        "atom_pairs_within_cutoff": 15
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 286,
+        "insertion_code": null,
+        "residue_name": "GLU",
+        "closest_distance_angstrom": 2.996,
+        "protein_atom": "OE2",
+        "protein_atom_serial": 509,
+        "ligand_atom": "N21",
+        "ligand_atom_serial": 4484,
+        "atom_pairs_within_cutoff": 4
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 361,
+        "insertion_code": null,
+        "residue_name": "HIS",
+        "closest_distance_angstrom": 3.162,
+        "protein_atom": "O",
+        "protein_atom_serial": 1113,
+        "ligand_atom": "C52",
+        "ligand_atom_serial": 4495,
+        "atom_pairs_within_cutoff": 5
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 299,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 3.25,
+        "protein_atom": "CG1",
+        "protein_atom_serial": 608,
+        "ligand_atom": "O29",
+        "ligand_atom_serial": 4500,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 290,
+        "insertion_code": null,
+        "residue_name": "MET",
+        "closest_distance_angstrom": 3.308,
+        "protein_atom": "SD",
+        "protein_atom_serial": 533,
+        "ligand_atom": "N21",
+        "ligand_atom_serial": 4484,
+        "atom_pairs_within_cutoff": 6
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 317,
+        "insertion_code": null,
+        "residue_name": "PHE",
+        "closest_distance_angstrom": 3.327,
+        "protein_atom": "CD1",
+        "protein_atom_serial": 754,
+        "ligand_atom": "N3",
+        "ligand_atom_serial": 4469,
+        "atom_pairs_within_cutoff": 9
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 380,
+        "insertion_code": null,
+        "residue_name": "ALA",
+        "closest_distance_angstrom": 3.329,
+        "protein_atom": "CB",
+        "protein_atom_serial": 1263,
+        "ligand_atom": "O29",
+        "ligand_atom_serial": 4500,
+        "atom_pairs_within_cutoff": 5
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 271,
+        "insertion_code": null,
+        "residue_name": "LYS",
+        "closest_distance_angstrom": 3.351,
+        "protein_atom": "N",
+        "protein_atom_serial": 374,
+        "ligand_atom": "C20",
+        "ligand_atom_serial": 4501,
+        "atom_pairs_within_cutoff": 6
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 382,
+        "insertion_code": null,
+        "residue_name": "PHE",
+        "closest_distance_angstrom": 3.405,
+        "protein_atom": "CD2",
+        "protein_atom_serial": 1279,
+        "ligand_atom": "C11",
+        "ligand_atom_serial": 4473,
+        "atom_pairs_within_cutoff": 8
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 313,
+        "insertion_code": null,
+        "residue_name": "ILE",
+        "closest_distance_angstrom": 3.447,
+        "protein_atom": "O",
+        "protein_atom_serial": 719,
+        "ligand_atom": "C20",
+        "ligand_atom_serial": 4501,
+        "atom_pairs_within_cutoff": 3
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 269,
+        "insertion_code": null,
+        "residue_name": "ALA",
+        "closest_distance_angstrom": 3.55,
+        "protein_atom": "O",
+        "protein_atom_serial": 365,
+        "ligand_atom": "C20",
+        "ligand_atom_serial": 4501,
+        "atom_pairs_within_cutoff": 3
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 253,
+        "insertion_code": null,
+        "residue_name": "TYR",
+        "closest_distance_angstrom": 3.564,
+        "protein_atom": "CD2",
+        "protein_atom_serial": 233,
+        "ligand_atom": "C12",
+        "ligand_atom_serial": 4472,
+        "atom_pairs_within_cutoff": 9
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 248,
+        "insertion_code": null,
+        "residue_name": "LEU",
+        "closest_distance_angstrom": 3.628,
+        "protein_atom": "CD2",
+        "protein_atom_serial": 204,
+        "ligand_atom": "C5",
+        "ligand_atom_serial": 4467,
+        "atom_pairs_within_cutoff": 3
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 362,
+        "insertion_code": null,
+        "residue_name": "ARG",
+        "closest_distance_angstrom": 3.662,
+        "protein_atom": "CD",
+        "protein_atom_serial": 1126,
+        "ligand_atom": "C54",
+        "ligand_atom_serial": 4497,
+        "atom_pairs_within_cutoff": 3
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 256,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 3.731,
+        "protein_atom": "CG1",
+        "protein_atom_serial": 256,
+        "ligand_atom": "C11",
+        "ligand_atom_serial": 4473,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 370,
+        "insertion_code": null,
+        "residue_name": "LEU",
+        "closest_distance_angstrom": 3.802,
+        "protein_atom": "CD2",
+        "protein_atom_serial": 1189,
+        "ligand_atom": "C4",
+        "ligand_atom_serial": 4468,
+        "atom_pairs_within_cutoff": 1
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 321,
+        "insertion_code": null,
+        "residue_name": "GLY",
+        "closest_distance_angstrom": 3.811,
+        "protein_atom": "CA",
+        "protein_atom_serial": 787,
+        "ligand_atom": "C1",
+        "ligand_atom_serial": 4465,
+        "atom_pairs_within_cutoff": 2
+      },
+      {
+        "author_chain": "A",
+        "author_residue_number": 289,
+        "insertion_code": null,
+        "residue_name": "VAL",
+        "closest_distance_angstrom": 3.835,
+        "protein_atom": "CG1",
+        "protein_atom_serial": 525,
+        "ligand_atom": "C46",
+        "ligand_atom_serial": 4492,
+        "atom_pairs_within_cutoff": 3
+      }
+    ]
+  },
+  "interpretation": "The shell identifies protein residues whose deposited heavy atoms lie within 4.0 \u00c5 of STI A:201; it is a geometric neighborhood, not an affinity or potency ranking.",
+  "limitations": [
+    "The residue list changes if the distance cutoff, alternate-location policy, or independent crystallographic copy changes.",
+    "Hydrogen atoms, protonation, solvent mediation, dynamics, and interaction energies are not evaluated.",
+    "The deposited complex demonstrates a bound pose in this crystal model and does not by itself establish cellular or clinical effects."
+  ]
+}

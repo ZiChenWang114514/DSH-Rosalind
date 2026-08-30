@@ -1,9 +1,107 @@
 {
-  "id":"databases-egfr-landscape","plugin_id":"life-sciences-databases","plugin_version":"0.1.5","status":"ready","run_date":"2026-08-29","prompt":"prompt.md","inputs":[],
-  "outputs":[{"path":"outputs/results.json"},{"path":"outputs/sources.json"}],"previews":[{"path":"previews/egfr-landscape.svg"}],
-  "sources":["https://www.uniprot.org/uniprotkb/P00533/entry","https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203","https://www.rcsb.org/structure/1M17","https://reactome.org/content/detail/R-HSA-177929"],
-  "observations":["UniProt identifies P00533 as a reviewed human EGFR record.","ChEMBL identifies CHEMBL203 as human EGFR and returned ten inhibitor mechanism records in the selected slice.","Gefitinib, erlotinib, and osimertinib are each phase-4 ChEMBL compounds.","RCSB 1M17 is a 2.60 Å X-ray structure of the EGFR kinase domain with erlotinib.","Reactome R-HSA-177929 is Signaling by EGFR."],
-  "interpretation":["Stable protein, target, compound, structure, and pathway identifiers support a navigable EGFR research map."],
-  "limitations":["The compound set is illustrative, not comprehensive.","A Reactome API call failed; pathway identity was verified from the official record page.","Database linkage does not compare efficacy or clinical use."],
-  "environment":{"retrieval_date":"2026-08-29","protein":"P00533","target":"CHEMBL203","structure":"1M17"}
+  "id": "databases-egfr-landscape",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-29",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases public API evidence and identifier-preserving JSON aggregation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained UniProt, ChEMBL, RCSB, and Reactome observations plus a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1111
+    },
+    {
+      "path": "outputs/sources.json",
+      "bytes": 1460
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 995
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 621
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5896
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/egfr-landscape.svg",
+      "bytes": 2851
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/uniprotkb/P00533/entry",
+    "https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203",
+    "https://www.rcsb.org/structure/1M17",
+    "https://reactome.org/content/detail/R-HSA-177929"
+  ],
+  "observations": [
+    "UniProt identifies P00533 as a reviewed human EGFR record.",
+    "ChEMBL identifies CHEMBL203 as human EGFR and returned ten inhibitor mechanism records in the selected slice.",
+    "Gefitinib, erlotinib, and osimertinib are phase-4 ChEMBL compounds.",
+    "RCSB 1M17 is a 2.60 Å X-ray structure of the EGFR kinase domain with erlotinib.",
+    "Reactome R-HSA-177929 is Signaling by EGFR.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "Stable protein, target, compound, structure, and pathway identifiers support a navigable EGFR research map."
+  ],
+  "limitations": [
+    "The compound set is illustrative and not comprehensive.",
+    "A Reactome API request failed; the pathway identifier was checked against the official record page.",
+    "Record linkage does not compare efficacy, safety, or clinical use."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/P00533/entry",
+        "https://www.ebi.ac.uk/chembl/explore/target/CHEMBL203",
+        "https://www.rcsb.org/structure/1M17",
+        "https://reactome.org/content/detail/R-HSA-177929"
+      ],
+      "inputs": [],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/sources.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/egfr-landscape.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the P00533, CHEMBL203, 1M17, and R-HSA-177929 requests recorded in outputs/query-verification.json.",
+    "Verify that the Reactome ContentService result is successful before using the pathway name.",
+    "Inspect the preview while keeping protein, target, compound, structure, and pathway identifiers distinct."
+  ]
 }

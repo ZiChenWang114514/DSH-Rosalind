@@ -1,0 +1,134 @@
+{
+  "id": "databases-kras-g12c",
+  "plugin_id": "life-sciences-databases",
+  "plugin_version": "0.1.5",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "public-data-integration",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Life Sciences Databases uniprot-skill, clinvar-variation-skill, chembl-skill, and rcsb-pdb-skill",
+      "Python 3 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "retained public protein, allele, compound, and structure responses with deterministic identifier checks and a genuine Rosalind task-chooser observation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 503
+    },
+    {
+      "path": "inputs/uniprot-P01116.json",
+      "bytes": 247119
+    },
+    {
+      "path": "inputs/clinvar-KRAS-G12C-search.json",
+      "bytes": 582
+    },
+    {
+      "path": "inputs/chembl-sotorasib-search.json",
+      "bytes": 18218
+    },
+    {
+      "path": "inputs/rcsb-6OIM.json",
+      "bytes": 20220
+    },
+    {
+      "path": "scripts/build_case.py",
+      "bytes": 5074
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/results.json",
+      "bytes": 1283
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 1031
+    },
+    {
+      "path": "outputs/query-verification.json"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 655
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6343
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2126
+    }
+  ],
+  "sources": [
+    "https://www.uniprot.org/uniprotkb/P01116/entry",
+    "https://www.ncbi.nlm.nih.gov/clinvar/variation/12578/",
+    "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4535757",
+    "https://www.rcsb.org/structure/6OIM"
+  ],
+  "observations": [
+    "UniProt P01116 is reviewed, contains 189 residues, and has glycine at position 12.",
+    "ClinVar Variation 12578 is NM_004985.5(KRAS):c.34G>T (p.Gly12Cys).",
+    "ChEMBL CHEMBL4535757 is SOTORASIB with maximum phase 4 and first approval year 2021.",
+    "RCSB 6OIM is a 1.65 Å X-ray structure of KRAS G12C covalently bound to AMG 510.",
+    "The Rosalind launcher returned ready=true and did not execute a scientific job."
+  ],
+  "interpretation": [
+    "The exact protein, variant, compound, and structure identifiers form a coherent KRAS G12C public evidence map."
+  ],
+  "limitations": [
+    "The ClinVar response retains ten of twelve search matches.",
+    "ChEMBL phase and approval fields do not compare efficacy or safety.",
+    "One structure does not describe every KRAS G12C state or cellular context."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.uniprot.org/uniprotkb/P01116/entry",
+        "https://www.ncbi.nlm.nih.gov/clinvar/variation/12578/",
+        "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4535757",
+        "https://www.rcsb.org/structure/6OIM"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/uniprot-P01116.json",
+        "inputs/clinvar-KRAS-G12C-search.json",
+        "inputs/chembl-sotorasib-search.json",
+        "inputs/rcsb-6OIM.json",
+        "scripts/build_case.py"
+      ],
+      "outputs": [
+        "outputs/results.json",
+        "outputs/provenance.json",
+        "outputs/query-verification.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Exact public accessions and query parameters are retained in outputs/provenance.json; outputs/rosalind-open-observation.json records the genuine launcher call and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Repeat the P01116, KRAS G12C ClinVar, sotorasib ChEMBL, and 6OIM RCSB requests in outputs/query-verification.json.",
+    "Run python scripts/build_case.py and confirm that variation 12578 is selected from the truncated ClinVar search slice.",
+    "Compare outputs/results.json and the preview without turning database status fields into treatment guidance."
+  ]
+}

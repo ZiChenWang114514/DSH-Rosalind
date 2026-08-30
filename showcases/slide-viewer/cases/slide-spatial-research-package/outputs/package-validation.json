@@ -1,0 +1,33 @@
+{
+  "showcase_id": "slide-spatial-research-package",
+  "verification_kind": "repository-relative spatial artifact inventory validation",
+  "validated_on": "2026-08-30",
+  "project_root": "GPT-Science",
+  "checks": {
+    "inventory_json_parsed": true,
+    "artifact_paths_checked": 10,
+    "artifact_paths_found": 10,
+    "byte_counts_matched": 10,
+    "sha256_values_matched": 10,
+    "shared_h5ad_not_duplicated": true,
+    "common_h5ad_association_matched": true,
+    "common_matrix_revision_matched_where_declared": true
+  },
+  "content_summary": {
+    "spatial_source_files": 1,
+    "source_and_matrix_metadata_files": 3,
+    "complete_observation_tables": 1,
+    "provenance_records": 2,
+    "demonstration_annotation_files": 1,
+    "scientific_layer_mapping_records": 2
+  },
+  "viewer_execution": {
+    "mounted_tissue_frame_observed": false,
+    "scientific_layer_import_executed": false,
+    "workflow_executed": false,
+    "viewer_native_package_export_executed": false,
+    "source_image_export_executed": false,
+    "current_user_source_image_capture_permission_recorded": false
+  },
+  "result": "verified inventory of retained artifacts; no live viewer or workflow result claimed"
+}

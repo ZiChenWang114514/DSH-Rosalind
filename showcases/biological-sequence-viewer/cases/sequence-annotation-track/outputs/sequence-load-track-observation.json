@@ -1,0 +1,203 @@
+{
+  "schema": "sequence-viewer.operation-observation/v1",
+  "case_id": "sequence-annotation-track",
+  "plugin_version": "0.1.43",
+  "source": {
+    "database": "NCBI RefSeq Nucleotide",
+    "accession_version": "NC_001416.1",
+    "official_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=gbwithparts&retmode=text",
+    "derivation": "The 871-base regional FASTA and four-feature GFF3 were derived from NC_001416.1 bases 37180..38050 with local 1-based inclusive coordinates.",
+    "reference_identity": "NC_001416.1_region_37180_38050",
+    "track_format": "GFF3",
+    "track_scope": "cI CDS and OR3, OR2, and OR1 only"
+  },
+  "session_open": {
+    "tool": "mcp__sequence_viewer__sequence_open_from_chat",
+    "started_at_utc": "2026-08-29T19:03:34.327Z",
+    "completed_at_utc": "2026-08-29T19:03:34.426Z",
+    "started_at_local": "2026-08-30T03:03:34.327+08:00",
+    "completed_at_local": "2026-08-30T03:03:34.426+08:00",
+    "arguments": {
+      "path": "inputs/NC_001416.1-region-37180-38050.fasta",
+      "presentation": "full"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "The embedded Biological Sequence & Alignment Viewer is opening. Its session is created, but rendering is not yet confirmed. Click or expand the Sequence open from chat tool card above to view it. After it loads, use Open in side pane, or ask me to move or control the same live viewer."
+        }
+      ],
+      "structuredContent": {
+        "schemaVersion": 1,
+        "sessionReady": true,
+        "viewerCommandRevision": 0,
+        "viewerReady": false,
+        "viewerSessionId": "[internal viewer session omitted]",
+        "viewerPresentation": "full"
+      }
+    }
+  },
+  "operation": {
+    "tool": "mcp__sequence_viewer__sequence_load_track",
+    "started_at_utc": "2026-08-29T19:03:44.235Z",
+    "completed_at_utc": "2026-08-29T19:04:14.286Z",
+    "started_at_local": "2026-08-30T03:03:44.235+08:00",
+    "completed_at_local": "2026-08-30T03:04:14.286+08:00",
+    "arguments": {
+      "sessionId": "[internal viewer session omitted]",
+      "format": "gff3",
+      "path": "inputs/NC_001416.1-region-37180-38050.gff3",
+      "reference": "NC_001416.1_region_37180_38050"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "The viewer did not acknowledge the requested action before the timeout."
+        }
+      ],
+      "isError": true
+    }
+  },
+  "follow_up_query": {
+    "tool": "mcp__sequence_viewer__sequence_query_viewer",
+    "started_at_utc": "2026-08-29T19:04:27.250Z",
+    "completed_at_utc": "2026-08-29T19:04:57.291Z",
+    "started_at_local": "2026-08-30T03:04:27.250+08:00",
+    "completed_at_local": "2026-08-30T03:04:57.291+08:00",
+    "arguments": {
+      "sessionId": "[internal viewer session omitted]",
+      "target": "tracks",
+      "limit": 20
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "The viewer did not acknowledge the requested action before the timeout."
+        }
+      ],
+      "isError": true
+    }
+  },
+  "compatibility_diagnostics": {
+    "fasta_record": "NC_001416.1_region_37180_38050",
+    "fasta_length": 871,
+    "gff3_seqid": "NC_001416.1_region_37180_38050",
+    "gff3_sequence_region": "1..871",
+    "coordinate_system": "1-based inclusive",
+    "feature_count": 4,
+    "result": "The FASTA record name and every GFF3 seqid match exactly; the declared GFF3 region equals the 871-base reference, and the four intervals 48..761, 772..788, 795..811, and 819..835 all lie within it."
+  },
+  "viewer_lifecycle": {
+    "requirement": "sequence_open_from_chat creates an authorized session but does not establish rendering while viewerReady is false. Capability coverage requires an acknowledged sequence_load_track response followed by a tracks query that confirms parsed attached state.",
+    "public_record_policy": "Internal viewer session identifiers are intentionally omitted from this public artifact; all other supplied arguments are recorded exactly."
+  },
+  "fresh_attempt": {
+    "session_open": {
+      "tool": "mcp__sequence_viewer__sequence_open_from_chat",
+      "started_at_utc": "2026-08-29T19:19:46.014Z",
+      "completed_at_utc": "2026-08-29T19:19:46.092Z",
+      "started_at_local": "2026-08-30T03:19:46.014+08:00",
+      "completed_at_local": "2026-08-30T03:19:46.092+08:00",
+      "arguments": {
+        "path": "inputs/NC_001416.1-region-37180-38050.fasta",
+        "presentation": "full"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "The embedded Biological Sequence & Alignment Viewer is opening. Its session is created, but rendering is not yet confirmed. Click or expand the Sequence open from chat tool card above to view it. After it loads, use Open in side pane, or ask me to move or control the same live viewer."
+          }
+        ],
+        "structuredContent": {
+          "schemaVersion": 1,
+          "sessionReady": true,
+          "viewerCommandRevision": 0,
+          "viewerReady": false,
+          "viewerSessionId": "[internal viewer session omitted]",
+          "viewerPresentation": "full"
+        }
+      }
+    },
+    "readiness_query": {
+      "tool": "mcp__sequence_viewer__sequence_query_viewer",
+      "started_at_utc": "2026-08-29T19:19:50.270Z",
+      "completed_at_utc": "2026-08-29T19:20:20.304Z",
+      "started_at_local": "2026-08-30T03:19:50.270+08:00",
+      "completed_at_local": "2026-08-30T03:20:20.304+08:00",
+      "arguments": {
+        "sessionId": "[internal viewer session omitted]",
+        "target": "records",
+        "limit": 20
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "The viewer did not acknowledge the requested action before the timeout."
+          }
+        ],
+        "isError": true
+      }
+    },
+    "operation": {
+      "tool": "mcp__sequence_viewer__sequence_load_track",
+      "started_at_utc": "2026-08-29T19:20:26.418Z",
+      "completed_at_utc": "2026-08-29T19:20:56.457Z",
+      "started_at_local": "2026-08-30T03:20:26.418+08:00",
+      "completed_at_local": "2026-08-30T03:20:56.457+08:00",
+      "arguments": {
+        "sessionId": "[internal viewer session omitted]",
+        "format": "gff3",
+        "path": "inputs/NC_001416.1-region-37180-38050.gff3",
+        "reference": "NC_001416.1_region_37180_38050"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "The viewer did not acknowledge the requested action before the timeout."
+          }
+        ],
+        "isError": true
+      }
+    },
+    "follow_up_query": {
+      "tool": "mcp__sequence_viewer__sequence_query_viewer",
+      "started_at_utc": "2026-08-29T19:21:01.665Z",
+      "completed_at_utc": "2026-08-29T19:21:31.706Z",
+      "started_at_local": "2026-08-30T03:21:01.665+08:00",
+      "completed_at_local": "2026-08-30T03:21:31.706+08:00",
+      "arguments": {
+        "sessionId": "[internal viewer session omitted]",
+        "target": "tracks",
+        "limit": 20
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "The viewer did not acknowledge the requested action before the timeout."
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  "outcome": {
+    "status": "unacknowledged",
+    "track_loaded": false,
+    "capability_claimed": false,
+    "reason": "The fresh session again reported viewerReady false. Its records readiness query, GFF3 load request, and follow-up tracks query all timed out without acknowledgement, so no live track identifier, mapping diagnostics, parsed feature inventory, or attached-track state was observed.",
+    "safety": "The operation was read-only with respect to the source FASTA and GFF3; no sequence edit, annotation edit, export, or workspace publication was requested."
+  },
+  "limitations": [
+    "Session creation was reported twice, but viewer rendering remained unconfirmed in both sessions.",
+    "The timeout response does not establish that the GFF3 was parsed, mapped, displayed, or retained by the viewer.",
+    "No mapping diagnostics, track identifier, feature inventory, or loaded-track state was returned.",
+    "The GFF3 contains four selected annotations and is not a complete conversion of the source GenBank interval."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "verification_kind": "case-local exact JSON state comparison",
+  "generated_by": "scripts/build_storyboard_evidence.py",
+  "base_scene": "01-open-state",
+  "trials": [
+    {
+      "mutation": "apply 03-side-by-side",
+      "changed_from_base": true,
+      "restore_action": "replace the complete case-local state with 01-open-state",
+      "restored_exactly": true,
+      "compared_fields": [
+        "objects",
+        "camera_preset",
+        "layers",
+        "selection",
+        "focus"
+      ]
+    },
+    {
+      "mutation": "apply 04-local-kabsch-overlay",
+      "changed_from_base": true,
+      "restore_action": "replace the complete case-local state with 01-open-state",
+      "restored_exactly": true,
+      "compared_fields": [
+        "objects",
+        "camera_preset",
+        "layers",
+        "selection",
+        "focus"
+      ]
+    }
+  ],
+  "all_restores_exact": true,
+  "viewer_scene_restore_verified": false,
+  "qualification": "This proves reversibility of the retained case-local model. It does not prove Structure Viewer save_scene or load_scene behavior."
+}

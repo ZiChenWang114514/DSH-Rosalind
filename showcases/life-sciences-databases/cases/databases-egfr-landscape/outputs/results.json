@@ -10,5 +10,5 @@
   ],
   "structure":{"pdb_id":"1M17","title":"Epidermal Growth Factor Receptor tyrosine kinase domain with 4-anilinoquinazoline inhibitor erlotinib","method":"X-RAY DIFFRACTION","resolution_angstrom":2.6,"pdb_doi":"10.2210/pdb1M17/pdb"},
   "pathway":{"reactome_id":"R-HSA-177929","name":"Signaling by EGFR"},
-  "service_notes":[{"source":"Reactome ContentService","status":"service_error","used_as_evidence":false,"replacement_check":"Official Reactome record page R-HSA-177929"}]
+  "service_notes":[{"source":"Reactome ContentService","status":"success","used_as_evidence":true,"retrieved_at":"2026-08-29T19:56:53.601526Z","stable_id_version":"R-HSA-177929.6"}]
 }

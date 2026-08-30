@@ -1,0 +1,143 @@
+{
+  "id": "ngs-ssh-target",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "interface",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-compute.configure_ssh_target",
+    "ngs-compute.list_compute_targets",
+    "ngs-compute.inspect_compute_target",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_compute__configure_ssh_target",
+      "mcp__ngs_compute__list_compute_targets",
+      "mcp__ngs_compute__inspect_compute_target",
+      "OpenSSH for Windows",
+      "Docker CLI",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller with sanitized SSH observations",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/ssh-probe-plan.md",
+      "bytes": 870
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/ssh-target-observation.json",
+      "bytes": 1791
+    },
+    {
+      "path": "outputs/remote-runtime.csv",
+      "bytes": 764
+    },
+    {
+      "path": "outputs/ssh-probe.txt",
+      "bytes": 497
+    },
+    {
+      "path": "outputs/configure-ssh-target-receipt.json",
+      "bytes": 1786
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 826
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 751
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 3007
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 7273
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2035
+    }
+  ],
+  "sources": [
+    "https://www.openssh.com/",
+    "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+    "installed-plugin://rosalind-workbench/tool-contract"
+  ],
+  "observations": [
+    "The authorized SSH compute target accepted a credential-free BatchMode connection within the configured timeout.",
+    "Ubuntu 24.04.4 LTS, 64 logical CPUs, 314.5 GiB of memory, and four RTX 4090 GPUs were observed.",
+    "Docker server metadata was reachable, while Nextflow and Snakemake were not found on the noninteractive PATH.",
+    "ngs-compute.configure_ssh_target registered the authorized SSH compute target with a temporary workspace reference and local-process executor.",
+    "Post-registration inspection reached the target; the temporary workspace was absent and neither Nextflow nor Snakemake was available.",
+    "rosalind_open returned the ready launcher view for this case-specific task context; no scientific job executed.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "The saved alias is now registered and inspectable through Workbench, but it still lacks an observed NGS workflow controller and an existing configured workspace."
+  ],
+  "limitations": [
+    "PATH inspection does not exclude software in an unactivated environment.",
+    "No scheduler worker, shared filesystem, container image, task software, workflow, or NGS input was tested.",
+    "Identifying connection fields and credential material were deliberately omitted.",
+    "The public operation receipt omits private addresses, usernames, host fingerprints, and host-specific executable paths.",
+    "Rosalind launcher readiness does not demonstrate scientific task execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.openssh.com/",
+        "installed-plugin://ngs-analysis-workbench/0.2.16/tool-contract",
+        "installed-plugin://rosalind-workbench/tool-contract"
+      ],
+      "inputs": [
+        "inputs/ssh-probe-plan.md"
+      ],
+      "outputs": [
+        "outputs/ssh-target-observation.json",
+        "outputs/remote-runtime.csv",
+        "outputs/ssh-probe.txt",
+        "outputs/configure-ssh-target-receipt.json",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/operation-evidence.json",
+        "outputs/session-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The Workbench receipt records successful target registration and bounded inspection while excluding credentials, private addresses, usernames, host fingerprints, and host-specific executable paths."
+    }
+  ],
+  "reproduction": [
+    "Read inputs/ssh-probe-plan.md.",
+    "Run the bounded OpenSSH BatchMode probe against the authorized SSH compute target without retaining aliases or listing files, users, processes, containers, images, addresses, configuration, or environment variables.",
+    "Call ngs-compute.configure_ssh_target only for the case-owned neutral target reference, then inspect that target.",
+    "Compare the safe fields with outputs/configure-ssh-target-receipt.json and outputs/provenance.json.",
+    "Call mcp__rosalind__rosalind_open with the case-specific task_context and compare its response with outputs/rosalind-open-observation.json.",
+    "Compare the sanitized fields with outputs/ssh-target-observation.json and outputs/remote-runtime.csv.",
+    "For ngs-ssh-target, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "observed_at": "2026-08-29T17:40:11Z",
+    "cost": "free",
+    "state_changes": "registered the case-owned authorized SSH compute target; no workspace or workflow run was created"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "showcase_id": "rosalind-mdm2-p53-inhibitor",
+  "retrieved_on": "2026-08-30",
+  "coordinate_format": "legacy PDB text from the current RCSB entry revision",
+  "structures": [
+    {
+      "pdb_id": "1YCR",
+      "label": "MDM2-p53-peptide",
+      "coordinate_url": "https://files.rcsb.org/download/1YCR.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/1YCR",
+      "entry_url": "https://www.rcsb.org/structure/1YCR",
+      "title": "MDM2 BOUND TO THE TRANSACTIVATION DOMAIN OF P53",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 2.6,
+      "initial_release_date": "1997-11-19T00:00:00.000+00:00",
+      "revision_date": "2024-02-14T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 5,
+      "pdb_doi": "10.2210/pdb1ycr/pdb",
+      "primary_citation_doi": "10.1126/science.274.5289.948"
+    },
+    {
+      "pdb_id": "4HG7",
+      "label": "MDM2-Nutlin-3a",
+      "coordinate_url": "https://files.rcsb.org/download/4HG7.pdb",
+      "metadata_url": "https://data.rcsb.org/rest/v1/core/entry/4HG7",
+      "entry_url": "https://www.rcsb.org/structure/4HG7",
+      "title": "Crystal Structure of an MDM2/Nutlin-3a complex",
+      "experimental_method": "X-RAY DIFFRACTION",
+      "resolution_angstrom": 1.6,
+      "initial_release_date": "2013-07-31T00:00:00.000+00:00",
+      "revision_date": "2024-02-28T00:00:00.000+00:00",
+      "major_revision": 1,
+      "minor_revision": 2,
+      "pdb_doi": "10.2210/pdb4hg7/pdb",
+      "primary_citation_doi": "10.1107/S0907444913004459"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Nutlin-3a",
+      "role": "4HG7 ligand",
+      "pubchem_cid": 11433190,
+      "property_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11433190/property/Title,MolecularFormula,MolecularWeight,XLogP,TPSA,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,ConnectivitySMILES,SMILES,InChIKey/JSON",
+      "entry_url": "https://pubchem.ncbi.nlm.nih.gov/compound/11433190",
+      "title": "Nutlin 3",
+      "inchi_key": "BDUHCSBCVGXTJM-WUFINQPMSA-N"
+    }
+  ]
+}

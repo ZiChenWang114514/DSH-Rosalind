@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "showcase_id": "sequence-session-restore",
+  "restoration_kind": "local JSON round trip with source revalidation",
+  "portable_manifest": "inputs/portable-session.json",
+  "restored_manifest": "outputs/restored-session.json",
+  "input_bytes": 1147,
+  "restored_bytes": 1147,
+  "input_sha256": "b880d7b1ae4f0bbb83e39ec477283bd8e45ccf71ac9825ededacfe2185a15b1a",
+  "restored_sha256": "b880d7b1ae4f0bbb83e39ec477283bd8e45ccf71ac9825ededacfe2185a15b1a",
+  "serialized_bytes_equal": true,
+  "source_revalidated": true,
+  "selected_sequence_revalidated": true,
+  "field_checks": [
+    {
+      "field": "schema_version",
+      "equal": true
+    },
+    {
+      "field": "session_kind",
+      "equal": true
+    },
+    {
+      "field": "source.relative_path",
+      "equal": true
+    },
+    {
+      "field": "source.accession",
+      "equal": true
+    },
+    {
+      "field": "source.sequence_version",
+      "equal": true
+    },
+    {
+      "field": "source.sequence_length",
+      "equal": true
+    },
+    {
+      "field": "source.response_sha256",
+      "equal": true
+    },
+    {
+      "field": "view_state.mode",
+      "equal": true
+    },
+    {
+      "field": "view_state.record_id",
+      "equal": true
+    },
+    {
+      "field": "view_state.orientation",
+      "equal": true
+    },
+    {
+      "field": "view_state.residue_palette",
+      "equal": true
+    },
+    {
+      "field": "view_state.selected_range",
+      "equal": true
+    }
+  ],
+  "all_fields_equal": true,
+  "viewer_workflow_status": "rehearsed"
+}

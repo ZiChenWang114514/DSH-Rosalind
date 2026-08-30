@@ -1,0 +1,22 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "rosalind-gfp-pocket",
+  "source_checked": "2026-08-30",
+  "scientific_evidence": {
+    "source": "inputs/public-source.md",
+    "retained_summary": "outputs/verification-receipt.json",
+    "method": "Case-specific review of the public RCSB PDB 1EMA record; no coordinate or pocket calculation was performed."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "note": "The response records only the task chooser and supplied no GFP pocket analysis."
+  },
+  "limitations": [
+    "No coordinate contact list, distance rule, sequence change, or fluorescence prediction is retained.",
+    "The source summary should be refreshed if the RCSB entry changes."
+  ]
+}

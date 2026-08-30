@@ -1,0 +1,63 @@
+{
+  "schema": "structure-viewer.related-data-authorization/v1",
+  "case_id": "structure-scene-storyboard",
+  "scientific_input": {
+    "provider": "RCSB Protein Data Bank",
+    "accession": "4AKE",
+    "repository_path": "inputs/4AKE.pdb",
+    "bytes": 309339,
+    "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"
+  },
+  "attempts": [
+    {
+      "operation": "structure_open_from_chat",
+      "startedAtUtc": "2026-08-29T19:21:58.460Z",
+      "completedAtUtc": "2026-08-29T19:21:59.979Z",
+      "arguments": {
+        "source": "inputs/4AKE.pdb",
+        "internal_identifiers_omitted": true
+      },
+      "response": {
+        "sessionReady": true,
+        "viewerReady": false,
+        "workspacePublicationAvailable": true,
+        "mountState": "presentation-issued",
+        "renderState": "pending"
+      }
+    },
+    {
+      "operation": "structure_get_state",
+      "startedAtUtc": "2026-08-29T19:22:04.682Z",
+      "completedAtUtc": "2026-08-29T19:22:34.699Z",
+      "response_message": "The viewer command deadline elapsed before the action was acknowledged."
+    },
+    {
+      "operation": "structure_browse_related_data",
+      "startedAtUtc": "2026-08-29T19:34:07.277Z",
+      "completedAtUtc": "2026-08-29T19:34:07.403Z",
+      "arguments": {
+        "fresh_caller_and_command_ids": true,
+        "internal_identifiers_omitted": true
+      },
+      "response": {
+        "available": false,
+        "message": "Source-relative workspace access is unavailable because trusted file metadata was not bound to this viewer session."
+      }
+    },
+    {
+      "operation": "structure_get_state",
+      "startedAtUtc": "2026-08-29T19:34:13.748Z",
+      "completedAtUtc": "2026-08-29T19:34:13.777Z",
+      "response_message": "The viewer session is no longer active. Reopen the viewer and try again."
+    }
+  ],
+  "authorization_result": {
+    "related_data_listing_verified": false,
+    "image_token_obtained": false,
+    "background_load_invoked": false,
+    "background_state_verified": false,
+    "reason": "The source open did not reach a mounted, ready state with trusted file metadata bound to the session. No related-data listing or authenticated image token was returned."
+  },
+  "capabilities_added": [],
+  "sanitization": "Nonportable viewer, intent, caller, command, resource, presentation, and absolute-path identifiers are omitted."
+}

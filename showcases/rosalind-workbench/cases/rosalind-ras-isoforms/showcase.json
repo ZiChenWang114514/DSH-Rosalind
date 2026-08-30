@@ -1,0 +1,135 @@
+{
+  "id": "rosalind-ras-isoforms",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind-workbench.public-evidence",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "UniProtKB reviewed SV1 records and Python 3 standard library"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus deterministic comparison of three retained UniProtKB-reviewed RAS sequences",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 5612,
+      "sha256": "9637d5c3690ca8699640a0d90e7364d1fae53b0a592ac38220efc0d0e0052edc"
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 606,
+      "sha256": "34d32c36a1b2f0ace0b56e0eb7b6fde75dec9230107b473c0975bf5ffaef44ea"
+    },
+    {
+      "path": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+      "bytes": 786,
+      "sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f"
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 2089,
+      "sha256": "770de4ae974506be7a4a24cc31bae27c0e3a787686ecd1f79f4015665b827526"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/alignment-summary.json",
+      "bytes": 2581,
+      "sha256": "13aa66a5aad1ea5a779090f063bb4a3b2e5c355e5929c0e84a0a570cf96d50eb"
+    },
+    {
+      "path": "outputs/variable-sites.csv",
+      "bytes": 556,
+      "sha256": "e7efefe906c3fd5753e32e642bac658bdc4fe4b9505877a962e3f6013821309b"
+    },
+    {
+      "path": "outputs/provenance.json",
+      "bytes": 863,
+      "sha256": "2f49904f5b1cb33e4132486442d23d1910061043d154aca4d7d6973081d09e56"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 891,
+      "sha256": "773c733c046ee22b4a494b8d39be694b234c85b26bd18d8139195544121d2701"
+    },
+    {
+      "path": "bundle.md",
+      "bytes": 6104,
+      "sha256": "092e84d0a29f522bfc711c680937d0760969ed41593e39e8c4375ec94cfd2eb3"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 3111,
+      "sha256": "3ddc2772280421cd4b6dc24432260e9b89ff1f1f25aa9a0049d3fc27428d48c3"
+    }
+  ],
+  "sources": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "observations": [
+    "All three retained reviewed SV1 sequences contain 189 amino acids and occupy 191 alignment columns.",
+    "The direct recomputation identified 154 invariant and 37 variable alignment columns.",
+    "The four retained KRAS motif intervals are identical across KRAS, NRAS, and HRAS.",
+    "A genuine Rosalind Workbench open call returned the exact task-chooser-ready message."
+  ],
+  "interpretation": [
+    "The retained alignment shows a highly conserved catalytic core accompanied by greater sequence divergence toward the C termini."
+  ],
+  "limitations": [
+    "The center-star alignment is exploratory and does not provide a publication-grade evolutionary model.",
+    "Sequence divergence alone does not establish biochemical or clinical effects.",
+    "rosalind_open only opened the task chooser and did not run a RAS analysis."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+        "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+      ],
+      "inputs": [
+        "inputs/human-RAS-UniProt-SV1.aln-fasta",
+        "inputs/source-provenance.json"
+      ],
+      "outputs": [
+        "outputs/alignment-summary.json",
+        "outputs/variable-sites.csv",
+        "outputs/provenance.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained UniProt records and local script support the sequence results; the separate 891-byte Rosalind observation supports launcher readiness only."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-ras-isoforms/build_case.py from the repository root.",
+    "Require the expected three accessions, equal aligned widths, and a self-consistent variable-site table.",
+    "Treat the Rosalind launcher receipt separately from the computed sequence evidence."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local",
+    "rosalind_open": "executed"
+  }
+}

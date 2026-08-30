@@ -1,0 +1,46 @@
+{
+  "schema": "structure-viewer.operation-evidence/v1",
+  "case_id": "structure-gfp-figure",
+  "operation_receipts": [
+    {
+      "operation": "structure_render_image",
+      "operation_succeeded": true,
+      "completed_at_utc": "2026-08-29T11:49:09.515Z",
+      "evidence_kind": "viewer-written PNG and render provenance sidecar",
+      "response": {
+        "artifact": {
+          "path": "previews/gfp.png",
+          "bytes": 738922,
+          "sha256": "6d8d83a5daf18f97ee6efaf02dfefb06bdf0f433c5b8a3b045f089556696796b"
+        },
+        "sidecar": {
+          "path": "previews/gfp.png.render.json",
+          "bytes": 2994,
+          "sha256": "468f8443286b694fd6358ca92856d66a4057a68db0987d934e452df83f935d7f"
+        },
+        "renderer": "Mol* 5.11.0",
+        "width": 1600,
+        "height": 1200,
+        "source_sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088",
+        "source_matches_retained_public_input": true
+      }
+    }
+  ],
+  "visual_inspection": {
+    "complete_protein_cartoon_visible": true,
+    "chromophore_sticks_visible": true,
+    "dark_background_visible": true,
+    "chromophore_label_visible": false
+  },
+  "unverified_operations": [
+    "structure_open_from_chat",
+    "structure_analyze",
+    "structure_apply_scene",
+    "structure_validate_render"
+  ],
+  "blocked_operations": {
+    "structure_browse_related_data": "The retained attempt returned available=false.",
+    "structure_load_background": "Not invoked because no authenticated image token was returned."
+  },
+  "sanitization": "No session, render-job, caller, command, resource, or local-user identifiers are retained."
+}

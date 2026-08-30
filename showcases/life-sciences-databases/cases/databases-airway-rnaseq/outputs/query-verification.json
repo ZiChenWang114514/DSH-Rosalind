@@ -1,0 +1,14 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "databases-airway-rnaseq",
+  "verified_at_utc": "2026-08-29T19:57:22.248576Z",
+  "calls": [{
+    "skill": "biostudies-arrayexpress-skill",
+    "request": {"base_url":"https://www.ebi.ac.uk/biostudies/api/v1","path":"studies/E-GEOD-52778"},
+    "source_url": "https://www.ebi.ac.uk/biostudies/api/v1/studies/E-GEOD-52778",
+    "retrieved_at_utc": "2026-08-29T19:57:22.248576Z",
+    "ok": true,
+    "summary": {"accession":"E-GEOD-52778","title":"Human Airway Smooth Muscle Transcriptome Changes in Response to Asthma Medications","release_date":"2014-01-01","record_type":"submission"}
+  }],
+  "limitation": "The compact study response confirms the public study record. It does not itself expose the SDRF rows needed to verify which sample belongs to which donor and treatment combination."
+}

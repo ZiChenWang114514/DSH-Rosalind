@@ -1,0 +1,3 @@
+# Safe cancellation of a local KRAS analysis job
+
+Using the versioned public KRAS `P01116` FASTA, run a disposable 9-residue window calculation in a temporary local subprocess. Capture the running state, stop the process after 32 of 181 windows, remove partial files, verify that no final output exists and that the source digest is unchanged, and retain explicit pre- and post-cancel records. Invoke `mcp__rosalind__rosalind_open` once, retain the exact task-chooser response with UTC and local timestamps in `outputs/rosalind-open-observation.json`, and state that it does not prove a Rosalind scientific run. Treat Sequence Viewer job operations as rehearsed unless a mounted viewer supplies a running job ID.

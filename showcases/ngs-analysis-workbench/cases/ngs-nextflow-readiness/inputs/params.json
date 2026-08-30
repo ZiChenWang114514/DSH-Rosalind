@@ -1,0 +1,4 @@
+{
+  "reads": "inputs/public-fixture.fastq",
+  "output": "outputs/native-fastq-stats.json"
+}

@@ -1,0 +1,34 @@
+{
+  "showcase_id": "rosalind-scientific-compute",
+  "assay": "SPG1_STRSG_Wu_2016",
+  "selection": "first 500 data rows in the ProteinGym v1.3 archive member",
+  "variant_count": 500,
+  "full_sequence_length": 448,
+  "variable_positions_1_based": [
+    265,
+    266,
+    267,
+    280
+  ],
+  "reference_residues": "VDGV",
+  "embedding": {
+    "kind": "four-site categorical one-hot",
+    "dimensions": 80,
+    "amino_acid_order": "ACDEFGHIKLMNPQRSTVWY",
+    "esm_executed": false
+  },
+  "mutation_depth_counts": {
+    "0": 0,
+    "1": 2,
+    "2": 44,
+    "3": 454,
+    "4": 0
+  },
+  "DMS_score": {
+    "minimum": 0.0,
+    "maximum": 6.2011354501,
+    "mean": 0.2155088725563308,
+    "median": 0.007301001793545
+  },
+  "positive_bin_count": 82
+}

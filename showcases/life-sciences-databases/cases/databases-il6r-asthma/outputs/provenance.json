@@ -1,0 +1,17 @@
+{
+  "case_id": "databases-il6r-asthma",
+  "retrieval_date": "2026-08-29",
+  "queries": [
+    {"source": "Open Targets", "identifier": "ENSG00000160712", "filter": "asthma / MONDO_0004979", "retained_output": "outputs/results.json"},
+    {"source": "GWAS Catalog API v2", "query": "mapped_gene=IL6R&size=10", "retained_output": "outputs/results.json"},
+    {"source": "GTEx v10", "variant": "rs2228145 / 1:154454494-A-C", "gene": "ENSG00000160712", "retained_output": "outputs/results.json"}
+  ],
+  "source_index": "outputs/sources.json",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "observed_at_utc": "2026-08-29T18:14:05.178Z",
+    "scientific_job_executed": false,
+    "note": "The call opened only the task chooser; it did not produce the database observations."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "slide-dicom-export",
+  "observed_at_utc": "2026-08-29T17:56:30.767Z",
+  "observed_at_local_asia_shanghai": "2026-08-30T01:56:30.767+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Metadata-only DICOM WSI export preparation; open the task chooser only."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "response_structured_content": {
+    "schemaVersion": "life-sciences.launcher/v1",
+    "ready": true,
+    "view": "launcher"
+  },
+  "scientific_job_executed": false,
+  "limitation": "rosalind_open opened the task chooser; it did not execute a DICOM or scientific job."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-ras-isoforms",
+  "observed_at_utc": "2026-08-29T18:20:46.529Z",
+  "observed_at_local": "2026-08-30T02:20:46.529+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "case_id": "rosalind-ras-isoforms",
+    "task_context": "Open Rosalind Workbench for the public human HRAS, KRAS, and NRAS deterministic sequence-comparison showcase; do not select or execute a Rosalind scientific task.",
+    "execute_scientific_task": false
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "response_schema": "life-sciences.launcher/v1",
+  "response_view": "launcher",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not submit a RAS sequence, align the isoforms, or execute a Rosalind scientific task."
+}

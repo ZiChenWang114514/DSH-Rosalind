@@ -1,0 +1,46 @@
+{
+  "schema": "gpt-science.ngs-operation-receipt/v1",
+  "case_id": "ngs-snakemake-readiness",
+  "operation": "ngs-analysis-workbench.plan_snakemake",
+  "scientific_context": "Plan the bundled FASTQ QC workflow for a public paired-read example without executing it.",
+  "readiness_call": {
+    "started_at_utc": "2026-08-29T18:58:04.413Z",
+    "finished_at_utc": "2026-08-29T18:58:04.554Z",
+    "arguments": {
+      "workflow_id": "oai_fastq_qc",
+      "target_id": "local",
+      "run_dir": "[temporary run directory]",
+      "config_file": "<installed-plugin>/workflows/fastq_qc/config/config.json",
+      "runtime_snapshot_id": "sanitized-runtime-snapshot"
+    },
+    "response": {
+      "ok": false,
+      "status": "blocked",
+      "readiness_id": "readiness-da7e1356ee538a9e6997a4c275603c11",
+      "blockers": [
+        "required executable is not available: snakemake"
+      ],
+      "controller_candidates": []
+    }
+  },
+  "plan_call": {
+    "started_at_utc": "2026-08-29T18:58:10.663Z",
+    "finished_at_utc": "2026-08-29T18:58:10.760Z",
+    "arguments": {
+      "workflow_id": "oai_fastq_qc",
+      "target_id": "local",
+      "run_dir": "[temporary run directory]",
+      "config_file": "<installed-plugin>/workflows/fastq_qc/config/config.json",
+      "runtime_snapshot_id": "sanitized-runtime-snapshot",
+      "cores": 1,
+      "display_name": "GPT-Science temporary FASTQ QC planning verification"
+    },
+    "response_error": "module 'os' has no attribute 'fchmod'",
+    "operation_succeeded": false
+  },
+  "plan_created": false,
+  "run_created": false,
+  "workflow_engine_executed": false,
+  "sanitization": "The installed-plugin configuration path is normalized; no username or private local path is retained.",
+  "limitation": "The operation was called genuinely, but the missing Snakemake controller and a Windows plan-registry compatibility error prevented an immutable plan from being created."
+}

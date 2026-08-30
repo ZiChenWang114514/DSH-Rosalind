@@ -23,6 +23,10 @@ export const DATABASE_SHOWCASES = {
     "databases-il6r-asthma",
     "databases-variant-interpretation",
     "databases-egfr-landscape",
+    "databases-kras-g12c",
+    "databases-pdl1",
+    "databases-petase",
+    "databases-airway-rnaseq",
   ],
 } as const;
 

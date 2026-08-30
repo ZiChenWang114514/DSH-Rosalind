@@ -1,0 +1,5 @@
+Command family: ssh -o BatchMode=yes -o ConnectTimeout=15 <authorized-ssh-compute-target> '<bounded read-only probes>'
+Observed result: exit 0 at 2026-08-29T17:40:11Z
+Observed categories: OS, architecture, CPU count, memory total, writable-state booleans, command availability, Docker server, GPU count/model
+Excluded categories: hostname, username, network address, SSH configuration, environment variables, process list, file listing, container list, image list, credentials
+State changes: none

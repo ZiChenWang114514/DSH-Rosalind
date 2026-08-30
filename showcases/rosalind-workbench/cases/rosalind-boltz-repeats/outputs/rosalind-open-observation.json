@@ -1,0 +1,14 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-boltz-repeats",
+  "observed_at_utc": "2026-08-29T18:24:25.744Z",
+  "observed_at_local": "2026-08-30T02:24:25.744+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Open Rosalind Workbench for the retained Boltz-2 repeated-sampling evidence teaching case; launcher readiness check only, with no model rerun or scientific job execution."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "This call opened the Rosalind task chooser only; it did not submit sequences, run Boltz-2, resample structures, or recompute the retained ranking."
+}

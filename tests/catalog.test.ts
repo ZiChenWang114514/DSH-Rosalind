@@ -5,9 +5,9 @@ import { buildCatalogue, scientificAcceptance, validateShowcases } from "../scri
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
 
 describe("generated showcase catalogue", () => {
-  it("builds 23 ready, searchable, three-mode definitions in seven categories", async () => {
+  it("builds 100 ready, searchable, three-mode definitions in seven categories", async () => {
     const catalogue = await buildCatalogue(repositoryRoot);
-    expect(catalogue).toHaveLength(23);
+    expect(catalogue).toHaveLength(100);
     expect(new Set(catalogue.map((item) => item.categoryId))).toEqual(new Set(["literature", "databases", "sequence", "ngs", "structure", "slide", "workbench"]));
     for (const showcase of catalogue) {
       expect(showcase.status).toBe("ready");
@@ -15,6 +15,12 @@ describe("generated showcase catalogue", () => {
       expect(showcase.question.length).toBeGreaterThan(10);
       expect(showcase.searchText).toContain(showcase.title.toLowerCase());
       expect(showcase.recipe.adapter).toBeTruthy();
+      expect(showcase.domain).toBeTruthy();
+      expect(showcase.caseType).toBeTruthy();
+      expect(showcase.difficulty).toBeTruthy();
+      expect(showcase.evidenceLevel).toBeTruthy();
+      expect(showcase.execution.actualTools.length).toBeGreaterThan(0);
+      expect(showcase.reproductionSteps.length).toBeGreaterThan(0);
       expect(showcase.artifacts.length).toBeGreaterThanOrEqual(3);
       expect(showcase.preview?.resourceUri).toMatch(/^(data:image\/svg\+xml;base64,|dsh-rosalind:\/\/)/);
       expect(showcase.claims.every((claim) => ["observation", "computed", "interpretation"].includes(claim.kind))).toBe(true);
@@ -39,42 +45,43 @@ describe("generated showcase catalogue", () => {
       expect(showcase.fixtures.length).toBeGreaterThan(0);
       expect(showcase.expectedArtifacts.length).toBeGreaterThan(0);
       expect(showcase.scientificAssertions.length).toBeGreaterThan(0);
-      expect(showcase.provenance.sourceCommit).toBe("f81e668c69edbfe7863cc936f2d535b61d8df76b");
+      expect(showcase.provenance.sourceCommit).toBe("f8c2ea83ac3b3b9258b160b80039dc3db37d76c4");
       expect(showcase.provenance.sources).toEqual(showcase.sources);
+      expect(showcase.provenance.records.length).toBeGreaterThan(0);
       expect(showcase.visualAssertions.length).toBe(showcase.preview ? 1 : 0);
     }
   });
 
-  it("declares the real cross-service fixtures used by the three Rosalind launchers", async () => {
+  it("retains cross-service dependencies and the updated scientific-compute record", async () => {
     const catalogue = await buildCatalogue(repositoryRoot);
     const structure = catalogue.find((item) => item.id === "rosalind-structure-analysis");
     expect(structure).toMatchObject({
-      requiredMcpServers: ["rosalind", "structure"],
-      requiredOperations: ["rosalind.open", "structure.open_from_chat", "structure.get_state"],
-      requiredSkills: ["rosalind-structure-structure-viewer"],
+      requiredMcpServers: ["rosalind"],
+      requiredOperations: ["rosalind.open", "structure.open_from_chat"],
+      rosalindTasks: ["predict-kras-g12c"],
     });
-    expect(structure?.fixtures).toContain("structure-mdm2-p53:inputs/1YCR.pdb");
-    expect(structure?.expectedArtifacts).toContain("structure-mdm2-p53:outputs/results.json");
-    expect(structure?.artifacts.find((item) => item.id === "structure-mdm2-p53:inputs/1YCR.pdb")?.source).toContain("structure-mdm2-p53");
+    expect(structure?.fixtures).toContain("rosalind-structure-analysis:inputs/6OIM.pdb");
+    expect(structure?.expectedArtifacts).toContain("rosalind-structure-analysis:outputs/structure-summary.json");
 
     const genomics = catalogue.find((item) => item.id === "rosalind-genomics");
     expect(genomics).toMatchObject({
-      requiredMcpServers: ["rosalind", "sequence"],
-      requiredOperations: ["rosalind.open", "sequence.open_from_chat", "sequence.run_analysis"],
-      requiredSkills: ["rosalind-sequence-biological-sequence-viewer"],
+      requiredMcpServers: ["rosalind"],
+      requiredOperations: ["rosalind.open", "list_workflows"],
+      rosalindTasks: ["analyze-airway-rnaseq"],
     });
-    expect(genomics?.fixtures).toContain("sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta");
-    expect(genomics?.expectedArtifacts).toContain("sequence-ras-alignment:outputs/analysis.json");
-    expect(genomics?.artifacts.find((item) => item.id === "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta")?.source).toContain("sequence-ras-alignment");
+    expect(genomics?.fixtures).toContain("rosalind-genomics:inputs/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz");
+    expect(genomics?.expectedArtifacts).toContain("rosalind-genomics:outputs/analysis-summary.json");
 
     const compute = catalogue.find((item) => item.id === "rosalind-scientific-compute");
     expect(compute).toMatchObject({
-      requiredMcpServers: ["rosalind", "ngs"],
-      requiredOperations: ["rosalind.open", "list_workflows", "get_runtime_environment", "list_compute_targets"],
-      requiredSkills: ["rosalind-ngs-ngs-analysis-workbench"],
+      domain: "scientific-computing",
+      caseType: "analysis",
+      evidenceLevel: "computed-result",
+      rosalindTasks: ["embed-gb1-sequences"],
     });
-    expect(compute?.fixtures).toContain("rosalind-scientific-compute:inputs/runtime-discovery-request.json");
-    expect(compute?.recipe.requiredInputs).toContain("showcases/rosalind-workbench/cases/rosalind-scientific-compute/inputs/runtime-discovery-request.json");
+    expect(compute?.fixtures).toContain("rosalind-scientific-compute:inputs/gb1-variants-first-500.csv");
+    expect(compute?.expectedArtifacts).toContain("rosalind-scientific-compute:outputs/embedding-summary.json");
+    expect(compute?.reproductionSteps.join(" ")).toContain("ProteinGym");
   });
 
   it("retains exact artifact sizes, recorded hashes, and browser-safe previews", async () => {
@@ -102,10 +109,10 @@ describe("scientific acceptance records", () => {
     expect(values.pdl1).toEqual({ candidates: 20, topFiveRows: 5, ensemblePredictions: 25, firstCandidate: "NB13_E104Q" });
   });
 
-  it("parses the complete 151-file release snapshot", async () => {
+  it("parses the complete 1224-file release snapshot", async () => {
     const report = await validateShowcases(repositoryRoot);
     expect(report.errors).toEqual([]);
-    expect(report).toMatchObject({ ok: true, pluginCount: 7, showcaseCount: 23, fileCount: 151 });
-    expect(Object.values(report.parsedByType).reduce((sum, count) => sum + count, 0)).toBe(151);
+    expect(report).toMatchObject({ ok: true, pluginCount: 7, showcaseCount: 100, fileCount: 1224 });
+    expect(Object.values(report.parsedByType).reduce((sum, count) => sum + count, 0)).toBe(1224);
   });
 });

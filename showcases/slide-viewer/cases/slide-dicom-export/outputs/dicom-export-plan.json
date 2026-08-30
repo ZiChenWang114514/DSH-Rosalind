@@ -1,0 +1,41 @@
+{
+  "showcase_id": "slide-dicom-export",
+  "plan_kind": "metadata-only local DICOM export preparation",
+  "input": {
+    "format": "DICOM JSON Model",
+    "objects": 1,
+    "sop_class_uid": "1.2.840.10008.5.1.4.1.1.77.1.6",
+    "modality": "SM",
+    "frames": 16,
+    "tile_rows": 512,
+    "tile_columns": 512,
+    "total_pixel_matrix_rows": 2048,
+    "total_pixel_matrix_columns": 2048,
+    "pixel_data_present": false
+  },
+  "planned_output": {
+    "new_series_instance_uid": "2.25.300000000000000000000000000000000005",
+    "new_sop_instance_uid": "2.25.300000000000000000000000000000000006",
+    "destination": null,
+    "dicom_instance_written": false,
+    "deidentified_claim": false,
+    "rendered_view_claim": false
+  },
+  "upload": {
+    "authorized": false,
+    "destination": null,
+    "prepare_called": false,
+    "submit_called": false,
+    "operation_token": null
+  },
+  "viewer_operations": {
+    "slide-viewer.slide_query_dicomweb": "rehearsed",
+    "slide-viewer.slide_inspect_dicomweb_instance": "rehearsed",
+    "slide-viewer.slide_read_dicomweb_object": "rehearsed",
+    "slide-viewer.slide_import_dicom_object": "rehearsed",
+    "slide-viewer.slide_export_dicom_object": "rehearsed",
+    "slide-viewer.slide_prepare_dicom_upload": "rehearsed",
+    "slide-viewer.slide_submit_dicom_upload": "rehearsed"
+  },
+  "viewer_execution": false
+}

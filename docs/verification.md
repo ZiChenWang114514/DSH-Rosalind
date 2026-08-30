@@ -4,7 +4,7 @@ Release acceptance covers the scientific snapshot, host behavior, browser compon
 
 ## Scientific acceptance
 
-`npm run validate:showcases` parses the 23 manifests and all 151 referenced files. It does not treat catalogue totals as scientific proof; the headline values are derived from the retained inputs and outputs.
+`npm run validate:showcases` parses the 100 manifests and all 1,224 catalogue and case files. It also checks the seven-module distribution, resolves retained artifacts, and derives the representative headline values below from their inputs and outputs.
 
 | Case | Expected release value |
 |---|---|

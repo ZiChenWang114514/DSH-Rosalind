@@ -1,0 +1,103 @@
+{
+  "schema": "gpt-science.ngs-operation-evidence/v1",
+  "case_id": "ngs-ssh-target",
+  "review_date": "2026-08-30",
+  "successful_operations": [
+    {
+      "operation": "mcp__ngs_compute__configure_ssh_target",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:50:25.933Z",
+      "arguments": {
+        "target_id": "[sanitized]",
+        "title": "[sanitized]",
+        "ssh_alias": "[sanitized]",
+        "workspace_root": "[sanitized]",
+        "executor": "local_process"
+      },
+      "response": {
+        "registered": true,
+        "provider": "ngs-compute",
+        "controller_transport": "ssh",
+        "workspace_access": "remote_filesystem",
+        "executor": "local_process",
+        "identity_fields_removed": true
+      }
+    },
+    {
+      "operation": "mcp__ngs_compute__list_compute_targets",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:10.460Z",
+      "arguments": {},
+      "response": {
+        "ok": true,
+        "count": 3,
+        "targets": [
+          {
+            "kind": "local"
+          },
+          {
+            "kind": "ssh",
+            "identity": "sanitized"
+          },
+          {
+            "kind": "ssh",
+            "identity": "sanitized"
+          }
+        ]
+      }
+    },
+    {
+      "operation": "mcp__ngs_compute__inspect_compute_target",
+      "operation_succeeded": true,
+      "observed_at_utc": "2026-08-29T19:54:14.676Z",
+      "arguments": {
+        "target_id": "[sanitized SSH target]"
+      },
+      "response": {
+        "ok": true,
+        "target_identity": "sanitized",
+        "host": {
+          "os": "linux",
+          "arch": "x86_64"
+        },
+        "workspace": {
+          "exists": false,
+          "readable": false,
+          "writable": false
+        },
+        "commands": {
+          "python3": "ready",
+          "java": "ready",
+          "docker": "ready",
+          "nextflow": "missing",
+          "snakemake": "missing"
+        },
+        "docker_daemon_reachable": true
+      }
+    }
+  ],
+  "failed_operations": [
+    {
+      "operation": "mcp__ngs_compute__configure_ssh_target",
+      "operation_succeeded": false,
+      "started_at_utc": "2026-08-29T19:54:06.747Z",
+      "observed_at_utc": "2026-08-29T19:54:08.735Z",
+      "arguments": {
+        "target_id": "[sanitized]",
+        "title": "[sanitized]",
+        "ssh_alias": "[sanitized]",
+        "workspace_root": "[sanitized]",
+        "executor": "local_process"
+      },
+      "response_error": "local Workbench daemon exited during startup: 3221225786"
+    }
+  ],
+  "not_executed_operations": [],
+  "privacy": {
+    "private_device_names_removed": true,
+    "user_paths_removed": true,
+    "task_uuids_removed": true,
+    "credentials_retained": false
+  },
+  "interpretation": "A successful tool transport for a readiness check proves that the check completed; a blocked readiness result does not prove workflow readiness. Failed and unexecuted actions do not support capability claims."
+}

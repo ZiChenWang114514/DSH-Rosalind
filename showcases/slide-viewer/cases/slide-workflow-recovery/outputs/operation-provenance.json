@@ -1,0 +1,22 @@
+{
+  "schema": "slide-viewer.operation-provenance/v1",
+  "case_id": "slide-workflow-recovery",
+  "plugin_version": "0.1.56",
+  "observed_at_utc": "2026-08-29T18:55:06.207Z/2026-08-29T19:01:43.843Z",
+  "evidence": "outputs/workflow-operation-evidence.json",
+  "source_files": [
+    "inputs/temporary-region-counts.tsv",
+    "inputs/temporary-region-annotations.tsv"
+  ],
+  "executed_operations": [
+    "slide_import_workflow_source",
+    "slide_run_workflow",
+    "slide_list_workflows"
+  ],
+  "unavailable_follow_ups": [
+    "slide_read_workflow_artifact",
+    "slide_read_live_workflow_artifact"
+  ],
+  "result_scope": "Operation and failure evidence for a temporary region-QC teaching task; no scientific artifact was produced.",
+  "rosalind_observation_preserved": "outputs/rosalind-open-observation.json remains unchanged and continues to describe only task-chooser readiness."
+}

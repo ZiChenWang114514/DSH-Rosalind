@@ -25,9 +25,9 @@
     <text x="86" y="552" class="white">HRAS</text><text x="214" y="552" class="white">0.1368</text><text x="326" y="552" class="white">0.1579</text><text x="450" y="552" class="green">0</text>
   </g>
   <text x="78" y="602" class="sans muted" font-size="15">Closest pair: KRAS–NRAS</text>
-  <text x="78" y="642" class="sans white" font-size="18" font-weight="650">Exploratory NJ tree</text>
-  <path d="M92 660H170M170 660V620M170 620H250M170 660V690M170 690H210M210 690V672M210 672H284M210 690V708M210 708H284" class="line"/>
-  <text x="260" y="626" class="sans white" font-size="15">KRAS</text><text x="294" y="678" class="sans white" font-size="15">NRAS</text><text x="294" y="714" class="sans white" font-size="15">HRAS</text>
+  <text x="78" y="630" class="sans white" font-size="18" font-weight="650">Exploratory NJ tree</text>
+  <path d="M92 650H170M170 650V638M170 638H250M170 650V664M170 664H210M210 664V657M210 657H284M210 664V671M210 671H284" class="line"/>
+  <text x="260" y="643" class="sans white" font-size="15">KRAS</text><text x="294" y="662" class="sans white" font-size="15">NRAS</text><text x="294" y="676" class="sans white" font-size="15">HRAS</text>
   <rect x="596" y="344" width="552" height="340" rx="18" class="panel"/>
   <text x="622" y="385" class="sans white" font-size="20" font-weight="650">C-terminal divergence · columns 170–191</text>
   <g class="mono" font-size="20"><text x="622" y="438" class="muted">KRAS</text><text x="700" y="438" class="amber">KK-ISKEEKTPGCVKIKKCIIM</text><text x="622" y="480" class="muted">NRAS</text><text x="700" y="480" class="white">KKLNSSDDGTQGC-MGLPCVVM</text><text x="622" y="522" class="muted">HRAS</text><text x="700" y="522" class="white">KL-NPPDESGPGC-MSCKCVLS</text></g>

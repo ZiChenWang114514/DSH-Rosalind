@@ -1,0 +1,7 @@
+2026-08-29T17:36:25Z local runtime snapshot: succeeded
+2026-08-29T17:36:25Z previously registered SSH context: inspection failed because the host was unreachable or inspection was incomplete
+2026-08-29T17:40:11Z authorized SSH compute target: bounded BatchMode probe exited 0
+2026-08-29T18:56:10.883Z authorized SSH compute target: Workbench registration succeeded
+2026-08-29T18:56:25.651Z authorized SSH compute target: bounded Workbench inspection succeeded; workspace absent and workflow controllers missing
+2026-08-29T19:06:06.529Z Workbench target list: three registered contexts
+No workflow plan or workflow run was created.

@@ -3,72 +3,124 @@
   "plugin_id": "rosalind-workbench",
   "plugin_version": "0.2.2-research-preview",
   "status": "ready",
-  "run_date": "2026-08-29",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "analyze-airway-rnaseq"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14 standard library",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "deterministic analysis of the public GSE52778 Dex-versus-untreated processed Cuffdiff table plus a separate Rosalind launcher observation; no Rosalind scientific job executed",
+    "status": "verified"
+  },
   "prompt": "prompt.md",
-  "inputs": [],
+  "inputs": [
+    {
+      "path": "build_case.py",
+      "bytes": 6925
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 311
+    },
+    {
+      "path": "inputs/source-provenance.json",
+      "bytes": 443
+    },
+    {
+      "path": "inputs/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz",
+      "bytes": 850055
+    }
+  ],
   "outputs": [
     {
-      "path": "outputs/launcher-observation.json"
+      "path": "outputs/top-differential-genes.csv",
+      "bytes": 1524
+    },
+    {
+      "path": "outputs/theme-panel-summary.csv",
+      "bytes": 275
+    },
+    {
+      "path": "outputs/analysis-summary.json",
+      "bytes": 845
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 722
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5837
     }
   ],
   "previews": [
     {
-      "path": "previews/rosalind-genomics.svg"
+      "path": "previews/preview.svg",
+      "bytes": 2133
     }
   ],
   "sources": [
-    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
-    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
-    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+    "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778",
+    "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE52nnn/GSE52778/suppl/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz"
   ],
-  "dependencies": {
-    "required_mcp_servers": ["rosalind", "sequence"],
-    "required_operations": ["rosalind.open", "sequence.open_from_chat", "sequence.run_analysis"],
-    "required_skills": ["rosalind-sequence-biological-sequence-viewer"],
-    "artifacts": [
-      {
-        "id": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta",
-        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
-        "role": "input",
-        "source": "Shared aligned FASTA input from sequence-ras-alignment."
-      },
-      {
-        "id": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
-        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
-        "role": "provenance",
-        "source": "Shared UniProt acquisition record from sequence-ras-alignment."
-      },
-      {
-        "id": "sequence-ras-alignment:outputs/analysis.json",
-        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/analysis.json",
-        "role": "output",
-        "source": "Shared alignment metrics and neighbor-joining result from sequence-ras-alignment."
-      },
-      {
-        "id": "sequence-ras-alignment:outputs/RAS-P01116-P01111-P01112-NJ.nwk",
-        "repository_path": "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/outputs/RAS-P01116-P01111-P01112-NJ.nwk",
-        "role": "output",
-        "source": "Shared exploratory neighbor-joining tree from sequence-ras-alignment."
-      }
-    ],
-    "provenance": {
-      "reused_cases": ["sequence-ras-alignment"]
-    }
-  },
   "observations": [
-    "The Rosalind launcher was ready and exposed the named scientific area.",
-    "The replay fixture is the three-row human RAS alignment retained by sequence-ras-alignment."
+    "The retained public comparison has 23,273 rows, of which 13,513 status-OK gene rows were tested.",
+    "At q <= 0.05, 316 rows are significant after direction is recomputed as log2(Dex FPKM / untreated FPKM).",
+    "The leading retained genes include SPARCL1, KLF15, FKBP5, SAMHD1, GPX3, C7, SERPINA3, MAOA, DUSP1, and CCDC69."
   ],
   "interpretation": [
-    "The genomics route opens the retained RAS alignment and recomputes its alignment metrics with the local Sequence service."
+    "The authors' processed table shows a strong dexamethasone-associated response in airway smooth-muscle cells.",
+    "The predeclared theme panels are descriptive organization aids and do not constitute formal pathway enrichment."
   ],
   "limitations": [
-    "The retained launcher observation did not expose individual task choices.",
-    "The RAS distance and neighbor-joining results are exploratory and do not provide phylogenetic support values."
+    "This is an analysis of the authors' processed Cuffdiff result, not a raw-read or count-level reanalysis.",
+    "The study has four donors, and donor pairing and other design terms are not re-estimated here.",
+    "The Rosalind call verified launcher readiness only and executed no scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778",
+        "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE52nnn/GSE52778/suppl/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz"
+      ],
+      "inputs": [
+        "build_case.py",
+        "inputs/public-source.md",
+        "inputs/source-provenance.json",
+        "inputs/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz"
+      ],
+      "outputs": [
+        "outputs/top-differential-genes.csv",
+        "outputs/theme-panel-summary.csv",
+        "outputs/analysis-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The builder computes the scientific summaries from the retained public GEO file. outputs/rosalind-open-observation.json records the genuine mcp__rosalind__rosalind_open call separately and states that no scientific job executed."
+    }
+  ],
+  "reproduction": [
+    "Run python build_case.py to retrieve the public processed comparison and regenerate outputs.",
+    "Confirm 23,273 source rows, 13,513 status-OK rows, and 316 rows at q <= 0.05.",
+    "Inspect outputs/rosalind-open-observation.json separately as launcher-readiness evidence."
   ],
   "environment": {
-    "launcher_ready": true,
-    "scientific_job_executed": false,
-    "reproduction_fixture": "sequence-ras-alignment:inputs/human-RAS-UniProt-SV1.aln-fasta"
+    "cost": "free",
+    "data": "public GEO GSE52778",
+    "scientific_job_executed_by_rosalind": false
   }
 }

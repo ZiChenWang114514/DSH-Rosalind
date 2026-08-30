@@ -1,0 +1,20 @@
+{
+  "schema": "showcase.provenance/v1",
+  "case_id": "rosalind-ras-isoforms",
+  "scientific_evidence": {
+    "source": "inputs/human-RAS-UniProt-SV1.aln-fasta",
+    "source_provenance": "inputs/source-provenance.json",
+    "computation": "build_case.py",
+    "outputs": ["outputs/alignment-summary.json", "outputs/variable-sites.csv"],
+    "method": "Exact retained aligned-FASTA comparison with KRAS-coordinate mapping and uncorrected pairwise p-distance."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 891,
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "limitation": "The launcher response did not produce the RAS alignment or any scientific result."
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "id": "rosalind-kinase-metabolism",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "adme-and-developability",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open",
+    "rosalind-workbench.public-evidence"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "PubChem PUG REST",
+      "DailyMed public labels",
+      "Python 3.14",
+      "RDKit 2026.03.5"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus exact public kinase-inhibitor structures joined to official metabolism statements and transparent local SMARTS prompts",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 742
+    },
+    {
+      "path": "inputs/compounds.csv",
+      "bytes": 544
+    },
+    {
+      "path": "inputs/metabolism-evidence.csv",
+      "bytes": 975
+    },
+    {
+      "path": "scripts/analyze.py",
+      "bytes": 6677
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/descriptors.csv",
+      "bytes": 219
+    },
+    {
+      "path": "outputs/structural-alerts.csv",
+      "bytes": 1747
+    },
+    {
+      "path": "outputs/metabolism-review.csv",
+      "bytes": 799
+    },
+    {
+      "path": "outputs/result-summary.json",
+      "bytes": 1330
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 537
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 7061
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1988
+    }
+  ],
+  "sources": [
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5291",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/123631",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/176870",
+    "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7b7cc194-29e4-4484-a364-a1ac7d7d6cf5",
+    "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1a3c0ce7-06a1-4e04-9106-14ddb2a866a5&version=4",
+    "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4cff04f5-3693-4d87-a9f8-a2b195e3d26e"
+  ],
+  "observations": [
+    "DailyMed identifies CYP3A4 as the major enzyme responsible for imatinib metabolism.",
+    "DailyMed describes gefitinib metabolism as extensive and predominantly CYP3A4.",
+    "DailyMed describes erlotinib metabolism as primarily CYP3A4 with lesser CYP1A2 and CYP1A1 contributions in vitro.",
+    "The local SMARTS table retains match counts for five explicit structural prompts across all three compounds.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "Official label statements establish enzyme-related evidence; SMARTS matches only identify structural regions for further investigation."
+  ],
+  "limitations": [
+    "The SMARTS set is uncalibrated and may miss relevant chemistry or produce false positives.",
+    "No metabolite ranking, intrinsic clearance, microsomal stability, transporter effect, or clinical exposure was calculated.",
+    "The Rosalind operation opened only the task chooser; no Rosalind scientific job or laboratory experiment was executed."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://pubchem.ncbi.nlm.nih.gov/compound/5291",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/123631",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/176870",
+        "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7b7cc194-29e4-4484-a364-a1ac7d7d6cf5",
+        "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1a3c0ce7-06a1-4e04-9106-14ddb2a866a5&version=4",
+        "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4cff04f5-3693-4d87-a9f8-a2b195e3d26e"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/compounds.csv",
+        "inputs/metabolism-evidence.csv",
+        "scripts/analyze.py"
+      ],
+      "outputs": [
+        "outputs/descriptors.csv",
+        "outputs/structural-alerts.csv",
+        "outputs/metabolism-review.csv",
+        "outputs/result-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The launcher observation records the exact Rosalind chooser response and does not represent scientific execution. Exact structures and official label statements remain separate from locally generated, uncalibrated structural prompts."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-kinase-metabolism/scripts/analyze.py from the repository root.",
+    "Invoke mcp__rosalind__rosalind_open with task_context kinase inhibitor metabolism-evidence teaching case, then compare the response with outputs/rosalind-open-observation.json.",
+    "Inspect source statements, SMARTS definitions, full match counts, joined review table, summary, and SVG preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local"
+  }
+}

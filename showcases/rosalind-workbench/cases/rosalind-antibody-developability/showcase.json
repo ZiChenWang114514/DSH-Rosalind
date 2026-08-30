@@ -1,0 +1,129 @@
+{
+  "id": "rosalind-antibody-developability",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "adme-and-developability",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open",
+    "rosalind-workbench.public-evidence"
+  ],
+  "rosalind_tasks": [
+    "assess-antibody-developability"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "RCSB PDB REST and FASTA",
+      "Python 3.14 standard library"
+    ],
+    "device": "local",
+    "implementation": "Genuine Rosalind task-chooser observation plus exact public Fab chain sequences and deterministic variable-domain motif, charge, pI, and hydrophobic-window calculations",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 561
+    },
+    {
+      "path": "inputs/source-records.csv",
+      "bytes": 652
+    },
+    {
+      "path": "inputs/antibody-chains.fasta",
+      "bytes": 1356
+    },
+    {
+      "path": "scripts/analyze.py",
+      "bytes": 8926
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/sequence-metrics.csv",
+      "bytes": 639
+    },
+    {
+      "path": "outputs/motif-liabilities.csv",
+      "bytes": 674
+    },
+    {
+      "path": "outputs/result-summary.json",
+      "bytes": 1369
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 545
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 7010
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1747
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1N8Z",
+    "https://www.rcsb.org/structure/5DK3"
+  ],
+  "observations": [
+    "The complete RCSB antibody chain sequences and the analyzed variable-domain lengths are retained.",
+    "The Herceptin Fab variable-domain pair has nine motif flags; the pembrolizumab Fab pair has three under the defined motif set.",
+    "The largest hydrophobic 9-residue windows contain seven and eight hydrophobic residues, respectively.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The sequence flags nominate regions for structural inspection and controlled experiments; their counts do not establish comparative laboratory developability."
+  ],
+  "limitations": [
+    "The analysis omits solvent exposure, full IgG architecture, formulation, concentration, expression host, and conformational dynamics.",
+    "Motif presence does not demonstrate chemical degradation.",
+    "No laboratory developability, stability, aggregation, viscosity, pharmacokinetic, efficacy, or safety measurement was performed.",
+    "The Rosalind operation opened only the task chooser; no Rosalind scientific job was executed."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://www.rcsb.org/structure/1N8Z",
+        "https://www.rcsb.org/structure/5DK3"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/source-records.csv",
+        "inputs/antibody-chains.fasta",
+        "scripts/analyze.py"
+      ],
+      "outputs": [
+        "outputs/sequence-metrics.csv",
+        "outputs/motif-liabilities.csv",
+        "outputs/result-summary.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The launcher observation records the exact Rosalind chooser response and does not represent scientific execution. Exact RCSB chains are trimmed only by documented variable-domain lengths and analyzed locally with inspectable formulas and motif definitions."
+    }
+  ],
+  "reproduction": [
+    "Run python showcases/rosalind-workbench/cases/rosalind-antibody-developability/scripts/analyze.py from the repository root.",
+    "Invoke mcp__rosalind__rosalind_open with task_context therapeutic antibody sequence-liability teaching case, then compare the response with outputs/rosalind-open-observation.json.",
+    "Inspect the source sequences, per-chain metrics, motif positions, summary, and SVG preview."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local"
+  }
+}

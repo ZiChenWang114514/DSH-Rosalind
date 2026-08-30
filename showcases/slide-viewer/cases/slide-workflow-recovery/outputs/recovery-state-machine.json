@@ -1,0 +1,22 @@
+{
+  "model": "workflow-cancellation-and-recovery-rehearsal",
+  "version": "1.0.0",
+  "job_A": {
+    "purpose": "cancellation",
+    "allowed_sequence": ["running", "cancel_requested", "cancelled_settled"],
+    "terminal_resume_allowed": false
+  },
+  "job_B": {
+    "purpose": "recovery",
+    "allowed_sequence": ["running", "interrupted_recoverable", "reauthorized", "resumed_running", "terminal_result"],
+    "required_immutable_fields": ["durable_id", "public_url", "bytes", "sha256", "matrix", "source_revision"],
+    "required_changes": ["authorization_alias", "current_source_id", "attempt"]
+  },
+  "viewer_operations": {
+    "slide-viewer.slide_cancel_workflow": "rehearsed",
+    "slide-viewer.slide_get_workflow": "rehearsed",
+    "slide-viewer.slide_get_live_workflow": "rehearsed",
+    "slide-viewer.slide_resume_workflow": "rehearsed"
+  },
+  "viewer_execution": false
+}

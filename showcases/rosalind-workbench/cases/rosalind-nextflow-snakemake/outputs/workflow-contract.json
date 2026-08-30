@@ -1,0 +1,22 @@
+{
+  "input": "inputs/DRR037765-first-500.fastq",
+  "shared_program": "qc_core.py",
+  "canonical_fields": [
+    "records",
+    "total_bases",
+    "minimum_read_length",
+    "maximum_read_length",
+    "mean_read_length",
+    "GC_percent",
+    "Q30_percent"
+  ],
+  "nextflow_definition": "workflows/nextflow/main.nf",
+  "snakemake_definition": "workflows/snakemake/Snakefile",
+  "comparison_rule": "Integer values must match exactly; floating-point values from the same qc_core implementation must match exactly after JSON parsing.",
+  "engine_result_status": "unexecuted",
+  "reference_result": "outputs/reference-qc.json",
+  "planned_engine_outputs": [
+    "outputs/nextflow/qc.json",
+    "outputs/snakemake/qc.json"
+  ]
+}

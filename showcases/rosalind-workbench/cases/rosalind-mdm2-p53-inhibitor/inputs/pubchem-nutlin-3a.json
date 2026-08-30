@@ -1,0 +1,20 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 11433190,
+        "MolecularFormula": "C30H30Cl2N4O4",
+        "MolecularWeight": "581.5",
+        "SMILES": "CC(C)OC1=C(C=CC(=C1)OC)C2=N[C@H]([C@H](N2C(=O)N3CCNC(=O)C3)C4=CC=C(C=C4)Cl)C5=CC=C(C=C5)Cl",
+        "ConnectivitySMILES": "CC(C)OC1=C(C=CC(=C1)OC)C2=NC(C(N2C(=O)N3CCNC(=O)C3)C4=CC=C(C=C4)Cl)C5=CC=C(C=C5)Cl",
+        "InChIKey": "BDUHCSBCVGXTJM-WUFINQPMSA-N",
+        "XLogP": 5.2,
+        "TPSA": 83.5,
+        "HBondDonorCount": 1,
+        "HBondAcceptorCount": 5,
+        "RotatableBondCount": 6,
+        "Title": "Nutlin 3"
+      }
+    ]
+  }
+}

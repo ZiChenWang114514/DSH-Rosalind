@@ -1,0 +1,20 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "slide-spatial-expression",
+  "started_at_utc": "2026-08-29T18:13:03.754Z",
+  "observed_at_utc": "2026-08-29T18:13:03.865Z",
+  "completed_at_utc": "2026-08-29T18:13:03.865Z",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "task_context": "Document the distinction between retained public spatial-expression evidence, reproducible summary computation, and unexecuted live viewer operations for the slide-spatial-expression teaching case."
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "ready": true,
+  "structured_content": {
+    "schemaVersion": "life-sciences.launcher/v1",
+    "ready": true,
+    "view": "launcher"
+  },
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not query the H5AD, calculate expression summaries, render tissue, or execute a Rosalind scientific job."
+}

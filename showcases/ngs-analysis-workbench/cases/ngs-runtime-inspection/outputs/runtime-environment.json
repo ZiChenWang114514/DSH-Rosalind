@@ -1,0 +1,60 @@
+{
+  "observed_at": "2026-08-29T20:26:16.206Z",
+  "workbench_version": "0.2.16",
+  "local": {
+    "snapshot_id": "sanitized-runtime-snapshot",
+    "target_id": "local",
+    "os": "windows",
+    "arch": "amd64",
+    "commands": [
+      {"name": "nextflow", "state": "missing", "version": null},
+      {"name": "snakemake", "state": "missing", "version": null},
+      {"name": "java", "state": "ready", "version": "openjdk 21.0.12.1"},
+      {"name": "docker", "state": "ready", "version": "29.7.2"},
+      {"name": "conda", "state": "ready", "version": "25.11.1"},
+      {"name": "mamba", "state": "ready", "version": "0.11.3"},
+      {"name": "micromamba", "state": "missing", "version": null},
+      {"name": "pixi", "state": "missing", "version": null},
+      {"name": "apptainer", "state": "missing", "version": null},
+      {"name": "singularity", "state": "missing", "version": null}
+    ],
+    "docker_daemon_reachable": false,
+    "controller_candidates": [],
+    "managed_environments_scanned": 13,
+    "compatible_managed_controllers_found": 0
+  },
+  "registered_ssh_target": {
+    "public_label": "previously registered SSH context",
+    "runtime_inspection": "unreachable"
+  },
+  "authorized_ssh_compute_target": {
+    "public_label": "repaired local SSH compute target",
+    "registered_in_workbench": true,
+    "os": "Ubuntu 24.04.4 LTS",
+    "arch": "x86_64",
+    "nextflow_on_path": true,
+    "nextflow_version": "26.04.6",
+    "snakemake_on_path": true,
+    "snakemake_version": "9.26.0",
+    "docker_cli": "29.7.2",
+    "docker_server_version": "29.7.2",
+    "docker_server_reachable": true,
+    "controller_candidates": 2,
+    "docker_smoke_test_exit_code": 0,
+    "python3": "3.12.3",
+    "java": "21.0.12"
+  },
+  "interpretation": "The Windows controller remains without workflow controllers or a reachable Docker server. The repaired Linux SSH target exposes Nextflow and Snakemake controller candidates and a reachable Docker 29.7.2 server.",
+  "sanitization": {
+    "aliases_retained": false,
+    "usernames_retained": false,
+    "addresses_retained": false,
+    "fingerprints_retained": false,
+    "environment_specific_paths_retained": false
+  },
+  "limitations": [
+    "The local runtime snapshot expires and should be refreshed before planning.",
+    "Unactivated environments were not exhaustively searched on the SSH host.",
+    "Only the public hello-world image was executed; no scientific container image or task software stack was resolved."
+  ]
+}

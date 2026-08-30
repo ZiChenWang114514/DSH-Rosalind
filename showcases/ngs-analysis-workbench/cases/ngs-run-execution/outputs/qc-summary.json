@@ -1,0 +1,20 @@
+{
+  "schema_version": "2.0",
+  "input_state": "raw public FASTQ subset",
+  "phred_encoding": "Phred+33",
+  "records": 24,
+  "unique_record_ids": 24,
+  "bases": 11304,
+  "read_length_min": 471,
+  "read_length_median": 471.0,
+  "read_length_max": 471,
+  "gc_percent": 28.848195329087048,
+  "n_percent": 0.0,
+  "mean_phred": 37.2997169143666,
+  "q20_threshold": 20,
+  "q20_percent": 99.27459306440198,
+  "q30_threshold": 30,
+  "q30_percent": 96.78874734607218,
+  "fastq_integrity": "passed",
+  "transformation_performed": false
+}

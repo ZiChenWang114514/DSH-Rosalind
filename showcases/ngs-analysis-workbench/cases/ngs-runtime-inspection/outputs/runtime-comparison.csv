@@ -1,0 +1,4 @@
+public_label,registration,os_arch,nextflow,snakemake,docker_cli,docker_server,controller_candidate
+local controller,workbench,windows-amd64,missing,missing,29.7.2,unreachable,none
+previously registered SSH context,workbench,unknown,unknown,unknown,unknown,unknown,unknown
+repaired local SSH compute target,workbench,ubuntu-24.04.4-x86_64,26.04.6,9.26.0,29.7.2,reachable,2

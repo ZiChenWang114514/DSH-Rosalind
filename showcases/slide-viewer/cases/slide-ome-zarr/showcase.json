@@ -1,0 +1,103 @@
+{
+  "id": "slide-ome-zarr",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "interface",
+  "difficulty": "intermediate",
+  "evidence_level": "interface-observation",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "IDR anonymous HTTPS",
+      "Python standard-library JSON checks",
+      "slide-viewer.slide_open_ome_zarr",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "three-object NGFF metadata verification, axis-aware topology calculation, recorded public-root open outcomes, and a separately retained Rosalind task-chooser invocation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 566
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 2767
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 801
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 4871,
+      "sha256": "a8691a203b18f0d3238c158bece73ed7c42bbb44e19854209275cc8c2538933f"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 1901
+    }
+  ],
+  "sources": [
+    "https://idr.github.io/ome-ngff-samples/",
+    "https://livingobjects.ebi.ac.uk/idr/zarr/v0.4/idr0101A/13457537.zarr"
+  ],
+  "observations": [
+    "Three required NGFF metadata resources returned HTTP 200 with byte counts, SHA-256 values, ETags, and Last-Modified values retained.",
+    "Declared axis order maps the level-0 shape to T=18, C=6, Z=12, Y=223, X=198.",
+    "The guarded public-root open returned a schema error for the explicit consistency field and a timeout without that field.",
+    "Rosalind Workbench opened its task chooser for the case-specific context; no scientific job was selected or executed."
+  ],
+  "interpretation": [
+    "The metadata supports a reproducible remote-array description, while current evidence does not support a mounted scene or visible plane."
+  ],
+  "limitations": [
+    "The compact check did not list the store or fetch image chunks.",
+    "ETags are response validators rather than publisher checksums.",
+    "No viewer session, C/Z/T selection, layer state, navigation, or render was observed.",
+    "The Rosalind launcher observation is interface provenance only and supplies no scientific result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://idr.github.io/ome-ngff-samples/",
+        "https://livingobjects.ebi.ac.uk/idr/zarr/v0.4/idr0101A/13457537.zarr"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The scientific receipt retains bounded metadata, topology, calculations, and viewer outcomes; the separate Rosalind observation preserves only the task-chooser invocation."
+    }
+  ],
+  "reproduction": [
+    "Read the three exact metadata objects without copying the remote store.",
+    "Map shape through the declared axis order and compare hashes and validators.",
+    "Call rosalind_open with the retained case context and record the chooser response separately.",
+    "Attempt the public-root open with the current schema and preserve the returned session or error exactly."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0",
+    "device": "local"
+  }
+}

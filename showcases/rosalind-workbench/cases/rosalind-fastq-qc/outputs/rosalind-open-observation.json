@@ -1,0 +1,18 @@
+{
+  "schema": "rosalind.open-observation/v1",
+  "case_id": "rosalind-fastq-qc",
+  "observed_at_utc": "2026-08-29T18:21:00.272Z",
+  "observed_at_local": "2026-08-30T02:21:00.272+08:00",
+  "tool": "mcp__rosalind__rosalind_open",
+  "arguments": {
+    "case_id": "rosalind-fastq-qc",
+    "task_context": "Open Rosalind Workbench for the retained public ENA DRR037765 500-read deterministic FASTQ quality showcase; do not upload reads or execute a Rosalind scientific task.",
+    "execute_scientific_task": false
+  },
+  "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+  "response_schema": "life-sciences.launcher/v1",
+  "response_view": "launcher",
+  "ready": true,
+  "scientific_job_executed": false,
+  "limitation": "The call opened only the task chooser; it did not upload DRR037765 reads, calculate FASTQ metrics, or execute a Rosalind scientific task."
+}

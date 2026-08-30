@@ -1,0 +1,27 @@
+{
+  "showcase_id": "rosalind-oral-candidates",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "Five CID-exact public compound records were retained and transformed into the molecular-property comparison."
+  },
+  "method": "exact PubChem structures; local RDKit 2026.03.5 descriptors and explicit thresholds",
+  "thresholds": {
+    "Lipinski": "MW > 500; MolLogP > 5; HBD > 5; HBA > 10",
+    "Veber_style": "rotatable bonds > 10; TPSA > 140 A^2"
+  },
+  "observations": [
+    "Imatinib: 0 Lipinski and 0 Veber-style threshold exceedances.",
+    "Gefitinib: 0 Lipinski and 0 Veber-style threshold exceedances.",
+    "Erlotinib: 0 Lipinski and 0 Veber-style threshold exceedances.",
+    "Osimertinib: 0 Lipinski and 0 Veber-style threshold exceedances.",
+    "Sunitinib: 0 Lipinski and 0 Veber-style threshold exceedances."
+  ],
+  "interpretation": "The five reference drugs occupy a broad descriptor range despite oral administration, illustrating that simple thresholds are filters rather than clinical absorption models.",
+  "limitations": [
+    "The comparison omits solid state, salt form, formulation, dissolution, permeability, transporters, metabolism, dose, and exposure.",
+    "QED and all listed descriptors are computed molecule-level quantities, without clinical ADME measurement.",
+    "Threshold exceedances do not rank efficacy, safety, developability, or probability of oral success.",
+    "All five entries are reference drugs, not prospectively selected development candidates."
+  ]
+}

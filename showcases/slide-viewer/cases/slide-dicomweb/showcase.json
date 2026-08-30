@@ -1,0 +1,108 @@
+{
+  "id": "slide-dicomweb",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "advanced",
+  "evidence_level": "interface-observation",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "IDC anonymous DICOMweb HTTPS",
+      "Python multipart payload hashing",
+      "slide-viewer DICOMweb guarded operations",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "complete three-metadata and fourteen-frame representation pins, recorded guarded DICOMweb results, and a separately retained Rosalind task-chooser invocation",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 945
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/verification-receipt.json",
+      "bytes": 4038
+    },
+    {
+      "path": "outputs/dicomweb-representation-manifest.json",
+      "bytes": 8634
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 801
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 5424,
+      "sha256": "5a96ba6cce1defb68dcdaa304a245b3fc6f9a2ece93d3121fe9a2e5bfee5bb93"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2022
+    }
+  ],
+  "sources": [
+    "https://raw.githubusercontent.com/ImagingDataCommons/wg26-2026-connectathon-idc/main/data/manifest/wg26_selection.json",
+    "https://learn.canceridc.dev/portal/proxy-policy"
+  ],
+  "observations": [
+    "Direct anonymous HTTPS returned the expected three metadata resources and all fourteen frames with no ETags.",
+    "A complete exact-representation manifest was calculated for all seventeen selected resources.",
+    "The current adapter rejected the three-object open because associated image objects are not registered as pyramid levels.",
+    "Rosalind Workbench opened its task chooser for the case-specific context; no scientific job was selected or executed."
+  ],
+  "interpretation": [
+    "Complete delivery pins support repeatable response verification, while the current result remains a source-admission observation without render evidence."
+  ],
+  "limitations": [
+    "Caller-created SHA pins do not authenticate the publisher.",
+    "The public endpoint can change after the check date.",
+    "No viewer session, frame display, navigation, or morphology observation was produced.",
+    "The Rosalind launcher observation is interface provenance only and supplies no scientific result."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://raw.githubusercontent.com/ImagingDataCommons/wg26-2026-connectathon-idc/main/data/manifest/wg26_selection.json",
+        "https://learn.canceridc.dev/portal/proxy-policy"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/verification-receipt.json",
+        "outputs/dicomweb-representation-manifest.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The DICOMweb receipts preserve the selected responses and adapter results; the separate Rosalind observation preserves only the task-chooser invocation."
+    }
+  ],
+  "reproduction": [
+    "Repeat the exact study, series, SOP, metadata, and frame requests anonymously.",
+    "Hash each complete metadata body and each extracted single-frame multipart payload.",
+    "Call rosalind_open with the retained case context and record the chooser response separately.",
+    "Use the complete manifest for a guarded open attempt and report the returned session or rejection exactly."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0",
+    "device": "local"
+  }
+}

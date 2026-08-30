@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Antibody breadth across target variants</title><desc id="desc">Teaching preview for Antibody breadth across target variants</desc>
+<rect width="1200" height="675" fill="#071726"/><circle cx="1040" cy="105" r="190" fill="#0e7490" opacity=".36"/>
+<path d="M0 535 C250 450 410 650 650 535 S1000 420 1200 525 V675 H0Z" fill="#0f766e" opacity=".42"/>
+<text x="80" y="105" fill="#67e8f9" font-family="Segoe UI,Arial" font-size="28">Rosalind Workbench</text>
+<text x="80" y="235" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="52" font-weight="700">Antibody breadth across target variant</text>
+<text x="80" y="300" fill="#cbd5e1" font-family="Segoe UI,Arial" font-size="25">Public source · inspectable receipt · reproducible lesson</text>
+<rect x="80" y="385" width="1040" height="98" rx="18" fill="#0f172a" stroke="#22d3ee"/>
+<text x="110" y="445" fill="#e2e8f0" font-family="Consolas,monospace" font-size="19">public-evidence</text>
+</svg>

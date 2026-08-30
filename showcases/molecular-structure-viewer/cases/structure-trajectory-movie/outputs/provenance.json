@@ -1,0 +1,53 @@
+{
+  "case_id": "structure-trajectory-movie",
+  "run_date": "2026-08-30",
+  "dataset": {
+    "figshare_article_id": 5108170,
+    "version": 1,
+    "doi": "10.6084/m9.figshare.5108170.v1",
+    "license": "CC BY 4.0",
+    "metadata": "inputs/dataset-metadata.json"
+  },
+  "acquisition": {
+    "topology_url": "https://ndownloader.figshare.com/files/8672230",
+    "full_trajectory_url": "https://ndownloader.figshare.com/files/8672074",
+    "full_trajectory_retained": false,
+    "reason": "The 168200440-byte source DCD was used to derive a compact five-frame teaching subset and then removed from temporary storage."
+  },
+  "executed_local_work": {
+    "tool": "scripts/build_subset_and_inspect.py",
+    "runtime": "Python 3.12.13, MDAnalysis 2.10.0, NumPy 2.5.2",
+    "source_files_verified": true,
+    "topology_trajectory_load_succeeded": true,
+    "subset_reload_succeeded": true,
+    "outputs": [
+      "inputs/adk-equilibrium-5frames.dcd",
+      "inputs/adk-frame0.pdb",
+      "outputs/trajectory-inspection.json",
+      "outputs/sampled-frame-metrics.csv"
+    ]
+  },
+  "viewer_work": {
+    "status": "not executed",
+    "contract": "outputs/viewer-operation-plan.json",
+    "unverified_artifacts": [
+      "MP4 movie",
+      "render provenance sidecar",
+      "cancel-render receipt",
+      "scene export",
+      "viewer-generated analysis CSV"
+    ]
+  },
+  "evidence_separation": {
+    "source_observations": "Figshare metadata, licensing, deposited file identities, and source description",
+    "computed_results": "frame count, compatibility, compact DCD, coordinate reload check, RMSD, radius of gyration, and domain-centroid distances",
+    "interpretation": "selected frames sample a wider conformation than frame zero",
+    "unverified_operations": "Structure Viewer loading, playback, movie rendering, cancellation, and export"
+  },
+  "rosalind_open_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 658,
+    "scientific_job_executed": false,
+    "note": "Genuine case-specific task-chooser call; no trajectory was submitted, no movie was rendered or exported, and no Rosalind scientific job ran."
+  }
+}

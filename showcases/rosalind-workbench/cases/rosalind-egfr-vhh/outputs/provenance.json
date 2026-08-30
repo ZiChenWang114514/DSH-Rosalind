@@ -1,0 +1,22 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "rosalind-egfr-vhh",
+  "source_checked": "2026-08-30",
+  "scientific_evidence": {
+    "source": "inputs/public-source.md",
+    "retained_summary": "outputs/verification-receipt.json",
+    "method": "Case-specific review of the public RCSB PDB 4KRL record; no coordinate computation was performed."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "note": "The response records only the task chooser and did not produce any EGFR or VHH scientific result."
+  },
+  "limitations": [
+    "No new sequence, structure, docking pose, optimization, or ranking was generated.",
+    "The source summary should be refreshed if the RCSB entry changes."
+  ]
+}

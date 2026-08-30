@@ -1,0 +1,16 @@
+"""Minimal FASTQ structural-statistics workflow for readiness teaching."""
+
+rule all:
+    input:
+        config["output"]
+
+
+rule fastq_stats:
+    input:
+        config["fastq"]
+    output:
+        config["output"]
+    params:
+        python=config.get("python", "python")
+    shell:
+        "{params.python:q} scripts/reference_fastq_stats.py {input:q} {output:q}"

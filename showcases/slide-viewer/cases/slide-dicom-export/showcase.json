@@ -1,0 +1,123 @@
+{
+  "id": "slide-dicom-export",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "export",
+  "difficulty": "advanced",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local Python DICOM JSON and CSV validation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "DICOM 2026c metadata-only WSI fixture validation, local export planning, and an observed Rosalind task-chooser invocation; all Slide Viewer operations remain rehearsed",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 877,
+      "sha256": "431c4a537abc2bf37093fa57b21a26449dc98ccf1319bfcebb575d9420be1c3e"
+    },
+    {
+      "path": "inputs/dicom-metadata.json",
+      "bytes": 926,
+      "sha256": "a0b811fe67902f8db6015d0eb591ea8eb189a67d02d9fb82e9e9fb7bfe9af2ac"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/dicom-export-plan.json",
+      "bytes": 1358,
+      "sha256": "2f1db866d879a3643d7794b9bac7cf01c0e14faee2b7af4e4a9c1b5e2546ffd4"
+    },
+    {
+      "path": "outputs/dicom-metadata-validation.csv",
+      "bytes": 649,
+      "sha256": "c880cef001580c17edacd0484f974382f1722771703fc71addd08dd49434b7e8"
+    },
+    {
+      "path": "outputs/local-validation.json",
+      "bytes": 492,
+      "sha256": "3d1089f35e3992a1bed73005c09157ca9c6a3f18201f1e0f4cc111ae9a9b6f92"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 737,
+      "sha256": "b4d6fb2aedc01137ea31da1986eb4df5f2d778466d00cb8734cc71f637dafe16"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 3041,
+      "sha256": "0ced3037ca198567e1d0da6064700aeaba859d559b14240e23f8c43802113dc9"
+    }
+  ],
+  "sources": [
+    "https://dicom.nema.org/medical/dicom/current/output/chtml/part18/sect_F.2.html",
+    "https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_B.5.html"
+  ],
+  "observations": [
+    "All twelve local DICOM metadata checks passed for one compact VL Whole Slide Microscopy JSON fixture.",
+    "Sixteen 512 by 512 RGB frames exactly cover the declared 2048 by 2048 total pixel matrix.",
+    "Patient, accession, pixel-data, bulk-data, path, and credential fields are absent; no DICOM object was written and no upload was prepared or submitted.",
+    "A genuine Rosalind launcher call returned ready=true and the exact task-chooser message; no scientific job was executed."
+  ],
+  "interpretation": [
+    "The fixture is internally consistent for metadata teaching and local export planning but does not represent a valid or remotely accepted Part 10 object."
+  ],
+  "limitations": [
+    "The metadata-only fixture omits pixel data, functional groups, optical paths, dimension organization, specimen modules, and file meta information.",
+    "No DICOMweb query, object read, import, export, upload preparation, submission, or Rosalind scientific job occurred.",
+    "The plan does not claim de-identification, rendering, or preservation of a clinical source object."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://dicom.nema.org/medical/dicom/current/output/chtml/part18/sect_F.2.html",
+        "https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_B.5.html"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "inputs/dicom-metadata.json"
+      ],
+      "outputs": [
+        "outputs/dicom-export-plan.json",
+        "outputs/dicom-metadata-validation.csv",
+        "outputs/local-validation.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "Public DICOM standard identifiers support a deterministic metadata-only fixture; every Slide Viewer operation, DICOM write, and network action remains unexecuted."
+    }
+  ],
+  "reproduction": [
+    "Run python validate_case.py from the case directory and inspect outputs/rosalind-open-observation.json.",
+    "Inspect the twelve metadata checks and the null destination plus false write, prepare, and submit fields.",
+    "Treat any later DICOM creation or network action as a new execution with actual byte, hash, source-reference, and response evidence."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public DICOM standard plus self-contained metadata fixture",
+    "device": "local",
+    "patient_fields_present": false,
+    "dicom_instance_written": false,
+    "upload_prepared": false,
+    "upload_submitted": false,
+    "viewer_operations_executed": false,
+    "rosalind_launcher_invoked": true,
+    "rosalind_scientific_job_executed": false
+  }
+}

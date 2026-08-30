@@ -1,0 +1,48 @@
+{
+  "schema": "rosalind.variant-pathway-evidence/v1",
+  "showcase_id": "rosalind-variant-pathway",
+  "generated_at": "2026-08-30",
+  "public_evidence_operation": {
+    "capability": "rosalind-workbench.public-evidence",
+    "performed": true,
+    "outcome": "Retained ClinVar, Ensembl, and Reactome records were assembled into an allele-specific identifier path with explicit source links."
+  },
+  "selected_variant": {
+    "rsid": "rs7903146",
+    "allele": "C>T",
+    "grch38": "10:112998590-C-T",
+    "clinvar_variation_id": "7413",
+    "clinvar_accession": "VCV000007413",
+    "transcript_hgvs": "NM_001367943.1(TCF7L2):c.450+33966C>T",
+    "molecular_consequence": "intron variant"
+  },
+  "excluded_variant": {
+    "allele": "C>G",
+    "clinvar_variation_id": "1692994",
+    "reason": "different alternate allele returned for the same rsID"
+  },
+  "nodes": [
+    {"id": "clinvar:7413", "type": "selected allele", "label": "rs7903146 C>T"},
+    {"id": "HGNC:11641", "type": "gene", "label": "TCF7L2"},
+    {"id": "R-HSA-201923", "type": "Reactome entity", "label": "TCF7L2 in nucleoplasm"},
+    {"id": "R-HSA-201722", "type": "Reactome pathway", "label": "Formation of the beta-catenin:TCF transactivating complex"}
+  ],
+  "links": [
+    {"from": "clinvar:7413", "to": "HGNC:11641", "relation": "transcript annotation names TCF7L2", "source": "https://www.ncbi.nlm.nih.gov/clinvar/variation/7413/"},
+    {"from": "HGNC:11641", "to": "R-HSA-201923", "relation": "Reactome entity cross-references human TCF7L2", "source": "https://reactome.org/content/detail/R-HSA-201923"},
+    {"from": "R-HSA-201923", "to": "R-HSA-201722", "relation": "TCF7L2 is represented in the curated beta-catenin:TCF pathway", "source": "https://reactome.org/content/detail/R-HSA-201722"}
+  ],
+  "local_calculation": {
+    "node_count": 4,
+    "link_count": 3,
+    "all_links_have_sources": true,
+    "excluded_allele_present_in_path": false,
+    "performed": "deterministic identifier-path assembly and validation"
+  },
+  "interpretation": "The selected C>T record maps to TCF7L2 identifiers, and curated Reactome records place TCF7L2 in WNT signaling. This connectivity does not establish a variant mechanism or clinical causality.",
+  "limitations": [
+    "The calculation organizes identifiers and curated annotations; it does not calculate pathway activity or variant effect size.",
+    "No tissue-specific regulation, expression, chromatin, perturbation, phenotype, or clinical evidence is analyzed.",
+    "Public records can change after the recorded access date."
+  ]
+}

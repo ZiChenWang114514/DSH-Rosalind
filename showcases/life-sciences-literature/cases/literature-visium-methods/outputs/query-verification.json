@@ -1,0 +1,14 @@
+{
+  "schema": "public-query-verification/v1",
+  "case_id": "literature-visium-methods",
+  "verified_at_utc": "2026-08-29T19:55:53.770392Z",
+  "calls": [{
+    "skill": "ncbi-entrez-skill",
+    "request": {"endpoint":"esearch","params":{"db":"pubmed","term":"SpatialExperiment[Title] OR Squidpy[Title] OR BayesSpace[Title] OR SpotClean[Title] OR Sprod[Title]","retmode":"json","retmax":10,"sort":"relevance"},"max_items":10},
+    "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+    "retrieved_at_utc": "2026-08-29T19:55:53.770392Z",
+    "ok": true,
+    "summary": {"record_count":5,"pmids":["34083791","35102346","35624112","35927477","35482478"]},
+    "comparison": "The returned PMID set matches the retained five-method evidence file."
+  }]
+}

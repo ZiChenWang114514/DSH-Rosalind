@@ -1,0 +1,17 @@
+crate_path,source_case,source_path,evidence_class,bytes
+cases/rosalind-scientific-compute/inputs/source-provenance.json,rosalind-scientific-compute,inputs/source-provenance.json,source-observation,564
+cases/rosalind-scientific-compute/outputs/embedding-summary.json,rosalind-scientific-compute,outputs/embedding-summary.json,computed-result,743
+cases/rosalind-scientific-compute/outputs/run-metrics.json,rosalind-scientific-compute,outputs/run-metrics.json,provenance,354
+cases/rosalind-pdl1-assay-plan/inputs/KN035-public-evidence.md,rosalind-pdl1-assay-plan,inputs/KN035-public-evidence.md,source-observation,1609
+cases/rosalind-pdl1-assay-plan/outputs/assay-plan.json,rosalind-pdl1-assay-plan,outputs/assay-plan.json,experimental-plan,3136
+cases/rosalind-pdl1-assay-plan/outputs/competitive-elisa-plate-map.csv,rosalind-pdl1-assay-plan,outputs/competitive-elisa-plate-map.csv,experimental-plan,6724
+cases/rosalind-boltz-repeats/inputs/source-and-run-provenance.md,rosalind-boltz-repeats,inputs/source-and-run-provenance.md,provenance,1006
+cases/rosalind-boltz-repeats/outputs/run-evidence.json,rosalind-boltz-repeats,outputs/run-evidence.json,computed-result,2147
+cases/rosalind-boltz-repeats/outputs/top5-ensemble-ranking.csv,rosalind-boltz-repeats,outputs/top5-ensemble-ranking.csv,computed-result,1758
+cases/rosalind-boltz-repeats/outputs/top5-confidence-records.json,rosalind-boltz-repeats,outputs/top5-confidence-records.json,computed-result,24303
+cases/rosalind-nextflow-snakemake/inputs/source-provenance.json,rosalind-nextflow-snakemake,inputs/source-provenance.json,source-observation,361
+cases/rosalind-nextflow-snakemake/outputs/reference-qc.json,rosalind-nextflow-snakemake,outputs/reference-qc.json,computed-result,208
+cases/rosalind-nextflow-snakemake/outputs/readiness.json,rosalind-nextflow-snakemake,outputs/readiness.json,provenance,499
+cases/rosalind-nextflow-snakemake/outputs/workflow-contract.json,rosalind-nextflow-snakemake,outputs/workflow-contract.json,workflow-plan,722
+cases/rosalind-nextflow-snakemake/workflows/nextflow/main.nf,rosalind-nextflow-snakemake,workflows/nextflow/main.nf,workflow-plan,333
+cases/rosalind-nextflow-snakemake/workflows/snakemake/Snakefile,rosalind-nextflow-snakemake,workflows/snakemake/Snakefile,workflow-plan,232

@@ -1,0 +1,28 @@
+{
+  "schema": "public-structure.source-provenance/v1",
+  "case_id": "structure-gfp-figure",
+  "accession": "1EMA",
+  "verified_at_utc": "2026-08-29T19:12:23.2784006Z",
+  "official_sources": [
+    "https://www.rcsb.org/structure/1EMA",
+    "https://files.rcsb.org/download/1EMA.pdb",
+    "https://doi.org/10.2210/pdb1EMA/pdb"
+  ],
+  "official_observations": {
+    "title": "GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA",
+    "method": "X-RAY DIFFRACTION",
+    "resolution_angstrom": 1.9,
+    "current_entry_version": "2.0",
+    "current_version_release_date": "2026-03-18",
+    "biological_assembly_1_atom_count": 1866
+  },
+  "retained_coordinate": {
+    "path": "inputs/1EMA.pdb",
+    "bytes": 190188,
+    "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088"
+  },
+  "figure_source": "Molecular Structure Viewer bundled 1EMA example",
+  "render_source_sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088",
+  "revision_note": "The retained official RCSB download is byte-identical to the source digest recorded by the viewer render sidecar.",
+  "internal_identifiers_omitted": true
+}

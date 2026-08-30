@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Authorization renewal manifest validation</title>
+  <desc id="desc">Fourteen checks preserve source and layer identities while fixture lease labels and expiries change.</desc>
+  <rect width="1200" height="675" fill="#071b1b"/>
+  <text x="66" y="82" fill="#e4fff9" font-family="Segoe UI,Arial" font-size="40" font-weight="700">Authorization renewal rehearsal</text>
+  <text x="66" y="126" fill="#9bc8c0" font-family="Segoe UI,Arial" font-size="22">public H&amp;E source + 684 capture-spot layer</text>
+  <g font-family="Segoe UI,Arial">
+    <rect x="66" y="186" width="498" height="224" rx="18" fill="#123537" stroke="#55d6c2"/><text x="98" y="235" fill="#e4fff9" font-size="28" font-weight="700">Stable identities</text><text x="98" y="284" fill="#b7ded7" font-size="20">session · source ID · source revision</text><text x="98" y="325" fill="#b7ded7" font-size="20">layer ID · layer revision · 684 entities</text><text x="98" y="366" fill="#b7ded7" font-size="20">public byte count unchanged</text>
+    <rect x="636" y="186" width="498" height="224" rx="18" fill="#32301c" stroke="#e7c95c"/><text x="668" y="235" fill="#fff9dc" font-size="28" font-weight="700">Changed fixture fields</text><text x="668" y="284" fill="#eadf9c" font-size="20">source lease 01 → 02</text><text x="668" y="325" fill="#eadf9c" font-size="20">layer lease 01 → 02</text><text x="668" y="366" fill="#eadf9c" font-size="20">expiry + 60 minutes</text>
+    <rect x="66" y="464" width="320" height="122" rx="16" fill="#123537"/><text x="96" y="513" fill="#e4fff9" font-size="34" font-weight="700">14 / 14</text><text x="96" y="553" fill="#9bc8c0" font-size="19">diff checks passed</text>
+    <rect x="440" y="464" width="320" height="122" rx="16" fill="#123537"/><text x="470" y="513" fill="#e4fff9" font-size="28" font-weight="700">0 credentials</text><text x="470" y="553" fill="#9bc8c0" font-size="19">no paths or tokens</text>
+    <rect x="814" y="464" width="320" height="122" rx="16" fill="#3f2227"/><text x="844" y="513" fill="#ffe5e9" font-size="28" font-weight="700">5 rehearsed ops</text><text x="844" y="553" fill="#efb7c0" font-size="19">no renewal requested</text>
+  </g>
+  <text x="66" y="615" fill="#e7c95c" font-family="Segoe UI,Arial" font-size="18">Rosalind launcher observed: ready=true · scientific_job_executed=false</text>
+  <text x="66" y="646" fill="#9bc8c0" font-family="Segoe UI,Arial" font-size="18">A saved manifest does not renew authority; a fresh guarded request is required.</text>
+</svg>

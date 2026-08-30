@@ -1,0 +1,141 @@
+{
+  "id": "ngs-workflow-versions",
+  "plugin_id": "ngs-analysis-workbench",
+  "plugin_version": "0.2.16",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "workflow",
+  "difficulty": "intermediate",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "ngs-analysis-workbench.update_workflow",
+    "ngs-analysis-workbench.list_workflow_versions",
+    "ngs-analysis-workbench.activate_workflow_version",
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "mcp__ngs_analysis_workbench__update_workflow",
+      "mcp__ngs_analysis_workbench__list_workflow_versions",
+      "mcp__ngs_analysis_workbench__activate_workflow_version",
+      "Python 3.14 difflib",
+      "mcp__rosalind__rosalind_open"
+    ],
+    "device": "local controller",
+    "implementation": "Live 2026-08-30 operation review with case-local sanitized receipts; only explicit successful responses support capabilities, and failed or unexecuted actions are retained separately.",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 407,
+      "sha256": "abfb01aaaeccb2aa34c4ad4ce7539b4db556b0501601a862b59b8e4791490dcc"
+    },
+    {
+      "path": "workflow/v2/Snakefile",
+      "bytes": 631,
+      "sha256": "97381e38082a97500d3364534f56cbfca199f45d8355b00d87b4003b9ca5eaf0"
+    },
+    {
+      "path": "workflow/v2/config/config.json",
+      "bytes": 270,
+      "sha256": "cb34a0fb0a3d498a74d67d514a89454ce3307260c4b1c1186ec2e885ce9ebfc6"
+    },
+    {
+      "path": "workflow/v2/scripts/qc_core.py",
+      "bytes": 6359,
+      "sha256": "76153e551cc73c27d314e5df691d4b259deea49bf9fd0dc98490c0f4f2f50499"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/workflow-version.diff",
+      "bytes": 8091,
+      "sha256": "463e73695cf10fdf28fbba5aa55927a96be4edd68c849337e68fcb7c08a4d7fe"
+    },
+    {
+      "path": "outputs/workbench-version-lifecycle.json",
+      "bytes": 1157,
+      "sha256": "79d2f914382c4252a68efcc1746a6225244617a9d1a9a5d4a23c155936480d63"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 765,
+      "sha256": "4f8d38699c9522629c6087a50b1c7be2e4d2bb27382c46a4510f6264484eb816"
+    },
+    {
+      "path": "outputs/session-bundle.md",
+      "bytes": 6738,
+      "sha256": "def1d135634b49b4fa553ba7b08d4233c21f80f166bde625ec27168bfe07d7a8"
+    },
+    {
+      "path": "outputs/operation-evidence.json",
+      "bytes": 2260
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2221,
+      "sha256": "d78eb7d9d5f701158194ff335fe71d7967b4f827320972c70b067137b9c07ab3"
+    }
+  ],
+  "sources": [
+    "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+  ],
+  "observations": [
+    "Workbench retained version-172b18afc3346b8b037416f67893a9f5 and version-d88ed31c58ebee8c5667ddee257b846f for the same case-owned workflow.",
+    "Version 2 has a distinct source digest and is the final active version.",
+    "The 8,295-byte unified diff records changes to the Snakefile, configuration, and Python core.",
+    "rosalind.rosalind_open returned ready true with view launcher for this case-specific context.",
+    "The 2026-08-30 review retained only explicit successful tool responses as capability evidence."
+  ],
+  "interpretation": [
+    "Version 2 materially expands the QC evidence by making thresholds explicit and adding read-level, cycle-level, and integrity measurements."
+  ],
+  "limitations": [
+    "No engine execution occurred during version management.",
+    "The compact fixture does not support run-wide inference.",
+    "A workflow digest alone does not explain scientific differences without the retained diff.",
+    "rosalind_open only opened the task chooser and does not establish Rosalind scientific execution.",
+    "Blocked readiness, failed planner calls, nonexistent-run responses, and unexecuted actions do not establish the corresponding capabilities."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+      ],
+      "inputs": [
+        "inputs/public-source.md",
+        "workflow/v2/Snakefile",
+        "workflow/v2/config/config.json",
+        "workflow/v2/scripts/qc_core.py"
+      ],
+      "outputs": [
+        "outputs/workflow-version.diff",
+        "outputs/workbench-version-lifecycle.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/session-bundle.md",
+        "outputs/operation-evidence.json"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The retained source note identifies the public run and subset rule; workflow files and machine-readable outputs support the scientific observations. outputs/rosalind-open-observation.json records the separate case-specific launcher invocation and its explicit limitation."
+    }
+  ],
+  "reproduction": [
+    "Run build_cases.py to regenerate the diff.",
+    "Review every hunk in workflow-version.diff.",
+    "On a fresh disposable object, repeat update, list, and activation calls and compare the identifiers.",
+    "For ngs-workflow-versions, inspect outputs/operation-evidence.json before presenting any operation as successful."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public",
+    "device": "local Windows amd64"
+  }
+}

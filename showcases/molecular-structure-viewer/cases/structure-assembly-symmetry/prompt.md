@@ -1,0 +1,3 @@
+# Assembly and symmetry comparison
+
+Retrieve RCSB 4V1W entry and biological assembly 1 metadata, retain its stoichiometry, member identities, global symmetry symbol, rotation axes, atom and residue counts, and describe how the deposited A24 apoferritin assembly relates to the octahedral O annotation. Do not display unsupported symmetry graphics or infer behavior in every solution condition. Invoke `mcp__rosalind__rosalind_open` with this case's task context, cite the 642-byte `outputs/rosalind-open-observation.json`, and state that the task-chooser response does not show that a Rosalind scientific job ran.

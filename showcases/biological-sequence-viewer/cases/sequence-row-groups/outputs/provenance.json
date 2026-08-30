@@ -1,0 +1,19 @@
+{
+  "author": "Codex",
+  "created": "2026-08-30",
+  "source_case": "sequence-ras-alignment",
+  "source_sha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+  "public_records": [
+    "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+    "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+  ],
+  "derivation": "ungap each 189-aa record, inspect residues 166..185 and terminal residues 186..189, then assign explicit rule-based groups",
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "tool": "mcp__rosalind__rosalind_open",
+    "scientific_job_executed": false,
+    "note": "The observed ready response documents only the task chooser; the local script produced the grouping plans."
+  },
+  "viewer_status": "rehearsed"
+}

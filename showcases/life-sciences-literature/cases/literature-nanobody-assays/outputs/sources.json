@@ -1,0 +1,105 @@
+{
+  "schema": "literature.public-api-evidence/v1",
+  "case_id": "literature-nanobody-assays",
+  "retrieved_at_utc": "2026-08-29T18:12:02.658729Z",
+  "api_calls": [
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esearch",
+      "params": {
+        "db": "pubmed",
+        "term": "nanobody[Title/Abstract] AND surface plasmon resonance[Title/Abstract] AND ELISA[Title/Abstract]",
+        "retmax": 10,
+        "sort": "relevance"
+      },
+      "retrieved_at_utc": "2026-08-29T18:11:09.801518Z",
+      "returned_pmids": ["36700149", "38176255", "26078175", "37085457", "37980554", "40362285", "21478264", "36439110", "38882000", "32270531"]
+    },
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esearch",
+      "params": {
+        "db": "pubmed",
+        "term": "nanobody[Title/Abstract] AND biolayer interferometry[Title/Abstract]",
+        "retmax": 10,
+        "sort": "relevance"
+      },
+      "retrieved_at_utc": "2026-08-29T18:11:11.426563Z",
+      "returned_pmids": ["41105446", "39572731", "39431011", "40507880", "38548653", "41956563", "40328713", "41966431", "40179630", "37869063"]
+    },
+    {
+      "service": "NCBI Entrez E-Utilities",
+      "endpoint": "esummary and efetch",
+      "params": {
+        "db": "pubmed",
+        "id": "39572731,36700149,40362285,36439110"
+      },
+      "retrieved_between_utc": ["2026-08-29T18:11:22.988341Z", "2026-08-29T18:12:49.634960Z"]
+    },
+    {
+      "service": "PMC Article Dataset API",
+      "endpoint": "identifier lookup",
+      "identifiers": ["39572731", "36700149", "40362285", "36439110"],
+      "retrieved_between_utc": ["2026-08-29T18:11:51.998727Z", "2026-08-29T18:12:02.658729Z"]
+    }
+  ],
+  "records": [
+    {
+      "pmid": "39572731",
+      "pmcid": null,
+      "doi": "10.1038/s41596-024-01079-8",
+      "date": "2025-04",
+      "journal": "Nature Protocols",
+      "title": "Biolayer interferometry for measuring the kinetics of protein-protein interactions and nanobody binding.",
+      "assay_role": "label-free BLI kinetics protocol",
+      "query_evidence": "returned by the nanobody plus biolayer-interferometry title-or-abstract query",
+      "pmc_record_available": false,
+      "pmc_open_access": false,
+      "license_code": null,
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/39572731/"
+    },
+    {
+      "pmid": "36700149",
+      "pmcid": "PMC9869787",
+      "doi": "10.2147/IJN.S387160",
+      "date": "2023-01-19",
+      "journal": "International Journal of Nanomedicine",
+      "title": "A Multivalent and Thermostable Nanobody Neutralizing SARS-CoV-2 Omicron (B.1.1.529).",
+      "assay_role": "SPR and ELISA application record",
+      "query_evidence": "returned by the nanobody plus surface-plasmon-resonance plus ELISA title-or-abstract query",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "license_code": "CC BY-NC",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/36700149/"
+    },
+    {
+      "pmid": "40362285",
+      "pmcid": "PMC12071740",
+      "doi": "10.3390/ijms26094045",
+      "date": "2025-04-24",
+      "journal": "International Journal of Molecular Sciences",
+      "title": "A Single-Domain VNAR Nanobody Binds with High-Affinity and Selectivity to the Heparin Pentasaccharide Fondaparinux.",
+      "assay_role": "SPR and ELISA selectivity application record",
+      "query_evidence": "returned by the nanobody plus surface-plasmon-resonance plus ELISA title-or-abstract query",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "license_code": "CC BY",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/40362285/"
+    },
+    {
+      "pmid": "36439110",
+      "pmcid": "PMC9682242",
+      "doi": "10.3389/fimmu.2022.1022418",
+      "date": "2022-11-09",
+      "journal": "Frontiers in Immunology",
+      "title": "Generation of high affinity ICAM-1-specific nanobodies and evaluation of their suitability for allergy treatment.",
+      "assay_role": "SPR and ELISA affinity/specificity application record",
+      "query_evidence": "returned by the nanobody plus surface-plasmon-resonance plus ELISA title-or-abstract query",
+      "pmc_record_available": true,
+      "pmc_open_access": true,
+      "license_code": "CC BY",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/36439110/"
+    }
+  ],
+  "method_note": "Titles, identifiers, dates, journals, DOI values, query matches, and PMC status fields are source observations. The assay_role values are deterministic teaching classifications. A search-term match does not establish assay quality or cross-paper comparability."
+}

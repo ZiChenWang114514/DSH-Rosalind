@@ -1,0 +1,16 @@
+name,alert_id,smarts,match_count,interpretation
+Imatinib,tertiary_amine_dealkylation_prompt,[NX3;H0;!$(N-C=O)],2,tertiary amine; review possible N-dealkylation evidence
+Imatinib,aryl_alkyl_ether_prompt,[c][OX2][CX4],0,aryl-alkyl ether; review possible O-dealkylation evidence
+Imatinib,benzylic_sp3_prompt,"[c][CX4;H1,H2,H3]",2,benzylic sp3 carbon; review oxidation evidence
+Imatinib,terminal_alkyne_prompt,[C]#[CH],0,terminal alkyne; review mechanism-based reactivity evidence
+Imatinib,michael_acceptor_prompt,"[C,c]=[C,c][C](=O)[N,O,S]",0,"alpha,beta-unsaturated carbonyl; review covalent/reactivity evidence"
+Gefitinib,tertiary_amine_dealkylation_prompt,[NX3;H0;!$(N-C=O)],1,tertiary amine; review possible N-dealkylation evidence
+Gefitinib,aryl_alkyl_ether_prompt,[c][OX2][CX4],2,aryl-alkyl ether; review possible O-dealkylation evidence
+Gefitinib,benzylic_sp3_prompt,"[c][CX4;H1,H2,H3]",0,benzylic sp3 carbon; review oxidation evidence
+Gefitinib,terminal_alkyne_prompt,[C]#[CH],0,terminal alkyne; review mechanism-based reactivity evidence
+Gefitinib,michael_acceptor_prompt,"[C,c]=[C,c][C](=O)[N,O,S]",0,"alpha,beta-unsaturated carbonyl; review covalent/reactivity evidence"
+Erlotinib,tertiary_amine_dealkylation_prompt,[NX3;H0;!$(N-C=O)],0,tertiary amine; review possible N-dealkylation evidence
+Erlotinib,aryl_alkyl_ether_prompt,[c][OX2][CX4],2,aryl-alkyl ether; review possible O-dealkylation evidence
+Erlotinib,benzylic_sp3_prompt,"[c][CX4;H1,H2,H3]",0,benzylic sp3 carbon; review oxidation evidence
+Erlotinib,terminal_alkyne_prompt,[C]#[CH],1,terminal alkyne; review mechanism-based reactivity evidence
+Erlotinib,michael_acceptor_prompt,"[C,c]=[C,c][C](=O)[N,O,S]",0,"alpha,beta-unsaturated carbonyl; review covalent/reactivity evidence"

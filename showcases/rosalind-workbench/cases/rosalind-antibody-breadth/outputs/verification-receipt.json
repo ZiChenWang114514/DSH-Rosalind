@@ -1,0 +1,19 @@
+{
+  "schema": "gpt-science.source-verification/v1",
+  "showcase_id": "rosalind-antibody-breadth",
+  "question": "Which conserved target residues should be retained when proposing broader antibody recognition?",
+  "source": "https://www.uniprot.org/",
+  "checked_at_utc": "2026-08-29T18:23:14.162Z",
+  "verification_kind": "antibody-breadth source-sufficiency review",
+  "observations": [
+    "The retained source points to the UniProt service homepage and does not name a target accession or sequence version.",
+    "The case retains no variant set, sequence collection, alignment, residue mapping, antibody record, or experimental breadth measurement.",
+    "No conserved target residue can be identified reproducibly from the retained artifacts."
+  ],
+  "interpretation": "The case is a useful lesson in evidence sufficiency: residue-level conservation and antibody-breadth claims require explicit targets, versions, comparison methods, and supporting measurements.",
+  "limitations": [
+    "No target protein or pathogen is identified.",
+    "No sequence analysis or antibody assessment was performed.",
+    "Rosalind launcher readiness is documented separately and does not establish a scientific run."
+  ]
+}

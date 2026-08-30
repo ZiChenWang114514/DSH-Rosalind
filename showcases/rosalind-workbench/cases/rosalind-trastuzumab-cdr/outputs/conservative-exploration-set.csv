@@ -1,0 +1,13 @@
+priority,chain,cdr,position,proposal,min_distance_to_her2_a,rationale
+1,B,H3,95,TYR->PHE,17.107,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+2,B,H2,63,SER->THR,15.166,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+3,A,L1,24,ARG->LYS,15.16,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+4,B,H2,64,VAL->ILE,14.124,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+5,A,L1,26,SER->THR,13.287,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+6,B,H3,97,SER->THR,12.234,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+7,A,L1,25,ALA->SER,11.901,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+8,B,H2,62,ASP->GLU,11.556,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+9,B,H2,61,ALA->SER,11.21,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+10,A,L1,34,ALA->SER,9.712,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+11,B,H1,31,ASP->GLU,9.623,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z
+12,A,L1,27,GLN->ASN,9.592,conservative exploration at a CDR position at least 8 Å from HER2 in 1N8Z

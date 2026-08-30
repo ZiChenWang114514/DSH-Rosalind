@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">KRAS G12C literature trail</title>
+  <desc id="desc">A dated four-record PubMed timeline from the switch-II-pocket study to resistance research.</desc>
+  <rect width="1200" height="675" rx="28" fill="#071726"/>
+  <text x="70" y="78" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="38" font-weight="700">KRAS G12C covalent inhibition</text>
+  <text x="70" y="116" fill="#8ed8e4" font-family="Segoe UI,Arial" font-size="19">Four selected PubMed records · API check 29 Aug 2026</text>
+  <line x1="135" y1="338" x2="1065" y2="338" stroke="#2a7182" stroke-width="7"/>
+  <g font-family="Segoe UI,Arial">
+    <circle cx="150" cy="338" r="22" fill="#67e8f9"/><text x="105" y="295" fill="#67e8f9" font-size="22" font-weight="700">2013</text><text x="85" y="385" fill="#f8fafc" font-size="18">PMID 24256730</text><text x="85" y="414" fill="#a9c8d2" font-size="16">structural start</text>
+    <circle cx="440" cy="338" r="22" fill="#5eead4"/><text x="395" y="295" fill="#5eead4" font-size="22" font-weight="700">2016</text><text x="375" y="385" fill="#f8fafc" font-size="18">PMID 26739882</text><text x="375" y="414" fill="#a9c8d2" font-size="16">inactive state</text>
+    <circle cx="730" cy="338" r="22" fill="#a7f3d0"/><text x="685" y="295" fill="#a7f3d0" font-size="22" font-weight="700">2020</text><text x="665" y="385" fill="#f8fafc" font-size="18">PMID 31820981</text><text x="665" y="414" fill="#a9c8d2" font-size="16">AMG 510 discovery</text>
+    <circle cx="1020" cy="338" r="22" fill="#fde68a"/><text x="975" y="295" fill="#fde68a" font-size="22" font-weight="700">2024</text><text x="955" y="385" fill="#f8fafc" font-size="18">PMID 39215000</text><text x="955" y="414" fill="#a9c8d2" font-size="16">resistance</text>
+  </g>
+  <rect x="70" y="505" width="1060" height="92" rx="18" fill="#102b3a" stroke="#2a7182"/>
+  <text x="105" y="545" fill="#dff7fb" font-family="Segoe UI,Arial" font-size="20">PMC checks: 2 records found · 1 reported open access</text>
+  <text x="105" y="575" fill="#8fb5c0" font-family="Segoe UI,Arial" font-size="16">Labels are project-authored; bibliographic and access fields remain separate in outputs/sources.json.</text>
+</svg>

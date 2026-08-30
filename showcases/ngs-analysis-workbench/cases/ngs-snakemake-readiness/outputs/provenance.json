@@ -1,0 +1,18 @@
+{
+  "schema": "gpt-science.showcase-provenance/v1",
+  "case_id": "ngs-snakemake-readiness",
+  "workbench_observations": [
+    "outputs/readiness.json records the earlier blocked Snakemake readiness result.",
+    "outputs/plan-snakemake-receipt.json records the earlier readiness refresh and genuine plan_snakemake call, including the exact returned error.",
+    "outputs/operation-evidence.json records the repaired Linux runtime, successful native Snakemake run, and later Workbench POSIX-path conversion failure."
+  ],
+  "local_computations": [
+    "outputs/reference-fastq-stats.json was produced by the retained Python reference script and reproduced by the completed Snakemake rules."
+  ],
+  "rosalind_observation": "outputs/rosalind-open-observation.json",
+  "scientific_job_executed_by_rosalind": false,
+  "limitations": [
+    "No immutable plan or registered run was created.",
+    "The retained Snakemake statistics workflow executed, but it does not demonstrate FastQC or MultiQC execution."
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "slide-spatial-research-package",
+  "plugin_id": "slide-viewer",
+  "plugin_version": "0.1.56",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "genomics-and-pathology",
+  "case_type": "export",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "local repository path, byte-count, hash, JSON, GeoJSON, and CSV validation",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "hash-pinned inventory of retained licensed spatial artifacts; viewer layer, workflow, and export actions remain unexecuted",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 976,
+      "sha256": "50b58c0f026e3889f440345ac82e5daeb72066be5542bd4d20ca34bf244ee4d8"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/research-package-inventory.json",
+      "bytes": 3648,
+      "sha256": "ab0f3b10d62274a7f738dee0f30d1f1d1252bc2d37d4136aa659ebd53dc704ad"
+    },
+    {
+      "path": "outputs/package-validation.json",
+      "bytes": 1195,
+      "sha256": "ef0f0d1151f1b46d6a18dddfc81d9c15ab59a2fb749c44c3963b5cf3527b24dc"
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 881,
+      "sha256": "67a79d919cc468c64841e46f62297ecf3d34a30f913a08d80c7c52df70fa6e9d"
+    },
+    {
+      "path": "outputs/teaching-bundle.md",
+      "bytes": 6017,
+      "sha256": "a937e8ff5cee5bf25b745c4eb82e11347ce45d6423acf6c5f0bb66de774c1651"
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 2452,
+      "sha256": "86c7e1240361d953da272b470e7a99fef42e320f137ef137b06d2c94658fbdc8"
+    }
+  ],
+  "sources": [
+    "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+    "https://doi.org/10.6084/m9.figshare.13604177.v1",
+    "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+  ],
+  "observations": [
+    "Ten retained artifacts were resolved by repository path and matched their recorded byte counts and SHA-256 values.",
+    "The package inventory references the large H5AD, CSV, and GeoJSON in place without duplication.",
+    "Workflow, live layer, portable-project, and source-image export results are explicitly absent.",
+    "A genuine mcp__rosalind__rosalind_open call returned the retained ready response for this case-specific context."
+  ],
+  "interpretation": [
+    "The inventory preserves source, observation, geometry, and scientific-layer mapping evidence for independent inspection."
+  ],
+  "limitations": [
+    "No supported workflow or live scientific-layer import was executed.",
+    "No tissue frame was rendered and matrix value scale remains unknown.",
+    "No current user source-image capture permission was recorded and no source pixels were exported.",
+    "The Rosalind operation opened only the task chooser and did not assemble a package or execute a scientific job."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "https://exampledata.scverse.org/squidpy/visium_hne_adata_crop.h5ad",
+        "https://doi.org/10.6084/m9.figshare.13604177.v1",
+        "https://www.10xgenomics.com/datasets/mouse-brain-section-coronal-1-standard-1-1-0"
+      ],
+      "inputs": [
+        "inputs/public-source.md"
+      ],
+      "outputs": [
+        "outputs/research-package-inventory.json",
+        "outputs/package-validation.json",
+        "outputs/rosalind-open-observation.json",
+        "outputs/teaching-bundle.md"
+      ],
+      "previews": [
+        "previews/preview.svg"
+      ],
+      "note": "The package inventories existing licensed source and repository artifacts with exact verification data. outputs/rosalind-open-observation.json separately records the genuine task-chooser invocation and its limitation."
+    }
+  ],
+  "reproduction": [
+    "Resolve all inventory paths from the project root.",
+    "Recompute byte counts and SHA-256 values and compare with the inventory.",
+    "Verify shared source and matrix associations before any later viewer execution.",
+    "Invoke mcp__rosalind__rosalind_open with the retained case-specific task_context and compare its response with outputs/rosalind-open-observation.json."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public CC BY 4.0 source and retained repository artifacts",
+    "device": "local",
+    "viewer_actions_executed": false,
+    "workflow_executed": false,
+    "source_image_export_executed": false
+  }
+}

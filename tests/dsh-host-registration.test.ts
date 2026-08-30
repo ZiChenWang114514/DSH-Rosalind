@@ -149,7 +149,7 @@ describe("DSH bundle registration through Cordis services", () => {
     const { ctx } = await mountHarness();
     try {
       const catalogue = await execute(ctx, "rosalind_catalog_list", {});
-      expect(catalogue).toMatchObject({ isError: false, value: { total: 23 } });
+      expect(catalogue).toMatchObject({ isError: false, value: { total: 100 } });
 
       const workbench = await execute(ctx, "rosalind_open", {});
       expect(workbench).toMatchObject({ isError: false, value: { status: "completed", operationCount: 121, skillCount: 55 } });

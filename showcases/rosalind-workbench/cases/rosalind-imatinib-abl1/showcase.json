@@ -1,0 +1,161 @@
+{
+  "id": "rosalind-imatinib-abl1",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "small-molecule-design-and-docking",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [
+    "dock-imatinib-abl1"
+  ],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Python 3.14 coordinate analysis",
+      "RDKit descriptor calculation",
+      "Matplotlib preview rendering"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; retained experimental PDB poses were analyzed locally with fixed-CID PubChem records, and no Rosalind scientific job or new docking was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/case-config.json",
+      "bytes": 974
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 989
+    },
+    {
+      "path": "inputs/source-metadata.json",
+      "bytes": 2545
+    },
+    {
+      "path": "inputs/1IEP.pdb",
+      "bytes": 434565
+    },
+    {
+      "path": "inputs/3CS9.pdb",
+      "bytes": 780354
+    },
+    {
+      "path": "inputs/pubchem-imatinib.json",
+      "bytes": 588
+    },
+    {
+      "path": "inputs/pubchem-nilotinib.json",
+      "bytes": 613
+    },
+    {
+      "path": "scripts/fetch_public_inputs.py",
+      "bytes": 3949
+    },
+    {
+      "path": "scripts/analyze_case.py",
+      "bytes": 16410
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/contacts.csv",
+      "bytes": 3156
+    },
+    {
+      "path": "outputs/contact-overlap.csv",
+      "bytes": 831
+    },
+    {
+      "path": "outputs/descriptors.csv",
+      "bytes": 691
+    },
+    {
+      "path": "outputs/analysis-summary.json",
+      "bytes": 13903
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 653
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 104460
+    },
+    {
+      "path": "previews/preview.png",
+      "bytes": 72996
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1IEP",
+    "https://www.rcsb.org/structure/3CS9",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5291",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/644241"
+  ],
+  "observations": [
+    "The genuine mcp__rosalind__rosalind_open call returned the exact message 'Rosalind Workbench is ready. Choose a research task in the app.' and ready=true; it opened only the task chooser.",
+    "The retained X-ray structures have reported resolutions of 2.10 angstrom for 1IEP and 2.21 angstrom for 3CS9.",
+    "The 4.0-angstrom analysis found 21 ABL1 contact residues for imatinib and 24 for nilotinib, with 19 shared residue labels.",
+    "The shared contact set includes Thr315, Met318, Glu286, Asp381, and Phe382."
+  ],
+  "interpretation": [
+    "The deposited imatinib and nilotinib poses occupy substantially overlapping ABL1 contact environments while retaining distinct peripheral contacts."
+  ],
+  "limitations": [
+    "The Rosalind launcher observation does not show that docking or another scientific job was executed.",
+    "No new docking, binding assay, cellular experiment, or clinical analysis was performed.",
+    "Distance-based contacts do not quantify interaction energy, affinity, residence time, or resistance effects.",
+    "Crystallographic construct and condition differences can contribute to the observed contact differences."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "RCSB PDB 1IEP revision 1.3",
+        "RCSB PDB 3CS9 revision 1.3",
+        "PubChem CID 5291",
+        "PubChem CID 644241"
+      ],
+      "inputs": [
+        "inputs/1IEP.pdb",
+        "inputs/3CS9.pdb",
+        "inputs/pubchem-imatinib.json",
+        "inputs/pubchem-nilotinib.json",
+        "inputs/source-metadata.json"
+      ],
+      "outputs": [
+        "outputs/contacts.csv",
+        "outputs/contact-overlap.csv",
+        "outputs/descriptors.csv",
+        "outputs/analysis-summary.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg",
+        "previews/preview.png"
+      ],
+      "note": "The retained scripts convert the cited public records into distance, overlap, descriptor, summary, and preview artifacts; the separate Rosalind observation records the genuine task-chooser response and no scientific job."
+    }
+  ],
+  "reproduction": [
+    "Call mcp__rosalind__rosalind_open with task_context 'Document the Imatinib-ABL1 experimental-pose showcase; open the task chooser only and do not start a scientific job.' and record the exact response separately as outputs/rosalind-open-observation.json.",
+    "From the case directory, run python scripts/analyze_case.py to reproduce results from the retained snapshot.",
+    "Optionally run python scripts/fetch_public_inputs.py first to refresh current RCSB revisions while retaining fixed PubChem CIDs.",
+    "Inspect the CSV and JSON outputs and confirm that the preview states that no new docking was run."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public RCSB PDB and PubChem records",
+    "device": "local",
+    "network_required_for_refresh_only": true
+  }
+}

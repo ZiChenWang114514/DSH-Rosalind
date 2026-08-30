@@ -1,0 +1,20 @@
+{
+  "schema": "showcase.provenance/v1",
+  "case_id": "rosalind-fastq-qc",
+  "scientific_evidence": {
+    "source": "inputs/DRR037765.fastq.gz",
+    "source_record": "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz",
+    "computation": "build_case.py",
+    "outputs": ["outputs/quality-summary.json", "outputs/per-cycle-quality.csv"],
+    "method": "Validated first-500-record FASTQ parsing with Phred+33, composition, length, Q30, and per-cycle summaries."
+  },
+  "rosalind_observation": {
+    "path": "outputs/rosalind-open-observation.json",
+    "bytes": 894,
+    "tool": "mcp__rosalind__rosalind_open",
+    "response_message": "Rosalind Workbench is ready. Choose a research task in the app.",
+    "ready": true,
+    "scientific_job_executed": false,
+    "limitation": "The launcher response did not receive FASTQ data or produce a QC result."
+  }
+}

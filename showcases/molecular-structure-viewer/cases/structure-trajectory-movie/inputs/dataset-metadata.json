@@ -1,0 +1,45 @@
+{
+  "figshare_article_id": 5108170,
+  "version": 1,
+  "title": "Molecular dynamics trajectory for benchmarking MDAnalysis",
+  "authors": [
+    {"name": "Sean Seyler", "orcid": "0000-0002-9434-4490"},
+    {"name": "Oliver Beckstein", "orcid": "0000-0003-1340-0831"}
+  ],
+  "doi": "10.6084/m9.figshare.5108170.v1",
+  "license": {"name": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/"},
+  "retrieved": "2026-08-30",
+  "api_url": "https://api.figshare.com/v2/articles/5108170",
+  "files": [
+    {
+      "role": "topology",
+      "figshare_file_id": 8672230,
+      "name": "adk4AKE.psf",
+      "bytes": 789917,
+      "md5_from_figshare": "c6f6b0711709cdfebe4620191b6d8e23",
+      "sha256_from_mdanalysisdata": "1aa947d58fb41b6805dc1e7be4dbe65c6a8f4690f0bd7fc2ae03e7bd437085f4",
+      "download_url": "https://ndownloader.figshare.com/files/8672230"
+    },
+    {
+      "role": "full trajectory used to derive retained subset",
+      "figshare_file_id": 8672074,
+      "name": "1ake_007-nowater-core-dt240ps.dcd",
+      "bytes": 168200440,
+      "md5_from_figshare": "8790cbd6810dc7c591e135d86442b372",
+      "sha256_from_mdanalysisdata": "598fcbcfcc425f6eafbe9997238320fcacc6a4613ecce061e1521732bab734bf",
+      "download_url": "https://ndownloader.figshare.com/files/8672074",
+      "retained_in_repository": false
+    }
+  ],
+  "source_description": {
+    "system": "apo adenylate kinase",
+    "force_field": "CHARMM27",
+    "ensemble": "NPT",
+    "temperature_kelvin": 300,
+    "pressure_bar": 1,
+    "duration_microseconds": 1.004,
+    "saved_interval_ps": 240,
+    "solvent_in_retained_trajectory": false,
+    "alignment": "superimposed on the adenylate-kinase CORE domain"
+  }
+}

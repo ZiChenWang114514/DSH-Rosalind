@@ -1,0 +1,152 @@
+{
+  "id": "rosalind-mdm2-p53-inhibitor",
+  "plugin_id": "rosalind-workbench",
+  "plugin_version": "0.2.2-research-preview",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "small-molecule-design-and-docking",
+  "case_type": "analysis",
+  "difficulty": "advanced",
+  "evidence_level": "multi-tool-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Rosalind Workbench mcp__rosalind__rosalind_open",
+      "Python 3.14 coordinate and sequence analysis",
+      "RDKit descriptor calculation",
+      "Matplotlib preview rendering"
+    ],
+    "device": "local Windows workstation",
+    "implementation": "A genuine Rosalind launcher call recorded task-chooser readiness; experimental MDM2-p53 peptide and MDM2-Nutlin-3a structures were compared locally with fixed-CID PubChem descriptors, and no Rosalind scientific job or docking was run",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {
+      "path": "inputs/case-config.json",
+      "bytes": 926
+    },
+    {
+      "path": "inputs/public-source.md",
+      "bytes": 895
+    },
+    {
+      "path": "inputs/source-metadata.json",
+      "bytes": 2076
+    },
+    {
+      "path": "inputs/1YCR.pdb",
+      "bytes": 94041
+    },
+    {
+      "path": "inputs/4HG7.pdb",
+      "bytes": 186543
+    },
+    {
+      "path": "inputs/pubchem-nutlin-3a.json",
+      "bytes": 624
+    },
+    {
+      "path": "scripts/fetch_public_inputs.py",
+      "bytes": 3949
+    },
+    {
+      "path": "scripts/analyze_case.py",
+      "bytes": 16410
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/contacts.csv",
+      "bytes": 2143
+    },
+    {
+      "path": "outputs/contact-overlap.csv",
+      "bytes": 600
+    },
+    {
+      "path": "outputs/descriptors.csv",
+      "bytes": 515
+    },
+    {
+      "path": "outputs/analysis-summary.json",
+      "bytes": 6312
+    },
+    {
+      "path": "outputs/rosalind-open-observation.json",
+      "bytes": 645
+    }
+  ],
+  "previews": [
+    {
+      "path": "previews/preview.svg",
+      "bytes": 104317
+    },
+    {
+      "path": "previews/preview.png",
+      "bytes": 71817
+    }
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/1YCR",
+    "https://www.rcsb.org/structure/4HG7",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/11433190"
+  ],
+  "observations": [
+    "The genuine mcp__rosalind__rosalind_open call returned the exact message 'Rosalind Workbench is ready. Choose a research task in the app.' and ready=true; it opened only the task chooser.",
+    "The 4.0-angstrom analysis found 17 MDM2 residues contacting the p53 peptide and 11 contacting Nutlin-3a.",
+    "Ten exact MDM2 residue labels occur in both contact sets, producing a Jaccard value of 0.5556.",
+    "Nearest-pair rows connect MDM2 Leu54 and Gly58 to p53 Trp23 and MDM2 Gln72, Ile61, and Val75 to p53 Phe19."
+  ],
+  "interpretation": [
+    "Nutlin-3a occupies a substantial part of the MDM2 surface pocket contacted by the p53 peptide, supporting a residue-level protein-protein-interaction inhibition lesson."
+  ],
+  "limitations": [
+    "The Rosalind launcher observation does not show that docking, pocket analysis, or another scientific job was executed.",
+    "No docking, dynamics, binding assay, cellular experiment, or efficacy study was performed.",
+    "The structures use different resolutions and constructs; 4HG7 contains engineered MDM2 substitutions.",
+    "Contact overlap does not quantify affinity, functional p53 restoration, or pharmacophore energetics."
+  ],
+  "provenance": [
+    {
+      "sources": [
+        "RCSB PDB 1YCR revision 1.5",
+        "RCSB PDB 4HG7 revision 1.2",
+        "PubChem CID 11433190"
+      ],
+      "inputs": [
+        "inputs/1YCR.pdb",
+        "inputs/4HG7.pdb",
+        "inputs/pubchem-nutlin-3a.json",
+        "inputs/source-metadata.json"
+      ],
+      "outputs": [
+        "outputs/contacts.csv",
+        "outputs/contact-overlap.csv",
+        "outputs/descriptors.csv",
+        "outputs/analysis-summary.json",
+        "outputs/rosalind-open-observation.json"
+      ],
+      "previews": [
+        "previews/preview.svg",
+        "previews/preview.png"
+      ],
+      "note": "The local scripts compute nearest residue contacts, overlap, descriptors, summary, and previews from public structures; the separate Rosalind observation records chooser readiness and no scientific job."
+    }
+  ],
+  "reproduction": [
+    "Call mcp__rosalind__rosalind_open with task_context 'Document the MDM2-p53 inhibitor showcase; open the task chooser only and do not start a scientific job.' and record the exact response separately as outputs/rosalind-open-observation.json.",
+    "Run python scripts/analyze_case.py from the case directory.",
+    "Optionally run python scripts/fetch_public_inputs.py first to refresh current RCSB entry revisions.",
+    "Trace p53 and Nutlin nearest partners in contacts.csv before interpreting pocket overlap."
+  ],
+  "environment": {
+    "cost": "free",
+    "data": "public RCSB PDB and PubChem records",
+    "device": "local",
+    "network_required_for_refresh_only": true
+  }
+}

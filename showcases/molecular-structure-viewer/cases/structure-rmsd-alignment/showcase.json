@@ -1,0 +1,76 @@
+{
+  "id": "structure-rmsd-alignment",
+  "plugin_id": "molecular-structure-viewer",
+  "plugin_version": "0.1.80",
+  "status": "ready",
+  "run_date": "2026-08-30",
+  "domain": "structure-and-sequence",
+  "case_type": "analysis",
+  "difficulty": "intermediate",
+  "evidence_level": "computed-result",
+  "capabilities": [
+    "rosalind.rosalind_open"
+  ],
+  "rosalind_tasks": [],
+  "execution": {
+    "actual_tools": [
+      "Python 3.14",
+      "NumPy 2.5.1",
+      "Rosalind Workbench mcp__rosalind__rosalind_open"
+    ],
+    "device": "local",
+    "implementation": "Exact chain-A C-alpha correspondence and unweighted NumPy Kabsch calculation over retained RCSB coordinate snapshots",
+    "status": "verified"
+  },
+  "prompt": "prompt.md",
+  "inputs": [
+    {"path": "inputs/4AKE.pdb", "bytes": 309339, "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78"},
+    {"path": "inputs/1AKE.pdb", "bytes": 357777, "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9"},
+    {"path": "inputs/acquisition.md", "bytes": 633}
+  ],
+  "outputs": [
+    {"path": "outputs/alignment-results.json", "bytes": 4983},
+    {"path": "outputs/rosalind-open-observation.json", "bytes": 640}
+  ],
+  "previews": [
+    {"path": "previews/preview.svg", "bytes": 3482}
+  ],
+  "sources": [
+    "https://www.rcsb.org/structure/4AKE",
+    "https://files.rcsb.org/download/4AKE.pdb",
+    "https://www.rcsb.org/structure/1AKE",
+    "https://files.rcsb.org/download/1AKE.pdb"
+  ],
+  "observations": [
+    "Both retained chain-A structures contain 214 C-alpha atoms and all 214 pairs match by author residue identity.",
+    "The whole-chain Kabsch C-alpha RMSD is 7.130700 angstrom.",
+    "After the global fit, CORE, NMP, and LID RMSDs are 3.726713, 9.738001, and 11.238005 angstrom."
+  ],
+  "interpretation": [
+    "The low independently fitted domain RMSDs and larger globally fitted NMP/LID deviations support substantial domain displacement between the deposited open and AP5-bound conformations."
+  ],
+  "limitations": [
+    "The result is specific to chain-A C-alpha correspondence and the declared domain ranges.",
+    "RMSD does not estimate energy, kinetics, or conformational population.",
+    "Crystal packing, resolution, and ligand state differ between the entries."
+  ],
+  "provenance": [
+    {
+      "sources": ["https://files.rcsb.org/download/4AKE.pdb", "https://files.rcsb.org/download/1AKE.pdb"],
+      "inputs": ["inputs/4AKE.pdb", "inputs/1AKE.pdb", "inputs/acquisition.md"],
+      "outputs": ["outputs/alignment-results.json", "outputs/rosalind-open-observation.json", "scripts/compute_alignment.py"],
+      "previews": ["previews/preview.svg"],
+      "note": "The script records atom selection, correspondence, transform, global and domain RMSDs, retained hashes, and largest per-residue deviations; the separate Rosalind observation records launcher availability without a scientific job."
+    }
+  ],
+  "reproduction": [
+    "Run python scripts/compute_alignment.py from the case directory.",
+    "Confirm the retained input hashes and compare the regenerated JSON with the preview."
+  ],
+  "environment": {
+    "python": "3.14.0",
+    "numpy": "2.5.1",
+    "cost": "free",
+    "data": "public"
+  }
+}
