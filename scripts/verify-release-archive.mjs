@@ -5,9 +5,12 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, resolve } from "node:path";
 
+import { npmArchiveBaseName, releaseVerificationReportPath } from "./lib/release-paths.mjs";
+
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/(?:([A-Za-z]):)/, "$1:"));
-const archive = resolve(process.argv[2] ?? "zichenwang114514-dsh-rosalind-0.3.0.tgz");
-const output = resolve(process.argv[3] ?? "release/v0.3.0-archive-verification.json");
+const pkg = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8"));
+const archive = resolve(process.argv[2] ?? npmArchiveBaseName(pkg));
+const output = resolve(process.argv[3] ?? releaseVerificationReportPath(pkg));
 
 function runNode(script, args = [], environment = process.env) {
   return execFileSync(process.execPath, [resolve(root, script), ...args], {

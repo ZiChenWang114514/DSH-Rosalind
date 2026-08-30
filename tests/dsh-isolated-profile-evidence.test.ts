@@ -24,7 +24,7 @@ describe("isolated DSH profile evidence", () => {
       isolatedProfileEvidence: {
         installation: { archive: string; archiveSha256: string; archiveBytes: number; archiveSource: string; archiveKind: "explicit-tgz" | "source-smoke"; releaseArchiveValidated: boolean; configIncludedRosalind: boolean; profileBundles: string[] };
         mount: {
-          registration: { totalTools: number; rosalindTools: number; skillsListed: number; skillsReadBack: number };
+          registration: { totalTools: number; bundleTools: number; rosalindTools: number; skillsListed: number; skillsReadBack: number };
           skills: Array<{ loaded: boolean; contentBytes: number }>;
           representatives: Record<string, { result: { host: string; scientificErrorCode: string | null } }>;
           execution: { localProfileMount: boolean; fixtureOrLocalExecution: boolean; publicServiceExecution: { attempted: boolean } };
@@ -52,7 +52,7 @@ describe("isolated DSH profile evidence", () => {
 
     expect(evidence.installation.configIncludedRosalind).toBe(true);
     expect(evidence.installation.profileBundles).toContain("@zichenwang114514/dsh-rosalind");
-    expect(evidence.mount.registration).toMatchObject({ rosalindTools: 13, skillsListed: 55, skillsReadBack: 55 });
+    expect(evidence.mount.registration).toMatchObject({ bundleTools: 140, rosalindTools: 13, skillsListed: 55, skillsReadBack: 55 });
     expect(evidence.mount.registration.totalTools).toBeGreaterThanOrEqual(140);
     expect(evidence.mount.skills).toHaveLength(55);
     expect(evidence.mount.skills.every((skill) => skill.loaded && skill.contentBytes > 0)).toBe(true);

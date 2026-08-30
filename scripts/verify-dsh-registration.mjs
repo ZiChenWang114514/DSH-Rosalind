@@ -128,7 +128,7 @@ function createPnpmShim(root) {
   return bin;
 }
 
-function profileProbeSource() {
+function profileProbeSource(expectedBundleTools) {
   return `
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -137,6 +137,7 @@ import { boot, healProfilesModuleFallback, loadProfile } from ${JSON.stringify(p
 
 const marker = ${JSON.stringify(PROFILE_PROBE_MARKER)};
 const expectedRosalindTools = ${JSON.stringify(ROSALIND_TOOL_NAMES)};
+const expectedBundleTools = ${JSON.stringify(expectedBundleTools)};
 const config = JSON.parse(process.env.DSH_ROSALIND_PROFILE_PROBE_CONFIG ?? "{}");
 delete process.env.DSH_ROSALIND_ENABLE_LIVE_NETWORK;
 
@@ -172,6 +173,7 @@ async function run() {
   try {
     const schemas = ctx.tools.schemas();
     const toolNames = new Set(schemas.map((schema) => schema.name));
+    const missingBundleTools = expectedBundleTools.filter((name) => !toolNames.has(name));
     const skills = await ctx.skills.list({ cwd: config.cwd });
     const readBack = [];
     for (const skill of skills) {
@@ -205,7 +207,7 @@ async function run() {
       arguments: {},
       signal: cancelled.signal,
     }));
-    if (schemas.length < 140) throw new Error("Expected the profile to expose at least the 140 Rosalind tools, received " + schemas.length);
+    if (missingBundleTools.length > 0) throw new Error("The installed bundle is missing ToolRuntime registrations: " + missingBundleTools.join(", "));
     if (expectedRosalindTools.some((name) => !toolNames.has(name))) throw new Error("A Rosalind orchestration tool was absent from the profile ToolRuntime");
     if (skills.length !== 55 || readBack.some((skill) => !skill.loaded || skill.contentBytes === 0)) {
       throw new Error("Expected 55 readable profile-mounted Skills, received " + skills.length);
@@ -222,7 +224,7 @@ async function run() {
     if (cancellation.code !== "ABORTED_BEFORE_DISPATCH") throw new Error("Profile cancellation was not preserved");
     process.stdout.write(marker + JSON.stringify({
       profile: { name: profile.name, bundles: profile.layers.map((layer) => layer.packageName) },
-      registration: { totalTools: schemas.length, rosalindTools: expectedRosalindTools.length, skillsListed: skills.length, skillsReadBack: readBack.length },
+      registration: { totalTools: schemas.length, bundleTools: expectedBundleTools.length, rosalindTools: expectedRosalindTools.length, skillsListed: skills.length, skillsReadBack: readBack.length },
       skills: readBack,
       representatives,
       cancellation,
@@ -244,7 +246,7 @@ run().catch((error) => {
 `;
 }
 
-function runIsolatedProfileEvidence() {
+function runIsolatedProfileEvidence(expectedBundleTools) {
   const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-profile-evidence-"));
   try {
     const archiveRecord = bundleArchive(root);
@@ -281,7 +283,7 @@ function runIsolatedProfileEvidence() {
     assert(dump.stdout.includes("dsh-rosalind"), "The isolated DSH profile dump did not contain the Rosalind patch row");
 
     const probePath = join(root, "profile-probe.mjs");
-    writeFileSync(probePath, profileProbeSource());
+    writeFileSync(probePath, profileProbeSource(expectedBundleTools));
     const probe = commandResult(process.execPath, [probePath], {
       cwd: SOURCE_ROOT,
       env: {
@@ -299,7 +301,7 @@ function runIsolatedProfileEvidence() {
     const markerAt = probe.stdout.lastIndexOf(PROFILE_PROBE_MARKER);
     assert(markerAt >= 0, `The isolated profile probe produced no evidence marker.\n${probe.stdout}`);
     const evidence = JSON.parse(probe.stdout.slice(markerAt + PROFILE_PROBE_MARKER.length).trim());
-    assert(evidence.registration?.totalTools >= 140 && evidence.registration?.rosalindTools === ROSALIND_TOOL_NAMES.length, "The isolated profile probe did not report the Rosalind ToolRuntime contribution");
+    assert(evidence.registration?.bundleTools === expectedBundleTools.length && evidence.registration?.rosalindTools === ROSALIND_TOOL_NAMES.length, "The isolated profile probe did not report the complete Rosalind ToolRuntime contribution");
     assert(evidence.registration?.skillsListed === 55 && evidence.registration?.skillsReadBack === 55, "The isolated profile probe did not read back all 55 Skills");
     return {
       installation: {
@@ -483,7 +485,9 @@ async function main() {
     const afterDispose = { tools: ctx.tools.schemas().length, skills: (await ctx.skills.list()).length };
     assert(afterDispose.tools === 0 && afterDispose.skills === 0, "Bundle disposal left registrations active");
 
-    const isolatedProfileEvidence = runIsolatedProfileEvidence();
+    const bundleToolNames = [...operationNames, ...SKILL_ADAPTER_TOOL_NAMES, ...ROSALIND_TOOL_NAMES];
+    assert(new Set(bundleToolNames).size === 140, `Expected 140 unique bundle tool names, received ${new Set(bundleToolNames).size}`);
+    const isolatedProfileEvidence = runIsolatedProfileEvidence(bundleToolNames);
 
     process.stdout.write(`${JSON.stringify({
       ok: true,
