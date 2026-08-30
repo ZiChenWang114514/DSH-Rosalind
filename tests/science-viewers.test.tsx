@@ -192,10 +192,10 @@ describe("science ToolViews", () => {
       sourceHeight: 500,
       sourceRevision: "local:test",
     })} />);
-    expect(screen.getByLabelText("Local slide source pixel workspace")).toBeInTheDocument();
+    expect(screen.getByLabelText(/Local slide source pixel workspace/)).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText("Zoom slide in"));
     expect(document.querySelector(".sv-slide-position")).toHaveTextContent("120% · x 0 · y 0");
-    fireEvent.keyDown(screen.getByLabelText("Local slide source pixel workspace"), { key: "ArrowRight" });
+    fireEvent.keyDown(screen.getByLabelText(/Local slide source pixel workspace/), { key: "ArrowRight" });
     expect(document.querySelector(".sv-slide-position")).toHaveTextContent("x 20");
     fireEvent.click(screen.getByLabelText("Reset slide view"));
     expect(document.querySelector(".sv-slide-position")).toHaveTextContent("100% · x 0 · y 0");
@@ -210,8 +210,15 @@ describe("science ToolViews", () => {
       viewerReady: false,
       renderState: "awaiting-viewer",
     })} />);
-    expect(screen.getByLabelText("Local slide source pixel workspace")).toBeInTheDocument();
+    const canvas = screen.getByLabelText(/Local slide source pixel workspace/);
+    expect(canvas).toBeInTheDocument();
     expect(screen.getByText(/receives pixel data decoded from the authorized local source tile/i)).toBeInTheDocument();
+    fireEvent.keyDown(canvas, { key: " " });
+    fireEvent.keyDown(canvas, { key: "ArrowRight", shiftKey: true });
+    fireEvent.keyDown(canvas, { key: "ArrowDown", shiftKey: true });
+    fireEvent.keyDown(canvas, { key: "Enter" });
+    expect(screen.getByText(/1 local region draft; retained in this result view until cleared/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Clear local slide regions" })).toBeInTheDocument();
   });
 
   it("projects returned slide dimensions, regions, spatial matrix, and layer state", () => {

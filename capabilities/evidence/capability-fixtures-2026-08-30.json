@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T23:22:57.074Z",
+  "recordedAt": "2026-08-30T23:41:52.921Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
     "version": "0.3.5"
@@ -2130,8 +2130,8 @@
   ],
   "profileInstallation": {
     "archive": "zichenwang114514-dsh-rosalind-0.3.5.tgz",
-    "archiveBytes": 18734668,
-    "archiveSha256": "7175099f84d2e5a474dcc9dd8d520517a668c94ba07f7198594e9b1be2209bbc",
+    "archiveBytes": 18732438,
+    "archiveSha256": "fedf3543434f0a0a4ecd0fd1e2c4b83ac69fd9c81c9010b58837f38011f9216e",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2381,7 +2381,7 @@
     "src/client/prompt.ts": "86844a06a47944deb385bfc02dd976e353527bc670d384b3f83ac66086173c5c",
     "src/client/science-mode.tsx": "3200310aff29921971738ee1176bdb4ec4c7142591f7fdb4b5fe57d78bdcf81d",
     "src/client/science-viewers.css.ts": "182f781d541fd285ce5d5eea89317c9a2dc42d82e89cbe03779442a2c79d7986",
-    "src/client/science-viewers.tsx": "1d41bb7663622393c9480b9861fa300faeb2ef4652323a5936e1d84bc9f0914b",
+    "src/client/science-viewers.tsx": "c672ee7be41d0ff495338d51bfbfe740392a3929ce9b780a35c75af59ccece63",
     "src/client/session-evidence.ts": "51f5687a7817daa63169f05171b54b9f06ea986b47503b9b09587a3f3f4a500c",
     "src/client/settings-styles.ts": "b2735442b0a7cd0f8aed5e585bba0082471636be166321e04f9f320ce0e605b9",
     "src/client/settings.tsx": "02416e233c42a2f0ffb179c3a1e064031f392d61672122b1b7970f3ad39101fe",

@@ -90,7 +90,7 @@ test("slide source controls preserve state and explain read-only layer visibilit
 
 test("decoded slide tiles provide the same zoom, pan, and position feedback", async ({ page }) => {
   await page.goto("/?science=slide&live=1");
-  const canvas = page.getByRole("img", { name: "Local slide source pixel workspace" });
+  const canvas = page.getByRole("img", { name: /Local slide source pixel workspace/ });
   await expect(canvas).toBeVisible();
   await canvas.focus();
   await page.keyboard.press("+");
@@ -99,6 +99,13 @@ test("decoded slide tiles provide the same zoom, pan, and position feedback", as
   await expect(page.locator(".sv-slide-position")).toHaveText("120% · x 20 · y 0");
   await page.getByLabel("Reset slide view").click();
   await expect(page.locator(".sv-slide-position")).toHaveText("100% · x 0 · y 0");
+  await canvas.focus();
+  await page.keyboard.press("Space");
+  await page.keyboard.press("Shift+ArrowRight");
+  await page.keyboard.press("Shift+ArrowDown");
+  await page.keyboard.press("Enter");
+  await expect(page.getByText("1 local region draft; retained in this result view until cleared.")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Clear local slide regions" })).toBeVisible();
 });
 
 test("dark structure result and narrow slide result retain their scientific state", async ({ page }, testInfo) => {
