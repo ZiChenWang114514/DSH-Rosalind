@@ -1,5 +1,6 @@
 import type { JsonValue, ToolDefinition } from "@deepseek-ai/dsh-tools";
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -37,6 +38,12 @@ async function toolCall(tools: ToolDefinition[], name: string, args: Record<stri
 
 function snapshot(value: Record<string, JsonValue>): RunSnapshot {
   return value as unknown as RunSnapshot;
+}
+
+function registryName(sessionId: string): string {
+  const normalized = sessionId.replace(/[^A-Za-z0-9._-]/g, "_").slice(0, 120) || "session";
+  const checksum = createHash("sha256").update(sessionId).digest("hex").slice(0, 20);
+  return `${normalized}--${checksum}.json`;
 }
 
 class ScriptedNgsExecutor implements ScienceExecutor {
@@ -169,6 +176,46 @@ describe("Rosalind NGS production plan lifecycle", () => {
       expect(failed.error?.code).toBe("BLOCKED");
     } finally {
       runtime.dispose();
+      if (previousStateDir === undefined) delete process.env.DSH_ROSALIND_STATE_DIR;
+      else process.env.DSH_ROSALIND_STATE_DIR = previousStateDir;
+    }
+  });
+
+  it("retains the NGS registry under the stable DSH agent identity used by the Rosalind lifecycle", async () => {
+    const input = scientificInputs();
+    const stateRoot = join(input.root, "state");
+    const previousStateDir = process.env.DSH_ROSALIND_STATE_DIR;
+    process.env.DSH_ROSALIND_STATE_DIR = stateRoot;
+    const science = new ScienceRuntime();
+    const runtime = new RosalindRuntime({ science });
+    const tools = createRosalindTools(runtime);
+    const sessionId = "stable-dsh-agent";
+    const session = { id: sessionId };
+    const restoredService = new NgsService({ registryRoot: join(stateRoot, "ngs-registry") });
+    try {
+      const pending = await createPendingNgsRun(runtime, tools, session, input);
+      const registryRoot = join(stateRoot, "ngs-registry");
+      expect(existsSync(join(registryRoot, registryName(sessionId)))).toBe(true);
+      const plan = pending.ngs!.pendingPlan!;
+      const restored = await restoredService.execute("execute_plan", {
+        plan_id: plan.planId,
+        plan_name: plan.planName,
+        plan_checksum: plan.planChecksum,
+      }, {
+        session: {},
+        sessionId,
+        signal: new AbortController().signal,
+        packageRoot: process.cwd(),
+      });
+      expect(restored).toMatchObject({
+        registry_run_id: expect.stringMatching(/^run-/),
+        plan_id: plan.planId,
+        state: "blocked",
+      });
+    } finally {
+      runtime.dispose();
+      await science.dispose();
+      await restoredService.dispose();
       if (previousStateDir === undefined) delete process.env.DSH_ROSALIND_STATE_DIR;
       else process.env.DSH_ROSALIND_STATE_DIR = previousStateDir;
     }
