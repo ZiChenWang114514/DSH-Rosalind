@@ -204,11 +204,39 @@ export function ShowcaseDetailOverlay(): JSX.Element | null {
   const { selectedCaseId, detailTab, mode, bridge, notice } = useWorkbenchState();
   const showcase = selectedCaseId ? SHOWCASE_BY_ID.get(selectedCaseId) : undefined;
   const panelRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   useEffect(() => {
     if (!showcase) return undefined;
     const previous = document.activeElement as HTMLElement | null;
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") closeShowcase(); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeShowcase();
+        return;
+      }
+      if (event.key !== "Tab" || !panelRef.current) return;
+      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+      ));
+      if (focusable.length === 0) {
+        event.preventDefault();
+        panelRef.current.focus();
+        return;
+      }
+      const first = focusable[0]!;
+      const last = focusable[focusable.length - 1]!;
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === panelRef.current)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      } else if (!panelRef.current.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     window.setTimeout(() => panelRef.current?.focus(), 0);
     return () => { document.removeEventListener("keydown", onKey); previous?.focus(); };
@@ -217,6 +245,12 @@ export function ShowcaseDetailOverlay(): JSX.Element | null {
   if (!showcase) return null;
   const category = categoryFor(showcase);
   const preview = previewFor(showcase);
+  const detailTabs = ["overview", "evidence", "reproduce"] as const;
+  const selectTab = (index: number) => {
+    const nextIndex = (index + detailTabs.length) % detailTabs.length;
+    setDetailTab(detailTabs[nextIndex]!);
+    tabRefs.current[nextIndex]?.focus();
+  };
   const importCase = () => {
     if (bridge.importCase) bridge.importCase(showcase, mode);
     else if (bridge.startSession) bridge.startSession(showcase, mode);
@@ -231,9 +265,30 @@ export function ShowcaseDetailOverlay(): JSX.Element | null {
           <button type="button" className="rr-close" aria-label="Close project details" onClick={closeShowcase}><CloseIcon size={18} /></button>
         </header>
         <div className="rr-tabs" role="tablist" aria-label="Project details">
-          {(["overview", "evidence", "reproduce"] as const).map((tab) => <button key={tab} type="button" className="rr-tab" role="tab" aria-selected={detailTab === tab} onClick={() => setDetailTab(tab)}>{tab[0]!.toUpperCase() + tab.slice(1)}</button>)}
+          {detailTabs.map((tab, index) => <button
+            aria-controls={`rr-detail-panel-${tab}`}
+            aria-selected={detailTab === tab}
+            className="rr-tab"
+            id={`rr-detail-tab-${tab}`}
+            key={tab}
+            onClick={() => setDetailTab(tab)}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowRight") { event.preventDefault(); selectTab(index + 1); }
+              else if (event.key === "ArrowLeft") { event.preventDefault(); selectTab(index - 1); }
+              else if (event.key === "Home") { event.preventDefault(); selectTab(0); }
+              else if (event.key === "End") { event.preventDefault(); selectTab(detailTabs.length - 1); }
+            }}
+            ref={(element) => { tabRefs.current[index] = element; }}
+            role="tab"
+            tabIndex={detailTab === tab ? 0 : -1}
+            type="button"
+          >{tab[0]!.toUpperCase() + tab.slice(1)}</button>)}
         </div>
-        <main className="rr-detail-body">{detailTab === "overview" ? <Overview showcase={showcase} /> : detailTab === "evidence" ? <Evidence showcase={showcase} /> : <Reproduce showcase={showcase} />}</main>
+        <main className="rr-detail-body">
+          <div aria-labelledby="rr-detail-tab-overview" hidden={detailTab !== "overview"} id="rr-detail-panel-overview" role="tabpanel" tabIndex={detailTab === "overview" ? 0 : -1}>{detailTab === "overview" ? <Overview showcase={showcase} /> : null}</div>
+          <div aria-labelledby="rr-detail-tab-evidence" hidden={detailTab !== "evidence"} id="rr-detail-panel-evidence" role="tabpanel" tabIndex={detailTab === "evidence" ? 0 : -1}>{detailTab === "evidence" ? <Evidence showcase={showcase} /> : null}</div>
+          <div aria-labelledby="rr-detail-tab-reproduce" hidden={detailTab !== "reproduce"} id="rr-detail-panel-reproduce" role="tabpanel" tabIndex={detailTab === "reproduce" ? 0 : -1}>{detailTab === "reproduce" ? <Reproduce showcase={showcase} /> : null}</div>
+        </main>
         <footer className="rr-detail-foot">
           {notice && <span className="rr-notice" role="status">{notice}</span>}
           <div className="rr-actions"><button type="button" className="rr-button rr-button--primary" onClick={importCase}><PlayIcon size={15} />{MODE_COPY[mode].action}</button></div>
