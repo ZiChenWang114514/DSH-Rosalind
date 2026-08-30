@@ -41,7 +41,8 @@ describe("NGS and Sequence tools through the strict DSH ToolRuntime contract", (
 
   it("runs the contract-named quality-report analysis on an opened FASTQ session", async () => {
     await mount();
-    const call = (name: string, arguments_: Record<string, unknown>) => context!.tools.execute({ callId: callId(`sequence-runtime-${name}`), name, arguments: arguments_, signal: new AbortController().signal });
+    const agent = { id: "quality-report-agent" } as NonNullable<ToolExecutionInput["agent"]>;
+    const call = (name: string, arguments_: Record<string, unknown>) => context!.tools.execute({ callId: callId(`sequence-runtime-${name}`), name, arguments: arguments_, signal: new AbortController().signal, agent });
     const opened = await call("sequence_open_from_chat", { path: fastqPath });
     expect(opened.isError, JSON.stringify(opened)).toBe(false);
     if (opened.isError) return;
@@ -55,7 +56,8 @@ describe("NGS and Sequence tools through the strict DSH ToolRuntime contract", (
 
   it("keeps explicit typed unavailability for contract analyses with no local implementation", async () => {
     await mount();
-    const call = (name: string, arguments_: Record<string, unknown>) => context!.tools.execute({ callId: callId(`sequence-runtime-${name}`), name, arguments: arguments_, signal: new AbortController().signal });
+    const agent = { id: "restricted-analysis-agent" } as NonNullable<ToolExecutionInput["agent"]>;
+    const call = (name: string, arguments_: Record<string, unknown>) => context!.tools.execute({ callId: callId(`sequence-runtime-${name}`), name, arguments: arguments_, signal: new AbortController().signal, agent });
     const opened = await call("sequence_open_from_chat", { path: rasAlignmentPath });
     expect(opened.isError, JSON.stringify(opened)).toBe(false);
     if (opened.isError) return;
@@ -65,5 +67,15 @@ describe("NGS and Sequence tools through the strict DSH ToolRuntime contract", (
     if (!restricted.isError) {
       expect(restricted.value).toMatchObject({ status: "failed", error: { code: "SEQUENCE_OPERATION_FAILED", message: expect.stringContaining("restriction-analysis") } });
     }
+  });
+
+  it("does not share viewer state between calls without an agent session", async () => {
+    const tools = createScienceTools(new ScienceRuntime());
+    const open = tools.find((tool) => tool.name === "sequence_open_from_chat")!;
+    const query = tools.find((tool) => tool.name === "sequence_query_viewer")!;
+    const execution = { signal: new AbortController().signal } as Parameters<typeof open.execute>[1];
+    const opened = await open.execute({ path: rasAlignmentPath }, execution) as Record<string, unknown>;
+    const isolated = await query.execute({ sessionId: opened.viewerSessionId, target: "records" }, execution) as Record<string, unknown>;
+    expect(isolated).toMatchObject({ status: "failed", error: { code: "SEQUENCE_OPERATION_FAILED", message: expect.stringContaining("not active") } });
   });
 });

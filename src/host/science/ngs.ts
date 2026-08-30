@@ -265,6 +265,7 @@ export class NgsService {
   private readonly contextSessionIds = new WeakMap<object, string>();
   private readonly activeRuns = new Set<Run>();
   private readonly runOwners = new WeakMap<Run, NgsState>();
+  private readonly pendingOutputPersistence = new Map<Run, { state: NgsState; timer: ReturnType<typeof setTimeout> }>();
   private active = true;
   private disposed = false;
   private readonly registryRoot: string | undefined;
@@ -291,8 +292,8 @@ export class NgsService {
     try {
       const result = await this.dispatch(state, serverId, operation, args, context);
       return {
-        mcp_server: serverId,
         ...result,
+        mcp_server: serverId,
         ...(state.restorationDiagnostic ? { registry_restoration: clone(state.restorationDiagnostic) } : {}),
         ...(state.persistenceDiagnostic ? { registry_persistence: clone(state.persistenceDiagnostic) } : {}),
       };
@@ -542,7 +543,15 @@ export class NgsService {
       const existing = state.runs.get(plan.consumedByRunId);
       if (!existing) throw new Error(`Execution receipt ${plan.consumedByRunId} is missing from the durable registry.`);
       return {
-        ...this.runView(existing),
+        ok: true,
+        registry_run_id: existing.id,
+        state: existing.state,
+        plan_id: existing.planId,
+        workflow_id: existing.workflowId,
+        command: existing.command ? clone(existing.command) : null,
+        process_id: existing.processId ?? null,
+        diagnostic: clone(existing.diagnostic ?? {}),
+        events: clone(existing.events),
         reused: true,
         reason: "PLAN_ALREADY_CONSUMED",
         execution_receipt: { plan_id: plan.id, plan_checksum: plan.checksum, registry_run_id: existing.id, consumed: true },
@@ -698,14 +707,14 @@ export class NgsService {
     this.runOwners.set(run, state);
     run.events.push({ at: run.updatedAt, state: run.state, message: "Reviewed local workflow command started.", process_id: child.pid ?? null });
     saveState(state);
-    child.stdout?.on("data", (chunk: Buffer) => { run.stdoutSummary = appendSummary(run.stdoutSummary, chunk); saveState(state); });
-    child.stderr?.on("data", (chunk: Buffer) => { run.stderrSummary = appendSummary(run.stderrSummary, chunk); saveState(state); });
+    child.stdout?.on("data", (chunk: Buffer) => { run.stdoutSummary = appendSummary(run.stdoutSummary, chunk); this.scheduleOutputPersistence(state, run); });
+    child.stderr?.on("data", (chunk: Buffer) => { run.stderrSummary = appendSummary(run.stderrSummary, chunk); this.scheduleOutputPersistence(state, run); });
     child.once("error", (cause) => {
       if (run.cancelRequested) return;
       run.state = "failed"; run.updatedAt = now(); run.exitCode = null;
       run.stderrSummary = appendSummary(run.stderrSummary, Buffer.from(cause.message));
       run.events.push({ at: run.updatedAt, state: run.state, message: "The local workflow command emitted a process error." });
-      saveState(state);
+      this.persistRunNow(state, run);
     });
     child.once("close", (code, signal) => {
       this.activeRuns.delete(run);
@@ -717,8 +726,27 @@ export class NgsService {
         run.state = code === 0 ? "completed" : "failed";
         run.events.push({ at: run.updatedAt, state: run.state, message: code === 0 ? "Local workflow command completed." : "Local workflow command exited unsuccessfully.", exit_code: code, signal: signal ?? null });
       }
-      saveState(state);
+      this.persistRunNow(state, run);
     });
+  }
+
+  private scheduleOutputPersistence(state: NgsState, run: Run): void {
+    if (this.pendingOutputPersistence.has(run)) return;
+    const timer = setTimeout(() => {
+      this.pendingOutputPersistence.delete(run);
+      saveState(state);
+    }, 100);
+    timer.unref?.();
+    this.pendingOutputPersistence.set(run, { state, timer });
+  }
+
+  private persistRunNow(state: NgsState, run: Run): void {
+    const pending = this.pendingOutputPersistence.get(run);
+    if (pending) {
+      clearTimeout(pending.timer);
+      this.pendingOutputPersistence.delete(run);
+    }
+    saveState(state);
   }
 
   private async terminateLocalProcess(child: ChildProcess): Promise<boolean> {
@@ -811,7 +839,7 @@ export class NgsService {
   }
 
   private optionalRun(state: NgsState, args: Record<string, unknown>): Run | undefined { return state.runs.get(required(args.registry_run_id, "registry_run_id")); }
-  private missingRun(args: Record<string, unknown>): Json { const id = required(args.registry_run_id, "registry_run_id"); return { ok: false, registry_run_id: id, errors: [`registry run does not exist: ${id}`] }; }
+  private missingRun(args: Record<string, unknown>): Json { const id = required(args.registry_run_id, "registry_run_id"); return { ok: false, registry_run_id: id, error: { code: "NGS_RUN_NOT_FOUND", message: `Registry run does not exist: ${id}` } }; }
   private run(state: NgsState, args: Record<string, unknown>): Run { const id = required(args.registry_run_id, "registry_run_id"); const run = state.runs.get(id); if (!run) throw new Error(`NGS run ${id} is unavailable.`); return run; }
   private workflowView(workflow: Workflow): Json { const active = workflow.versions.find((version) => version.id === workflow.activeVersionId); return { workflow_id: workflow.id, name: workflow.name, engine: workflow.engine, description: workflow.description, archived: workflow.archived, active_version_id: workflow.activeVersionId, active_version_checksum: active?.checksum ?? null, catalog_source_checksum: active?.catalogChecksum ?? null, source_entrypoint: active?.source ?? null, source_available: active ? existsSync(active.source) : false, version_count: workflow.versions.length }; }
   private runView(run: Run): Json { return { registry_run_id: run.id, plan_id: run.planId, workflow_id: run.workflowId, state: run.state, created_at: run.createdAt, updated_at: run.updatedAt, command: run.command ? clone(run.command) : null, process_id: run.processId ?? null, exit_code: run.exitCode ?? null, stdout_summary: run.stdoutSummary ?? "", stderr_summary: run.stderrSummary ?? "", cancellation_requested: run.cancelRequested === true, execution_settled: !["queued", "running", "stopping"].includes(run.state), events: clone(run.events), summary_path: run.summaryPath ?? null, diagnostic: clone(run.diagnostic ?? {}) }; }

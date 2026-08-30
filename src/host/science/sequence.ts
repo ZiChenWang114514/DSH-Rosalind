@@ -1,12 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { basename, extname, isAbsolute, resolve } from "node:path";
+import { basename, extname, isAbsolute, relative, resolve } from "node:path";
 
 export interface ScienceExecutionContext {
   session: object;
   sessionId?: string;
   signal: AbortSignal;
   packageRoot: string;
+  /** Host-approved destinations for operations that create or replace files. */
+  authorizedWritePaths?: readonly string[];
 }
 
 type Json = Record<string, unknown>;
@@ -506,7 +508,7 @@ export class SequenceService {
     if (target === "annotations") return { annotations: clone(state.annotations) };
     if (target === "tracks") return { tracks: clone(state.tracks) };
     if (target === "artifacts") return { artifacts: clone(state.artifacts) };
-    if (target === "search") return clone(state.search ?? { query: "", hits: [], selectedHit: null });
+    if (target === "search") return { target, ...clone(state.search ?? { query: "", hits: [], selectedHit: null }) };
     return { target, state: this.summary(state), note: "The requested viewer target is available through the current in-memory scientific session." };
   }
 
@@ -668,8 +670,13 @@ export class SequenceService {
   private export(args: Record<string, unknown>, context: ScienceExecutionContext): Json {
     const state = this.state(args, context); const format = string(args.format, "format"); const name = String(args.name ?? `sequence-export-${state.viewerSessionId}`);
     const filename = `${name.replace(/[^A-Za-z0-9._-]/g, "-")}.${format === "fasta" ? "fasta" : format === "newick" ? "nwk" : "json"}`;
-    const directory = resolve(context.packageRoot, "artifacts", "sequence-exports"); mkdirSync(directory, { recursive: true }); const path = resolve(directory, filename);
-    if (!path.startsWith(directory)) throw new Error("Export destination is outside the managed artifact directory.");
+    const directory = resolve(context.packageRoot, "artifacts", "sequence-exports"); const path = resolve(directory, filename);
+    const authorized = context.authorizedWritePaths?.some((root) => {
+      const relation = relative(resolve(root), path);
+      return relation === "" || (!isAbsolute(relation) && relation !== ".." && !relation.startsWith(`..${process.platform === "win32" ? "\\" : "/"}`));
+    }) === true;
+    if (!authorized) throw new Error("WRITE_NOT_AUTHORIZED: Sequence export requires an explicit host write authorization for its destination.");
+    mkdirSync(directory, { recursive: true });
     if (existsSync(path)) throw new Error(`DESTINATION_EXISTS: Sequence export ${filename} already exists; choose a new name.`);
     const content = format === "fasta" ? state.records.map((record) => `>${record.id} ${record.label}\n${record.sequence}\n`).join("") : format === "newick" ? (threeTaxonNewick(state.records) ?? ";") : JSON.stringify(this.summary(state), null, 2);
     writeFileSync(path, content, "utf8"); return { artifact: { path, format, bytes: Buffer.byteLength(content), generatedAt: new Date().toISOString() } };
@@ -691,5 +698,6 @@ export class SequenceService {
 export function asSequenceServiceError(cause: unknown): { code: string; message: string } {
   const error = resultError(cause);
   if (error.message.startsWith("DESTINATION_EXISTS:")) return { code: "DESTINATION_EXISTS", message: error.message.slice("DESTINATION_EXISTS:".length).trim() };
+  if (error.message.startsWith("WRITE_NOT_AUTHORIZED:")) return { code: "WRITE_NOT_AUTHORIZED", message: error.message.slice("WRITE_NOT_AUTHORIZED:".length).trim() };
   return { code: /cancel/i.test(error.message) ? "CANCELLED" : "SEQUENCE_OPERATION_FAILED", message: error.message };
 }

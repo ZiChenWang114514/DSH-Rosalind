@@ -5,6 +5,7 @@ import { CapabilityRegistry } from "../src/host/capabilities.js";
 import { createScienceGatewayTools } from "../src/host/science-gateway-tools.js";
 import { createScienceTools } from "../src/host/science-tools.js";
 import { ScienceRuntime } from "../src/host/science/runtime.js";
+import type { NgsService } from "../src/host/science/ngs.js";
 
 const signal = new AbortController().signal;
 
@@ -13,6 +14,64 @@ function violations(schema: JsonSchemaNode, value: unknown): string[] {
 }
 
 describe("science tool output schemas", () => {
+  it("keeps normalized identity and lifecycle fields authoritative", async () => {
+    const ngs = {
+      execute: async () => ({ serviceId: "raw-service", operation: "raw-operation", status: "failed", ok: true }),
+    } as unknown as NgsService;
+    const runtime = new ScienceRuntime({ ngs });
+    await expect(runtime.execute("ngs", "list_workflows", {}, { session: {}, signal, packageRoot: process.cwd() })).resolves.toMatchObject({
+      serviceId: "ngs",
+      operation: "list_workflows",
+      status: "completed",
+      ok: true,
+    });
+  });
+
+  it("validates module-disabled, missing-run, and consumed-plan NGS results", async () => {
+    const registry = new CapabilityRegistry();
+    const disabled = new ScienceRuntime({ ngs: null });
+    const disabledResult = await disabled.execute("ngs", "list_workflows", {}, { session: {}, signal, packageRoot: registry.packageRoot });
+    const disabledTool = createScienceTools(disabled, registry).find((candidate) => candidate.name === "ngs_list_workflows")!;
+    expect(disabledResult).toMatchObject({ status: "unavailable", module: "ngs-analysis-workbench", moduleStatus: { enabled: false }, error: { code: "NGS_MODULE_DISABLED" } });
+    expect(violations(disabledTool.output.schema, disabledResult)).toEqual([]);
+
+    const runtime = new ScienceRuntime();
+    const session = {};
+    const context = { session, signal, packageRoot: registry.packageRoot };
+    const missing = await runtime.execute("ngs", "get_ngs_run", { registry_run_id: "run-missing" }, context);
+    const tools = createScienceTools(runtime, registry);
+    const getRunTool = tools.find((candidate) => candidate.name === "ngs_get_ngs_run")!;
+    expect(missing).toMatchObject({ status: "failed", error: { code: "NGS_RUN_NOT_FOUND" } });
+    expect(violations(getRunTool.output.schema, missing)).toEqual([]);
+
+    const plan = await runtime.execute("ngs", "plan_snakemake", { workflow_id: "oai_fastq_qc", run_dir: registry.packageRoot }, context);
+    const identity = { plan_id: plan.plan_id, plan_name: plan.plan_name, plan_checksum: plan.plan_checksum };
+    await runtime.execute("ngs", "execute_plan", identity, context);
+    const repeated = await runtime.execute("ngs", "execute_plan", identity, context);
+    const executeTool = tools.find((candidate) => candidate.name === "ngs_execute_plan")!;
+    expect(repeated).toMatchObject({ reason: "PLAN_ALREADY_CONSUMED", reused: true });
+    expect(violations(executeTool.output.schema, repeated)).toEqual([]);
+  });
+
+  it("describes sequence search hits and slide diagnostic notes exactly", () => {
+    const tools = createScienceTools(new ScienceRuntime(), new CapabilityRegistry());
+    const sequenceQuery = tools.find((candidate) => candidate.name === "sequence_query_viewer")!;
+    expect(violations(sequenceQuery.output.schema, {
+      serviceId: "sequence", operation: "sequence.query_viewer", status: "completed", target: "search",
+      query: "GKS", hits: [{ record: "P01116", start: 10, end: 12 }], selectedHit: 0,
+    })).toEqual([]);
+    expect(violations(sequenceQuery.output.schema, {
+      serviceId: "sequence", operation: "sequence.query_viewer", status: "completed", target: "search",
+      query: { value: "GKS" }, hits: [{ record: "P01116", start: "10", end: 12 }], selectedHit: "0",
+    }).length).toBeGreaterThan(0);
+
+    const slideOpen = tools.find((candidate) => candidate.name === "slide_open_from_chat")!;
+    expect(violations(slideOpen.output.schema, {
+      serviceId: "slide", operation: "slide.open_from_chat", status: "completed", ok: true,
+      note: { code: "PIXEL_CODEC_UNAVAILABLE", message: "Codec is unavailable.", diagnostic: { code: "TIFF_PIXEL_CODEC_UNAVAILABLE", message: "Compressed source." } },
+    })).toEqual([]);
+  });
+
   it("declares a strict normalized result contract for all 121 fixed operations", () => {
     const runtime = new ScienceRuntime();
     const registry = new CapabilityRegistry();

@@ -2,6 +2,7 @@ import type {
   JsonSchemaNode, JsonValue, ObjectJsonSchema, ObjectValueSchemaSpec, ParameterSchemaSpec,
   ToolDefinition, ToolResult,
 } from "@deepseek-ai/dsh-tools";
+import { resolve } from "node:path";
 
 import { CapabilityRegistry, type RuntimeOperationContract } from "./capabilities.js";
 
@@ -24,8 +25,6 @@ export interface ScienceExecutor {
     context: ScienceExecutionContext,
   ): Promise<Record<string, JsonValue>>;
 }
-
-const FALLBACK_SESSION = {};
 
 export type ScienceServiceId = "literature" | "databases" | "sequence" | "ngs" | "structure" | "slide" | "rosalind";
 
@@ -102,7 +101,55 @@ const SERVICE_OUTPUT_FIELDS: Record<ScienceServiceId, readonly string[]> = {
 /** The normalizer in science/runtime.ts is deliberately small; this is the
  * public, operation-level result vocabulary.  Do not widen this list without
  * adding a runtime result and a fixture which exercises it. */
-const RESULT_STATUSES = ["completed", "failed", "cancelled", "blocked", "configured"] as const;
+const RESULT_STATUSES = ["completed", "failed", "cancelled", "blocked", "configured", "unavailable"] as const;
+
+const MODULE_STATUS_SCHEMA: JsonSchemaNode = {
+  type: "object",
+  properties: {
+    enabled: { type: "boolean" },
+    status: { type: "string", enum: ["available", "disabled"] },
+    diagnostic: { oneOf: [{ type: "string" }, { type: "null" }] },
+  },
+  required: ["enabled", "status", "diagnostic"],
+  additionalProperties: false,
+};
+
+const MODULE_STATUS_SCHEMA_SPEC = {
+  type: "object",
+  properties: {
+    enabled: { type: "boolean", required: true },
+    status: { type: "string", enum: ["available", "disabled"], required: true },
+    diagnostic: { oneOf: [{ type: "string" }, { type: "null" }], required: true },
+  },
+  additionalProperties: false,
+} as const;
+
+const REGISTRY_DIAGNOSTIC_SCHEMA: JsonSchemaNode = {
+  type: "object",
+  properties: {
+    code: { type: "string" },
+    path: { type: "string" },
+    original_preserved: { type: "boolean" },
+    byte_length: { type: "number" },
+    message: { type: "string" },
+    observed_schema: { oneOf: [{ type: "string" }, { type: "null" }] },
+  },
+  required: ["code", "path", "original_preserved"],
+  additionalProperties: false,
+};
+
+const REGISTRY_DIAGNOSTIC_SCHEMA_SPEC = {
+  type: "object",
+  properties: {
+    code: { type: "string", required: true },
+    path: { type: "string", required: true },
+    original_preserved: { type: "boolean", required: true },
+    byte_length: { type: "number" },
+    message: { type: "string" },
+    observed_schema: { oneOf: [{ type: "string" }, { type: "null" }] },
+  },
+  additionalProperties: false,
+} as const;
 
 const STRING_FIELDS = new Set([
   "action", "activeVersionId", "active_version_checksum", "active_version_id", "area", "background", "callerId", "code", "commandId", "dataUrl", "directoryToken",
@@ -167,8 +214,8 @@ const OPERATION_OUTPUT_FIELDS: Record<string, readonly string[]> = {
   "activate_workflow_version": ["workflow", "workflow_id", "active_version_id", "active_version_checksum", "version"],
   "archive_workflow": ["workflow", "workflow_id", "archived", "updated_at"],
   "cancel_ngs_run": ["registry_run_id", "cancelled", "cancellation_requested", "cancellation_accepted", "executionSettled", "execution_settled", "state", "process_id", "reason", "diagnostic"],
-  "check_nextflow_readiness": ["ok", "ready", "engine", "executable", "run_dir", "workflow_id", "workflow_version_id", "target_id", "declared_input_paths", "scientific_input_paths", "checkedAt", "diagnostics", "code", "requestedEngine", "requestedExecutables", "runtime"],
-  "check_snakemake_readiness": ["ok", "ready", "engine", "executable", "run_dir", "workflow_id", "workflow_version_id", "target_id", "declared_input_paths", "scientific_input_paths", "checkedAt", "diagnostics", "code", "requestedEngine", "requestedExecutables", "runtime"],
+  "check_nextflow_readiness": ["ok", "ready", "engine", "executable", "run_dir", "workflow_id", "workflow_version_id", "target_id", "declared_input_paths", "scientific_input_paths", "checkedAt", "diagnostics", "code", "expectedEngine", "requestedEngine", "requestedExecutables", "runtime"],
+  "check_snakemake_readiness": ["ok", "ready", "engine", "executable", "run_dir", "workflow_id", "workflow_version_id", "target_id", "declared_input_paths", "scientific_input_paths", "checkedAt", "diagnostics", "code", "expectedEngine", "requestedEngine", "requestedExecutables", "runtime"],
   "execute_plan": ["ok", "registry_run_id", "state", "plan_id", "plan_checksum", "workflow_id", "command", "process_id", "process_started", "diagnostic", "events", "reused", "execution_receipt", "reason", "code", "diagnostics"],
   "get_ngs_run": ["ok", "registry_run_id", "workflow_id", "plan_id", "state", "created_at", "updated_at", "events", "command", "process_id", "exit_code", "stdout_summary", "stderr_summary", "summary_path", "diagnostic", "cancellation_requested", "execution_settled"],
   "get_runtime_environment": ["target_id", "target", "runtime", "executable", "version", "ready", "diagnostics", "code", "mcp_server"],
@@ -256,7 +303,7 @@ const OPERATION_OUTPUT_FIELDS: Record<string, readonly string[]> = {
   "slide.open_dicom_series": ["ok", "viewerSessionId", "stateRevision", "source", "sourceRevision", "fileName", "format", "load", "presentation", "viewerControls", "scientificLayers", "spatial", "jobs", "projectHistory", "previewTile", "renderer", "viewerReady", "viewerState", "renderState", "displayMode", "toolbarVisible", "theme", "visibleBounds", "selectedRegions", "layers", "measurements", "workspaceSection", "commandSearch"],
   "slide.open_dicomweb_wsi": ["ok", "viewerSessionId", "stateRevision", "source", "sourceRevision", "fileName", "format", "load", "presentation", "viewerControls", "scientificLayers", "spatial", "jobs", "projectHistory", "previewTile", "renderer", "viewerReady", "viewerState", "renderState", "displayMode", "toolbarVisible", "theme", "visibleBounds", "selectedRegions", "layers", "measurements", "workspaceSection", "commandSearch"],
   "slide.open_from_chat": ["ok", "viewerSessionId", "stateRevision", "source", "sourceRevision", "fileName", "format", "load", "presentation", "viewerControls", "scientificLayers", "spatial", "jobs", "projectHistory", "previewTile", "renderer", "viewerReady", "viewerState", "renderState", "displayMode", "toolbarVisible", "theme", "visibleBounds", "selectedRegions", "layers", "measurements", "workspaceSection", "commandSearch", "note"],
-  "slide.open_ome_tiff_series": ["ok", "viewerSessionId", "stateRevision", "source", "sourceRevision", "fileName", "format", "load", "presentation", "viewerControls", "scientificLayers", "spatial", "jobs", "projectHistory", "previewTile", "renderer", "viewerReady", "viewerState", "renderState", "displayMode", "toolbarVisible", "theme", "visibleBounds", "selectedRegions", "layers", "measurements", "workspaceSection", "commandSearch"],
+  "slide.open_ome_tiff_series": ["ok", "viewerSessionId", "stateRevision", "source", "sourceRevision", "fileName", "format", "load", "presentation", "viewerControls", "scientificLayers", "spatial", "jobs", "projectHistory", "previewTile", "renderer", "viewerReady", "viewerState", "renderState", "displayMode", "toolbarVisible", "theme", "visibleBounds", "selectedRegions", "layers", "measurements", "workspaceSection", "commandSearch", "note"],
   "slide.open_ome_zarr": ["ok", "viewerSessionId", "stateRevision", "source", "sourceRevision", "fileName", "format", "load", "presentation", "viewerControls", "scientificLayers", "spatial", "jobs", "projectHistory", "previewTile", "renderer", "viewerReady", "viewerState", "renderState", "displayMode", "toolbarVisible", "theme", "visibleBounds", "selectedRegions", "layers", "measurements", "workspaceSection", "commandSearch", "note"],
   "slide.prepare_dicom_upload": ["ok", "prepared", "preparedOperation", "endpoint", "instanceCount", "bytes", "expiresAt", "localMock", "stateRevision"],
   "slide.query_dicomweb": ["ok", "items", "total", "provenance"],
@@ -288,6 +335,11 @@ function fieldSchema(field: string, serviceId: ScienceServiceId, operation: stri
   if (field === "checkedAt") return { type: "string" };
   if (field === "jobId") return { type: "string" };
   if (field === "analysis") return { type: "string" };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "target") return { type: "string" };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "query") return { type: "string" };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "selectedHit") return { oneOf: [{ type: "number" }, { type: "null" }] };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "hits") return { type: "array", items: { type: "object", properties: { record: { type: "string" }, start: { type: "number" }, end: { type: "number" } }, required: ["record", "start", "end"], additionalProperties: false } };
+  if (serviceId === "slide" && field === "note" && ["slide.open_from_chat", "slide.open_ome_zarr", "slide.open_ome_tiff_series"].includes(operation)) return { oneOf: [{ type: "string" }, { type: "object", properties: { code: { type: "string" }, message: { type: "string" }, diagnostic: ERROR_SCHEMA }, required: ["code", "message"], additionalProperties: false }] };
   if (field === "state" && serviceId === "sequence" && operation !== "sequence.run_analysis") return { type: "object", additionalProperties: true };
   if (field === "state" && serviceId === "structure") return { type: "object", additionalProperties: true };
   if (field === "background" && operation === "structure.load_background") return { type: "object", additionalProperties: true };
@@ -319,6 +371,11 @@ function fieldSpec(field: string, serviceId: ScienceServiceId, operation: string
   if (field === "checkedAt") return { type: "string" };
   if (field === "jobId") return { type: "string" };
   if (field === "analysis") return { type: "string" };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "target") return { type: "string" };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "query") return { type: "string" };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "selectedHit") return { oneOf: [{ type: "number" }, { type: "null" }] };
+  if (serviceId === "sequence" && operation === "sequence.query_viewer" && field === "hits") return { type: "array", items: { type: "object", properties: { record: { type: "string" }, start: { type: "number" }, end: { type: "number" } }, additionalProperties: false } };
+  if (serviceId === "slide" && field === "note" && ["slide.open_from_chat", "slide.open_ome_zarr", "slide.open_ome_tiff_series"].includes(operation)) return { oneOf: [{ type: "string" }, { type: "object", properties: { code: { type: "string" }, message: { type: "string" }, diagnostic: ERROR_SCHEMA_SPEC }, additionalProperties: false }] };
   if (operation === "structure.apply_scene" && field === "wouldApply") return { type: "object", additionalProperties: true };
   if (field === "ok" || BOOLEAN_FIELDS.has(field)) return { type: "boolean" };
   if (field === "state" && serviceId === "sequence" && operation !== "sequence.run_analysis") return { type: "object", additionalProperties: true };
@@ -379,7 +436,13 @@ function outputProperties(serviceId: ScienceServiceId, operation: string): Param
 /** Build the defineTool authoring form; defineTool compiles required flags into JSON Schema. */
 export function scienceOutputSpec(serviceId: ScienceServiceId, operation: string): ObjectValueSchemaSpec {
   const properties = outputProperties(serviceId, operation);
-  if (serviceId === "ngs") properties.mcp_server = { type: "string" };
+  if (serviceId === "ngs") {
+    properties.mcp_server = { type: "string" };
+    properties.module = { type: "string", const: "ngs-analysis-workbench" };
+    properties.moduleStatus = MODULE_STATUS_SCHEMA_SPEC;
+    properties.registry_restoration = REGISTRY_DIAGNOSTIC_SCHEMA_SPEC;
+    properties.registry_persistence = REGISTRY_DIAGNOSTIC_SCHEMA_SPEC;
+  }
   Object.assign(properties, {
     serviceId: { type: "string", const: serviceId, required: true },
     operation: { type: "string", const: operation, required: true },
@@ -395,7 +458,13 @@ export function scienceOutputSchema(serviceId: ScienceServiceId, operation: stri
   const properties: Record<string, JsonSchemaNode> = Object.fromEntries(
     operationOutputFields(serviceId, operation).map((field) => [field, fieldSchema(field, serviceId, operation)]),
   );
-  if (serviceId === "ngs") properties.mcp_server = { type: "string" };
+  if (serviceId === "ngs") {
+    properties.mcp_server = { type: "string" };
+    properties.module = { type: "string", const: "ngs-analysis-workbench" };
+    properties.moduleStatus = MODULE_STATUS_SCHEMA;
+    properties.registry_restoration = REGISTRY_DIAGNOSTIC_SCHEMA;
+    properties.registry_persistence = REGISTRY_DIAGNOSTIC_SCHEMA;
+  }
   Object.assign(properties, {
     serviceId: { type: "string", const: serviceId },
     operation: { type: "string", const: operation },
@@ -448,10 +517,13 @@ function toolDefinition(contract: RuntimeOperationContract, executor: ScienceExe
     async execute(args, exec) {
       const record = args && typeof args === "object" && !Array.isArray(args) ? args as Record<string, unknown> : {};
       return executor.execute(contract.record.serviceId, contract.record.operation, record, {
-        session: exec.agent ?? FALLBACK_SESSION,
+        session: exec.agent ?? {},
         ...(exec.agent?.id ? { sessionId: String(exec.agent.id) } : {}),
         signal: exec.signal,
         packageRoot,
+        ...(contract.record.operation === "sequence.export_artifact"
+          ? { authorizedWritePaths: [resolve(packageRoot, "artifacts", "sequence-exports")] }
+          : {}),
       });
     },
     presentCall: (args) => callView(contract, args),

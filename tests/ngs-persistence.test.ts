@@ -18,6 +18,39 @@ function registryName(sessionId: string): string {
 }
 
 describe("NgsService durable registry", () => {
+  it("coalesces burst output persistence into one scheduled registry write", async () => {
+    const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-output-batch-"));
+    const registryRoot = join(root, "profile-state", "ngs-registry");
+    const session = {};
+    const service = new NgsService({ registryRoot });
+    await service.execute("list_workflows", {}, context(session, root, "output-batch-session"));
+    const internals = service as unknown as {
+      sessions: WeakMap<object, { runs: Map<string, Record<string, unknown>> }>;
+      pendingOutputPersistence: Map<object, unknown>;
+      scheduleOutputPersistence: (state: object, run: object) => void;
+    };
+    const state = internals.sessions.get(session)!;
+    const run = {
+      id: "run-output-batch",
+      planId: "plan-output-batch",
+      workflowId: "workflow-output-batch",
+      state: "running",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      events: [],
+      stdoutSummary: "burst output",
+    };
+    state.runs.set(run.id, run);
+    for (let index = 0; index < 100; index += 1) internals.scheduleOutputPersistence(state, run);
+    expect(internals.pendingOutputPersistence.size).toBe(1);
+    await new Promise((resolveWait) => setTimeout(resolveWait, 150));
+    expect(internals.pendingOutputPersistence.size).toBe(0);
+    expect(JSON.parse(readFileSync(join(registryRoot, registryName("output-batch-session")), "utf8"))).toMatchObject({
+      runs: [expect.objectContaining({ id: run.id, stdoutSummary: "burst output" })],
+    });
+    await service.dispose();
+  });
+
   it("consumes an execution plan once and restores the same receipt in a new service instance", async () => {
     const root = mkdtempSync(join(tmpdir(), "dsh-rosalind-ngs-registry-"));
     const registryRoot = join(root, "profile-state", "ngs-registry");

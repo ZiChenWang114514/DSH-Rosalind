@@ -134,7 +134,7 @@ describe("SlideService local Canvas renderer", () => {
       expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: revision - 1 }, ctx)).toMatchObject({ ok: false, error: { code: "RENDER_STATE_SUPERSEDED" }, renderState: "superseded" });
       expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: revision + 1 }, ctx)).toMatchObject({ ok: false, error: { code: "RENDER_STATE_UNKNOWN" } });
       expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: revision }, ctx)).toMatchObject({ ok: true, viewerReady: false, renderState: "pending", pending: true, timedOut: false });
-      expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: revision, timeoutMs: 0 }, ctx)).toMatchObject({ ok: true, viewerReady: false, renderState: "timeout", pending: true, timedOut: true });
+      expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: revision, timeoutMs: 0 }, ctx)).toMatchObject({ ok: true, viewerReady: false, renderState: "timeout", pending: false, timedOut: true });
       await service.execute("slide.control_viewer", { sessionId, action: "set_toolbar_visibility", visible: false }, ctx);
       expect(await service.execute("slide.wait_for_render", { sessionId, stateRevision: revision }, ctx)).toMatchObject({ ok: false, error: { code: "RENDER_STATE_SUPERSEDED" }, renderState: "superseded" });
     } finally { rmSync(temp, { recursive: true, force: true }); }

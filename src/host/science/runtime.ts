@@ -54,15 +54,25 @@ function errorRecord(serviceId: string, operation: string, cause: unknown): Json
   return { serviceId, operation, status: code === "CANCELLED" ? "cancelled" : "failed", error: { code, message } };
 }
 
+function normalizedStatus(serviceId: string, operation: string, record: JsonRecord): JsonValue {
+  if (operation === "configure_ssh_target") return "configured";
+  if (record.cancelled === true || record.state === "cancelled") return "cancelled";
+  if (record.state === "blocked") return "blocked";
+  if (record.state === "failed" || record.state === "termination_failed" || record.state === "orphaned") return "failed";
+  if (record.ok === false) {
+    if (record.ready === false || record.state === "blocked" || record.code === "PLAN_INPUT_CHANGED") return "blocked";
+    return "failed";
+  }
+  return "completed";
+}
+
 function normalize(serviceId: string, operation: string, value: unknown): JsonRecord {
   const record = jsonRecord(value);
-  const ok = typeof record.ok === "boolean" ? record.ok : undefined;
-  const existingStatus = typeof record.status === "string" ? record.status : undefined;
   return {
+    ...record,
     serviceId,
     operation,
-    ...record,
-    status: existingStatus ?? (ok === false ? "failed" : "completed"),
+    status: normalizedStatus(serviceId, operation, record),
   };
 }
 

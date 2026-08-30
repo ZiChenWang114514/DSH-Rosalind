@@ -8,10 +8,26 @@ import { NgsService } from "../src/host/science/ngs.js";
 import { SequenceService } from "../src/host/science/sequence.js";
 
 function context(session: object, packageRoot: string, signal = new AbortController().signal) {
-  return { session, packageRoot, signal };
+  return { session, packageRoot, signal, authorizedWritePaths: [join(packageRoot, "artifacts", "sequence-exports")] };
 }
 
 describe("Sequence operation matrix", () => {
+  it("requires explicit destination authorization before creating an export", async () => {
+    const service = new SequenceService();
+    const session = {};
+    const root = process.cwd();
+    const executionContext = { session, packageRoot: root, signal: new AbortController().signal };
+    const opened = await service.execute("sequence.open_from_chat", {
+      path: "showcases/biological-sequence-viewer/cases/sequence-ras-alignment/inputs/human-RAS-UniProt-SV1.aln-fasta",
+    }, executionContext);
+    await expect(service.execute("sequence.export_artifact", {
+      sessionId: opened.viewerSessionId,
+      format: "json",
+      name: "unauthorized-export",
+    }, executionContext)).rejects.toThrow(/WRITE_NOT_AUTHORIZED/);
+    expect(existsSync(join(root, "artifacts", "sequence-exports", "unauthorized-export.json"))).toBe(false);
+  });
+
   it("executes every one of the 13 registered operations through one scientific session", async () => {
     const service = new SequenceService();
     const session = {};
@@ -37,6 +53,12 @@ describe("Sequence operation matrix", () => {
       query: "GKS",
     });
     expect(controlled.applied).toBe(true);
+    expect(await execute("sequence.query_viewer", { sessionId, target: "search" })).toMatchObject({
+      target: "search",
+      query: "GKS",
+      hits: expect.arrayContaining([expect.objectContaining({ record: "P01116", start: expect.any(Number), end: expect.any(Number) })]),
+      selectedHit: 0,
+    });
 
     const analysis = await execute("sequence.run_analysis", { sessionId, analysis: "alignment_metrics" });
     expect((analysis.result as Record<string, unknown>).alignedLength).toBe(191);

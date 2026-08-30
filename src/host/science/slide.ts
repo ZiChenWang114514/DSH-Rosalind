@@ -707,7 +707,7 @@ export class SlideService {
     if (!source || !source.renderAvailable) return { ...fail("RENDER_CAPABILITY_UNAVAILABLE", "This source has metadata or coordinate-preview state only; no locally decodable source pixels are available for a mounted frame.", { stateRevision: session.revision, rendererMode: source?.rendererMode ?? null }), viewerReady: false, viewerState: renderState(source), renderState: renderState(source), stateRevision: session.revision, requestedRevision, pending: false, timedOut: false };
     if (session.mountedSourceRevision === source.revision) return { ...sessionState(session), viewerReady: true, viewerState: "ready", renderState: "ready", requestedRevision, pending: false, timedOut: false };
     const timeoutRequested = typeof args.timeoutMs === "number";
-    return { ...sessionState(session), viewerReady: false, viewerState: "awaiting-viewer", renderState: timeoutRequested ? "timeout" : "pending", requestedRevision, pending: true, timedOut: timeoutRequested, note: "The local decoder can supply source tiles, but this service has no host frame-confirmation channel for this revision." };
+    return { ...sessionState(session), viewerReady: false, viewerState: "awaiting-viewer", renderState: timeoutRequested ? "timeout" : "pending", requestedRevision, pending: !timeoutRequested, timedOut: timeoutRequested, note: "The local decoder can supply source tiles, but this service has no host frame-confirmation channel for this revision." };
   }
 
   private control(args: Record<string, unknown>, session: SlideSession, context: ScienceExecutionContext): Record<string, unknown> | ScienceFailure {
