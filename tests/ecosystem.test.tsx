@@ -26,7 +26,7 @@ describe("ScienceEcosystemPanel", () => {
     expect(screen.queryByRole("switch")).not.toBeInTheDocument();
     expect(screen.getByRole("tabpanel")).toHaveTextContent("declared in bundle");
     expect(screen.getByText(/Installation or registration does not confirm that a provider is ready/)).toBeInTheDocument();
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("change it in DSH settings");
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("DSH Settings → Rosalind");
   });
 
   it("makes each example task an actionable button", () => {

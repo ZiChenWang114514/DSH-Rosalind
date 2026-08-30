@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
 
-test("blank sessions open directly into a searchable project catalogue", async ({ page }) => {
+test("blank sessions open directly into a research project workspace", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Start a scientific task" })).toBeVisible();
-  await expect(page.getByRole("button", { name: /^Open / })).toHaveCount(23);
+  await expect(page.getByRole("heading", { name: "Rosalind research workspace" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "New research task" })).toBeVisible();
+  await expect(page.locator(".rr-card")).toHaveCount(0);
   await expect(page.getByRole("navigation", { name: "Workbench view" })).toHaveCount(0);
   const dimensions = await page.locator(".preview-shell").evaluate((element) => ({
     scrollWidth: element.scrollWidth,
@@ -12,11 +13,12 @@ test("blank sessions open directly into a searchable project catalogue", async (
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth + 1);
 });
 
-test("search, detail evidence, use mode, and composer import work", async ({ page }) => {
+test("module detail, reviewed record, reproduction mode, and composer import work", async ({ page }) => {
   await page.goto("/");
-  await page.getByPlaceholder("Search a scientific question or method").fill("nanobody");
-  await expect(page.getByRole("button", { name: /^Open / })).toHaveCount(1);
-  await page.getByRole("button", { name: "Open PD-L1 nanobody design showcase" }).click();
+  await page.getByRole("button", { name: "New research task" }).click();
+  await page.getByRole("tab", { name: /Rosalind Workbench/ }).click();
+  const record = page.getByText("PD-L1 nanobody design showcase").locator("xpath=ancestor::article[1]");
+  await record.getByRole("button", { name: "Reproduce" }).click();
   const dialog = page.getByRole("dialog", { name: "PD-L1 nanobody design showcase" });
   await expect(dialog).toBeVisible();
   await dialog.getByRole("tab", { name: "Evidence" }).click();
@@ -31,12 +33,14 @@ test("search, detail evidence, use mode, and composer import work", async ({ pag
 
 test("keyboard navigation, Escape, and dark theme remain usable", async ({ page }) => {
   await page.goto("/?theme=dark");
-  await page.getByRole("heading", { name: "Start a scientific task" }).focus();
-  await page.getByPlaceholder("Search a scientific question or method").focus();
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Enter");
+  await page.getByRole("button", { name: "New research task" }).click();
+  const firstModule = page.getByRole("tab", { name: /Life Sciences Literature/ });
+  await firstModule.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("tab", { name: /Life Sciences Databases/ })).toBeFocused();
+  await page.getByRole("tab", { name: /Rosalind Workbench/ }).click();
+  const record = page.getByText("PD-L1 nanobody design showcase").locator("xpath=ancestor::article[1]");
+  await record.getByRole("button", { name: "Inspect" }).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
   const overview = dialog.getByRole("tab", { name: "Overview" });
@@ -58,16 +62,18 @@ test("CSS 200 percent zoom keeps catalogue controls usable", async ({ page }) =>
   await page.goto("/");
   await page.evaluate(() => { document.documentElement.style.zoom = "2"; });
   await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).zoom)).toBe("2");
-  await page.getByPlaceholder("Search a scientific question or method").fill("nanobody");
-  await expect(page.getByRole("button", { name: "Open PD-L1 nanobody design showcase" })).toBeVisible();
-  await page.getByRole("button", { name: "Open PD-L1 nanobody design showcase" }).click();
+  await page.getByRole("button", { name: "New research task" }).click();
+  await page.getByRole("tab", { name: /Rosalind Workbench/ }).click();
+  const record = page.getByText("PD-L1 nanobody design showcase").locator("xpath=ancestor::article[1]");
+  await expect(record.getByRole("button", { name: "Inspect" })).toBeVisible();
+  await record.getByRole("button", { name: "Inspect" }).click();
   await expect(page.getByRole("dialog", { name: "PD-L1 nanobody design showcase" })).toBeVisible();
 });
 
 test("direct project catalogue stays within the narrow viewport", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium-narrow", "The narrow check is captured at 720 × 900.");
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Start a scientific task" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Rosalind research workspace" })).toBeVisible();
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });

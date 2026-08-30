@@ -4,7 +4,7 @@ DSH-Rosalind is one installable DSH bundle with a Node host and a browser client
 
 ```text
 DSH Web
-  hero catalogue · conversation Workbench · settings · tool views · detail overlay
+  research project workspace · Sessions/Science browser · conversation · settings · tool views
         │
         ▼
 DSH-Rosalind client bundle
@@ -21,7 +21,7 @@ Scientific adapters
 
 ## Package and lifecycle
 
-`cordis.patch.yml` inserts the host bundle. Its core creates a shared science coordinator and mounts two independently disposable Cordis plugins:
+`cordis.patch.yml` inserts the host bundle. Its core creates a shared science coordinator and a `ModuleRegistry` that manages seven independently disposable Cordis Fibers. NGS and Rosalind use dedicated workflow plugins; Sequence, Structure, and Slide also expose service-specific host registration functions for focused mounting and contract tests.
 
 - `dsh-rosalind-ngs-workbench` registers the 25 NGS operations and five NGS Skills. It owns workflow discovery and versioning, reviewed plans, durable run attempts, observations and logs, cancellation, workflow restoration, and local process cleanup.
 - `dsh-rosalind-workbench` registers the thirteen project tools and the two fixed Rosalind service operations. It owns cross-service projects, confirmation, run coordination, status, cancellation, retained session evidence, and research-project summaries.
@@ -45,14 +45,23 @@ The client occupies named slots and does not inspect product DOM elements:
 
 | DSH slot | DSH-Rosalind use |
 |---|---|
+| `sidebar.workspaces` | Sessions / Science tabs inside the existing DSH sidebar browser region |
 | `conversation.hero.brand.mark` | Original project mark |
-| `conversation.hero.workspace` | Blank-session project catalogue |
+| `conversation.hero.workspace` | Blank-session research project workspace |
 | `conversation.view` | Session-level Workbench |
 | `settings.section` | Scientific provider diagnostics |
 | `tool.call.toolview` | Dedicated display for each `rosalind_*` tool |
 | `shell.overlay` | Project details, evidence, use mode, and import action |
 
 The project detail state is a small external store. A blank-session selection keeps the requested teaching prompt until a DSH workspace is chosen. In an active conversation, the prompt is placed in the composer and remains editable before submission. The session Workbench derives its project, data and files, tasks and runs, recent results, sources and citations, and Sequence, Structure, and Slide Viewer summaries only from settled conversation tool results. Missing evidence stays visibly empty. Client-module lifecycle status is shown separately, so disabling NGS does not erase earlier result records.
+
+The project detail state is a small external store. The DSH sidebar shell continues to own the brand row, New Session action, Settings, theme, width, and collapsed rail; Rosalind replaces only the single `sidebar.workspaces` browser region. Its Sessions tab reads the standard DSH workspace/session hooks and calls their controller services. The Science tab shows the seven declared module contracts without treating bundle registration as provider readiness.
+
+The blank-session home is a research project workspace. Reviewed showcases are absent from the home view and appear only within a selected module, where they can be inspected or used to prepare a reproduction request. A selected request remains editable before submission.
+
+## Viewer modules
+
+Sequence, Structure, and Slide have paired host and client registrations. Each host registration filters the capability registry to its service id; each client registration maps exactly the same tool names to the scientific result view. Tests require the three name sets to remain equal and disjoint. This keeps viewer registration independent while the shared `ScienceRuntime` remains the sole lifecycle and execution service.
 
 ## Host model
 

@@ -54,6 +54,9 @@ export type {
   WorkflowModuleHandle,
   WorkflowModuleStatus,
 } from "./host/workflow-modules.js";
+export { registerSequenceHostModule, SEQUENCE_HOST_MODULE } from "./host/modules/sequence.js";
+export { registerSlideHostModule, SLIDE_HOST_MODULE } from "./host/modules/slide.js";
+export { registerStructureHostModule, STRUCTURE_HOST_MODULE } from "./host/modules/structure.js";
 export { validateShowcase } from "./host/validators.js";
 export { createRosalindModuleComposition } from "./modules/definitions.js";
 export { ModuleRegistry } from "./modules/registry.js";

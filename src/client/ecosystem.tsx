@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { SHOWCASES } from "../generated/catalog.js";
+import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
 
 export interface EcosystemExample {
   label: string;
@@ -30,16 +32,18 @@ export const SCIENCE_ECOSYSTEMS: readonly SciencePluginSpec[] = [
 
 export interface ScienceEcosystemPanelProps {
   onExample?: (example: EcosystemExample, plugin: SciencePluginSpec) => void;
+  onShowcase?: (showcase: ShowcaseDefinition, mode: ShowcaseMode) => void;
   className?: string;
 }
 
 function marker(color: string): React.CSSProperties { return { background: color, boxShadow: `0 0 0 4px color-mix(in srgb, ${color} 16%, transparent)` }; }
 
-export function ScienceEcosystemPanel({ onExample, className = "" }: ScienceEcosystemPanelProps): JSX.Element {
+export function ScienceEcosystemPanel({ onExample, onShowcase, className = "" }: ScienceEcosystemPanelProps): JSX.Element {
   const [activeId, setActiveId] = useState(SCIENCE_ECOSYSTEMS[0]!.id);
   const activeIndex = Math.max(0, SCIENCE_ECOSYSTEMS.findIndex((item) => item.id === activeId));
   const active = SCIENCE_ECOSYSTEMS[activeIndex]!;
   const declaredOperationCount = SCIENCE_ECOSYSTEMS.reduce((sum, item) => sum + item.operationCount, 0);
+  const activeShowcases = SHOWCASES.filter((showcase) => showcase.status === "ready" && showcase.categoryId === active.id);
 
   function selectAt(index: number): void {
     const next = SCIENCE_ECOSYSTEMS[(index + SCIENCE_ECOSYSTEMS.length) % SCIENCE_ECOSYSTEMS.length]!;
@@ -69,8 +73,9 @@ export function ScienceEcosystemPanel({ onExample, className = "" }: ScienceEcos
         </div>
         <article id={`science-ecosystem-panel-${active.id}`} className="drr-ecosystem__detail" role="tabpanel" aria-labelledby={`science-ecosystem-tab-${active.id}`}>
           <div className="drr-ecosystem__detail-head"><span className="drr-ecosystem__large-mark" style={marker(active.color)} aria-hidden="true">✦</span><div><p className="drr-ecosystem__eyebrow">Declared contract · {active.version}</p><h3>{active.name}</h3><p>{active.description}</p></div></div>
-          <div className="drr-ecosystem__status-grid"><section><h4>Services</h4><ul>{active.mcpServices.map((service) => <li key={service}><span className="drr-ecosystem__ready" style={{ background: "var(--rr-muted)" }} aria-hidden="true" />{service}<small>declared in bundle</small></li>)}</ul><p>Check provider status before a fresh run. Registration only records bundle membership; it does not confirm provider readiness.</p></section><section><h4>Skills</h4><p><strong>{active.skillCount}</strong> declared {active.skillCount === 1 ? "skill" : "skills"}</p><p className="drr-ecosystem__read-only">Skill availability is reported here; change it in DSH settings after reviewing provider status and maintenance.</p></section><section><h4>Capabilities</h4>{active.operationCount > 0 ? <p><strong>{active.operationCount}</strong> declared operations in this workspace</p> : <p>This reference does not claim runtime availability. Source requests use the Literature and Databases gateway tools.</p>}</section></div>
+          <div className="drr-ecosystem__status-grid"><section><h4>Services</h4><ul>{active.mcpServices.map((service) => <li key={service}><span className="drr-ecosystem__ready" style={{ background: "var(--rr-muted)" }} aria-hidden="true" />{service}<small>declared in bundle</small></li>)}</ul><p>Check provider status before a fresh run. Registration only records bundle membership; it does not confirm provider readiness.</p></section><section><h4>Skills & showcases</h4><p><strong>{active.skillCount}</strong> declared {active.skillCount === 1 ? "skill" : "skills"}</p><p><strong>{activeShowcases.length}</strong> reviewed showcases</p><p className="drr-ecosystem__read-only">Change provider configuration in DSH Settings → Rosalind.</p></section><section><h4>Tools</h4>{active.operationCount > 0 ? <p><strong>{active.operationCount}</strong> declared tools in this workspace</p> : <p>This reference does not claim runtime availability. Source requests use the Literature and Databases gateway tools.</p>}</section></div>
           <section className="drr-ecosystem__examples" aria-label={`${active.name} example conversation tasks`}><h4>Example conversation tasks</h4><p className="drr-ecosystem__read-only">When connected to a conversation composer, selecting an example prepares a conversation task; it does not run a provider.</p><div>{active.examples.map((example) => <button key={example.label} type="button" aria-label={`Prepare conversation task: ${example.label}`} onClick={() => onExample?.(example, active)}>{example.label}<span aria-hidden="true">→</span></button>)}</div></section>
+          <section className="drr-ecosystem__showcases" aria-label={`${active.name} showcases`}><h4>Reviewed research records</h4><div>{activeShowcases.map((showcase) => <article key={showcase.id}><div><strong>{showcase.title}</strong><p>{showcase.summary}</p></div><div><button type="button" onClick={() => onShowcase?.(showcase, "lesson")}>Inspect</button>{showcase.modes.includes("reproduce") && <button type="button" onClick={() => onShowcase?.(showcase, "reproduce")}>Reproduce</button>}</div></article>)}</div></section>
         </article>
       </div>
     </section>

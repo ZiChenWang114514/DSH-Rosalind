@@ -18,14 +18,14 @@ interface ArtifactLink {
   path: string;
 }
 
-const SEQUENCE_TOOLS = [
+export const SEQUENCE_TOOLS = [
   "sequence_acquire_public_example", "sequence_align", "sequence_cancel_job", "sequence_control_viewer",
   "sequence_edit_copy", "sequence_export_artifact", "sequence_load_track", "sequence_manage_annotations",
   "sequence_open_from_chat", "sequence_query_viewer", "sequence_restore_session", "sequence_run_analysis",
   "sequence_save_session",
 ] as const;
 
-const NGS_TOOLS = [
+export const NGS_TOOLS = [
   "ngs_activate_workflow_version", "ngs_archive_workflow", "ngs_cancel_ngs_run", "ngs_check_nextflow_readiness",
   "ngs_check_snakemake_readiness", "ngs_execute_plan", "ngs_get_ngs_run", "ngs_get_runtime_environment",
   "ngs_list_ngs_run_lineages", "ngs_list_ngs_runs", "ngs_list_workflow_versions", "ngs_list_workflows",
@@ -34,7 +34,7 @@ const NGS_TOOLS = [
   "ngs_inspect_compute_target", "ngs_list_compute_targets",
 ] as const;
 
-const STRUCTURE_TOOLS = [
+export const STRUCTURE_TOOLS = [
   "structure_add_structure", "structure_align_structures", "structure_analyze", "structure_apply_scene",
   "structure_assembly_symmetry", "structure_browse_related_data", "structure_cancel_render", "structure_control_viewer",
   "structure_delete_scene", "structure_derive_object", "structure_discover_density", "structure_export",
@@ -48,7 +48,7 @@ const STRUCTURE_TOOLS = [
   "structure_transform_object", "structure_undo", "structure_validate_render",
 ] as const;
 
-const SLIDE_TOOLS = [
+export const SLIDE_TOOLS = [
   "slide_cancel_analysis_from_chat", "slide_cancel_pathology", "slide_cancel_scientific_layer_import",
   "slide_cancel_workflow", "slide_export_dicom_object", "slide_get_analysis_from_chat", "slide_get_capabilities",
   "slide_get_live_workflow", "slide_get_pathology", "slide_get_scientific_entity",

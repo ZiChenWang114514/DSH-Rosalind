@@ -14,41 +14,50 @@ afterEach(() => {
   cleanup();
 });
 
-describe("Workbench catalogue", () => {
-  it("renders all 23 projects and all seven category choices", () => {
+function openModuleRecord(title: string, moduleName: RegExp, action = "Inspect"): void {
+  const newTask = screen.queryByRole("button", { name: "New research task" });
+  if (newTask) fireEvent.click(newTask);
+  fireEvent.click(screen.getByRole("tab", { name: moduleName }));
+  const record = screen.getByText(title).closest("article");
+  expect(record).not.toBeNull();
+  fireEvent.click(within(record!).getByRole("button", { name: action }));
+}
+
+describe("Research project workspace", () => {
+  it("renders a project workspace with seven scientific module choices", () => {
     render(<Workbench />);
-    expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(23);
-    const category = screen.getByRole("combobox", { name: "Filter by scientific area" });
-    expect(within(category).getAllByRole("option")).toHaveLength(8);
+    expect(screen.getByRole("heading", { name: "Rosalind research workspace" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A new scientific investigation" })).toBeInTheDocument();
+    expect(screen.getAllByRole("button")).toHaveLength(8);
+    expect(screen.queryByText("Human RAS protein alignment")).not.toBeInTheDocument();
     expect(screen.getByText("151 manifest-referenced files · seven scientific areas")).toBeInTheDocument();
   });
 
-  it("shows a compact project search and task launch area in a blank session", () => {
+  it("shows the project workspace in a blank session without a showcase wall", () => {
     render(<Workbench hero />);
-    expect(screen.getByRole("heading", { name: "Start a scientific task" })).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(23);
-    expect(screen.getByPlaceholderText("Search a scientific question or method")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Rosalind research workspace" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /^Open / })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "New research task" })).toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Workbench view" })).not.toBeInTheDocument();
   });
 
-  it("searches scientific content and filters by category", () => {
+  it("reveals showcases only inside a selected scientific module", () => {
     render(<Workbench />);
-    fireEvent.change(screen.getByPlaceholderText("Search a scientific question or method"), { target: { value: "nanobody" } });
-    expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(1);
-    expect(screen.getByRole("button", { name: /Open.*PD-L1/i })).toBeInTheDocument();
-    fireEvent.change(screen.getByPlaceholderText("Search a scientific question or method"), { target: { value: "" } });
-    fireEvent.change(screen.getByRole("combobox", { name: "Filter by scientific area" }), { target: { value: "structure" } });
-    expect(screen.getAllByRole("button", { name: /^Open / })).toHaveLength(3);
+    fireEvent.click(screen.getByRole("button", { name: "New research task" }));
+    expect(screen.getAllByRole("tab")).toHaveLength(7);
+    expect(screen.getByText("TREM2 microglia publication landscape")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("tab", { name: /Molecular Structure Viewer/ }));
+    expect(screen.queryByText("Human RAS protein alignment")).not.toBeInTheDocument();
+    expect(screen.getByText("MDM2-p53 interface analysis")).toBeInTheDocument();
   });
 
   it("starts the selected project with a natural request and submits it", () => {
     const setDraft = vi.fn();
     const submit = vi.fn();
     render(<><Workbench inputActions={{ setDraft, submit }} /><ShowcaseDetailOverlay /></>);
-    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    openModuleRecord("Human RAS protein alignment", /Biological Sequence/, "Reproduce");
     const dialog = screen.getByRole("dialog", { name: "Human RAS protein alignment" });
-    expect(within(dialog).getByText("Scientific question")).toBeInTheDocument();
-    fireEvent.click(within(dialog).getByRole("tab", { name: "Reproduce" }));
+    expect(within(dialog).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
     fireEvent.click(within(dialog).getByRole("button", { name: "Prepare run" }));
     expect(setDraft).toHaveBeenCalledTimes(1);
     expect(submit).toHaveBeenCalledTimes(1);
@@ -59,11 +68,12 @@ describe("Workbench catalogue", () => {
 
   it("remembers the last selected mode for each project", () => {
     render(<><Workbench /><ShowcaseDetailOverlay /></>);
-    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    openModuleRecord("Human RAS protein alignment", /Biological Sequence/);
     const dialog = screen.getByRole("dialog", { name: "Human RAS protein alignment" });
     fireEvent.click(within(dialog).getByRole("tab", { name: "Reproduce" }));
     fireEvent.click(within(dialog).getByRole("button", { name: "Close project details" }));
-    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    const record = screen.getByText("Human RAS protein alignment").closest("article");
+    fireEvent.click(within(record!).getByRole("button", { name: "Inspect" }));
     expect(within(screen.getByRole("dialog")).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
   });
 
@@ -103,7 +113,7 @@ describe("Workbench catalogue", () => {
 
   it("closes project details with Escape", () => {
     render(<><Workbench /><ShowcaseDetailOverlay /></>);
-    fireEvent.click(screen.getByRole("button", { name: "Open Provenance-bearing GFP figure" }));
+    openModuleRecord("Provenance-bearing GFP figure", /Molecular Structure Viewer/);
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -111,7 +121,7 @@ describe("Workbench catalogue", () => {
 
   it("keeps modal focus inside the project details", () => {
     render(<><Workbench /><ShowcaseDetailOverlay /></>);
-    fireEvent.click(screen.getByRole("button", { name: "Open Provenance-bearing GFP figure" }));
+    openModuleRecord("Provenance-bearing GFP figure", /Molecular Structure Viewer/);
     const dialog = screen.getByRole("dialog");
     const close = within(dialog).getByRole("button", { name: "Close project details" });
     const action = within(dialog).getByRole("button", { name: "Start lesson" });
@@ -126,7 +136,7 @@ describe("Workbench catalogue", () => {
 
   it("uses roving focus and linked panels for project detail tabs", () => {
     render(<><Workbench /><ShowcaseDetailOverlay /></>);
-    fireEvent.click(screen.getByRole("button", { name: "Open Human RAS protein alignment" }));
+    openModuleRecord("Human RAS protein alignment", /Biological Sequence/);
     const dialog = screen.getByRole("dialog");
     const tabs = within(dialog).getAllByRole("tab");
     const selected = within(dialog).getByRole("tab", { selected: true });

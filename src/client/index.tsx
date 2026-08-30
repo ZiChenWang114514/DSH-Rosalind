@@ -1,4 +1,4 @@
-import type { ClientContext } from "@deepseek-ai/dsh-client-runtime/client";
+import type { ClientContext, ISessions } from "@deepseek-ai/dsh-client-runtime/client";
 import type {} from "@deepseek-ai/dsh-client-ui-conversation/client";
 import type {} from "@deepseek-ai/dsh-client-ui-layout/client";
 import type {} from "@deepseek-ai/dsh-client-ui-settings/client";
@@ -8,9 +8,17 @@ import { ShowcaseDetailOverlay, Workbench } from "./components.js";
 import { ProviderSettings } from "./settings.js";
 import { SCIENCE_VIEWER_CSS } from "./science-viewers.css.js";
 import { WORKBENCH_CSS } from "./styles.js";
-import { SCIENCE_VIEWER_TOOL_NAMES, RosalindToolCard, ScienceToolCard } from "./toolview.js";
-import { createNgsWorkbenchClientModule, createRosalindWorkbenchClientModule, NGS_WORKBENCH_TOOL_NAMES } from "./workflow-modules.js";
+import { RosalindToolCard, ScienceToolCard } from "./toolview.js";
+import { createNgsWorkbenchClientModule, createRosalindWorkbenchClientModule } from "./workflow-modules.js";
+import { ScienceSidebarBrowser, type ScienceSidebarBrowserProps } from "./sidebar.js";
+import { registerSequenceClientModule } from "./modules/sequence.js";
+import { registerSlideClientModule } from "./modules/slide.js";
+import { registerStructureClientModule } from "./modules/structure.js";
 export { ScienceEcosystemPanel, SCIENCE_ECOSYSTEMS } from "./ecosystem.js";
+export { ScienceSidebarBrowser } from "./sidebar.js";
+export { registerSequenceClientModule, SEQUENCE_CLIENT_MODULE } from "./modules/sequence.js";
+export { registerSlideClientModule, SLIDE_CLIENT_MODULE } from "./modules/slide.js";
+export { registerStructureClientModule, STRUCTURE_CLIENT_MODULE } from "./modules/structure.js";
 
 export * from "../shared/types.js";
 export { Workbench, ShowcaseDetailOverlay, ProviderSettings, RosalindToolCard, ScienceToolCard };
@@ -23,7 +31,15 @@ export {
 } from "./workflow-modules.js";
 
 export const name = "dsh-rosalind-client";
-export const inject = ["slots"];
+export const inject = ["slots", "sessions", "workspaces"];
+
+interface SidebarSlotRegistry {
+  inject(key: string, callback: () => () => void): () => void;
+  register(
+    spec: { name: string; priority: number; inject: () => Pick<ScienceSidebarBrowserProps, "openSession" | "startSession"> },
+    component: typeof ScienceSidebarBrowser,
+  ): () => void;
+}
 
 function installStyles(): () => void {
   const id = "dsh-rosalind-styles";
@@ -38,10 +54,18 @@ function installStyles(): () => void {
 
 export function apply(ctx: ClientContext): void {
   ctx.effect(installStyles, "dsh-rosalind: styles");
-  const ngsTools = new Set(NGS_WORKBENCH_TOOL_NAMES);
-  for (const toolName of SCIENCE_VIEWER_TOOL_NAMES.filter((name) => !ngsTools.has(name))) {
-    ctx.slots.inject("tool.call.toolview", () => ctx.slots.register({ name: "tool.call.toolview", key: toolName }, ScienceToolCard));
-  }
+  const sidebarSlots = ctx.slots as unknown as SidebarSlotRegistry;
+  sidebarSlots.inject("sidebar.workspaces", () => sidebarSlots.register({
+    name: "sidebar.workspaces",
+    priority: -20,
+    inject: () => ({
+      openSession: (sessionId) => (ctx.sessions as unknown as ISessions).open(sessionId),
+      startSession: (workspaceId) => ctx.workspaces.startSession(workspaceId),
+    }),
+  }, ScienceSidebarBrowser));
   ctx.plugin(createNgsWorkbenchClientModule());
   ctx.plugin(createRosalindWorkbenchClientModule());
+  registerSequenceClientModule(ctx);
+  registerStructureClientModule(ctx);
+  registerSlideClientModule(ctx);
 }

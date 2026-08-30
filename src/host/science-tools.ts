@@ -462,12 +462,14 @@ function toolDefinition(contract: RuntimeOperationContract, executor: ScienceExe
 export function createScienceTools(
   executor: ScienceExecutor,
   registry = new CapabilityRegistry(),
-  serviceSelection?: ScienceServiceId | ReadonlySet<string>,
+  serviceSelection?: ScienceServiceId | ReadonlySet<string> | readonly ScienceServiceId[],
 ): ToolDefinition[] {
   const operations = serviceSelection === undefined
     ? registry.operations
     : typeof serviceSelection === "string"
       ? registry.operations.filter((contract) => contract.record.serviceId === serviceSelection)
-      : registry.operations.filter((contract) => serviceSelection.has(contract.record.serviceId));
+      : Array.isArray(serviceSelection)
+        ? registry.operations.filter((contract) => (serviceSelection as readonly string[]).includes(contract.record.serviceId))
+        : registry.operations.filter((contract) => (serviceSelection as ReadonlySet<string>).has(contract.record.serviceId));
   return operations.map((contract) => toolDefinition(contract, executor, registry.packageRoot));
 }

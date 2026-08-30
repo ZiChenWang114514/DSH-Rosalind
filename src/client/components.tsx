@@ -1,11 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ConversationSnapshot } from "@deepseek-ai/dsh-client-runtime/client";
 import type { EmptyWorkspaceOwnerProps, HeroBrandMarkOwnerProps } from "@deepseek-ai/dsh-client-ui-conversation/client";
 
 import { PREVIEW_DATA_URLS, SHOWCASE_BY_ID, SHOWCASES, SHOWCASE_FILE_COUNT, SHOWCASE_SOURCE_COMMIT } from "../generated/catalog.js";
 import { SHOWCASE_CATEGORIES, categoryById } from "../shared/categories.js";
 import type { ShowcaseDefinition, ShowcaseMode } from "../shared/types.js";
-import { ArrowIcon, CategoryIcon, CheckIcon, CloseIcon, FileIcon, PlayIcon, RosalindMark, SearchIcon } from "./icons.js";
+import { CategoryIcon, CheckIcon, CloseIcon, FileIcon, PlayIcon, RosalindMark } from "./icons.js";
+import { ScienceEcosystemPanel } from "./ecosystem.js";
 import { buildConversationPrompt } from "./prompt.js";
 import {
   closeShowcase,
@@ -96,9 +97,7 @@ function SessionDataFlow({ dataFlow }: { dataFlow: WorkbenchDataFlowSummary }): 
 }
 
 export function Workbench({ session = false, hero = false, inputActions, projectSummary, dataFlow }: WorkbenchProps): JSX.Element {
-  const [query, setQuery] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const [runnableOnly, setRunnableOnly] = useState(false);
+  const [showModules, setShowModules] = useState(false);
   useEffect(() => {
     if (!inputActions) return undefined;
     const staged = consumeConversationPrompt();
@@ -115,67 +114,41 @@ export function Workbench({ session = false, hero = false, inputActions, project
     });
   }, [inputActions]);
 
-  const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    return SHOWCASES.filter((showcase) => showcase.status === "ready")
-      .filter((showcase) => !categoryId || showcase.categoryId === categoryId)
-      .filter((showcase) => !runnableOnly || showcase.modes.includes("reproduce"))
-      .filter((showcase) => !normalized || showcase.searchText.includes(normalized));
-  }, [categoryId, query, runnableOnly]);
-
   if (session) {
     return <section className="rr-root rr-root--session" aria-label="DSH-Rosalind current project"><SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} /></section>;
   }
 
-  return (
-    <section className={`rr-root${session ? " rr-root--session" : ""}${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind scientific workbench">
-      {hero ? <header className="rr-launch">
-        <span className="rr-launch-mark"><RosalindMark size={28} /></span>
-        <div><span className="rr-kicker"><span className="rr-kicker-dot" /> Research preview</span><h1>Start a scientific task</h1><p>Choose a checked project to learn from retained evidence, inspect results, or prepare the next run.</p></div>
-        <span className="rr-launch-count">23 projects</span>
-      </header> : <header className="rr-hero-head">
-        <span className="rr-kicker"><span className="rr-kicker-dot" /> Research preview · 23 projects</span>
-        <h1 className="rr-title">Rosalind scientific workbench</h1>
-        <p className="rr-subtitle">Learn from versioned evidence, replay checked results, or prepare a fresh run across literature, databases, sequences, NGS, structures, pathology, spatial biology, and molecular design.</p>
-      </header>}
-      <div className="rr-toolbar">
-        <label className="rr-search">
-          <SearchIcon size={17} />
-          <span className="sr-only">Search projects</span>
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search a scientific question or method" />
-        </label>
-        <select className="rr-select" aria-label="Filter by scientific area" value={categoryId} onChange={(event) => setCategoryId(event.target.value)}>
-          <option value="">All scientific areas</option>
-          {SHOWCASE_CATEGORIES.map((category) => <option key={category.id} value={category.id}>{category.label}</option>)}
-        </select>
-        <label className="rr-count">
-          <input type="checkbox" checked={runnableOnly} onChange={(event) => setRunnableOnly(event.target.checked)} />
-          <span>Run recipe available</span><strong>{filtered.length}</strong>
-        </label>
-      </div>
-      <div className="rr-grid">
-        {filtered.map((showcase) => {
-          const category = categoryFor(showcase);
-          return (
-            <button key={showcase.id} type="button" className="rr-card" style={styleFor(showcase)} onClick={() => openShowcase(showcase.id)} aria-label={`Open ${showcase.title}`}>
-              <span className="rr-card-icon"><CategoryIcon icon={category.icon} size={24} /></span>
-              <span className="rr-card-body">
-                <span className="rr-card-meta"><span className="rr-ready-dot" />{category.label}</span>
-                <span className="rr-card-title">{showcase.title}</span>
-                <span className="rr-card-summary">{showcase.summary}</span>
-              </span>
-              <span className="rr-card-arrow"><ArrowIcon size={17} /></span>
-            </button>
-          );
-        })}
-        {filtered.length === 0 && <div className="rr-empty">No project matches this search. Clear a filter to see the complete catalogue.</div>}
-      </div>
-      <footer className="rr-source-note">
-        <span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span>
-        <span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span>
-      </footer>
+  function prepareExample(prompt: string): void {
+    if (inputActions) inputActions.setDraft(prompt);
+    else stageConversationPrompt(prompt);
+    showNotice("The research question is prepared for a DSH conversation.");
+  }
+
+  return <section className={`rr-root rr-project${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind research project workspace">
+    <header className="rr-project__mast">
+      <div className="rr-project__identity"><span className="rr-launch-mark"><RosalindMark size={30} /></span><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Scientific project workspace</span><h1>Rosalind research workspace</h1><p>Frame a question, inspect sources, follow analysis, and keep results with their scientific record.</p></div></div>
+      <button type="button" className="rr-button rr-button--primary" aria-expanded={showModules} onClick={() => setShowModules((value) => !value)}>{showModules ? "Project overview" : "New research task"}</button>
+    </header>
+    <div className="rr-project__grid">
+      <section className="rr-project__primary" aria-labelledby="rr-project-current">
+        <span className="rr-project__label">Current project</span><h2 id="rr-project-current">A new scientific investigation</h2><p>Begin with a testable question and choose the specialist module that matches the evidence and data you already have.</p>
+        <ol className="rr-project__steps"><li><span>01</span><div><strong>Question</strong><small>Define the claim and required evidence.</small></div></li><li><span>02</span><div><strong>Sources</strong><small>Select local files or public records.</small></div></li><li><span>03</span><div><strong>Analysis</strong><small>Review methods before execution.</small></div></li><li><span>04</span><div><strong>Research record</strong><small>Keep outputs, limitations, and provenance together.</small></div></li></ol>
+      </section>
+      <aside className="rr-project__summary" aria-label="Workspace summary">
+        <div><span>Scientific modules</span><strong>7</strong><small>specialist workspaces</small></div>
+        <div><span>Reviewed records</span><strong>{SHOWCASES.length}</strong><small>available inside module details</small></div>
+        <div><span>Runtime status</span><strong>Checked per task</strong><small>registration does not imply readiness</small></div>
+      </aside>
+    </div>
+    <section className="rr-project__modules" aria-labelledby="rr-project-modules-title">
+      <div className="rr-project__section-head"><div><span className="rr-project__label">Research environment</span><h2 id="rr-project-modules-title">Choose a scientific module</h2></div><p>Showcases appear only after a module is selected, alongside new-task and reproduction actions.</p></div>
+      {showModules ? <ScienceEcosystemPanel
+        onExample={(example) => prepareExample(example.prompt)}
+        onShowcase={(showcase, mode) => { openShowcase(showcase.id); if (mode === "reproduce") setDetailTab("reproduce"); }}
+      /> : <div className="rr-project__module-strip">{SHOWCASE_CATEGORIES.map((category) => <button key={category.id} type="button" onClick={() => setShowModules(true)}><CategoryIcon icon={category.icon} size={19} /><span><strong>{category.label}</strong><small>{category.description}</small></span></button>)}</div>}
     </section>
-  );
+    <footer className="rr-source-note"><span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span><span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span></footer>
+  </section>;
 }
 
 function InfoBlock({ title, items, wide = false }: { title: string; items: readonly string[]; wide?: boolean }): JSX.Element {
