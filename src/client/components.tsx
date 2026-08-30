@@ -11,7 +11,6 @@ import { buildConversationPrompt } from "./prompt.js";
 import {
   closeShowcase,
   consumeConversationPrompt,
-  getWorkbenchState,
   openShowcase,
   setDetailTab,
   setWorkbenchBridge,
@@ -98,6 +97,7 @@ function SessionDataFlow({ dataFlow }: { dataFlow: WorkbenchDataFlowSummary }): 
 
 export function Workbench({ session = false, hero = false, inputActions, projectSummary, dataFlow }: WorkbenchProps): JSX.Element {
   const [showModules, setShowModules] = useState(false);
+  const { selectedCaseId } = useWorkbenchState();
   useEffect(() => {
     if (!inputActions) return undefined;
     const staged = consumeConversationPrompt();
@@ -114,14 +114,32 @@ export function Workbench({ session = false, hero = false, inputActions, project
     });
   }, [inputActions]);
 
-  if (session) {
-    return <section className="rr-root rr-root--session" aria-label="DSH-Rosalind current project"><SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} /></section>;
-  }
-
   function prepareExample(prompt: string): void {
     if (inputActions) inputActions.setDraft(prompt);
     else stageConversationPrompt(prompt);
     showNotice("The research question is prepared for a DSH conversation.");
+  }
+
+  function openModuleShowcase(showcase: ShowcaseDefinition, mode: ShowcaseMode): void {
+    openShowcase(showcase.id);
+    if (mode === "reproduce") setDetailTab("reproduce");
+  }
+
+  if (session) {
+    return <section className="rr-root rr-root--session rr-science-view" aria-label="DSH-Rosalind Science workspace">
+      <header className="rr-science-view__head"><div><span className="rr-kicker"><span className="rr-kicker-dot" /> Science</span><h1>Rosalind Science</h1><p>Review the current project or choose one of seven scientific modules.</p></div></header>
+      {selectedCaseId ? <ShowcaseDetailPanel /> : <>
+        <SessionProjectPanel summary={projectSummary} dataFlow={dataFlow} />
+        <section className="rr-project__modules" aria-labelledby="rr-session-modules-title">
+          <div className="rr-project__section-head"><div><span className="rr-project__label">Scientific modules</span><h2 id="rr-session-modules-title">Methods and reviewed records</h2></div><p>Choose a module to prepare a task or inspect its retained scientific records.</p></div>
+          <ScienceEcosystemPanel onExample={(example) => prepareExample(example.prompt)} onShowcase={openModuleShowcase} />
+        </section>
+      </>}
+    </section>;
+  }
+
+  if (selectedCaseId) {
+    return <section className={`rr-root rr-project${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind research project workspace"><ShowcaseDetailPanel /></section>;
   }
 
   return <section className={`rr-root rr-project${hero ? " rr-root--hero" : ""}`} aria-label="DSH-Rosalind research project workspace">
@@ -144,7 +162,7 @@ export function Workbench({ session = false, hero = false, inputActions, project
       <div className="rr-project__section-head"><div><span className="rr-project__label">Research environment</span><h2 id="rr-project-modules-title">Choose a scientific module</h2></div><p>Showcases appear only after a module is selected, alongside new-task and reproduction actions.</p></div>
       {showModules ? <ScienceEcosystemPanel
         onExample={(example) => prepareExample(example.prompt)}
-        onShowcase={(showcase, mode) => { openShowcase(showcase.id); if (mode === "reproduce") setDetailTab("reproduce"); }}
+        onShowcase={openModuleShowcase}
       /> : <div className="rr-project__module-strip">{SHOWCASE_CATEGORIES.map((category) => <button key={category.id} type="button" onClick={() => setShowModules(true)}><CategoryIcon icon={category.icon} size={19} /><span><strong>{category.label}</strong><small>{category.description}</small></span></button>)}</div>}
     </section>
     <footer className="rr-source-note"><span>{SHOWCASE_FILE_COUNT} manifest-referenced files · seven scientific areas</span><span>Snapshot <code>{SHOWCASE_SOURCE_COMMIT.slice(0, 8)}</code></span></footer>
@@ -204,46 +222,17 @@ const MODE_COPY: Record<ShowcaseMode, { action: string }> = {
   reproduce: { action: "Prepare run" },
 };
 
-export function ShowcaseDetailOverlay(): JSX.Element | null {
+export function ShowcaseDetailPanel(): JSX.Element | null {
   const { selectedCaseId, detailTab, mode, bridge, notice } = useWorkbenchState();
   const showcase = selectedCaseId ? SHOWCASE_BY_ID.get(selectedCaseId) : undefined;
-  const panelRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   useEffect(() => {
     if (!showcase) return undefined;
     const previous = document.activeElement as HTMLElement | null;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closeShowcase();
-        return;
-      }
-      if (event.key !== "Tab" || !panelRef.current) return;
-      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
-      ));
-      if (focusable.length === 0) {
-        event.preventDefault();
-        panelRef.current.focus();
-        return;
-      }
-      const first = focusable[0]!;
-      const last = focusable[focusable.length - 1]!;
-      if (event.shiftKey && (document.activeElement === first || document.activeElement === panelRef.current)) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      } else if (!panelRef.current.contains(document.activeElement)) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener("keydown", onKey);
     window.setTimeout(() => panelRef.current?.focus(), 0);
-    return () => { document.removeEventListener("keydown", onKey); previous?.focus(); };
+    return () => previous?.focus();
   }, [showcase]);
 
   if (!showcase) return null;
@@ -261,12 +250,19 @@ export function ShowcaseDetailOverlay(): JSX.Element | null {
     else showNotice("Open a DSH workspace, then add this project to the conversation.");
   };
   return (
-    <div className="rr-overlay rr-overlay-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closeShowcase(); }}>
-      <div ref={panelRef} className="rr-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="rr-detail-title" tabIndex={-1} style={styleFor(showcase)}>
+    <section
+      ref={panelRef}
+      className="rr-detail-panel"
+      role="region"
+      aria-labelledby="rr-detail-title"
+      tabIndex={-1}
+      style={styleFor(showcase)}
+      onKeyDown={(event) => { if (event.key === "Escape") { event.preventDefault(); closeShowcase(); } }}
+    >
         <header className="rr-detail-head">
           {preview ? <img className="rr-preview" src={preview} alt="" /> : <div className="rr-preview-fallback"><CategoryIcon icon={category.icon} size={36} /></div>}
           <div><span className="rr-detail-category"><CategoryIcon icon={category.icon} size={15} />{category.label}</span><h2 id="rr-detail-title" className="rr-detail-title">{showcase.title}</h2><p className="rr-detail-summary">{showcase.summary}</p></div>
-          <button type="button" className="rr-close" aria-label="Close project details" onClick={closeShowcase}><CloseIcon size={18} /></button>
+          <button type="button" className="rr-close" aria-label="Back to scientific modules" onClick={closeShowcase}><CloseIcon size={18} /></button>
         </header>
         <div className="rr-tabs" role="tablist" aria-label="Project details">
           {detailTabs.map((tab, index) => <button
@@ -297,10 +293,12 @@ export function ShowcaseDetailOverlay(): JSX.Element | null {
           {notice && <span className="rr-notice" role="status">{notice}</span>}
           <div className="rr-actions"><button type="button" className="rr-button rr-button--primary" onClick={importCase}><PlayIcon size={15} />{MODE_COPY[mode].action}</button></div>
         </footer>
-      </div>
-    </div>
+    </section>
   );
 }
+
+/** @deprecated Project details now render inside Workbench. */
+export const ShowcaseDetailOverlay = ShowcaseDetailPanel;
 
 export function RosalindBrandMark({ size = 48, className }: HeroBrandMarkOwnerProps): JSX.Element {
   return <span className={`rr-brand-mark${className ? ` ${className}` : ""}`}><RosalindMark size={size} /></span>;

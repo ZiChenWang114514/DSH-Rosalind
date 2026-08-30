@@ -56,9 +56,9 @@ The composed config must contain `dsh-rosalind`, and the server must load the ho
 
 ## Browser and visual checks
 
-The Playwright suite uses the repository preview server at 1280×800, 1440×900, 2048×1320, and 720×900. It checks the research project workspace, module details, prepared reproduction actions, theme and keyboard behavior, CSS zoom, narrow-width overflow, and the four project-owned scientific result views. Checked-in screenshots currently cover the four result layouts plus one dark structure view. Other browser checks are assertion-based and do not claim a visual reference.
+The Playwright suite uses the repository preview server at 1280×800, 1440×900, 2048×1320, and 720×900. It checks the research project workspace, the 491-pixel content width observed in the composed DSH layout, inline module details, prepared reproduction actions, theme and keyboard behavior, CSS zoom, narrow-width overflow, and the four project-owned scientific result views. Checked-in screenshots currently cover the four result layouts plus one dark structure view. The second-round Workbench screenshots are retained in the Playwright result directory for local review.
 
-The zoom check is explicitly a **CSS 200% zoom** test: it applies `document.documentElement.style.zoom = "2"`, then searches for a showcase and opens its detail dialog. Chromium automation does not expose a portable control for browser-UI zoom, so this does not certify the browser's own zoom setting or a full accessibility conformance review.
+The zoom check is explicitly a **CSS 200% zoom** test: it applies `document.documentElement.style.zoom = "2"`, then selects a module, opens an inline scientific record, and checks width containment. Chromium automation does not expose a portable control for browser-UI zoom, so this does not certify the browser's own zoom setting or a full accessibility conformance review.
 
 The component preview carries recorded fixture data. Canvas component tests and these screenshots verify interaction and layout of the local renderer; they do not validate molecular coordinates or slide pixels against a native scientific viewer in a browser.
 
@@ -68,7 +68,7 @@ Third-party plugin screenshots and source mirrors used during design analysis ar
 
 `tests/dsh-isolated-profile-evidence.test.ts` creates an isolated DSH profile, reads back the registered host services and Skills, and exercises one representative call for each service with public-network access disabled. When `DSH_ROSALIND_PROFILE_ARCHIVE` is absent, its evidence is marked `source-smoke`: it does not claim that a release tarball was installed. Supplying that variable with a built `.tgz` enables explicit archive verification.
 
-`tests/e2e/dsh-profile.spec.ts` can inspect a running DSH Web page when `DSH_PROFILE_URL` is supplied. It checks the research project workspace, the absence of the former 23-item home wall, module disclosure, and width containment. The 1280-pixel project also records a clean-profile screenshot. It does not invoke scientific operations or validate scientific Canvas output. Without that URL, the test is skipped.
+`tests/e2e/dsh-profile.spec.ts` can inspect a running DSH Web page when `DSH_PROFILE_URL` is supplied. It checks the native New Session and WorkspaceBrowser surface, the research project workspace, module disclosure, and width containment. The 1280-pixel project also records a clean-profile screenshot. It does not invoke scientific operations or validate scientific Canvas output. Without that URL, the test is skipped.
 
 The images in [`docs/screenshots`](screenshots) are release-candidate reference images. They are useful for product review but are not a substitute for the isolated-profile or browser test records.
 

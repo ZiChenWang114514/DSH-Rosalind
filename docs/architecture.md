@@ -4,7 +4,7 @@ DSH-Rosalind is one installable DSH bundle with a Node host and a browser client
 
 ```text
 DSH Web
-  research project workspace · Sessions/Science browser · conversation · settings · tool views
+  native Sessions browser · Science conversation view · settings · tool views
         │
         ▼
 DSH-Rosalind client bundle
@@ -45,19 +45,18 @@ The client occupies named slots and does not inspect product DOM elements:
 
 | DSH slot | DSH-Rosalind use |
 |---|---|
-| `sidebar.workspaces` | Sessions / Science tabs inside the existing DSH sidebar browser region |
+| `sidebar.workspaces` | Unchanged; the native DSH WorkspaceBrowser remains the sole occupant |
 | `conversation.hero.brand.mark` | Original project mark |
 | `conversation.hero.workspace` | Blank-session research project workspace |
-| `conversation.view` | Session-level Workbench |
+| `conversation.view` | Session-level `Science` view with seven modules |
 | `settings.section` | Scientific provider diagnostics |
 | `tool.call.toolview` | Dedicated display for each `rosalind_*` tool |
-| `shell.overlay` | Project details, evidence, use mode, and import action |
 
 The project detail state is a small external store. A blank-session selection keeps the requested teaching prompt until a DSH workspace is chosen. In an active conversation, the prompt is placed in the composer and remains editable before submission. The session Workbench derives its project, data and files, tasks and runs, recent results, sources and citations, and Sequence, Structure, and Slide Viewer summaries only from settled conversation tool results. Missing evidence stays visibly empty. Client-module lifecycle status is shown separately, so disabling NGS does not erase earlier result records.
 
-The project detail state is a small external store. The DSH sidebar shell continues to own the brand row, New Session action, Settings, theme, width, and collapsed rail; Rosalind replaces only the single `sidebar.workspaces` browser region. Its Sessions tab reads the standard DSH workspace/session hooks and calls their controller services. The Science tab shows the seven declared module contracts without treating bundle registration as provider readiness.
+The DSH sidebar shell and `ui-workspace` continue to own the brand row, New Session action, grouped or flat Workspace and Session rows, add, rename, reorder, search, fork, archive, Settings, theme, width, and collapsed rail. Rosalind deliberately does not register into `sidebar.workspaces`. In fixed DSH `0.1.1-rc.2`, the WorkspaceBrowser implementation is package-internal and the single browser region has no public child region for an adjacent tab. The closest public composition keeps that browser intact and registers `Science` through `conversation.view`, where seven keyboard-accessible module tabs provide module status, questions, reviewed records, and new-task actions.
 
-The blank-session home is a research project workspace. Reviewed showcases are absent from the home view and appear only within a selected module, where they can be inspected or used to prepare a reproduction request. A selected request remains editable before submission.
+The blank-session home is a research project workspace. Reviewed showcases are absent from the home view and appear only within a selected module, where they can be inspected or used to prepare a reproduction request. Details render inside the Workbench document, with no application-wide modal registration. A selected request remains editable before submission.
 
 ## Viewer modules
 

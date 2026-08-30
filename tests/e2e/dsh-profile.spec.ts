@@ -10,6 +10,8 @@ test("clean DSH profile loads the installed Rosalind bundle", async ({ page }) =
     await testingNotice.getByRole("button", { name: "Continue" }).click({ timeout: 5_000 }).catch(() => undefined);
     await expect(testingNotice).toBeHidden({ timeout: 5_000 });
   }
+  await expect(page.getByRole("button", { name: /New Session/i })).toBeVisible({ timeout: 30_000 });
+  await expect(page.locator(".drr-sidebar-browser")).toHaveCount(0);
   await expect(launcherHeading).toBeVisible({ timeout: 30_000 });
   await expect(page.locator(".rr-root--hero .rr-card")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "New research task" })).toBeVisible();
@@ -22,4 +24,7 @@ test("clean DSH profile loads the installed Rosalind bundle", async ({ page }) =
   await page.getByRole("button", { name: "New research task" }).click();
   await page.getByRole("tab", { name: /Rosalind Workbench/ }).click();
   await expect(page.getByText("PD-L1 nanobody design showcase")).toBeVisible();
+  await page.getByText("PD-L1 nanobody design showcase").locator("xpath=ancestor::article[1]").getByRole("button", { name: "Inspect" }).click();
+  await expect(page.getByRole("region", { name: "PD-L1 nanobody design showcase" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "PD-L1 nanobody design showcase" })).toHaveCount(0);
 });

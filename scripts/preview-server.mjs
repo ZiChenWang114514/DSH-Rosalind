@@ -50,6 +50,7 @@ async function realNgsEvidence() {
 const ngsEvidence = process.env.DSH_ROSALIND_PREVIEW_NGS_EVIDENCE === "0" ? { ngs: {} } : await realNgsEvidence();
 const evidenceScript = `window.__DSH_ROSALIND_SESSION_EVIDENCE__ = ${JSON.stringify(ngsEvidence)};`;
 const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DSH-Rosalind preview</title><script>${evidenceScript}</script></head><body><div id="root"></div><script src="/preview.js"></script></body></html>`;
+const previewPort = Number(process.env.DSH_ROSALIND_PREVIEW_PORT ?? "4175");
 const server = createServer((request, response) => {
   if (request.url === "/health") {
     response.writeHead(200, { "content-type": "text/plain" });
@@ -64,5 +65,5 @@ const server = createServer((request, response) => {
   response.writeHead(200, { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" });
   response.end(html);
 });
-server.listen(4175, "127.0.0.1", () => console.log("DSH-Rosalind preview: http://127.0.0.1:4175"));
+server.listen(previewPort, "127.0.0.1", () => console.log(`DSH-Rosalind preview: http://127.0.0.1:${previewPort}`));
 for (const signal of ["SIGINT", "SIGTERM"]) process.on(signal, () => server.close(() => process.exit(0)));

@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/vitest";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ConversationWorkbenchView, ShowcaseDetailOverlay, Workbench } from "../src/client/components.js";
+import { ConversationWorkbenchView, Workbench } from "../src/client/components.js";
 import { publishConversationNodes } from "../src/client/session-evidence.js";
 import { closeShowcase, consumeConversationPrompt, stageConversationPrompt } from "../src/client/state.js";
 
@@ -54,11 +54,11 @@ describe("Research project workspace", () => {
   it("starts the selected project with a natural request and submits it", () => {
     const setDraft = vi.fn();
     const submit = vi.fn();
-    render(<><Workbench inputActions={{ setDraft, submit }} /><ShowcaseDetailOverlay /></>);
+    render(<Workbench inputActions={{ setDraft, submit }} />);
     openModuleRecord("Human RAS protein alignment", /Biological Sequence/, "Reproduce");
-    const dialog = screen.getByRole("dialog", { name: "Human RAS protein alignment" });
-    expect(within(dialog).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
-    fireEvent.click(within(dialog).getByRole("button", { name: "Prepare run" }));
+    const detail = screen.getByRole("region", { name: "Human RAS protein alignment" });
+    expect(within(detail).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
+    fireEvent.click(within(detail).getByRole("button", { name: "Prepare run" }));
     expect(setDraft).toHaveBeenCalledTimes(1);
     expect(submit).toHaveBeenCalledTimes(1);
     expect(setDraft.mock.calls[0]?.[0]).toContain("Human RAS protein alignment");
@@ -67,14 +67,13 @@ describe("Research project workspace", () => {
   });
 
   it("remembers the last selected mode for each project", () => {
-    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+    render(<Workbench />);
     openModuleRecord("Human RAS protein alignment", /Biological Sequence/);
-    const dialog = screen.getByRole("dialog", { name: "Human RAS protein alignment" });
-    fireEvent.click(within(dialog).getByRole("tab", { name: "Reproduce" }));
-    fireEvent.click(within(dialog).getByRole("button", { name: "Close project details" }));
-    const record = screen.getByText("Human RAS protein alignment").closest("article");
-    fireEvent.click(within(record!).getByRole("button", { name: "Inspect" }));
-    expect(within(screen.getByRole("dialog")).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
+    const detail = screen.getByRole("region", { name: "Human RAS protein alignment" });
+    fireEvent.click(within(detail).getByRole("tab", { name: "Reproduce" }));
+    fireEvent.click(within(detail).getByRole("button", { name: "Back to scientific modules" }));
+    openModuleRecord("Human RAS protein alignment", /Biological Sequence/);
+    expect(within(screen.getByRole("region", { name: "Human RAS protein alignment" })).getByRole("tab", { name: "Reproduce" })).toHaveAttribute("aria-selected", "true");
   });
 
   it("preserves a staged blank-session request for direct submission", () => {
@@ -94,6 +93,7 @@ describe("Research project workspace", () => {
     await waitFor(() => expect(screen.getByRole("heading", { name: "Human RAS protein alignment" })).toBeInTheDocument());
     expect(screen.getByText("Next step")).toBeInTheDocument();
     expect(screen.getByText("Inspect the retained alignment evidence.")).toBeInTheDocument();
+    expect(screen.getAllByRole("tab")).toHaveLength(7);
     expect(screen.queryByRole("button", { name: /^Open / })).not.toBeInTheDocument();
   });
 
@@ -112,34 +112,28 @@ describe("Research project workspace", () => {
   });
 
   it("closes project details with Escape", () => {
-    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+    render(<Workbench />);
     openModuleRecord("Provenance-bearing GFP figure", /Molecular Structure Viewer/);
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
-    fireEvent.keyDown(document, { key: "Escape" });
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    const detail = screen.getByRole("region", { name: "Provenance-bearing GFP figure" });
+    fireEvent.keyDown(detail, { key: "Escape" });
+    expect(screen.queryByRole("region", { name: "Provenance-bearing GFP figure" })).not.toBeInTheDocument();
   });
 
-  it("keeps modal focus inside the project details", () => {
-    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+  it("renders project details inline without modal semantics", () => {
+    render(<Workbench />);
     openModuleRecord("Provenance-bearing GFP figure", /Molecular Structure Viewer/);
-    const dialog = screen.getByRole("dialog");
-    const close = within(dialog).getByRole("button", { name: "Close project details" });
-    const action = within(dialog).getByRole("button", { name: "Start lesson" });
-
-    action.focus();
-    fireEvent.keyDown(document, { key: "Tab" });
-    expect(close).toHaveFocus();
-
-    fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
-    expect(action).toHaveFocus();
+    const detail = screen.getByRole("region", { name: "Provenance-bearing GFP figure" });
+    expect(detail).not.toHaveAttribute("aria-modal");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(within(detail).getByRole("button", { name: "Back to scientific modules" })).toBeInTheDocument();
   });
 
   it("uses roving focus and linked panels for project detail tabs", () => {
-    render(<><Workbench /><ShowcaseDetailOverlay /></>);
+    render(<Workbench />);
     openModuleRecord("Human RAS protein alignment", /Biological Sequence/);
-    const dialog = screen.getByRole("dialog");
-    const tabs = within(dialog).getAllByRole("tab");
-    const selected = within(dialog).getByRole("tab", { selected: true });
+    const detail = screen.getByRole("region", { name: "Human RAS protein alignment" });
+    const tabs = within(detail).getAllByRole("tab");
+    const selected = within(detail).getByRole("tab", { selected: true });
     const selectedIndex = tabs.indexOf(selected);
     const next = tabs[(selectedIndex + 1) % tabs.length]!;
 
@@ -149,6 +143,6 @@ describe("Research project workspace", () => {
     fireEvent.keyDown(selected, { key: "ArrowRight" });
     expect(next).toHaveFocus();
     expect(next).toHaveAttribute("aria-selected", "true");
-    expect(within(dialog).getByRole("tabpanel")).toHaveAttribute("aria-labelledby", next.id);
+    expect(within(detail).getByRole("tabpanel")).toHaveAttribute("aria-labelledby", next.id);
   });
 });
