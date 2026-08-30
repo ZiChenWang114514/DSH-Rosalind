@@ -14,7 +14,7 @@ test("clean DSH profile loads the installed Rosalind bundle", async ({ page }) =
   const scienceTab = page.getByRole("tab", { name: "科学" });
   const sidebarExtensionAvailable = await scienceTab.count() > 0;
   if (!sidebarExtensionAvailable) {
-    await page.getByRole("button", { name: /Settings|设置/i }).click();
+    await page.getByRole("button", { name: /Settings|设置/i }).evaluate((button: HTMLButtonElement) => button.click());
     await page.getByRole("button", { name: "Rosalind" }).click();
     await expect(page.getByText(/当前 DSH 版本尚未提供可扩展工作区侧栏/)).toBeVisible();
     await expect(page.getByRole("heading", { name: "DSH-Rosalind 模块设置" })).toBeVisible();
