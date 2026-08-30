@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "runId": "capability-fixtures-2026-08-30",
   "status": "passed",
-  "recordedAt": "2026-08-30T21:04:51.677Z",
+  "recordedAt": "2026-08-30T21:18:44.687Z",
   "package": {
     "name": "@zichenwang114514/dsh-rosalind",
     "version": "0.3.4"
@@ -2118,8 +2118,8 @@
   ],
   "profileInstallation": {
     "archive": "zichenwang114514-dsh-rosalind-0.3.4.tgz",
-    "archiveBytes": 17166879,
-    "archiveSha256": "cf5b00855f491750e9c6e26a1fd18cc388b4315908bbbf29cdb173f3b34bb4cb",
+    "archiveBytes": 17166887,
+    "archiveSha256": "5e478fd9548746f71bdb45e270ed82c2026b0e0c842b2e09905f9d7912b8b7bf",
     "archiveSource": "current-worktree npm pack --ignore-scripts",
     "archiveKind": "source-smoke",
     "releaseArchiveValidated": false,
@@ -2389,7 +2389,7 @@
     "src/host/science-tools.ts": "9f2b23a03ced99898e7dbcc64dfdc4a88262434520f95386bc54e835f8b7d821",
     "src/host/science/databases.ts": "a4860aa38e6afd2422c16f9e03492da4eda40705bc551bee1d9189b4dcdb2f8b",
     "src/host/science/literature.ts": "7fac2d9a11ddd09b65d0e27dad79527aec1fa3d9944d1e95cb36bacd45e634c4",
-    "src/host/science/ngs.ts": "df3e07a6c8bb18482301cf48b827e2e436352a793f7c7062b8e27fd8590f1a0d",
+    "src/host/science/ngs.ts": "f1d5e852062ccf74e5eaa4c73802a5befe209b2124382d52b92d341b055c825b",
     "src/host/science/runtime.ts": "e8e44f66e30a0a77fb16fd62277511a9a54e5b134a51e8a504b3c0e4caa7cbb3",
     "src/host/science/sequence.ts": "9138418a36ef8701d8adf785634e021b46e7e557e1461485da88863121402652",
     "src/host/science/slide.ts": "f6f54437db38981ed2a7bb348f31e739a0adf6d4747680e8af02293b58dc9f49",
@@ -2427,7 +2427,7 @@
     "tests/science-module-registration.test.ts": "08c59157f6db32e792d08d7fc341ee16060e69bdec418e45ec8019200b7f6385",
     "tests/science-output-schema.test.ts": "cb1e0280eaeca5ebf8e5f1fc3155f59171d0a91650f01ebcb811d32333be2f71",
     "tests/science-slide-canvas.test.tsx": "8df0ef9aa0c5e0778a4f8c00bb444ba445c93e3211d464159c29158797a2aa6b",
-    "tests/science-slide-parity.test.ts": "1cc16684cb32ce5deb360ce200742f63d668a577f677b1d05d3b3493852580fd",
+    "tests/science-slide-parity.test.ts": "b95c28cc4797966ec088066a4c00807ce8a08a3ddf8437bcdd6730b7809ddf09",
     "tests/science-slide-runtime.test.ts": "261c6aee6e2bea462f8e56d8fe3ee1232a499aa5cf56ba79c12e7a0e09d9ff11",
     "tests/sequence-ngs-operation-matrix.test.ts": "cfa1d8604474bfc1abca09d697988abf247a4cddc3c37a4070bbc743bd1a6593",
     "tests/skills-registry-trace.test.ts": "6c8da25ebfa8ba46f2c0b8e64bd1a0777a78dbb2b928f78854b09bff509de9e0",

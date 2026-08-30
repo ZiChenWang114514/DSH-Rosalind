@@ -52,6 +52,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: npm install --global pnpm@10.15.1
       - run: npm run validate
       - name: Preserve capability reports after a failed validation
@@ -90,6 +92,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: npm install --global @deepseek-ai/dsh@0.1.1-rc.2 pnpm@10.15.1
       - run: test "$(dsh --version)" = "0.1.1-rc.2"
       - run: test "$(pnpm --version)" = "10.15.1"

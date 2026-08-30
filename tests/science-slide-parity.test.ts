@@ -59,7 +59,7 @@ describe("SlideService fixed-contract parity", () => {
     writeFileSync(tiffPath, minimalTiff(320, 240));
 
     const covered = new Set<string>();
-    const spatialCsvNative = spatialCsv.replace(/\//g, "\\");
+    const spatialCsvNative = process.platform === "win32" ? spatialCsv.replace(/\//g, "\\") : spatialCsv;
     const verify = async (operation: string, args: Record<string, unknown>, expected: object) => {
       const result = await service.execute(operation, args, ctx) as Record<string, unknown>;
       expect(result, operation).toMatchObject(expected);

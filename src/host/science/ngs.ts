@@ -232,15 +232,12 @@ function waitForProcessExit(child: ChildProcess, timeoutMs: number): Promise<boo
       if (settled) return;
       settled = true;
       clearTimeout(timer);
-      child.off("exit", onExit);
       child.off("close", onClose);
       resolveWait(exited);
     };
-    const onExit = () => finish(true);
     const onClose = () => finish(true);
     const timer = setTimeout(() => finish(false), timeoutMs);
     timer.unref?.();
-    child.once("exit", onExit);
     child.once("close", onClose);
   });
 }
